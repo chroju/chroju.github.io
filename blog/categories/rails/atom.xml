@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails | the world as code]]></title>
+  <link href="http://chroju.github.io//blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io//"/>
+  <updated>2015-12-14T22:16:31+09:00</updated>
+  <id>http://chroju.github.io//</id>
+  <author>
+    <name><![CDATA[chroju]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mechanizeによるスクレイピングの基本的なことまとめ]]></title>
+    <link href="http://chroju.github.io//blog/2015/02/08/post/"/>
+    <updated>2015-02-08T13:35:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/02/08/post</id>
+    <content type="html"><![CDATA[<p><a href="http://www.chroju.net/exhibi">Exhibi</a>の内部的な話を書こう書こうと思って忘れてた。とりあえずMechanizeについて。</p>
+
+<p><a href="https://github.com/sparklemotion/mechanize">Mechanize</a>はスクレイピングを楽にしてくれるRubygemsです。ExhibiではMechanizeを使ったスクレイピングのRakeタスクを作成し、それを日次で実行することで、各美術館のサイトから展覧会情報を抽出しています。抽出した情報がDB内に存在していれば無視。存在しないのならDBに追加。こういうクローリングに関しては、ちょうど時同じくしてRubyのクロール入門本が去年出たんですけど未読です。技術的な話のみならず、人様のサイトへ機械的にアクセスする際のお作法的なことも載っているらしく、いつかは読みたいところ。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797380357/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51qDobozaNL._SL160_.jpg" alt="Rubyによるクローラー開発技法 巡回・解析機能の実装と21の運用例" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797380357/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Rubyによるクローラー開発技法 巡回・解析機能の実装と21の運用例</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">るびきち 佐々木 拓郎 <br />SBクリエイティブ <br />売り上げランキング: 6,364<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797380357/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<h2>Mechanizeの内部動作</h2>
+
+<p>Mechanizeは同じくスクレイピング用のGemである<a href="https://github.com/sparklemotion/nokogiri">nokogiri</a>に依存しており、スクレイピング結果はNokogiriのオブジェクトとして扱われるみたいです。nokogiri使ったことないのでよくわかりませんが。例えばあるurlに対してgetリクエストをかけた際、そのレスポンスを<code>page</code>インスタンスとして受け取った場合、この中身は単なるHTMLではなく、スクレイピング向きにアレンジされてます。<code>page.links</code>でページ内のリンク一覧が取得できるし、<code>page.search(XPath)</code>でXPathを使った検索ができます。</p>
+
+<p>まあだいたいスクレイピングでやることって、ページを取得してきて①その中のリンクをクリックする、②フォームを埋めて送信して次のページヘ進む、③ページ内の要素からデータを抽出する、というところだと思うので、これぐらい押さえておけばなんとかなります。ちなみにurl与えてページを持ってくるときは<code>Mechanize</code>のインスタンス（公式チュートリアル内では<code>agent</code>という変数が振られてます）に対して<code>agent.get(url)</code>というメソッド使えば返ってきます。簡単ですね。</p>
+
+<h2>ページ内の要素からデータを抽出する</h2>
+
+<p>自分はXPathをよく使います。</p>
+
+<pre><code class="ruby">page.search(&lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;//td[@class="hoge"]&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;).text
+</code></pre>
+
+<p>タグでももちろんいけます。</p>
+
+<pre><code class="ruby">page.search(&lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;h3&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;)[&lt;span class="synConstant"&gt;0&lt;/span&gt;].text
+</code></pre>
+
+<p>こちらだと戻り値が配列になる点に注意。XPathだと対象を一意に特定できるけど、タグだと同一ページ内に複数存在する可能性があるからなんだと思います。他にもやり方あるかもしれませんが、自分はこれしか使ってないです。あと、タグ内のテキスト部分を取り出したい場合は上記のやり方ですが、タグの要素の値を取り出すこともできます。</p>
+
+<pre><code class="ruby">page.search(&lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;img&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;)[&lt;span class="synConstant"&gt;0&lt;/span&gt;][&lt;span class="synSpecial"&gt;"&lt;/span&gt;&lt;span class="synConstant"&gt;src&lt;/span&gt;&lt;span class="synSpecial"&gt;"&lt;/span&gt;]
+</code></pre>
+
+<p>こんな感じで画像のURLを抽出したいときなどに使います。</p>
+
+<h2>リンクをクリックする</h2>
+
+<p>基本は<code>a</code>タグで挟まれたテキストの値か、href属性の値から特定してクリックします。</p>
+
+<pre><code class="ruby">page.link_with(&lt;span class="synConstant"&gt;text&lt;/span&gt;: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;).click
+page.link_with(&lt;span class="synConstant"&gt;href&lt;/span&gt;: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;/fuga&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;).click
+</code></pre>
+
+<p>これでリンク先の<code>page</code>が返ります。が、クリックしたいのがテキストではない上に、href属性の値も特定できない場合もあります。Exhibiで必要な展覧会情報も基本的には個々の展覧会でパーマリンクが別なので、hrefから特定することはできないです。そういうときはXPathと上手いこと組み合わせます。</p>
+
+<pre><code class="ruby">hrefs = page.search(&lt;span class="synSpecial"&gt;"&lt;/span&gt;&lt;span class="synConstant"&gt;//div[@class='hoge']/div/a/@href&lt;/span&gt;&lt;span class="synSpecial"&gt;"&lt;/span&gt;)
+
+links = &lt;span class="synType"&gt;Array&lt;/span&gt;.new
+hrefs.each &lt;span class="synStatement"&gt;do&lt;/span&gt; |&lt;span class="synIdentifier"&gt;href&lt;/span&gt;|
+  links.push(page.link_with(&lt;span class="synConstant"&gt;href&lt;/span&gt;: href.text))
+&lt;span class="synStatement"&gt;end&lt;/span&gt;
+
+links.each &lt;span class="synStatement"&gt;do&lt;/span&gt; |&lt;span class="synIdentifier"&gt;link&lt;/span&gt;|
+  page = link.click
+  &lt;span class="synComment"&gt;### なにか処理 ###&lt;/span&gt;
+&lt;span class="synStatement"&gt;end&lt;/span&gt;
+</code></pre>
+
+<p>また<code>page.links</code>ですべてのリンクが呼び出せるので、イテレータで全リンクに対して何か処理したりってこともできます。</p>
+
+<h2>フォームを埋めて送信する</h2>
+
+<p>Exhibiではフォームの処理は使っていませんが、一応書き留め。<code>page</code>に対して<code>form</code>メソッドを使うことで特定のフォームを取得し、値を埋めてsubmitできます。</p>
+
+<pre><code class="ruby">f = page.form(&lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;LoginForm&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;)
+f.name = &lt;span class="synSpecial"&gt;"&lt;/span&gt;&lt;span class="synConstant"&gt;chroju&lt;/span&gt;&lt;span class="synSpecial"&gt;"&lt;/span&gt;
+f.password = &lt;span class="synSpecial"&gt;"&lt;/span&gt;&lt;span class="synConstant"&gt;password&lt;/span&gt;&lt;span class="synSpecial"&gt;"&lt;/span&gt;
+page = f.submit
+</code></pre>
+
+<p><code>page#form</code>の引数に与えているのは、取得したい<code>form</code>タグの<code>name</code>要素です。以下、<code>input</code>タグの<code>name</code>要素がメソッドになっているので、ここに値を埋め込んでいき、最後に<code>#submit</code>メソッドを呼び出します。</p>
+
+<p>基本的にやることはこれだけなんですけど、ものによっては単純なフォームの送信ではなく、送信ボタンをクリックした時にonClick要素でJavaScriptを呼び出して処理させていたりします。そういう場合は単純にsubmitしてもバリデーションが通らない可能性があるので、呼び出している関数の中身を解析して対処するしかないです。大抵はhidden要素に対して何かしら値をいれこむような処理をしていることが多いので、その内容さえわかれば、JavaScript内で行われている値の代入処理を手で書いてあげれば無事にsubmitできたりします。</p>
+
+<p>あとリンクと同じように、フォームも<code>page.forms</code>で全要素取得できます。</p>
+
+<h2>スクレイピング楽しい！！！</h2>
+
+<p>だいぶざっくりめに書いちゃいましたが、やっぱり<a href="http://docs.seattlerb.org/mechanize/GUIDE_rdoc.html">公式ドキュメント</a>読むのが一番いいとは思います。ここに書いている以外にもやれることはいろいろあるはずなので。</p>
+
+<p>スクレイピング、API提供していないサイトであっても、すべてのネット上のデータを機械的に扱うことができるようになるので、結構夢が広がります。ただし、セマンティックウェブに則りきちんとしたHTMLを書いているサイトじゃないと上手いことコードが書けなかったりするので、ひとえに万能な魔法というわけではないのが悩ましかったりも。そういうときはウェブ上で簡単にスクレイピングが出来るらしい<a href="https://www.kimonolabs.com/">kimono</a>とか使うのもアリなのかもしれません。自分は使ったことはないですけど、kimonoの開発者が「セマンティックウェブは失敗した。ネット上のデータ構造化をウェブ製作者側ではなく、データの利用者側がやるべきだ」的なことを<a href="http://dev.classmethod.jp/study_meeting/web-scraping-tokyo-2nd/">言っていて</a>、これにはかなり共感を覚えたりしてます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[bundle installはどのパスに対してすべきなのか問題]]></title>
+    <link href="http://chroju.github.io//blog/2014/01/14/post/"/>
+    <updated>2014-01-14T22:13:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2014/01/14/post</id>
+    <content type="html"><![CDATA[<p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
+
+<pre><code>% bundle install --path vendor/bundle
+</code></pre>
+
+<p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
+
+<p>まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な<a href="http://railstutorial.jp/">オンラインのRoRチュートリアル</a>にはこのことが書かれてなかったので、書き留めた次第。</p>
+
+<ul>
+<li><a href="http://qiita.com/emadurandal/items/a60886152a4c99ce1017">Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]</a></li>
+<li><a href="http://memo.yomukaku.net/entries/IpCSQmo">Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net</a></li>
+</ul>
+
+
+<p></blockquote></p>
+
+<p>で、<a href="http://chroju89.hatenablog.jp/entry/2014/01/09/235505">先日のエラー</a>についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[twitter-bootstrap-railsでundefined methodのエラーに嵌る]]></title>
+    <link href="http://chroju.github.io//blog/2014/01/09/post/"/>
+    <updated>2014-01-09T23:55:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2014/01/09/post</id>
+    <content type="html"><![CDATA[<p>完全に嵌った。さっぱりわからん。</p>
+
+<pre><code>undefined method `to_css' for nil:NilClass
+</code></pre>
+
+<p><a href="https://github.com/seyhunak/twitter-bootstrap-rails">twitter-bootstrap-rails</a>を試してみているのだが、インストールしていざブラウザからアクセスしてみると、undefined methodのエラーが出てしまう。どのページにアクセスしてもダメ。</p>
+
+<p>エラーメッセージ読んでも、そもそも#to_cssメソッドがどこにあるのかもわからんのだが、名前からしてLESSのコンパイルでトチってそうだという想像をしている。でもそれ以上はわかんない。ググっても情報はほとんどないし。</p>
+
+<p>試しにrails newから全部やり直してみたりしたのだが、それでも尚ダメだった。READMEの通りにやってるはずなんだけどなぁ……。使ったコマンドは以下のみ。</p>
+
+<pre><code>rails new TestApp
+(Gemfileを編集)
+bundle install
+rails g bootstrap:install less
+rails g bootstrap:layout application fluid
+rails g Scaffold User name:string mail:string
+rake db:migrate
+rails g bootstrap:themed Users
+rails s
+</code></pre>
+
+<p>仕方ないので他のGem使おうかと。んー……なんなんだろ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bundle execサボってエライ目にあった]]></title>
+    <link href="http://chroju.github.io//blog/2013/12/08/02-post/"/>
+    <updated>2013-12-08T23:21:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2013/12/08/02-post</id>
+    <content type="html"><![CDATA[<p>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……</p>
+
+<blockquote>bundle exec rails g devise:install</blockquote>
+
+
+<p>Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上のコマンドを入れるべきところでふつーにrails g devise:installとしてしまった。そしてrails g devise User ゴニョゴニョ。すると何が起きたか。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/11270239633/"> title=&ldquo;スクリーンショット_2013-12-08_22.57.54-3 by chroju, on Flickr&rdquo;><img src="http://farm4.staticflickr.com/3751/11270239633_8cc563c384.jpg" width="500" height="404" alt="スクリーンショット_2013-12-08_22.57.54-3"></a></p>
+
+<p>い……いねぇ……。確かにgenerateしたはずなのにurbはあるけどコントローラーもヘルパーもねぇ……。でもね、この状態でブラウザ開くとなんかログインできるんだよ。動くんだよ。幽霊かと。お前ソースはどこにあんのかと。んで探ってみたらあった。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/11270148454/"> title=&ldquo;スクリーンショット 2013-12-08 22.57.19 by chroju, on Flickr&rdquo;><img src="http://farm4.staticflickr.com/3754/11270148454_9e29b9f724.jpg" width="500" height="291" alt="スクリーンショット 2013-12-08 22.57.19"></a></p>
+
+<p>なんかすげえとこにあった！！！！</p>
+
+<p>あー、要はこれがbundle execの有無による違いね。bundle execプレフィックスを付けると今の環境のGemfileからインストールしてくれるけど、付けない場合はシステム側のRubyにdeviseをインストールしてしまう。だからこんなとこにいろいろ入ってしまったと。あー。失敗だ……。</p>
+
+<p>なんかbundle execを省略する方法もあるらしいけど、よくわかってないものをよくわかってないままに省略するのも危険なので、しばらくは自戒込めてプレフィックス付けるようにします。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい]]></title>
+    <link href="http://chroju.github.io//blog/2013/11/04/post/"/>
+    <updated>2013-11-04T21:54:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2013/11/04/post</id>
+    <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>Rails入門の定番書。このブログで何度か読んでいる途中経過を報告してきたか、ようやく読み終えることができた。読了というか、読み終わったのはもうだいぶ前ではあるんだけど。しかし予定していた以上に時間をかけてしまった。。。最初は写経しながら読んでいたのだが、どうにも時間がかかりすぎてイライラしていて、途中からはザーッとRailsの概略を掴むためだけのような読み方になってしまった。写経した方がやっぱり頭には入ると思うのだけど、それでサンプルアプリを作ったところで、応用してすぐ自分のアプリを作れるとは限らなくて、なんとももどかしい。結果としてはまだ消化しきれてなくて、行ったり来たり読み返しながら自分なりにアプリを作り始めているのが今の段階。</p>
+
+<p>この本は表題通り、架空のアジャイル開発案件を進めるかのように、徐々にRailsアプリを作る過程をなぞっていくことで、Railsで出来ること、Railsでアプリを作ることを教える構成を取っている。なので実践的でわかりやすい反面、解説なしにいきなりソースを提示されたりもするので「なぜこういうコードで動くのか？」が掴みにくいことも少なくなかった。アプリの完成まで読み進めると、その後に「Rails詳説」としてRailsの規約やらフレームワークを解説するページが現れるのだが、個人的には正直逆の構成の方が掴みやすい。あるいはアジャイル開発を1段階進めていくごとに、そこで書いたソースの詳細な解説を挟むようにしてほしい。</p>
+
+<p>というのも、Railsはコードを省略したり、フレームワークによって自動生成されたりするものが非常に多い。だから初見ではどこまで書けば良いのか、どこからオートで作り上げてくれるのか、感覚が掴めないのだ。俺はウェブアプリケーションとしては初歩的なJavaアプリの経験しかないのだが、それと比べてRailsのアプリ構築は遥かに簡単な印象を受ける。正確に言えば、自分で書かなくてはならない部分が少ない。しかしそれ故に、手で書かなかった部分がどう動いているのかがわかりづらく、技術を手中に収めた感覚がない。Javaのウェブアプリはプラグインなどを使わない限りは「書いたものが動く」感覚だったので、手とアプリが連動しているという錯覚があった。</p>
+
+<p>本書のような「実際に作る過程を見せる」という技術書は世の中に数多くあるし、基本的にはその方が「わかりやすい」本になるのだと思う。が、ことRailsに関しては作る前に「Railsは何を成してくれるのか」を解説してくれる本が必要なんじゃないかと。もちろん、本書においては「Rails詳説」の章がその役割を果たしているわけで、もう少し読み込まないとRailsをモノには出来そうにない。</p>
+
+<p>次の本としては、これまた定番であるレシピブックを買った。これとRails詳説を片手に、Railsがどう動くのか？を学びながら、まずはローカル環境でアプリを作ってみる。外観まで含め、年内にきちんと形になるところまで持っていきたい。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41Tnr3W6b0L._SL160_.jpg" alt="Rails3レシピブック 190の技" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Rails3レシピブック 190の技</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">高橋 征義 松田 明 諸橋 恭介 <br />ソフトバンククリエイティブ <br />売り上げランキング: 57,121<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

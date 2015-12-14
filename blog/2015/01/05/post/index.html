@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Railsのデプロイでハマった点まとめ - the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="昨年末に自身初のRailsアプリを見切り発車という名でローンチしましたが、その際デプロイで1か月以上もハマってましたので、ハマリポイントをピックアップしてまとめておきます。 Capistranoでssh-agentを使う Capistrano3のタスクの中に、git &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//blog/2015/01/05/post">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Railsのデプロイでハマった点まとめ</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-05T22:22:00+09:00'><span class='date'>2015-01-05 (Mon)</span> <span class='time'>10:22 pm</span></time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>昨年末に自身初のRailsアプリを見切り発車という名でローンチしましたが、その際デプロイで1か月以上もハマってましたので、ハマリポイントをピックアップしてまとめておきます。</p>
+
+<h2>Capistranoでssh-agentを使う</h2>
+
+<p>Capistrano3のタスクの中に、<code>git clone</code>でレポジトリをダウンロードしてくる過程があるのだが、ここではもちろん、GitHub（他のサービス使ってる場合は他の）にアクセスするためのssh秘密鍵が必要になる。ここで利用する秘密鍵はssh先のサーバーに置いておいても良いのだが、Capistrano3ではssh agent forwardingを使えるようにするための設定箇所が存在するので、リモートに鍵をわざわざ転送しなくても、ローカルの鍵が使える。設定箇所は<code>deploy/(test|staging|production).rb</code>の中で、サーバー設定を書くときに以下のように<code>forward_agent</code>を<code>true</code>で宣言すればいい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server '192.168.1.1', port: 2222, user: 'develop', roles: %w{web app db}, ssh_options: {
+</span><span class='line'>  keys: %w(~/.ssh/id_rsa),
+</span><span class='line'>  forward_agent: true,
+</span><span class='line'>  auth_methods: %w(publickey)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サブディレクトリでアプリを展開する場合の環境変数設定</h2>
+
+<p>例えば<code>/var/www</code>がnginxの見に行くルートディレクトリになっていて、Railsのアプリは<code>/var/www/rails</code>で展開しているというように、サブディレクトリを使う場合はRails側に環境変数<code>RAILS_RELATIVE_URL_ROOT</code>の設定が必要になる。Railsが<code>link_to</code>などを展開してパスを埋め込むときは、このroot設定が元になるので、サブディレクトリを使っていることを環境変数上で明記してやらなければ、本来<code>http://example.com/rails/hoge</code>へのリンクを展開してほしいはずが、<code>http://example.com/hoge</code>が展開される、といったことになってしまう。設定箇所としては<code>config.ru</code>になる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ENV["RAILS_RELATIVE_URL_ROOT"] = "/rails"
+</span><span class='line'>
+</span><span class='line'>if ENV['RAILS_RELATIVE_URL_ROOT']
+</span><span class='line'>  map ENV['RAILS_RELATIVE_URL_ROOT'] do
+</span><span class='line'>    run Rails.application
+</span><span class='line'>  end
+</span><span class='line'>else
+</span><span class='line'>  run Rails.application
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>はっきり言って<code>config.ru</code>が何者なのかよくわかってはいないのだが、Rackサーバーを起動するrackupコマンドに起動オプションを渡したりするもの、らしい。そのことについては<code>config.ru</code>の先頭行にコメントでも入っているのでなんとなくわかると思う。が、Rackが理解できてないので結局のところわからない。コマンドは意味から考えれば、Railsを起動するときにパスのマッピングとして<code>RAILS_RELATIVE_URL_ROOT</code>を渡してやっているように見える。ただ、この書き方だと環境変数の宣言を<code>config.ru</code>の中で行った上で、その環境変数の存在をifで確認するというちょっとマヌケなロジックになってしまっているので、おそらくは環境変数を別のところで宣言するのがベターなのだと思う。</p>
+
+<p>なお、サブディレクトリでRailsアプリを立ち上げるには、ウェブサーバー（nginx + unicorn）に対しても設定が必要だが、ここでは割愛。nginxの<code>location</code>ディレクティブを使う、とだけ覚えておけばなんとかなるはず。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://qiita.com/akito1986/items/56198edcafc222b320a8">nginx + unicorn + Railsの設定方法 - Qiita</a></li>
+<li><a href="http://blog.nazylabs.net/2013/07/06/124/">UnicornでRedmineをサブディレクトリにデプロイする方法 | ride on technology – 藝に游ぶ –</a></li>
+<li><a href="http://quickhack.net/nom/blog/2012-09-19-rails-with-relative-url-root.html">Rails with Relative URL Root - Quickhack Diary</a></li>
+</ul>
+
+
+<h2>assetsに対するルーティング設定</h2>
+
+<p><code>assets:precompile</code>を使ってあらかじめassetsフォルダ内にcssとjsを展開していたのだが、ブラウザ経由でいざアプリにアクセスすると、CSSもJavaScriptも適用されていない（assets配下が読み込めていない）という事象が発生した。</p>
+
+<p>原因はルーティングが正しくなかったから。前述の通りExhiBiでは<code>/var/www/rails</code>にアプリを展開していたのだが、さらに細かく見ると<code>rails</code>フォルダの中には<code>releases</code>、<code>current</code>、<code>shared</code>という主に3種類のフォルダが配置される。<code>releases</code>は要するに<code>git clone</code>の対象フォルダで、ソースコードをCapistranoで宣言した数だけバージョン管理している。<code>shared</code>はbundleやlogといった、リリースバージョンに左右されず不変のファイルを格納する場所で、Capistranoで言えば<code>linked_dirs</code>にあたる。この2つのフォルダを<code>current</code>配下にシンボリックリンクすることにより、<code>current</code>が実際のアプリ配置場所として機能する。従ってnginxのlocationディレクティブはこんな感じになる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>location /rails {
+</span><span class='line'>  alias /var/www/rails/current;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここでassetsへのルーティングを考えてみると、assetsに対するパスは<code>http://example.com/rails/assets/hogehoge</code>になるため、<code>/var/www/rails/current/assets</code>を見に行くことになる。しかし実際にはassetsは<code>shared/public/assets</code>であり、シンボリックリンクは<code>current/public/assets</code>に貼られている。そのため先のlocatonだけではassetsに到達することはできないため、assets用のlocationディレクトリが別途必要になる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>location ~ ^/rails/assets/(.*) {
+</span><span class='line'>  alias /var/www/rails/current/public/assets/$1;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://qiita.com/kizashi1122/items/c827f0675dff4d82d06c">Nginx で Rails の assets (css, js) にアクセスできない（403 forbidden が返る） - Qiita</a></li>
+</ul>
+
+
+<h2>SECRET_KEY_BASEの環境変数設定</h2>
+
+<p>ブラウザ経由でアプリにアクセスしたら、404ではないのだが画面が真っ白になってしまう事象。ぐぐってみるとドンピシャすぎる記事があって大変助かった。</p>
+
+<iframe src="http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Frails-secret-key-base-env.html" title="Rails が production 環境で真っ白、SECRET_KEY_BASE 設定忘れが原因でした | EasyRamble" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;">[Rails が production 環境で真っ白、SECRET_KEY_BASE 設定忘れが原因でした | EasyRamble](http://easyramble.com/rails-secret-key-base-env.html)</iframe>
+
+
+<p><code>SECRET_KEY_BASE</code>という環境変数を設定してやらねばならんらしい。なんじゃそりゃ。環境変数の設定なので方法は下記のURLのようにいくつかあるみたいだが、自分は取りあえずChefレシピの中で、<code>.bash_profile</code>へ環境変数設定をいれこむことにした。これも何かしらベストプラクティスがありそうな気がする。。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://j1ykt68.hatenablog.com/entry/2014/07/03/111725">Missing <code>secret_key_base</code> for &lsquo;production&rsquo; environment が出たのをどうにかする件 - YKT68の日記</a></li>
+<li><a href="http://qiita.com/kanpe777/items/cb11dc88ced544d10bd5">Rails - secret_key_baseあたりのメモ - Qiita</a></li>
+</ul>
+
+
+<h2>gem &lsquo;pg&#8217;が入らない</h2>
+
+<p>入らない。なんか知らんが入らない。ググるとどうも入りづらいGemの筆頭である模様。いろいろ探って、therubyracerを先に入れるべきだと聴いてやってみたけど結局入らない。とにかくどうやっても、Capistranoの<code>bundle install</code>で<code>Make sure that gem install pg -v '0.17.1' succeeds before bundling.</code>と言われてしまう。仕方ないのでsshでサーバーに直に入って<code>bundle install</code>を手動実行してみるとなぜか入る。わからん。これだけは本当にわからん。さらにその後はtiltが入らないとか言われたりもした。ソースをrubygems.orgから変えたりしてなんとか入ったのだが、ちょっと腑に落ちない感。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://qiita.com/goking/items/bc34518c2628d1b2cae0">Ruby - bundlerでpgをインストールする - Qiita</a></li>
+<li><a href="http://qiita.com/tq_jappy/items/4e05059169e509f08f75">Ruby - bundle installでつまずきやすいgem達 - Qiita</a></li>
+<li><a href="http://this.aereal.org/entry/2012/11/18/152451">(解決済み) gem install などができない問題の一時的な解決方法と根本的な解決 - this A moment</a></li>
+</ul>
+
+
+<h2>posgresqlのユーザー管理</h2>
+
+<p>SQLに関する基礎知識のなさを猛省した。とりあえずわかってなかったのこんなとこ。</p>
+
+<ul>
+<li><p>pg_hba.confで指定できる認証方式でmd5はパスワード認証、peerはOSにログイン中のユーザー名でログインしようとする</p></li>
+<li><p>よってsqlで使う予定のユーザー名がOS側に存在しない場合、peerを使おうとするとコケる</p></li>
+<li><p>psqlコマンドでログインしたとき、まずユーザー名と同名のDBにアクセスしようとするので、それが存在しないとエラーになる</p></li>
+<li><p>でもDB作成って<code>rake db:create</code>でやると思うんだけど、このコマンド打つときはどうやってアクセスするの？あれ？</p></li>
+<li><p>DBに初期データを投入したい場合は<code>db/seeds.rb</code>に書いて<code>rake db:seed</code>を打つ</p></li>
+<li><code>rake db:migrate</code>はテーブル生成だけでデータ登録までは賄ってくれない</li>
+<li>開発段階でmigrateファイルをやたらと作ってたりすると上手くdb:migrateできないこともあるので、整理した方がいいかも</li>
+</ul>
+
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://www.nslabs.jp/postgresql-user-management.rhtml">PostgreSQLのユーザ管理 | Netsphere Laboratories</a></li>
+<li><a href="http://www.techscore.com/tech/Ruby/Rails/model/migration/3">1. マイグレーション(3) | TECHSCORE(テックスコア)</a></li>
+</ul>
+
+
+<p>Rails、Capistranoのいずれも抽象度の高い技術で、これは何度かブログに書いてきてるけど、その内実をきちんと押さえてないとエラーが起きた場合に結構辛いことになる。READMEを読むこと、公式のWikiなどがあるならそっちも目を通すこと、エラーが起きたらログを見ること、あるいは前もってログを吐く設定にしておくこと。このあたりは改めて徹底したいところ。</p>
+
+<p>あとここからは余談だが、Railsのデプロイ先としてherokuが好まれるのは、ある程度「間違いのない選択肢」ということなのだろうなと想像している。ここで自分がつまずいたサブディレクトリでのアプリ展開や、postgresqlのコンフィグなどは、herokuであれば必要がなくなる。一旦用意されている高速道路を全力で走ってみて、それが成功してから自分好みに変えていく方が近道なのかもしれない。なんとかしてposgresqlを使おうとこだわったり、サブディレクトリでの運用をさせたり、最初からいろいろ欲張りすぎた点も反省。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+  <span class="byline author vcard">Authored by <span class="fn">
+  
+    chroju
+  
+  </span></span>
+
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-01-05T22:22:00+09:00'><span class='date'>2015-01-05 (Mon)</span> <span class='time'>10:22 pm</span></time>
+      
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/capistrano/'>capistrano</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://chroju.github.io//blog/2015/01/05/post/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://chroju.github.io//blog/2015/01/05/post/" data-via="chroju" data-counturl="http://chroju.github.io//blog/2015/01/05/post/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-layout="button_count" data-send="false" data-width="300" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/12/29/post/" title="Previous Post: 美術展検索サービスExhiBiを見切り発車しました">&laquo; 美術展検索サービスExhiBiを見切り発車しました</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/01/12/post/" title="Next Post: 2015年の行動規範">2015年の行動規範 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://chroju.github.io//blog/2015/01/05/post/';
+        var disqus_url = 'http://chroju.github.io//blog/2015/01/05/post/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

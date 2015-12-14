@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる - the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでにこちらのエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。 今回作成したファイル &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//blog/2014/04/12/post">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-12T21:56:00+09:00'><span class='date'>2014-04-12 (Sat)</span> <span class='time'>9:56 pm</span></time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでに<a href="http://chroju89.hatenablog.jp/entry/2014/02/20/000348">こちら</a>のエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。</p>
+
+<h2>今回作成したファイル</h2>
+
+<p>以下4ファイルを作成した。</p>
+
+<ul>
+<li>Capfile</li>
+<li>config/deploy.rb</li>
+<li>config/deploy/staging.rb</li>
+<li>lib/capistrano/tasks/unicorn.cap</li>
+</ul>
+
+
+<p>基本的にCapistranoを使う場合「必須」なのは上2つのファイル。<code>deploy/hoge.rb</code>も確実に必要にはなるが、デプロイ先の環境が本番なのかステージングなのかでproduction.rbとstaging.rbを使い分けることになる。もちろん、ステージング環境を用意していない場合はstaging.rbは不要。また4つ目のファイルだが、自分の場合はunicornをデプロイ先で使っているので、デプロイ後にunicornを再起動する目的で独自タスクを作成している。説明が遅れたが、今回デプロイ先となる環境は大雑把に以下の通り。</p>
+
+<ul>
+<li>Vagrant 1.4.3</li>
+<li>CentOS 6.4</li>
+<li>Postgresql 9.1</li>
+<li>Ruby 1.9.3(rbenv)</li>
+<li>Nginx + unicorn</li>
+<li>位置付けはステージング環境</li>
+</ul>
+
+
+<h2>Capfile</h2>
+
+<script src="https://gist.github.com/10530780.js"></script>
+
+
+<p>ここはだいたい環境を問わず同じになってくる箇所。まず<code>capistrano/setup</code>と<code>capistrano/deploy</code>は<code>require</code>が必須。RailsをCapistranoで扱う場合は、<code>capistrano/bundler</code>から<code>capistrano/rails/assets</code>までも必須となる。rbenvを使っている場合は<code>capistrano/rbenv</code>が必要。rbenvをどこにインストールしたのかにより、<code>set :rbenv_type</code>を指定する。あとはデプロイするアプリケーションで使うRubyのバージョンも指定してやる。rvmを使う場合も似たような<code>capistrano/rvm</code>を使うみたいだが、そちらはよくわからんので割愛。</p>
+
+<p>で、ここまでがrequireということなので、デプロイ元サーバーにGemfile書いてインストールしておくことを忘れずに。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>group :development do
+</span><span class='line'>  gem 'capistrano', '~&gt; 3.1.0', :require =&gt; false
+</span><span class='line'>  gem 'capistrano-rails', '~&gt; 1.0.0', :require =&gt; false
+</span><span class='line'>    gem 'capistrano-rbenv', '~&gt; 2.0', :require =&gt; false
+</span><span class='line'>  gem 'capistrano-bundler', '~&gt; 1.1.2', :require =&gt; false
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最終行は独自カスタムタスクを読み込むための行。デフォルトで入っているのでそのままにしておけばよい。先のunicorn.capのように、何か独自タスクを作った場合はこのパスに入れれば読み込むよーということでもある。</p>
+
+<p>なお、以前書いたエントリーでは<code>capistrano3/unicorn</code>も<code>require</code>していたのだが、これは撤回した。詳細はunicorn.capについて説明するときに後述。</p>
+
+<h2>staging.rb</h2>
+
+<script src="https://gist.github.com/10530945.js"></script>
+
+
+<p>ステージング環境、というかデプロイ先環境の設定を書く。vagrantを使う場合はだいたいこれと同じように書いておけば通るんじゃないかと思う。Vagrantはデフォルトではvagrantユーザーによるsshが可能になっているので、それをそのまま使わせてもらっている。何か他のユーザーで入りたい場合などは頑張るしかない。</p>
+
+<p>一点だけ注意すべきは、<code>RAILS_ENV</code>がstagingに設定されるということ。Capistrano3では<code>cap install</code>を叩くとデフォルトでstaging.rbとproduction.rbが作られ、<code>RAILS_ENV</code>もこのファイル名に倣うことになるのだが、Railsの動作環境は通常test, development, productionの3種類であり、stagingは存在していない。従ってこのままデプロイを始めてもうまくはいかない。面倒であればstaging.rbは使わず、production.rbだけを使っていてもいいかもしれない。</p>
+
+<p>staging.rbを使う場合は、Rails側で環境の準備が必要になる。やることは大きく3つ。</p>
+
+<h3>1. database.ymlにstagingを作成する</h3>
+
+<p><code>rake db:migrate</code>などのDB系のコマンドはi<code>RAILS_ENV</code>を指定して実行される。ここで指定された<code>RAILS_ENV</code>をdatabase.ymlに見に行くので、設定を入れておく必要がある。ステージング環境の本来の意味を考えると、production用の記述をそのままコピーするだけで良いはず。</p>
+
+<h3>2. config/environments/staging.rbを作成する</h3>
+
+<p>動作環境設定ファイルとして、デフォルトではproduction.rbとdevelopment.rbだけが用意されているので、これもproduction.rbをコピーしてstaging.rbを作る。</p>
+
+<h3>3. Gemfileにgroup :stagingを作成する</h3>
+
+<p>これは<code>RAILS_ENV</code>と直結するわけではないが、GemfileのグループもRails環境ごとに作られているのでstagingを設けてやった方が良さそう。これもここまでと同様の話で、<code>group :staging, :production do</code>としてやるだけで良い。</p>
+
+<ul>
+<li>参考：<a href="http://spring-mt.tumblr.com/post/33209507135/rails-staging">railsでstaging環境を作る - CubicLouve</a></li>
+</ul>
+
+
+<h2>deploy.rb</h2>
+
+<script src="https://gist.github.com/10530987.js"></script>
+
+
+<p>いよいよデプロイ用の設定。面倒なので説明は省くが、だいたいはコメント読めば設定できるはず。</p>
+
+<p><code>linked_files</code>と<code>linked_dirs</code>は<a href="http://chroju89.hatenablog.jp/entry/2014/04/06/191336">前回のエントリー</a>で書いた通り、shared配下に置いているファイルやフォルダのうち、currentに必要となるものを指定することでシンボリックリンクを張ってくれるというものなのだが、ではshared配下にこれらファイルやフォルダはいつ作られるのか？というのがかねてから疑問だった。</p>
+
+<p>結論を言えば、<code>linked_files</code>は勝手には作成されない。というより、ここに指定したファイルがshared下に存在しない場合、Capistranoはデプロイ時にエラーを吐いてくる。正確に言えば<code>deploy:check:linked_files</code>というタスクがあり、ここで存在確認を行っている（<a href="https://github.com/capistrano/capistrano/blob/master/lib/capistrano/tasks/deploy.rake">参照</a>）。したがってこのタスクが投げられる前にファイルは別でアップロードしなくてはならない。ここではdetabase.ymlを指定しているので、アップロードタスクを独自で組み込んでいる。詳細は後述。</p>
+
+<p>一方の<code>linked_dirs</code>は、shared配下に存在しない場合は<code>deploy:check:make_linked_dirs</code>で空っぽのフォルダとして作成してくれる。逆に言えば、元々ファイルが入っているようなフォルダをここで指定することはあまりないということ。例えばbundleなり、logやtmpなり、アプリが動作する中で必要とされるフォルダ（従ってGitHubで静的に管理はしていないフォルダ）がここに来ている。なお、shared/bundleは<code>capistrano/bundle</code>が<code>bundle install --path</code>で指定するデフォルトのフォルダなんだそうだが、古いバージョンの<code>capistrano/bundle</code>ではshared/vendor/bundleにインストールするらしいので要確認。</p>
+
+<p>後半では独自タスクを3つ追加している。</p>
+
+<p>1つ目はdatabase.ymlをアップロードするタスク。デプロイ先にshared/configフォルダを作成した上で、ローカルのconfig/database.ymlをアップロードしている。2つ目は<code>bundle exec rake db:create</code>を発動するタスク。Capistranoやcapistrano/railsにはDB作成用のタスクは一切含まれていないので、自力であらかじめ作っておく必要がある。手動で作成したり、Chefなんかで仕込んでおく手もあるのだろうが、ここではCapistranoのタスクとして書いている。必要になるのはもちろん初回1回限りなので、デプロイのルーチンの中には組み込んでいない。</p>
+
+<ul>
+<li>参照：<a href="http://yss44.hatenablog.com/entry/2013/12/01/150215">Capistrano3で快適デプロイ生活!! - Less is Best</a></li>
+</ul>
+
+
+<p>3つ目はunicornを再起動するタスク。これはunicorn.capの中で作成した<code>unicorn:restart</code>というタスクを呼んでいる。</p>
+
+<p>最後の2行は独自タスクのルーチンへの組み込み。database.ymlのアップロードは真っ先にやらなくてはならないので、<code>deploy:starting</code>というデフォルトで言えば最初のタスクのさらに前に組み入れている。一方のunicorn再起動は<code>deploy:publishing</code>の後、ほぼすべてのタスクが終わったタイミング。</p>
+
+<h2>unicorn.cap</h2>
+
+<script src="https://gist.github.com/10531064.js"></script>
+
+
+<p>ほぼほぼ以下エントリーの中身をそのまま使わせてもらいました。</p>
+
+<ul>
+<li>参照：<a href="http://qiita.com/satococoa/items/9b0cc416ffc042680b9b">unicorn + rails 用 Capistrano 3 の設定ファイル - Qiita</a></li>
+</ul>
+
+
+<p>異なる箇所は<code>start_unicorn</code>の内部処理。元エントリーでは<code>bundle exec unicorn</code>を叩いているのだが、自分としては<code>bundle exec unicorn_rails</code>を叩く認識だったので書き換えている。ここの書き換えが必要なのかどうかはちょっと自信がない。またコマンドのオプションとして<code>--path hoge</code>を指定しているのだが、これはサブディレクトリでRailsアプリを動作させたいため。予定として<a href="http://www.chroju.net/">http://www.chroju.net/</a>は静的なサイト、www.chroju.net/hogeでアプリごとにフォルダ作って管理としたかったもので。まー、こういう要らんチューニングを最初からやろうとするから迷走するわけなのだが。はじめはマニュアル通りにまず写経すべきだと思います。はい。サブディレクトリ云々の件はまた別途エントリー書きます。</p>
+
+<p>ちなみにパスの指定やら何やらやらないのであれば、<a href="https://github.com/tablexi/capistrano3-unicorn">capistrano3-unicorn</a>を使うのも手だと思う。</p>
+
+<h2>その他トラブルなど</h2>
+
+<p>以上、ここまでの設定にはそれなりに自信がある。とりあえず<code>bundle exec cap staging deploy</code>を叩いてエラーが出ないことも確認はした。が、現状アプリは動いてない。。。いや、正確に言うと一度動いたのだが、その後Vagrant落として、セキュリティアップデートのためにiMacも再起動してもう一度やってみたところ、ダメダメになってしまったのだ。何が原因なのやらさっぱりだ。。。トラブルは3つほど遭遇している。</p>
+
+<h3>1. Gitが通らない</h3>
+
+<p><code>git ls-remote</code>で<code>Permission denid(publickey)</code>のエラーが出るという事象が発生、その先に進めなくなった。これについてはドンピシャなエントリーを探し当てたので、そのまま解決策を適用したらなんとかなった。なぜこのエラーが起きたのかまではまだ深堀りできてない。</p>
+
+<ul>
+<li>参考：<a href="http://peteoliveira.com/deploying-with-capistrano-3-failing-permission-denied-publickey/">Deploying with Capistrano 3 failing – Permission denied (publickey) | Pete Oliveira</a></li>
+</ul>
+
+
+<h3>2. 404が返される</h3>
+
+<p>Nginxは動いている。unicornもプロセスは上がっているのだが、アプリを配置したフォルダを見に行くとThe page you were looking for doesn&rsquo;t exist.というメッセージが返される状態。他の有りもしないフォルダを見に行こうとするとNginxがBad Gatewayを返してくるし、unicorn.stderr.rbにログが残っているのでアクセスはできているようなのだが、なぜ表示に至らないのかわからない。</p>
+
+<p>ちなみにstaging.logにはActionController::RoutingErrorが出ている。？？？</p>
+
+<h3>3. Assets周りが不具合起こしている模様</h3>
+
+<p>Vagrantを落とす前はアプリ自体つながりはしたのだが、jsとcssが反映されていない状態だった。ソースから探ってjsとcssをブラウザ上で開いてみたのだが、真っ白になっていた。アセットコンパイルのエラーなのかと思い、サーバー上でもコンパイル後のファイルを開いたりしてみたが、こっちは中身がきちんと書かれていた。なんなんだ一体。</p>
+
+<p>以上。だいたい整ったはずなのだが、まだまだ先が長そうでいい加減ゲンナリしている。自分、この手のこと向いてないのかもしれんと思い始めた。。。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+  <span class="byline author vcard">Authored by <span class="fn">
+  
+    chroju
+  
+  </span></span>
+
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-04-12T21:56:00+09:00'><span class='date'>2014-04-12 (Sat)</span> <span class='time'>9:56 pm</span></time>
+      
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/capistrano/'>capistrano</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://chroju.github.io//blog/2014/04/12/post/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://chroju.github.io//blog/2014/04/12/post/" data-via="chroju" data-counturl="http://chroju.github.io//blog/2014/04/12/post/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-layout="button_count" data-send="false" data-width="300" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/04/06/post/" title="Previous Post: Capistrano3がわからんので今一度イチから考えなおしてみる">&laquo; Capistrano3がわからんので今一度イチから考えなおしてみる</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/01/post/" title="Next Post: エンジニアの転職において「技術」とは目的か手段か">エンジニアの転職において「技術」とは目的か手段か &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://chroju.github.io//blog/2014/04/12/post/';
+        var disqus_url = 'http://chroju.github.io//blog/2014/04/12/post/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

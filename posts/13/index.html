@@ -1,0 +1,911 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//posts/13">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/06/02-post/">Chef soloはじめの一歩</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-06T13:56:00+09:00'><span class='date'>2014-05-06 (Tue)</span> <span class='time'>1:56 pm</span></time>
+        
+         | <a href="/blog/2014/05/06/02-post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。</p>
+
+<p>参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" alt="入門Chef Solo - Infrastructure as Code" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">伊藤直也 (2013-03-11)<br />売り上げランキング: 2,821<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<h2>基本構成</h2>
+
+<p>chefの基本構成を取りあえず押さえる。</p>
+
+<ul>
+<li>chef: インフラ自動化のフレームワーク</li>
+<li>chef solo: 本来クラサバ構成で扱うChefをスタンドアロンで使えるようにしたもの</li>
+<li>knife-solo: リモートからchef soloの実行に必要なツール</li>
+<li>Berkshelf: サードパーティクックブックの管理に使う</li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>上記のものを全部インストール。Gemfile書いてる場合はそっちに追加で。また最後に<code>rbenv rehash</code>を忘れずに。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install chef -v 11.10 --no-ri --no-rdoc
+</span><span class='line'>gem install knife-solo --no-ri --no-rdoc
+</span><span class='line'>gem install berkshelf
+</span><span class='line'>rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにChefの最新はv11.12.xなんだけど、どうもバグがあるっぽく上手くいかなかったのでバージョン指定で古いの入れてる。</p>
+
+<ul>
+<li>参考：<a href="http://qiita.com/sakatuba@github/items/1548818b02735b2047ad">Chef 11.12.2のknife configureが失敗する - Qiita</a></li>
+</ul>
+
+
+<h2>セットアップ</h2>
+
+<p>初期設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>knife configure # 対話は全部デフォでOK
+</span><span class='line'>knife solo init chef-repo # chef-repoフォルダがレポジトリとして作られる
+</span><span class='line'>cd chef-repo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>chef soloを使うリモート側へもchefをインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ knife solo prepare vagrant@192.168.1.1</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Berkshelf</h2>
+
+<p>続いてBerkshelfの初期設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しかし、ここでまさかのエラー。。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cannot load such file -- hitimes/hitimes (LoadError)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/copiousfreetime/hitimes/issues/17">ここ</a>によればgem updateしてからhitimesを再インストールすれば大丈夫だよ的な話。やってみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem update
+</span><span class='line'>$ gem -v
+</span><span class='line'>2.2.2
+</span><span class='line'>$ gem install hitimes
+</span><span class='line'>$ rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>気を取り直して。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks init
+</span><span class='line'>The resource at '/Users/chroju/Dropbox/lab/chef/vagrant-repo/metadata.rb' does not appear to be a valid cookbook. Does it have a metadata.rb?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(&lsquo;A`)ｳﾞｧｰ</p>
+
+<p>わけわからんし、<code>berks init</code>しなくてもBerkfile自前で作りゃイケるらしいので諦めることにする。Berksfileを<code>touch</code>してからvimで編集。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>site :opscode
+</span><span class='line'>
+</span><span class='line'>cookbook 'sudo'
+</span><span class='line'>cookbook 'iptables`</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileと似たような書き方で、<code>cookbook 'hoge'</code>と書くとそのクックブックが<a href="http://community.opscode.com/">Opscode</a>からインストールされる。Opscode以外のGitHubで公開されているクックブックを使う場合は、これもGemfileのように<code>cookbook 'fuga' git:"..."</code>の形でURL指定が可能。</p>
+
+<p>そしていざインストール……だがまたしてもエラー。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks install --path cookbooks
+</span><span class='line'>DEPRECATED: `berks install --path [PATH}` has been replaced by `berks vendor`.
+</span><span class='line'>DEPRECATED: Re-run your command as `berks vendor [PATH]` or see `berks help vendor`.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そろそろこのあたりから笑えてきた。調べたところ、Berkshelf v3.xでは<code>berks install --path hoge</code>は使えないらしいス。<code>berks vendor hoge</code>が今どきらしい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks vendor cookbooks
+</span><span class='line'>destination already exists /Users/chroju/Dropbox/lab/chef/vagrant-repo/cookbooks. Delete it and try again or use a different filepath.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>えー。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm -rf cookbooks
+</span><span class='line'>$ berks vendor cookbooks
+</span><span class='line'>
+</span><span class='line'>DEPRECATED: Your Berksfile contains a site location pointing to the Opscode Community Site (site :opscode). Site locations have been replaced by the source location. Change this to: 'source "http://api.berkshelf.com"' to remove this warning. For more information visit https://github.com/berkshelf/berkshelf/wiki/deprecated-locations
+</span><span class='line'>Resolving cookbook dependencies...
+</span><span class='line'>Using iptables (0.13.2)
+</span><span class='line'>Using sudo (2.5.2)
+</span><span class='line'># 以下略</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文句言いながらもやってくれました。冒頭の1行目の書き方は<code>site :opscode</code>というのが通例だったけど、v2.0から<code>source "https://api.berkshelf.com"</code>に変わった模様。ただ、コマンドは通るには通るんだけど。</p>
+
+<p>最初に<code>berks vendor cookbooks</code>したときに出たエラー、要は「すでにあるフォルダにはインストールできねーよ」って話なのだが、だとしたらBerksfileを書き換えて追加インストールしたいときはどうしたらいいんだろう？というのは素朴な疑問。サードパーティのクックブックは直接編集しない（変数などは自分のレシピの方で代入する）のが基本らしいので、一度フォルダを消してから再度<code>berks vendro cookbooks</code>でも不都合はないと言えばないのだが、なんだか馬鹿らしい感じもする。</p>
+
+<p>あと<code>berks install</code>コマンドもあるんだけど使い方わかってない。</p>
+
+<h2>レシピ作成</h2>
+
+<p>その前におさえる基本。</p>
+
+<ul>
+<li>nodes/hostname.json : 実行するレシピをrun_listとして記述</li>
+<li>solo.rb : chefが利用する各種パスの設定ファイル（knife soloの場合は生成されない）</li>
+<li>cookbooks/hoge/recipes/default.rb : レシピ本体</li>
+<li>cookbooks/hoge/templates/default/* : テンプレートファイル</li>
+<li>cookbooks/hoge/files/* : 静的ファイル</li>
+<li>cookbooks/hoge/attributes/* : 変数の格納</li>
+</ul>
+
+
+<p>あとcookbooksフォルダはサードパーティ製のものを入れて、自家製のクックブックはsite-cookbooksフォルダに入れるっていうルールもある。名前がわかりにくいが。</p>
+
+<p>このへん押さえつつ、次回はレシピ作成編です。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/01/post/">エンジニアの転職において「技術」とは目的か手段か</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-01T00:57:00+09:00'><span class='date'>2014-05-01 (Thu)</span> <span class='time'>12:57 am</span></time>
+        
+         | <a href="/blog/2014/05/01/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a title="By 江戸村のとくぞう (投稿者自身による作品) [CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons" href="http://commons.wikimedia.org/wiki/File%3A%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG"><img width="512" alt="渋谷ヒカリエー２" src="//upload.wikimedia.org/wikipedia/commons/thumb/7/76/%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG/512px-%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG"/></a></p>
+
+<p>ヒカリエ綺麗すぎる。。。</p>
+
+<p>えー。<a href="http://connpass.com/event/5766/">こちらのイベント</a>に参加してきました。こういう社外での勉強会チックなものに参加するって初めてですげービビってたけどわりと楽しめた。</p>
+
+<p>登壇者の方はSIerを経てWeb系に行かれたということでしたけど、その理由が「コードを書けないことへの危機感」だとか「3.11を目の当たりにして、やりたいことやっとかないといつ死ぬかわからん」みたいな話だったのはだいぶ自分とも似ている点でした。というかSIerを脱出して別のIT系に転職する人って2パターンあって、1つがこのように「より技術的なスキルアップをしたい」という人、もう1つが「ユーザー企業の側に行ってみたい」という人。少なくとも自分の周囲を見回しているとそういう感じで、比較的安定的でよく狙われてるのは後者なのかなという印象を持っています。ただ、最近のトレンドとして手に職をつけるじゃないですけど、自分で出来ることの幅を増やしたいという人は多い気もしている。イベント後の懇親会で話していてもそんな感じでした。</p>
+
+<p>自分としても技術的な危機感というのはあって、だからこそのこのブログなのだけど、最近より強く感じているのは「長期的な目的なしに転職したくない」ということ。</p>
+
+<p>突然の話になりますが、自分は今のインターネットを巡るこの国の状況って実にダサいなと思ってます。光回線はだいぶ普及したし、ポケットに入るコンピュータを誰もが持ち歩いているし、Wi-Fiサービスだってそこここにある。確かにインフラ面では多大なる普及を終えているんだけど、じゃあそれを使ってみんな何をしてるの？というと、今ってソシャゲで金銭巻き上げられたりSNS疲れが社会問題化したり、あるいは歩きスマホしてて階段から落ちて死ぬみたいな感じじゃないかと。なんてーか、まだ十分に社会が、ソフトウェアの方がインフラの状況に追いついていないように思うのですよ。ネットを通じて社会を良くしよう！みたいな話がよくあるけど、その前にネット自体を何とかしないとヤバくね？ってのが自分の実感です。</p>
+
+<p>だからキャリアプランとしては、そういう方面に進んでいきたい。ITと社会がうまく調和していくような、そういう動きを促せるような働きかけをしていきたいという思いが強くある。となると、自分の手で技術的なこと出来るか？ってのは二の次になるんですよね。手段と目的の違いです。もちろん、今挙げた「目的」を達するために技術力という「手段」を使えれば自分にとって最も望む結果だと思うし、その方向ってのは目指したいと思ってる。ただ、じゃあ実際どういう職種がその方向の先にあるんだろうってのがあまり具体化できてなくて。考えたのはUIデザインとかは少し近いなと思うんですけど、あまりしっくりはきていない。むしろ法整備したりだとか、あるいはMIAUのやっているようなことが自分の目的には近いのだけど、そうなると技術者じゃなくて良くなっちゃうなぁってのもあって悩ましい。</p>
+
+<p>世の「技術やりたい！」というエンジニアのみなさんは、もうそれ自体が目的化しているのか、それとも技術を通して実現したい目的が別にあるのか、というのは大変に気になるところです。今日聞けばよかったかな。まあ、もうちょっといろいろ考えてみます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/12/post/">Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-12T21:56:00+09:00'><span class='date'>2014-04-12 (Sat)</span> <span class='time'>9:56 pm</span></time>
+        
+         | <a href="/blog/2014/04/12/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでに<a href="http://chroju89.hatenablog.jp/entry/2014/02/20/000348">こちら</a>のエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。</p>
+
+<h2>今回作成したファイル</h2>
+
+<p>以下4ファイルを作成した。</p>
+
+<ul>
+<li>Capfile</li>
+<li>config/deploy.rb</li>
+<li>config/deploy/staging.rb</li>
+<li>lib/capistrano/tasks/unicorn.cap</li>
+</ul>
+
+
+<p>基本的にCapistranoを使う場合「必須」なのは上2つのファイル。<code>deploy/hoge.rb</code>も確実に必要にはなるが、デプロイ先の環境が本番なのかステージングなのかでproduction.rbとstaging.rbを使い分けることになる。もちろん、ステージング環境を用意していない場合はstaging.rbは不要。また4つ目のファイルだが、自分の場合はunicornをデプロイ先で使っているので、デプロイ後にunicornを再起動する目的で独自タスクを作成している。説明が遅れたが、今回デプロイ先となる環境は大雑把に以下の通り。</p>
+
+<ul>
+<li>Vagrant 1.4.3</li>
+<li>CentOS 6.4</li>
+<li>Postgresql 9.1</li>
+<li>Ruby 1.9.3(rbenv)</li>
+<li>Nginx + unicorn</li>
+<li>位置付けはステージング環境</li>
+</ul>
+
+
+<h2>Capfile</h2>
+
+<script src="https://gist.github.com/10530780.js"></script>
+
+
+<p>ここはだいたい環境を問わず同じになってくる箇所。まず<code>capistrano/setup</code>と<code>capistrano/deploy</code>は<code>require</code>が必須。RailsをCapistranoで扱う場合は、<code>capistrano/bundler</code>から<code>capistrano/rails/assets</code>までも必須となる。rbenvを使っている場合は<code>capistrano/rbenv</code>が必要。rbenvをどこにインストールしたのかにより、<code>set :rbenv_type</code>を指定する。あとはデプロイするアプリケーションで使うRubyのバージョンも指定してやる。rvmを使う場合も似たような<code>capistrano/rvm</code>を使うみたいだが、そちらはよくわからんので割愛。</p>
+
+<p>で、ここまでがrequireということなので、デプロイ元サーバーにGemfile書いてインストールしておくことを忘れずに。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>group :development do
+</span><span class='line'>  gem 'capistrano', '~&gt; 3.1.0', :require =&gt; false
+</span><span class='line'>  gem 'capistrano-rails', '~&gt; 1.0.0', :require =&gt; false
+</span><span class='line'>    gem 'capistrano-rbenv', '~&gt; 2.0', :require =&gt; false
+</span><span class='line'>  gem 'capistrano-bundler', '~&gt; 1.1.2', :require =&gt; false
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最終行は独自カスタムタスクを読み込むための行。デフォルトで入っているのでそのままにしておけばよい。先のunicorn.capのように、何か独自タスクを作った場合はこのパスに入れれば読み込むよーということでもある。</p>
+
+<p>なお、以前書いたエントリーでは<code>capistrano3/unicorn</code>も<code>require</code>していたのだが、これは撤回した。詳細はunicorn.capについて説明するときに後述。</p>
+
+<h2>staging.rb</h2>
+
+<script src="https://gist.github.com/10530945.js"></script>
+
+
+<p>ステージング環境、というかデプロイ先環境の設定を書く。vagrantを使う場合はだいたいこれと同じように書いておけば通るんじゃないかと思う。Vagrantはデフォルトではvagrantユーザーによるsshが可能になっているので、それをそのまま使わせてもらっている。何か他のユーザーで入りたい場合などは頑張るしかない。</p>
+
+<p>一点だけ注意すべきは、<code>RAILS_ENV</code>がstagingに設定されるということ。Capistrano3では<code>cap install</code>を叩くとデフォルトでstaging.rbとproduction.rbが作られ、<code>RAILS_ENV</code>もこのファイル名に倣うことになるのだが、Railsの動作環境は通常test, development, productionの3種類であり、stagingは存在していない。従ってこのままデプロイを始めてもうまくはいかない。面倒であればstaging.rbは使わず、production.rbだけを使っていてもいいかもしれない。</p>
+
+<p>staging.rbを使う場合は、Rails側で環境の準備が必要になる。やることは大きく3つ。</p>
+
+<h3>1. database.ymlにstagingを作成する</h3>
+
+<p><code>rake db:migrate</code>などのDB系のコマンドはi<code>RAILS_ENV</code>を指定して実行される。ここで指定された<code>RAILS_ENV</code>をdatabase.ymlに見に行くので、設定を入れておく必要がある。ステージング環境の本来の意味を考えると、production用の記述をそのままコピーするだけで良いはず。</p>
+
+<h3>2. config/environments/staging.rbを作成する</h3>
+
+<p>動作環境設定ファイルとして、デフォルトではproduction.rbとdevelopment.rbだけが用意されているので、これもproduction.rbをコピーしてstaging.rbを作る。</p>
+
+<h3>3. Gemfileにgroup :stagingを作成する</h3>
+
+<p>これは<code>RAILS_ENV</code>と直結するわけではないが、GemfileのグループもRails環境ごとに作られているのでstagingを設けてやった方が良さそう。これもここまでと同様の話で、<code>group :staging, :production do</code>としてやるだけで良い。</p>
+
+<ul>
+<li>参考：<a href="http://spring-mt.tumblr.com/post/33209507135/rails-staging">railsでstaging環境を作る - CubicLouve</a></li>
+</ul>
+
+
+<h2>deploy.rb</h2>
+
+<script src="https://gist.github.com/10530987.js"></script>
+
+
+<p>いよいよデプロイ用の設定。面倒なので説明は省くが、だいたいはコメント読めば設定できるはず。</p>
+
+<p><code>linked_files</code>と<code>linked_dirs</code>は<a href="http://chroju89.hatenablog.jp/entry/2014/04/06/191336">前回のエントリー</a>で書いた通り、shared配下に置いているファイルやフォルダのうち、currentに必要となるものを指定することでシンボリックリンクを張ってくれるというものなのだが、ではshared配下にこれらファイルやフォルダはいつ作られるのか？というのがかねてから疑問だった。</p>
+
+<p>結論を言えば、<code>linked_files</code>は勝手には作成されない。というより、ここに指定したファイルがshared下に存在しない場合、Capistranoはデプロイ時にエラーを吐いてくる。正確に言えば<code>deploy:check:linked_files</code>というタスクがあり、ここで存在確認を行っている（<a href="https://github.com/capistrano/capistrano/blob/master/lib/capistrano/tasks/deploy.rake">参照</a>）。したがってこのタスクが投げられる前にファイルは別でアップロードしなくてはならない。ここではdetabase.ymlを指定しているので、アップロードタスクを独自で組み込んでいる。詳細は後述。</p>
+
+<p>一方の<code>linked_dirs</code>は、shared配下に存在しない場合は<code>deploy:check:make_linked_dirs</code>で空っぽのフォルダとして作成してくれる。逆に言えば、元々ファイルが入っているようなフォルダをここで指定することはあまりないということ。例えばbundleなり、logやtmpなり、アプリが動作する中で必要とされるフォルダ（従ってGitHubで静的に管理はしていないフォルダ）がここに来ている。なお、shared/bundleは<code>capistrano/bundle</code>が<code>bundle install --path</code>で指定するデフォルトのフォルダなんだそうだが、古いバージョンの<code>capistrano/bundle</code>ではshared/vendor/bundleにインストールするらしいので要確認。</p>
+
+<p>後半では独自タスクを3つ追加している。</p>
+
+<p>1つ目はdatabase.ymlをアップロードするタスク。デプロイ先にshared/configフォルダを作成した上で、ローカルのconfig/database.ymlをアップロードしている。2つ目は<code>bundle exec rake db:create</code>を発動するタスク。Capistranoやcapistrano/railsにはDB作成用のタスクは一切含まれていないので、自力であらかじめ作っておく必要がある。手動で作成したり、Chefなんかで仕込んでおく手もあるのだろうが、ここではCapistranoのタスクとして書いている。必要になるのはもちろん初回1回限りなので、デプロイのルーチンの中には組み込んでいない。</p>
+
+<ul>
+<li>参照：<a href="http://yss44.hatenablog.com/entry/2013/12/01/150215">Capistrano3で快適デプロイ生活!! - Less is Best</a></li>
+</ul>
+
+
+<p>3つ目はunicornを再起動するタスク。これはunicorn.capの中で作成した<code>unicorn:restart</code>というタスクを呼んでいる。</p>
+
+<p>最後の2行は独自タスクのルーチンへの組み込み。database.ymlのアップロードは真っ先にやらなくてはならないので、<code>deploy:starting</code>というデフォルトで言えば最初のタスクのさらに前に組み入れている。一方のunicorn再起動は<code>deploy:publishing</code>の後、ほぼすべてのタスクが終わったタイミング。</p>
+
+<h2>unicorn.cap</h2>
+
+<script src="https://gist.github.com/10531064.js"></script>
+
+
+<p>ほぼほぼ以下エントリーの中身をそのまま使わせてもらいました。</p>
+
+<ul>
+<li>参照：<a href="http://qiita.com/satococoa/items/9b0cc416ffc042680b9b">unicorn + rails 用 Capistrano 3 の設定ファイル - Qiita</a></li>
+</ul>
+
+
+<p>異なる箇所は<code>start_unicorn</code>の内部処理。元エントリーでは<code>bundle exec unicorn</code>を叩いているのだが、自分としては<code>bundle exec unicorn_rails</code>を叩く認識だったので書き換えている。ここの書き換えが必要なのかどうかはちょっと自信がない。またコマンドのオプションとして<code>--path hoge</code>を指定しているのだが、これはサブディレクトリでRailsアプリを動作させたいため。予定として<a href="http://www.chroju.net/">http://www.chroju.net/</a>は静的なサイト、www.chroju.net/hogeでアプリごとにフォルダ作って管理としたかったもので。まー、こういう要らんチューニングを最初からやろうとするから迷走するわけなのだが。はじめはマニュアル通りにまず写経すべきだと思います。はい。サブディレクトリ云々の件はまた別途エントリー書きます。</p>
+
+<p>ちなみにパスの指定やら何やらやらないのであれば、<a href="https://github.com/tablexi/capistrano3-unicorn">capistrano3-unicorn</a>を使うのも手だと思う。</p>
+
+<h2>その他トラブルなど</h2>
+
+<p>以上、ここまでの設定にはそれなりに自信がある。とりあえず<code>bundle exec cap staging deploy</code>を叩いてエラーが出ないことも確認はした。が、現状アプリは動いてない。。。いや、正確に言うと一度動いたのだが、その後Vagrant落として、セキュリティアップデートのためにiMacも再起動してもう一度やってみたところ、ダメダメになってしまったのだ。何が原因なのやらさっぱりだ。。。トラブルは3つほど遭遇している。</p>
+
+<h3>1. Gitが通らない</h3>
+
+<p><code>git ls-remote</code>で<code>Permission denid(publickey)</code>のエラーが出るという事象が発生、その先に進めなくなった。これについてはドンピシャなエントリーを探し当てたので、そのまま解決策を適用したらなんとかなった。なぜこのエラーが起きたのかまではまだ深堀りできてない。</p>
+
+<ul>
+<li>参考：<a href="http://peteoliveira.com/deploying-with-capistrano-3-failing-permission-denied-publickey/">Deploying with Capistrano 3 failing – Permission denied (publickey) | Pete Oliveira</a></li>
+</ul>
+
+
+<h3>2. 404が返される</h3>
+
+<p>Nginxは動いている。unicornもプロセスは上がっているのだが、アプリを配置したフォルダを見に行くとThe page you were looking for doesn&rsquo;t exist.というメッセージが返される状態。他の有りもしないフォルダを見に行こうとするとNginxがBad Gatewayを返してくるし、unicorn.stderr.rbにログが残っているのでアクセスはできているようなのだが、なぜ表示に至らないのかわからない。</p>
+
+<p>ちなみにstaging.logにはActionController::RoutingErrorが出ている。？？？</p>
+
+<h3>3. Assets周りが不具合起こしている模様</h3>
+
+<p>Vagrantを落とす前はアプリ自体つながりはしたのだが、jsとcssが反映されていない状態だった。ソースから探ってjsとcssをブラウザ上で開いてみたのだが、真っ白になっていた。アセットコンパイルのエラーなのかと思い、サーバー上でもコンパイル後のファイルを開いたりしてみたが、こっちは中身がきちんと書かれていた。なんなんだ一体。</p>
+
+<p>以上。だいたい整ったはずなのだが、まだまだ先が長そうでいい加減ゲンナリしている。自分、この手のこと向いてないのかもしれんと思い始めた。。。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/06/post/">Capistrano3がわからんので今一度イチから考えなおしてみる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-06T19:13:00+09:00'><span class='date'>2014-04-06 (Sun)</span> <span class='time'>7:13 pm</span></time>
+        
+         | <a href="/blog/2014/04/06/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。</p>
+
+<h2>Capistranoは何をしてくれるのか</h2>
+
+<p>そもそもCapistranoとは何をしてくれるツールなのか？</p>
+
+<p><a href="http://qiita.com/yuku_t/items/01c0ec4389db143e27f5">Capistrano3のデプロイフレームワークの使い方 - Qiita</a></p>
+
+<p>Capistranoは2まではRailsのデプロイツールだったけど、3は汎用的なデプロイツールに変わっている。したがってデフォルトの状態ではRails用のデプロイタスクは特に含まれていない。このあたりが上の方のリンク先で語られている内容になる。</p>
+
+<p>ではデフォルトでのデプロイタスクは何をするのかと言えば、およそサーバーへのデプロイとして一般的に行われるようなものが組み込まれている。<a href="https://github.com/capistrano/capistrano/tree/master/lib/capistrano/tasks">capistrano/lib/capistrano/tasks</a>あたりを探るとデフォルトタスクがよくわかる。</p>
+
+<ul>
+<li>releases、sharedなどディレクトリの作成</li>
+<li>レポジトリからgit clone</li>
+<li>linked_files、linked_dirsの存在確認とシンボリックリンク作成</li>
+<li>currentディレクトリへのシンボリックリンク作成</li>
+<li>最古世代の削除、クリーンナップ</li>
+</ul>
+
+
+<p>ざっくり見てしまうと、単純にサーバーへファイルを上げて自動的に世代管理をさせるだけであればこれだけでもなんとかなりそうなところではある。逆にこれらが煩わしいのであれば、<a href="http://labs.gree.jp/blog/2013/12/10084/">デフォルトタスクを無効化して使う手もある。</a>デフォルトタスクの内容がよくわからないのであれば、一旦無効化してすべて自分でタスクを書くというのも手だと思う。</p>
+
+<p>Railsをデプロイする場合はこれだけでは足りないので、capistrano/railsやcapistrano/bundleを追加で読み込むことになる。</p>
+
+<h2>Capistranoのディレクトリ構成</h2>
+
+<p>Capistranoでデフォルトのデプロイを行った時、デプロイ先サーバーに作成されるディレクトリについてもよくわかってないのでまとめておく。deploy.rbのdeploy_toで指定したディレクトリ内に、次の3つのディレクトリが作られる。</p>
+
+<ul>
+<li>releases : デプロイした内容を世代管理する</li>
+<li>shared : bundleとかdatabase.ymlとかGitで管理してないファイル置き場（多分）</li>
+<li>current : releasesの最新世代とsharedのシンボリックリンクが置かれる</li>
+</ul>
+
+
+<p>基本的に「デプロイ」される先はreleasesだ。releases配下にはデプロイ時のタイムスタンプから生成された名前のフォルダが作られ、その中にごっそりデプロイしたファイルが入っている。タイムスタンプが付くということは当然世代管理されているわけだが、保持される世代数はdeploy.rbの<code>set :keep_releases</code>で好きに指定できる。で、最新世代についてはcurrent配下にシンボリックリンクが自動的に貼られる。</p>
+
+<p>sharedは正直よくわからない。デプロイのたびに更新するわけではない、すなわちGitで管理をしていないファイルやディレクトリを置いておくみたいなのだが、では<strong>どうやって配置すれば良いのか？</strong>がわからない。配置したファイルのうち、必要なものについてはlinked_dirsとlinked_filesで指定すればcurrent配下にこれもまたシンボリックリンクが貼られる。しかし、<strong>どうやって配置すれば良いのかわからない。</strong></p>
+
+<p>関連：<a href="http://qiita.com/shunsugai@github/items/a112182ff5c0bb49249a">[自分用メモ]Capistrano3のlinked_filesって自分でuploadしなきゃダメですか？ - Qiita</a></p>
+
+<p>で、これを書いていて気付いたのだが、アプリの中身がcurrent配下に展開されるということは、ウェブサーバーの設定もdeploy_toではなくてcurrentに飛ばすようにしておかないといけないわけだ。俺だけかも知れんが、案外罠ではないかという気がする。</p>
+
+<h2>capistrano/rails</h2>
+
+<p>取りあえずsharedの話はほっといて、Railsをデプロイする話に戻る。冒頭でデフォルトタスクにはRailsに対するものは何もないと書いたが、それではRails用のデプロイタスクはどこで生成されているのか？ 答えから書けば、capistrano-railsを読み込むことによって初めて生成される。</p>
+
+<p><a href="http://qiita.com/yuku_t/items/78f32d6e5d21aee4e745">Capistrano3におけるRailsのデプロイタスクの内部実装 - Qiita</a>
+いわく、追加されるタスクは主に3つ。</p>
+
+<ul>
+<li>assets compile(deploy:compile_assets)</li>
+<li>assetsのタイムスタンプ更新(deploy:normalize_assets)</li>
+<li>db:migrate(deploy:migrate)</li>
+</ul>
+
+
+<p>逆に言えば、ここで追加される以外のタスクはデフォルトでは<strong>行われない</strong>ということになる。その点を配慮せずにただググって適当なdeploy.rbをコピーしたりしただけでは、思ったとおりのデプロイは出来ない。</p>
+
+<p>一例として自分がハマったのが、<code>db:create</code>は行われないということ。schema.rbを使って初回デプロイのときに上手いこと云々なんてことは一切してくれないので、このあたりは自分で書くか、サーバーを作ったときに予めDBをこしらえておく必要がある。</p>
+
+<h2>capistrano/bundle</h2>
+
+<p>もうひとつ、RailsをCapistranoでデプロイする場合に必要なのがcapistrano/bundler。Rails使っててGemfileがないなんてことはないだろうし、というかcapistrano/railsの中で<a href="https://github.com/capistrano/rails/blob/master/lib/capistrano/rails.rb">明示的にrequireされている。</a>何をやっているのかと言えば、簡単な話しである。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  before 'deploy:updated', 'bundler:install'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デフォルトではshared配下にbundleディレクトリを作ってbundle installをかけてくれる。パスについては<code>set :bundle_path</code>オプションで自由に指定ができる。</p>
+
+<h2>capistrano/rbenv</h2>
+
+<p>あとよく使われるものとして、capistrano/rbenvがある。デプロイ先のサーバーで、Rubyをrbenvを使って入れてる場合には必須になるもの。中身はよく知らないが、そこまで気にしなくても良いのではないかという感覚がある。入れたらdeploy.rbに<code>set :rbenv_ruby_version</code>で使うRubyのバージョンを指定すればOK。</p>
+
+<p>同じ類のものとして、capistrano/rvmももちろんあります。</p>
+
+<h2>ソースにあたることの必要性</h2>
+
+<p>以上がCapistrano3でRailsをデプロイする場合の主なデフォルトタスクの内容になる。繰り返しになるが、これ以外に何をやりたいのならタスクは書く必要がある。よく言われるのがデプロイ後のウェブサーバーの再起動で、unicornを再起動するタスクを追加している例はよく見かける。ただ、これも<a href="https://github.com/tablexi/capistrano3-unicorn">capistrano3-unicorn</a>という便利なものがすでに作られていたりはする。</p>
+
+<p>個人的な思いなのだが、<a href="http://capistranorb.com/">Capistrano公式</a>の「Getting Started」は説明が不十分な気がしてならない。デプロイに至るまでの設定ファイルの書き方やら何やらは確かにだいたい載っているのだが、ではCapistrano3の内部実装がどうなっているのかとか、タスクを自分で書くにはどうすればよいのかといったあたりの情報が足りない。自分はまだこのDSLを読み下せないのだが、rakeあたりを知っていると結構書けるものなんだろうか？　ひょっとしたら、自分のようなRubyやRails初心者が安易に手を出すものではないのかなぁとか思う。</p>
+
+<p>ただ、GitHubにいずれもソースが上がっているので、根気よく読んでいけばCapistranoが何をしているのか、また何を求めているのかは理解できる。誰かの書いたノウハウに頼るより、ソースにあたるのが大切なのは基本だと思う。常に。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/20/post/">Rails環境構築（5）Capistranoによるデプロイ ※未完</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-20T00:03:00+09:00'><span class='date'>2014-02-20 (Thu)</span> <span class='time'>12:03 am</span></time>
+        
+         | <a href="/blog/2014/02/20/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。</p>
+
+<p>Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。</p>
+
+<p>3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは<a href="http://capistranorb.com/">本家</a>をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。</p>
+
+<ul>
+<li><a href="http://threetreeslight.com/post/68344998681/capistrano-3-x-rails">capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight</a></li>
+<li><a href="http://labs.gree.jp/blog/2013/12/10084/">入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&#8217; Blog</a></li>
+<li><a href="http://takkkun.hatenablog.com/entry/2013/10/12/Capistrano_3%E3%81%B8%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D">Capistrano 3への手引き - 今日のごはんは素麺です</a></li>
+<li><a href="http://d.hatena.ne.jp/ria10/20130526/1369583203">capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記</a></li>
+<li><a href="http://kakakakakku.hatenablog.com/entry/2013/12/11/090204">Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog</a></li>
+</ul>
+
+
+<h2>Capistranoとは？</h2>
+
+<p>そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。</p>
+
+<h2>インストール</h2>
+
+<p>インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>group :development do
+</span><span class='line'>  gem 'capistrano', '~&gt; 3.1.0'
+</span><span class='line'>  gem 'capistrano-rails', '~&gt; 1.0.0'
+</span><span class='line'>  gem 'capistrano-bundler', '~&gt; 1.1.2'
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。</p>
+
+<h2>初期作業</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec cap install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。</p>
+
+<ul>
+<li>Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述</li>
+<li>config/deploy.rb : デプロイタスクを記述</li>
+<li>config/deploy/hoge.rb : 各サーバー情報を記述</li>
+</ul>
+
+
+<h2>Capfile編集</h2>
+
+<p>capistrano-railsと同bundlerを読み込むため、Capfileを開いて以下追記。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'capistrano/rails'
+</span><span class='line'>require 'capistrano/bundler'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>config/deploy.rb編集</h2>
+
+<p>いろいろコメントアウトしてあってどれを使えばいいかよくわかんなかったりもするのだが、最低限以下は必要っぽい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set &lt;span class="synConstant"&gt;:application&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:repo_url&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;git@github.com:chroju/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:deploy_to&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;/var/www/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:scm&lt;/span&gt;, &lt;span class="synConstant"&gt;:git&lt;/span&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上から。1行目はアプリケーション名。これはどこかで使われる設定ではないようなので、適当に入れておけばよさそう。2行目はGithubのリポジトリURL。3行目はデプロイ先となるサーバー上のディレクトリパス指定。ここではApacheの設定にならってみた。4行目は使用しているSCMの指定。とはいえ、現状Gitしか対応していないのでこれ以外の書き方は不可。</p>
+
+<p>ファイル後半にはデプロイタスクのデフォルト設定が書かれている。一応、ここはそのままでも動くみたい。自分で何か特別なことをやらせたい場合は当然ながら編集する必要があるが、まだその域に至ってないです。</p>
+
+<h2>config/deploy/hoge.rb編集</h2>
+
+<p>ここではステージング環境としてvagrantを使うものと仮定。WebサーバーやDBサーバーを分けたりはせず、1台のサーバーですべてをまかなうこととする。よってstaging.rbを編集する。このファイルもデフォルトでいろいろ書かれてはいるのだが、とりあえず次の4行があればOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;127.0.0.1&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, port: &lt;span class="synConstant"&gt;2222&lt;/span&gt;, user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, roles: &lt;span class="synSpecial"&gt;%w{&lt;/span&gt;&lt;span class="synConstant"&gt;web, app, db&lt;/span&gt;&lt;span class="synSpecial"&gt;}&lt;/span&gt;, ssh_options: {
+</span><span class='line'>  user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;,
+</span><span class='line'>  keys: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;~/.vagrant.d/insecure_private_key&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;,
+</span><span class='line'>  auth_methods: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;publickey&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>server〜で1台のサーバーの設定を一括で書ける。言わずもがな、まず対象IP。portがポート番号、userがSSHログインするユーザー名。roleはこのサーバーの役割を書く。web、app、dbの中から当てはまるものを書けばいいようだが、allという指定もできるとかできないとか。ssh_options:でさらに詳しい内容を記述。userはさっきのと被ってるので不要な気がするのだが、他のサイトを見てたら書いている設定があったので取りあえず入れてる。keysは認証に使うキーのパス。auth_methods:で認証方法を指定しているが、通例publickey認証とする。
+ここに書いた設定の大半はvagrant ssh-configコマンドで拾えるので、自分の環境に合った設定に書き換えて下さい。</p>
+
+<h2>デプロイ実行</h2>
+
+<p>で、あとはデプロイでいけちゃうみたいです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec staging deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>stagingをproductionに換えればproduction.rbの設定に則ります。あと、末尾に:checkを付けるとコマンドが通るかコールドでチェックしてくれるので、まずは:checkをした方がいい。あと、cap -Tで実行可能なコマンドがずらずら出てくる。デプロイのロールバックしたり、rake db:migrateを走らせたり、結構いろんなことができるので一度見ておくと吉。</p>
+
+<h2>ハマった点</h2>
+
+<p>自分の場合は以上の手順で上手くいきませんでした。何点かハマったポイントをば。</p>
+
+<h3>デプロイ先ディレクトリのパーミッション</h3>
+
+<p>大変アホみたいな話だが最初これでmkdirが上手くいかなかった。公式ドキュメントの<a href="http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/">ココ</a>に書いてあるけど、SSHユーザーはsudoなしでデプロイ先ディレクトリを操作できる権限がなきゃダメです。vagrantユーザーは~/var配下の操作権限なかったので弾かれた次第。。。</p>
+
+<p>対応としてはさっきのリンク先に書いてある手順通り<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080219/294154/">sgid</a>の設定とかしてあげたらなんとかなりました。あるいはパスワードなしでsudo実行可能にしてやっても動くみたいだけど、当然ながらサーバーセキュリティ的にはNGなので。まぁvagrantであればどうでもいいかもしんないけど。</p>
+
+<h3>SQLiteのエラー</h3>
+
+<p>deploy中にsqlite3.hが存在しないよというエラーが発生。<a href="http://www.guanxiaohua2k6.com/2012/07/sqlite3h-is-missing.html">このページ</a>に書いてあるのとまったく同じ症例だったので、同様の対策をしてあげて解決。これは俺のvagrant環境の準備に不備があったってことでいいんだろうか。根本原因がイマイチ謎。</p>
+
+<h3>rake db:migrateのエラー</h3>
+
+<p>そして現在進行形で未解決なのがこのエラー。デフォルトのデプロイタスクでは途中でデプロイ先サーバー上でRAILS_ENV=staging bundle exec rake db:migrateを叩くんだけど、これが次のエラーで停まってしまう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>DEBUG [4be84d91]        rake aborted!
+</span><span class='line'>DEBUG [4be84d91]        database configuration does not specify adapter</span></code></pre></td></tr></table></div></figure>
+
+
+<p>いくつか思い当たった原因に取り組んではみたのだが、なおエラーが起きている。</p>
+
+<ul>
+<li>RAILS_ENV=hogeを追加した場合、Gemfileのgroup :hogeを見に行くのだが、stagingグループを用意していなかった（<a href="http://opentechnica.blogspot.jp/2012/01/railsenv.html">参考</a>）。</li>
+<li>database.ymlにstagingの設定を用意していなかった。</li>
+</ul>
+
+
+<p>たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/14">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/12">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

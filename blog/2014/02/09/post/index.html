@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>突然だけどVimperatorrcを晒してみる - the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。 vimperator自体は何年か前から使っていたのだが、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//blog/2014/02/09/post">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">突然だけどVimperatorrcを晒してみる</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-09T10:29:00+09:00'><span class='date'>2014-02-09 (Sun)</span> <span class='time'>10:29 am</span></time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。</p>
+
+<p>vimperator自体は何年か前から使っていたのだが、カスタマイズはあまりせずにデフォルトの状態で使っていた。が、操作によってはマウス使った方が便利だったり、ちょっと中途半端な状態にあったので、一念発起してちょこちょこいじってみた。まだいじれる余地はありそうなんだけど。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" vim: set filetype=vim :</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vimで編集するとき、vimperatorrc用のハイライトがないので、似たところでfiletypeをvimとして認識させてます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" General
+</span><span class='line'>"============================
+</span><span class='line'>
+</span><span class='line'>" 入力欄に自動フォーカスしない
+</span><span class='line'>set focuscontent
+</span><span class='line'>" ビジュアルベルを表示しない
+</span><span class='line'>set visualbell
+</span><span class='line'>highlight Bell display:none
+</span><span class='line'>" :oなどでの補完候補をサーチエンジン、履歴に限定
+</span><span class='line'>set complete=sl
+</span><span class='line'>" Hintモードでアルファベット使用
+</span><span class='line'>set hintchars=jfnvurhgytbkdmcielsxoe
+</span><span class='line'>" ツールバーはアドオンとタブのみ表示
+</span><span class='line'>set gui=addons,nobookmarks,nomenu,nonavigation,tas
+</span><span class='line'>" commandモードでIMEオフ
+</span><span class='line'>style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここまでは基本、一般的な設定しかないかと。set complete=slは地味に効く。で、なぜか現状set hintcharsが動いてないれす。。。何がいけないのかわからん。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" Key mapping
+</span><span class='line'>"============================
+</span><span class='line'>
+</span><span class='line'>" google検索を手早くする
+</span><span class='line'>noremap s :open&lt;Space&gt;google&lt;Space&gt;
+</span><span class='line'>noremap ,s :tabopen&lt;Space&gt;google&lt;Space&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここからキーマッピング。:openで検索もURL開くのも両方いけるのはいけるんだが、vimperatorでの自動判別がうまいこといかない（例えば「twitter おすすめ」とかで:openすると、Twitter検索で「おすすめ」を探した結果が表示されるとか）ときがあるので、明示的に:open googleを一発で開けるようにしてます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" OS分岐
+</span><span class='line'>" dをブラウザ標準の「タブを閉じる」にマッピング
+</span><span class='line'>" vimperatorrcのリロード
+</span><span class='line'>js&lt;&lt;EOM
+</span><span class='line'>if(liberator.has("MacUnix")) {
+</span><span class='line'>  liberator.execute("map d &lt;M-w&gt;");
+</span><span class='line'>  liberator.execute("map ,r :source&lt;Space&gt;~/.vimperatorrc&lt;CR&gt;");
+</span><span class='line'>} else {
+</span><span class='line'>  liberator.execute("map d &lt;C-w&gt;");
+</span><span class='line'>  liberator.execute("map ,r :source&lt;Space&gt;~/_vimperatorrc&lt;CR&gt;");
+</span><span class='line'>}
+</span><span class='line'>EOM</span></code></pre></td></tr></table></div></figure>
+
+
+<p>dを打ったときに左隣のタブにフォーカスが移るのが気に入らないので、OSデフォルトの「タブを閉じる」ショートカットにdをリンクさせて、タブを閉じたときの挙動はTab Mix Plusで「直前のアクティブタブに移る」ように設定してる。このへん、vimperatorrcだけでなんとか設定できないものか。</p>
+
+<p>あと、,rでvimperatorrcの再読み込みさせてます。この2つの設定はOSによって微妙に異なるので、分岐させますた。MacとWindowsでしか使ってないのでかなり適当な分岐。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" 移動幅
+</span><span class='line'>noremap j 5j
+</span><span class='line'>noremap k 5k
+</span><span class='line'>" タブ移動
+</span><span class='line'>nnoremap h &lt;C-p&gt;
+</span><span class='line'>nnoremap l &lt;C-n&gt;
+</span><span class='line'>" タブの位置変更
+</span><span class='line'>map &lt;C-l&gt; :tabmove! +1&lt;CR&gt;
+</span><span class='line'>map &lt;C-h&gt; :tabmove! -1&lt;CR&gt;
+</span><span class='line'>" undo一覧から開く
+</span><span class='line'>nnoremap U :undo&lt;Space&gt;
+</span><span class='line'>let g:hint_tombloo_key = 'r'
+</span><span class='line'>" ブラウザ再起動
+</span><span class='line'>nnoremap &lt;C-r&gt; :restart&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>わりと良くある感じのキーマッピング。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" VisualモードでC-gで選択しているテキストでGoogle検索
+</span><span class='line'>vmap &lt;silent&gt; &lt;C-g&gt; y&lt;Esc&gt;&lt;Esc&gt;P</span></code></pre></td></tr></table></div></figure>
+
+
+<p>コメントの通り。Visualモードで文字列選択した状態でC-g押すと、選択文字列でGoogle検索します。URLの場合はそのまま開いてくれるはずだけど、やったことなし。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" タブのピン止めを@でトグル
+</span><span class='line'>" http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e
+</span><span class='line'>javascript &lt;&lt;EOM
+</span><span class='line'>liberator.modules.commands.addUserCommand(["togglepin"], "add pin to current tab",
+</span><span class='line'>function(){
+</span><span class='line'>    var currentTab = gBrowser.mCurrentTab
+</span><span class='line'>    if(currentTab.pinned){
+</span><span class='line'>        gBrowser.unpinTab(currentTab)
+</span><span class='line'>    }
+</span><span class='line'>    else{
+</span><span class='line'>        gBrowser.pinTab(currentTab)
+</span><span class='line'>    }
+</span><span class='line'>});
+</span><span class='line'>EOM
+</span><span class='line'>nnoremap @ :togglepin&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>地味にピン止め使うのでキーマッピングしました。Firefoxのこの全部Javascriptでなんとかなる感じ好きよ。大好き。ちなみに以下エントリーから丸コピーしてます。</p>
+
+<p><a href="http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e">Vimperator - タブのピン留めをトグルする - Qiita</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" colorscheme
+</span><span class='line'>"============================
+</span><span class='line'>" デフォルトのヒント派手すぎ＞＜
+</span><span class='line'>hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+</span><span class='line'>hi HintElem color: gray; background-color: #a1e4e6;
+</span><span class='line'>hi HintActive color: black; background-color: #ff8700;
+</span><span class='line'>
+</span><span class='line'>" デフォルトのエラー赤くてこわい＞＜
+</span><span class='line'>hi ErrorMsg color:white; background-color: #ec6aa1;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デフォルトのヒントモードが色彩的に大変ウザいので……。色はもうちょい改善の余地あるかなと思ってる。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/12396935955/"> title=&ldquo;スクリーンショット 2014-02-09 10.09.25 by chroju, on Flickr&rdquo;><img src="http://farm6.staticflickr.com/5548/12396935955_dae9869fd9.jpg" width="500" height="257" alt="スクリーンショット 2014-02-09 10.09.25"></a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" qmarks
+</span><span class='line'>"============================
+</span><span class='line'>qmark m https://mail.google.com/
+</span><span class='line'>qmark b http://b.hatena.ne.jp/chroju
+</span><span class='line'>qmark t http://chroju.tumblr.com/
+</span><span class='line'>qmark f http://cloud.feedly.com/#latest
+</span><span class='line'>qmark p http://getpocket.com/a/queue
+</span><span class='line'>qmark B http://chroju.hatenablog.jp/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>QuickMarks設定。これ入れておくと、例えばgomでアクティブタブにGmailが開きます。gnmで新規タブで開ける。あんまり使ってない。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" plugin
+</span><span class='line'>"============================
+</span><span class='line'>
+</span><span class='line'>" plugin_loader
+</span><span class='line'>let g:plugin_loader_roots = "~\vimperator\vimperator-plugins\ ~/.vimperator/vimperator-plugins/"
+</span><span class='line'>let g:plugin_loader_plugins = "_libly,direct_bookmark,sbmcommentsviewer,caret-hint,appendAnchor,stella,feedSomeKeys_3,commandBookmarklet,copy"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここからプラグイン。プラグイン管理は<a href="https://github.com/vimpr/vimperator-plugins/blob/master/plugin_loader.js">plugin_loader</a>を使うとアホみたいに便利です。</p>
+
+<p>普通、プラグインって~/.vimperator/plugin/フォルダに入れて（あるいはシンボリックリンク貼って）読み込ませると思うのだが、このplugin_loaderを~/.vimperator/pluginフォルダに入れれば、以下設定が適用可能に。</p>
+
+<ul>
+<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_roots => 読み込むプラグインが配置されたフォルダを指定（複数可）</li>
+<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_plugins => 読み込むプラグイン名を指定（.jsは除外でOK）</li>
+</ul>
+
+
+<p>つまり<a href="https://github.com/vimpr/vimperator-plugins.git">https://github.com/vimpr/vimperator-plugins.git</a>をどっかにgit cloneしておいて、そのフォルダに対してg:plugin_loader_rootsを指定しておけばどのプラギンもシンボリックリンクとか貼らずに好きに使えるってわけです。便利過ぎ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" Evernote Clearly
+</span><span class='line'>nnoremap e :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(false)&lt;CR&gt;
+</span><span class='line'>nnoremap E :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(true)&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プラグインじゃないけど。。。アドオンのEvernote Clearyの操作をeとEにマッピングさせてる。これもどっかで拾ったコードです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" direct_bookmark
+</span><span class='line'>let g:direct_sbm_use_services_by_tag = "h"
+</span><span class='line'>let g:direct_sbm_use_services_by_post = "h"
+</span><span class='line'>source! $HOME/.vimperatorrc.local</span></code></pre></td></tr></table></div></figure>
+
+
+<p>direct_bookmarkの設定。コマンドからdeliciousとかはてブとかソシアルブックマアクに投稿できるヤツです。はてブしか使ってないので、はてブだけで使えるように。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" vのみではてブコメント表示
+</span><span class='line'>map v :viewSBMComments&lt;Space&gt;-t&lt;Space&gt;h&lt;Space&gt;-f&lt;Space&gt;id,comment&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sbmcommentsviewerの設定。ソシアルブックマアクのコメントがコマンドで見られるようになるヤツ。これもはてブだけに設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" feedSomeKeys
+</span><span class='line'>command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args&gt;
+</span><span class='line'>lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r &lt;S-i&gt;  a # [ ] ? gi gs gt gd ga gc
+</span><span class='line'>lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
+</span><span class='line'>lazy fmaps -u='feedly\.com' j k n p o v gm ga gg gl / r m x s t l f b
+</span><span class='line'>lazy fmaps -e=vkeydown -u='www\.tumblr\.com/' j k r t q p n L l&lt;CR&gt;
+</span><span class='line'>lazy fmaps -u='www\.pixiv\.net/member_illust\.php\?mode=manga&amp;illust_id=[0-9]+' j k</span></code></pre></td></tr></table></div></figure>
+
+
+<p>feedSomeKeysの設定。特定URL下で特定キーを無効化するプラギン。:ignorekeysより細かく設定ができるから好き。ただ、いまいち設定方法が飲み込めてなかったりもする。現状はGmail、feedly、Tumblr、pixivの漫画モード（？）で設定させてる。Gmailの設定が被ってるとこなんとかしたい。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" copy.js
+</span><span class='line'>javascript &lt;&lt;EOM
+</span><span class='line'>(function () {
+</span><span class='line'>  liberator.globalVariables.copy_templates = [
+</span><span class='line'>    { label: 'titleAndURL',    value: '%TITLE%\n%URL%' },
+</span><span class='line'>    { label: 'markdown',       value: '[%TITLE%](%URL%)' },
+</span><span class='line'>    { label: 'title',          value: '%TITLE%' },
+</span><span class='line'>    { label: 'anchor',         value: '[%TITLE%](%URL%)' },
+</span><span class='line'>    { label: 'selanchor',      value: '[ title="%TITLE%"&gt;%SEL%](%URL%)' },
+</span><span class='line'>
+</span><span class='line'>    { label: 'amazon',   value: 'copy clean amazon url from current page',
+</span><span class='line'>      custom: function() {
+</span><span class='line'>        var m = content.document.location.pathname.match(/dp\/(\d+)/);
+</span><span class='line'>        return m ? ('http://amazon.jp/dp/' + m[1]) : null;
+</span><span class='line'>      }
+</span><span class='line'>    },
+</span><span class='line'>  ];
+</span><span class='line'>})();
+</span><span class='line'>EOM
+</span><span class='line'>
+</span><span class='line'>" 特によく使う機能をキーマッピング
+</span><span class='line'>map ,y :copy&lt;Space&gt;titleAndURL&lt;CR&gt;
+</span><span class='line'>map ,my :copy&lt;Space&gt;markdown&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>copy.jsの設定。いろいろと好きな形式でコピーが出来るようになる。{ label〜のとこの設定がそれに当たりまして、例えば:copy markdownコマンドでマークダウン記法用にタイトルとURLがコピーできる。ブログ書いてるとこれホント便利。</p>
+
+<p>基本的には%TITLE%や%URL%といった変数を使って設定するんだけど、javascriptも欠けます。label: amazonではAmazonのURLを短い（アフィ用のパラメータとか除外した）状態でコピれるようjavascriptで書かれてる。詳しくは以下エントリー。</p>
+
+<p><a href="http://qiita.com/hadashiA/items/83e2fef39bac531577e2">JavaScript - vimperatorプラグインcopy.jsで、いま開いてるamazonの本のページの短いURLをクリップボードにコピる。あと正規表現で好きなとこコピる - Qiita</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
+</span><span class='line'>" about:config
+</span><span class='line'>"============================
+</span><span class='line'>
+</span><span class='line'>set! network.dns.disableIPv6=true
+</span><span class='line'>set! network.http.pipelining=true
+</span><span class='line'>set! network.http.proxy.pipelining=true
+</span><span class='line'>set! network.http.pipelining.maxrequests=8
+</span><span class='line'>set! network.http.max-connections-per-server=32
+</span><span class='line'>set! security.dialog_enable_delay=0
+</span><span class='line'>set! browser.tabs.closeWindowWithLastTab=false
+</span><span class='line'>set! browser.cache.memory.capacity=16384
+</span><span class='line'>set! browser.sessionstore.interval=500000
+</span><span class='line'>set! dom.popup_maximum=50
+</span><span class='line'>set! browser.cache.disk.enable=false
+</span><span class='line'>set! browser.cache.memory.capacity=-1
+</span><span class='line'>set! layout.spellcheckDefault=0
+</span><span class='line'>set! javascript.options.mem.high_water_mark=32</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vimperatorはset!でabout:configの設定ができます！　便利！　これでabout:configの内容も共有できるよ！　設定内容はウン年前にやったままなので、具体的に何やってんのか覚えてないれす。メモリ周りの設定が主だったと思うので、最近の比較的軽くなったFxなら要らない設定もあるかも。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"読み込み完了メッセージ
+</span><span class='line'>echo "vimperatorrc loaded."
+</span><span class='line'>
+</span><span class='line'>" [EOF]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、vimperatorrcが読み込まれたとき用のechoを入れる。これがないと,r押しても読み込まれたのかわかんないので。</p>
+
+<p>vimperator、Vimmerじゃなくても便利なのでじゃんじゃん使いましょう晒しましょう。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+  <span class="byline author vcard">Authored by <span class="fn">
+  
+    chroju
+  
+  </span></span>
+
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-02-09T10:29:00+09:00'><span class='date'>2014-02-09 (Sun)</span> <span class='time'>10:29 am</span></time>
+      
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/vimperator/'>vimperator</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/http://chroju.github.io//blog/2014/02/09/post/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="$B$3$N%(%s%H%j!<$r$O$F$J%V%C%/%^!<%/$KDI2C(B" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://chroju.github.io//blog/2014/02/09/post/" data-via="chroju" data-counturl="http://chroju.github.io//blog/2014/02/09/post/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-layout="button_count" data-send="false" data-width="300" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/02/02-post/" title="Previous Post: $ vagrant sshで仮想マシンに入れなくなった場合の対処法">&laquo; $ vagrant sshで仮想マシンに入れなくなった場合の対処法</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/02/20/post/" title="Next Post: Rails環境構築（5）Capistranoによるデプロイ ※未完">Rails環境構築（5）Capistranoによるデプロイ ※未完 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://chroju.github.io//blog/2014/02/09/post/';
+        var disqus_url = 'http://chroju.github.io//blog/2014/02/09/post/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

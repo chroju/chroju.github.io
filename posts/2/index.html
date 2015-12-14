@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="Github、joinしたのは2013年で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd => commit => pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。 What is Github flow &hellip;&#8221;>
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//posts/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/10/04/individual-github-flow/">個人開発環境にGithub Flowを適用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-04T14:00:05+09:00'><span class='date'>2015-10-04 (Sun)</span> <span class='time'>2:00 pm</span></time>
+        
+         | <a href="/blog/2015/10/04/individual-github-flow/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Github、<a href="https://github.com/chroju">joinしたのは2013年</a>で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd => commit => pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。</p>
+
+<h1>What is Github flow ?</h1>
+
+<p>Githubを用いた開発作業を進めるにあたっての指針みたいなものです。基本的にはmasterブランチ上では作業せず、作業工程ごとにブランチ作って、終わったらプルリクしてmasterにマージしてもらうことでデプロイとしましょうね、というものだと理解している。至ってシンプルではあるけど、これを取り入れるだけで従来やっちゃってた「masterで作業してるのでデプロイしても動かないレポジトリがGithub上にある」みたいな状態が防げて良さそうだと思った。</p>
+
+<p>ちなみにGit-flowというのもあるようだけど、こちらは全然別個のツールらしく理解していない。Git-flowの問題解決としてGithub Flowが提唱されたようだが、そもそも開発工程の制御のためだけにツールを追加したくはないなと思ったのでGithub Flowを採用した。</p>
+
+<p>Github Flowの理解にはこの文章が良さそう。なお、dotfilesのような大した更新のないレポジトリにはさすがに適用していない。</p>
+
+<p><a href="https://gist.github.com/Gab-km/3705015">GitHub Flow (Japanese translation)</a></p>
+
+<h1>実際の開発工程</h1>
+
+<p>あくまでGithub Flowに沿う形という程度なので、そのままそっくり適用できてはないとは思うが。</p>
+
+<h2>開発開始</h2>
+
+<p>ブランチを切る。ブランチ名は機能追加等の開発要件であれば<code>dev_hoge</code>、バグフィックスであれば<code>hotfix_hoge</code>とする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout -b dev_hoge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>開発中</h2>
+
+<p>普通であればレビューを依頼するタイミングなど、開発の切りがついたところで<code>push</code>していくのだろうが、分散して開発しているわけではないので、1日の開発が終わる段階で<code>push</code>している。そもそも開発に使っている環境が複数あるので、Github上のdevelopブランチも常に最新化していつどこでも<code>fetch</code>可能にしたいなという思いがある。従来はDropboxで各環境間の同期を取っていたが、プラグインの有無やbundleなどで度々不具合もあったので改めた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add -A
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="err">&quot;</span>
+</span><span class='line'>...
+</span><span class='line'><span class="nv">$ </span>git push origin dev_hoge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>git add .</code>ではなく<code>-A</code>なのは、そちらじゃないと<code>git rm</code>したファイル等が含まれないと<a href="http://qiita.com/otukutun/items/9feb513c596418e94fc6">こちらの記事</a>に書いてあったゆえ。</p>
+
+<h2>開発終了</h2>
+
+<p>開発が終わり、masterへのマージを必要とする段階に来たらプルリクを出す。プルリクって別のコミッターからしか不可なのかと思っていたが、自分のレポジトリに自分で出すことも可能だったのでそうしている。本来であればテストツール等走らせるべきではあるのだろうが、今のところはプルリクに対して特にレビュー等なく（自分のコードだし）そのままマージしている。</p>
+
+<p>後述するがバグや開発課題の管理にはGithub issueを用いているので、マージの際はissueのナンバーをコメントに入れている。これでGithub上のリンクとして働いてくれるので便利。</p>
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/chroju/21903884486/" title="スクリーンショット 2015-10-04 14.19.25"><img src="https://farm1.staticflickr.com/735/21903884486_cae2057f70_z.jpg" width="640" height="576" alt="スクリーンショット 2015-10-04 14.19.25"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>参考：<a href="http://rochefort.hatenablog.com/entry/2015/09/05/090000">Gitコミットメッセージの7大原則 - rochefort&rsquo;s blog</a></p>
+
+<h2>マージ後</h2>
+
+<p>作業ブランチを消して、ローカルのmasterを最新化する。</p>
+
+<p>マージには<code>git merge</code>を使用し、<code>git rebase</code>は使わないことにしている。そもそも<code>rebase</code>完全に理解してないというのもあるが、要するに歴史改変にあたるような操作があまり好めないというのが強い。個人の開発においては作業ブランチの変更中にmasterに更新が入ることは少ないので、このやり方でおそらく不都合はしないと思っている。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git checkout master
+</span><span class='line'><span class="nv">$ </span>git branch -a
+</span><span class='line'><span class="nv">$ </span>git branch -d dev_hoge
+</span><span class='line'><span class="nv">$ </span>git push --delete origin dev_hoge
+</span><span class='line'><span class="nv">$ </span>git fetch
+</span><span class='line'><span class="nv">$ </span>git marge origin/master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考
+<a href="http://dev.classmethod.jp/tool/git/development-flow-with-branch-and-rebase-by-git/">GitのRebaseによるBranchの運用 ｜ Developers.IO</a>
+<a href="http://kray.jp/blog/git-pull-rebase/">git pull と git pull –rebase の違いって？図を交えて説明します！ | KRAY Inc</a></p>
+
+<h2>コンフリクトした場合</h2>
+
+<p><code>git ls-files -u</code>でコンフリクトしたファイルが一覧化されるとのことなので、確認の上で開いて直す。もしローカルかリモートのいずれかを全面採用するのであれば、<code>git checkout</code>の<code>--ours</code>と<code>--theirs</code>オプションを使う。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git ls-files -u
+</span><span class='line'>git checkout --ours hoge
+</span><span class='line'>git checkout --theris hoge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考：<a href="http://d.hatena.ne.jp/sinsoku/20110831/1314720280">Gitでコンフリクトした時のための備忘録 - アジャイルSEを目指すブログ</a></p>
+
+<h2>リモートのmasterがローカルより先に行っている場合</h2>
+
+<p>ローカル環境が複数あるので、このような場合は多々ありえる。そういうときは基本的にはmergeすればいいだけではあるが。masterはリモートレポジトリの最新化が原則となるので、コンフリクトした場合は99%リモートを優先させる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git show-branch --all --color
+</span><span class='line'>git fetch origin
+</span><span class='line'>git diff origin/master
+</span><span class='line'>git merge origin/master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考：<a href="http://qiita.com/yuyuchu3333/items/a30387bdd6a0afc1185c">gitのリモートリポジトリの更新を確認する - Qiita</a></p>
+
+<h2>バグ、開発課題の発生</h2>
+
+<p>先に少し触れたが、開発すべきTODOはすべてGithub issueで管理することにした。今までどうしていたかというと特に管理はしておらず、思いつくままに開発してしまっていたのだが、これでGithubに開発に必要なものはすべて集約できるのではないかと思う。個人でのGithub issue運営には下記の記事を参考にさせてもらっているが、特に難しいことはせず、タスク管理ツールのような形で使っている。</p>
+
+<p>参考：<a href="http://azu.github.io/slide/udonjs/github-issue.html#3">一人で使えるGithub Issue</a></p>
+
+<h1>覚えられない</h1>
+
+<p>Github Flowは便利なのだが、Gitのコマンド体系がどうにも覚えづらくて仕方がない。どうにもならんのでaliasを駆使してなるべく覚える内容を少なくしようと努めているが、あとは慣れるしかないのかなぁと。Githubのコマンドは本当に多い。体系自体を学ぶのであれば<a href="https://progit-ja.github.io/">Pro Git</a>がわかりやすく、epubの配布もあるのでKindleでいつでも読めて最高なのだが、数多あるコマンドを網羅しようとか思うとこれだけではつらい。Qiitaでまとめ記事が上がるたびに覗いてみて、今の自分のキャパで使えそうなのをつまみ食いしていく形で覚えればいいのかなと思っている。</p>
+
+<p>今のalias設定はこんなの。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span><span class="nb">alias</span><span class="o">]</span>
+</span><span class='line'>  <span class="nv">a</span>  <span class="o">=</span> add
+</span><span class='line'>  <span class="nv">aa</span> <span class="o">=</span> add --all
+</span><span class='line'>  <span class="nv">br</span> <span class="o">=</span> branch
+</span><span class='line'>  <span class="nv">bra</span> <span class="o">=</span> branch -a
+</span><span class='line'>  <span class="nv">brd</span> <span class="o">=</span> branch -d
+</span><span class='line'>  <span class="nv">co</span> <span class="o">=</span> checkout
+</span><span class='line'>  <span class="nv">cob</span> <span class="o">=</span> checkout -b
+</span><span class='line'>  <span class="nv">coo</span> <span class="o">=</span> checkout --ours
+</span><span class='line'>  <span class="nv">cot</span> <span class="o">=</span> checkout --theirs
+</span><span class='line'>  <span class="nv">cl</span> <span class="o">=</span> clone
+</span><span class='line'>  <span class="nv">clr</span> <span class="o">=</span> clone --recursive
+</span><span class='line'>  <span class="nv">cm</span> <span class="o">=</span> commit
+</span><span class='line'>  <span class="nv">cmm</span> <span class="o">=</span> commit -m
+</span><span class='line'>  <span class="nv">d</span>  <span class="o">=</span> diff
+</span><span class='line'>  <span class="nv">f</span>  <span class="o">=</span> fetch
+</span><span class='line'>  <span class="nv">lg</span> <span class="o">=</span> log
+</span><span class='line'>  <span class="nv">lga</span> <span class="o">=</span> log --graph --decorate --online
+</span><span class='line'>  <span class="nv">lgp</span> <span class="o">=</span> log -p
+</span><span class='line'>  <span class="nv">mg</span> <span class="o">=</span> merge
+</span><span class='line'>  <span class="nv">mgn</span> <span class="o">=</span> merge --no-ff
+</span><span class='line'>  <span class="nv">ps</span> <span class="o">=</span> push
+</span><span class='line'>  <span class="nv">psd</span> <span class="o">=</span> push --delete origin
+</span><span class='line'>  <span class="nv">pso</span> <span class="o">=</span> push origin
+</span><span class='line'>  <span class="nv">psm</span> <span class="o">=</span> push origin master
+</span><span class='line'>  <span class="nv">pl</span> <span class="o">=</span> pull
+</span><span class='line'>  <span class="nv">s</span>  <span class="o">=</span> status -s
+</span><span class='line'>  <span class="nv">sb</span> <span class="o">=</span> status -s --branch
+</span><span class='line'>  <span class="nv">ss</span> <span class="o">=</span> status
+</span><span class='line'>  <span class="nv">sh</span> <span class="o">=</span> show
+</span><span class='line'>  <span class="nv">sba</span> <span class="o">=</span> show-branch --all
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>今後</h1>
+
+<p>やりたいこととしてはCI。Circle CIとかと連動させて自動テストしたりというところまで組み込めたら、個人開発としてだいぶ理想的な状態かなと思う。そのままデプロイまで自動化できれば最高か。またGitの理解がやはりどうにも覚束ない部分があり、まだまだ使いこなせているとは言いがたいので、aliasをカンペ代わりに育てつつ、ガンガン覚えていきたい。特にミスったときの<code>reset</code>系コマンドがあまりに多くてなぁ……。</p>
+
+<h1>その他参考記事</h1>
+
+<ul>
+<li><a href="http://keijinsonyaban.blogspot.jp/2011/05/git.html?m=1">見えないチカラ: 【翻訳】Gitをボトムアップから理解する</a></li>
+<li><a href="http://postd.cc/git-command-line-shortcuts/">Gitコマンドラインショートカット | プログラミング | POSTD</a></li>
+<li><a href="http://yuroyoro.hatenablog.com/entry/20101008/1286531851">.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記</a></li>
+<li><a href="http://d.hatena.ne.jp/sinsoku/20111025/1319497900">図で分かるgit-mergeの&ndash;ff, &ndash;no-ff, &ndash;squashの違い - アジャイルSEを目指すブログ</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/24/ansible-in-nearly-best-practice/">開発環境のためのansibleを出来るだけベストプラクティスでまとめた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-09-24T19:37:08+09:00'><span class='date'>2015-09-24 (Thu)</span> <span class='time'>7:37 pm</span></time>
+        
+         | <a href="/blog/2015/09/24/ansible-in-nearly-best-practice/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
+
+<h2>なぜEC2？</h2>
+
+<p>少し前に<a href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">開発環境としてDigitalOceanを使うことを勧める記事</a>を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。</p>
+
+<h2>ベストプラクティス構成の意識</h2>
+
+<p>出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。</p>
+
+<p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
+
+<p>あらゆるサーバーで共通の<code>common</code>というロールと、開発環境用の<code>develop</code>というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから<code>git clone</code>しているし。</p>
+
+<p>ansibleには公式ドキュメントに<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html">ディレクトリ構成のベストプラクティス</a>が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。</p>
+
+<ul>
+<li>playbooksは同時に実行すべきtaskをroleとして分割する</li>
+<li>ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する</li>
+<li>グループごとに実行するroleと変数（group_vars）を紐つける</li>
+</ul>
+
+
+<p>taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は<code>ansible-playbook site.yml</code>でよいし、一部グループだけに適用したいなら<code>ansible-playbook *servers.yml</code>とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。</p>
+
+<p>なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。</p>
+
+<p>ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。</p>
+
+<p>ansible、ファーストインプレッションはとにかく<a href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">「楽そう」</a>だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。</p>
+
+<h2>このレポジトリでやっていること</h2>
+
+<p>ソース読んでもらえればわかる話ではありますが。</p>
+
+<ul>
+<li>common
+
+<ul>
+<li>hostname設定</li>
+<li>localeとtimezone設定</li>
+<li>sshd_config設定</li>
+<li>authorized keys設定</li>
+<li>/etc/aliasesの設定</li>
+<li>DenyHostsインストール</li>
+<li>logwatchインストール</li>
+<li>iptables設定</li>
+</ul>
+</li>
+<li>develop
+
+<ul>
+<li>development tools、zsh、git、vim、jqのインストール</li>
+<li>dotfilesの配置</li>
+<li>デフォルトシェルをzshに変更</li>
+<li>rbenvの設定</li>
+</ul>
+</li>
+</ul>
+
+
+<p>もっとも苦労したのはrbenv周りで、<code>git clone</code>直後はpathが通ってない<code>~/.rbenv/bin</code>配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで<code>sudo: yes</code>としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、<code>sudo:</code>ないし<code>become:</code>の設定はタスク単位で考えたほうが良いと思う。また本来であれば<code>~/.bash_profile</code>あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。</p>
+
+<p>もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は<code>ec2_user</code>、その他VPSの場合は<code>root</code>がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。</p>
+
+<h2>その他技術的な話</h2>
+
+<p>細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。</p>
+
+<ul>
+<li>変数名の命名規約。代入は<code>group_vars</code>で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。</li>
+<li>ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。</li>
+<li>EC2には開発ツールがないので<code>Development tools</code>でまとめてインストールしてしまったが、本当は個々に切り出したい。</li>
+<li>ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/16/hackers-mind-and-their-essay/">ハッカーマインドと3冊のエッセイ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-16T16:02:51+09:00'><span class='date'>2015-08-16 (Sun)</span> <span class='time'>4:02 pm</span></time>
+        
+         | <a href="/blog/2015/08/16/hackers-mind-and-their-essay/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊のことである。しかし『それがぼくには』は重要な一冊だと思うんだけど、なんでまた絶版なんですかね。そんな古い本でもないのに。仕方なく図書館で借りたけど。</p>
+
+<p>いわゆるハッカーマインドを描いた本としていずれも似たような印象を抱きがちだが、実際に読んでみるとスタンスはだいぶ異なる。『ハッカーと画家』はコンピュータについてあまり詳しくない人に対して、ハッカーというのはこういう人種なのだと切々と説いた本であり、故にそれほど挑発的な印象は受けず、すらすらと読み進めていくことができる。もっともこれがハッカー以外に理解できるかというとかなり疑問ではあるが、ハッカーが比較的客観的に自らを解き明かした本として参考にはなる。著者のポール・グレアムのエッセイは<a href="http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t:%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7">naoya_t氏による和訳</a>がいくらか読めるので、これを読んで興味をそそられたら読んでみるのでもいいかもしれない。あと、Lispめっちゃ推してる。</p>
+
+<p>『UNIXという考え方』は、ハッカー向けにハッカーマインド、というかUNIX哲学を説く本なので、これは3冊の中では最も「読むべき」本だと思った。プログラムの移植性が重要であることだとか、ソフトウェアのレバレッジを効かせて効率性を最大限に高めていくべきだとか、我々がコードを書いたりシステムを作る上で重視すべきことがいくつも盛り込まれている。</p>
+
+<p>『それがぼくには楽しかったから』はまさにエッセイ、リーナス・トーヴァルズの半生を描いたもので、ハッカーマインド云々というよりはだいぶ読み物チック。終盤で著作権やOSSといった概念に対するリーナスの考え方が少し語られるが、ほとんどはLinuxがいかにして生まれたのか？を描いた物語と言っていい。自分はリーナスというハッカーをこれまで詳しくは知らなかったのだが、案外柔軟な人物であるという印象を受けた。OSSの考え方自体は肯定しながらも、それは押し付けるべきではない、具体的に名前を挙げてリチャード・ストールマンのやり方は強引に過ぎるとしていたり、自分は聖人君子ではなく、大金が舞い込んだときには当然喜んでしまったこともあるよなんて語っていたり、彼の人間性がとても良く出ている。まぁとはいえ、自分が否とみなしたものに対しては、それなりに厳しい批判を飛ばす人物ではあると思うが。</p>
+
+<p>こうした本に書かれた「ハッカーマインド」なるものは、我々が仕事をする上で必須のものではないと思うし、行き過ぎるとリーナスが言うような宗教戦争チックにもなりかねない。また技術に傾倒しすぎた単なるオタクが仕事の上でも重要な人物足りえるかというと、そういうわけでもない。リーナス・トーヴァルズは偉大なハッカーの1人であろうが、彼は同時にLinux開発者という立場での活動を行うにあたり、社会性を身につけたりもしてきたわけで。単にGeekであること自体が良いこととも自分は思えない。</p>
+
+<p>とはいえ、まだ生成されてまもなく、業界標準なんてものがあるんだかないのだかもわからない、進化の速いこの業界で仕事をしていくには、多少なりともハッカー的なマインドは必要だとも思うのだ。というか、じゃないと仕事が面白くならないんでは？　惰性で同じ技術をずっと使い続けたり、効率の悪い方法を繰り返したりしていてもお金は入るのだろうけど、それが必ずしも収入に結びつかないとしても、なんかカッコイイことやってみたいとか、楽しそうな新技術にトライしてみたいだとか、そういう感覚がないとエンジニアをやっている意味がないなと思う。エンジニアが会社を選ぶにあたって重要なのは、案外このポイントなのではなかろうか。</p>
+
+<p>残念ながら求人票からハッカーマインドは透けてこないし、転職面接の数分でそれを読み解くことも難しいだろう（自分は以前、面接でArch Linuxの話でたまたま意気投合する機会があったりして、そういう面接が出来たら話が別なのだろうけど）。その点、最近GitHubやQiitaでエンジニアたちが企業名を出して活動していることがあるが、あれは求人票やウェブサイトでは見えにくいその会社のハッカーマインドを、外部に知らしめていく良い手段だと感じる。ビジネス的に何を成して、社会をどう変えたいのかというよりも、エンジニアとしてどういったカタチで技術にコミットしていくかの方が自分には重要だ。そういう視点で仕事をしていけたらどんなにか幸せだろうし、またそれは茨の道でもあるのだろうなと思っている。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/511SV9NXW2L._SL160_.jpg" alt="ハッカーと画家 コンピュータ時代の創造者たち" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">ハッカーと画家 コンピュータ時代の創造者たち</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.08.16</div></div><div class="amazlet-detail">ポール グレアム <br />オーム社 <br />売り上げランキング: 6,887<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/518ME653H3L._SL160_.jpg" alt="UNIXという考え方―その設計思想と哲学" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">UNIXという考え方―その設計思想と哲学</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.08.16</div></div><div class="amazlet-detail">Mike Gancarz <br />オーム社 <br />売り上げランキング: 44,838<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51WZM2W6ZBL._SL160_.jpg" alt="それがぼくには楽しかったから (小プロ・ブックス)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">それがぼくには楽しかったから (小プロ・ブックス)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.08.16</div></div><div class="amazlet-detail">リーナス トーバルズ デビッド ダイヤモンド <br />小学館プロダクション <br />売り上げランキング: 71,563<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/09/qiita-commoditization-of-engineer/">Qiitaを使うということの意義</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-09T23:28:57+09:00'><span class='date'>2015-08-09 (Sun)</span> <span class='time'>11:28 pm</span></time>
+        
+         | <a href="/blog/2015/08/09/qiita-commoditization-of-engineer/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://qiita.com/chroju/">Qiitaにいくつか記事を上げてみて</a>思ったことを。</p>
+
+<h1>承認欲求が満たしやすい</h1>
+
+<p>ブログのような個人の場ではないのに承認欲求がってのもどうなんだという話はあるが、反応を得やすい。Qiitaでは各エントリーに必ずタグを設定することになり、ユーザーは興味のあるタグを登録して新着記事をチェックするわけだが、記事が上がってくるスピードは1日に数えられる程ではあるので、上げればほぼ必ず誰かしらの目には留まる状態にある。なので自分が上げたのは基礎的な記事ばかりだという思いはあるのだが、それでもすべて漏れなくストックされていた。</p>
+
+<p>もちろん、100ストックなどを目指すとハードルはぐっと上がってくるわけだが、こういった個人ブログで誰が見てくれているかわからない状態と比べて、記事投稿へのモチベーションは保ちやすいように感じた。なお、はてなでも同様のエコシステムは働いていて、例えばこのブログもはてな時代はそこそこブクマされていたわけだが、github.io化した後のブクマは見事にゼロである。</p>
+
+<h1>誤り修正と議論の活性化</h1>
+
+<p>ほぼすべての記事が誰かしらの目に触れるということで、（自分は未経験だが）コメントにより間違いの修正が入ることも多い。特に特定のタグに関してはその道の有名な方がだいぶ監視しているっぽいなぁという場合もあり、ちょこちょこコメントが付いている。</p>
+
+<p>またコメントで長々と議論が続くのもよく見かける。単なるハウツーよりは何らかの設計思想を書いた記事に多いように思うが、派生した内容として興味深く追えることも多い。</p>
+
+<h1>技術のコモディティ化</h1>
+
+<p>で、ここからが本題なのだが、QiitaによってIT技術者の知識というのはある程度コモディティ化されそうだなぁと思う。</p>
+
+<p>Qiita以前ははてななどがエンジニアのアウトプットがよくストックされる場所ではあったが、Qiitaほど体系だってまとめられていたわけではない。Qiitaでは「タグ」を追うことで、その分野の新しい話題も古い話題も、基礎も応用も知っていくことができる。逆に言えば、Qiitaに書いてあることぐらいは誰だってすぐ追って身につけられる状態にある。</p>
+
+<p>技術書のような網羅性の高い知識パッケージとはさすがに性質を異にはするが、先に上げたコメントなどによって適宜内容が改訂され、より正しい状態に近づいていき、また必要な情報、新たな情報が次々と追加されるという意味では、動的な知識パッケージとして果たす役割は大きいのではないか。
+まぁ要はブログやSNSの黎明期に言われたようなことが、Qiitaという専門性の高い1サービス内で圧縮的に再現されているというだけの話ではあるのだが、「Qiitaをやっている」というレッテルが、ある一定の知識レベルを有することと同義になる日も来そうだなという思いがする。問題点としてはQiita外と同様、やはりWeb系、OSS系の知識に内容が偏っていて、有償製品等のノウハウはそれほど多くないことだろうか。これはQiitaの問題ではないのだけど。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/08/exhibi-update/">Kaminariの実装をしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-08T19:47:30+09:00'><span class='date'>2015-08-08 (Sat)</span> <span class='time'>7:47 pm</span></time>
+        
+         | <a href="/blog/2015/08/08/exhibi-update/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>久しぶりに稼働させている<a href="http://chroju.net/exhibi">ExhiBi</a>というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。</p>
+
+<h1>kaminari</h1>
+
+<p>ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari" title="amatsuda/kaminari" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="https://github.com/amatsuda/kaminari" target="_blank">amatsuda/kaminari</a></iframe>
+
+
+<p>bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは<code>controller</code>で<code>#index</code>のようなリソースを拾ってくるアクションに<code>.page</code>をかましてやるようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># もともとはExhibition.all.order...</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="vi">@exhibitions</span> <span class="o">=</span> <span class="no">Exhibition</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s2">&quot;start_date DESC&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとは<code>view</code>でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='slim'><span class='line'><span class="p">=</span> <span class="n">paginate</span> <span class="vi">@exhibitions</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、実装当初は<code>undefined method 'deep_symbolize_keys'</code>などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は<code>config/locales/ja.yml</code>が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。</p>
+
+<p>もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。</p>
+
+<h1>id以外の要素でmodle#showにアクセスする</h1>
+
+<p>例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fawakia%2Fitems%2Fc2c790dc51e5b084af10" title="Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://qiita.com/awakia/items/c2c790dc51e5b084af10" target="_blank">Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita</a></iframe>
+
+
+<p>やってることはなんともシンプルで、<code>Museum.find(n)</code>で呼んでいたところを<code>Museum.find_by_name_en_or_id(hoge)</code>と出来るようにしただけですね。<code>#to_param</code>でサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。</p>
+
+<p>ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通に<code>bundle exec rake g migration</code>してから<code>rake db:migrate</code>するだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦<code>rake db:migrate:reset</code>してから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Fdifference-bettween-rake-db-migrate-reset.html" title="rake db:reset と rake db:migrate:reset の違い | EasyRamble" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://easyramble.com/difference-bettween-rake-db-migrate-reset.html" target="_blank">rake db:reset と rake db:migrate:reset の違い | EasyRamble</a></iframe>
+
+
+<p>自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/3">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/index.html">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

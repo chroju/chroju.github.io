@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: github | the world as code]]></title>
+  <link href="http://chroju.github.io//blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io//"/>
+  <updated>2015-12-14T22:16:31+09:00</updated>
+  <id>http://chroju.github.io//</id>
+  <author>
+    <name><![CDATA[chroju]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[個人開発環境にGithub Flowを適用する]]></title>
+    <link href="http://chroju.github.io//blog/2015/10/04/individual-github-flow/"/>
+    <updated>2015-10-04T14:00:05+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/10/04/individual-github-flow</id>
+    <content type="html"><![CDATA[<p>Github、<a href="https://github.com/chroju">joinしたのは2013年</a>で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd => commit => pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。</p>
+
+<h1>What is Github flow ?</h1>
+
+<p>Githubを用いた開発作業を進めるにあたっての指針みたいなものです。基本的にはmasterブランチ上では作業せず、作業工程ごとにブランチ作って、終わったらプルリクしてmasterにマージしてもらうことでデプロイとしましょうね、というものだと理解している。至ってシンプルではあるけど、これを取り入れるだけで従来やっちゃってた「masterで作業してるのでデプロイしても動かないレポジトリがGithub上にある」みたいな状態が防げて良さそうだと思った。</p>
+
+<p>ちなみにGit-flowというのもあるようだけど、こちらは全然別個のツールらしく理解していない。Git-flowの問題解決としてGithub Flowが提唱されたようだが、そもそも開発工程の制御のためだけにツールを追加したくはないなと思ったのでGithub Flowを採用した。</p>
+
+<p>Github Flowの理解にはこの文章が良さそう。なお、dotfilesのような大した更新のないレポジトリにはさすがに適用していない。</p>
+
+<p><a href="https://gist.github.com/Gab-km/3705015">GitHub Flow (Japanese translation)</a></p>
+
+<h1>実際の開発工程</h1>
+
+<p>あくまでGithub Flowに沿う形という程度なので、そのままそっくり適用できてはないとは思うが。</p>
+
+<h2>開発開始</h2>
+
+<p>ブランチを切る。ブランチ名は機能追加等の開発要件であれば<code>dev_hoge</code>、バグフィックスであれば<code>hotfix_hoge</code>とする。</p>
+
+<pre><code class="bash">$ git checkout -b dev_hoge
+</code></pre>
+
+<h2>開発中</h2>
+
+<p>普通であればレビューを依頼するタイミングなど、開発の切りがついたところで<code>push</code>していくのだろうが、分散して開発しているわけではないので、1日の開発が終わる段階で<code>push</code>している。そもそも開発に使っている環境が複数あるので、Github上のdevelopブランチも常に最新化していつどこでも<code>fetch</code>可能にしたいなという思いがある。従来はDropboxで各環境間の同期を取っていたが、プラグインの有無やbundleなどで度々不具合もあったので改めた。</p>
+
+<pre><code class="bash">$ git add -A
+$ git commit -m "
+...
+$ git push origin dev_hoge
+</code></pre>
+
+<p><code>git add .</code>ではなく<code>-A</code>なのは、そちらじゃないと<code>git rm</code>したファイル等が含まれないと<a href="http://qiita.com/otukutun/items/9feb513c596418e94fc6">こちらの記事</a>に書いてあったゆえ。</p>
+
+<h2>開発終了</h2>
+
+<p>開発が終わり、masterへのマージを必要とする段階に来たらプルリクを出す。プルリクって別のコミッターからしか不可なのかと思っていたが、自分のレポジトリに自分で出すことも可能だったのでそうしている。本来であればテストツール等走らせるべきではあるのだろうが、今のところはプルリクに対して特にレビュー等なく（自分のコードだし）そのままマージしている。</p>
+
+<p>後述するがバグや開発課題の管理にはGithub issueを用いているので、マージの際はissueのナンバーをコメントに入れている。これでGithub上のリンクとして働いてくれるので便利。</p>
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/chroju/21903884486/" title="スクリーンショット 2015-10-04 14.19.25"><img src="https://farm1.staticflickr.com/735/21903884486_cae2057f70_z.jpg" width="640" height="576" alt="スクリーンショット 2015-10-04 14.19.25"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>参考：<a href="http://rochefort.hatenablog.com/entry/2015/09/05/090000">Gitコミットメッセージの7大原則 - rochefort&rsquo;s blog</a></p>
+
+<h2>マージ後</h2>
+
+<p>作業ブランチを消して、ローカルのmasterを最新化する。</p>
+
+<p>マージには<code>git merge</code>を使用し、<code>git rebase</code>は使わないことにしている。そもそも<code>rebase</code>完全に理解してないというのもあるが、要するに歴史改変にあたるような操作があまり好めないというのが強い。個人の開発においては作業ブランチの変更中にmasterに更新が入ることは少ないので、このやり方でおそらく不都合はしないと思っている。</p>
+
+<pre><code class="bash">$ git checkout master
+$ git branch -a
+$ git branch -d dev_hoge
+$ git push --delete origin dev_hoge
+$ git fetch
+$ git marge origin/master
+</code></pre>
+
+<p>参考
+<a href="http://dev.classmethod.jp/tool/git/development-flow-with-branch-and-rebase-by-git/">GitのRebaseによるBranchの運用 ｜ Developers.IO</a>
+<a href="http://kray.jp/blog/git-pull-rebase/">git pull と git pull –rebase の違いって？図を交えて説明します！ | KRAY Inc</a></p>
+
+<h2>コンフリクトした場合</h2>
+
+<p><code>git ls-files -u</code>でコンフリクトしたファイルが一覧化されるとのことなので、確認の上で開いて直す。もしローカルかリモートのいずれかを全面採用するのであれば、<code>git checkout</code>の<code>--ours</code>と<code>--theirs</code>オプションを使う。</p>
+
+<pre><code>git ls-files -u
+git checkout --ours hoge
+git checkout --theris hoge
+</code></pre>
+
+<p>参考：<a href="http://d.hatena.ne.jp/sinsoku/20110831/1314720280">Gitでコンフリクトした時のための備忘録 - アジャイルSEを目指すブログ</a></p>
+
+<h2>リモートのmasterがローカルより先に行っている場合</h2>
+
+<p>ローカル環境が複数あるので、このような場合は多々ありえる。そういうときは基本的にはmergeすればいいだけではあるが。masterはリモートレポジトリの最新化が原則となるので、コンフリクトした場合は99%リモートを優先させる。</p>
+
+<pre><code>git show-branch --all --color
+git fetch origin
+git diff origin/master
+git merge origin/master
+</code></pre>
+
+<p>参考：<a href="http://qiita.com/yuyuchu3333/items/a30387bdd6a0afc1185c">gitのリモートリポジトリの更新を確認する - Qiita</a></p>
+
+<h2>バグ、開発課題の発生</h2>
+
+<p>先に少し触れたが、開発すべきTODOはすべてGithub issueで管理することにした。今までどうしていたかというと特に管理はしておらず、思いつくままに開発してしまっていたのだが、これでGithubに開発に必要なものはすべて集約できるのではないかと思う。個人でのGithub issue運営には下記の記事を参考にさせてもらっているが、特に難しいことはせず、タスク管理ツールのような形で使っている。</p>
+
+<p>参考：<a href="http://azu.github.io/slide/udonjs/github-issue.html#3">一人で使えるGithub Issue</a></p>
+
+<h1>覚えられない</h1>
+
+<p>Github Flowは便利なのだが、Gitのコマンド体系がどうにも覚えづらくて仕方がない。どうにもならんのでaliasを駆使してなるべく覚える内容を少なくしようと努めているが、あとは慣れるしかないのかなぁと。Githubのコマンドは本当に多い。体系自体を学ぶのであれば<a href="https://progit-ja.github.io/">Pro Git</a>がわかりやすく、epubの配布もあるのでKindleでいつでも読めて最高なのだが、数多あるコマンドを網羅しようとか思うとこれだけではつらい。Qiitaでまとめ記事が上がるたびに覗いてみて、今の自分のキャパで使えそうなのをつまみ食いしていく形で覚えればいいのかなと思っている。</p>
+
+<p>今のalias設定はこんなの。</p>
+
+<pre><code>[alias]
+  a  = add
+  aa = add --all
+  br = branch
+  bra = branch -a
+  brd = branch -d
+  co = checkout
+  cob = checkout -b
+  coo = checkout --ours
+  cot = checkout --theirs
+  cl = clone
+  clr = clone --recursive
+  cm = commit
+  cmm = commit -m
+  d  = diff
+  f  = fetch
+  lg = log
+  lga = log --graph --decorate --online
+  lgp = log -p
+  mg = merge
+  mgn = merge --no-ff
+  ps = push
+  psd = push --delete origin
+  pso = push origin
+  psm = push origin master
+  pl = pull
+  s  = status -s
+  sb = status -s --branch
+  ss = status
+  sh = show
+  sba = show-branch --all
+</code></pre>
+
+<h1>今後</h1>
+
+<p>やりたいこととしてはCI。Circle CIとかと連動させて自動テストしたりというところまで組み込めたら、個人開発としてだいぶ理想的な状態かなと思う。そのままデプロイまで自動化できれば最高か。またGitの理解がやはりどうにも覚束ない部分があり、まだまだ使いこなせているとは言いがたいので、aliasをカンペ代わりに育てつつ、ガンガン覚えていきたい。特にミスったときの<code>reset</code>系コマンドがあまりに多くてなぁ……。</p>
+
+<h1>その他参考記事</h1>
+
+<ul>
+<li><a href="http://keijinsonyaban.blogspot.jp/2011/05/git.html?m=1">見えないチカラ: 【翻訳】Gitをボトムアップから理解する</a></li>
+<li><a href="http://postd.cc/git-command-line-shortcuts/">Gitコマンドラインショートカット | プログラミング | POSTD</a></li>
+<li><a href="http://yuroyoro.hatenablog.com/entry/20101008/1286531851">.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記</a></li>
+<li><a href="http://d.hatena.ne.jp/sinsoku/20111025/1319497900">図で分かるgit-mergeの&ndash;ff, &ndash;no-ff, &ndash;squashの違い - アジャイルSEを目指すブログ</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

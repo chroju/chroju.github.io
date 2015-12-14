@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)posted with amazlet at 15.03.01山本 陽平 技術評論社 売り上げランキング: 13,031Amazon.co.jpで詳細を見る 言わずと知れた名著、なんですかね。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//posts/16">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/28/post/">『Webを支える技術』読了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-28T01:14:00+09:00'><span class='date'>2013-12-28 (Sat)</span> <span class='time'>1:14 am</span></time>
+        
+         | <a href="/blog/2013/12/28/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51qo6pgjaSL._SL160_.jpg" alt="Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">山本 陽平 <br />技術評論社 <br />売り上げランキング: 13,031<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>言わずと知れた名著、なんですかね。元はと言えば山本陽平氏の<a href="http://yohei-y.blogspot.jp/2005/04/rest_23.html">REST解説記事</a>をWebで見かけて、えっらいわかりやすかったもんで著作にも手を出してみたという感じ。あとRails触り始めたというのもあって、一度は読んでおくべきかな、と。</p>
+
+<p>全体の印象としてはかなり平易な言葉で書かれてて読みやすい。ただ、多少の前提知識は必要とされるので、ウェブサービスを初めてこれから作ってみようみたいな人が読んでも厳しいと思う。自分はRailsかじってたので、それになぞらえて読み進めることができた。というか、この本読むとRuby on Railsが本当にRESTfulに設計されているんだってことが追認できる。</p>
+
+<p>目次</p>
+
+<ul>
+<li><p>第1部 Web概論</p></li>
+<li><p>第1章 Webとはなにか</p></li>
+<li>第2章 Webの歴史</li>
+<li><p>第3章 REST ―― Webのアーキテクチャスタイル</p></li>
+<li><p>第2部 URI</p></li>
+<li><p>第4章 URIの仕様</p></li>
+<li><p>第5章 URIの設計</p></li>
+<li><p>第3部 URI</p></li>
+<li><p>第6章 HTTPの基本</p></li>
+<li>第7章 HTTPメソッド</li>
+<li>第8章 ステータスコード</li>
+<li><p>第9章 HTTPヘッダ</p></li>
+<li><p>第4部 ハイパーメディアフォーマット</p></li>
+<li><p>第10章 HTML</p></li>
+<li>第11章 microformats</li>
+<li>第12章 Atom</li>
+<li>第13章 Atom Publishing Protocol</li>
+<li><p>第14章 JSON</p></li>
+<li><p>第5部 Webサービスの設計</p></li>
+<li><p>第15章 読み取り専用のWebサービスの設計</p></li>
+<li>第16章 書き込み可能なWebサービスの設計</li>
+<li>第17章 リソースの設計</li>
+</ul>
+
+
+<p></blockquote></p>
+
+<p>ポイントピックアップ</p>
+
+<ul>
+<li>POSTとPUTの使い分け。前者は作成したリソースURIをサーバーが規定し、後者はクライアント（というかリクエスト）で規定できる。</li>
+<li>HTTPメソッドには「冪等性」と「安全性」の性質がある。冪等性は「ある操作を何度行っても結果が同じこと」。DELETEメソッドは何度発行しようと同じ結果になる。安全性は「操作対象のリソースの状態を変化させないこと」。GETを発行してもリソースは変化しない。POSTは冪等でも安全でもない。</li>
+<li>セマンティックWeb、ウェブの意味論。リソースの意味をどのようにプログラムから処理するか？</li>
+<li><p>RESTfulなウェブサービスの性質はアドレス可能性、接続性、統一インタフェース、ステートレス性の4つ。</p></li>
+<li><p>アドレス可能性 ＝ URIで一意にリソースを指し示せる性質。</p></li>
+<li>接続性 ＝ リソースをリンクで接続する性質。</li>
+<li>統一インタフェース ＝ GET/POST/PUT/DELETEということ（でOK？）。</li>
+<li><p>ステートレス性 ＝ HTTPはステートレス。但しCookieによるセッション管理が現実には行われる。</p></li>
+<li><p>Webサービス設計において重要なことはシンプルに保つこと、リソースを基準として考えること、POSTでだいたいなんでもできること（え？）</p></li>
+<li>リソースはそれ自身ですべての情報を表せた方が通信が効率的になるため、あえて正規化を行わない（このへん、DB設計と同一視してたわ）</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/22/post/">Windows 8(VAIO Pro)買って最初にやったことと注意点</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-22T17:13:00+09:00'><span class='date'>2013-12-22 (Sun)</span> <span class='time'>5:13 pm</span></time>
+        
+         | <a href="/blog/2013/12/22/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本家ブログの方に書いたけど<a href="http://chroju.hatenablog.jp/entry/20131211/vaio_pro_11_so_cool_mobile_pc">VAIO Pro買った</a>。1週間ちょいほど、主に仕事で使ってるが、やっぱ軽いは正義。持ち歩いてもあんまり負担にならない。スペック的にも申し分ないし。不満点といえば、マットな触感のボディが案外傷つきやすいことぐらい。これタッチパネル有りのモデルだと質感違うんだっけ。そっちのが良かったりするのかも。</p>
+
+<p>で、Windows8はこれまでMac上に載せた仮想マシンで遊んでただけで、今回初めてきちんと初期設定とかしたので、いろいろまとめてみる。Win8が使いづらいってのは、要するにタブレット用のMetro UIを何も考えずデスクトップ用UIに統合させちゃったからで、この点上手く付き合えばそこまで悪くないOSかなとは思う。動きは軽い印象。</p>
+
+<h1>インストール</h1>
+
+<p>インストールは対話型に順序良く進めれば別に迷うこととかはないんだけど、一点だけ注意すべき点がある。ユーザーアカウント作るときにMicrosoftアカウントがあるなら入れてくれと確か言われるんだが、これ、入れない方がいい。というのも、入れるとMSアカウントに登録している名前がそのまま勝手にユーザーネームとして採用されるからだ。当然ながらユーザーディレクトリ名もMSアカウントの「名」部分が使われる。すなわちMSアカに「山田太郎」と登録していると、C:\Users\太郎フォルダと永劫付き合っていくことになる。これは頭抱える。</p>
+
+<p>はっきり言って糞仕様というか、こういうアカウントの「意味」が範囲を広げてしまうような昨今の風潮が自分は好きじゃない。例えばGoogleアカウントはもともとGmail目的で、つまりプライベートで使うものとして7年ぐらい前に取得したんだけど、いまや「ソーシャル」サービスであるGoogle+と勝手に結び付けられてしまって、当初こちらが意図していた「意味」を逸脱してしまっている。俺の持ってるMSアカウントも元を正せばSkypeアカウントだったんだが、それがまさかMSに買収され、さらにはOSのユーザーアカウントにまで流用されるとは思ってなかった。まぁアカウントの統合はわかりやすくて良いことかもしれないが、個人的には大変気持ち悪い。</p>
+
+<p>MSアカウントを使うのが気持ち悪い人や、ユーザーディレクトリに2バイト文字使いたくない人はローカルでアカウント作りましょう。MSアカウントには後からでも紐付けられるんで。</p>
+
+<h1>アップデート</h1>
+
+<p>インストールしたら早速8.1に上げた。上げていいこともあんまなかったけど、悪いこともそんなない気がする。スタートボタン復活が8.1の目玉らしいけど、あれ押しても例のタイル型UIのスタート画面が出てくるだけで、何の意味もないです。強いて言えば右クリックしてみると真価を発揮する、かも。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/11491905623/"> title=&ldquo;スクリーンショット_2013-12-11_18_55_36 by chroju, on Flickr&rdquo;><img src="http://farm6.staticflickr.com/5483/11491905623_ced037d32a.jpg" width="396" height="500" alt="スクリーンショット_2013-12-11_18_55_36"></a></p>
+
+<p>見たまえ、このよく使うはずなのにどこ行ったかわからん機能をとりあえず寄せ集めました感。美しくない。</p>
+
+<p>ちなみにアップデートはWindowsストアからです。Windows Updateじゃないです。いまだにWindows Updateがどこにあるかわかんないんだけど、どこにあんの？ MS公式のヘルプ見たら「検索から探せ」とか酷い答え返ってくるんだけど。。。</p>
+
+<p>あとハードウェアによっては独自のドライバアップデートツールとかあるんでそのへんも忘れずに。VAIOならVAIO Updateね。</p>
+
+<h1>設定変更</h1>
+
+<p>適当にコンパネとか。</p>
+
+<ul>
+<li>フォルダオプションで不可視ファイルの表示と拡張子の表示。必須。</li>
+<li>タスクバーとナビゲーションの設定でサインイン時にデスクトップを表示させる。</li>
+<li>マウスの速さ適切化。あとCtrl押下でマウス位置表示させる。すぐいなくなるので。</li>
+<li>電源オプションで無操作スリープ時間の変更と、休止状態の有効化。</li>
+</ul>
+
+
+<h1>ソフトウェアインストール</h1>
+
+<p>ここまできてやっとソフト入れます。Win8アプリは普通にPCとして使う場合は不便そうなので入れてない。</p>
+
+<ul>
+<li>Google IME</li>
+<li>Firefox</li>
+<li>Evernote</li>
+<li>Dropbox</li>
+<li>Kaoriya版Vim(GVim)</li>
+<li>Avast!</li>
+<li>Janetter</li>
+<li>Keepass</li>
+</ul>
+
+
+<p>ウイルスソフトとTwitterクライアントは今何が流行りなんですかね。よくわかんないので取りあえずAvast!とJanetter。もうリーマンやってんだからウイルスソフトぐらい買えって話だけど。</p>
+
+<p>テキストエディタは迷ったけどMacと同じくKaoriya版Vim入れました。慣れるともうVimから離れられんね。OS選ばず同じ使い方できて楽だし。ちなみにGVimとしてしか使ってないです。コマンドプロンプトからVim開くのはなんかテンション上がんなくて。</p>
+
+<p>ここまでやったらEvernoteとDropboxの同期でしばし待ち。</p>
+
+<h1>ソフト設定移行</h1>
+
+<p>ソフトの設定連携。というか、Dropboxの中に設定はほぼエクスポートしてるんで、DBの同期が終わった時点で半分移行は済んでいる。</p>
+
+<h2>Firefox</h2>
+
+<p>FEBEっていうアドオンが便利なので良いです。アドオン、ブックマーク、設定とかそのへんまとめて自動的に吐いてくれる。さすがにGreasemonkeyは無理っぽいけど。</p>
+
+<p><a href="https://addons.mozilla.org/ja/firefox/addon/febe/">FEBE</a></p>
+
+<h2>dotfiles</h2>
+
+<p>vimrcとvimperatorrcはdotfilesとしてDropboxにまとめているので自動同期。あとはシンボリックリンク貼っちゃえば終わりです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mklink _vimrc Dropbox/dotfiles/.vimrc
+</span><span class='line'>mklink _vimperatorrc Dropbox/dotfiles/.vimperatorrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>vimrc</h2>
+
+<p>だいたいはMacで使えてたvimrcそのままでイケるんだけど、一部設定変更が必要だったり。例えばファイルパス指定しているような箇所はOSによって当然異なるので、if has(&ldquo;Win64&rdquo;)で分岐させる。あとGVimだとcolorschemeの設定がgvimrc優先になるとかそのへん注意。</p>
+
+<h2>vimperator</h2>
+
+<p>vimperatorrcの同期は上に書いたDropboxでいいとして、pluginの同期まんどくせって思ってたんだけど、<a href="https://github.com/vimpr/vimperator-plugins/blob/master/plugin_loader.js">plugin_loader.js</a>で解決した。これ便利すぎてヤバイ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let g:plugin_loader_roots="~/.vimperator/vimperator-plugins/ ~/vimperator/vimperator-plugins/"
+</span><span class='line'>let g:plugin_loader_plugins="_libly,direct_bookmark,sbmcommentsviewer,caret-hint,appendAnchor,evernote-clearly-vimp,stella,feedSomeKeys_3,commandBookmarklet,copy"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>g:plugin_loader_rootsにプラグインが入れてあるフォルダのパスを指定し、g:plugin_loader_pluginsに読み込むプラグイン名を列挙するだけでプラグインを読み込んでくれる。シンボリックリンクなんて不要。プラグインについてはたいていのvimperator遣いはvimpr/vimperator-pluginsをクローンしてると思うんで、組み合わせれば最強に近い。他から持ってきたプラグインについては別途パスを指定してやればいいだけだし。</p>
+
+<p>だいたいこんなとこ。最近はDropboxとか使うとすんげー簡単に環境同期できちゃうので楽なことこの上ないッスね。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/08/post/">SSHでサーバーリモートログインする際のあれこれまとめ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-08T23:22:00+09:00'><span class='date'>2013-12-08 (Sun)</span> <span class='time'>11:22 pm</span></time>
+        
+         | <a href="/blog/2013/12/08/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。</p>
+
+<h2>環境</h2>
+
+<p>今回はいわゆる「リモートのサーバーにSSHを使ってログインする」場合と「GithubにSSHでpushする」場合を想定する。使用するクライアントはMac OS X、サーバーはCent OS。ちなみにシェルはbash。</p>
+
+<h2>そもそもSSHってなんぞや</h2>
+
+<p>セキュアなリモート通信用プロトコル。セキュアな、と言っているのはTelnetあたりが平文でパスワード贈っちゃうのに対して、SSHが暗号化に対応している点を指す。で、暗号化には今多くの場合RSA（公開鍵暗号方式）を用いているらしい。だから秘密鍵と公開鍵を作ってローカルとリモートにそれぞれ配置して云々という設定が必要になる。あとGitHubもリモートレポジトリにつなぐ時にSSHが使える。</p>
+
+<h2>リモートサーバー接続手順</h2>
+
+<p>まずリモートサーバーにSSHでつなぐときの手順。</p>
+
+<h3>1. 認証鍵の生成</h3>
+
+<p>Linuxには鍵生成のコマンドがあるので、それを使う。</p>
+
+<blockquote>ssh-keygen -t rsa</blockquote>
+
+
+<p>-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。<strong>絶対控える。</strong></p>
+
+<p>作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。</p>
+
+<h3>2. 公開鍵の転送</h3>
+
+<p>鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。</p>
+
+<blockquote>scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/</blockquote>
+
+
+<p>SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。</p>
+
+<p>ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(<em>ﾉω・</em>)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。</p>
+
+<p>例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。</p>
+
+<h3>3. 公開鍵の登録</h3>
+
+<p>今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。</p>
+
+<blockquote>mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</blockquote>
+
+
+<p>authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。</p>
+
+<p>あとアクセス権も変える。</p>
+
+<blockquote>chmod 600 ~/.ssh/authorized_keys</blockquote>
+
+
+<h3>4. sshd_configの設定</h3>
+
+<p>リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。</p>
+
+<blockquote>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys</blockquote>
+
+
+<p>読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。</p>
+
+<p>逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。</p>
+
+<blockquote>PasswordAuthentication no
+ChallengeResponseAuthentication no</blockquote>
+
+
+<p>上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。</p>
+
+<p>あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。</p>
+
+<p>書き換えたらsshサービスを再起動してフィニッシュ。</p>
+
+<blockquote>/etc/init.d/sshd restart</blockquote>
+
+
+<p>これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。</p>
+
+<h3>5. Githubにつなぐ場合</h3>
+
+<p>Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings > SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。</p>
+
+<p>リモート側のサーバーで環境共有したい場合はgit cloneで持ってくる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/08/02-post/">Bundle execサボってエライ目にあった</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-08T23:21:00+09:00'><span class='date'>2013-12-08 (Sun)</span> <span class='time'>11:21 pm</span></time>
+        
+         | <a href="/blog/2013/12/08/02-post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……</p>
+
+<blockquote>bundle exec rails g devise:install</blockquote>
+
+
+<p>Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上のコマンドを入れるべきところでふつーにrails g devise:installとしてしまった。そしてrails g devise User ゴニョゴニョ。すると何が起きたか。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/11270239633/"> title=&ldquo;スクリーンショット_2013-12-08_22.57.54-3 by chroju, on Flickr&rdquo;><img src="http://farm4.staticflickr.com/3751/11270239633_8cc563c384.jpg" width="500" height="404" alt="スクリーンショット_2013-12-08_22.57.54-3"></a></p>
+
+<p>い……いねぇ……。確かにgenerateしたはずなのにurbはあるけどコントローラーもヘルパーもねぇ……。でもね、この状態でブラウザ開くとなんかログインできるんだよ。動くんだよ。幽霊かと。お前ソースはどこにあんのかと。んで探ってみたらあった。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/11270148454/"> title=&ldquo;スクリーンショット 2013-12-08 22.57.19 by chroju, on Flickr&rdquo;><img src="http://farm4.staticflickr.com/3754/11270148454_9e29b9f724.jpg" width="500" height="291" alt="スクリーンショット 2013-12-08 22.57.19"></a></p>
+
+<p>なんかすげえとこにあった！！！！</p>
+
+<p>あー、要はこれがbundle execの有無による違いね。bundle execプレフィックスを付けると今の環境のGemfileからインストールしてくれるけど、付けない場合はシステム側のRubyにdeviseをインストールしてしまう。だからこんなとこにいろいろ入ってしまったと。あー。失敗だ……。</p>
+
+<p>なんかbundle execを省略する方法もあるらしいけど、よくわかってないものをよくわかってないままに省略するのも危険なので、しばらくは自戒込めてプレフィックス付けるようにします。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/10/post/">GTD環境 2013年秋版</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-10T21:34:00+09:00'><span class='date'>2013-11-10 (Sun)</span> <span class='time'>9:34 pm</span></time>
+        
+         | <a href="/blog/2013/11/10/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先日GTDの聖典を読み込み、ちょっと久しぶりにGTD環境を再構築した。今年に入ってからCatch Notesを使ったGTDを試すも、PCを使ってる時にわざわざブラウザからタスク追加するのが面倒になり、初夏あたりでtodo.txtに乗り換えた。しかしこれもソートがしづらいだとか、複数のリスト持つのが面倒（たぶん俺のVimスキルがアップすればなんとかなるんだけど）などがあり、晩夏あたりでストップしてしまっていた。それから先々週頃までGTD環境は空白状態。そして2ヶ月ぶりぐらいの再構築に至ったわけだが、やっぱしGTDやっとくとなんとなく気が楽ね。</p>
+
+<p>で、どうにもツールに振り回されすぎてる嫌いがあるので、ここらでもう一度自分がやっていることをまとめておく。やりたいことを一つに定めれば、どんなツールを使っていようとも迷うことはない。そういう状態に持っていきたい。</p>
+
+<h3>仕事とプライベートで環境を分ける</h3>
+
+<p>入社当初、Toodledoで仕事もプライベートもすべてのタスクを管理していたことがあったのだが、これは無理だった。自分の職場の事情故の話ではあるが、会社PCではクラウドサービスの使用が禁じられているし、また仕事の資料を家に持ち帰ることはできない。つまり仕事のタスクをいつでも見られるようにとToodledoに入れておいても、会社ではそれを確認できないし、家では仕事の状況を確認する資料がないからタスクレビューができない。</p>
+
+<p>よって今は仕事とプライベートのGTD環境を完全に分けている。仕事ではTaskChuteを使い、TaskChuteはGTDには向かないなどという声もあるが、まぁ仕事のタスクなんて今すぐやるか、いつかやるかのほぼ2択なので、降ってきたタスクを適当な日付にぶちこんでおしまいである。「いつかやる」リストに行くはずのタスクは1週間後の日付でとりあえず入れておけばいいだけだし、「連絡待ち」リストに行くタスクは適したタイミングで「○○さんに例の件確認」と入れればいい。正直、仕事はこれで本当にうまく回っている。</p>
+
+<p>仕事とプライベートのGTD環境を分けることには利点もある。TaskChuteは会社のファイルサーバーに置いてあるので家からは確認のしようがなく、ON-OFFのメリハリがつくようになった。家に帰ってタスクリストを開いたら、仕事の予定がいっぱい入っているなんて状態は、精神によろしくない。</p>
+
+<h3>軌道修正を図りやすくする</h3>
+
+<p>ではプライベートのGTD環境とは何のためにあるのかということだが、軌道修正を図りやすくするためのものだと考えている。</p>
+
+<p>プライベートのタスクとは何か。主には家事、勉強、娯楽に分けられる。このうち家事は細切れのタスクがほとんどだが、娯楽と勉強はPJのような形になることが多い。それは例えばRailsを習得する、だったり、秋の気になるアートイベントに行きまくる、だったり。</p>
+
+<p>ただ、プライベートで抱えるPJを毎日コツコツ回せるかというと、なかなか時間は取れないもので、中には1ヶ月近く放置になってしまうものもある。そんなときに、「あれ？そういえばあれやりたくてやりかけにしてたけど、どこまでやったっけ？」とならないよう、フローの洗い出しと経過の記録を怠らないようにする。また進んでないPJにすぐ気付き、対策を打てるようにしておく。</p>
+
+<p>そして長く時間を費やす「PJ」は、往々にして相応の理由がある。例えばRails習得はWeb系の転職を考えているからであり、ではWeb系になぜ転職したいのか？といえば、、、といった具合に、理由はより大きな理由に遡及できる。自分の立ち位置を見失わないためにも、理由の記録と記憶は必要だ。これを管理するには、GTDでいう高度の概念がふさわしい。</p>
+
+<h3>ユビキタスキャプチャーを重視する</h3>
+
+<p>週次レビュー以上に自分が意識しているのがユビキタスキャプチャー。いくらトリガーリストがあると言っても、やはり2時間うんうん唸ってタスクを書き出したところで、一度忘れたタスクは思い出しづらい。思いついたこと、インプットされた情報はとにかくすぐメモる。この方が確実だ。</p>
+
+<p>ただ、自分はどうもこれが苦手で。あまり深く考えない性格なのか、気付けば新たな情報を右の耳から左の耳へ聞き流していることがある。どうすりゃいいんだろうな、これ。</p>
+
+<h3>ToDoリストに手間をかけすぎない</h3>
+
+<p>ToodledoはGTDに最適だとよく言われる。自分も使っていたが、そのことは肯定できる。だが、ちょっとガチガチに設定できすぎるような気もする。アレに凝りすぎると、ToDoリストを管理するというToDoに1日相当な時間を使いそうになる。</p>
+
+<p>だからToDoリストは手間をかけすぎないのがいい。先に言及したTaskChuteはその点すごく楽で、開いたらAlt+s -> aで行を追加し、日付とタスク名と見積時間を入れれば登録完了だ。プロジェクトの入力も可だが、そのへんはお好みで。</p>
+
+<p>プライベートでは今、Wunderlistを使っている。これもまた実にシンプルなツール。次点でTodo.txtだが、これはすでに述べた通りちょっと単機能すぎる。Google Tasksもまた然り。</p>
+
+<h3>「いつやるのか」を明確にする</h3>
+
+<p>GTDは元来、タスクのスケジューリングは必要としない。GTDにおいては、ToDoリストとは「時間があるときにやることのリスト」であり、やる時間が決まっているものはカレンダーに登録するべきだからだ。でも現実、そう上手くいくか？ この1週間のどこか空いた日で必ずやるとか、そういうタスクもあるだろう。</p>
+
+<p>自分はWunderlistのスターを「スケジューリング」として使っている。スターが付いたタスクとは、「今週やるべきタスク」だ。「時間があるときにやること」の中でも、最優先でやるべきことにスターを付けている。</p>
+
+<p>タスクのスケジューリングは重要だ。いつまでもリストに眠り続けるタスクを産まないためにも。</p>
+
+<h3>現在の環境</h3>
+
+<p>以上の方針を踏まえた上で、次のようなGTD環境（プライベートver）を回している。</p>
+
+<ul>
+<li><p>Wunderlist => タスクリスト</p></li>
+<li><p>すべての「やること」がここにある。</p></li>
+<li>リストはNext、Someday、Want＝やりたいこと、各PJ。</li>
+<li>PJはノートを使って目的と〆切を書いている。タスクには最初マイルストーンだけを置いておき、実際に進めながら細かいタスクへ分解している。</li>
+</ul>
+
+
+<p><a href="http://www.flickr.com/photos/chroju/10776411723/"> title=&ldquo;スクリーンショット 2013-11-10 21.20.34 by chroju, on Flickr&rdquo;><img src="http://farm6.staticflickr.com/5548/10776411723_fee1923491.jpg" width="500" height="410" alt="スクリーンショット 2013-11-10 21.20.34"></a></p>
+
+<ul>
+<li><p>Google Calendar => 予定管理</p></li>
+<li><p>アナログ管理とすべきかだいぶ悩んだけど、繰り返しの予定とかが管理しやすいのでデジタルに軍配。</p></li>
+<li>基本はプライベートの予定。仕事や休日や深夜のものだけ入れる。</li>
+<li><p>「やる日が決まっているタスク」もここに入れる。</p></li>
+<li><p>Dropbox&amp;txt => ユビキタスキャプチャーその1</p></li>
+<li><p>デジタルのユビキタスキャプチャー管理。メモはやっぱプレーンテキスト最強。</p></li>
+<li>Macで扱うときはQFixHowmを使っている。</li>
+<li>Androidで扱うときはDraft。これ最強。このエントリーもDraftで書いてます。</li>
+<li>ポイントはクイック入力機能、Markdownの入力補助、全文検索機能。</li>
+</ul>
+
+
+<p><a href="https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;hl=ja"> target=&ldquo;_blank&rdquo; rel=&ldquo;nofollow&rdquo;><img class="alignleft" align="left" src="https://lh6.ggpht.com/AwZSLYU7QIp0nnwNEzPxR1Nmx03aKnOEmLAA_SOCW0miZ75oblV6JZU4NS6Lf3DB2jU1=w300" width="85" style="margin:0px 10px 1px 5px;padding:0px;border:none"></a><a href="https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;hl=ja"> target=&ldquo;_blank&rdquo; rel=&ldquo;nofollow&rdquo;><strong><span style="font-size:120%">Draft 0.12</span></strong></a><br>カテゴリ: 仕事効率化<br><a href="https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;hl=ja"> target=&ldquo;_blank&rdquo; rel=&ldquo;nofollow&rdquo;>Google Playで詳細を見る</a><br style="clear: both;"></p>
+
+<ul>
+<li><p>Dropbox&amp;txt => GTDの中枢</p></li>
+<li><p>ユビキタスキャプチャー用のフォルダの中にGTDというフォルダを掘ってる</p></li>
+<li>ここに何を入れているかというと、GTDで使う資料系一式。</li>
+<li>例えばGTD.txtは、自分流GTDのフローと、各「高度」を書き込んでいる。GTDってなんだっけ状態になったらここに戻ってくる。</li>
+<li>あとトリガーリストとかもここ。GTD関連でタスクでないもの全般って感じか。</li>
+</ul>
+
+
+<p><a href="http://www.flickr.com/photos/chroju/10776412153/"> title=&ldquo;スクリーンショット 2013-11-10 21.21.54 by chroju, on Flickr&rdquo;><img src="http://farm8.staticflickr.com/7401/10776412153_43304f8401_n.jpg" width="279" height="320" alt="スクリーンショット 2013-11-10 21.21.54"></a></p>
+
+<ul>
+<li><p>ほぼ日手帳 => ユビキタスキャプチャーその2</p></li>
+<li><p>アナログのユビキタスキャプチャー。仕事中は専らこれ。</p></li>
+<li>予定もタスクもデジタル管理にしちゃったので、もはやただの日付入りメモ帳。</li>
+<li>ホントはライフログっぽいこともしたいんだけど、TaskChuteがあるしいいやってなってる。</li>
+<li>来年はEDITに浮気予定。ほぼ日よりシンプルで使いやすそうなので。</li>
+</ul>
+
+
+<p>こんなところ。正直プレーンテキスト最強論者（デバイスを選ばない、フォーマットフリー、Dropboxで共有＆バックアップも瞬時、Vimで編集もクソ楽）なので、全部プレーンテキストにまとめたいとも思ってるんだが、なかなか上手くいかなかった。まぁ予定はまず無理だし、タスクもちと辛い。いや、やってやれないこともないのだが、面倒だ。期日順に並べ替えたり、PJと期日の2つの観点からタスクを絞り込んだりとか、そういう有機的な操作はやっぱり専用アプリを使ったほうがいい。すなわちそれがWunderlistだった。</p>
+
+<p>あと悩んでるのが、日課や週末の家事のような定期的タスク。Googleカレンダーに試しに繰り返しの予定で入れてはみたが、毎日同じ予定が表示されるのはちょっとウザかったり。かといってWunderlistで繰り返し設定して、毎日ちまちま消してくのもウザい。プレーンテキストでリスト化しとくのが楽かなーと思うのだが、それだと「やることは全部Wunderlistに集約」という原則が崩れてしまうし。むー。</p>
+
+<p>とりあえずこの路線を1年は続けたい。浮気して、違うツール設定して試して、また戻ってきてなんて時間は、GTDの根本に反するような無駄に過ぎない。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/17">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/15">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

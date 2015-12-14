@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: misc | the world as code]]></title>
+  <link href="http://chroju.github.io//blog/categories/misc/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io//"/>
+  <updated>2015-12-14T22:16:31+09:00</updated>
+  <id>http://chroju.github.io//</id>
+  <author>
+    <name><![CDATA[chroju]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[chroju.netを開設してみた]]></title>
+    <link href="http://chroju.github.io//blog/2014/06/05/post/"/>
+    <updated>2014-06-05T23:08:00+09:00</updated>
+    <id>http://chroju.github.io//blog/2014/06/05/post</id>
+    <content type="html"><![CDATA[<p><a href="http://chroju89.hatenablog.jp/entry/2014/05/30/212733">前回の記事</a>でchefでVPS構築したと書きましたが、そのサーバーに静的なHTML置いてドメインも取得してみました。</p>
+
+<p>まだ何もないですけど、ここをハブにしていろいろやってみたい。</p>
+
+<p><a href="http://www.chroju.net/">http://www.chroju.net/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

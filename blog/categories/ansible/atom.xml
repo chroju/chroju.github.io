@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ansible | the world as code]]></title>
+  <link href="http://chroju.github.io//blog/categories/ansible/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io//"/>
+  <updated>2015-12-14T22:16:31+09:00</updated>
+  <id>http://chroju.github.io//</id>
+  <author>
+    <name><![CDATA[chroju]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ansible + Serverspec + Docker + circle ci によるインフラCI]]></title>
+    <link href="http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci/"/>
+    <updated>2015-11-18T22:13:25+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
+
+<p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>
+
+<p><a href="https://github.com/chroju/ansible-ruby-devs">chroju/ansible-ruby-devs</a></p>
+
+<h1>Ansibleにテストは必要か？</h1>
+
+<p>AnsibleはPlaybookに書かれた設定通りにサーバーをセッティングしてくれるツールなのだから、傍証としてのテストは必要ないし、そもそもそれはAnsibleに対する信頼の問題だという話がある。（かのオライリーのServerspec本でも「Serverspecの必要性」を状況に応じて説明した章がある）が、自分は以下の理由からAnsible実行後のテストは必要と考えている。</p>
+
+<h2>1. Playbookの書き方が間違っている</h2>
+
+<p>確かにPlaybookに書いた内容通りにサーバーは組まれるのだが、そもそもPlaybookの書き方がおかしくて、想定通りの実行結果にならない可能性はある。そのレベルであればコードレビューで気付くべきではないかという話もあるが、こういう趣味の個人開発では難しかったり、レビューで漏れがあったりというのも有り得るわけで、自動テストに任せられるならその方が確かかとは思う。</p>
+
+<h2>2. 冪等性の問題</h2>
+
+<p>特にshellモジュールを用いたときなどは冪等性が維持されない可能性があり、複数回の実行で想定外のサーバー状態になる可能性はある。</p>
+
+<h1>テストツールの選定</h1>
+
+<p>普通にServerspec。Ansibleで定義したインベントリファイルやrolesをServerspecと共有してくれる<a href="http://qiita.com/volanja/items/5e97432d6b231dbb31c1">ansible_spec</a>というツールもあり、当初はこちらを使おうとしていた。が、前述した「Ansibleの書き方自体が間違っている可能性」をテストするとなると、できるだけAnsibleとテストツールは疎結合とするべきと考え、ファイルや設定は一切共有しない形でServerspecを使っている。</p>
+
+<h1>Circle CIの利用</h1>
+
+<p>繰り返しになるが初である。インフラエンジニアがCIをすることはまぁない（なかった）。そんな頻繁に設定を変えるわけでもなし。インフラCIが可能かつ必要となったのは、Infrastructure as Codeの台頭と、クラウドネイティブ化によりImmutableかつ極めて速いライフサイクルでサーバーインフラが更新されるようになったことによるもの。</p>
+
+<p>で、Circle CIでググってもそんなに使い方みたいな初歩的な記事は出ない。どうもCIツールの使い方なんてのはJenkins登場の頃に身につけてて当然だろって感じの扱いっぽい。実際使いながら自分なりに理解したのは「レポジトリをpushすると、それを使って自動的にテストやデプロイを回してくれる」ツールということで、Circle CIについてはこんな感じに認識してるんだがあってんのかなぁ。</p>
+
+<ul>
+<li>レポジトリの使用言語やファイル構成を見て良きに計らって勝手にテストしてくれる。</li>
+<li>もちろん自分でテストコマンドを書いてもOKで、Circle CIにやってほしいことは <code>circle.yml</code> というYAMLファイルに書いてレポジトリの第一階層に置いておく。</li>
+<li>GitHub連携を前提としており、連携したレポジトリの <code>push</code> をトリガーとして動作する。</li>
+<li>動作としてはCircle CI上でDockerコンテナ（ubuntuベース）を起動→レポジトリを <code>git clone</code> →circle.ymlを読んで実行</li>
+</ul>
+
+
+<h1>実装</h1>
+
+<p>実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。</p>
+
+<p><a href="http://stormcat.hatenablog.com/entry/2015/02/04/004227">CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&lt;)</a></p>
+
+<pre><code class="yaml">machine:
+  timezone:
+    Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
+
+  cache_directories:
+    - "~/docker"
+
+test:
+  override:
+    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c 'ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;&amp; cd /ansible/spec &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec'
+</code></pre>
+
+<p>この方法の肝はAnsibleとServerspecのフォルダを<code>docker run</code>の<code>-v</code>オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。</p>
+
+<p>テストにおいてはインベントリファイルも<code>site.yml</code>もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと<code>load</code>するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。</p>
+
+<p>実行結果はslackの個人チャンネルに流している。GtiHubに上げるだけで勝手にテストして結果も自動通知されるというのはとても楽しい。やれることの自由度が広すぎて夢が広がる。</p>
+
+<h1>つまずいた点</h1>
+
+<ul>
+<li>Dockerfile初挑戦につき、結構戸惑った。Ansibleでsshd_configを編集させていたのだが、コンテナにそもそもsshが入ってなくてコケたりした。</li>
+<li>Circle CIでのカレントディレクトリの扱いがわからず、しばらく <code>circle.yml</code> で指定するファイルパスに悩まされた。クローンしたレポジトリの中にいる状態で始まるっぽい？</li>
+<li><code>docker run</code> に <code>&amp;&amp;</code> 付きでコマンド渡すときに <code>/bin/sh -c</code> が必要だとしばらく気付かなかった。</li>
+<li>Dockerコンテナを <code>save</code> して <code>load</code> してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[開発環境のためのansibleを出来るだけベストプラクティスでまとめた]]></title>
+    <link href="http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice/"/>
+    <updated>2015-09-24T19:37:08+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice</id>
+    <content type="html"><![CDATA[<p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
+
+<h2>なぜEC2？</h2>
+
+<p>少し前に<a href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">開発環境としてDigitalOceanを使うことを勧める記事</a>を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。</p>
+
+<h2>ベストプラクティス構成の意識</h2>
+
+<p>出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。</p>
+
+<p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
+
+<p>あらゆるサーバーで共通の<code>common</code>というロールと、開発環境用の<code>develop</code>というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから<code>git clone</code>しているし。</p>
+
+<p>ansibleには公式ドキュメントに<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html">ディレクトリ構成のベストプラクティス</a>が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。</p>
+
+<ul>
+<li>playbooksは同時に実行すべきtaskをroleとして分割する</li>
+<li>ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する</li>
+<li>グループごとに実行するroleと変数（group_vars）を紐つける</li>
+</ul>
+
+
+<p>taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は<code>ansible-playbook site.yml</code>でよいし、一部グループだけに適用したいなら<code>ansible-playbook *servers.yml</code>とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。</p>
+
+<p>なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。</p>
+
+<p>ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。</p>
+
+<p>ansible、ファーストインプレッションはとにかく<a href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">「楽そう」</a>だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。</p>
+
+<h2>このレポジトリでやっていること</h2>
+
+<p>ソース読んでもらえればわかる話ではありますが。</p>
+
+<ul>
+<li>common
+
+<ul>
+<li>hostname設定</li>
+<li>localeとtimezone設定</li>
+<li>sshd_config設定</li>
+<li>authorized keys設定</li>
+<li>/etc/aliasesの設定</li>
+<li>DenyHostsインストール</li>
+<li>logwatchインストール</li>
+<li>iptables設定</li>
+</ul>
+</li>
+<li>develop
+
+<ul>
+<li>development tools、zsh、git、vim、jqのインストール</li>
+<li>dotfilesの配置</li>
+<li>デフォルトシェルをzshに変更</li>
+<li>rbenvの設定</li>
+</ul>
+</li>
+</ul>
+
+
+<p>もっとも苦労したのはrbenv周りで、<code>git clone</code>直後はpathが通ってない<code>~/.rbenv/bin</code>配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで<code>sudo: yes</code>としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、<code>sudo:</code>ないし<code>become:</code>の設定はタスク単位で考えたほうが良いと思う。また本来であれば<code>~/.bash_profile</code>あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。</p>
+
+<p>もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は<code>ec2_user</code>、その他VPSの場合は<code>root</code>がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。</p>
+
+<h2>その他技術的な話</h2>
+
+<p>細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。</p>
+
+<ul>
+<li>変数名の命名規約。代入は<code>group_vars</code>で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。</li>
+<li>ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。</li>
+<li>EC2には開発ツールがないので<code>Development tools</code>でまとめてインストールしてしまったが、本当は個々に切り出したい。</li>
+<li>ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AnsibleとDigitalOceanでどこでも使える開発環境を作る]]></title>
+    <link href="http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
+    <updated>2015-07-20T14:50:28+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
+    <content type="html"><![CDATA[<p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
+
+<p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>
+
+<h2>DigitalOcean</h2>
+
+<p>すでに他所で言われてはいるが、利点としてはこんなところかと思う。</p>
+
+<ul>
+<li>月額課金ではなく時間課金なので、使いたいだけ払えばOK</li>
+<li>安い</li>
+<li>アプリケーションやSSH鍵が最初から組み込まれたイメージを作れる</li>
+<li>REST APIでだいたいのVPS操作ができる</li>
+</ul>
+
+
+<p>要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。</p>
+
+<p>REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。</p>
+
+<div class="bookmarklet bookmarklet-gp" itemscope itemtype="http://schema.org/MobileApplication" style="clear:both;min-height:165px;width:100%;max-width:468px;overflow:hidden;padding:12px;border:1px solid;border-color:#eaeaea #ddd #d0d0d0;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:5px;"><dl class="bookmarklet-gp-info" style="margin:0;"><dt class="bookmarklet-gp-title" style="border-bottom:1px solid;border-color:#eaeaea #ddd #d0d0d0;font-weight:bold;margin:0 0 .5em 0;padding:0 0 .5em 0;"><img alt="Google play" class="favicon" style="vertical-align:middle;border:0;" src="//ssl.gstatic.com/android/market_images/web/favicon.ico" /> <span itemprop="name">DigitalOcean Swimmer Android</span></dt><dd class="bookmarklet-gp-desc" style="font-size:.9em;margin:0;"><div class="bookmarklet-gp-thumb" style="float:left;"><img src="https://lh3.ggpht.com/HXBZyHdspPh5MFgaC-rOXAZIZc8D9uM4KrQsL-gqoB1_9ZuBhthaWYLRoYJYNUY9Ytg=w300" alt="DigitalOcean Swimmer Android" itemprop="image" style="height:120px;width:120px;max-width:100%;vertical-align:middle;border:0;margin:0 1em 0 0;"></div><div class="supplier" itemscope itemtype="http://schema.org/Organization">制作: <span itemprop="name">Hannoun Yassir</span></div><div class="review" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">評価: <span itemprop="ratingValue">4.4</span> / 5段階中</div><div class="price" itemtype="http://schema.org/Offer" itemscope itemprop="offers">価格: <meta itemprop="price" content="0">無料<small> (2015/7/11 時点)</small><br /></div><a href="https://play.google.com/store/apps/details?id=com.yassirh.digitalocean&hl=ja" target="_blank" title="DigitalOcean Swimmer Android" itemprop="url" style="float:right;"><img src="//dl.dropboxusercontent.com/u/540358/ja_generic_rgb_wo_45.png" alt="ダウンロード" style="border:0;display:inline-block;height:auto;vertical-align: middle;"/></a><small>posted by: <a target="_blank" href="http://hayashikejinan.com/?p=818">AndroidHTML v3.1</a></small></dd></dl></div>
+
+
+<p>このアプリさえあればGUI操作はほぼ全部できる。</p>
+
+<p>ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとして<code>authorized_keys</code>の件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初は<code>root</code>以外のユーザーがいないため、当然ながら<code>authorized_keys</code>のパスも<code>/root/.ssh/</code>配下となる。構築用には別のユーザーを設けることになると思うが、その際には<code>authorized_keys</code>を<code>/home/user</code>配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。</p>
+
+<h2>Ansibleによる初期構築</h2>
+
+<p>巷ではVagrantと連携して、<code>vagrant up</code>でDigitalOceanにマシンを上げるのが流行ってるらしい。</p>
+
+<ul>
+<li><a href="http://qiita.com/msykiino/items/d45cab7f520a3288862a">vagrantではじめるクラウド開発環境（DigitalOcean編） - Qiita</a></li>
+<li><a href="http://blog.glidenote.com/blog/2013/12/05/digital-ocean-with-vagrant/">VagrantとSSDなVPS(Digital Ocean)で1時間1円の使い捨て高速サーバ環境を構築する - Glide Note - グライドノート</a></li>
+</ul>
+
+
+<p>とはいえ自分は冒頭に書いた通り、最悪iPad miniでもいいので外から繋ぐという運用をしたかったので、Vagrantからの起動は使えない。なので初期構築には最近学び始めたAnsibleを使ってみた。</p>
+
+<p>インフラ管理系のツール、使ったことがあるのはChefぐらいで、Puppetは概念だけ知ってはいるが、Ansibleの特色はやはりハードルの低さ、学習コストの低さだと思う。エージェントレス、<code>knife</code>のような特殊なコマンドもほとんど覚える必要がなく、<code>ansible-playbook</code>コマンドさえ覚えておけばとりあえずなんとかなってしまう。</p>
+
+<ul>
+<li>エージェントレスなのでpipで手元のマシンにansibleを入れればすぐ使える。</li>
+<li>設定はyamlによるplaybookに書き出すので、文法も比較的容易。</li>
+<li>1個1個のタスクは定められたモジュールを用いて書くことになるが、やりたいことを公式Docsの<a href="http://docs.ansible.com/modules_by_category.html">Module Index</a>で探ればわりとなんとかなる。</li>
+<li>ディレクトリ掘ったり<code>knife</code>みたいなコマンドいっぱい覚えなくても、とりあえずyaml1つとコマンド1つあれば始められる。</li>
+</ul>
+
+
+<p>pip経由でのインストールが必要なので非pythonista的には若干戸惑いもありましたが、学習コストの低さはハンパないのでインストールから1時間もあれば一旦サーバー建てられました。ノウハウもQiitaはじめ随所に落ちてはいるけれど、正直公式ドキュメントがかなり充実していて、<a href="http://docs.ansible.com/YAMLSyntax.html">YAMLのシンタックスガイド</a>まで付いていたりするので、下手にググってやるよりもドキュメントちゃんと読んだ方がいいと思う。まぁ、Ansibleにかぎらずなんだってそうではあるが。ただ、複数台管理だとかアプリのデプロイだとかをやろうとすると当然ディレクトリ構成も複雑になって、既存のプラクティスが必要になってくるので、あくまで「導入の学習コストが低い」という感じだが。</p>
+
+<p>書いたPlaybookはとりあえずGitHubに上げた。<a href="http://akiyoko.hatenablog.jp/entry/2013/12/16/020529">こちら</a>を参考に、いわゆるVPS作るときの初期設定だけまとめている。ただしわりと俺用（dotfiles引っ張ってきたりとか）。Ansibleについてはまた別の記事でまとめようと思う。</p>
+
+<p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
+
+<h2>iPadからのSSH接続</h2>
+
+<p>クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのが<a href="https://panic.com/jp/prompt/">Prompt2</a>。</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/chroju/19822940536" title="prompt_with_digitalocean"><img src="https://farm1.staticflickr.com/541/19822940536_5f6201ca53_z.jpg" width="640" height="480" alt="prompt_with_digitalocean"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>vim-lightlineもきちんと表示してくれるし日本語も可だし、外付けキーボードの煩わしささえ考慮しなければかなり快適である。当然ながら鍵認証も使えるし、ぶっちゃけWindowsのラップトップ持ち歩くぐらいならこっちの方がSSHはストレスないんじゃないかというぐらい。つないでちょこちょこっと使えればいいかなぐらいの思いだったが、嬉しい誤算だった。さすがに有料ではあるけど。</p>
+
+<p>おかげさまで場所を選ばず開発環境につながるようになったので、ちょっと試したいツールがTLに上がってきたりしたらおもむろにiPadを取り出して試したりとかできる。すぐ復元したいのであれば、先のAndroidアプリで予めスナップショットを取ったりもできるし、楽すぎて笑える。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ansibleの入門イベント聞いてきた話]]></title>
+    <link href="http://chroju.github.io//blog/2015/06/25/hika-labo-ansible/"/>
+    <updated>2015-06-25T00:21:58+09:00</updated>
+    <id>http://chroju.github.io//blog/2015/06/25/hika-labo-ansible</id>
+    <content type="html"><![CDATA[<p><a href="https://atnd.org/events/66419">これ</a>行ってきた。ざくっと感想を箇条書きで。</p>
+
+<ul>
+<li>ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれらより広い。要はCapistranoがやるようなことまでまかなえる。</li>
+<li>それどころかHomebrewの管理あたりも可。一時期brewfileとか流行ってたけど、冪等性とか考えるとAnsible管理の方がいいかも。
+
+<ul>
+<li>最近そんな記事がちょうど上がってた。→ <a href="http://dev.classmethod.jp/tool/osxc-ansible-configuration-for-mac/">【要するに】osxcでMacの環境の構成を記述管理する【MacでAnsible】 ｜ Developers.IO</a></li>
+</ul>
+</li>
+<li>一番のポイントはエージェントレス、だと個人的にも思う。導入ハードルが低い。個人のVPSとかならChef-Zeroとかよりも気楽で良い。</li>
+<li>yamlだからインフラ担当者でも読みやすいって点はそれほど惹かれないというか、Rubyぐらいインフラ屋でも昨今は読み書きできるべきではって気がする。
+
+<ul>
+<li>あとRubyの方がぶっちゃけ処理ベタ書きしちゃえるって点で安心感はある。Ansibleで細かいとこに手が届かないとき、どういうワークアラウンドがあるかはわかってないが。</li>
+</ul>
+</li>
+<li>しかし、とはいえやっぱ楽そう。Vagrantと組み合わせて開発環境立てるみたいな小さなことからやってみて、イケると思ったら本番展開ってのもアリかもしれない。かも。</li>
+<li>この手のツールが出たときに「こんなこともできる！すごい！」ってなりがちなんだけど、実は再発明された車輪で成り立ってる部分もあって、それshでできるよ？ってなることは結構ある（brewfileがわりとその気配あった）ので、その点に関してはきちんと見極めがしたい。</li>
+<li>あとやっぱり構成管理ツールはインフラエンジニアから完全にdevを奪いにかかるツールではあるので、インフラ屋はスケーリングとかネットワークとか（そういえばネットワーク周りのas codeなかなか流行りませんね）障害対策とか、本気でops特化が求められるのかもなとか思った。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

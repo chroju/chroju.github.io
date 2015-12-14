@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>the world as code</title>
+  <meta name="author" content="chroju">
+
+  
+  <meta name="description" content="chroju - Qiita 気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽かなと思って。あと先日の暗号化に関する記事みたいなまとめ記事、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io//posts/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6765151-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">the world as code</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/chroju" rel="subscribe-github" title="@chroju on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/chroju" rel="subscribe-twitter" title="@chroju on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/25/start-qiita/">Qiitaはじめました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-25T11:07:38+09:00'><span class='date'>2015-07-25 (Sat)</span> <span class='time'>11:07 am</span></time>
+        
+         | <a href="/blog/2015/07/25/start-qiita/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fchroju" title="chroju - Qiita" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://qiita.com/chroju" target="_blank">chroju - Qiita</a></iframe>
+
+
+<p>気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽かなと思って。あと先日の<a href="http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/">暗号化に関する記事</a>みたいなまとめ記事、tips系はやはりQiitaの方がフットワーク軽くて使いやすいような気がする。更新した場合にも履歴が残るし。</p>
+
+<p>ブログとの使い分けが難しそうな気はするが、いわゆる勉強メモみたいな頻繁に見返すものをQiitaに上げて、ブログの方はもっとガッチリとした長文、たとえば勉強会の記録だとか技術に対する考え、あるいは何かを作った系の記事などを上げたらいいのではと思っている。まぁこのへんはあまり縛られず、あくまで中心に据えているのは自分用メモとしての役割なので、自分が使いやすいようなやり方でやれればいいかなと思っている。</p>
+
+<p>ブログは多くとも週2回程度の更新だったが、Qiitaはもっと高い頻度でいろいろ貯めこんでいきたいし、そうできるような仕事をしていきたい所存。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/20/encryption-hash-at-first/">暗号化とハッシュ化に関する基本的な事柄まとめ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-20T16:56:06+09:00'><span class='date'>2015-07-20 (Mon)</span> <span class='time'>4:56 pm</span></time>
+        
+         | <a href="/blog/2015/07/20/encryption-hash-at-first/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。</p>
+
+<ul>
+<li>暗号化とハッシュ化は違う。暗号化はデータの秘匿を目的としており、適切な鍵を用いることで復号が可能。ハッシュ化はデータの置換がそもそもの目的であり、ハッシュ関数により一定のフォーマットへ不可逆の変換を行う。</li>
+<li>ただし、衝突耐性を持つことなどにより、セキュリティ用途に適する「暗号学的ハッシュ関数」というものもあるらしい。デジタル署名やメッセージ認証符号への使用を目的とされており、逆にチェックサム等に使用するには計算が「重い」。</li>
+</ul>
+
+
+<h1>暗号</h1>
+
+<p>主なアルゴリズムをざっと。</p>
+
+<h2>RSA</h2>
+
+<ul>
+<li>公開鍵暗号。素因数分解の計算難度を根拠としたもの。サマウォで解いてたアレもたぶん素因数分解暗号だが、暗算で解かれたらたまったものではない。</li>
+<li>SSHログイン時の鍵認証やSSL認証など、広く使われる。</li>
+<li>秘密鍵生成コマンドとして<code>openssl genrsa</code>がある。SSH鍵認証では<code>ssh-keygen</code>を用いる。</li>
+</ul>
+
+
+<h2>DES</h2>
+
+<ul>
+<li>共通鍵暗号。鍵長54bitのブロック暗号。</li>
+<li>鍵長が短すぎるため、現在では安全ではないとされるが、暗号化復号化処理を3回実行するトリプルDESという形で主に実用されている。</li>
+<li><code>openssl genrsa</code>での秘密鍵生成時に、パスフレーズによるトリプルDESでの暗号化を施すため、<code>-des3</code>オプションが用いられる。</li>
+</ul>
+
+
+<h2>AES</h2>
+
+<ul>
+<li>共通鍵暗号。DESの安全性低下に伴い開発された、鍵長128bit超のブロック暗号。</li>
+</ul>
+
+
+<h1>ハッシュ</h1>
+
+<h2>ソルト</h2>
+
+<p>ハッシュ化前に対象文字列に付加するランダムな文字列。同一文字列のハッシュ化時に衝突が防げる、レインボーテーブルによる探索に対する妨害になる、といった利点がある。</p>
+
+<h2>フィンガープリント</h2>
+
+<p>SSH初回ログインで表示されるやつ。公開鍵のハッシュ値。<code>~/.ssh/known_hosts</code>に記述され、次回以降のログインで公開鍵の変更有無の確認に使われる。変更があると、サーバーなりすましの危険性もあるため警告が表示される。<code>ssh-keygen -lf</code>でも表示可能。</p>
+
+<h2>md5</h2>
+
+<ul>
+<li>出力128bitのハッシュアルゴリズム。ファイル配布時のチェックサムなどに用いられる。</li>
+<li>安全性は高くないことが判明しているため、日米ともにSHAの使用が推奨されている。</li>
+<li>コマンドは<code>md5sum</code>あるいは<code>openssl md5</code>を使用する。</li>
+<li>なおパスワードハッシュ化でよく用いられる<code>openssl passwd</code>はmd5による実装。</li>
+</ul>
+
+
+<h2>sha</h2>
+
+<ul>
+<li>Secure Hash Algorithm。暗号学的ハッシュ関数の一つ。</li>
+<li>SSL、SSH等で用いられる暗号化アルゴリズム。</li>
+<li>SHA-0,1,2,3が存在しており、SHA-1には脆弱性が存在するため、SSL証明書はSHA-2への全面移行が進められている。すでにGoogle ChromeではSHA-1による証明書に対して警告が表示される。</li>
+<li>SHA-2は鍵長によりSHA-224、SHA-256、SHA-384、SHA-512といったバリエーションが存在する。</li>
+<li>上述の通り<code>openssl passwd</code>はSHA非対応だが、<code>grub-crypt</code>がSHA-2によるハッシュ化に使える模様。
+参考: <a href="http://heroween.hateblo.jp/entry/2014/07/28/133713">CentOS6.5でランダムSalt付きSHA-512のシャドウパスワードを生成する - ひろうぃんの雑記</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">AnsibleとDigitalOceanでどこでも使える開発環境を作る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-20T14:50:28+09:00'><span class='date'>2015-07-20 (Mon)</span> <span class='time'>2:50 pm</span></time>
+        
+         | <a href="/blog/2015/07/20/ansible-digitalocean-vps-dev-env/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
+
+<p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>
+
+<h2>DigitalOcean</h2>
+
+<p>すでに他所で言われてはいるが、利点としてはこんなところかと思う。</p>
+
+<ul>
+<li>月額課金ではなく時間課金なので、使いたいだけ払えばOK</li>
+<li>安い</li>
+<li>アプリケーションやSSH鍵が最初から組み込まれたイメージを作れる</li>
+<li>REST APIでだいたいのVPS操作ができる</li>
+</ul>
+
+
+<p>要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。</p>
+
+<p>REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。</p>
+
+<div class="bookmarklet bookmarklet-gp" itemscope itemtype="http://schema.org/MobileApplication" style="clear:both;min-height:165px;width:100%;max-width:468px;overflow:hidden;padding:12px;border:1px solid;border-color:#eaeaea #ddd #d0d0d0;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:5px;"><dl class="bookmarklet-gp-info" style="margin:0;"><dt class="bookmarklet-gp-title" style="border-bottom:1px solid;border-color:#eaeaea #ddd #d0d0d0;font-weight:bold;margin:0 0 .5em 0;padding:0 0 .5em 0;"><img alt="Google play" class="favicon" style="vertical-align:middle;border:0;" src="//ssl.gstatic.com/android/market_images/web/favicon.ico" /> <span itemprop="name">DigitalOcean Swimmer Android</span></dt><dd class="bookmarklet-gp-desc" style="font-size:.9em;margin:0;"><div class="bookmarklet-gp-thumb" style="float:left;"><img src="https://lh3.ggpht.com/HXBZyHdspPh5MFgaC-rOXAZIZc8D9uM4KrQsL-gqoB1_9ZuBhthaWYLRoYJYNUY9Ytg=w300" alt="DigitalOcean Swimmer Android" itemprop="image" style="height:120px;width:120px;max-width:100%;vertical-align:middle;border:0;margin:0 1em 0 0;"></div><div class="supplier" itemscope itemtype="http://schema.org/Organization">制作: <span itemprop="name">Hannoun Yassir</span></div><div class="review" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">評価: <span itemprop="ratingValue">4.4</span> / 5段階中</div><div class="price" itemtype="http://schema.org/Offer" itemscope itemprop="offers">価格: <meta itemprop="price" content="0">無料<small> (2015/7/11 時点)</small><br /></div><a href="https://play.google.com/store/apps/details?id=com.yassirh.digitalocean&hl=ja" target="_blank" title="DigitalOcean Swimmer Android" itemprop="url" style="float:right;"><img src="//dl.dropboxusercontent.com/u/540358/ja_generic_rgb_wo_45.png" alt="ダウンロード" style="border:0;display:inline-block;height:auto;vertical-align: middle;"/></a><small>posted by: <a target="_blank" href="http://hayashikejinan.com/?p=818">AndroidHTML v3.1</a></small></dd></dl></div>
+
+
+<p>このアプリさえあればGUI操作はほぼ全部できる。</p>
+
+<p>ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとして<code>authorized_keys</code>の件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初は<code>root</code>以外のユーザーがいないため、当然ながら<code>authorized_keys</code>のパスも<code>/root/.ssh/</code>配下となる。構築用には別のユーザーを設けることになると思うが、その際には<code>authorized_keys</code>を<code>/home/user</code>配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。</p>
+
+<h2>Ansibleによる初期構築</h2>
+
+<p>巷ではVagrantと連携して、<code>vagrant up</code>でDigitalOceanにマシンを上げるのが流行ってるらしい。</p>
+
+<ul>
+<li><a href="http://qiita.com/msykiino/items/d45cab7f520a3288862a">vagrantではじめるクラウド開発環境（DigitalOcean編） - Qiita</a></li>
+<li><a href="http://blog.glidenote.com/blog/2013/12/05/digital-ocean-with-vagrant/">VagrantとSSDなVPS(Digital Ocean)で1時間1円の使い捨て高速サーバ環境を構築する - Glide Note - グライドノート</a></li>
+</ul>
+
+
+<p>とはいえ自分は冒頭に書いた通り、最悪iPad miniでもいいので外から繋ぐという運用をしたかったので、Vagrantからの起動は使えない。なので初期構築には最近学び始めたAnsibleを使ってみた。</p>
+
+<p>インフラ管理系のツール、使ったことがあるのはChefぐらいで、Puppetは概念だけ知ってはいるが、Ansibleの特色はやはりハードルの低さ、学習コストの低さだと思う。エージェントレス、<code>knife</code>のような特殊なコマンドもほとんど覚える必要がなく、<code>ansible-playbook</code>コマンドさえ覚えておけばとりあえずなんとかなってしまう。</p>
+
+<ul>
+<li>エージェントレスなのでpipで手元のマシンにansibleを入れればすぐ使える。</li>
+<li>設定はyamlによるplaybookに書き出すので、文法も比較的容易。</li>
+<li>1個1個のタスクは定められたモジュールを用いて書くことになるが、やりたいことを公式Docsの<a href="http://docs.ansible.com/modules_by_category.html">Module Index</a>で探ればわりとなんとかなる。</li>
+<li>ディレクトリ掘ったり<code>knife</code>みたいなコマンドいっぱい覚えなくても、とりあえずyaml1つとコマンド1つあれば始められる。</li>
+</ul>
+
+
+<p>pip経由でのインストールが必要なので非pythonista的には若干戸惑いもありましたが、学習コストの低さはハンパないのでインストールから1時間もあれば一旦サーバー建てられました。ノウハウもQiitaはじめ随所に落ちてはいるけれど、正直公式ドキュメントがかなり充実していて、<a href="http://docs.ansible.com/YAMLSyntax.html">YAMLのシンタックスガイド</a>まで付いていたりするので、下手にググってやるよりもドキュメントちゃんと読んだ方がいいと思う。まぁ、Ansibleにかぎらずなんだってそうではあるが。ただ、複数台管理だとかアプリのデプロイだとかをやろうとすると当然ディレクトリ構成も複雑になって、既存のプラクティスが必要になってくるので、あくまで「導入の学習コストが低い」という感じだが。</p>
+
+<p>書いたPlaybookはとりあえずGitHubに上げた。<a href="http://akiyoko.hatenablog.jp/entry/2013/12/16/020529">こちら</a>を参考に、いわゆるVPS作るときの初期設定だけまとめている。ただしわりと俺用（dotfiles引っ張ってきたりとか）。Ansibleについてはまた別の記事でまとめようと思う。</p>
+
+<p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
+
+<h2>iPadからのSSH接続</h2>
+
+<p>クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのが<a href="https://panic.com/jp/prompt/">Prompt2</a>。</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/chroju/19822940536" title="prompt_with_digitalocean"><img src="https://farm1.staticflickr.com/541/19822940536_5f6201ca53_z.jpg" width="640" height="480" alt="prompt_with_digitalocean"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>vim-lightlineもきちんと表示してくれるし日本語も可だし、外付けキーボードの煩わしささえ考慮しなければかなり快適である。当然ながら鍵認証も使えるし、ぶっちゃけWindowsのラップトップ持ち歩くぐらいならこっちの方がSSHはストレスないんじゃないかというぐらい。つないでちょこちょこっと使えればいいかなぐらいの思いだったが、嬉しい誤算だった。さすがに有料ではあるけど。</p>
+
+<p>おかげさまで場所を選ばず開発環境につながるようになったので、ちょっと試したいツールがTLに上がってきたりしたらおもむろにiPadを取り出して試したりとかできる。すぐ復元したいのであれば、先のAndroidアプリで予めスナップショットを取ったりもできるし、楽すぎて笑える。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/04/development-environment-for-windows/">Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-04T20:24:32+09:00'><span class='date'>2015-07-04 (Sat)</span> <span class='time'>8:24 pm</span></time>
+        
+         | <a href="/blog/2015/07/04/development-environment-for-windows/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。</p>
+
+<h2>Chocolatey</h2>
+
+<p>Windowsでのパッケージ管理。不可欠かというとそうでもないとは思うのだが、アップデート含め一括管理が可能なので、精神衛生上良さそうだという意味で使ってみている。どうでもいいが名前がかわいい。</p>
+
+<p>インストール自体はPowershellからワンライナーを叩くだけなので難しくはないのだが、よくわからないエラーで止まることが多くて、現状使い切れてない。Proxyの設定はしたし、powershellの権限も<code>RemoteSigned</code>にしたのだけど、何がいけないのか。。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Unable to index into an object of type System.IO.FileInfo.
+</span><span class='line'> 発生場所 C:\ProgramData\chocolatey\helpers\functions\Write-ChocolateyFailure.ps
+</span><span class='line'> 1:24 文字:8
+</span><span class='line'> +   throw &lt;&lt;&lt;&lt;  "$failureMessage"
+</span><span class='line'>     + CategoryInfo          : OperationStopped: (Unable to index...em.IO.FileI
+</span><span class='line'>    nfo.:String) []、RuntimeException
+</span><span class='line'>     + FullyQualifiedErrorId : Unable to index into an object of type System.IO
+</span><span class='line'>    .FileInfo.
+</span><span class='line'>The install of clover was NOT successful.
+</span><span class='line'>Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstall.ps1'.
+</span><span class='line'> See log for details.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>参考</h3>
+
+<p><a href="http://qiita.com/himinato/items/11f4dc9a23afebbc242c">windowsの開発環境は一瞬で整うwith chocolatey - Qiita</a></p>
+
+<h2>コンソール</h2>
+
+<p>cmdだと貧弱貧弱ゥ！なので、とか、bashコマンド試し打ちしたい場合が多いとか、そういう理由でコンソールは入れ直す。</p>
+
+<p>Gitを入れると自動的にGit bashが入るので、コマンド環境としてはこれを使っている。ターミナルアプリは最近ちょっと話題になっていたのでConEmuを入れてみた。もちろんChocolateyで。</p>
+
+<ul>
+<li>Font charsetを「Shiftjis」に設定</li>
+<li>フォントは<a href="http://github.com/yascentur/RictyDiminished">Ricty Diminished</a>を利用</li>
+<li>lsで日本語が化けるので<code>~/.bashrc</code>に<code>alias ls='ls --show-control-chars --colors'</code>を設定</li>
+</ul>
+
+
+<h3>参考</h3>
+
+<p><a href="http://astra.digi2.jp/a/e/setup-conemu-as-japanese-cmd.html">ConEmuの初期設定(日本語表示環境を構築) - Diary on wind @astra.dat</a>
+<a href="http://qiita.com/ironsand/items/ec0675644a55a69855d6">Ruby - 【無理】WindowsのコンソールでUnicodeを使いたい - Qiita</a></p>
+
+<p>Windowsで開発する場合の最大のネックは、CLIの貧弱さ以上にcp932にあると思うの。</p>
+
+<h2>AutoHotkey</h2>
+
+<p>キーバインド変えたいことが多いので愛用。とりあえず<code>&lt;ESC&gt;</code>と間違えて隣の<code>F1</code>押してヘルプ出てしまうことが多いので、<code>F1</code>は潰している。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='autohotkey'><span class='line'><span class="nl">F1::</span><span class="n">Return</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとOutlookの使い勝手があまり好きではないので、配布されていたGmailライクなキーバインドを実現する設定を使わせていただいている。しかしOutlook2013、差出人名の表示がやたらでかかったり、フォルダのツリー表示が文字だけ（アイコンとかツリーを表す罫線がない）になっていて見づらかったり、UI面で難がありすぎる。。。</p>
+
+<h3>参考</h3>
+
+<p><a href="http://www.autohotkey.com/board/topic/102227-gmailkeys-for-outlook-2013/">GmailKeys for Outlook 2013 - Scripts and Functions - AutoHotkey Community</a></p>
+
+<h2>メモアプリ</h2>
+
+<p>技術的なことをやってるとどうしてもメモを取る必要性が出てくるのだが、いろんなところに書き散らしていると後から見返せないのでそれなりの整理はしておきたいと常々思う。</p>
+
+<p>元々は自宅だとDropbox + QFixHowm(Vim)、会社だと（あまり技術的な話が多くなかったので＆クラウド系アプリは使えなかったので）別個の環境で同様にQFixHowmを使っていたのだが、比較的技術的なノウハウをとりためることも増えたので、可能なら自宅からも参照できるメモ環境を会社でも作りたいなと思い直している。</p>
+
+<p>個人的に理想としているのはこんな感じ。</p>
+
+<ul>
+<li>クラウド同期が取れる、可能ならDropboxがいい</li>
+<li>全文検索ができる</li>
+<li>（可能なら）vimキーバインドが使える</li>
+<li>（可能なら）Markdownプレビューができる</li>
+</ul>
+
+
+<p>いろいろ検証はしてみたが、どれもしっくり来ていない。なんかないものか。</p>
+
+<h3>Kobito</h3>
+
+<ul>
+<li>Markdownエディタとしては優秀。ハイライトも綺麗。</li>
+<li>vimモードがあってそこそこ快適。若干表示がズレることがあるが、設定いじれば修正は可能かも。</li>
+<li>クラウド同期はできない。あとファイル実体見れないのがなんとなく気持ち悪い。</li>
+</ul>
+
+
+<h3>Evernote</h3>
+
+<ul>
+<li>Markdownエディタとしては論外。</li>
+<li>アカウントは持っているが、すでにプライベートメモがどっさり入ってるので会社で開きにくい。</li>
+</ul>
+
+
+<h3>GistBox</h3>
+
+<ul>
+<li>Markdownエディタではないし、フォーム入力なので編集は貧弱。</li>
+<li>GitHub経由で同期取れる点は魅力。</li>
+<li>Gistはスニペット置き場のイメージが強く、文章の保存はしっくりこない。</li>
+</ul>
+
+
+<h3>Wri.pe</h3>
+
+<ul>
+<li>今のところ最良と思われる。</li>
+<li>フォーム入力型の編集にはなってしまうが、<a href="https://github.com/akahuku/wasavi">Wasavi</a>使うことでVimっぽくできる。</li>
+<li>ログインすれば自宅からでもメモは見られるので一応同期可能。</li>
+<li>Dropbox連携はあるが、あくまでバックアップをzipでストックさせるだけなので、家ではVimで編集します、とかはスムーズにできなくて微妙。</li>
+</ul>
+
+
+<h3>Cirrus Editor</h3>
+
+<ul>
+<li>Dropbox内のtxtファイルをブラウザで直接編集できるのは今のところこれぐらいしか見つからない。</li>
+<li>新規ファイルの追加ができないので、メモ環境としては使えない。</li>
+</ul>
+
+
+<p>ひとまずWri.pe使ってますけどだいぶ辛さあります。今日日はやっぱりKobito使ってるエンジニアが多いんだろうか。あるいはメモなんていらない？ うーん。。。</p>
+
+<p><strong>……と思ってたらWasaviがDropbox連携機能もってた！！！</strong></p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fappsweets.net%2Fwasavi%2F" title="wasavi - appsweets akahuku labs." style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://appsweets.net/wasavi/" target="_blank">wasavi - appsweets akahuku labs.</a></iframe>
+
+
+<ul>
+<li>連携すると<code>:write</code>や<code>:edit</code>がWasavi上で使えるようになる。
+
+<ul>
+<li>つまりWri.peをWasaviで編集していて、Dropboxにツッコみたくなったら<code>:write hoge.txt</code>すればよい。</li>
+<li>逆にDropboxのテキストをWri.peに持ってきたければ<code>:edit fuga.txt</code>とすればよい。</li>
+</ul>
+</li>
+<li>さらに<code>http://qasavi.appsweets.net</code>につなぐと単独でWasaviをブラウザエディタとして使える。Dropboxのオンラインエディタになる。</li>
+</ul>
+
+
+<p>ヤバイだろうこれ。。。highlightはさすがに無理とか、Dropbox使えると言っても<code>ls</code>は使えないのでファイラとしては微妙とか、そういうのはもろもろあるとは言え、Dropboxのファイルを直接ブラウザ上でVimライクな編集できるってのは恐ろしく便利。単なるVimのエミュレートに留まらず、ブラウザとDropboxのシームレスな連携ができるという点が肝だと思う。Dropboxで書きためていたブログの下書きを、はてなブログの編集画面上で直接呼び出すこともできるわけだ。ちなみにGoogle DriveとOne Note連携もあるので、そちらがお好みであればそちらでも。</p>
+
+<p>これまでぜんぜん見たこともないソフトだったけど、これだいぶいいものなのでは？？？</p>
+
+<h2>その他アプリケーション</h2>
+
+<ul>
+<li><a href="http://www.forest.impress.co.jp/library/software/clover/">Clover</a> エクスプローラーのタブ化</li>
+<li>chrome全盛になりつつある気はするが、Vimp使いたくてFirefox</li>
+<li>VirtualBoxにVagrantはもはや定番</li>
+<li>Outlookの予定表使いづらすぎて辛いんだけど、Exchangeと同期できるアプリでなんか良い代替ないッスか。。。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/03/how-about-your-troubleshooting/">すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T00:20:52+09:00'><span class='date'>2015-07-03 (Fri)</span> <span class='time'>12:20 am</span></time>
+        
+         | <a href="/blog/2015/07/03/how-about-your-troubleshooting/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
+
+<p>改めて見るとすげー名前のイベント……行ってきた。</p>
+
+<p>障害対応は嫌いです。ていうか好きな人がいるならお目にかかってみたいもんですが、しかしシステムを動かす以上障害は避けられないし、それならばなるべく負担を軽減したいというのが人の、いやエンジニアの性。つわけでよりよいソリューションを探す目的で行ってきたイベントだったんですが、結局のところ <strong>より深い闇を知るだけの結果に終わった。</strong></p>
+
+<p>世の中闇だらけですわ。闇しかないですわ。自分なんかぜんぜん甘いなっていうか闇とすら呼べないんじゃないかっていう。詳しくは書けませんけど世の中運用者って苦労してんなって認識新たにしました。まぁだからって闇を甘受していいわけじゃなくて、だからこそやることあるんだけどさ。</p>
+
+<p>得た知見をザクっとまとめちゃいますけど、</p>
+
+<ul>
+<li>明文化と記録は何事も大事。顧客との契約にせよ、手順や構成にせよ、障害記録にせよ。</li>
+<li>ただ記録するんじゃなくて探しやすいようにとか考えないと意味ない(Wikiに書き散らしても役には立たない)</li>
+<li>日頃からの点検などによる障害の抑止も重要。障害訓練とか。</li>
+<li>スーパーエンジニアだから治せるって状態は脱したいのでスキルの底上げは必要。</li>
+<li>電話かかってくるのウザいけど必要。確実に対応しなきゃならない障害なら絶対電話。別にTwilioとかでいいので。</li>
+</ul>
+
+
+<p>障害対応って辛くないはずはないのだが、だったらより辛くない方法を探さねばなと思う。アラートの対象は極力絞ったり、自動復旧でイケる事象はスクリプト組んでおいたり。</p>
+
+<p>あと自分はもともと金融系SEで、運用に用いてたのもJP1やTivoliみたいな商用製品が多かった故、会場で交聞いたnagiosやらcactiやらCloudWatchやらを学ばねばというところ。顧客とビジネスモデルが変わっただけで、見える技術領域もほんとに変わるものだと思う。</p>
+
+<p>こういうopsやインフラに絞ったイベント、なかなかない気がするので良いですね。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/4">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/2">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - chroju -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nointention';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
