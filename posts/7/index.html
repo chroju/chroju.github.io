@@ -9,15 +9,14 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="パーフェクトRuby p.144より。 判定系メソッド、#nonzeroが#zeroの真逆の動きではなくてちょっと混乱しそう。あと#integer?はあるけど#float?はないとか。 1
+  <meta name="description" content="『パーフェクトRuby』p.171より。 まずは配列の生成をいくつか。#new(a,b)で生成したとき、各要素は同じオブジェクトとなるので注意。またブロックで受け取ると、インデックスを引数としてブロック内の処理を実行した結果が値となる。 1
 2
 3
 4
 5
 6
 7
-0.zero? # =&gt; true
-3.zero? # =&gt; false &hellip;">
+a1 = Array.new(3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://chroju.github.io//posts/7">
+  <link rel="canonical" href="http://chroju.github.io/posts/7">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
@@ -101,7 +100,7 @@
     
       <form action="https://www.google.com/search" method="get">
         <fieldset role="search">
-          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+          <input type="hidden" name="sitesearch" value="chroju.github.io" />
     
           <input class="search" type="text" name="q" results="0" placeholder="Search"/>
         </fieldset>
@@ -118,6 +117,589 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/18/study-ruby-array/">Ruby基礎復習(5) 配列(Array)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-18T23:18:39+09:00'><span class='date'>2015-03-18 (Wed)</span> <span class='time'>11:18 pm</span></time>
+        
+         | <a href="/blog/2015/03/18/study-ruby-array/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『パーフェクトRuby』p.171より。</p>
+
+<p>まずは配列の生成をいくつか。<code>#new(a,b)</code>で生成したとき、各要素は同じオブジェクトとなるので注意。またブロックで受け取ると、インデックスを引数としてブロック内の処理を実行した結果が値となる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a1</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># =&gt; [1, 1, 1]</span>
+</span><span class='line'><span class="n">a2</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;hoge&quot;</span><span class="p">)</span> <span class="c1"># =&gt; [&quot;hoge&quot;, &quot;hoge&quot;, &quot;hoge&quot;]</span>
+</span><span class='line'><span class="n">a3</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;hoge&quot;</span><span class="p">,</span> <span class="s2">&quot;fuga&quot;</span><span class="p">,</span> <span class="s2">&quot;piyo&quot;</span><span class="o">]</span> <span class="c1"># =&gt; [&quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;]</span>
+</span><span class='line'><span class="n">a4</span> <span class="o">=</span> <span class="nb">Array</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">}</span> <span class="c1"># =&gt; [0, 5, 10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a2</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;fuga&quot;</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">a2</span> <span class="c1"># =&gt; [&quot;hogefuga&quot;, &quot;hogefuga&quot;, &quot;hogefuga&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>基本的な操作系メソッド。演算子メソッドは直感的でほんといいなーと思う。なお、<code>#&lt;&lt;</code>は<code>#concat</code>と同義。<code>#==</code>と<code>#eql?</code>も同義。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;hoge&quot;</span><span class="p">,</span> <span class="s2">&quot;fuga&quot;</span><span class="p">,</span> <span class="s2">&quot;piyo&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">length</span> <span class="c1"># =&gt; 3</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">size</span> <span class="c1"># =&gt; 3</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">empty?</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;fuga&quot;</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1"># =&gt; [&quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;, &quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;, &quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="o">+</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span> <span class="c1"># =&gt; [&quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;, 1, 2]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="o">-</span> <span class="o">[</span><span class="s2">&quot;hoge&quot;</span><span class="p">,</span> <span class="s2">&quot;piyo&quot;</span><span class="o">]</span> <span class="c1"># =&gt; [&quot;fuga&quot;]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="o">&amp;</span> <span class="o">[</span><span class="s2">&quot;piyo&quot;</span><span class="o">]</span> <span class="c1"># =&gt; [&quot;piyo&quot;]</span>
+</span><span class='line'><span class="n">array</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;hogehoge&quot;</span> <span class="c1"># =&gt; [&quot;hoge&quot;, &quot;fuga&quot;, &quot;piyo&quot;, &quot;hogehoge&quot;]</span>
+</span><span class='line'><span class="n">array2</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;hoge&quot;</span><span class="p">,</span> <span class="s2">&quot;fuga&quot;</span><span class="p">,</span> <span class="s2">&quot;piyo&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="n">array3</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;hoge&quot;</span><span class="p">,</span> <span class="s2">&quot;fuga&quot;</span><span class="p">,</span> <span class="s2">&quot;piyo&quot;</span><span class="p">,</span> <span class="s2">&quot;hogehoge&quot;</span><span class="o">]</span>
+</span><span class='line'><span class="n">array</span> <span class="o">==</span> <span class="n">array2</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'><span class="n">array</span> <span class="o">==</span> <span class="n">array3</span> <span class="c1"># =&gt; true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要素の取り出し。<code>#[a, b]</code>が添字aから長さbの配列を取り出すのに対し、<code>#values_at(a, b)</code>が添字a, bの要素を取り出して配列を作る、という点が異なるのが注意かも。</p>
+
+<p>また範囲外の添字を指定したときの振る舞いだが、<code>#[]</code>がnilを返すのに対し、第一引数のみの<code>#fetch</code>はIndexErrorを返す。<code>#fetch</code>に第二引数を指定すると、範囲外を呼び出したときに第二引数を返すようになる。</p>
+
+<p><code>#sample</code>はランダム抽出。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="c1"># =&gt; 2</span>
+</span><span class='line'><span class="n">array</span><span class="o">[-</span><span class="mi">1</span><span class="o">]</span> <span class="c1"># =&gt; 5</span>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span> <span class="c1"># =&gt; [2, 3, 4]</span>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">2</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="o">]</span> <span class="c1"># =&gt; [3, 4, 5]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">values_at</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># =&gt; 4</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">values_at</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># =&gt; [1, 4, 5]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># =&gt; IndexError</span>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="c1"># =&gt; nil</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="c1"># =&gt; &quot;error&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">first</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">last</span> <span class="c1"># =&gt; 5</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># =&gt; [4, 5]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">sample</span> <span class="c1"># =&gt; 3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要素の追加削除。添字を使って普通に要素の入れ替えはできるのだが、面白いのはレンジにない添字を指定してもOutOfBounds扱いにはならず、足りない箇所はnilを埋めて補完してくれること。<code>#insert</code>は第一引数をインデックスとする要素の直前に、第二引数以降の要素を挿入する。あと<code>#fill</code>は全要素を同じオブジェクトで埋め込む。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># =&gt; [1, 0, 3, 4, 5]</span>
+</span><span class='line'><span class="n">array</span><span class="o">[</span><span class="mi">8</span><span class="o">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10, 3]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">pop</span> <span class="c1"># =&gt; 3</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">shift</span> <span class="c1"># =&gt; [0, 3, 4, 5, nil, nil, nil, 10]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">unshift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span> <span class="c1"># =&gt; [1, 0, &quot;a&quot;, &quot;b&quot;, 3, 4, 5, nil, nil, nil, 10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># =&gt; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">clear</span> <span class="c1"># =&gt; []</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; []</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要素の選択周り。ブロック内の処理でtrueとなった要素について、<code>#select</code>では抽出、<code>#reject</code>では削除を行う。いずれも破壊的／非破壊的の別があり。<code>#keep_if</code>は<code>#select!</code>と同様の動作をするが、削除する要素がなかった場合に<code>#select!</code>がnilを返す一方で、<code>#keep_if</code>がレシーバをそのまま返すという違いがある。<code>#delete_if</code>についても同様。ブロック内での評価ではなく、単純に特定の値と等しい要素を削除したい場合は<code>#delete</code>が使える。これは破壊的。<code>#delete_at</code>は添字による指定で削除する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; [2, 4]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; [1, 2, 3, 4, 5]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; [2, 4]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; [2, 4]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; [1, 3, 5]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; [1, 2, 3, 4, 5]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">reject!</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; [1, 3, 5]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">array</span> <span class="c1"># =&gt; [1, 3, 5]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="o">]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">select!</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; nil</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">keep_if</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span> <span class="c1"># =&gt; [2, 4, 6]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">reject!</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span> <span class="c1"># =&gt; nil</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span> <span class="c1"># =&gt; [2, 4, 6]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">delete</span> <span class="mi">4</span> <span class="c1"># =&gt; [2, 6]</span>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">delete_at</span> <span class="mi">1</span> <span class="c1"># =&gt; [2]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>同様に要素の切り出しでは<code>#slice</code>というメソッドもあるが、引数の与え方で動作が変わってくる。Integerの引数1つを与えると、そのインデックスにある要素を返す。範囲外の場合はnilが返る。Integerの引数2つでは、第一引数のインデックスより、第二引数の個数分要素を切り出して返す。Rangeを引数とすると、その範囲のインデックスにあたる要素を返す。</p>
+
+<p>またいずれの場合でも<code>!</code>による破壊的メソッドがあるが、ここでは戻り値となる要素が配列より削除される。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="o">]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># =&gt; 4</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># =&gt; [4, 6, 9]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># =&gt; [4, 6]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># =&gt; 6</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">a</span> <span class="c1"># =&gt; [2, 4, 9]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># =&gt; [2, 4]</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">a</span> <span class="c1"># =&gt; [9]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>整形。<code>#compact</code>はnilを要素から除外する。<code>#uniq</code>は重複した要素を除外。<code>#reverse</code>は要素の順序を逆にする。<code>#flatten</code>は多次元配列を1次元に変換する。いずれも<code>!</code>を付けることで破壊的になる。また<code>#sort!</code>や<code>#map!</code>といった破壊的要素を使うことで、実行結果により自身を更新できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">]]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">compact!</span> <span class="c1"># =&gt; [5, 3, 3, 9, 1, [4, 3]]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">uniq!</span> <span class="c1"># =&gt; [5, 3, 9, 1, [4, 3]]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">reverse!</span> <span class="c1"># =&gt; [[4, 3], 1, 9, 3, 5]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">flatten!</span> <span class="c1"># =&gt; [4, 3, 1, 9, 3, 5]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">sort!</span> <span class="c1"># =&gt; [1, 3, 3, 4, 5, 7, 9]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">map!</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">}</span> <span class="c1"># =&gt; [2, 6, 6, 8, 10, 14, 18]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>複製。<code>#dup</code>は内容のみを複製する（浅いコピー）のに対し、<code>#clone</code>はfrozen等の情報も複製する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">].</span><span class="n">freeze</span>
+</span><span class='line'><span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># =&gt; RuntimeError</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span>
+</span><span class='line'><span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># =&gt; [5, 2, 3]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">clone</span>
+</span><span class='line'><span class="n">c</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># =&gt; RuntimeError</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若干変わったものを最後にいくつか。<code>#transpose</code>は多次元配列を行列とみなして、行と列の入れ替えを行う。破壊的メソッドはない。<code>#bsearch</code>はソートされている配列に対して使用し、二分探索で最初に見つかった要素を返す。<code>#join</code>は各要素を連結した値を返す。引数にセパレータを渡すことも可。<code>#shuffle</code>は配列をランダムにシャッフルする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">]]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transpose</span> <span class="c1"># =&gt; [[1, 3], [2, 4]]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="o">]</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">bsearch</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="p">}</span> <span class="c1"># =&gt; 3</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">join</span> <span class="c1"># =&gt; &quot;03579&quot;</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span> <span class="c1"># =&gt; &quot;0-3-5-7-9&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">shuffle!</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">a</span> <span class="c1"># =&gt; [5, 9, 0, 3, 7]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/17/study-ruby-enumerable-comparable/">Ruby基礎復習(4) EnumerableとComparable</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-17T21:55:27+09:00'><span class='date'>2015-03-17 (Tue)</span> <span class='time'>9:55 pm</span></time>
+        
+         | <a href="/blog/2015/03/17/study-ruby-enumerable-comparable/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『パーフェクトRuby』p.164より。</p>
+
+<p>一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされている。前者は聞き慣れない英単語だが、&#8221;can be counted&#8221;の意味らしく、HashやArrayといった一定の集合を表すクラスにincludeされていて、繰り返し処理や要素抽出に関するメソッドを実装する。Comparableはその名の通り比較演算、具体的には<code>#&lt;=&gt;</code>の実装であり、NumericやStringにincludeされているらしい。</p>
+
+<p>特に実装されるメソッド数が多いので、Enumerableについてじっくり見てみたい。</p>
+
+<h2>Enumerable</h2>
+
+<p>まず繰り返し系。これだけでもかなり。。<code>#each_cons</code>のconsって何の意味ですかね。他はだいたい字義からイメージできる動作をしてくれる。あと<code>#each_with_object</code>がいまいち飲み込めてない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span> <span class="mi">2</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="o">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; [1,2] [2,3] [3,4]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">each_slice</span> <span class="mi">2</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="o">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; [1,2] [3,4]</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">%(hoge fuga piyo)</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">value</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; 0: hoge 1: fuga 2: piyo</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">each_with_object</span><span class="p">(</span><span class="o">[]</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">result</span><span class="o">|</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span> <span class="c1"># =&gt; [2,4,6,8]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reverse_each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="n">i</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; 4,3,2,1</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">cycle</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="nb">p</span> <span class="n">i</span><span class="p">}</span> <span class="c1"># =&gt; 1,2,3,4,1,2... 以下、無限ループ</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>各要素の評価には<code>#map</code>と<code>#collect</code>。いずれも同じ動作。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span><span class="p">}</span> <span class="c1"># =&gt; [3, 6, 9, 12]</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span><span class="p">}</span> <span class="c1"># =&gt; [3, 6, 9, 12]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>判定系。<code>#member?</code>と<code>include?</code>は同義。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">all?</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">}</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">any?</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">}</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">none?</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">}</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">one?</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">}</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">%w(hoge fuga piyo)</span><span class="o">.</span><span class="n">member?</span> <span class="s2">&quot;fuga&quot;</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="sx">%w(hoge fuga piyo)</span><span class="o">.</span><span class="n">include?</span> <span class="s2">&quot;fuga&quot;</span> <span class="c1"># =&gt; true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>抽出系。覚えやすいことにgrepがある。<code>#detect</code>は条件に当てはまる最初の要素だけ、<code>#select</code>はすべてを抽出する。<code>#find_all</code>は<code>#select</code>と同義。<code>#reject</code>は<code>#select</code>といわば「逆」の動きをする。<code>#take</code>と<code>#drop</code>は要素数を指定して先頭から要素抽出orスキップする。あとは語義通りのメソッドがいくつか。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="sx">%w(hoge fuga piyo)</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/o/i</span><span class="p">)</span> <span class="c1"># =&gt; &quot;hoge&quot;, &quot;piyo&quot;</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;hoge&quot;</span><span class="o">].</span><span class="n">grep</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span> <span class="c1"># =&gt; &quot;hoge&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; 2</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">select</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; 2, 4</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">find_all</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; 2, 4</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">reject</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; 1, 3</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">find_index</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">take</span> <span class="mi">3</span> <span class="c1"># =&gt; [1,2,3]</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span> <span class="mi">3</span> <span class="c1"># =&gt; [4,5,6,7,8,9,10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">take_while</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">}</span> <span class="c1"># =&gt; [1,2]</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">drop_while</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">}</span> <span class="c1"># =&gt; [3,4,5,6,7,8,9,10]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">max</span> <span class="c1"># =&gt; 10</span>
+</span><span class='line'><span class="sx">%(aaa bbbb ccccc)</span><span class="o">.</span><span class="n">max_by</span> <span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="o">.</span><span class="n">length</span><span class="p">}</span> <span class="c1"># =&gt; &quot;ccccc&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">min</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="sx">%(aaa bbbb ccccc)</span><span class="o">.</span><span class="n">min_by</span> <span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="o">.</span><span class="n">length</span><span class="p">}</span> <span class="c1"># =&gt; &quot;aaa&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">minmax</span> <span class="c1"># =&gt; [1,10]</span>
+</span><span class='line'><span class="sx">%(aaa bbbb ccccc)</span><span class="o">.</span><span class="n">minmax_by</span> <span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="o">.</span><span class="n">length</span><span class="p">}</span> <span class="c1"># =&gt; [&quot;aaa&quot;, &quot;ccccc&quot;]</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">first</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">count</span> <span class="c1"># =&gt; 10</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># =&gt; 1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>#inject</code>を使うと全要素を総計するような処理ができる。これを「畳み込み演算」と呼ぶらしい。引数2つを必要とするブロックを受け取り、第一引数が直前のループでの演算結果を持ち、第二引数がその回のループでの要素を取る。あるいはブロックを取らず、<code>#inject</code>の引数にシンボルでメソッド名を渡すことで、全要素に対してそのメソッドを適用した結果を得られる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span> <span class="p">{</span><span class="o">|</span><span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="n">result</span> <span class="o">+</span> <span class="n">i</span><span class="p">}</span> <span class="c1"># =&gt; 15</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="n">result</span> <span class="o">+</span> <span class="n">i</span><span class="p">}</span> <span class="c1"># =&gt; 25</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="c1"># =&gt; 15</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="ss">:*</span><span class="p">)</span> <span class="c1"># =&gt; 120</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>グルーピング。<code>#group_by</code>はブロックで評価した戻り値をキーとしたハッシュに要素をグルーピングしてくれる。<code>#partition</code>はブロックで評価した真偽値を元に配列でグルーピング。後者の方が使い勝手は良さそうではある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">group_by</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="p">}</span> <span class="c1"># =&gt; {0=&gt;[3,6], 1=&gt;[1,4], 2=&gt;[2,5]}</span>
+</span><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">partition</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">.</span><span class="n">even?</span><span class="p">}</span> <span class="c1"># =&gt; [[1,3,5], [2,4,6]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一番意味がわからない<code>#zip</code>。selfと引数の配列で、同じ添字にあたる要素を使って新しい配列を生成する。どう使うんだろうこれ。。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="o">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="o">]</span><span class="p">)</span> <span class="c1"># =&gt; [1,4,7], [2,5,8], [3,6,9]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Comparableとソート</h2>
+
+<p>個人的に苦手なのがこの宇宙船演算子とソート周り。まず大前提として、宇宙船演算子はレシーバと引数を比較し、レシーバが大きければ1、小さければ-1、同値であれば0を返す。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">2</span> <span class="c1"># =&gt; -1</span>
+</span><span class='line'><span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">0</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">1</span> <span class="c1"># =&gt; 0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Comparableモジュールをincludeしたクラスで<code>#&lt;=&gt;</code>を定義すると、各種演算子による比較のルールを定めることができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Comparable</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:age</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">&lt;=&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">age</span> <span class="o">&lt;=&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">taro</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+</span><span class='line'><span class="n">hanako</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">taro</span> <span class="o">&gt;</span> <span class="n">hanako</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="n">taro</span> <span class="o">==</span> <span class="n">hanako</span> <span class="c1"># =&gt; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、Enumerableの<code>#sort</code>は要素を宇宙船演算子で比較して結果が正になるよう並び替えていく。要は昇順がデフォルト。ブロックに引き渡すこともでき、ここで任意の比較方法を定義してソートすることもできる。<code>#sort_by</code>を使えば宇宙船演算子を使わず、指定のメソッドを使って昇順に並び替えてくれる。メソッド呼び出し回数が<code>#sort_by</code>だと1回で済むので、実行速度の面で差が出る可能性がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">takeshi</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</span><span class='line'><span class="n">people</span> <span class="o">=</span> <span class="o">[</span><span class="n">hanako</span><span class="p">,</span> <span class="n">taro</span><span class="p">,</span> <span class="n">takeshi</span><span class="o">]</span>
+</span><span class='line'><span class="n">people</span><span class="o">.</span><span class="n">sort</span> <span class="c1"># =&gt; [taro, takeshi, hanako]</span>
+</span><span class='line'><span class="n">people</span><span class="o">.</span><span class="n">sort</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">b</span> <span class="o">&lt;=&gt;</span> <span class="n">a</span><span class="p">}</span> <span class="c1"># =&gt; [hanako, takeshi, taro]</span>
+</span><span class='line'><span class="n">people</span><span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span><span class="o">|</span><span class="n">person</span><span class="o">|</span> <span class="n">person</span><span class="o">.</span><span class="n">age</span><span class="p">}</span> <span class="c1"># =&gt; [taro, takeshi, hanako]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>なお、意図的に飛ばしてしまったのだが、あと触れてないEnumerableのメソッドとして<code>#chunk</code>周りがある。ちょっと飲み込みきれてないのでまた次回。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://jutememo.blogspot.jp/2008/03/ruby-2-enumerable.html">Ruby のイテレータ (2) – Enumerable と Comparable モジュール | すぐに忘れる脳みそのためのメモ</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -667,191 +1249,6 @@
 
 
 <p>まーぶっっちゃけ全部だな。。。。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/07/book-review-time-management-for-engineer/">『エンジニアのための時間管理術』読了</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-07T23:43:38+09:00'><span class='date'>2015-03-07 (Sat)</span> <span class='time'>11:43 pm</span></time>
-        
-         | <a href="/blog/2015/03/07/book-review-time-management-for-engineer/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51jWtxU0sAL._SL160_.jpg" alt="エンジニアのための時間管理術" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">エンジニアのための時間管理術</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.07</div></div><div class="amazlet-detail">Thomas A. Limoncelli <br />オライリー・ジャパン <br />売り上げランキング: 12,858<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<p>先日のデブサミでオライリーの書籍販売があったわけですけど、5000円以上購入でトートバッグプレゼントというのに釣られて買った1冊です。本当は2冊で5000円届くはずだったんだけど、そのときはディスカウントがあったばかりに5000円に届かず3冊という、得したんだか買いすぎちゃったんだかよくわからない感じでした。まぁ、前々から気になって立ち読みしまくってた1冊なので、買うきっかけくれたことには感謝。</p>
-
-<p>内容はGTDとか散々やってきてる自分にとってそれほど新鮮味のあるものではありませんでした。煩わしいタイムマネジメントに関することは全部頭の中から放り出して、その日のタスク、スケジュール、目標なんかはひとつの場所にまとめておこうねっていうのが全体の趣旨です。あとはエンジニアならではなのかな？と思えることとして、手順の文書化の話だったり、スクリプトによる雑事の自動化周りの話がちょっぴり載ってたりはします。</p>
-
-<p>本書内ではタイムマネジメントに使う媒体（デジタルでもアナログでもなんでもいいけど、とりあえず何かしら「1か所」にまとめる）のことをオーガナイザーと読んでいるのですが、そこに書くことは大きく3つあり、1つは365日のタスク。GTDをはじめ、よく聞かれるタスク管理法だと「やるべきこと」は全部1つのリストにドバっと書き出していることが多いわけだけど、本書ではそういう「永遠に終わらないリスト」は「破滅のリスト」と呼んで回避するよう告げている。タスクリストを1日分でクローズドにすることで、その日にやったことを明示的にリスト内で「潰せる」ようにし、達成感を味わえるようにした方がよいと。2つ目はカレンダー。日時の決まった予定だとか、繰り返しのルーチンはカレンダーに書いちゃった方が早い。3つ目が長期的な目標。月単位や年単位の長いスパンで何を実現したいのか？を書き出しておく。その手順は細かく分割した上で、365日のタスクリストや、カレンダー上に載ることになる。そして目標リストは定期的に見直して、更新していく。</p>
-
-<p>自分が今やってることとこれ、わりとよく似ていて。自分の場合、スケジュールがGoogle Calendarで、タスクリストはAny.do。以前todo.txtを使っているという記事を書いたこともあるのだけど、最近乗り換えてしまった。なぜかと言うとスマホアプリのCalを使うと、1日のGCal上の予定とAny.doのタスクがまとめて見られてすんごい楽だから。</p>
-
-<div id="appreach-box" style="text-align:left;">
-    <img id="appreach-image" src="http://a512.phobos.apple.com/us/r30/Purple6/v4/78/bb/1d/78bb1d61-0262-76c4-2edb-f421111365d4/mzl.fxvayqgf.png" alt="Cal – Calendar for iCloud, Google &amp;amp; Exchange" style="float:left; margin:10px; width:25%; max-width:120px; border-radius:10%;" pagespeed_url_hash="248610482">
-    <div class="appreach-info" style="margin: 10px;">
-      <div id="appreach-appname">Cal – Calendar for iCloud, Google &amp; Exchange</div>
-      <div id="appreach-developer" style="font-size:80%; display:inline-block; _display:inline;">
-        開発元:<a id="appreach-developerurl" href="https://itunes.apple.com/jp/artist/halo-inc./id499497834?uo=4" target="_blank" rel="nofollow">Any.DO</a>
-      </div>
-      <div id="appreach-price" style="font-size:80%; display:inline-block; _display:inline;">無料</div>
-      <div class="appreach-powered" style="font-size:80%; display:inline-block; _display:inline;">
-        posted with <a href="http://appreach.t-tu.com/" title="アプリーチ" target="_blank" rel="nofollow">アプリーチ</a>
-      </div>
-      <br>
-      <div class="appreach-links" style="float:left;">
-        <div id="appreach-itunes-link" style="display: inline-block; _display: inline;">
-          <a id="appreach-itunes" href="https://itunes.apple.com/jp/app/cal-calendar-for-icloud-google/id648287824?mt=8&amp;uo=4&amp;at=11lHd9" target="_blank" rel="nofollow">
-           <img src="http://appreach.t-tu.com/img/itune_en.png.pagespeed.ce.8asOsm0ta-.png" style="height:40px;" pagespeed_url_hash="1074815294">
-          </a>
-        </div>
-        <div id="appreach-gplay-link" style="display:inline-block; _display:inline;">
-          <a id="appreach-gplay" href="https://play.google.com/store/apps/details?id=com.anydo.cal" target="_blank" rel="nofollow">
-           <img src="http://appreach.t-tu.com/img/gplay_en.png.pagespeed.ce.1AAXzseXga.png" style="height:40px;" pagespeed_url_hash="45329112">
-           </a>
-        </div>
-      </div>
-    </div>
-    <div class="appreach-footer" style="margin-bottom:10px; clear: left;"></div>
-  </div>
-
-
-<p>GTDが唄うような「すべてのタスクが網羅されたリスト」ってのはあまりに雑多で自分も嫌いで、なのでAny.doの中身は週に一度見直して、その週にやることを「TODAY」として扱うようにしている。日次リストが本当は理想なのだろうけど、残業も少なくない中で日次でできるタスクなんざたかが知れているので週次がちょうどいい。今日できなくても明日やればいい、みたいな調整もわりと楽に出来るし。</p>
-
-<p>長期的なやりたいこととか取り組んでいることはプレーンテキストで残している。タスク管理アプリのカテゴリー機能などを使う人も多いようだけど、長期的な取り組みはだいたいがその途上で疑問が湧いてきたり、参考URLなぞを書きたくなるもので。だから柔軟なフォーマットで記録しておきたいなという思いが強く、今はプレーンテキストを使っている。</p>
-
-<p>だいたいこれで上手く回ってるかなーと思ってはいるのだが、気にかかっていることが2つだけある。1つはルーチンの扱い。そのほとんどが家事ではあるのだが、定期的にやらなきゃならんことって案外多くて、Google calendarに全部記録するとなかなかにとんでもない量になって嫌気が差す。かといって他のリストを使うというのもあまり効率的には思えないので、現状は「日次タスク」というような大きな予定枠を取っておき、メモ欄にその内容を細かに書く、といった運用になっている。もうちょっとスマートにならぬものか。あとルーチンって定期的に決まったタイミングでやるもののみならず、普段はやらないけどたまに思い出さなくちゃならないよね！みたいなものもあって、そういうのまで「決まった日時に繰り返す」としてカレンダーに入れちゃうとちょっとしんどいなぁと思える。でも、そうした方が忘れずに済むのだろうなぁとも思うから、なるたけ割り切るようにしている。</p>
-
-<p>もう1つ気にかかっているのは、クローズしたタスクや、長期的な取り組みの進捗はきちんと記録を残したいなということ。例えるなら<a href="http://shigotano.info/mbr/taskchute2/paypal.php">TaskChute</a>。自分はこれを仕事で使っているのだが、完了したタスクは取り消し線を引いた上できちんと残るようになってて、今週どのPJに多くの時間を割いたのかとか、そういやあのタスクいつやったっけ、みたいなのを後から振り返れるようになっている。これをAny.doや、プレーンテキストによる長期タスク管理の中でも回したい。進んでいる感覚を持ちたい。暫定的には週次レビューでタスクの棚卸しをするとき、その週のやったことリストを残すことで運用している。自分が何かをやったんだ、前に進んでいるんだという実感を持つことはすごく大事。なんとなく頭の中がもやっとしてるときに、達成記録を読むとちょっとホッとするし、逆に最近取り組んでいない領域があると、ああやらなきゃなって思える。</p>
-
-<p>んで、書評じゃなくて自分のタスク管理の話になってしまったが、毎日のライフサイクルをエンジニアリングするという思想は今後も重視していきたいなと思う。もうずっと迷いながら、やり方を模索しながらなのでときに嫌になったりはするのだけど、エンジニアリングすること自体が楽しくもあるし、それが「システム」である限りは常に保守運用は必要だよなとも思っている。とりあえず中心に置いている考え方は、「ルーチンを確実に回し、タスクを効率的に処理して、やりたいことをやる時間を増やす」こと。ここだけブレなければ大丈夫かなと思っている。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/01/move-from-hatena-blog-to-octopress/">はてなブログからの記事移行を完了した</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-01T13:15:20+09:00'><span class='date'>2015-03-01 (Sun)</span> <span class='time'>1:15 pm</span></time>
-        
-         | <a href="/blog/2015/03/01/move-from-hatena-blog-to-octopress/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://chroju89.hatenablog.jp/">旧ブログ</a>から全記事移行完了しました。ちょっとだけ疲れた。</p>
-
-<p>もともとはてなブログで記事を書いてたわけですが、こちらは記事のエクスポート形式がMovableType形式にしか対応してないので、そこからMarkdownに変換し直したりだとか、はてなキーワードリンクを削除したりとか、地道にいろいろやらねばならず。たぶんスクリプトでガチャーンと一発でやれるんでしょうけど、力が足りないのでvimでファイル開いて変換ポイント確認してはポチポチコマンドで置換してやりました。</p>
-
-<h2>エクスポートファイルの分割</h2>
-
-<p>はてなブログからエクスポートすると、最初は全記事が1ファイルに連なった状態で吐かれます。自分はMT使った経験ないんでわかりませんが、これは「そういうもの」と考えていいんですかね。一方のoctopressはエントリーごとに分割されているので、まずはこのエクスポートファイルを1記事ずつ分割してやらなくてはならない。あとヘッダの形式も微妙に両者で異なるので、ここの変換も必要。</p>
-
-<p>なんか変換ツール落ちてないかなと堕落した感じで探しまわってたら、一応ありました。</p>
-
-<script src="https://gist.github.com/railsbros-dirk/2351046.js"></script>
-
-
-<p>名前がMT to Markdownなので完全にMarkdownへ変換してくれるものかと期待したのだけど、実際やってくれるのは先ほど挙げた「分割」と「ヘッダの書き換え」程度です。中身はHTMLタグのまま。一方で自分の環境だと<code>&lt;</code>が<code>&amp;lt;</code>に変わってしまうといった副作用もあり。あと元のヘッダにあったBASENAMEだとかCONVERT BREAKSといった文字列がそのまま本文内に残ってたり。。。ちょっと謎。ただ、変換が楽になるのは確か。</p>
-
-<h2>vimによる置換</h2>
-
-<p>スクリプト力弱いので、あとはvimによる力技です。今回初めて複数ファイルを一挙にvimで扱うってやったけど、便利ですね。</p>
-
-<p>vimではバッファリストがあるのは知っていたけど、一方で引数リストっていうのもあって、<code>:args hoge.txt fuga.txt</code>とかでファイルリストを作れます。元々は名前の通り、vimを起動するときに与えた引数が入ってるリストらしいのだけど、任意に書き換えができるのであまり「引数」リストという感じはしない。バッファ内の全ファイルへのコマンド実行は<code>:bufdo</code>で出来るし、引数リストについても似た感じで<code>:argdo</code>が使える。このあたりを上手く活用すれば、今回のような複数ファイルを一挙に処理するのはたやすい。</p>
-
-<p>例えば先の<code>&amp;lt;</code>を<code>&lt;</code>に全置換したり。他にも置換コマンドはh1タグを<code>#</code>に変換するだとか、いろいろな形で使いました。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">:</span><span class="k">argdo</span> %<span class="k">s</span><span class="sr">/&amp;lt;/</span><span class="p">&lt;</span>/<span class="k">g</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>CONVERT BREAKSと書かれた行を全部消したり。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">:</span><span class="k">argdo</span> <span class="k">g</span><span class="sr">/CONVERT BREAKS/</span><span class="k">d</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>自分が今回初めて身に付けた知識でもっとも有効だったのは、検索でマッチした文字列を置換後の文字列内で指定する方法ですかね。検索パターンの括弧でくくった部分（vimなのでエスケープして<code>\(</code>と<code>\)</code>で囲った部分、ということになりますが）を、置換パターンから<code>\1</code>で指定できる。これははてなキーワードのリンクを一掃するのに役立ちました。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">:</span><span class="k">argdo</span> %<span class="k">s</span><span class="sr">/&lt;a class=&quot;keyword&quot;\(.\{-}\)&lt;\/a&gt;/</span>\<span class="m">1</span>/<span class="k">g</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あー、あとこのコマンドで重要なのは<code>{-}</code>の部分ですかね。これで最短マッチになるらしい。他、細かなとこだと改行コードを入力するには<code>&lt;C-v&gt;&lt;C-m&gt;</code>と打つとか、<code>&lt;C-r&gt;/</code>で直前の検索パターンをコマンドラインに入力できるとか、いろいろこの機会に調べられてタメになりました。</p>
-
-<h3>参考</h3>
-
-<ul>
-<li><a href="http://scriptogr.am/error1009/post/201211151634">Vimで最短マッチと検索してから置換 - // Nice Catch! :)</a></li>
-<li><a href="http://lesguillemets.github.io/blog/2014/08/05/vim-reuse-last-search-for-replace.html">Vim で直前の検索パターンを部分的に再利用する - Xeebi</a></li>
-<li><a href="http://www.eightsee.net/?m=pc&amp;a=noticeinfodetail&amp;notice_no=31">改行コード変換 vi で改行コード一括置換　-eightsee.net</a></li>
-</ul>
-
-
-<h2>ファイルのリネーム</h2>
-
-<p>また先のコードで分割したMarkdownファイルは自動的にファイル名も振ってくれるんですけど、日本語の場合は漢字をなんとなく頑張って読んでローマ字に変換してくれた、気持ちはありがたいけど残念な感じのものになっちゃいます。なのでこれも一括変換。</p>
-
-<p>ファイル名一括変換だと<code>rename</code>コマンドってのがあるのですね。Linuxだと標準で入ってるけどUNIX系にはないだとか。なのでMacにも入ってなかったので、Homebrewでインストール。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'>$ brew install rename
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使い方としては<code>rename 's/hoge/fuga/' *.markdown</code>形式が使える、要はvimの置換コマンドっぽく書けるので、vimmerならこれが便利ではないかと。正規表現も当然使えます。ただし、vimで必要なあの面倒くさいエスケープの数々が要らなくなっていたり、先ほど書いた<code>\1</code>によるマッチ文字列の流用が<code>$1</code>に変わっていたり、若干の使用感の違いはあります。でも便利。</p>
-
-<h3>参考</h3>
-
-<ul>
-<li><a href="http://qiita.com/yahihi/items/dd8b3cc7c7041c3f03b9">Linuxでrenameコマンドを使おう - Qiita</a></li>
-</ul>
-
-
-<p>そんなこんなで記事の変換が終わったら、あとはoctopressのレポジトリで<code>/source/_posts</code>の中に全ファイルブチ込んで<code>rake generate</code>かければ生成されます。最初はちょっと戸惑いもありましたが、やれてしまうと案外簡単に移行できるなという感じです。</p>
 </div>
   
   

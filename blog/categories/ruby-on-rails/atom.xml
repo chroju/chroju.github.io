@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby on rails | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/ruby-on-rails/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Kaminariの実装をしてみた]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/08/exhibi-update/"/>
+    <link href="http://chroju.github.io/blog/2015/08/08/exhibi-update/"/>
     <updated>2015-08-08T19:47:30+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/08/exhibi-update</id>
+    <id>http://chroju.github.io/blog/2015/08/08/exhibi-update</id>
     <content type="html"><![CDATA[<p>久しぶりに稼働させている<a href="http://chroju.net/exhibi">ExhiBi</a>というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。</p>
 
 <h1>kaminari</h1>

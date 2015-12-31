@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vagrant | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/vagrant/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[$ vagrant sshで仮想マシンに入れなくなった場合の対処法]]></title>
-    <link href="http://chroju.github.io//blog/2014/02/02/02-post/"/>
+    <link href="http://chroju.github.io/blog/2014/02/02/02-post/"/>
     <updated>2014-02-02T16:27:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/02/02/02-post</id>
+    <id>http://chroju.github.io/blog/2014/02/02/02-post</id>
     <content type="html"><![CDATA[<p>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃねと思ったんだけど、なんとか元に戻せたので対処法まとめとく。</p>
 
 <p>といっても簡単な話です。</p>
@@ -62,9 +62,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails環境構築（1） Vagrantで仮想マシン構築]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/19/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/19/post/"/>
     <updated>2014-01-19T21:08:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/19/post</id>
+    <id>http://chroju.github.io/blog/2014/01/19/post</id>
     <content type="html"><![CDATA[<p>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。</p>
 
 <h2>インストール</h2>

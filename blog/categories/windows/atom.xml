@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: windows, | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/windows/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/04/development-environment-for-windows/"/>
+    <link href="http://chroju.github.io/blog/2015/07/04/development-environment-for-windows/"/>
     <updated>2015-07-04T20:24:32+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/04/development-environment-for-windows</id>
+    <id>http://chroju.github.io/blog/2015/07/04/development-environment-for-windows</id>
     <content type="html"><![CDATA[<p>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。</p>
 
 <h2>Chocolatey</h2>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: poem | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/poem/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/poem/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -14,10 +14,84 @@
 
   
   <entry>
+    <title type="html"><![CDATA[2015年総括]]></title>
+    <link href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/"/>
+    <updated>2015-12-31T19:23:47+09:00</updated>
+    <id>http://chroju.github.io/blog/2015/12/31/looking-back-2015</id>
+    <content type="html"><![CDATA[<p>いろいろとチャレンジングに動いてみただけに、難しい年だった。</p>
+
+<p>今年初めの<a href="http://chroju.github.io/blog/2015/01/12/post/">「行動規範」</a>で書いた通り、就職は、した。大手SIerからいわゆるベンチャー気質な企業に転職して、働き方はだいぶ変わった。毎日Excelとにらめっこしていた生活ではなく、業務上初めてsshを実行し、いまでは毎日実行するような生活になった。</p>
+
+<p>承認と判子と指示が行動の軸だった状態から、個々人のスキルと瞬発力と経験が物を言うような状態になり、率直に言ってついていけてない感はある。どこまでを許可無くやっちゃっていいのかわからない（いわゆるDon’t ask for permission, beg for forgiveness的文化）し、技術検証に手をつけ始めると基礎スキルが低いのでやたら時間を食ってしまい、その間に他の人にタスクを取られたりする。</p>
+
+<p>でもまったく手応えがないわけではなくて、個人開発で使っていたスキルで食い込んでいけるところも大きいし、自分に足りない、学ぶべきことは山のように社内に転がっているので、ひたすら旺盛に吸収していきたいと思う。というかそうしない限り、エンジニアとして生きる道がない。</p>
+
+<p>興味領域としてはDevOps方面にかなりアンテナが伸びてきている。大企業でわりとカッチリ運用設計を認めていた自分が、創業からそれなりの年数が経ち、技術的負債の増えてきたベンチャーに入ったことによる必然とも言えるのだろうが、運用上の穴や非効率な部分がとても目についていて、ルールで縛るのではなく、システム的に運用の統括を図ろうというのが目下の課題となっている。それこそInfrastructure as Codeを使うなりDockerを使うなり、もっと低レイヤーにシェルスクリプトをガリガリ書くなり。だから技術的に磨いて実践していくことが本当に多いのだけど、一方で運用方法の改変ということは社内への浸透が必要になり、政治的な問題にもなってくるので、コミュニケーション力結局必要やんけってところで非コミュな自分は悩んでいる。社内政治ほんとやだ。</p>
+
+<p>まぁ、総じて言えば楽しく仕事はできている。だけど大きな変化は副作用的に予期しない変化を別のところでもたらしたりするものでもあって、そのバランスを取ることがなんとも難しい。貪欲であることと、単に我欲を押し通すこととはまた違うわけで、もう少しコントールが必要だと思っている。リスクテイクしたのだからその分の負担の大きさを覚悟してはいたが、わりと想定以上なところはあってストレスは大きい。年齢も年齢なので、自分が「何をすべきか」という論調よりも、周囲、世の中にとって自分は「何であるのか」という視点で動いた方が良いのかもなという気がしてきた。もう少し、置かれた場所というものも大事にしたい。</p>
+
+<p>抽象論についつい流れてしまったけど、具体的な技術的成果はQiitaを中心に流していこうと思っているので、ブログはポエミーにこんな感じで締めてみる。また来年。</p>
+
+<h2>おまけ：2015年定量評価</h2>
+
+<h3>技術</h3>
+
+<ul>
+<li>Linuxのサーバー運用に従事開始。初歩的なコマンドからさらい直せてる。</li>
+<li>CentOS7の業務利用開始。</li>
+<li>AWSの利用を個人でも業務でも開始。ただしほぼEC2。</li>
+<li>Ansible利用開始。</li>
+<li>Serverspec検証開始。</li>
+<li>Docker検証開始。</li>
+</ul>
+
+
+<h3>イベント</h3>
+
+<ul>
+<li>JAWS DAYS 2015</li>
+<li>JAWS UG 初心者支部</li>
+<li>デブサミ2015</li>
+<li>Ansible入門イベント</li>
+<li>他社の障害対応気にならNight</li>
+<li>手羽の会（ハンズラボ）</li>
+<li>Serverworks Sonic!</li>
+<li>OSC東京 2015秋</li>
+<li>Rakuten Tech 2015</li>
+<li>RubyKaigi 2015</li>
+<li>他</li>
+</ul>
+
+
+<h3>書籍</h3>
+
+<ul>
+<li>リーダブルコード</li>
+<li>プログラマが知るべき97のこと</li>
+<li>それがぼくには楽しかったから</li>
+<li>ハッカーと画家</li>
+<li>UNIXという考え方</li>
+<li>インターネットのカタチ</li>
+<li>Amazon Web Services パターン別構築・運用ガイド</li>
+<li>シェルプログラミング実用テクニック</li>
+<li>はじめてUNIXで仕事をする人が読む本</li>
+<li>大規模サービス技術入門</li>
+<li>Serverspec</li>
+<li>CentOS7実践ガイド</li>
+<li>Team Geak</li>
+<li>オペレーティングシステムの基礎</li>
+<li>たのしいインフラの歩き方</li>
+<li>他</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[インフラエンジニアの幸福論]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/20/eudaemonics-of-infrastructure-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/"/>
     <updated>2015-10-20T23:35:46+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/20/eudaemonics-of-infrastructure-engineer</id>
+    <id>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer</id>
     <content type="html"><![CDATA[<p>1年前、<a href="http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4">インフラエンジニアは死んだ</a>。</p>
 
 <p>遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。</p>
@@ -38,9 +112,9 @@
   
   <entry>
     <title type="html"><![CDATA[Qiitaを使うということの意義]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/09/qiita-commoditization-of-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/"/>
     <updated>2015-08-09T23:28:57+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/09/qiita-commoditization-of-engineer</id>
+    <id>http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer</id>
     <content type="html"><![CDATA[<p><a href="http://qiita.com/chroju/">Qiitaにいくつか記事を上げてみて</a>思ったことを。</p>
 
 <h1>承認欲求が満たしやすい</h1>
@@ -68,9 +142,9 @@
   
   <entry>
     <title type="html"><![CDATA[the world as code]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/04/the-world-as-code/"/>
+    <link href="http://chroju.github.io/blog/2015/04/04/the-world-as-code/"/>
     <updated>2015-04-04T01:13:42+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/04/the-world-as-code</id>
+    <id>http://chroju.github.io/blog/2015/04/04/the-world-as-code</id>
     <content type="html"><![CDATA[<p>世界を構成するのはテクストである、という考え方が好きだ。より正確な言い方をするならば記号論やミーム的な考え方になるのだと思うが、記述されたもの、意味を成して認識されたものだけが実在足りうる、というような世界観をなんとなく抱いている。『ニルヤの島』では個人の生が物語へと還元され、データとして外部記憶装置へ保存されるようになった。『from the nothing, with love』では、ジェームズが自らを「生起しつつあるテクスト」であると述懐する。あるいはヘプタポッドの言語は、未来をも決定論的に「記述」する。</p>
 
 <p>特にことインターネットの隆盛により、世界はテクストの、ミームの満ちるものへと変容しつつあるように思う。インターネット上に存在する「個人」とは、すなわちミームに他ならない。インターネットへのアクセスをしていても、能動的にテクストを紡がない個人は存在しないに等しい。この世界では個人は、あるいはあらゆる事象はデータへと還元され、そして半永久的にミームの海を彷徨っていく。</p>

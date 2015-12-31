@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。 vimperator自体は何年か前から使っていたのだが、 &hellip;">
+  <meta name="description" content="前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://chroju.github.io//posts/14">
+  <link rel="canonical" href="http://chroju.github.io/posts/14">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="the world as code" type="application/atom+xml">
@@ -93,7 +93,7 @@
     
       <form action="https://www.google.com/search" method="get">
         <fieldset role="search">
-          <input type="hidden" name="sitesearch" value="chroju.github.io/" />
+          <input type="hidden" name="sitesearch" value="chroju.github.io" />
     
           <input class="search" type="text" name="q" results="0" placeholder="Search"/>
         </fieldset>
@@ -110,6 +110,297 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/06/post/">Capistrano3がわからんので今一度イチから考えなおしてみる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-06T19:13:00+09:00'><span class='date'>2014-04-06 (Sun)</span> <span class='time'>7:13 pm</span></time>
+        
+         | <a href="/blog/2014/04/06/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。</p>
+
+<h2>Capistranoは何をしてくれるのか</h2>
+
+<p>そもそもCapistranoとは何をしてくれるツールなのか？</p>
+
+<p><a href="http://qiita.com/yuku_t/items/01c0ec4389db143e27f5">Capistrano3のデプロイフレームワークの使い方 - Qiita</a></p>
+
+<p>Capistranoは2まではRailsのデプロイツールだったけど、3は汎用的なデプロイツールに変わっている。したがってデフォルトの状態ではRails用のデプロイタスクは特に含まれていない。このあたりが上の方のリンク先で語られている内容になる。</p>
+
+<p>ではデフォルトでのデプロイタスクは何をするのかと言えば、およそサーバーへのデプロイとして一般的に行われるようなものが組み込まれている。<a href="https://github.com/capistrano/capistrano/tree/master/lib/capistrano/tasks">capistrano/lib/capistrano/tasks</a>あたりを探るとデフォルトタスクがよくわかる。</p>
+
+<ul>
+<li>releases、sharedなどディレクトリの作成</li>
+<li>レポジトリからgit clone</li>
+<li>linked_files、linked_dirsの存在確認とシンボリックリンク作成</li>
+<li>currentディレクトリへのシンボリックリンク作成</li>
+<li>最古世代の削除、クリーンナップ</li>
+</ul>
+
+
+<p>ざっくり見てしまうと、単純にサーバーへファイルを上げて自動的に世代管理をさせるだけであればこれだけでもなんとかなりそうなところではある。逆にこれらが煩わしいのであれば、<a href="http://labs.gree.jp/blog/2013/12/10084/">デフォルトタスクを無効化して使う手もある。</a>デフォルトタスクの内容がよくわからないのであれば、一旦無効化してすべて自分でタスクを書くというのも手だと思う。</p>
+
+<p>Railsをデプロイする場合はこれだけでは足りないので、capistrano/railsやcapistrano/bundleを追加で読み込むことになる。</p>
+
+<h2>Capistranoのディレクトリ構成</h2>
+
+<p>Capistranoでデフォルトのデプロイを行った時、デプロイ先サーバーに作成されるディレクトリについてもよくわかってないのでまとめておく。deploy.rbのdeploy_toで指定したディレクトリ内に、次の3つのディレクトリが作られる。</p>
+
+<ul>
+<li>releases : デプロイした内容を世代管理する</li>
+<li>shared : bundleとかdatabase.ymlとかGitで管理してないファイル置き場（多分）</li>
+<li>current : releasesの最新世代とsharedのシンボリックリンクが置かれる</li>
+</ul>
+
+
+<p>基本的に「デプロイ」される先はreleasesだ。releases配下にはデプロイ時のタイムスタンプから生成された名前のフォルダが作られ、その中にごっそりデプロイしたファイルが入っている。タイムスタンプが付くということは当然世代管理されているわけだが、保持される世代数はdeploy.rbの<code>set :keep_releases</code>で好きに指定できる。で、最新世代についてはcurrent配下にシンボリックリンクが自動的に貼られる。</p>
+
+<p>sharedは正直よくわからない。デプロイのたびに更新するわけではない、すなわちGitで管理をしていないファイルやディレクトリを置いておくみたいなのだが、では<strong>どうやって配置すれば良いのか？</strong>がわからない。配置したファイルのうち、必要なものについてはlinked_dirsとlinked_filesで指定すればcurrent配下にこれもまたシンボリックリンクが貼られる。しかし、<strong>どうやって配置すれば良いのかわからない。</strong></p>
+
+<p>関連：<a href="http://qiita.com/shunsugai@github/items/a112182ff5c0bb49249a">[自分用メモ]Capistrano3のlinked_filesって自分でuploadしなきゃダメですか？ - Qiita</a></p>
+
+<p>で、これを書いていて気付いたのだが、アプリの中身がcurrent配下に展開されるということは、ウェブサーバーの設定もdeploy_toではなくてcurrentに飛ばすようにしておかないといけないわけだ。俺だけかも知れんが、案外罠ではないかという気がする。</p>
+
+<h2>capistrano/rails</h2>
+
+<p>取りあえずsharedの話はほっといて、Railsをデプロイする話に戻る。冒頭でデフォルトタスクにはRailsに対するものは何もないと書いたが、それではRails用のデプロイタスクはどこで生成されているのか？ 答えから書けば、capistrano-railsを読み込むことによって初めて生成される。</p>
+
+<p><a href="http://qiita.com/yuku_t/items/78f32d6e5d21aee4e745">Capistrano3におけるRailsのデプロイタスクの内部実装 - Qiita</a>
+いわく、追加されるタスクは主に3つ。</p>
+
+<ul>
+<li>assets compile(deploy:compile_assets)</li>
+<li>assetsのタイムスタンプ更新(deploy:normalize_assets)</li>
+<li>db:migrate(deploy:migrate)</li>
+</ul>
+
+
+<p>逆に言えば、ここで追加される以外のタスクはデフォルトでは<strong>行われない</strong>ということになる。その点を配慮せずにただググって適当なdeploy.rbをコピーしたりしただけでは、思ったとおりのデプロイは出来ない。</p>
+
+<p>一例として自分がハマったのが、<code>db:create</code>は行われないということ。schema.rbを使って初回デプロイのときに上手いこと云々なんてことは一切してくれないので、このあたりは自分で書くか、サーバーを作ったときに予めDBをこしらえておく必要がある。</p>
+
+<h2>capistrano/bundle</h2>
+
+<p>もうひとつ、RailsをCapistranoでデプロイする場合に必要なのがcapistrano/bundler。Rails使っててGemfileがないなんてことはないだろうし、というかcapistrano/railsの中で<a href="https://github.com/capistrano/rails/blob/master/lib/capistrano/rails.rb">明示的にrequireされている。</a>何をやっているのかと言えば、簡単な話しである。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  before 'deploy:updated', 'bundler:install'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デフォルトではshared配下にbundleディレクトリを作ってbundle installをかけてくれる。パスについては<code>set :bundle_path</code>オプションで自由に指定ができる。</p>
+
+<h2>capistrano/rbenv</h2>
+
+<p>あとよく使われるものとして、capistrano/rbenvがある。デプロイ先のサーバーで、Rubyをrbenvを使って入れてる場合には必須になるもの。中身はよく知らないが、そこまで気にしなくても良いのではないかという感覚がある。入れたらdeploy.rbに<code>set :rbenv_ruby_version</code>で使うRubyのバージョンを指定すればOK。</p>
+
+<p>同じ類のものとして、capistrano/rvmももちろんあります。</p>
+
+<h2>ソースにあたることの必要性</h2>
+
+<p>以上がCapistrano3でRailsをデプロイする場合の主なデフォルトタスクの内容になる。繰り返しになるが、これ以外に何をやりたいのならタスクは書く必要がある。よく言われるのがデプロイ後のウェブサーバーの再起動で、unicornを再起動するタスクを追加している例はよく見かける。ただ、これも<a href="https://github.com/tablexi/capistrano3-unicorn">capistrano3-unicorn</a>という便利なものがすでに作られていたりはする。</p>
+
+<p>個人的な思いなのだが、<a href="http://capistranorb.com/">Capistrano公式</a>の「Getting Started」は説明が不十分な気がしてならない。デプロイに至るまでの設定ファイルの書き方やら何やらは確かにだいたい載っているのだが、ではCapistrano3の内部実装がどうなっているのかとか、タスクを自分で書くにはどうすればよいのかといったあたりの情報が足りない。自分はまだこのDSLを読み下せないのだが、rakeあたりを知っていると結構書けるものなんだろうか？　ひょっとしたら、自分のようなRubyやRails初心者が安易に手を出すものではないのかなぁとか思う。</p>
+
+<p>ただ、GitHubにいずれもソースが上がっているので、根気よく読んでいけばCapistranoが何をしているのか、また何を求めているのかは理解できる。誰かの書いたノウハウに頼るより、ソースにあたるのが大切なのは基本だと思う。常に。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/20/post/">Rails環境構築（5）Capistranoによるデプロイ ※未完</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-20T00:03:00+09:00'><span class='date'>2014-02-20 (Thu)</span> <span class='time'>12:03 am</span></time>
+        
+         | <a href="/blog/2014/02/20/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。</p>
+
+<p>Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。</p>
+
+<p>3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは<a href="http://capistranorb.com/">本家</a>をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。</p>
+
+<ul>
+<li><a href="http://threetreeslight.com/post/68344998681/capistrano-3-x-rails">capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight</a></li>
+<li><a href="http://labs.gree.jp/blog/2013/12/10084/">入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&#8217; Blog</a></li>
+<li><a href="http://takkkun.hatenablog.com/entry/2013/10/12/Capistrano_3%E3%81%B8%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D">Capistrano 3への手引き - 今日のごはんは素麺です</a></li>
+<li><a href="http://d.hatena.ne.jp/ria10/20130526/1369583203">capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記</a></li>
+<li><a href="http://kakakakakku.hatenablog.com/entry/2013/12/11/090204">Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog</a></li>
+</ul>
+
+
+<h2>Capistranoとは？</h2>
+
+<p>そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。</p>
+
+<h2>インストール</h2>
+
+<p>インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>group :development do
+</span><span class='line'>  gem 'capistrano', '~&gt; 3.1.0'
+</span><span class='line'>  gem 'capistrano-rails', '~&gt; 1.0.0'
+</span><span class='line'>  gem 'capistrano-bundler', '~&gt; 1.1.2'
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。</p>
+
+<h2>初期作業</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec cap install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。</p>
+
+<ul>
+<li>Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述</li>
+<li>config/deploy.rb : デプロイタスクを記述</li>
+<li>config/deploy/hoge.rb : 各サーバー情報を記述</li>
+</ul>
+
+
+<h2>Capfile編集</h2>
+
+<p>capistrano-railsと同bundlerを読み込むため、Capfileを開いて以下追記。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'capistrano/rails'
+</span><span class='line'>require 'capistrano/bundler'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>config/deploy.rb編集</h2>
+
+<p>いろいろコメントアウトしてあってどれを使えばいいかよくわかんなかったりもするのだが、最低限以下は必要っぽい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set &lt;span class="synConstant"&gt;:application&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:repo_url&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;git@github.com:chroju/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:deploy_to&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;/var/www/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
+</span><span class='line'>set &lt;span class="synConstant"&gt;:scm&lt;/span&gt;, &lt;span class="synConstant"&gt;:git&lt;/span&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上から。1行目はアプリケーション名。これはどこかで使われる設定ではないようなので、適当に入れておけばよさそう。2行目はGithubのリポジトリURL。3行目はデプロイ先となるサーバー上のディレクトリパス指定。ここではApacheの設定にならってみた。4行目は使用しているSCMの指定。とはいえ、現状Gitしか対応していないのでこれ以外の書き方は不可。</p>
+
+<p>ファイル後半にはデプロイタスクのデフォルト設定が書かれている。一応、ここはそのままでも動くみたい。自分で何か特別なことをやらせたい場合は当然ながら編集する必要があるが、まだその域に至ってないです。</p>
+
+<h2>config/deploy/hoge.rb編集</h2>
+
+<p>ここではステージング環境としてvagrantを使うものと仮定。WebサーバーやDBサーバーを分けたりはせず、1台のサーバーですべてをまかなうこととする。よってstaging.rbを編集する。このファイルもデフォルトでいろいろ書かれてはいるのだが、とりあえず次の4行があればOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;127.0.0.1&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, port: &lt;span class="synConstant"&gt;2222&lt;/span&gt;, user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, roles: &lt;span class="synSpecial"&gt;%w{&lt;/span&gt;&lt;span class="synConstant"&gt;web, app, db&lt;/span&gt;&lt;span class="synSpecial"&gt;}&lt;/span&gt;, ssh_options: {
+</span><span class='line'>  user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;,
+</span><span class='line'>  keys: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;~/.vagrant.d/insecure_private_key&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;,
+</span><span class='line'>  auth_methods: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;publickey&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>server〜で1台のサーバーの設定を一括で書ける。言わずもがな、まず対象IP。portがポート番号、userがSSHログインするユーザー名。roleはこのサーバーの役割を書く。web、app、dbの中から当てはまるものを書けばいいようだが、allという指定もできるとかできないとか。ssh_options:でさらに詳しい内容を記述。userはさっきのと被ってるので不要な気がするのだが、他のサイトを見てたら書いている設定があったので取りあえず入れてる。keysは認証に使うキーのパス。auth_methods:で認証方法を指定しているが、通例publickey認証とする。
+ここに書いた設定の大半はvagrant ssh-configコマンドで拾えるので、自分の環境に合った設定に書き換えて下さい。</p>
+
+<h2>デプロイ実行</h2>
+
+<p>で、あとはデプロイでいけちゃうみたいです。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec staging deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>stagingをproductionに換えればproduction.rbの設定に則ります。あと、末尾に:checkを付けるとコマンドが通るかコールドでチェックしてくれるので、まずは:checkをした方がいい。あと、cap -Tで実行可能なコマンドがずらずら出てくる。デプロイのロールバックしたり、rake db:migrateを走らせたり、結構いろんなことができるので一度見ておくと吉。</p>
+
+<h2>ハマった点</h2>
+
+<p>自分の場合は以上の手順で上手くいきませんでした。何点かハマったポイントをば。</p>
+
+<h3>デプロイ先ディレクトリのパーミッション</h3>
+
+<p>大変アホみたいな話だが最初これでmkdirが上手くいかなかった。公式ドキュメントの<a href="http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/">ココ</a>に書いてあるけど、SSHユーザーはsudoなしでデプロイ先ディレクトリを操作できる権限がなきゃダメです。vagrantユーザーは~/var配下の操作権限なかったので弾かれた次第。。。</p>
+
+<p>対応としてはさっきのリンク先に書いてある手順通り<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080219/294154/">sgid</a>の設定とかしてあげたらなんとかなりました。あるいはパスワードなしでsudo実行可能にしてやっても動くみたいだけど、当然ながらサーバーセキュリティ的にはNGなので。まぁvagrantであればどうでもいいかもしんないけど。</p>
+
+<h3>SQLiteのエラー</h3>
+
+<p>deploy中にsqlite3.hが存在しないよというエラーが発生。<a href="http://www.guanxiaohua2k6.com/2012/07/sqlite3h-is-missing.html">このページ</a>に書いてあるのとまったく同じ症例だったので、同様の対策をしてあげて解決。これは俺のvagrant環境の準備に不備があったってことでいいんだろうか。根本原因がイマイチ謎。</p>
+
+<h3>rake db:migrateのエラー</h3>
+
+<p>そして現在進行形で未解決なのがこのエラー。デフォルトのデプロイタスクでは途中でデプロイ先サーバー上でRAILS_ENV=staging bundle exec rake db:migrateを叩くんだけど、これが次のエラーで停まってしまう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>DEBUG [4be84d91]        rake aborted!
+</span><span class='line'>DEBUG [4be84d91]        database configuration does not specify adapter</span></code></pre></td></tr></table></div></figure>
+
+
+<p>いくつか思い当たった原因に取り組んではみたのだが、なおエラーが起きている。</p>
+
+<ul>
+<li>RAILS_ENV=hogeを追加した場合、Gemfileのgroup :hogeを見に行くのだが、stagingグループを用意していなかった（<a href="http://opentechnica.blogspot.jp/2012/01/railsenv.html">参考</a>）。</li>
+<li>database.ymlにstagingの設定を用意していなかった。</li>
+</ul>
+
+
+<p>たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -691,262 +982,6 @@
 </span><span class='line'>$ sudo chkconfig nginx on</span></code></pre></td></tr></table></div></figure>
 
 
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/26/post/">Rails環境構築（3）PostgreSQLインストール</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-26T16:22:00+09:00'><span class='date'>2014-01-26 (Sun)</span> <span class='time'>4:22 pm</span></time>
-        
-         | <a href="/blog/2014/01/26/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ yum list | grep postgresql
-</span><span class='line'>（中略）
-</span><span class='line'>postgresql.i686                           8.4.18-1.el6_4                base
-</span><span class='line'>postgresql.x86_64                         8.4.18-1.el6_4                base
-</span><span class='line'>postgresql-contrib.x86_64                 8.4.18-1.el6_4                base
-</span><span class='line'>postgresql-devel.i686                     8.4.18-1.el6_4                base
-</span><span class='line'>postgresql-devel.x86_64                   8.4.18-1.el6_4                base
-</span><span class='line'>postgresql-docs.x86_64                    8.4.18-1.el6_4                base
-</span><span class='line'>postgresql-ip4r.x86_64                    1.05-1.el6                    epel</span></code></pre></td></tr></table></div></figure>
-
-
-<p>うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4である。最新を入れればいいというわけでもないが、さすがにちょっと古いような気が。（ところでyumに入ってるパッケージの調べ方、これであってんのかな？）</p>
-
-<p>てわけで新しいバージョンをWebから持ってくる。<a href="http://yum.postgresql.org/repopackages.php">PostgreSQL RPM Repository (with Yum)</a>にいろいろあるので適切なリンクURLをコピー。1コ前のバージョンでPostgresql 9.2にしときましょか。自分のOSがなんだかわかんなくなったらunameコマンドで確認。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ uname -a
-</span><span class='line'>Linux xxx 2.6.32-358.23.2.el6.x86_64 #1 SMP Wed Oct 16 18:37:12 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></code></pre></td></tr></table></div></figure>
-
-
-<p>CentOS 6 x86_64であることがわかったので、wgetでダウンロード。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget -P /tmp http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm</span></code></pre></td></tr></table></div></figure>
-
-
-<p>続いてRPMにインストール。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo rpm -ih /tmp/pgdg-centos92-9.2-6.noarch.rpm
-</span><span class='line'>warning: /temp/pgdg-centos92-9.2-6.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
-</span><span class='line'>########################################### [100%]
-</span><span class='line'>########################################### [100%]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>rpmコマンドのオプションとして-iを付けるとパッケージのインストールが出来る。さらにhを付けると####で進捗が表示されるそうだ。必須オプションではないので、hについてはお好みで。</p>
-
-<p>いよいよyumでインストール。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ yum -y install postgresql92-server.x86_64</span></code></pre></td></tr></table></div></figure>
-
-
-<p>……yum installって補完はできないんですかね入れたら初期化して起動て自動起動設定します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service postgresql-9.2 initdb
-</span><span class='line'>$ sudo service postgresql-9.2 start
-</span><span class='line'>$ sudo chkconfig postgresql-9.2 on</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここまでで一旦インストールとしては終了。あとは基本的な設定をいくつか入れておく。</p>
-
-<p>まずpg_hba.confを触る。これはDBに対するクライアントからのアクセスを制御するファイルで、さきほどinitdbしたときに作成されている。管理している内容としてはどのDBに対するどのユーザーのどこ（IP）からのアクセスを、どの認証方式で認証するか。必要に応じて書き入れてやる必要があるが、ひとまず参考書通りの設定をしておく。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vim /var/lib/pgsql/9.2/data</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># TYPE  DATABASE     USER           ADDRESS                     METHOD
-</span><span class='line'>
-</span><span class='line'>local  all           postgres                                   peer
-</span><span class='line'>local  all           all                                        md5
-</span><span class='line'>host   all           all            127.0.0.1/32                md5
-</span><span class='line'>host   all           all            ::1/128                     md5</span></code></pre></td></tr></table></div></figure>
-
-
-<p>終わったらPostgreSQLをリロード。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service postgresql-9.2 reload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>今回はここまで。</p>
-
-<h2>参考</h2>
-
-<ul>
-<li><a href="http://www.postgresql.jp/document/8.2/html/auth-pg-hba-conf.html">pg_hba.confファイル</a></li>
-<li><a href="http://morizyun.github.io/blog/postgresql-mac-centos-rails/">Mac MountainLion/CentOS 6.4へのPostgreSQL 9.2の導入手順 - 酒と泪とRubyとRailsと</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/23/post/">Rails環境構築（2）Rubyのインストール + α</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-23T22:55:00+09:00'><span class='date'>2014-01-23 (Thu)</span> <span class='time'>10:55 pm</span></time>
-        
-         | <a href="/blog/2014/01/23/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。</p>
-
-<p>まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、postgresqlなんかもまぁ必要だろう。gccとかは要る……のか？</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum -y install gcc gcc-c++ make autoconf openssl-devel readline-devel libyaml-devel postgresql9.1-devel wget git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>続いて意気揚々とRubyを入れたいとこだが、その前にrbenvを入れる。以前にエントリーで書いたこともあったけど、rbenvを使ってRubyをインストールすると、複数のバージョンのRubyを切り替えて使えるようになるので大変便利。インストールもwgetでダウンロードしてビルドしてなんてやり方をせず、rbenv installコマンドで簡単にできるようになる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
-</span><span class='line'>$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
-
-
-<p>rbenv自体のインストールもgithubからのクローンで済むのでスマートですね。ついでにもう1個git cloneしているのはruby-buildって奴で、これがないとrbenv install（rbenv使ってRubyをインストールするためのコマンド）が使えないらしい。で、入れたらPATHを通します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
-</span><span class='line'>$ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile</span></code></pre></td></tr></table></div></figure>
-
-
-<p>PATHを通したらbash_profileを再読み込みして、それからtype rbenvコマンドを打ってインストールの正常完了を確認する。ちなみに自分は最初、bash_profileの再読み込み忘れて慌てました。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bash_profile
-</span><span class='line'>$ type rbenv # rbenv is a functionと表示されればOK</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここまでの手順はGitHubでrbenvのREADMEにも書かれてるから一読を推奨。</p>
-
-<p>rbenvが入ったので、早速Rubyをインストール。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install --list #インストール可能なバージョンが一覧表示される
-</span><span class='line'>$ rbenv install 1.9.3-p484 #入れるバージョンは任意で</span></code></pre></td></tr></table></div></figure>
-
-
-<p>もちろん複数バージョン入れてもOK。Rubyのインストールが完了したら、どのバージョンを使うか確定させる。使うコマンドはrbenv global。安易に想像できる話ではあるが、rbenv localもある。前者が文字通りシステム全体、どのシェルでも使われるバージョンであるのに対し、後者はローカル環境、すなわち今後入れるRailsのアプリケーションディレクトリとか、そういう環境でのRubyバージョンを指定するもの。今はローカル環境がないので、rbenv globalだけ指定すればいい。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv global 1.9.3-p484
-</span><span class='line'>$ ruby -v #確認</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上でRubyは入ったわけだけど、ついでに今後使うのでBundlerも入れておく。BundlerはRubyGemsを管理するためのツールであり、RubyGemsとはRubyのパッケージ管理システムのことである。GemはRailsでもめちゃめちゃ使うし、そもそものRailsもGemで入れることになるので、ここでBundlerを入れておく。</p>
-
-<p>ちなみにGem自体はRubyと一緒にすでに入っている。が、バージョンが古い場合があるので更新してあげる必要がある。GemだけでももちろんRailsをインストールしたりはできるんだけど、その後の落とした各Gemの管理がマンドクセーってなるので、Bundlerが必要になる。まぁ詳しくは次回あたりで。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem update --system
-</span><span class='line'>$ gem -v #最新のバージョンになったことを確認</span></code></pre></td></tr></table></div></figure>
-
-
-<p>じゃあ喜び勇んでGemを使ってBundler入れましょう！と行きたいところだが、まだやることがある。デフォルトだとGemで何かをインストールしたとき、ずらずらーっとメッセージが出てくるのだが、それを消すためのおまじない。これで体感2倍ぐらいインストールが速くなるらしい。方法は簡単で、~/.gemrcファイルを新規で作成して、以下の内容を書き入れる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem: --no-ri --no-rdoc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>書き入れるって簡単にいうけどエディタは何使えばいいんだよ？って人はviあたり使っとけばいいと思う。もっといえば$ sudo yum install vimすればいいと思うんだが、そのあたりの話はまたおいおい。</p>
-
-<p>はい、やっとこれで準備完了。Bundler入れます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv exec gem install bundler
-</span><span class='line'>$ bundle -v</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで作業完了！のはずなんだが、なぜか自分はbundleにPATHが通ってなかったらしく、$ bundle -vできませんでした。なんでだろ？　仕方ないので<a href="http://qiita.com/hyshhryk/items/7e728ad57d963454b142">ココ</a>のやり方に従ってなんとかPATHは通ったんだけど、リンク先が何をやっていたのかはっきり言ってわかっておらず、不安。EXECUTABLE DIRECTORYってなんスか？</p>
-
-<p>まーとりあえずRubyとBundlerは入ったので、次回はRailsのインストールといきますかね。</p>
-
-<h2>参考</h2>
-
-<ul>
-<li><a href="http://blog.ruedap.com/2011/05/14/ruby-gem-install-no-ri-no-rdoc-gemrc">RubyGemsでgemのインストール時に&ndash;no-ri &ndash;no-rdocをデフォルトにする - アインシュタインの電話番号</a></li>
-<li><a href="http://qiita.com/ongaeshi/items/b07beebca21ba7ed8e7f">rbenv &amp; ruby-build の使い方メモ - Qiita [キータ]</a></li>
-</ul>
 
 </div>
   

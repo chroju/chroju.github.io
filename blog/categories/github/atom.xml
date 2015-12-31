@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: github | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/github/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[個人開発環境にGithub Flowを適用する]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/04/individual-github-flow/"/>
+    <link href="http://chroju.github.io/blog/2015/10/04/individual-github-flow/"/>
     <updated>2015-10-04T14:00:05+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/04/individual-github-flow</id>
+    <id>http://chroju.github.io/blog/2015/10/04/individual-github-flow</id>
     <content type="html"><![CDATA[<p>Github、<a href="https://github.com/chroju">joinしたのは2013年</a>で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd => commit => pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。</p>
 
 <h1>What is Github flow ?</h1>

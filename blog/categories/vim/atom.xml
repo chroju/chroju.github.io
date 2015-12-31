@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vim | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/vim/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[はてなブログからの記事移行を完了した]]></title>
-    <link href="http://chroju.github.io//blog/2015/03/01/move-from-hatena-blog-to-octopress/"/>
+    <link href="http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/"/>
     <updated>2015-03-01T13:15:20+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/03/01/move-from-hatena-blog-to-octopress</id>
+    <id>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress</id>
     <content type="html"><![CDATA[<p><a href="http://chroju89.hatenablog.jp/">旧ブログ</a>から全記事移行完了しました。ちょっとだけ疲れた。</p>
 
 <p>もともとはてなブログで記事を書いてたわけですが、こちらは記事のエクスポート形式がMovableType形式にしか対応してないので、そこからMarkdownに変換し直したりだとか、はてなキーワードリンクを削除したりとか、地道にいろいろやらねばならず。たぶんスクリプトでガチャーンと一発でやれるんでしょうけど、力が足りないのでvimでファイル開いて変換ポイント確認してはポチポチコマンドで置換してやりました。</p>
@@ -89,9 +89,9 @@
   
   <entry>
     <title type="html"><![CDATA[Vimで意識しておきたいことまとめ＠2015新春]]></title>
-    <link href="http://chroju.github.io//blog/2015/01/20/post/"/>
+    <link href="http://chroju.github.io/blog/2015/01/20/post/"/>
     <updated>2015-01-20T00:24:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/01/20/post</id>
+    <id>http://chroju.github.io/blog/2015/01/20/post</id>
     <content type="html"><![CDATA[<p>前の記事がやたらポエミーになってしまったので、もうちょっと実際的なとこでVim使う上での注意点とか、今後覚えておきたいこと書いときます。</p>
 
 <h2>正規表現を使いこなす</h2>
@@ -202,9 +202,9 @@ c{operator} 指定範囲を消して挿入モード
   
   <entry>
     <title type="html"><![CDATA[『Software Design 2015年1月』Vim使い 事始め 読了]]></title>
-    <link href="http://chroju.github.io//blog/2015/01/16/post/"/>
+    <link href="http://chroju.github.io/blog/2015/01/16/post/"/>
     <updated>2015-01-16T00:57:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/01/16/post</id>
+    <id>http://chroju.github.io/blog/2015/01/16/post</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51sv-OIQh%2BL._SL160_.jpg" alt="ソフトウェア デザイン 2015年 01月号 [雑誌]" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">ソフトウェア デザイン 2015年 01月号 [雑誌]</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail"><br />技術評論社 (2014-12-18)<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 
@@ -229,9 +229,9 @@ c{operator} 指定範囲を消して挿入モード
   
   <entry>
     <title type="html"><![CDATA[Kaoriya版Vimでtxtファイルの自動改行が解除できない件]]></title>
-    <link href="http://chroju.github.io//blog/2013/07/23/post/"/>
+    <link href="http://chroju.github.io/blog/2013/07/23/post/"/>
     <updated>2013-07-23T22:00:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2013/07/23/post</id>
+    <id>http://chroju.github.io/blog/2013/07/23/post</id>
     <content type="html"><![CDATA[<p>2週間ぐらいハマってた。</p>
 
 <p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>

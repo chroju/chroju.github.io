@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: event | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/event/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/event/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[オープンソースカンファレンス2015 Tokyo/Fall行ってきた]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/25/osc-2015-tokyo-fall/"/>
+    <link href="http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/"/>
     <updated>2015-10-25T21:42:59+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/25/osc-2015-tokyo-fall</id>
+    <id>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall</id>
     <content type="html"><![CDATA[<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/chroju/22273557670/in/dateposted-public/" title="このはちゃんかわいい"><img src="https://farm1.staticflickr.com/630/22273557670_c7c51c391b_z.jpg" width="640" height="640" alt="このはちゃんかわいい"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
 
 <p>戦利品、ConoHaちゃんかわええ。</p>
@@ -78,9 +78,9 @@
   
   <entry>
     <title type="html"><![CDATA[すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting/"/>
+    <link href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/"/>
     <updated>2015-07-03T00:20:52+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting</id>
+    <id>http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting</id>
     <content type="html"><![CDATA[<p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
 
 <p>改めて見るとすげー名前のイベント……行ってきた。</p>
@@ -110,9 +110,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ansibleの入門イベント聞いてきた話]]></title>
-    <link href="http://chroju.github.io//blog/2015/06/25/hika-labo-ansible/"/>
+    <link href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/"/>
     <updated>2015-06-25T00:21:58+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/06/25/hika-labo-ansible</id>
+    <id>http://chroju.github.io/blog/2015/06/25/hika-labo-ansible</id>
     <content type="html"><![CDATA[<p><a href="https://atnd.org/events/66419">これ</a>行ってきた。ざくっと感想を箇条書きで。</p>
 
 <ul>
@@ -140,9 +140,9 @@
   
   <entry>
     <title type="html"><![CDATA[JAWS-UG初心者支部の立ち上げに行ってきた #jawsug_bgnr]]></title>
-    <link href="http://chroju.github.io//blog/2015/05/15/jaws-ug-for-beginners-at-first/"/>
+    <link href="http://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/"/>
     <updated>2015-05-15T00:40:09+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/05/15/jaws-ug-for-beginners-at-first</id>
+    <id>http://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first</id>
     <content type="html"><![CDATA[<p><a href="https://jawsug-beginner.doorkeeper.jp/events/22161">JAWS-UG初心者支部【第1回】2015年5月14日(木) - JAWS-UG初心者支部 | Doorkeeper</a></p>
 
 <p>AWS初心者具合がどれぐらいかと言うと、先日のJAWS DAYS 2015のハンズオンセッションでアカウント作り、それっきり一度もログインしていないぐらいの初心者なんですが、今回JAWS-UGの初心者支部というのが出来ると聞いたので飛び込むにはちょうどいいと思い行ってきました。しかし会場の内田洋行さん、初めて行ったけど大変ナウいオフィスでびっくりした。横に長い会場だったけど、6面スクリーン同時投影でどの席でも見やすいとかハンパない。</p>
@@ -177,9 +177,9 @@
   
   <entry>
     <title type="html"><![CDATA[JAWS DAYS 2015でAWS童貞捨ててきた]]></title>
-    <link href="http://chroju.github.io//blog/2015/03/22/jaws-days-2015/"/>
+    <link href="http://chroju.github.io/blog/2015/03/22/jaws-days-2015/"/>
     <updated>2015-03-22T22:38:02+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/03/22/jaws-days-2015</id>
+    <id>http://chroju.github.io/blog/2015/03/22/jaws-days-2015</id>
     <content type="html"><![CDATA[<p><a href="https://www.flickr.com/photos/chroju/16701892109" title="#jawsdays 初心者ハンズオンなう by chroju, on Flickr"><img src="https://farm9.staticflickr.com/8687/16701892109_b35dd45f3a_n.jpg" width="320" height="320" alt="#jawsdays 初心者ハンズオンなう"></a></p>
 
 <p><a href="http://jawsdays2015.jaws-ug.jp/">JAWS DAYS</a>、前々からやってるのは知ってたんですけど、自分はAWS経験ないし行ってもわかんねーかなと思ってなんとなく行かずにいたんですが、今回タイムテーブル覗いてみたら初心者向けハンズオンもあったので意を決して行ってきました。</p>

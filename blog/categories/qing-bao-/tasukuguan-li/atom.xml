@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 情報／タスク管理 | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/qing-bao-/tasukuguan-li/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/qing-bao-/tasukuguan-li/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/04/development-environment-for-windows/"/>
+    <link href="http://chroju.github.io/blog/2015/07/04/development-environment-for-windows/"/>
     <updated>2015-07-04T20:24:32+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/04/development-environment-for-windows</id>
+    <id>http://chroju.github.io/blog/2015/07/04/development-environment-for-windows</id>
     <content type="html"><![CDATA[<p>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。</p>
 
 <h2>Chocolatey</h2>
@@ -175,9 +175,9 @@ Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstal
   
   <entry>
     <title type="html"><![CDATA[GTD環境 2015年春版（Workflowy最強説）]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/29/gtd-2015-workflowy/"/>
+    <link href="http://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/"/>
     <updated>2015-04-29T01:45:02+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/29/gtd-2015-workflowy</id>
+    <id>http://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy</id>
     <content type="html"><![CDATA[<p>GTDという言葉もなんだか多義的に使われているような気がするが、自分の場合は「今あるタスクを『高度』の概念から見直して、きちんと前に進むことができているか確認すること」と、「やるべきことが全部可視化されていること」に重点を置いている。</p>
 
 <p>前回GTD関連をきちんとまとめ直したのはどうも<a href="http://chroju.github.io/blog/2013/11/10/post/">この記事</a>のようなのだが、さすがに古くてここからだいぶ変わっている。とかく面倒であるということが中心にあって、使うツールは少なければ少ない方がよいし、完全に管理しようとするよりもある程度割り切ってしまった方が上手く回る。現時点で使っているのはほとんどGoogle Calendarと<a href="https://workflowy.com/">Workflowy</a>だけだ。特にWorkflowyにはだいぶ助けられている感がある。</p>
@@ -210,9 +210,9 @@ Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstal
   
   <entry>
     <title type="html"><![CDATA[『エンジニアのための時間管理術』読了]]></title>
-    <link href="http://chroju.github.io//blog/2015/03/07/book-review-time-management-for-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/"/>
     <updated>2015-03-07T23:43:38+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/03/07/book-review-time-management-for-engineer</id>
+    <id>http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51jWtxU0sAL._SL160_.jpg" alt="エンジニアのための時間管理術" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">エンジニアのための時間管理術</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.07</div></div><div class="amazlet-detail">Thomas A. Limoncelli <br />オライリー・ジャパン <br />売り上げランキング: 12,858<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 
@@ -267,9 +267,9 @@ Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstal
   
   <entry>
     <title type="html"><![CDATA[手帳を投げ捨てたことと情報管理の再考]]></title>
-    <link href="http://chroju.github.io//blog/2015/02/01/post/"/>
+    <link href="http://chroju.github.io/blog/2015/02/01/post/"/>
     <updated>2015-02-01T20:26:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/02/01/post</id>
+    <id>http://chroju.github.io/blog/2015/02/01/post</id>
     <content type="html"><![CDATA[<p><a href="https://www.flickr.com/photos/chroju/16229686810"><img src="https://farm8.staticflickr.com/7321/16229686810_77a0ce3f87.jpg" width="300" height="300" alt="2015-02-01 19.10.00"></a></p>
 
 <p>そういえばだけど手帳使うのをやめた。去年の10月ぐらい？　2015年の手帳はどうしようかなと考えたときに「要らなくね？」って結論に達して以後使ってない。</p>
@@ -305,9 +305,9 @@ Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstal
   
   <entry>
     <title type="html"><![CDATA[2015年の行動規範]]></title>
-    <link href="http://chroju.github.io//blog/2015/01/12/post/"/>
+    <link href="http://chroju.github.io/blog/2015/01/12/post/"/>
     <updated>2015-01-12T21:06:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/01/12/post</id>
+    <id>http://chroju.github.io/blog/2015/01/12/post</id>
     <content type="html"><![CDATA[<p>世間には目標何十個立てるみたいなライフハックもあるみたいだけど、自分としては少し抽象度の高いベクトルを数個厳選しておく方が先の見通しが立ちやすいので、ここに書いておく。ちなみに去年は目標50個ぐらい書き出したりしたのだが、単なるタスクリストっぽくなってあんまり意味がなかったし、あとで見返したときやること多すぎてウンザリしたので今年はやめた。</p>
 
 <h2>就職したい</h2>

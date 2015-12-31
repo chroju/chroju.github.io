@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vps | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/vps/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/vps/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AnsibleとDigitalOceanでどこでも使える開発環境を作る]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
+    <link href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
     <updated>2015-07-20T14:50:28+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
+    <id>http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
     <content type="html"><![CDATA[<p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
 
 <p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>

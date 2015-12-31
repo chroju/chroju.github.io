@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: terminal | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/terminal/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/terminal/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[tmuxをなんとなく使ってたのできちんと使うようにしてみた]]></title>
-    <link href="http://chroju.github.io//blog/2014/07/20/post/"/>
+    <link href="http://chroju.github.io/blog/2014/07/20/post/"/>
     <updated>2014-07-20T10:57:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/07/20/post</id>
+    <id>http://chroju.github.io/blog/2014/07/20/post</id>
     <content type="html"><![CDATA[<p>tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。</p>
 
 <h2>tmuxとは</h2>

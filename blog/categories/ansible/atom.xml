@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ansible | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/ansible/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/ansible/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ansible + Serverspec + Docker + circle ci によるインフラCI]]></title>
-    <link href="http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci/"/>
+    <link href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/"/>
     <updated>2015-11-18T22:13:25+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci</id>
+    <id>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci</id>
     <content type="html"><![CDATA[<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
 
 <p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>
@@ -98,9 +98,9 @@ test:
   
   <entry>
     <title type="html"><![CDATA[開発環境のためのansibleを出来るだけベストプラクティスでまとめた]]></title>
-    <link href="http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice/"/>
+    <link href="http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/"/>
     <updated>2015-09-24T19:37:08+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice</id>
+    <id>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice</id>
     <content type="html"><![CDATA[<p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
 
 <h2>なぜEC2？</h2>
@@ -182,9 +182,9 @@ test:
   
   <entry>
     <title type="html"><![CDATA[AnsibleとDigitalOceanでどこでも使える開発環境を作る]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
+    <link href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
     <updated>2015-07-20T14:50:28+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
+    <id>http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
     <content type="html"><![CDATA[<p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
 
 <p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>
@@ -254,9 +254,9 @@ test:
   
   <entry>
     <title type="html"><![CDATA[Ansibleの入門イベント聞いてきた話]]></title>
-    <link href="http://chroju.github.io//blog/2015/06/25/hika-labo-ansible/"/>
+    <link href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/"/>
     <updated>2015-06-25T00:21:58+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/06/25/hika-labo-ansible</id>
+    <id>http://chroju.github.io/blog/2015/06/25/hika-labo-ansible</id>
     <content type="html"><![CDATA[<p><a href="https://atnd.org/events/66419">これ</a>行ってきた。ざくっと感想を箇条書きで。</p>
 
 <ul>

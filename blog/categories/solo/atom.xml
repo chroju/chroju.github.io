@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: solo | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/solo/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/solo/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[chefでさくらVPSの初期構築を全部自動化してみた]]></title>
-    <link href="http://chroju.github.io//blog/2014/05/30/post/"/>
+    <link href="http://chroju.github.io/blog/2014/05/30/post/"/>
     <updated>2014-05-30T21:27:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/05/30/post</id>
+    <id>http://chroju.github.io/blog/2014/05/30/post</id>
     <content type="html"><![CDATA[<p>Chefでサーバー構築を全部自動化して、借りているさくらVPSに当ててみた。意地でも手作業はまったく入れない完全自動構築設定。これはよい。毎回手作業やらずに済むというのは、抜け漏れをなくすという点でも、構築時間を短縮するという面でも本当に楽。</p>
 
 <h2>前提</h2>
@@ -244,9 +244,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Chef soloはじめの一歩]]></title>
-    <link href="http://chroju.github.io//blog/2014/05/06/02-post/"/>
+    <link href="http://chroju.github.io/blog/2014/05/06/02-post/"/>
     <updated>2014-05-06T13:56:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/05/06/02-post</id>
+    <id>http://chroju.github.io/blog/2014/05/06/02-post</id>
     <content type="html"><![CDATA[<p>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。</p>
 
 <p>参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。</p>

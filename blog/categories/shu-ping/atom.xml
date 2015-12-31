@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 書評 | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/shu-ping/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/shu-ping/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ハッカーマインドと3冊のエッセイ]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/16/hackers-mind-and-their-essay/"/>
+    <link href="http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/"/>
     <updated>2015-08-16T16:02:51+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/16/hackers-mind-and-their-essay</id>
+    <id>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay</id>
     <content type="html"><![CDATA[<p>ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊のことである。しかし『それがぼくには』は重要な一冊だと思うんだけど、なんでまた絶版なんですかね。そんな古い本でもないのに。仕方なく図書館で借りたけど。</p>
 
 <p>いわゆるハッカーマインドを描いた本としていずれも似たような印象を抱きがちだが、実際に読んでみるとスタンスはだいぶ異なる。『ハッカーと画家』はコンピュータについてあまり詳しくない人に対して、ハッカーというのはこういう人種なのだと切々と説いた本であり、故にそれほど挑発的な印象は受けず、すらすらと読み進めていくことができる。もっともこれがハッカー以外に理解できるかというとかなり疑問ではあるが、ハッカーが比較的客観的に自らを解き明かした本として参考にはなる。著者のポール・グレアムのエッセイは<a href="http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t:%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7">naoya_t氏による和訳</a>がいくらか読めるので、これを読んで興味をそそられたら読んでみるのでもいいかもしれない。あと、Lispめっちゃ推してる。</p>
@@ -49,9 +49,9 @@
   
   <entry>
     <title type="html"><![CDATA[『エンジニアのための時間管理術』読了]]></title>
-    <link href="http://chroju.github.io//blog/2015/03/07/book-review-time-management-for-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/"/>
     <updated>2015-03-07T23:43:38+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/03/07/book-review-time-management-for-engineer</id>
+    <id>http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51jWtxU0sAL._SL160_.jpg" alt="エンジニアのための時間管理術" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">エンジニアのための時間管理術</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.07</div></div><div class="amazlet-detail">Thomas A. Limoncelli <br />オライリー・ジャパン <br />売り上げランキング: 12,858<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 
@@ -106,9 +106,9 @@
   
   <entry>
     <title type="html"><![CDATA[『実践Vim』でVimの思想を身につける]]></title>
-    <link href="http://chroju.github.io//blog/2014/10/02/post/"/>
+    <link href="http://chroju.github.io/blog/2014/10/02/post/"/>
     <updated>2014-10-02T23:45:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/10/02/post</id>
+    <id>http://chroju.github.io/blog/2014/10/02/post</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51xLKL7w92L._SL160_.jpg" alt="実践Vim 思考のスピードで編集しよう!" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">実践Vim 思考のスピードで編集しよう!</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Drew Neil <br />アスキー・メディアワークス <br />売り上げランキング: 15,673<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 
@@ -126,9 +126,9 @@
   
   <entry>
     <title type="html"><![CDATA[『Webを支える技術』読了]]></title>
-    <link href="http://chroju.github.io//blog/2013/12/28/post/"/>
+    <link href="http://chroju.github.io/blog/2013/12/28/post/"/>
     <updated>2013-12-28T01:14:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2013/12/28/post</id>
+    <id>http://chroju.github.io/blog/2013/12/28/post</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51qo6pgjaSL._SL160_.jpg" alt="Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">山本 陽平 <br />技術評論社 <br />売り上げランキング: 13,031<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 

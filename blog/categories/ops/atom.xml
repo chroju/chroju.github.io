@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ops | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/ops/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/ops/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting/"/>
+    <link href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/"/>
     <updated>2015-07-03T00:20:52+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting</id>
+    <id>http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting</id>
     <content type="html"><![CDATA[<p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
 
 <p>改めて見るとすげー名前のイベント……行ってきた。</p>

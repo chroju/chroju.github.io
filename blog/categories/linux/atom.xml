@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: linux | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AnsibleとDigitalOceanでどこでも使える開発環境を作る]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
+    <link href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
     <updated>2015-07-20T14:50:28+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
+    <id>http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
     <content type="html"><![CDATA[<p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
 
 <p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>
@@ -87,9 +87,9 @@
   
   <entry>
     <title type="html"><![CDATA[awesomeウィンドウマネージャーの見栄えを良くする]]></title>
-    <link href="http://chroju.github.io//blog/2014/09/28/post/"/>
+    <link href="http://chroju.github.io/blog/2014/09/28/post/"/>
     <updated>2014-09-28T09:33:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/09/28/post</id>
+    <id>http://chroju.github.io/blog/2014/09/28/post</id>
     <content type="html"><![CDATA[<p>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。</p>
 
 <h1>テーマファイルの構成</h1>
@@ -170,9 +170,9 @@ right_layout:add(mylayoutbox[s])
   
   <entry>
     <title type="html"><![CDATA[Arch Linux + awesome with Windows 8.1 in VAIO Pro]]></title>
-    <link href="http://chroju.github.io//blog/2014/09/23/post/"/>
+    <link href="http://chroju.github.io/blog/2014/09/23/post/"/>
     <updated>2014-09-23T19:03:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/09/23/post</id>
+    <id>http://chroju.github.io/blog/2014/09/23/post</id>
     <content type="html"><![CDATA[<p><a href="https://www.flickr.com/photos/chroju/15143254940"><img src="https://farm4.staticflickr.com/3842/15143254940_70774bd603.jpg" width="500" height="281" alt="snapshot1_1"></a></p>
 
 <p>先日<a href="http://chroju89.hatenablog.jp/entry/2014/09/07/232727">VirtualBoxでArch Linux入れてみた</a>ところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお、Window8.1とのデュアルブートです。上のスクリーンショットが完成形。</p>
@@ -336,9 +336,9 @@ $ cp /boot/efi/EFI/grub/grubx64.efi bootmgfw.efi
   
   <entry>
     <title type="html"><![CDATA[VirtualBoxでArch Linuxのインストール練習]]></title>
-    <link href="http://chroju.github.io//blog/2014/09/07/post/"/>
+    <link href="http://chroju.github.io/blog/2014/09/07/post/"/>
     <updated>2014-09-07T23:27:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/09/07/post</id>
+    <id>http://chroju.github.io/blog/2014/09/07/post</id>
     <content type="html"><![CDATA[<p>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブートを試みることに。デュアルじゃなくてOS丸ごと入れ替えたら？という話もありそうだが、仕事で使うのでWindowsを潰せない。かと言って仮想マシンだとこのPCのスペックでは心許ない。。ってことでデュアル。</p>
 
 <p>ではディストリは何を使うか？だが、以前Ubuntuを使ったデュアルブートは構築した経験があるし、GUIでポチポチインストールするんじゃあんまり勉強にはならなさそうだなーということで、思い切ってArch Linuxを選んだ。ミニマルを是とするディストリだが、ミニマルどころか最初はsudoすら入っていないという徹底っぷり。使うものだけ入れろ！というポリシーは大変に共感できるものではあるが、それは当然難易度の高さと引き換えなわけで。。</p>
@@ -648,9 +648,9 @@ ibus-daemon -drx
   
   <entry>
     <title type="html"><![CDATA[SSHでサーバーリモートログインする際のあれこれまとめ]]></title>
-    <link href="http://chroju.github.io//blog/2013/12/08/post/"/>
+    <link href="http://chroju.github.io/blog/2013/12/08/post/"/>
     <updated>2013-12-08T23:22:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2013/12/08/post</id>
+    <id>http://chroju.github.io/blog/2013/12/08/post</id>
     <content type="html"><![CDATA[<p>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。</p>
 
 <h2>環境</h2>

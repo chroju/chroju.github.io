@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: on | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/on/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/on/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mechanizeによるスクレイピングの基本的なことまとめ]]></title>
-    <link href="http://chroju.github.io//blog/2015/02/08/post/"/>
+    <link href="http://chroju.github.io/blog/2015/02/08/post/"/>
     <updated>2015-02-08T13:35:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/02/08/post</id>
+    <id>http://chroju.github.io/blog/2015/02/08/post</id>
     <content type="html"><![CDATA[<p><a href="http://www.chroju.net/exhibi">Exhibi</a>の内部的な話を書こう書こうと思って忘れてた。とりあえずMechanizeについて。</p>
 
 <p><a href="https://github.com/sparklemotion/mechanize">Mechanize</a>はスクレイピングを楽にしてくれるRubygemsです。ExhibiではMechanizeを使ったスクレイピングのRakeタスクを作成し、それを日次で実行することで、各美術館のサイトから展覧会情報を抽出しています。抽出した情報がDB内に存在していれば無視。存在しないのならDBに追加。こういうクローリングに関しては、ちょうど時同じくしてRubyのクロール入門本が去年出たんですけど未読です。技術的な話のみならず、人様のサイトへ機械的にアクセスする際のお作法的なことも載っているらしく、いつかは読みたいところ。</p>
@@ -101,9 +101,9 @@ page = f.submit
   
   <entry>
     <title type="html"><![CDATA[bundle installはどのパスに対してすべきなのか問題]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/14/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/14/post/"/>
     <updated>2014-01-14T22:13:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/14/post</id>
+    <id>http://chroju.github.io/blog/2014/01/14/post</id>
     <content type="html"><![CDATA[<p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
 
 <pre><code>% bundle install --path vendor/bundle
@@ -127,9 +127,9 @@ page = f.submit
   
   <entry>
     <title type="html"><![CDATA[twitter-bootstrap-railsでundefined methodのエラーに嵌る]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/09/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/09/post/"/>
     <updated>2014-01-09T23:55:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/09/post</id>
+    <id>http://chroju.github.io/blog/2014/01/09/post</id>
     <content type="html"><![CDATA[<p>完全に嵌った。さっぱりわからん。</p>
 
 <pre><code>undefined method `to_css' for nil:NilClass
@@ -158,9 +158,9 @@ rails s
   
   <entry>
     <title type="html"><![CDATA[Bundle execサボってエライ目にあった]]></title>
-    <link href="http://chroju.github.io//blog/2013/12/08/02-post/"/>
+    <link href="http://chroju.github.io/blog/2013/12/08/02-post/"/>
     <updated>2013-12-08T23:21:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2013/12/08/02-post</id>
+    <id>http://chroju.github.io/blog/2013/12/08/02-post</id>
     <content type="html"><![CDATA[<p>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……</p>
 
 <blockquote>bundle exec rails g devise:install</blockquote>
@@ -184,9 +184,9 @@ rails s
   
   <entry>
     <title type="html"><![CDATA[『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい]]></title>
-    <link href="http://chroju.github.io//blog/2013/11/04/post/"/>
+    <link href="http://chroju.github.io/blog/2013/11/04/post/"/>
     <updated>2013-11-04T21:54:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2013/11/04/post</id>
+    <id>http://chroju.github.io/blog/2013/11/04/post</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 

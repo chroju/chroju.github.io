@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト]]></title>
-    <link href="http://chroju.github.io//blog/2015/05/03/google-spread-sheet-update-via-ruby/"/>
+    <link href="http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/"/>
     <updated>2015-05-03T19:52:10+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/05/03/google-spread-sheet-update-via-ruby</id>
+    <id>http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby</id>
     <content type="html"><![CDATA[<script src="https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js"></script>
 
 
@@ -39,9 +39,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby基礎学習(10) Mix-in]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/24/ruby-study-mix-in/"/>
+    <link href="http://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/"/>
     <updated>2015-04-24T07:22:17+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/24/ruby-study-mix-in</id>
+    <id>http://chroju.github.io/blog/2015/04/24/ruby-study-mix-in</id>
     <content type="html"><![CDATA[<p>Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。</p>
 
 <h2>参考</h2>
@@ -96,9 +96,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby基礎復習(9) Dirクラス]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/14/study-ruby-dir/"/>
+    <link href="http://chroju.github.io/blog/2015/04/14/study-ruby-dir/"/>
     <updated>2015-04-14T22:45:02+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/14/study-ruby-dir</id>
+    <id>http://chroju.github.io/blog/2015/04/14/study-ruby-dir</id>
     <content type="html"><![CDATA[<p>『パーフェクトRuby』p.208より。</p>
 
 <p>Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる。従って多くの操作を特異メソッドで行うことができる。</p>
@@ -144,9 +144,9 @@ dir.each {|f| p f} # =&gt; ".", "..", "bar", "baz", "foo"
   
   <entry>
     <title type="html"><![CDATA[Ruby基礎復習(8) Fileクラス]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/10/study-ruby-file-i-o/"/>
+    <link href="http://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/"/>
     <updated>2015-04-10T23:06:03+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/10/study-ruby-file-i-o</id>
+    <id>http://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o</id>
     <content type="html"><![CDATA[<p>『パーフェクトRuby』p.196より。わりと苦手な分野。</p>
 
 <p>まずはファイルをひらく。<code>#open</code>して変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。<code>#read</code>はファイルの内容全体を読み込む一方、<code>#gets</code>を使うと1行ずつ読み込むことができる。あるいは<code>#each_line</code>や<code>#each_char</code>といったメソッドも。</p>
@@ -307,9 +307,9 @@ File.absolute_path("~") # =&gt; "/home/chroju/~"
   
   <entry>
     <title type="html"><![CDATA[Ruby基礎復習(7) Timeクラス]]></title>
-    <link href="http://chroju.github.io//blog/2015/04/06/study-ruby-time/"/>
+    <link href="http://chroju.github.io/blog/2015/04/06/study-ruby-time/"/>
     <updated>2015-04-06T22:53:30+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/04/06/study-ruby-time</id>
+    <id>http://chroju.github.io/blog/2015/04/06/study-ruby-time</id>
     <content type="html"><![CDATA[<p>『パーフェクトRuby』p.190より。</p>
 
 <p><code>Time#now</code>か<code>Time#new</code>で現在時刻が取得可能。</p>

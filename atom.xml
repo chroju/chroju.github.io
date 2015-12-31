@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[the world as code]]></title>
-  <link href="http://chroju.github.io//atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:32:14+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -14,10 +14,143 @@
 
   
   <entry>
+    <title type="html"><![CDATA[2015年総括]]></title>
+    <link href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/"/>
+    <updated>2015-12-31T19:23:47+09:00</updated>
+    <id>http://chroju.github.io/blog/2015/12/31/looking-back-2015</id>
+    <content type="html"><![CDATA[<p>いろいろとチャレンジングに動いてみただけに、難しい年だった。</p>
+
+<p>今年初めの<a href="http://chroju.github.io/blog/2015/01/12/post/">「行動規範」</a>で書いた通り、就職は、した。大手SIerからいわゆるベンチャー気質な企業に転職して、働き方はだいぶ変わった。毎日Excelとにらめっこしていた生活ではなく、業務上初めてsshを実行し、いまでは毎日実行するような生活になった。</p>
+
+<p>承認と判子と指示が行動の軸だった状態から、個々人のスキルと瞬発力と経験が物を言うような状態になり、率直に言ってついていけてない感はある。どこまでを許可無くやっちゃっていいのかわからない（いわゆるDon’t ask for permission, beg for forgiveness的文化）し、技術検証に手をつけ始めると基礎スキルが低いのでやたら時間を食ってしまい、その間に他の人にタスクを取られたりする。</p>
+
+<p>でもまったく手応えがないわけではなくて、個人開発で使っていたスキルで食い込んでいけるところも大きいし、自分に足りない、学ぶべきことは山のように社内に転がっているので、ひたすら旺盛に吸収していきたいと思う。というかそうしない限り、エンジニアとして生きる道がない。</p>
+
+<p>興味領域としてはDevOps方面にかなりアンテナが伸びてきている。大企業でわりとカッチリ運用設計を認めていた自分が、創業からそれなりの年数が経ち、技術的負債の増えてきたベンチャーに入ったことによる必然とも言えるのだろうが、運用上の穴や非効率な部分がとても目についていて、ルールで縛るのではなく、システム的に運用の統括を図ろうというのが目下の課題となっている。それこそInfrastructure as Codeを使うなりDockerを使うなり、もっと低レイヤーにシェルスクリプトをガリガリ書くなり。だから技術的に磨いて実践していくことが本当に多いのだけど、一方で運用方法の改変ということは社内への浸透が必要になり、政治的な問題にもなってくるので、コミュニケーション力結局必要やんけってところで非コミュな自分は悩んでいる。社内政治ほんとやだ。</p>
+
+<p>まぁ、総じて言えば楽しく仕事はできている。だけど大きな変化は副作用的に予期しない変化を別のところでもたらしたりするものでもあって、そのバランスを取ることがなんとも難しい。貪欲であることと、単に我欲を押し通すこととはまた違うわけで、もう少しコントールが必要だと思っている。リスクテイクしたのだからその分の負担の大きさを覚悟してはいたが、わりと想定以上なところはあってストレスは大きい。年齢も年齢なので、自分が「何をすべきか」という論調よりも、周囲、世の中にとって自分は「何であるのか」という視点で動いた方が良いのかもなという気がしてきた。もう少し、置かれた場所というものも大事にしたい。</p>
+
+<p>抽象論についつい流れてしまったけど、具体的な技術的成果はQiitaを中心に流していこうと思っているので、ブログはポエミーにこんな感じで締めてみる。また来年。</p>
+
+<h2>おまけ：2015年定量評価</h2>
+
+<h3>技術</h3>
+
+<ul>
+<li>Linuxのサーバー運用に従事開始。初歩的なコマンドからさらい直せてる。</li>
+<li>CentOS7の業務利用開始。</li>
+<li>AWSの利用を個人でも業務でも開始。ただしほぼEC2。</li>
+<li>Ansible利用開始。</li>
+<li>Serverspec検証開始。</li>
+<li>Docker検証開始。</li>
+</ul>
+
+
+<h3>イベント</h3>
+
+<ul>
+<li>JAWS DAYS 2015</li>
+<li>JAWS UG 初心者支部</li>
+<li>デブサミ2015</li>
+<li>Ansible入門イベント</li>
+<li>他社の障害対応気にならNight</li>
+<li>手羽の会（ハンズラボ）</li>
+<li>Serverworks Sonic!</li>
+<li>OSC東京 2015秋</li>
+<li>Rakuten Tech 2015</li>
+<li>RubyKaigi 2015</li>
+<li>他</li>
+</ul>
+
+
+<h3>書籍</h3>
+
+<ul>
+<li>リーダブルコード</li>
+<li>プログラマが知るべき97のこと</li>
+<li>それがぼくには楽しかったから</li>
+<li>ハッカーと画家</li>
+<li>UNIXという考え方</li>
+<li>インターネットのカタチ</li>
+<li>Amazon Web Services パターン別構築・運用ガイド</li>
+<li>シェルプログラミング実用テクニック</li>
+<li>はじめてUNIXで仕事をする人が読む本</li>
+<li>大規模サービス技術入門</li>
+<li>Serverspec</li>
+<li>CentOS7実践ガイド</li>
+<li>Team Geak</li>
+<li>オペレーティングシステムの基礎</li>
+<li>たのしいインフラの歩き方</li>
+<li>他</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Serverspecファーストインプレッション]]></title>
+    <link href="http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/"/>
+    <updated>2015-12-31T19:22:54+09:00</updated>
+    <id>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression</id>
+    <content type="html"><![CDATA[<p>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。</p>
+
+<h2>サーバー構成の「仕様書」代わりとして</h2>
+
+<p>自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。</p>
+
+<p>Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。</p>
+
+<p>中には<a href="http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/">cronで監視チックに実行させている例</a>もあるようだが、それもアリかなと思う。</p>
+
+<h2>導入は簡単だが探求にはRubyスキル必須</h2>
+
+<p>Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。</p>
+
+<p>例えば私が初めて書いた<code>spec_helper.rb</code>はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;serverspec&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">properties</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;properties.yml&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">host</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;TARGET_HOST&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="n">set_property</span> <span class="n">properties</span><span class="o">[</span><span class="n">host</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">set</span> <span class="ss">:backend</span><span class="p">,</span> <span class="ss">:exec</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。</p>
+
+<p>自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。</p>
+
+<h2>国産OSSであるアドバンテージ</h2>
+
+<p>Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&#8217;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。</p>
+
+<p><a href="http://rebuild.fm/75/">Rebuild: 75: Book Driven Development (gosukenator)</a></p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg" alt="Serverspec" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Serverspec</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.12.31</div></div><div class="amazlet-detail">宮下 剛輔 <br />オライリージャパン <br />売り上げランキング: 213,793<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。<a href="https://github.com/ryotarai/infrataster">Infrataster</a>とも組み合わせられれば、よりテストの質は増しそう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[『Team Geek』読了]]></title>
-    <link href="http://chroju.github.io//blog/2015/12/14/review-team-geek/"/>
+    <link href="http://chroju.github.io/blog/2015/12/14/review-team-geek/"/>
     <updated>2015-12-14T22:14:29+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/12/14/review-team-geek</id>
+    <id>http://chroju.github.io/blog/2015/12/14/review-team-geek</id>
     <content type="html"><![CDATA[<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41SlY0zvpKL._SL160_.jpg" alt="Team Geek ―Googleのギークたちはいかにしてチームを作るのか" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Team Geek ―Googleのギークたちはいかにしてチームを作るのか</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.12.14</div></div><div class="amazlet-detail">Brian W. Fitzpatrick Ben Collins-Sussman <br />オライリージャパン <br />売り上げランキング: 18,890<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
 
@@ -35,9 +168,9 @@
   
   <entry>
     <title type="html"><![CDATA[Dockerファーストインプレッション]]></title>
-    <link href="http://chroju.github.io//blog/2015/12/04/docker-first-impression/"/>
+    <link href="http://chroju.github.io/blog/2015/12/04/docker-first-impression/"/>
     <updated>2015-12-04T20:48:49+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/12/04/docker-first-impression</id>
+    <id>http://chroju.github.io/blog/2015/12/04/docker-first-impression</id>
     <content type="html"><![CDATA[<p>前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。</p>
 
 <h2>「仮想マシン」と考えるとDockerは理解しづらい</h2>
@@ -72,9 +205,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ansible + Serverspec + Docker + circle ci によるインフラCI]]></title>
-    <link href="http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci/"/>
+    <link href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/"/>
     <updated>2015-11-18T22:13:25+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci</id>
+    <id>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci</id>
     <content type="html"><![CDATA[<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
 
 <p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>
@@ -172,9 +305,9 @@
   
   <entry>
     <title type="html"><![CDATA[オープンソースカンファレンス2015 Tokyo/Fall行ってきた]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/25/osc-2015-tokyo-fall/"/>
+    <link href="http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/"/>
     <updated>2015-10-25T21:42:59+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/25/osc-2015-tokyo-fall</id>
+    <id>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall</id>
     <content type="html"><![CDATA[<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/chroju/22273557670/in/dateposted-public/" title="このはちゃんかわいい"><img src="https://farm1.staticflickr.com/630/22273557670_c7c51c391b_z.jpg" width="640" height="640" alt="このはちゃんかわいい"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
 
 <p>戦利品、ConoHaちゃんかわええ。</p>
@@ -235,9 +368,9 @@
   
   <entry>
     <title type="html"><![CDATA[インフラエンジニアの幸福論]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/20/eudaemonics-of-infrastructure-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/"/>
     <updated>2015-10-20T23:35:46+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/20/eudaemonics-of-infrastructure-engineer</id>
+    <id>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer</id>
     <content type="html"><![CDATA[<p>1年前、<a href="http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4">インフラエンジニアは死んだ</a>。</p>
 
 <p>遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。</p>
@@ -258,9 +391,9 @@
   
   <entry>
     <title type="html"><![CDATA[個人開発環境にGithub Flowを適用する]]></title>
-    <link href="http://chroju.github.io//blog/2015/10/04/individual-github-flow/"/>
+    <link href="http://chroju.github.io/blog/2015/10/04/individual-github-flow/"/>
     <updated>2015-10-04T14:00:05+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/10/04/individual-github-flow</id>
+    <id>http://chroju.github.io/blog/2015/10/04/individual-github-flow</id>
     <content type="html"><![CDATA[<p>Github、<a href="https://github.com/chroju">joinしたのは2013年</a>で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd => commit => pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。</p>
 
 <h1>What is Github flow ?</h1>
@@ -465,9 +598,9 @@
   
   <entry>
     <title type="html"><![CDATA[開発環境のためのansibleを出来るだけベストプラクティスでまとめた]]></title>
-    <link href="http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice/"/>
+    <link href="http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/"/>
     <updated>2015-09-24T19:37:08+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/09/24/ansible-in-nearly-best-practice</id>
+    <id>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice</id>
     <content type="html"><![CDATA[<p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
 
 <h2>なぜEC2？</h2>
@@ -549,9 +682,9 @@
   
   <entry>
     <title type="html"><![CDATA[ハッカーマインドと3冊のエッセイ]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/16/hackers-mind-and-their-essay/"/>
+    <link href="http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/"/>
     <updated>2015-08-16T16:02:51+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/16/hackers-mind-and-their-essay</id>
+    <id>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay</id>
     <content type="html"><![CDATA[<p>ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊のことである。しかし『それがぼくには』は重要な一冊だと思うんだけど、なんでまた絶版なんですかね。そんな古い本でもないのに。仕方なく図書館で借りたけど。</p>
 
 <p>いわゆるハッカーマインドを描いた本としていずれも似たような印象を抱きがちだが、実際に読んでみるとスタンスはだいぶ異なる。『ハッカーと画家』はコンピュータについてあまり詳しくない人に対して、ハッカーというのはこういう人種なのだと切々と説いた本であり、故にそれほど挑発的な印象は受けず、すらすらと読み進めていくことができる。もっともこれがハッカー以外に理解できるかというとかなり疑問ではあるが、ハッカーが比較的客観的に自らを解き明かした本として参考にはなる。著者のポール・グレアムのエッセイは<a href="http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t:%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7">naoya_t氏による和訳</a>がいくらか読めるので、これを読んで興味をそそられたら読んでみるのでもいいかもしれない。あと、Lispめっちゃ推してる。</p>
@@ -583,9 +716,9 @@
   
   <entry>
     <title type="html"><![CDATA[Qiitaを使うということの意義]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/09/qiita-commoditization-of-engineer/"/>
+    <link href="http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/"/>
     <updated>2015-08-09T23:28:57+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/09/qiita-commoditization-of-engineer</id>
+    <id>http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer</id>
     <content type="html"><![CDATA[<p><a href="http://qiita.com/chroju/">Qiitaにいくつか記事を上げてみて</a>思ったことを。</p>
 
 <h1>承認欲求が満たしやすい</h1>
@@ -613,9 +746,9 @@
   
   <entry>
     <title type="html"><![CDATA[Kaminariの実装をしてみた]]></title>
-    <link href="http://chroju.github.io//blog/2015/08/08/exhibi-update/"/>
+    <link href="http://chroju.github.io/blog/2015/08/08/exhibi-update/"/>
     <updated>2015-08-08T19:47:30+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/08/08/exhibi-update</id>
+    <id>http://chroju.github.io/blog/2015/08/08/exhibi-update</id>
     <content type="html"><![CDATA[<p>久しぶりに稼働させている<a href="http://chroju.net/exhibi">ExhiBi</a>というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。</p>
 
 <h1>kaminari</h1>
@@ -669,9 +802,9 @@
   
   <entry>
     <title type="html"><![CDATA[Qiitaはじめました]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/25/start-qiita/"/>
+    <link href="http://chroju.github.io/blog/2015/07/25/start-qiita/"/>
     <updated>2015-07-25T11:07:38+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/25/start-qiita</id>
+    <id>http://chroju.github.io/blog/2015/07/25/start-qiita</id>
     <content type="html"><![CDATA[<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fchroju" title="chroju - Qiita" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://qiita.com/chroju" target="_blank">chroju - Qiita</a></iframe>
 
 
@@ -685,9 +818,9 @@
   
   <entry>
     <title type="html"><![CDATA[暗号化とハッシュ化に関する基本的な事柄まとめ]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/20/encryption-hash-at-first/"/>
+    <link href="http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/"/>
     <updated>2015-07-20T16:56:06+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/20/encryption-hash-at-first</id>
+    <id>http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first</id>
     <content type="html"><![CDATA[<p>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。</p>
 
 <ul>
@@ -761,9 +894,9 @@
   
   <entry>
     <title type="html"><![CDATA[AnsibleとDigitalOceanでどこでも使える開発環境を作る]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
+    <link href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/"/>
     <updated>2015-07-20T14:50:28+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
+    <id>http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env</id>
     <content type="html"><![CDATA[<p>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。</p>
 
 <p>結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで<a href="http://chroju.net">http://chroju.net</a>をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると<a href="https://www.digitalocean.com/">DigitalOcean</a>が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。</p>
@@ -833,9 +966,9 @@
   
   <entry>
     <title type="html"><![CDATA[Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/04/development-environment-for-windows/"/>
+    <link href="http://chroju.github.io/blog/2015/07/04/development-environment-for-windows/"/>
     <updated>2015-07-04T20:24:32+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/04/development-environment-for-windows</id>
+    <id>http://chroju.github.io/blog/2015/07/04/development-environment-for-windows</id>
     <content type="html"><![CDATA[<p>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。</p>
 
 <h2>Chocolatey</h2>
@@ -1006,9 +1139,9 @@
   
   <entry>
     <title type="html"><![CDATA[すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight]]></title>
-    <link href="http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting/"/>
+    <link href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/"/>
     <updated>2015-07-03T00:20:52+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/07/03/how-about-your-troubleshooting</id>
+    <id>http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting</id>
     <content type="html"><![CDATA[<p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
 
 <p>改めて見るとすげー名前のイベント……行ってきた。</p>
@@ -1038,9 +1171,9 @@
   
   <entry>
     <title type="html"><![CDATA[SIerからサービス系の会社に転職して1か月]]></title>
-    <link href="http://chroju.github.io//blog/2015/06/28/one-month-from-job-changing/"/>
+    <link href="http://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/"/>
     <updated>2015-06-28T22:00:14+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/06/28/one-month-from-job-changing</id>
+    <id>http://chroju.github.io/blog/2015/06/28/one-month-from-job-changing</id>
     <content type="html"><![CDATA[<p>SIerからサービス提供型の会社に転職して1か月ぐらい経ったので、感想とか今後のこととかまとめておく。立ち位置としてはインフラエンジニア、まぁ要は運用担当者になるのだが、BtoB、BtoCで動いている提供サービスすべてと、社内インフラまでひっくるめたありとあらゆるインフラの運用管理を受け持っている。なのでそれこそ雑用めいた仕事から構築にイッチョカミしてサーバー立てたりAWSいじったりみたいなところまで、見渡すべき範囲はアホほど広い感じ。</p>
 
 <h2>日常のストレスは減った</h2>
@@ -1073,9 +1206,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ansibleの入門イベント聞いてきた話]]></title>
-    <link href="http://chroju.github.io//blog/2015/06/25/hika-labo-ansible/"/>
+    <link href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/"/>
     <updated>2015-06-25T00:21:58+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/06/25/hika-labo-ansible</id>
+    <id>http://chroju.github.io/blog/2015/06/25/hika-labo-ansible</id>
     <content type="html"><![CDATA[<p><a href="https://atnd.org/events/66419">これ</a>行ってきた。ざくっと感想を箇条書きで。</p>
 
 <ul>
@@ -1103,9 +1236,9 @@
   
   <entry>
     <title type="html"><![CDATA[ファッション無職になった]]></title>
-    <link href="http://chroju.github.io//blog/2015/05/16/i-am-neet-now/"/>
+    <link href="http://chroju.github.io/blog/2015/05/16/i-am-neet-now/"/>
     <updated>2015-05-16T23:28:21+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/05/16/i-am-neet-now</id>
+    <id>http://chroju.github.io/blog/2015/05/16/i-am-neet-now</id>
     <content type="html"><![CDATA[<p>退職エントリーに対して「で、誰？」っていうレスが付くのがもはや定番化しているような気もするけど、ブログなんてだいたいはチラ裏なんだから「誰？」なんて退職エントリーに限らずなんだってそうやんけ、と思ったりはしてます。誰だかわかんない人の文章読むのがネットの醍醐味なんだから、あえて煽らなくてもいいじゃんねー？というネタにマジレス。</p>
 
 <p>というわけで退職、自体は実際にはまだなのだが、すでに現職はフェードアウトしてファッション無職期間に入っていたりする。半月以上の休暇なんて大学以来だからちょっとワクワクしてるし、大学4年の春休みに「こんなに休めることはもうないんやで」とか言われたのは嘘だったんだなーとも思ってる。んで、インフラ系SEを辞めて、来月からSaaS事業者でインフラエンジニアをすることになる。転職にあたってそもそも何がきっかけになったのか、忘れないよう書き留めておく。</p>
@@ -1124,67 +1257,6 @@
 <p>と、いうわけで、今後は今まで以上にインフラ寄りにお勉強を深めていきたい所存。先日のJAWS-UGへの参加なんかも是非とも続けていきたいところでござんす。</p>
 
 <div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4840144265/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41aEGDjXwAL._SL160_.jpg" alt="34歳無職さん 1 (MFコミックス フラッパーシリーズ)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4840144265/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">34歳無職さん 1 (MFコミックス フラッパーシリーズ)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.05.16</div></div><div class="amazlet-detail">いけだ たかし <br />メディアファクトリー (2012-02-23)<br />売り上げランキング: 15,860<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4840144265/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[JAWS-UG初心者支部の立ち上げに行ってきた #jawsug_bgnr]]></title>
-    <link href="http://chroju.github.io//blog/2015/05/15/jaws-ug-for-beginners-at-first/"/>
-    <updated>2015-05-15T00:40:09+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/05/15/jaws-ug-for-beginners-at-first</id>
-    <content type="html"><![CDATA[<p><a href="https://jawsug-beginner.doorkeeper.jp/events/22161">JAWS-UG初心者支部【第1回】2015年5月14日(木) - JAWS-UG初心者支部 | Doorkeeper</a></p>
-
-<p>AWS初心者具合がどれぐらいかと言うと、先日のJAWS DAYS 2015のハンズオンセッションでアカウント作り、それっきり一度もログインしていないぐらいの初心者なんですが、今回JAWS-UGの初心者支部というのが出来ると聞いたので飛び込むにはちょうどいいと思い行ってきました。しかし会場の内田洋行さん、初めて行ったけど大変ナウいオフィスでびっくりした。横に長い会場だったけど、6面スクリーン同時投影でどの席でも見やすいとかハンパない。</p>
-
-<h2>AWSは入口が山のようにある</h2>
-
-<p>初心者と口で言うのは簡単ですが、それを脱する手段も実は山のようにあるのがAWSで。そもそもがマウスでポチポチやればサーバー立ち上がっちゃうっていうサービス自体の簡易性を反映してなのかなんなのか知りませんが、入口といえる部分は非常に多いです。今回の勉強会では「入口」の紹介に非常に時間を割いていたなという印象。</p>
-
-<p>自分が特に印象深かったのは<a href="http://aws.amazon.com/jp/training/self-paced-labs/">セルフペースラボ</a>と<a href="http://aws.amazon.com/jp/webinar-flow/">Webiner</a>。前者はウェブ上で無料で（有料コースもあり）使える実践的なラボ空間で、自学自習でAWSの使い方が学べるとのこと。自分はVMwareを今専門としているのだが、VMwareでも同様の<a href="http://labs.hol.vmware.com/HOL/catalogs/">Hands on Labs</a>があったりして、使えるもん使わなきゃ損だなと。後者はオンライン・セミナーで、毎週開催されているそうです。火曜日18:00からが初心者向け、水曜日18:00からがBlack Belt Tech、すなわち「黒帯」ですので中級者向けのセミナー。</p>
-
-<p>他にも技術書の読み方や推薦があったり、ちょっと上級者向けな気はしたけどRe:Inventの紹介があったり（まーこういうのは早いうちから知っておいて、アンテナ高めといた方が良いのだろう）。とにかく勉強しようと思ったらいくらでもAWSを知るための入口はあるし、しかもかなり敷居の低いところから始めることもできるので、やらないで指くわえてたらどんどん置いていかれてしまうだけだなと。</p>
-
-<h2>人と会うこと</h2>
-
-<p>勉強会界隈ではよく言われる話で、本番は懇親会ってのがあります。まぁこの集まり自体が「Users Group」であることからもわかる通り、エンジニア同士の会社の枠を超えたつながりってすごく重視されていて、今日のなかでも何度も話に出ました。というか「隣の人と話してみましょう」なワークセッションが設けられていたぐらいの。これはあれですね。勉強会自体の初心者が多いことも見越してのことだったんでしょうね。</p>
-
-<p>自分はもうとにかくコミュ障というか人と話さず済むならそれが一番って感じの人間なんですけど、ここまで言われると話さないわけにもいかないんじゃないかなと思いつつあるし、てか勉強会参加の第一の目的が「コミュ障脱却」になってくるのではないかという話も。。</p>
-
-<p>これまでの勉強会で他の参加者と話したことは皆無ではなくて、んでやっぱり社外のエンジニアだと技術との向き合い方だとか、会社環境における技術選択の方式だとかが全然違うことが多くて、そういうの聞いてるだけで確かに楽しいのは知ってるんですよね。んでユーザーグループとなるとそのつながりがずっと続いていくわけで、絶えず情報交換しながら自分の会社に持ち帰って試してみて、また勉強会に課題を持ってくるみたいなサイクルが出来てくるわけじゃないですか。会社内だとなかなか解決できないことを外に出すこともできるわけで、閉塞感を打破する矛先を持っておくことってすごい重要なんじゃないかって気がします。近所にもJAWSの支部あるっぽいんで、そっちにも顔出してみたい……ですね、なんとか。あー、初心者向けならコミュ障のための勉強会参加法も教えてほしいなぁ。</p>
-
-<h2>初心者の中での隔絶</h2>
-
-<p>セッションを聞きながらTwitterでハッシュタグ追っていたのですが、結構レベル高くないか？難しいよ？みたいな声もちょこちょこ聞こえていて、「初心者」とひとえに言ってもレベルの差があるのだと気付いた次第。</p>
-
-<p>それを言ってしまうと多分自分は「なんちゃって初心者」です。オンプレミスのインフラエンジニアとしては数年の業務経験がありますし、VPS使ってるしAWSもアカウントは持ってるしで、完全な初心者かと言うとそうではない。一方で本当に「AWSってよく聞くけどなんなの？ 導入したらおいしいの？」ぐらいの人もいるのだし、敷居をどこまで下げていくかって案外むずかしい話なのかもしれないなと。初心者向けを謳っているのに「いやいや難しいでしょ」で人が離れてしまったら悲しいし、そこへのフォローってどうしたらいいのかなとか。</p>
-
-<p>あと「わからないことを取りあえずスルーする力」ってのも必要な気がした。今日のセッションって結構具体的なAWSのサービス名も出たりして、自分も全然わからない言葉は少なくなかったんですけど、一つ一つの単語や一部の話はわからなくとも、全体として何を言っているのか掴めれば取りあえずOKってことも多いし、わからない部分にこだわりすぎず、ある程度スルーする力って必要だと思うのです。でもこれって日々「わからないこと」と向き合っているエンジニアならではの特性っていう部分もあると思うので、そうじゃない人も入ってくる可能性のあるこの初心者支部では課題になりそうとも思った。</p>
-
-<p>やろうと思えばいくらでもやることあるし、やらないと置いて行かれるだけだってのが理解できたので、できることからガツガツやっていきたい所存。とはいえ「目的のない勉強」は行き詰まりやすいので、AWSで何ができるのか、自分は何をしたいのかをちょっと考えてみようかなと。とりあえず「紫本」買ってみるか。。。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト]]></title>
-    <link href="http://chroju.github.io//blog/2015/05/03/google-spread-sheet-update-via-ruby/"/>
-    <updated>2015-05-03T19:52:10+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/05/03/google-spread-sheet-update-via-ruby</id>
-    <content type="html"><![CDATA[<script src="https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js"></script>
-
-
-<p>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。</p>
-
-<p>用途としては非常に個人的なもので、各種オンラインバンクの残高をスクレイピングしてハッシュで返してくれるスクリプトをいくつか作ってあったので、その戻り値を使ってオートで家計簿作れたらいいなーという思いによるものです。ハッシュのキーをそのままスプレッドシート内の項目名として使っているので、シンボルではなく文字列をキーとして使ってしまっているのがあまりよろしくないのかなぁとは思うのだが、いつか改善するってーことで、とりあえず動くものを作ることを優先させた。んで、これって結構汎用的に使えそうなスクリプトかもなと思って公開した次第。</p>
-
-<p>Googleスプレッドシートをいじるのには<code>google-drive-ruby</code>というGemを使ってます。Githubは<a href="https://github.com/gimite/google-drive-ruby">ここ</a>。<code>def initialize</code>内の処理は、このGemの初期設定によるものなので、Gemの方のReadme読んでもらえればよいかと。単純な話、GoogleのOAuth API使っているだけの話です。ただ、このコードだと叩くたびにブラウザからAPI使用許可を与えてやって、success codeをコピーしてコマンドラインで入力してやらなくちゃならないっていう手間があって、そこまで省く方法なにかありそうだけどまだ調べてない。あと気になっている点としては、このGemでセルの値を取ると、表示値しか取れないこと。式を入れているセルについては、式を取るか表示値を取るか選べるといいなぁと思ったんだけど、そこまではできないらしい。しかしまぁ、とにかくGoogleスプレッドシートという、APIで叩けるクラウドの表計算ソフトがあるというのは本当に便利なことですね、って感じ。</p>
-
-<h2>参考</h2>
-
-<ul>
-<li><a href="http://qiita.com/inokappa/items/2566b21f4b1deac6f95b">RubyからGoogle SpreadSheet をいじるメモ - Qiita</a></li>
-<li><a href="http://qiita.com/yumiyon/items/d7c370b3b8582431a3de">Google DriveのスプレッドシートにRubyでアクセスする方法 - Qiita</a></li>
-</ul>
 
 ]]></content>
   </entry>

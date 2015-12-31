@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ci' | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/ci/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/ci/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ansible + Serverspec + Docker + circle ci によるインフラCI]]></title>
-    <link href="http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci/"/>
+    <link href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/"/>
     <updated>2015-11-18T22:13:25+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/11/18/ansible-serverspec-circle-ci</id>
+    <id>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci</id>
     <content type="html"><![CDATA[<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
 
 <p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>

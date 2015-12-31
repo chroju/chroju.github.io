@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: capistrano | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/capistrano/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/capistrano/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Railsのデプロイでハマった点まとめ]]></title>
-    <link href="http://chroju.github.io//blog/2015/01/05/post/"/>
+    <link href="http://chroju.github.io/blog/2015/01/05/post/"/>
     <updated>2015-01-05T22:22:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/01/05/post</id>
+    <id>http://chroju.github.io/blog/2015/01/05/post</id>
     <content type="html"><![CDATA[<p>昨年末に自身初のRailsアプリを見切り発車という名でローンチしましたが、その際デプロイで1か月以上もハマってましたので、ハマリポイントをピックアップしてまとめておきます。</p>
 
 <h2>Capistranoでssh-agentを使う</h2>
@@ -145,9 +145,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる]]></title>
-    <link href="http://chroju.github.io//blog/2014/04/12/post/"/>
+    <link href="http://chroju.github.io/blog/2014/04/12/post/"/>
     <updated>2014-04-12T21:56:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/04/12/post</id>
+    <id>http://chroju.github.io/blog/2014/04/12/post</id>
     <content type="html"><![CDATA[<p>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでに<a href="http://chroju89.hatenablog.jp/entry/2014/02/20/000348">こちら</a>のエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。</p>
 
 <h2>今回作成したファイル</h2>
@@ -294,9 +294,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Capistrano3がわからんので今一度イチから考えなおしてみる]]></title>
-    <link href="http://chroju.github.io//blog/2014/04/06/post/"/>
+    <link href="http://chroju.github.io/blog/2014/04/06/post/"/>
     <updated>2014-04-06T19:13:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/04/06/post</id>
+    <id>http://chroju.github.io/blog/2014/04/06/post</id>
     <content type="html"><![CDATA[<p>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。</p>
 
 <h2>Capistranoは何をしてくれるのか</h2>
@@ -386,9 +386,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Rails環境構築（5）Capistranoによるデプロイ ※未完]]></title>
-    <link href="http://chroju.github.io//blog/2014/02/20/post/"/>
+    <link href="http://chroju.github.io/blog/2014/02/20/post/"/>
     <updated>2014-02-20T00:03:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/02/20/post</id>
+    <id>http://chroju.github.io/blog/2014/02/20/post</id>
     <content type="html"><![CDATA[<p>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。</p>
 
 <p>Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。</p>

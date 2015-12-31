@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: octopress | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[はてなブログからの記事移行を完了した]]></title>
-    <link href="http://chroju.github.io//blog/2015/03/01/move-from-hatena-blog-to-octopress/"/>
+    <link href="http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/"/>
     <updated>2015-03-01T13:15:20+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/03/01/move-from-hatena-blog-to-octopress</id>
+    <id>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress</id>
     <content type="html"><![CDATA[<p><a href="http://chroju89.hatenablog.jp/">旧ブログ</a>から全記事移行完了しました。ちょっとだけ疲れた。</p>
 
 <p>もともとはてなブログで記事を書いてたわけですが、こちらは記事のエクスポート形式がMovableType形式にしか対応してないので、そこからMarkdownに変換し直したりだとか、はてなキーワードリンクを削除したりとか、地道にいろいろやらねばならず。たぶんスクリプトでガチャーンと一発でやれるんでしょうけど、力が足りないのでvimでファイル開いて変換ポイント確認してはポチポチコマンドで置換してやりました。</p>
@@ -89,9 +89,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress + github.ioでブログを作りました]]></title>
-    <link href="http://chroju.github.io//blog/2015/02/17/post/"/>
+    <link href="http://chroju.github.io/blog/2015/02/17/post/"/>
     <updated>2015-02-17T00:06:42+09:00</updated>
-    <id>http://chroju.github.io//blog/2015/02/17/post</id>
+    <id>http://chroju.github.io/blog/2015/02/17/post</id>
     <content type="html"><![CDATA[<p>これまではてなブログで書いていた<a href="http://chroju89.hatenablog.jp">技術系ブログ</a>を移設する目的で、Octopressとgithub.ioを使ったブログを作成しました。もはや常套手段とも言えるブログ作成方法ですので、ノウハウはネット上のあちこちに公開されており、特に苦労することもなかったです。というか、こんな簡単にブログ作れちゃうもんなんだなぁという感慨。</p>
 
 <ul>

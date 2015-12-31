@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 環境構築 | the world as code]]></title>
-  <link href="http://chroju.github.io//blog/categories/huan-jing-gou-zhu/atom.xml" rel="self"/>
-  <link href="http://chroju.github.io//"/>
-  <updated>2015-12-14T22:16:31+09:00</updated>
-  <id>http://chroju.github.io//</id>
+  <link href="http://chroju.github.io/blog/categories/huan-jing-gou-zhu/atom.xml" rel="self"/>
+  <link href="http://chroju.github.io/"/>
+  <updated>2015-12-31T19:33:54+09:00</updated>
+  <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails環境構築（4）nginx導入]]></title>
-    <link href="http://chroju.github.io//blog/2014/02/02/post/"/>
+    <link href="http://chroju.github.io/blog/2014/02/02/post/"/>
     <updated>2014-02-02T16:08:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/02/02/post</id>
+    <id>http://chroju.github.io/blog/2014/02/02/post</id>
     <content type="html"><![CDATA[<p>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。</p>
 
 <pre><code>$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
@@ -58,9 +58,9 @@ $ sudo chkconfig nginx on
   
   <entry>
     <title type="html"><![CDATA[Rails環境構築（3）PostgreSQLインストール]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/26/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/26/post/"/>
     <updated>2014-01-26T16:22:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/26/post</id>
+    <id>http://chroju.github.io/blog/2014/01/26/post</id>
     <content type="html"><![CDATA[<p>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。</p>
 
 <pre><code>$ yum list | grep postgresql
@@ -143,9 +143,9 @@ host   all           all            ::1/128                     md5
   
   <entry>
     <title type="html"><![CDATA[Rails環境構築（2）Rubyのインストール + α]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/23/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/23/post/"/>
     <updated>2014-01-23T22:55:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/23/post</id>
+    <id>http://chroju.github.io/blog/2014/01/23/post</id>
     <content type="html"><![CDATA[<p>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。</p>
 
 <p>まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、postgresqlなんかもまぁ必要だろう。gccとかは要る……のか？</p>
@@ -222,9 +222,9 @@ $ bundle -v
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails環境構築はじめます]]></title>
-    <link href="http://chroju.github.io//blog/2014/01/18/post/"/>
+    <link href="http://chroju.github.io/blog/2014/01/18/post/"/>
     <updated>2014-01-18T21:50:00+09:00</updated>
-    <id>http://chroju.github.io//blog/2014/01/18/post</id>
+    <id>http://chroju.github.io/blog/2014/01/18/post</id>
     <content type="html"><![CDATA[<p>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。</p>
 
 <div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
