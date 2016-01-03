@@ -9,7 +9,11 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="『パーフェクトRuby』p.196より。わりと苦手な分野。 まずはファイルをひらく。#openして変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。#readはファイルの内容全体を読み込む一方、# &hellip;">
+  <meta name="description" content="『パーフェクトRuby』p.208より。 Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる。従って多くの操作を特異メソッドで行うことができる。 1
+2
+3
+4
+Dir.pwd # =&gt; &quot;/Users/chroju&quot; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +114,106 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/14/study-ruby-dir/">Ruby基礎復習(9) Dirクラス</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-14T22:45:02+09:00'><span class='date'>2015-04-14 (Tue)</span> <span class='time'>10:45 pm</span></time>
+        
+         | <a href="/blog/2015/04/14/study-ruby-dir/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『パーフェクトRuby』p.208より。</p>
+
+<p>Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる。従って多くの操作を特異メソッドで行うことができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span> <span class="c1"># =&gt; &quot;/Users/chroju&quot;</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">pwd</span> <span class="c1"># =&gt; &quot;/tmp&quot;</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">home</span> <span class="c1"># =&gt; &quot;/Users/chroju&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ディレクトリに含まれるファイルは<code>Dir.entries</code>で配列として返り、<code>Dir.foreach</code>でEnumerableとして返る。また<code>Dir.glob</code>により、パターンにマッチするファイルパスを配列で返すこともできる。<code>Dir.glob</code>は<code>Dir[]</code>と同義である。引数のディレクトリが存在するか確認する場合は<code>Dir.exists?</code>を用いる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">entries</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="c1"># =&gt; [&quot;.&quot;, &quot;..&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;baz&quot;]</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">d</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="n">d</span>
+</span><span class='line'><span class="p">}</span> <span class="c1"># =&gt; &quot;.&quot;, &quot;..&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;baz&quot;</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;ba*&#39;</span><span class="p">)</span> <span class="c1"># =&gt; [&quot;bar&quot;, &quot;baz&quot;]</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;ba*&#39;</span><span class="o">]</span> <span class="c1"># =&gt; [&quot;bar&quot;, &quot;baz&quot;]</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">exists?</span><span class="p">(</span><span class="s2">&quot;hoo&quot;</span><span class="p">)</span> <span class="c1"># =&gt; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ディレクトリの削除、生成等も特異メソッドにて。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">mkdir</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mo">0755</span> <span class="c1"># パーミッション0755でfooディレクトリを生成</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">rmdir</span> <span class="s1">&#39;foo&#39;</span> <span class="c1"># fooディレクトリを削除するが、対象ディレクトリは空である必要がある</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">delete</span> <span class="s1">&#39;foo&#39;</span> <span class="c1"># Dir.rmdirと同義</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">.</span><span class="n">unlink</span> <span class="s1">&#39;foo&#39;</span> <span class="c1"># Dir.rmdirと同義</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>Dir.open</code>すると、Dirオブジェクトを取得することができ、インスタンスメソッドによる操作が可能になる。Dirオブジェクトは読み込み位置を持っていて、ディレクトリ内のファイル名を1つずつ読み込ませることができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">dir</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">path</span> <span class="c1"># =&gt; &quot;/temp&quot; （現在のファイルパス）</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">pos</span> <span class="c1"># =&gt; 0 （現在の読み込み位置）</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 読み込み位置を移動</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">read</span> <span class="c1"># =&gt; &quot;..&quot;</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">rewind</span> <span class="c1"># 読み込み位置を先頭に戻す</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">read</span> <span class="c1"># =&gt; &quot;.&quot;</span>
+</span><span class='line'><span class="n">dir</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">p</span> <span class="n">f</span><span class="p">}</span> <span class="c1"># =&gt; &quot;.&quot;, &quot;..&quot;, &quot;bar&quot;, &quot;baz&quot;, &quot;foo&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -885,59 +989,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/22/jaws-days-2015/">JAWS DAYS 2015でAWS童貞捨ててきた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-22T22:38:02+09:00'><span class='date'>2015-03-22 (Sun)</span> <span class='time'>10:38 pm</span></time>
-        
-         | <a href="/blog/2015/03/22/jaws-days-2015/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://www.flickr.com/photos/chroju/16701892109" title="#jawsdays 初心者ハンズオンなう by chroju, on Flickr"><img src="https://farm9.staticflickr.com/8687/16701892109_b35dd45f3a_n.jpg" width="320" height="320" alt="#jawsdays 初心者ハンズオンなう"></a></p>
-
-<p><a href="http://jawsdays2015.jaws-ug.jp/">JAWS DAYS</a>、前々からやってるのは知ってたんですけど、自分はAWS経験ないし行ってもわかんねーかなと思ってなんとなく行かずにいたんですが、今回タイムテーブル覗いてみたら初心者向けハンズオンもあったので意を決して行ってきました。</p>
-
-<p>ハンズオンでAWSアカウント作り、とりあえずEC2のインスタンスを1つばちこんと立てて、もう1こ簡単なREST API使ったサービスをばちこんと立てたので、無事にAWS童貞捨てることができました。クリック1つでサーバーが立つってのは知ってはいたけど、実際やってみるとほんと楽だなと。ていうかこれがあるならインフラエンジニアって何のためにいんの？ってやっぱり思うのですよね。もちろん大規模に組むならどこにどのサービス使ってスケーリングの設定はどうでみたいのがいるし、サーバーとストレージとLB立てるってだけがエンジニアではないと思うけど、サーバー1つ立てんのにいちいち申請上げて手順書き出して何人日もかけてやってる自分と比べると、デプロイのスピードも容易性も、おまけに確実性も段違いなわけで。わかってる、わかってるつもりだったけど、こりゃもう無理だなというか、クラウドファーストってよりAWSファーストが前提にあって、オンプレミスはなにか制限がある場合の最終手段にしかならんよなということを改めて実感してしまった気がします。</p>
-
-<p>セッションは結果としてわりとミーハーに聞いてしまって、ソニックガーデン倉貫さんの話だとかハンズラボ長谷川社長の話だとか、さくらインターネット田中社長がモデレーターをつとめるパネディスとかに参加してました。特に倉貫さんの「納品のない受託開発」の話、これまできちんと聞いたことなかったのですんごい興味を惹かれました。「受託開発」と言ってますけど、実質的には顧客との関係は受託開発よりも強固なもので。要するにビジネスモデルはあるけどエンジニアがいないようなスタートアップに対し、技術顧問を務めるような形で開発と運用を請け負うのですね。それはシステムを作って収めるというよりは、顧客の課題解決を一緒になってシステム開発によって実現していくこと。エンジニアの働き方の概念自体が変化する話。これをソニックガーデン社外の人間がすぐ真似できんのかと言ったらそうではないかもしれませんけど、現状の特に死に体になってる受託開発界隈に対して一石を投じるには十分過ぎる話だと思いました。</p>
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/46130528" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/kuranuki/ss-46130528" title="「納品のない受託開発」の先にある「エンジニアの働きかたの未来」" target="_blank">「納品のない受託開発」の先にある「エンジニアの働きかたの未来」</a> </strong> from <strong><a href="//www.slideshare.net/kuranuki" target="_blank">Yoshihito Kuranuki</a></strong> </div></p>
-
-<p>あとハンズラボの話に関してはこのツイートの内容に尽きる気がします。正直、羨ましいというか、今でこそ先駆的な一例に過ぎないけど、たぶんこういう例は徐々に増えていく、その一端なのだろうなと思っている。</p>
-
-<blockquote class="twitter-tweet" lang="ja"><p>ハンズやあきんどスシローのすごいところは、それまでtech companyっぽくない印象だった業態が、じつは <a href="https://twitter.com/hashtag/jawsdays?src=hash">#jawsdays</a> で先進的な事例として講演できるようなことをやってのけたところだと思う。 クラウドだからできた。</p>&mdash; Haruka Iwao (@Yuryu) <a href="https://twitter.com/Yuryu/status/579523731719995392">2015, 3月 22</a></blockquote>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>AWSのポイントはやっぱり、やろうと思えばすぐなんでもやれるって点だと思うんですよね。サービスやシステムを構築するにあたり、インフラをデリバリーするスピードがAWSによって格段に上がった。今まで何人日、何人月という工数をかけて、それでもヒューマンエラーで障害起こしてたようなインフラが意味を成さなくなった。じゃあその時代にインフラエンジニアは何をしなければならないのか？ってのは、ほんとちゃんと考えなきゃ死ぬな―これ。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -957,7 +1008,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

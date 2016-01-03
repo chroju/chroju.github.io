@@ -9,8 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="完全に嵌った。さっぱりわからん。 1
-undefined method `to_css' for nil:NilClass twitter-bootstrap-railsを試してみているのだが、インストールしていざブラウザからアクセスしてみると、undefined methodのエラーが出てしまう &hellip;">
+  <meta name="description" content="今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +110,56 @@ undefined method `to_css' for nil:NilClass twitter-bootstrap-railsを試して�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/14/post/">bundle installはどのパスに対してすべきなのか問題</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-14T22:13:00+09:00'><span class='date'>2014-01-14 (Tue)</span> <span class='time'>10:13 pm</span></time>
+        
+         | <a href="/blog/2014/01/14/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% bundle install --path vendor/bundle</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
+
+<p>まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な<a href="http://railstutorial.jp/">オンラインのRoRチュートリアル</a>にはこのことが書かれてなかったので、書き留めた次第。</p>
+
+<ul>
+<li><a href="http://qiita.com/emadurandal/items/a60886152a4c99ce1017">Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]</a></li>
+<li><a href="http://memo.yomukaku.net/entries/IpCSQmo">Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net</a></li>
+</ul>
+
+
+<p></blockquote></p>
+
+<p>で、<a href="http://chroju89.hatenablog.jp/entry/2014/01/09/235505">先日のエラー</a>についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -441,122 +490,6 @@ undefined method `to_css' for nil:NilClass twitter-bootstrap-railsを試して�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/08/post/">SSHでサーバーリモートログインする際のあれこれまとめ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-08T23:22:00+09:00'><span class='date'>2013-12-08 (Sun)</span> <span class='time'>11:22 pm</span></time>
-        
-         | <a href="/blog/2013/12/08/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。</p>
-
-<h2>環境</h2>
-
-<p>今回はいわゆる「リモートのサーバーにSSHを使ってログインする」場合と「GithubにSSHでpushする」場合を想定する。使用するクライアントはMac OS X、サーバーはCent OS。ちなみにシェルはbash。</p>
-
-<h2>そもそもSSHってなんぞや</h2>
-
-<p>セキュアなリモート通信用プロトコル。セキュアな、と言っているのはTelnetあたりが平文でパスワード贈っちゃうのに対して、SSHが暗号化に対応している点を指す。で、暗号化には今多くの場合RSA（公開鍵暗号方式）を用いているらしい。だから秘密鍵と公開鍵を作ってローカルとリモートにそれぞれ配置して云々という設定が必要になる。あとGitHubもリモートレポジトリにつなぐ時にSSHが使える。</p>
-
-<h2>リモートサーバー接続手順</h2>
-
-<p>まずリモートサーバーにSSHでつなぐときの手順。</p>
-
-<h3>1. 認証鍵の生成</h3>
-
-<p>Linuxには鍵生成のコマンドがあるので、それを使う。</p>
-
-<blockquote>ssh-keygen -t rsa</blockquote>
-
-
-<p>-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。<strong>絶対控える。</strong></p>
-
-<p>作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。</p>
-
-<h3>2. 公開鍵の転送</h3>
-
-<p>鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。</p>
-
-<blockquote>scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/</blockquote>
-
-
-<p>SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。</p>
-
-<p>ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(<em>ﾉω・</em>)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。</p>
-
-<p>例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。</p>
-
-<h3>3. 公開鍵の登録</h3>
-
-<p>今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。</p>
-
-<blockquote>mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</blockquote>
-
-
-<p>authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。</p>
-
-<p>あとアクセス権も変える。</p>
-
-<blockquote>chmod 600 ~/.ssh/authorized_keys</blockquote>
-
-
-<h3>4. sshd_configの設定</h3>
-
-<p>リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。</p>
-
-<blockquote>RSAAuthentication yes
-PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys</blockquote>
-
-
-<p>読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。</p>
-
-<p>逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。</p>
-
-<blockquote>PasswordAuthentication no
-ChallengeResponseAuthentication no</blockquote>
-
-
-<p>上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。</p>
-
-<p>あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。</p>
-
-<p>書き換えたらsshサービスを再起動してフィニッシュ。</p>
-
-<blockquote>/etc/init.d/sshd restart</blockquote>
-
-
-<p>これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。</p>
-
-<h3>5. Githubにつなぐ場合</h3>
-
-<p>Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings > SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。</p>
-
-<p>リモート側のサーバーで環境共有したい場合はgit cloneで持ってくる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/17">&larr; Older</a>
@@ -576,7 +509,7 @@ ChallengeResponseAuthentication no</blockquote>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

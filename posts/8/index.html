@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="エンジニアのための時間管理術posted with amazlet at 15.03.07Thomas A. Limoncelli オライリー・ジャパン 売り上げランキング: 12,858Amazon.co.jpで詳細を見る 先日のデブサミでオライリーの書籍販売があったわけですけど、 &hellip;">
+  <meta name="description" content="去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあえず受けたら見事に落ちたんですけど、その後再受験申し込み期間あるの忘れてて棒に振るとかよくわからんことやりました。そのままなんとなーくやる気なくなってたけど &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,231 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/08/study-ruby-grammer/">Ruby基礎復習(1) 基礎文法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-08T10:11:36+09:00'><span class='date'>2015-03-08 (Sun)</span> <span class='time'>10:11 am</span></time>
+        
+         | <a href="/blog/2015/03/08/study-ruby-grammer/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあえず受けたら見事に落ちたんですけど、その後再受験申し込み期間あるの忘れてて棒に振るとかよくわからんことやりました。そのままなんとなーくやる気なくなってたけど、さすがにSilverクラスの知識はきちんと押さえるべきだろってことで、しばらく手元の『パーフェクトRuby』使って自分用チートシートっぽくまとめてみます。超基礎なので退屈な記事が続く予定。</p>
+
+<p>今回は文法面で自分がつまずいたポイントまとめる。</p>
+
+<h2>変数のスコープ</h2>
+
+<p>ローカル変数、グローバル変数、インスタンス変数、グローバル変数がまず基本にある。それぞれ文字通りではあり、ローカル変数は最も局所的なスコープ、グローバルはどこからでも参照可能（あまり使わない？）、インスタンス変数は個々のインスタンスに属する変数、クラス変数はクラス間で共有される変数。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">display_local</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">hoge</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">display_global</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="vg">$hoge</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="vg">$hoge</span> <span class="o">=</span> <span class="s2">&quot;Hello, world!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">display_local</span> <span class="c1"># =&gt; NameError: undefined local variable or method `hoge&#39; for main:Object</span>
+</span><span class='line'><span class="n">display_global</span> <span class="c1"># =&gt; &quot;Hello, world!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Hoge</span>
+</span><span class='line'>  <span class="vc">@@class_var</span> <span class="o">=</span> <span class="s2">&quot;Hello, world from class!&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">display_class_var</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="vc">@@class_var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:ins_var</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">i</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">j</span> <span class="o">=</span> <span class="no">Hoge</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">i</span><span class="o">.</span><span class="n">display_class_var</span> <span class="c1"># =&gt; &quot;Hello, world from class!&quot;</span>
+</span><span class='line'><span class="n">j</span><span class="o">.</span><span class="n">display_class_var</span> <span class="c1"># =&gt; &quot;Hello, world from class!&quot;</span>
+</span><span class='line'><span class="n">i</span><span class="o">.</span><span class="n">ins_var</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">j</span><span class="o">.</span><span class="n">ins_var</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'><span class="n">i</span><span class="o">.</span><span class="n">ins_var</span> <span class="c1"># =&gt; 1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しかし改めてattr_accessorというのは便利ですね。</p>
+
+<p>問題はローカル変数とブロック、メソッドとの関係で、わりと理解できてなかった。やりがちだけど、メソッドの中からメソッド外のローカル変数は参照できない。一方でブロックの中からブロック外のローカル変数は<strong>参照できる。</strong>一方でブロック内のみで宣言されている変数は、ブロックローカル変数扱いになり外から参照できない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">hoge</span> <span class="o">=</span> <span class="s2">&quot;hoge&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">hello_hoge</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">hoge</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">hello_hoge</span> <span class="c1"># =&gt; NameError: undefined local variable or method `hoge&#39; for main:Object</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">j</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+</span><span class='line'>  <span class="n">block_local</span> <span class="o">=</span> <span class="s1">&#39;in block&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">i</span> <span class="c1"># =&gt; 4</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">block_local</span> <span class="c1"># =&gt; NameError</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Rangeクラス</h2>
+
+<p>Ruby Silver受けるまで、恥ずかしながら1..10みたいのがクラスだということを知りませんでした。Rangeクラスってのがあるのね。。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">range1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">4</span>
+</span><span class='line'><span class="n">range2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">4</span>
+</span><span class='line'><span class="n">range1</span><span class="o">.</span><span class="n">class</span> <span class="c1"># =&gt; Range</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">range1</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">i</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; 1,2,3,4</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">range1</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="n">range2</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># =&gt; false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>三項演算子</h2>
+
+<p>苦手。ついでに後置if/unlessもよく使うので頭に置いとく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">0</span><span class="o">.</span><span class="n">zero?</span> <span class="p">?</span> <span class="s1">&#39;0です&#39;</span> <span class="p">:</span> <span class="s1">&#39;0じゃないです&#39;</span> <span class="c1"># =&gt; &#39;0です&#39;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;0です&#39;</span> <span class="k">if</span> <span class="mi">0</span><span class="o">.</span><span class="n">zero?</span> <span class="c1"># =&gt; &#39;0です&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rescue</h2>
+
+<p>rescue節を複数書いた場合、最初に該当したrescue節で捕捉され、その後のrescue節は捨象される。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">begin</span>
+</span><span class='line'>  <span class="k">raise</span> <span class="s1">&#39;StandardError&#39;</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">LoadError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;これはloaderrorです&#39;</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;これはstandarderrorです&#39;</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s1">&#39;これはなにかエラーです&#39;</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># =&gt; &#39;これはstandarderrorです&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>今後のtodo</h2>
+
+<ul>
+<li>Hashの扱い（というかEnumerable）</li>
+<li>Time/Date関連の扱い</li>
+<li>Fileの扱い</li>
+<li>組み込みクラスの言語仕様再確認（特に破壊的非破壊的のあたり）</li>
+</ul>
+
+
+<p>まーぶっっちゃけ全部だな。。。。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -439,50 +664,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/17/post/">Octopress + github.ioでブログを作りました</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-17T00:06:42+09:00'><span class='date'>2015-02-17 (Tue)</span> <span class='time'>12:06 am</span></time>
-        
-         | <a href="/blog/2015/02/17/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>これまではてなブログで書いていた<a href="http://chroju89.hatenablog.jp">技術系ブログ</a>を移設する目的で、Octopressとgithub.ioを使ったブログを作成しました。もはや常套手段とも言えるブログ作成方法ですので、ノウハウはネット上のあちこちに公開されており、特に苦労することもなかったです。というか、こんな簡単にブログ作れちゃうもんなんだなぁという感慨。</p>
-
-<ul>
-<li><a href="http://www.miukoba.net/blog/2013/01/05/start-octopress/">Octopressはじめました | mimemo</a></li>
-<li><a href="http://rcmdnk.github.io/blog/2013/03/07/octopress-customize/">Octopressで最初に行う設定変更</a></li>
-<li><a href="http://qiita.com/fakestarbaby/items/4b9b6efd9d52d904986c">Octopressで新規ページを作成してみよう！ - Qiita</a></li>
-<li><a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">3rd Party Octopress Themes · imathis/octopress Wiki</a></li>
-</ul>
-
-
-<p>上記のうち、3つめの「新規ページ作成」に関しては、aboutページを作るときに参考としました。ブログのエントリー以外の個別ページもこの方法で作ってMarkdownで編集できるので、結構柔軟なカスタマイズが出来ると思います。aboutページには一番上のナビゲーション領域から飛べるのでよろしければ。</p>
-
-<p>あとはボチボチと折を見て旧ブログから記事を持ってくる予定。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/9">&larr; Older</a>
@@ -502,7 +683,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

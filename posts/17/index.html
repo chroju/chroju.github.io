@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… bundle exec rails g devise:install Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上のコマンドを入れるべきところでふつーにrails g devise: &hellip;">
+  <meta name="description" content="うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,122 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/08/post/">SSHでサーバーリモートログインする際のあれこれまとめ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-08T23:22:00+09:00'><span class='date'>2013-12-08 (Sun)</span> <span class='time'>11:22 pm</span></time>
+        
+         | <a href="/blog/2013/12/08/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。</p>
+
+<h2>環境</h2>
+
+<p>今回はいわゆる「リモートのサーバーにSSHを使ってログインする」場合と「GithubにSSHでpushする」場合を想定する。使用するクライアントはMac OS X、サーバーはCent OS。ちなみにシェルはbash。</p>
+
+<h2>そもそもSSHってなんぞや</h2>
+
+<p>セキュアなリモート通信用プロトコル。セキュアな、と言っているのはTelnetあたりが平文でパスワード贈っちゃうのに対して、SSHが暗号化に対応している点を指す。で、暗号化には今多くの場合RSA（公開鍵暗号方式）を用いているらしい。だから秘密鍵と公開鍵を作ってローカルとリモートにそれぞれ配置して云々という設定が必要になる。あとGitHubもリモートレポジトリにつなぐ時にSSHが使える。</p>
+
+<h2>リモートサーバー接続手順</h2>
+
+<p>まずリモートサーバーにSSHでつなぐときの手順。</p>
+
+<h3>1. 認証鍵の生成</h3>
+
+<p>Linuxには鍵生成のコマンドがあるので、それを使う。</p>
+
+<blockquote>ssh-keygen -t rsa</blockquote>
+
+
+<p>-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。<strong>絶対控える。</strong></p>
+
+<p>作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。</p>
+
+<h3>2. 公開鍵の転送</h3>
+
+<p>鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。</p>
+
+<blockquote>scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/</blockquote>
+
+
+<p>SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。</p>
+
+<p>ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(<em>ﾉω・</em>)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。</p>
+
+<p>例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。</p>
+
+<h3>3. 公開鍵の登録</h3>
+
+<p>今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。</p>
+
+<blockquote>mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</blockquote>
+
+
+<p>authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。</p>
+
+<p>あとアクセス権も変える。</p>
+
+<blockquote>chmod 600 ~/.ssh/authorized_keys</blockquote>
+
+
+<h3>4. sshd_configの設定</h3>
+
+<p>リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。</p>
+
+<blockquote>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys</blockquote>
+
+
+<p>読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。</p>
+
+<p>逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。</p>
+
+<blockquote>PasswordAuthentication no
+ChallengeResponseAuthentication no</blockquote>
+
+
+<p>上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。</p>
+
+<p>あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。</p>
+
+<p>書き換えたらsshサービスを再起動してフィニッシュ。</p>
+
+<blockquote>/etc/init.d/sshd restart</blockquote>
+
+
+<p>これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。</p>
+
+<h3>5. Githubにつなぐ場合</h3>
+
+<p>Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings > SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。</p>
+
+<p>リモート側のサーバーで環境共有したい場合はgit cloneで持ってくる。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -396,74 +512,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/14/post/">GTDの原典読んでみたら意外にいろいろ勘違いしてたという話</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-10-14T23:14:00+09:00'><span class='date'>2013-10-14 (Mon)</span> <span class='time'>11:14 pm</span></time>
-        
-         | <a href="/blog/2013/10/14/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>GTDというかタスク管理についてはもうだいぶ長いこと悩んできたのだが、もうなんともにっちもさっちもいかなくなってきたので、ついに原典を紐解いてみた。といっても本当の原典ではなく、実践編の方。まぁWebでつまみ食い程度とはいえ、一応GTDの理念は知った上でタスク管理してたので、実践編の方が役に立ちそうかな、と。でも実際読んでみて、案外GTDの基礎を勘違いしてることに気付いたり。</p>
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51rqNl71s%2BL._SL160_.jpg" alt="ひとつ上のGTD ストレスフリーの整理術 実践編――仕事というゲームと人生というビジネスに勝利する方法" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">ひとつ上のGTD ストレスフリーの整理術 実践編――仕事というゲームと人生というビジネスに勝利する方法</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">デビッド・アレン <br />二見書房 <br />売り上げランキング: 14,427<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<h2>GTDは頭の中を書き出すことがすべてではない</h2>
-
-<p>GTDってなんとなく「2時間かけて頭の中を書き出しましょう」「そのリストを1週間おきに週次レビューで見なおして最新の状態を保ちましょう」っていうのが核だと思っていたのだが、それがすべてではなかった。というより、それはあくまで始まりである。書き出して意識の外で保存するだけでは中途半端で、それを「どう処理するのか？」という点で見極めた上で、適切なリストに並べておかなくてはならない。例えば時間の決まっている行動であればカレンダーに書き込むことになるし、誰かに頼めることであれば、依頼した上で「連絡待ち」リストに入れる。今は使わないが、いずれ興味が出そうなことであれば、数日後に思い出せるようリマインダーに仕込んでおく。</p>
-
-<p>GTDとはすなわち「絶え間なく入ってくる情報を適切に整理し、すぐ行動に移せるようリスト化しておく」ことに他ならない。単なる「タスク管理」とはその意味で異なる。</p>
-
-<h2>「高度」という考え方を取り入れる</h2>
-
-<p>目の前のタスクを処理する、整理する他に、GTDには高度という考え方がある。一つ一つの具体的な行動を高度0メートルとして、それを1000メートル、2000メートルという名前の「より広い視点」から位置づけるのだ。例えば「GTDの本を読んだ感想をブログにまとめる」は、より広い視点から言えば「タスク管理方法を考えなおす」というプロジェクトの一部だ。さらにこのプロジェクトは、「時間を効率的に使う」という目標の一端を担うものとなる。という具合。</p>
-
-<p>今気になっていることをリスト化して行動に移すという水平思考と同時に、GTDにはその各行動がどう位置づけられ、どのような優先順位とすべきなのかという垂直思考の考え方がある。この点ってあまりWebのGTD系記事では触れられていない気がして新鮮だった。そして特に「プロジェクト」や「目標」の管理に手を焼いていたので、ちょっと助かった思い。</p>
-
-<p>とはいえ、この本はプロジェクトのリストとNext Actionリストの結びつけについては明確な答えを用意していない。きちんと整理された状態であれば、自ずと各リストの関連性が見えてくるといった回答が成されていたのだが、そんな曖昧なことに任せてられるかｗというのが正直なところ。プロジェクトには進行する上でのフローがあり、各フローをいつ、どのようにこなしていくかという視点から考えて、まとめておくことが必要なんじゃないかと思う。</p>
-
-<h2>ゴールは「常に最善の行動を取れるようになる」こと</h2>
-
-<p>何度も書くが、GTDはタスク管理の手法、ではない。今気になっていることと、それらの位置づけ、見通しをリスト化することにより、「今すべきこと」を明らかにすることだ。単なるタスク管理では、突発タスクを割り込ませる余裕がなくなったり、先々への見通しを持たず、目先の「やること」だけに集中してしまいがちだったりする。</p>
-
-<p>GTDでは常にすべての行動がリスト化されているので、例えば突発的なタスクがあっても、それを既存のリストの中に位置づけ直した上で、いつどのように行動すべきかを捉え直すことができる。仮にその余裕がないほどの事態であったとすれば、すぐ元の状態、正常な状態に戻れることが重要だという。リストは完璧である必要はないが、信頼に足るもの、心の中の「気になっているもの」をすべて書き出したものである必要はある。そしてその状態を保つからこそ、常に最善の行動を取ることができる。</p>
-
-<h2>今後この本をどう活かすか</h2>
-
-<p>GTDの基本概念を捉え直すことはできた。その上で今悩んでいるのは以下のようなこと。</p>
-
-<ul>
-<li>様々なリストが必要なようだが、何で管理するのか？（Google Tasks？、プレーンテキスト？、Evernoteは重いので論外）</li>
-<li>リストを見る気力もないときはどうしよう？（本書では「やる気がないことにすることリスト」も作っていたが、それすら見る気にならない時もある）</li>
-<li>「次にやること」を実際いつやるのか、スケジューリングする必要はないか？</li>
-</ul>
-
-
-<p>GTDというのはあくまで、自分の日々の状況を「最善」にするための補助ツールに過ぎないわけで、それに長々と時間をかけてしまうのは本末転倒。早いとこやり方を決めて、自分なりに進めていきたいところなのだが、はてさて。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/18">&larr; Older</a>
@@ -483,7 +531,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

@@ -9,18 +9,8 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。 1
-2
-3
-4
-5
-6
-7
-8
-9
-$ yum list | grep postgresql
-（中略）
-postgresql.i686 8.4.18-1.el6_4 base &hellip;">
+  <meta name="description" content="nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 1
+$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -121,6 +111,86 @@ postgresql.i686 8.4.18-1.el6_4 base &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/02/post/">Rails環境構築（4）nginx導入</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-02T16:08:00+09:00'><span class='date'>2014-02-02 (Sun)</span> <span class='time'>4:08 pm</span></time>
+        
+         | <a href="/blog/2014/02/02/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リポジトリが正しく登録されているか確認。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ yum list nginx --disablerepo=* --enablerepo=nginx
+</span><span class='line'>（中略）
+</span><span class='line'>Installed Packages
+</span><span class='line'>nginx.x86_64                1.4.4-1.e16.ngx           @nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>yum install</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum install nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作っておくという作業を入れる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo mkdir /etc/nginx/sites-available
+</span><span class='line'>$ sudo mkdir /etc/nginx/sites-enabled
+</span><span class='line'>$ sudo rm -f conf.d/*.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>nginx.confを開いて、sites-enabledを読み込ませるための設定を追加する。具体的には以下の1行。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>include /etc/nginx/sites-enabled/*;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上、終わり。最後にサービスを立ち上げて、自動起動を設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service nginx start
+</span><span class='line'>$ sudo chkconfig nginx on</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -580,56 +650,6 @@ postgresql.i686 8.4.18-1.el6_4 base &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/14/post/">bundle installはどのパスに対してすべきなのか問題</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-14T22:13:00+09:00'><span class='date'>2014-01-14 (Tue)</span> <span class='time'>10:13 pm</span></time>
-        
-         | <a href="/blog/2014/01/14/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>% bundle install --path vendor/bundle</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
-
-<p>まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な<a href="http://railstutorial.jp/">オンラインのRoRチュートリアル</a>にはこのことが書かれてなかったので、書き留めた次第。</p>
-
-<ul>
-<li><a href="http://qiita.com/emadurandal/items/a60886152a4c99ce1017">Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]</a></li>
-<li><a href="http://memo.yomukaku.net/entries/IpCSQmo">Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net</a></li>
-</ul>
-
-
-<p></blockquote></p>
-
-<p>で、<a href="http://chroju89.hatenablog.jp/entry/2014/01/09/235505">先日のエラー</a>についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/16">&larr; Older</a>
@@ -649,7 +669,7 @@ postgresql.i686 8.4.18-1.el6_4 base &hellip;">
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 

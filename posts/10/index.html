@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="世間には目標何十個立てるみたいなライフハックもあるみたいだけど、自分としては少し抽象度の高いベクトルを数個厳選しておく方が先の見通しが立ちやすいので、ここに書いておく。ちなみに去年は目標50個ぐらい書き出したりしたのだが、単なるタスクリストっぽくなってあんまり意味がなかったし、 &hellip;">
+  <meta name="description" content="ソフトウェア デザイン 2015年 01月号 [雑誌]posted with amazlet at 15.03.01技術評論社 (2014-12-18)Amazon.co.jpで詳細を見る 正月休みにSD読みました。今月からpdfで買うことにしたんだけど、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/16/post/">『Software Design 2015年1月』Vim使い 事始め 読了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-16T00:57:00+09:00'><span class='date'>2015-01-16 (Fri)</span> <span class='time'>12:57 am</span></time>
+        
+         | <a href="/blog/2015/01/16/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51sv-OIQh%2BL._SL160_.jpg" alt="ソフトウェア デザイン 2015年 01月号 [雑誌]" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">ソフトウェア デザイン 2015年 01月号 [雑誌]</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail"><br />技術評論社 (2014-12-18)<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00QH3HQMO/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>正月休みにSD読みました。今月からpdfで買うことにしたんだけど、表紙の見出しの文字がちゃんと中のページに対するリンクになっていたり、サンプルソース内のコメントに書かれているような細かいURLまでちゃんとリンクになっていたり、とても丁寧に作られている感じがして良い。問題はこれを何で読もうかということ。普段は電子書籍サービスとしてKindleを使っているので、Kindleパーソナルドキュメントサービスにメールして入れておこうと思ったんだけど、サイズが大きすぎて添付して送れず。仕方なくiBooksで読んだけど、これだと当然ながらAndroidからは使えないなぁという不満があったり。悩ましい。</p>
+
+<p>特集は「超基本」と、用途別に「プログラマ編」「インフラエンジニア編」「文書作成編」に分かれている。超基本は本当にインストールから初期設定のあたりの話。自分はVimをウェブ検索で得た断片的な情報を元に使い始めてしまっていたので、このあたりも参考にさせていただきました。「プログラマ編」はIDE風の使い方を、「インフラエンジニア編」は運用作業を想定して素のVimをどう使うかという話を、「文書作成編」はVimによるmarkdown編集をそれぞれピックアップしてます。</p>
+
+<p>自分が思うにVimは単にエディタというよりは、テキストに対する扱い方の概念というか、フレームワークみたいなものなんだと思う。テキストの捉え方そのものが違うというか。オペレータやテキストオブジェクトあたりの考え方がまさにそうで、テキストを効率的に扱うために、どういう単位でテキストを編集していくかという考え方がこのあたりには反映されている。だから<code>diw</code>を単にカーソル下の1単語を削除するコマンドとして丸暗記しても本質ではなくて、d,i,wがそれぞれ何を表しているのかを理解して、身体に染み込ませていかない限りは多分「Vim便利！」とはならないんじゃないかと思う。</p>
+
+<p>Vimのプラグインっていうのは、これは様々なVimmerが考えた「もっともテキストを扱いやすい方法」の塊みたいなもんで、そのうち自分にも合うものを1個1個組み合わせていくことで、「ボクが考える最強のVim」になるんだろう。自分が当初やってしまっていた「ウェブで検索して便利そうなオプションはプラグインを取りあえず入れてみる」というのは間違いではないのかもしれないけど、入れたものちゃんと理解してる？とか、使ってる？っていうのを今後は意識したい。</p>
+
+<p>特にプログラマ編でも触れられてたvim-quickrunは入れたはいいけど全然使ってないので使う。あとctagsも概念的に理解できてなくて、ちゃんとわかって使えば便利そう。Vimスクリプトもちゃんと読み書きしたいんだけど、まずその前に今年はテクニックバイブル読もうと思います。</p>
+
+<p>あと全然この雑誌と関係ないんだけど、最近知った<code>DiffOrig</code>コマンドがすげー便利。編集中のファイルの編集前後をdiffってくれる。こういう発見がいつまで経っても尽きないのよなぁ。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774147958/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/516K5O-bN8L._SL160_.jpg" alt="Vimテクニックバイブル　～作業効率をカイゼンする150の技" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774147958/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Vimテクニックバイブル　～作業効率をカイゼンする150の技</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Vimサポーターズ <br />技術評論社 <br />売り上げランキング: 165,426<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774147958/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -441,48 +491,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/10/post/">ブログ書けてない不安</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-11-10T00:34:00+09:00'><span class='date'>2014-11-10 (Mon)</span> <span class='time'>12:34 am</span></time>
-        
-         | <a href="/blog/2014/11/10/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>インプットに対してアウトプットの量が少ないなと前から思っている。ブログを書いてるとアウトプットの履歴が残るから「アウトプットしてない」時期が明確にわかり、それを見て不安になったりもするんだけど、結局書けてない、ということが続く。</p>
-
-<p>何かコーディングするときや構築するとき、わからないことがあるとついついググって探して実装して、そのままにしてしまうことが多いんだけど、これだと一過性で終わってしまって、結局記憶に残らず終わったりする。せめてはてブしたりEvernoteにクリッピングしたり、ぐらいはするときもあるのだが、これはこれでクリップしたまま記憶の底に埋もれていくので、やっぱり身になった気がしない。きちんと知識の定着を図るなら、何度も繰り返し試してみるか、インプットした内容を頭の中で咀嚼して、その経緯を自分なりにアウトプットし直すのが一番いい。</p>
-
-<p>なんで書けないのか？というと怠惰という理由が最も強いように思う。特に壁にぶつかったときは山のようにググって比較検討して答えを見つけようとしてしまうから、結局どのページを見て正答に至ったのかが曖昧になったりしやすい。まずは公式ドキュメントにあたるだとか、試行錯誤した結果でさえ一つ一つ丁寧にログを残すだとか、そういうことをできていない。</p>
-
-<p>ちなみにメモツールとしてはアナログだとモレスキンのラージ、デジタルだとVimプラギンのQfixHowmを主に使っている。QfixHowmを使っているのは正確にはプライベーとのPC上だけで、要はDropboxにプレーンテキストでメモを書き溜めている形になる。アナログについては、先月までは常に1日1ページ手帳のEDITを携えてメモ代わりに使っていたんだけど、ページが足りなくなることも多かったし、そもそもスケジュール管理はGoogle Calendarに全部移行していたので、もう手帳を持つ意味もないなと思い、自由度の高いモレスキンに変えた。職場の関係でDropboxは使えないし、ノートPCを叩きながら打ち合わせに臨むのも好ましいとされていないので、アナログのメモはどうしても捨てられずにいる。あと思考を巡らせるときなんかには自由度の高いフォーマットの方が好ましくて、iPad miniにタッチペンとか使うよりも広めのノートの方が脳と手が直結しやすくて楽。</p>
-
-<p>基本的にはこれらに「なんでも書く」方針でいるのだが、散漫な思いつきなどは書けていても、本を読んだり勉強しながら書く習慣がない。tmux開いてコーディングして、ウィンドウを切り替えてメモしてという手順を踏めばいいはずなんだけど、ついつい怠ってしまう。プログラマーの三大美徳に「怠惰」が含まれてはいるが、究極の怠惰は生産性を持たないものだと思う。</p>
-
-<p>書くためにどうしたらいいのか？という問いに対する答えは自分でもまだ見出だせていない。こういうのはもう性格レベルの問題なので、「意識する」とかそういう類の対策じゃなんの意味もなくて、もっと根本的にメモせざるを得ない状況を生み出すしかないのだと思う。あるいはメモの効用をより強く自覚すること。怠惰とはいえ、本当に必要だと思っていることはそれなりにこなせてはいるので、メモを書いてないことで痛い目見るような経験がもっと増えれば変わるような気はする。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -502,7 +510,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - chroju -
+  Copyright &copy; 2016 - chroju -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
 </p>
 
