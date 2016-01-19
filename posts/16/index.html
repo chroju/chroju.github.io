@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、 &hellip;">
+  <meta name="description" content="Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。 Ruby on Rails環境構築ガイドposted with amazlet at 15.03.01黒田 努 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/18/post/">Ruby on Rails環境構築はじめます</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-18T21:50:00+09:00'><span class='date'>2014-01-18 (Sat)</span> <span class='time'>9:50 pm</span></time>
+        
+         | <a href="/blog/2014/01/18/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>これまで環境としてはMax OS X 10.8にVMware FusionでCentOS浮かべて、その上でコード書いてWEBlick立ち上げてってやってたんだけど、考えてみればWEBlickでやるなら手元のMacで良かったわけで。いちいちコード書くのにSSHつなぐとかまぁ無駄なわけで。ということで、環境は次のように変えていく。</p>
+
+<ul>
+<li><p>開発環境：Mac OS X 10.8（物理）</p></li>
+<li><p>Ruby 2.0.0</p></li>
+<li>Rails 4.0</li>
+<li><p>MySQL</p></li>
+<li><p>ステージング：CentOS 6.4（Virtual Box）</p></li>
+<li><p>Ruby 2.0.0</p></li>
+<li>Rails 4.0</li>
+<li>MySQL</li>
+<li>nginx</li>
+<li>unicorn</li>
+<li><p>vagrant + chef soloで構築予定</p></li>
+<li><p>本番環境：CentOS 6.4（VPS）</p></li>
+<li><p>構成はステージングと同様</p></li>
+</ul>
+
+
+<p>Apacheは仕事でも使ったことがあるんで、流行りに乗ってnginx + unicornでやってみます。んでさらに流行りに乗ってvagrantとchef solo使おうかと。vagrantはちなみにもう試してみたけど、さっくり仮想マシンが立ってしまってビビる。あとでブログにまとめる予定。ただしchefはちょっとしっかりやんないと使えなさそう。</p>
+
+<p>もともと自分はインフラをメインで飯食ってるんで、こころへんはあまり迷わずにいきたいところ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -357,132 +415,6 @@
 <li>リソースはそれ自身ですべての情報を表せた方が通信が効率的になるため、あえて正規化を行わない（このへん、DB設計と同一視してたわ）</li>
 </ul>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/22/post/">Windows 8(VAIO Pro)買って最初にやったことと注意点</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-22T17:13:00+09:00'><span class='date'>2013-12-22 (Sun)</span> <span class='time'>5:13 pm</span></time>
-        
-         | <a href="/blog/2013/12/22/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本家ブログの方に書いたけど<a href="http://chroju.hatenablog.jp/entry/20131211/vaio_pro_11_so_cool_mobile_pc">VAIO Pro買った</a>。1週間ちょいほど、主に仕事で使ってるが、やっぱ軽いは正義。持ち歩いてもあんまり負担にならない。スペック的にも申し分ないし。不満点といえば、マットな触感のボディが案外傷つきやすいことぐらい。これタッチパネル有りのモデルだと質感違うんだっけ。そっちのが良かったりするのかも。</p>
-
-<p>で、Windows8はこれまでMac上に載せた仮想マシンで遊んでただけで、今回初めてきちんと初期設定とかしたので、いろいろまとめてみる。Win8が使いづらいってのは、要するにタブレット用のMetro UIを何も考えずデスクトップ用UIに統合させちゃったからで、この点上手く付き合えばそこまで悪くないOSかなとは思う。動きは軽い印象。</p>
-
-<h1>インストール</h1>
-
-<p>インストールは対話型に順序良く進めれば別に迷うこととかはないんだけど、一点だけ注意すべき点がある。ユーザーアカウント作るときにMicrosoftアカウントがあるなら入れてくれと確か言われるんだが、これ、入れない方がいい。というのも、入れるとMSアカウントに登録している名前がそのまま勝手にユーザーネームとして採用されるからだ。当然ながらユーザーディレクトリ名もMSアカウントの「名」部分が使われる。すなわちMSアカに「山田太郎」と登録していると、C:\Users\太郎フォルダと永劫付き合っていくことになる。これは頭抱える。</p>
-
-<p>はっきり言って糞仕様というか、こういうアカウントの「意味」が範囲を広げてしまうような昨今の風潮が自分は好きじゃない。例えばGoogleアカウントはもともとGmail目的で、つまりプライベートで使うものとして7年ぐらい前に取得したんだけど、いまや「ソーシャル」サービスであるGoogle+と勝手に結び付けられてしまって、当初こちらが意図していた「意味」を逸脱してしまっている。俺の持ってるMSアカウントも元を正せばSkypeアカウントだったんだが、それがまさかMSに買収され、さらにはOSのユーザーアカウントにまで流用されるとは思ってなかった。まぁアカウントの統合はわかりやすくて良いことかもしれないが、個人的には大変気持ち悪い。</p>
-
-<p>MSアカウントを使うのが気持ち悪い人や、ユーザーディレクトリに2バイト文字使いたくない人はローカルでアカウント作りましょう。MSアカウントには後からでも紐付けられるんで。</p>
-
-<h1>アップデート</h1>
-
-<p>インストールしたら早速8.1に上げた。上げていいこともあんまなかったけど、悪いこともそんなない気がする。スタートボタン復活が8.1の目玉らしいけど、あれ押しても例のタイル型UIのスタート画面が出てくるだけで、何の意味もないです。強いて言えば右クリックしてみると真価を発揮する、かも。</p>
-
-<p><a href="http://www.flickr.com/photos/chroju/11491905623/"> title=&ldquo;スクリーンショット_2013-12-11_18_55_36 by chroju, on Flickr&rdquo;><img src="http://farm6.staticflickr.com/5483/11491905623_ced037d32a.jpg" width="396" height="500" alt="スクリーンショット_2013-12-11_18_55_36"></a></p>
-
-<p>見たまえ、このよく使うはずなのにどこ行ったかわからん機能をとりあえず寄せ集めました感。美しくない。</p>
-
-<p>ちなみにアップデートはWindowsストアからです。Windows Updateじゃないです。いまだにWindows Updateがどこにあるかわかんないんだけど、どこにあんの？ MS公式のヘルプ見たら「検索から探せ」とか酷い答え返ってくるんだけど。。。</p>
-
-<p>あとハードウェアによっては独自のドライバアップデートツールとかあるんでそのへんも忘れずに。VAIOならVAIO Updateね。</p>
-
-<h1>設定変更</h1>
-
-<p>適当にコンパネとか。</p>
-
-<ul>
-<li>フォルダオプションで不可視ファイルの表示と拡張子の表示。必須。</li>
-<li>タスクバーとナビゲーションの設定でサインイン時にデスクトップを表示させる。</li>
-<li>マウスの速さ適切化。あとCtrl押下でマウス位置表示させる。すぐいなくなるので。</li>
-<li>電源オプションで無操作スリープ時間の変更と、休止状態の有効化。</li>
-</ul>
-
-
-<h1>ソフトウェアインストール</h1>
-
-<p>ここまできてやっとソフト入れます。Win8アプリは普通にPCとして使う場合は不便そうなので入れてない。</p>
-
-<ul>
-<li>Google IME</li>
-<li>Firefox</li>
-<li>Evernote</li>
-<li>Dropbox</li>
-<li>Kaoriya版Vim(GVim)</li>
-<li>Avast!</li>
-<li>Janetter</li>
-<li>Keepass</li>
-</ul>
-
-
-<p>ウイルスソフトとTwitterクライアントは今何が流行りなんですかね。よくわかんないので取りあえずAvast!とJanetter。もうリーマンやってんだからウイルスソフトぐらい買えって話だけど。</p>
-
-<p>テキストエディタは迷ったけどMacと同じくKaoriya版Vim入れました。慣れるともうVimから離れられんね。OS選ばず同じ使い方できて楽だし。ちなみにGVimとしてしか使ってないです。コマンドプロンプトからVim開くのはなんかテンション上がんなくて。</p>
-
-<p>ここまでやったらEvernoteとDropboxの同期でしばし待ち。</p>
-
-<h1>ソフト設定移行</h1>
-
-<p>ソフトの設定連携。というか、Dropboxの中に設定はほぼエクスポートしてるんで、DBの同期が終わった時点で半分移行は済んでいる。</p>
-
-<h2>Firefox</h2>
-
-<p>FEBEっていうアドオンが便利なので良いです。アドオン、ブックマーク、設定とかそのへんまとめて自動的に吐いてくれる。さすがにGreasemonkeyは無理っぽいけど。</p>
-
-<p><a href="https://addons.mozilla.org/ja/firefox/addon/febe/">FEBE</a></p>
-
-<h2>dotfiles</h2>
-
-<p>vimrcとvimperatorrcはdotfilesとしてDropboxにまとめているので自動同期。あとはシンボリックリンク貼っちゃえば終わりです。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mklink _vimrc Dropbox/dotfiles/.vimrc
-</span><span class='line'>mklink _vimperatorrc Dropbox/dotfiles/.vimperatorrc</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>vimrc</h2>
-
-<p>だいたいはMacで使えてたvimrcそのままでイケるんだけど、一部設定変更が必要だったり。例えばファイルパス指定しているような箇所はOSによって当然異なるので、if has(&ldquo;Win64&rdquo;)で分岐させる。あとGVimだとcolorschemeの設定がgvimrc優先になるとかそのへん注意。</p>
-
-<h2>vimperator</h2>
-
-<p>vimperatorrcの同期は上に書いたDropboxでいいとして、pluginの同期まんどくせって思ってたんだけど、<a href="https://github.com/vimpr/vimperator-plugins/blob/master/plugin_loader.js">plugin_loader.js</a>で解決した。これ便利すぎてヤバイ。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let g:plugin_loader_roots="~/.vimperator/vimperator-plugins/ ~/vimperator/vimperator-plugins/"
-</span><span class='line'>let g:plugin_loader_plugins="_libly,direct_bookmark,sbmcommentsviewer,caret-hint,appendAnchor,evernote-clearly-vimp,stella,feedSomeKeys_3,commandBookmarklet,copy"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>g:plugin_loader_rootsにプラグインが入れてあるフォルダのパスを指定し、g:plugin_loader_pluginsに読み込むプラグイン名を列挙するだけでプラグインを読み込んでくれる。シンボリックリンクなんて不要。プラグインについてはたいていのvimperator遣いはvimpr/vimperator-pluginsをクローンしてると思うんで、組み合わせれば最強に近い。他から持ってきたプラグインについては別途パスを指定してやればいいだけだし。</p>
-
-<p>だいたいこんなとこ。最近はDropboxとか使うとすんげー簡単に環境同期できちゃうので楽なことこの上ないッスね。</p>
 </div>
   
   

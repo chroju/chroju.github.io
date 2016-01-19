@@ -9,8 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 1
-$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx &hellip;">
+  <meta name="description" content="やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +110,80 @@ $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-cen
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/02/02-post/">$ vagrant sshで仮想マシンに入れなくなった場合の対処法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-02T16:27:00+09:00'><span class='date'>2014-02-02 (Sun)</span> <span class='time'>4:27 pm</span></time>
+        
+         | <a href="/blog/2014/02/02/02-post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃねと思ったんだけど、なんとか元に戻せたので対処法まとめとく。</p>
+
+<p>といっても簡単な話です。</p>
+
+<ul>
+<li>Virtual BoxをGUIで開く</li>
+<li>該当仮想マシンがリストに入ってるので強制終了し、Virtual Box上で起動し直す</li>
+<li>rootでログイン（パスワードはデフォルトでvagrant）</li>
+<li>おかしい箇所を直す</li>
+</ul>
+
+
+<p>コマンド叩いて操作してるので忘れがちだけど、vagrantはVirtual Box上（有料版ならVMware上も有り得るが）に仮想マシンを立ててるので、普通にGUIから入ればいい話です。rootで入ってぐいぐいヤバそうなとこ直して、直したらターミナルからssh試してみてってのを交互に繰り返して直しませう。</p>
+
+<p>rootで入り直す前に一度VM落とす手順を入れましたが、こうしないとGUIから入れないみたいです。僕の場合だとターミナルでiptablesとかいじって、よしじゃあsshログインできるか試してみようってことで一旦ログアウトしたら入れなくなった（アホだ）のでVMが立ち上がりっぱなしになっちゃったわけなんだけど、この状態で取りあえずVirtual Box開いてみたらコンソールを表示するボタンがグレーアウトされてました。なので一旦強制終了するしかないです。</p>
+
+<h2>余談</h2>
+
+<p>ちなみに今回何をやらかしたのかだけど、ポイントとしてはsshのポート番号を変えた（/.ssh/configをいじった）のと、iptablesをいじったのの二点。これを普通のVMの感覚でやっちゃったのがマズかったみたい。</p>
+
+<p>まず、vagrant sshで使われているポート番号はデフォルトで22ではなく、2222なのです。これはホスト側で$ vagrant ssh-configコマンドを打ってみるとわかる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host default
+</span><span class='line'>  Hostname 127.0.0.1
+</span><span class='line'>  User vagrant
+</span><span class='line'>  Port 2222</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一方、ssh以外の各vagrantコマンドについても、いずれもsshを使っている模様。vagrant upもvagrant haltもssh経由で命令しているみたいです。ただ、こちらは通常通りPort 22を使っているのでややこしい。このあたりの事情を踏まえた上でポート番号あれこれしないと、必要なはずのポート塞いじゃってうああああああってなっちゃうっぽい。</p>
+
+<p>まぁvagrantで作ったサーバーを表に公開することはあんまりないと思うんで、このへん触らないのが吉かも。練習でやりたいのであれば、vagrant以外でサーバー用意してやった方が良さそうな気がします。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://girigiribauer.com/archives/1127">Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 | girigiribauer.com</a></li>
+<li><a href="http://d.hatena.ne.jp/okinaka/20110805/1312474847">Vagrant のベースBOX作成手順 (Scientific Linux 6.1) - エンジニアきまぐれTips</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -585,64 +658,6 @@ $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-cen
 <p><a href="http://www.happytrap.jp/blogs/2013/07/26/10602/">Vagrantで仮想サーバ構築 | HAPPY*TRAP</a></p>
 
 <p><a href="http://qiita.com/nobu_blast/items/828cf7c002100a0fdeb2">vagrant + virtualbox 仮想サーバ構築 - Qiita [キータ]</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/18/post/">Ruby on Rails環境構築はじめます</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-18T21:50:00+09:00'><span class='date'>2014-01-18 (Sat)</span> <span class='time'>9:50 pm</span></time>
-        
-         | <a href="/blog/2014/01/18/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。</p>
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<p>これまで環境としてはMax OS X 10.8にVMware FusionでCentOS浮かべて、その上でコード書いてWEBlick立ち上げてってやってたんだけど、考えてみればWEBlickでやるなら手元のMacで良かったわけで。いちいちコード書くのにSSHつなぐとかまぁ無駄なわけで。ということで、環境は次のように変えていく。</p>
-
-<ul>
-<li><p>開発環境：Mac OS X 10.8（物理）</p></li>
-<li><p>Ruby 2.0.0</p></li>
-<li>Rails 4.0</li>
-<li><p>MySQL</p></li>
-<li><p>ステージング：CentOS 6.4（Virtual Box）</p></li>
-<li><p>Ruby 2.0.0</p></li>
-<li>Rails 4.0</li>
-<li>MySQL</li>
-<li>nginx</li>
-<li>unicorn</li>
-<li><p>vagrant + chef soloで構築予定</p></li>
-<li><p>本番環境：CentOS 6.4（VPS）</p></li>
-<li><p>構成はステージングと同様</p></li>
-</ul>
-
-
-<p>Apacheは仕事でも使ったことがあるんで、流行りに乗ってnginx + unicornでやってみます。んでさらに流行りに乗ってvagrantとchef solo使おうかと。vagrantはちなみにもう試してみたけど、さっくり仮想マシンが立ってしまってビビる。あとでブログにまとめる予定。ただしchefはちょっとしっかりやんないと使えなさそう。</p>
-
-<p>もともと自分はインフラをメインで飯食ってるんで、こころへんはあまり迷わずにいきたいところ。</p>
 </div>
   
   

@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、 &hellip;">
+  <meta name="description" content="前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。 「仮想マシン」と考えるとDockerは理解しづらい Dockerを「仮想マシン」と称する文章も随所で見かけていたが、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/04/docker-first-impression/">Dockerファーストインプレッション</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-04T20:48:49+09:00'><span class='date'>2015-12-04 (Fri)</span> <span class='time'>8:48 pm</span></time>
+        
+         | <a href="/blog/2015/12/04/docker-first-impression/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。</p>
+
+<h2>「仮想マシン」と考えるとDockerは理解しづらい</h2>
+
+<p>Dockerを「仮想マシン」と称する文章も随所で見かけていたが、これを仮想マシンとして捉えると理解からは遠のく。自分自身、Dockerの概念的な理解にはかなり手こずっていて、OSがないのにどうやって「マシン」が動くのかわからなかったし、 <code>chroot</code> のようにファイルシステム上に仮想的なディレクトリツリーを設けるものなのかと思っていた。</p>
+
+<p>Dockerは隔絶された名前空間上で展開されるプロセスに過ぎない。確かにコンテナはOSのような振る舞いを見せるが、そこにいわゆるVMwareやXenのような仮想「マシン」はない。あくまでホストOSの一部リソースを切り出して、仮想的に扱う技術に過ぎない。</p>
+
+<h2>Vagrantの代替？</h2>
+
+<p>一度理解して、 <code>docker run</code> を叩けるようになると利便性は即座に理解できる。OSをブートさせるわけではないのでコンテナの起動は従来の「仮想マシン」と比べて格段に速く、CircleCIで使われている用途同様、テスト用にまっさらな環境が即席で欲しいときには大変重宝する。こういう用途にはもともとVagrantが適していたのだと思うが、本当にすぐ使い捨ててしまいたいようなOS環境であれば、Dockerを使ったほうが遥かに手軽に起動も破棄もこなせる。</p>
+
+<p>ただあまりに簡単に起動、破棄ができるものの、作成したコンテナのイメージはコンテナ終了後も基本的に残存するので、調子に乗っているうちにいつの間にかディスクがかなり消費されていることが何度かあった。コンテナライフサイクルの把握と運用整備はマスト。</p>
+
+<h2>ポータブルなインフラストラクチャー</h2>
+
+<p>Dockerを実用できる一例として、先日Traildashを採用する機会があった。</p>
+
+<p><a href="https://github.com/AppliedTrust/traildash">AppliedTrust/traildash</a></p>
+
+<p>CloudTrailという、AWS APIへのアクセスログをjsonで吐いてくれるAWSサービスがあるのだが、それをElasticsearchで集計してKibanaでブラウザ表示してくれるツール。このツールはDockerイメージで配布されていて、自分のサーバー上にpullしてきて、AWS APIへアクセスするための環境変数をいくつか設定するだけで使えるようになる。自分はElasticsearchの運用経験はないのだが、実質的に <code>docker run</code> コマンド一発だけでそれが使えてしまう。（そのことの是非は置いておくとして）Dockerがアプリケーションサイドで実現することってこういうことなんだろうと。herokuが出たとき、ローカルからインターネットへのサービスのポータビリティが劇的に向上したわけだが、Dockerは稼働先を問わないわけで、ポータビリティはさらに拡大する。</p>
+
+<p>これはインフラ側としても嬉しいところで、今までnginxやらDBやらというミドル的な部分はアプリとしての要求もあり、インフラとしての要求もあり、双方の要件がガッシリ絡んでしまっていて、設定を後から見返すと「これなにゆえにこうなったんだっけ？」ってことが少なくなかったり、構築分担が面倒だったりというのがあって。コンテナとしてアプリをデプロイするとなると、サーバーとコンテナが明確に分離される。疎結合になる。ミドルの調整はコンテナ内だけを気にして行えばよいので、サーバーはとりあえずDocker動いてくれればいいやみたいな状態になる。雑だけど楽だろうなという気がぼんやりしている。</p>
+
+<h2>Dockerの運用</h2>
+
+<p>とりあえず前述のTraildashはDockerによる本番運用（外に出すものではないので本番といえるか微妙ではあるが）の発端にはなりそうなものの、いわゆるアプリ、サービスを本番稼働させるのがどんなもんなのかってところは自分自身見えてない。これをきちんと本番で扱うには可用性やら信頼性やらを担保しなくてはならないわけで、クラスタ構成に用いる<a href="https://docs.docker.com/swarm/">Docker Swarm</a>を導入するだとか、いわゆるインフラとしてのお仕事はやっぱり必要になる。そのへんどこかで試せればなぁとは思うので、ひとまずは自分の http;//chroju.net をDocker化しようかなどと。この前OSCでさくらのクラウド2万円クーポンもらったし、Dockerによる個人PaaS的なものでも作ってみようか。</p>
+
+<p>テストとしての利用には申し分のないところで、先日記事で上げたが<a href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/">AnsibleとServerspecのテスト</a>に使えるまっさらなOS環境としてDockerは重宝している。Infra as Codeと大変相性がよくて、よくこのタイミングで出てきてくれたなという感じがする。時代の要請なのだろうか。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -587,113 +647,6 @@
 <li><a href="http://postd.cc/git-command-line-shortcuts/">Gitコマンドラインショートカット | プログラミング | POSTD</a></li>
 <li><a href="http://yuroyoro.hatenablog.com/entry/20101008/1286531851">.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記</a></li>
 <li><a href="http://d.hatena.ne.jp/sinsoku/20111025/1319497900">図で分かるgit-mergeの&ndash;ff, &ndash;no-ff, &ndash;squashの違い - アジャイルSEを目指すブログ</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/24/ansible-in-nearly-best-practice/">開発環境のためのansibleを出来るだけベストプラクティスでまとめた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-09-24T19:37:08+09:00'><span class='date'>2015-09-24 (Thu)</span> <span class='time'>7:37 pm</span></time>
-        
-         | <a href="/blog/2015/09/24/ansible-in-nearly-best-practice/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
-
-<h2>なぜEC2？</h2>
-
-<p>少し前に<a href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">開発環境としてDigitalOceanを使うことを勧める記事</a>を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。</p>
-
-<h2>ベストプラクティス構成の意識</h2>
-
-<p>出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。</p>
-
-<p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
-
-<p>あらゆるサーバーで共通の<code>common</code>というロールと、開発環境用の<code>develop</code>というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから<code>git clone</code>しているし。</p>
-
-<p>ansibleには公式ドキュメントに<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html">ディレクトリ構成のベストプラクティス</a>が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。</p>
-
-<ul>
-<li>playbooksは同時に実行すべきtaskをroleとして分割する</li>
-<li>ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する</li>
-<li>グループごとに実行するroleと変数（group_vars）を紐つける</li>
-</ul>
-
-
-<p>taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は<code>ansible-playbook site.yml</code>でよいし、一部グループだけに適用したいなら<code>ansible-playbook *servers.yml</code>とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。</p>
-
-<p>なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。</p>
-
-<p>ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。</p>
-
-<p>ansible、ファーストインプレッションはとにかく<a href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">「楽そう」</a>だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。</p>
-
-<h2>このレポジトリでやっていること</h2>
-
-<p>ソース読んでもらえればわかる話ではありますが。</p>
-
-<ul>
-<li>common
-
-<ul>
-<li>hostname設定</li>
-<li>localeとtimezone設定</li>
-<li>sshd_config設定</li>
-<li>authorized keys設定</li>
-<li>/etc/aliasesの設定</li>
-<li>DenyHostsインストール</li>
-<li>logwatchインストール</li>
-<li>iptables設定</li>
-</ul>
-</li>
-<li>develop
-
-<ul>
-<li>development tools、zsh、git、vim、jqのインストール</li>
-<li>dotfilesの配置</li>
-<li>デフォルトシェルをzshに変更</li>
-<li>rbenvの設定</li>
-</ul>
-</li>
-</ul>
-
-
-<p>もっとも苦労したのはrbenv周りで、<code>git clone</code>直後はpathが通ってない<code>~/.rbenv/bin</code>配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで<code>sudo: yes</code>としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、<code>sudo:</code>ないし<code>become:</code>の設定はタスク単位で考えたほうが良いと思う。また本来であれば<code>~/.bash_profile</code>あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。</p>
-
-<p>もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は<code>ec2_user</code>、その他VPSの場合は<code>root</code>がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。</p>
-
-<h2>その他技術的な話</h2>
-
-<p>細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。</p>
-
-<ul>
-<li>変数名の命名規約。代入は<code>group_vars</code>で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。</li>
-<li>ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。</li>
-<li>EC2には開発ツールがないので<code>Development tools</code>でまとめてインストールしてしまったが、本当は個々に切り出したい。</li>
-<li>ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。</li>
 </ul>
 
 </div>

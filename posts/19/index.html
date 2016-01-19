@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進めず。 問題が起きたのはp.79。モデルクラスのrbファイルにvalidatesメソッドによる検証過程を書き入れ、test/functional/ &hellip;">
+  <meta name="description" content="「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。 基本的に rails generate hoge コマンドで色々作れる。scaffold、model、controllerとか、コマンドで作ればRailsが必要なファイルを用意してくれる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/04/post/">『RailsによるアジャイルWebアプリケーション開発』第II部読了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-09-04T23:44:00+09:00'><span class='date'>2013-09-04 (Wed)</span> <span class='time'>11:44 pm</span></time>
+        
+         | <a href="/blog/2013/09/04/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。</p>
+
+<ul>
+<li><p>基本的に rails generate hoge コマンドで色々作れる。scaffold、model、controllerとか、コマンドで作ればRailsが必要なファイルを用意してくれる。あとは作られたファイルをガチャガチャいじってアプリを作っていくというのが基本の流れ。</p></li>
+<li><p>特にscaffold。これをバチコンと叩き込むとコントローラ、モデル、ビュー、マイグレーションファイルから何から全部作られる。英語で「足場」という意味らしいがまさにそんな感じ。</p></li>
+<li>scaffold作ると編集画面（edit.html.erb）とか部分テンプレート（form.html.erb）まで作られるという至れり尽くせり感ビビる。</li>
+<li><p>create()やupdate()などの基本的なアクションも作られるので、実装したい動作によっては新しいコントローラをわざわざ作るまでもなかったり。</p></li>
+<li><p>テスト用のファイルも自動生成される。コントローラの機能を試すファンクションテスト、モデルの動きを試すユニットテスト、そしてアプリのフローを試す統合テスト。</p></li>
+<li><p>テスト用ファイルの編集方法がいまいちよくわからず。このあたりは試してみないと実感わかないかも。</p></li>
+<li><p>複数モデル（テーブルと読み替えてOK？）間の関係を表すには、modelsファイルにhas_manyやbelongs_toを追加する。DBを直接弄ったりはしない。</p></li>
+<li><p>button_to()に:remote=>trueを加えるだけでAjaxが追加できる。……え？</p></li>
+<li><p>そもそもAjax使ったことないんでこのへんはもう少し見直したいが。。。Ajaxと言っても、再読み込みなしで画面の一部が再描画される程度の話か。</p></li>
+<li><p>ちなみRailsのCSSは標準でSCSSが使われている。SCSSって最近まで知らなかったけどクソ便利すぎて笑う。最初からCSSがこういう文法ならいいのに……。これもまた勉強が必要なり。</p></li>
+<li>コントローラのrespond_toメソッドは出力形式を色々替えられる。format.json、format.atomとか。</li>
+<li>メールの送信機能もある。。。（このへんになるともう色々出来過ぎてよくわからなくなってきた）</li>
+<li>Railsのコードは当然ながらRubyで書くわけだが、他にヘルパーメソッドというものがある。フォーム用にボタンリンクを作るbutton_to()とか、リンクを作るlink_to()とか。Rubyをそもそもまだちゃんと理解できていないので、どれがRubyの文法でどれがヘルパーメソッドなのかの見分けもいまいちついていない状態。</li>
+</ul>
+
+
+<p>わーすげー簡単にまとめてしまった。全体の感想としては、とにかく何かと簡単かつ便利。自分でコーディングが必要な範囲は最低限。Javaでウェブアプリを組んだ経験があり、そのときはMVCそれぞれのファイルを全部イチから手で作っていたわけだが、RORではrails generate scaffoldで一発である。なんてこったい。しかし逆に言えばアプリの構造自体は全部任せて、中心的な機能や外観のコーディングだけに集中できるんだから、効率が良いわけで。</p>
+
+<p>SCSSとかAjaxとか、ウェブアプリを作る上でよく使われる技術が標準で備わっているというのも利点だろう。だから覚えることも多い。SCSS、Ajax、あとはDBもか。DBはSQL文を直接発行するようなことはないように組まれているけど、has_manyとか正しく書くためにはDBの構造あたりを正しく知っていなくてはならない。うむ、これからいろいろと学ばなくては。</p>
+
+<p>しかしこの本、いきなり実例から入ってしまうので理解がしやすいやらしにくいやら。実際に何か作りながら説明していく本というのは少なくないが、この本は第III部でRails全体の詳説が入る。「ここで入れるなら先に解説してくれよ！」と個人的には言いたい。いきなり知らないメソッドをバシバシ盛り込まれてどんどんコーディングを進められるより、そもRailsとはどういったディレクトリ構造になっていて、どういった動作をするものなのかという中身を知ってからの方が実例を理解しやすいのではと思う。まぁこのへんは好みか。</p>
+
+<p>第III部を読みつつ、そろそろとりあえず何か作ってみてもいいかもしれない。SCSSやAjaxを知らない以上、見た目にこだわったりとかはできないけど、とにかくアプリっぽいもの、データを追加して編集して表示させてっていうものをまずは作る。9月はそれが目標だなー。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -347,128 +404,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/20/post/">お勉強ブログ、はじめます</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-07-20T22:53:00+09:00'><span class='date'>2013-07-20 (Sat)</span> <span class='time'>10:53 pm</span></time>
-        
-         | <a href="/blog/2013/07/20/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>SEという職に就いて2年ちょい経ったわけだが、最近はPJリーダーとか顧客との調整とかその手の仕事ばかりを回されるようになってきて、実機を触る機会がめっきり少なくなってきてる。まぁうちはいわゆる大手SIerというヤツだから、徐々に技術っぽい仕事をしなくなるのは必然、ではある。だがしかし、あまり自分はそういうキャリアを望んでいないし、さすがに3年目で管理系の道に入ってしまうのは、ちょっと早すぎる。</p>
-
-<p>というわけで技術ブログである。会社で触れないなら家でやるしかない。エンジニアとして自負したいのであれば、もう精一杯足掻くしかないだろうと。指を咥えて与えられた仕事だけしてたら単なるダラダラリーマンになりそうなので、それは避けたい。そしてゆくゆくは、身につけた技術によって職を替えてもみたいのだが。</p>
-
-<h1>現在位置を確認する</h1>
-
-<p>自分はインフラ系のSEなので、日頃はスイッチのconfig書いたりVMwareでガリガリ仮装環境作ったり、そういう仕事が多い。ちなみに顧客環境の都合で業務上Linuxに触れた経験がないのは内緒である。</p>
-
-<p>というわけで、自力で学ぶのは会社から離れた方向。アプリ系を中心に据えていきたい。これまで自分が納めた言語はJava、それもわりと簡単なことしかできていないので、Javaの腕を磨くことと、もう一言語使えるようになることを目標にしたい。</p>
-
-<p>とはいえ現在の業務も重要ではあるので、同時にインフラ周りも学べるような道が吉。</p>
-
-<h1>これから行く先を定める</h1>
-
-<p>てわけで、当面の目標は二つ。</p>
-
-<ul>
-<li>VPSを借りて、Ruby on Railsで動くウェブサービスをつくる</li>
-<li>Androidアプリをなんかつくる</li>
-</ul>
-
-
-<p>Javaに加える「もう一言語」はRubyにした。最近流行っているようだし、出来る事の幅も広そう。Pythonにも興味は惹かれたが、まあとりあえずRubyで。</p>
-
-<p>そしてVPS。Ruby on RailsだとHerokuあたりで建てるのが主流みたいなんだけど、勉強も兼ねて足回りから全部自分で構築する。CentOSをいじって、ApacheとかDBとか入れてガリガリつくる。これでインフラ系SEとしての勉強も一応できるはず。</p>
-
-<p>2番目の目標の方はサブ。1個の目標だけずーっと続けるのもなかなかしんどそうなので、息抜きとしてAndroidアプリをいじりたい。作りたいもののイメージとしては、Tumblrの過去ログを漁りやすくするようなアプリが出来たらいいなーと思っている。</p>
-
-<h1>ブログをどう活用するか</h1>
-
-<p>と、ここまで書いておいてなんだが、実はすでに勉強は始めている。本を読みながら作ったりなんだりとしていたのだが、どうにも身になっている気がしなかったので、アウトプットの場としてブログを始めることにした次第。</p>
-
-<p>はじめはEvernoteとかqfix_howmあたりに勉強記録をつければいいかと思ったが、それだとモチベーションが上がりにくいし、整形もしない気がしたのでブログにしてみた。はてブロならMarkdownで書けるからちゃんとフォーマットも考えつつ書けそうだし、参考文献へのリンクの処理とかも楽。んでさすがに本家の方とは内容がかけ離れすぎてるので、別ブログとして開設。まぁひっそりとやっていきます。</p>
-
-<p>書く内容としては、何を学んだのか、何がわかったのか、わからなかった点はどこで、次回はどうするのか、ということを1日の勉強が終わったときに書き留めていきたい。特に「次回はどうするのか」がすげー重要だと個人的には思っていて、本を読んだら読みっぱなしではなく、「この本ではこのあたりのことがよくわからなかったから、次はこういう本を買おう」というビジョンが必要。そういうビジョンを持ちながら勉強するためにも、学んだ内容をアウトプットして整理する必要があると思っている。</p>
-
-<p>あ、あとは「うたうとき」の方でたまに書いてたライフハック的というか、情報整理環境みたいのについての記事もこっちに回してくるつもり。そういうのってこだわりすぎてもいけないんだけど、ある程度整備しとかないと色々支障をきたすものだとも思っている。</p>
-
-<p>次回以降、勉強ブログとして書き進めていきます。ちなみに現時点までの記録として、以下に開発環境と読んだ本をば。</p>
-
-<h1>これまでの足跡</h1>
-
-<h2>開発環境</h2>
-
-<ul>
-<li><p>メインマシン</p></li>
-<li><p>iMac late 2010</p></li>
-<li>Mountain Lion</li>
-<li>Java : Eclipse 4.2</li>
-<li>Ruby : vim（良いIDEとかあるなら教えてくだしあ＞＜）</li>
-<li><p>Editor : vim（出来ること多すぎてハマり気味。精神衛生上良くない）</p></li>
-<li><p>サブマシン（いずれもVMware fusion上）</p></li>
-<li><p>Cent OS 6.4（Linux勉強用）</p></li>
-<li>Windows 8（ほぼ使ってない。一応持ってるWindows）</li>
-<li>流行りのvagrantなんかも触ってみたいですね！</li>
-</ul>
-
-
-<h2>これまで読んだ本</h2>
-
-<ul>
-<li>Android</li>
-</ul>
-
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51KFio8rqSL._SL160_.jpg" alt="楽しみながら作ってみよう! はじめてのAndroidアプリプログラミング" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">楽しみながら作ってみよう! はじめてのAndroidアプリプログラミング</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 13.07.20</div></div><div class="amazlet-detail">塚田 翔也 <br />マイナビ <br />売り上げランキング: 15,868<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51pUNvCkwhL._SL160_.jpg" alt="Google Androidプログラミング入門 改訂2版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Google Androidプログラミング入門 改訂2版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">江川崇 神原健一 山田暁通 佐野徹郎 郷田まり子 <br />アスキー・メディアワークス <br />売り上げランキング: 400,553<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<ul>
-<li>Ruby</li>
-</ul>
-
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41VI40rlsIL._SL160_.jpg" alt="作りながら学ぶRuby入門 第2版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">作りながら学ぶRuby入門 第2版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">久保秋 真 <br />ソフトバンククリエイティブ <br />売り上げランキング: 274,090<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<ul>
-<li>Linux</li>
-</ul>
-
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51VAhyp4eWL._SL160_.jpg" alt="はじめてのCentOS6 Linuxサーバ構築編 (TECHNICAL MASTER)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">はじめてのCentOS6 Linuxサーバ構築編 (TECHNICAL MASTER)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">デージーネット <br />秀和システム <br />売り上げランキング: 210,008<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/20">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     

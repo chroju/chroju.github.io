@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="これまではてなブログで書いていた技術系ブログを移設する目的で、Octopressとgithub.ioを使ったブログを作成しました。もはや常套手段とも言えるブログ作成方法ですので、ノウハウはネット上のあちこちに公開されており、特に苦労することもなかったです。というか、 &hellip;">
+  <meta name="description" content="GitHub.ioとOctopressの組み合わせでブログを作成しました。 [No intention](http://chroju.github.io) こちらのブログを消すことはしませんが、おいおい全部の記事をエクスポートしてgithub.ioに持っていくつもりです。はてなブログでもまぁ、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/18/post/">github.ioにブログを移行します</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-18T21:16:00+09:00'><span class='date'>2015-02-18 (Wed)</span> <span class='time'>9:16 pm</span></time>
+        
+         | <a href="/blog/2015/02/18/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>GitHub.ioとOctopressの組み合わせでブログを作成しました。</p>
+
+<iframe src="//hatenablog-parts.com/embed?url=http%3A%2F%2Fchroju.github.io" title="No intention" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;">[No intention](http://chroju.github.io)</iframe>
+
+
+<p>こちらのブログを消すことはしませんが、おいおい全部の記事をエクスポートしてgithub.ioに持っていくつもりです。はてなブログでもまぁ、不満はなかったんですけど、流行りのやり方に乗ってみようかなというのと、隅々までカスタマイズできるフォーマットが欲しいかなということでやってみました。</p>
+
+<p>実際のところ、ブログの構成ファイルやエントリーをすべて手元に残しておける（それもMarkdownで）というのはどことなく安心感もあって良いものです。管理が行き届くという意味でも、Github.ioとOctopressによるブログ運営は良いんじゃないかなと。</p>
+
+<p>そこそこにはてなブログ読者登録もしていただいていたみたいですが、よろしければ今後共よろしくお願いします。なお、ブログ名の「No intention」は大した意味がないですが、好きなボカロ曲から連想したりしてます。</p>
+
+<iframe src="https://youtube.googleapis.com/v/OA1btvnzfDY&amp;source=uds" allowfullscreen="" frameborder="0" height="315" width="420"></iframe>
+
+
+<p><br><a href="http://www.youtube.com/watch?v=OA1btvnzfDY">【初音ミク PV】Chaining Intention【HD】[HD1080p] - YouTube</a></p>
+
+<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/sm7046584"></script>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -389,183 +440,6 @@
 
 
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/20/post/">Vimで意識しておきたいことまとめ＠2015新春</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-20T00:24:00+09:00'><span class='date'>2015-01-20 (Tue)</span> <span class='time'>12:24 am</span></time>
-        
-         | <a href="/blog/2015/01/20/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前の記事がやたらポエミーになってしまったので、もうちょっと実際的なとこでVim使う上での注意点とか、今後覚えておきたいこと書いときます。</p>
-
-<h2>正規表現を使いこなす</h2>
-
-<p>そもそも正規表現がきちんと修められていないので、これまで検索と置換はあまり使ってこなかった。が、これ使えないとVimの魅力半減だと思うので、ちゃんと使いこなせるようになるのが目標。</p>
-
-<p>正規表現と一言に言っても言語やツールによって書き方が違う場合があって、Vimについても一部の正規表現用の特殊文字を使うとき、エスケープが必要なことがある。これについては<code>very magic</code>というオプションを使うとエスケープせずに済むらしい。<code>vimrc</code>に書いたりできないのがちょっと煩わしいが、エスケープ必要な特殊文字を逐一覚えて1個1個処理していくよりは良い。</p>
-
-<iframe src="http://deris.hatenablog.jp/embed/2013/05/15/024932" title="Vimでパターン検索するなら知っておいたほうがいいこと - derisの日記" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;">[Vimでパターン検索するなら知っておいたほうがいいこと - derisの日記](http://deris.hatenablog.jp/entry/2013/05/15/024932)</iframe>
-
-
-<p>せっかく正規表現を使うなら<code>vimgrep</code>もマスターしておこうと思う。というかカレントバッファだけを編集するんじゃなくて、ファイルを扱うツールとしてVimを使いたい。今使っているのは<a href="https://github.com/scrooloose/nerdtree">NERDTree</a>ぐらいなものである。</p>
-
-<p>vimgrepは名前通り<code>:vimgrep</code>で打ちたくなるが、<code>:vim {pattern} {files}</code>の書式で使える。<code>{files}</code>にはフォルダパスやワイルドカードの他、標準出力も渡せるらしく、例えば<code>git ls-files</code>でGitにインデックスされているファイルだけを対象にしたりできるらしい。よくコード中に「TODO」とコメントしていく場面があるみたいだが、IDEではなくVimでも一斉検索して処理したりできるってことか。なるほど。vimgrepで探し当てた候補は<code>:cprevious</code>と<code>:cnext</code>というちょっと面倒なコマンドで選択するようなので、ここはマッピングしときたいですね。</p>
-
-<iframe src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fyuku_t%2Fitems%2F0c1aff03949cb1b8fe6b" title="vimgrepとQuickfix知らないVimmerはちょっとこっち来い - Qiita" class="embed-card embed-webcard" scrolling="no" frameborder="0" style="width: 100%; height: 155px; max-width: 500px; margin: 10px 0px;">[vimgrepとQuickfix知らないVimmerはちょっとこっち来い - Qiita](http://qiita.com/yuku_t/items/0c1aff03949cb1b8fe6b)</iframe>
-
-
-<h2>繰り返し操作</h2>
-
-<p>去年読んだ『実践Vim』にこのあたりのことはガッツリ書いてあった。<code>.</code>を有効活用せよ、繰り返しができるような操作を心掛けよと。例えば<code>hoge=fuga</code>とあって、イコールの前後にスペースを入れたい場合どうするか。イコールにカーソル持って行って<code>i&lt;Space&gt;&lt;esc&gt;la&lt;Space&gt;&lt;esc&gt;</code>とかでももちろんいいんだろうけど、『実践Vim』では<code>s&lt;Space&gt;=&lt;Space&gt;</code>を進める。挿入モード1回だけで入力が終わるので、この操作は<code>.</code>で使いまわせるからだ。もっと言えば<code>u</code>によるアンドゥも可能。移動→挿入モード→<code>&lt;esc&gt;</code>という動き1回で何が出来るか考えろと、簡単にまとめるとそういうこと。もちろんマクロも使えと。自分は複数行に同じ処理をするときとかによく使ってます。一度記録したマクロを再編集するとか、そういう使い方もあるらしいけど、ちょっとまだそこまではできてない。</p>
-
-<h2>コマンド、コード実行</h2>
-
-<p>今はtmuxで画面分割して、一方ではVimでコードを書き、もう一方で実行してエラーを確認したりしている。でもこれはVim内で完結できるはずかなと。プラグインとして<code>vim-quickrun</code>を入れているのに使っていないのが原因。すっごい単純な話、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">:</span>QuickRun
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>さえ覚えておけば、編集中のコードを実行させることができる。長いので何かしらマッピングはしたいが。最初はこれだけやってればいいかもしれない。物足りなくなったらオプションいじってみたり。あとは<code>:!</code>でシェルのコマンド実行できるってこともちゃんと覚えておけば、Vim上だけでやれることがだいぶ増えると思う。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">:!&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span>echo<span class="p">&lt;</span><span class="sr">/span&gt; $&lt;span class=&quot;synIdentifier&quot;&gt;HOME&lt;/</span>span<span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>移動</h2>
-
-<p>ぶっちゃけキーアサイン覚えるのが面倒なので、基本の<code>hjkl</code>と<code>gg</code>,<code>G</code>,あとは<code>ft/?</code>あたりによる検索でしか移動してなかった。行番号指定での移動もデバッグのときとか（エラーメッセージ内に行番号出るので）よく使うけど、いちいち移動したい先の行番号確認してコマンド打つのは面倒だなぁとか思っててあまり使ってない。</p>
-
-<p>というわけで移動をもうちょっとハッピーにしようと思う。このあたり？</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">w</span> 次の単語の語頭へ移動
-</span><span class='line'><span class="k">b</span> 前の単語の語頭へ移動
-</span><span class='line'><span class="k">e</span> 次の単号の語末へ移動
-</span><span class='line'>ge 前の単語の語末へ移動
-</span><span class='line'>{ 段落単位で戻る
-</span><span class='line'>} 段落単位で進む
-</span><span class='line'>C<span class="p">-</span><span class="k">u</span> 画面半分単位で戻る
-</span><span class='line'>C<span class="p">-</span><span class="k">d</span> 画面半分単位で進む
-</span><span class='line'>H 画面内最上の行へ移動
-</span><span class='line'>M 画面内中央の行へ移動
-</span><span class='line'>L 画面内最下の行へ移動
-</span><span class='line'>% 対応する括弧へ移動
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>wbe</code>あたり、<code>w</code>の逆が<code>b</code>に対して<code>e</code>の逆が<code>ge</code>ってのは気に入らないなぁ。。。<code>WBE</code>にもそれぞれマッピングはあるみたいだけど、覚えるの面倒だし逆移動にマッピングしちゃってもいいかもと思う。<code>Shift</code>付ければ逆操作になるってのは直感的で良い。あと<code>bb</code>にバッファウィンドウ開くようマッピングしてしまっている自分は<code>b</code>を多用できない問題もあったりする。他は比較的納得感のあるアサインなので覚えやすい気が。特に<code>{}</code>、Vimでブログも書いてる自分は重宝しそう。括弧に関しては自分Rubyをよく書くので、matchitの設定で<code>def</code>から<code>end</code>とかにも飛べるようにした。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">if</span><span class="p">&lt;</span><span class="sr">/span&gt; !&lt;span class=&quot;synIdentifier&quot;&gt;exists&lt;/</span>span<span class="p">&gt;&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synSpecial&quot;</span><span class="p">&gt;(&lt;</span><span class="sr">/span&gt;&lt;span class=&quot;synConstant&quot;&gt;&#39;loaded_matchit&#39;&lt;/</span>span<span class="p">&gt;&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synSpecial&quot;</span><span class="p">&gt;)&lt;</span>/span<span class="p">&gt;</span>
-</span><span class='line'>  <span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span>runtime<span class="p">&lt;</span><span class="sr">/span&gt; macros/</span>matchit<span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span>.<span class="k">vim</span><span class="p">&lt;</span>/span<span class="p">&gt;</span>
-</span><span class='line'><span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">endif</span><span class="p">&lt;</span>/span<span class="p">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>また移動系だと<a href="https://github.com/Lokaltog/vim-easymotion">vim-easymotion</a>を入れているけど使ってないので、使えれば使ってみようかなと。コンセプトとしては<code>3w</code>や<code>4fa</code>等と打つとき、いくつ先に行くのか数を数えなくてはならないという煩わしさがあるので、移動可能な場所候補にラベルを表示して、ラベルの打ち込みにより一発で移動しようというもの。<code>s{char}</code>で画面全体検索というキーバインドもあるみたい。感覚としてはVimperatorの<code>Follow hint</code>の動作に近いのか。ちなみに『実践Vim』では回数指定はやっぱり煩わしいので、<code>.</code>や<code>;</code>で繰り返した方が速いよってなことが書いてあった。</p>
-
-<p>あと<code>ctags</code>とかマークの機能もちゃんと使いたいのだが。<code>ctags</code>はVimの機能というより、元々あったプログラムを活用して楽に移動できるようにしましたという話なので、そもそもの<code>ctags</code>に対する理解を深めなければと思う。マークは次のキーマップを覚えれば使えそうだが、使いこなすのが難しそうな気もする。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">m</span>{char} カーソル位置にマークを設定
-</span><span class='line'>`{char} 指定のマークに移動
-</span><span class='line'>`` 直前のマークに移動
-</span><span class='line'><span class="p">:</span><span class="k">marks</span> マーク一覧の表示
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>その他キーマップ</h2>
-
-<p>今まであまり使ってなかったけど便利そうなキーマップ、改めてピックアップ。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'>D カーソル位置から行末まで削除
-</span><span class='line'>C カーソル位置から行末まで削除して挿入モード
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このキーマップに付随して<code>Y</code>も<code>y$</code>に割り当てたいよねってのが↓の記事に載ってたので早速vimrcに追記してます。<code>+</code>で<code>&lt;C-a&gt;</code>,<code>-</code>で<code>&lt;C-x&gt;</code>というのも真似してみた。確かにこれ、今まで便利なのは知ってたけど、キーマップが覚えられてなかった。そういうのはガンガン割り当て替えるべきですね。</p>
-
-<iframe src="http://itchyny.hatenablog.com/embed/2014/12/25/090000" title="個人的に便利だと思うVimの基本設定のランキングを発表します！ - プログラムモグモグ" class="embed-card embed-blogcard" scrolling="no" frameborder="0" style="width: 100%; height: 190px; max-width: 500px; margin: 10px 0px;">[個人的に便利だと思うVimの基本設定のランキングを発表します！ - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2014/12/25/090000)</iframe>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">s</span> <span class="m">1</span>文字消して挿入モード
-</span><span class='line'>S <span class="m">1</span>行消して挿入モード
-</span><span class='line'><span class="k">c</span>{operator} 指定範囲を消して挿入モード
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>s</code>と<code>c</code>の違いが掴めてなかった。<code>c</code>はオペレーターを取る。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'>zf 折り畳み（folding）
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>忘れる。これ。あまり使ってないけど。foldingの展開は<code>&lt;Space&gt;</code>で。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'>ヴィジュアルモードで<span class="k">o</span> 始点と終点を入れ替え
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>『実践Vim』に載ってた。始点間違えて<code>v</code>押しちゃってもモード抜けなくて済むのですごく便利。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot;0p ヤンクレジスタから貼り付け</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>0はヤンクレジスタにあたり、ヤンクしたテキストが暗黙的に入力されている。<code>dd</code>などで削除したテキストはこちらには入らないので、よくあるヤンクして数行後の行を削除してからペーストしようとしたら、<code>dd</code>したものが貼り付けられてしまった、みたいな事象を避けられる。レジスタはこれ意外にもいろいろ奥が深そうなので、機会があれば調べたい。</p>
 </div>
   
   
