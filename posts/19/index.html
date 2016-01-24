@@ -9,7 +9,10 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。 基本的に rails generate hoge コマンドで色々作れる。scaffold、model、controllerとか、コマンドで作ればRailsが必要なファイルを用意してくれる。 &hellip;">
+  <meta name="description" content="資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。 必要なもの Ruby ……当然のごとく
+Rails ……当然のごとく
+rbenv ……RubyとRailsの管理システム
+ruby-build …… &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +113,135 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/16/post/">バージョン管理に注意しながら、Ruby on Railsの動作環境を構築する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-09-16T09:42:00+09:00'><span class='date'>2013-09-16 (Mon)</span> <span class='time'>9:42 am</span></time>
+        
+         | <a href="/blog/2013/09/16/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。</p>
+
+<h2>必要なもの</h2>
+
+<ul>
+<li>Ruby ……当然のごとく</li>
+<li><p>Rails ……当然のごとく</p></li>
+<li><p>rbenv ……RubyとRailsの管理システム</p></li>
+<li><p>ruby-build ……rbenvとセットで使うっぽいがよくわかってない</p></li>
+<li><p>Git ……バージョン管理。必須ではない気もするがあった方がいい。rbenvとかのインストールにも使う。</p></li>
+<li><p>RubyGems ……Rubyのパッケージ管理システム</p></li>
+<li><p>Bundler ……Gemパッケージの管理システム</p></li>
+</ul>
+
+
+<p>こんなところだろうか。直接的に必要なものの他に、それぞれを管理するためのツールが必要だったりしてなかなかに複雑であった。あとhomebrewとかのあたりまで遡るとキリが無くなりそうなのでさすがに割愛。というかOSによっても違ってきちゃうし。readlineとかopensslとかも依存関係があるっぽいんだけどよくわからないので割愛……。んー、意味あるのかこの記事。俺がRoRで使ってる環境はちなみにCent OSなので、その前提で書きます。</p>
+
+<h2>rbenv</h2>
+
+<p>本とか読んでるとRubyのバージョン管理にはRVM使わせているものが多いんだけど、rbenvの方が軽くてBundlerとの相性も良いらしい。よってrbenvを使うことにする。</p>
+
+<p>参考：(<a href="http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm">http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm</a>)</p>
+
+<p>インストール先のパスが迷う。。。ホームフォルダに不可視で入れるのが気持ちとしてスッキリするのでそれを採用。</p>
+
+<blockquote>$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv</blockquote>
+
+
+<p>で、bash_profileにパスを追加。</p>
+
+<blockquote>echo &#8216;export PATH=&#8221;$HOME/.rbenv/bin:$PATH&#8221;&#8217; >> ~/.bash_profile
+echo &#8216;eval &#8220;$(rbenv init -)&#8221;&#8217; >> ~/.bash_profile
+source ~/.bash_profile</blockquote>
+
+
+<h3>追記</h3>
+
+<p>実はこの記事書く前にすでにRVM入れちゃってたんだけど（今読んでる『RailsによるアジャイルWebアプリケーション開発』にはRVMが紹介されてたので）、RVM削除してrbenvを入れなおそうと思い立って調べてみた。そこで辿り着いたRVMのアンインストールコマンドがなかなかに衝撃的だったので追記。</p>
+
+<blockquote>$ rvm seppuku</blockquote>
+
+
+<p>切腹！！！ｗｗｗｗ</p>
+
+<h2>ruby-build</h2>
+
+<p>よくわかってないけど入れる。わかっていることとしては、これがないとrbenv installコマンドが使えない。rbenvのプラグインとしての位置づけらしいので、.rbenvフォルダ配下に入れる。公式のREADMEにもそう書かれてます故。</p>
+
+<blockquote>$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</blockquote>
+
+
+<h2>Ruby</h2>
+
+<p>Rubyはrbenvを使ってインストール。バージョンについては都度変わるので、$ rbenv install -lコマンドで落とせるバージョンを確認しつつ、必要なものを入れる感じで。まぁ使うバージョン選択できるんだから、そんなにセンシティブになる必要はないと思うが。</p>
+
+<blockquote>$ rbenv install 1.9.3</blockquote>
+
+
+<p>デフォで使うRubyのバージョンを設定。</p>
+
+<blockquote>$ rbenv global 1.9.3 # これで設定
+$ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを落としたときに実行する</blockquote>
+
+
+<p>インストール済みのRubyのバージョンは$ rbenv versionsで確かめられる。ちょうど今年の上半期にRuby 2.0が出たばかりだし、このあたりはしばらくの間重宝しそう。</p>
+
+<h2>RubyGems</h2>
+
+<p>入れる方法はいろいろあるみたいだけど、自分の使ってるCent OSを基本として考えて、yumで入れることにする。</p>
+
+<blockquote>$ yum install rubygems</blockquote>
+
+
+<p>めんどかったら-yオプション付ければ対話なしで全部インストールされておしまい。</p>
+
+<h2>Rails</h2>
+
+<p>いよいよRailsのインストール。RailsはGemパッケージとして配布されているので、今入れたRubyGemsを使ってインストールする。特定のバージョンを使う場合は-vオプションを使う。オプション無しだと最新版が入る。rbenvでRubyの複数バージョン切り替えるみたいにRailsもやってみたいんだけど、やり方がわからない。。。</p>
+
+<blockquote>$ gem install rails</blockquote>
+
+
+<h2>Bundler</h2>
+
+<p>一番よくわかっていないところ。Rubyで使われるGemパッケージの管理ツールらしい。ルートディレクトリにあるGemfileに書いておいたパッケージについて、依存関係をチェックして自動でインストールしてくれるものらしい。ほお。</p>
+
+<blockquote>$ bundle install</blockquote>
+
+
+<p>Railsアプリケーションを$ rails newコマンドで作成した場合、ルートディレクトリに勝手にGemfileが作られる上、$ bundle installも自動で実行されるので、あまり意識はしなくていいっぽい。Rails自体もGemで配布されているのでbundlerを使って管理させたりとかもできるみたいなんだけど、そのあたりを調べた感じ、自分には何が何を管理してるのかメタにメタ重ねる感じで徐々に訳わからん感じになってきたので考えるのを、やめた。</p>
+
+<p>RailsアプリケーションのGemfileにはcoffescriptやSASS、SQLiteなどをインストールするように記述されている。下手にこれいじると多分死ぬと思うんだけど、SQLiteじゃなくてMySQL使いたいとか、他のGemパッケージが何か必要になったとか、そういうときは編集してあげてから$ bundle installでおｋっぽい。便利！</p>
+
+<h2>Git</h2>
+
+<p>長くなりそうなので割愛。また別の機会にまとめたい。GitHubのアカウントも持ってる（ほぼ使ってないけど。。。）し、一度RSA認証で繋げるように設定はしたことあるんだけど、完全に忘れたんでもう一度ちゃんとまとめる。今度。</p>
+
+<p>ツールをインストールするときは依存関係の処理とかの問題があるので、後々新バージョンが出たときに惑わないよう、なるたけ自動で管理できるような入れ方をする必要がある。その視点に立って一旦まとめてはみたけど、もっと良いやり方というのも多分あるのだろう。インストールするぐらいなら猿でも出来ると思いがちだが、これがなかなか奥が深い。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -344,59 +476,6 @@
 
 
 <p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/21/post/">Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-07-21T20:12:00+09:00'><span class='date'>2013-07-21 (Sun)</span> <span class='time'>8:12 pm</span></time>
-        
-         | <a href="/blog/2013/07/21/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、まずは動かしてみることにした。購入したのは以下の本。</p>
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<p>各所で絶賛されているのを見かけた上、立ち読みしてみた感じでもRubyのインストールという初歩から始まっていてわかりやすそうだった。候補としてはもうひとつ、インプレスの『基礎 Ruby on Rails』もあったんだけど、ザッと見た感じでは『Railsによる〜』の方が記載が細かそうだったのでこっちを選んだ。</p>
-
-<p>さて、VPSでRuby on Railsを作るにあたり、どこまでの範囲を学べば良いのだろう。今回買った本だとおそらくはRailsとRuby、DBあたりのコーディングが内容の主なようで、インフラ側のチューニングの話なんぞは載っていなさそうだった。自分が想像するとこだとLinuxというかOSの準備、VPSであるならばOSに接続するためのSSHの使い方、ウェブに公開するのでそのあたりのセキュリティ、DBやApacheなどのアプリインストールなどなど、やることはかなりありそう。あとView側の問題として、Coffe ScriptやSCSSあたりもやんなくちゃいけないんだろうな。JavaScriptとCSSはそれなりに書いたことあるけど、せっかくだし挑戦してみたい。</p>
-
-<p>……という感じのビジョンを描いているのだが、やはり全部まともにイチからやっていたらかなりの時間が必要だと思う。とりあえず作ってみて、あとは気になったところを徐々に手をつけていく感じでやっていきたい。あと、環境構築系だとこの本が良さそうだなーと目をつけている。</p>
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<p>……で、『Railsによる〜』はとりあえず1章読破したのだが、まさかのここでつまずくという事件発生。つまずくのはえーよｗｗｗ</p>
-
-<p>CentOSにRVMを入れようとしたのだが、以下のコマンドが通らなかった。curlのエラーっぽいんだけど、今をもって解消できてない。一応他の方法でRVMは入ったので、しばらく保留にしとこうかと思っている。</p>
-
-<blockquote>   bash < <(curl -s [https://rvm.beginrescueend.com/install/rvm)](https://rvm.beginrescueend.com/install/rvm))</blockquote>
-
-
-
 </div>
   
   

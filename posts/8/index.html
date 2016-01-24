@@ -9,17 +9,15 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="パーフェクトRuby p.148から学習。文字列ことStringクラス。 まずは基本操作系。 1
+  <meta name="description" content="パーフェクトRuby p.144より。 判定系メソッド、#nonzeroが#zeroの真逆の動きではなくてちょっと混乱しそう。あと#integer?はあるけど#float?はないとか。 1
 2
 3
 4
 5
 6
-s = &quot;hoge&quot;
-s.empty? # =&gt; false
-s.length # =&gt; 4
-s.size # =&gt; 4
-s.bitesize &hellip;">
+7
+0.zero? # =&gt; true
+3.zero? # =&gt; false &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,6 +118,164 @@ s.bitesize &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/16/study-ruby-numeric/">Ruby基礎復習(3) Numericクラス</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-16T22:06:56+09:00'><span class='date'>2015-03-16 (Mon)</span> <span class='time'>10:06 pm</span></time>
+        
+         | <a href="/blog/2015/03/16/study-ruby-numeric/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>パーフェクトRuby p.144より。</p>
+
+<p>判定系メソッド、<code>#nonzero</code>が<code>#zero</code>の真逆の動きではなくてちょっと混乱しそう。あと<code>#integer?</code>はあるけど<code>#float?</code>はないとか。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">0</span><span class="o">.</span><span class="n">zero?</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="n">zero?</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'><span class="mi">0</span><span class="o">.</span><span class="n">nonzero?</span> <span class="c1"># =&gt; nil</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">nonzero?</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">integer?</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">real?</span> <span class="c1"># =&gt; true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>演算子系の話は割愛するが、宇宙船演算子だけ注意しとく。右辺（引数）の方が大きければ負。左辺（レシーバ）が大きければ正。<code>#sort</code>ではブロック内の戻り値が負の場合は2要素をそのまま、正の場合は逆順にして返してくる。宇宙船演算子を利用して昇順or降順に並べ替えることができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">2</span> <span class="c1"># =&gt; -1</span>
+</span><span class='line'><span class="mi">2</span> <span class="o">&lt;=&gt;</span> <span class="mi">1</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="mi">1</span> <span class="o">&lt;=&gt;</span> <span class="mi">1</span> <span class="c1"># =&gt; 0</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">%w(aaaa aa aaa)</span><span class="o">.</span><span class="n">sort</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">a</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;=&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">length</span>
+</span><span class='line'><span class="p">}</span> <span class="c1"># =&gt; [&quot;aa&quot;, &quot;aaa&quot;, &quot;aaaa&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>丸め。<code>#round</code>が四捨五入。<code>#ceil</code>で切り上げ。<code>#floor</code>で切り捨て。馴染みのない英単語で覚えにくい。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="n">round</span> <span class="c1"># =&gt; 1</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="n">ceil</span> <span class="c1"># =&gt; 2</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="n">floor</span> <span class="c1"># =&gt; 1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>#step</code>で、第一引数に与えられた上限数値に達するまで、レシーバに第二引数の数値を足し合わせていく繰り返し処理がつくれる。第二引数のデフォルトは1。整数であれば<code>#upto</code>と<code>#downto</code>で1ずつ加算、減算させていくことも可能。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="n">step</span> <span class="mi">4</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">i</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># &quot;2&quot;,&quot;3&quot;,&quot;4&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="n">step</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span> <span class="k">do</span> <span class="o">|</span><span class="n">num</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">num</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># &quot;2.0&quot;,&quot;2.3&quot;,&quot;2.6&quot;,&quot;2.9&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="n">upto</span> <span class="mi">5</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">i</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># 2,3,4,5</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">4</span><span class="o">.</span><span class="n">downto</span> <span class="mi">2</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">i</span>
+</span><span class='line'><span class="k">end</span> <span class="c1"># 4,3,2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>整数</h2>
+
+<p>Integerクラスは絶対値の大きさによりFixnumサブクラスとBignumサブクラスに振り分けられる。メモリ領域との関係で境界が定められるみたいだが、自動判定されるのであまり気にしなくても良い気がする。整数ならではのメソッドは以下のあたり。oddとevenは「オッドアイ」の意味を考えると連想できることに気付いた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">odd?</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">even?</span> <span class="c1"># =&gt; false</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">1</span><span class="o">.</span><span class="n">next</span> <span class="c1"># =&gt; 2</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="n">succ</span> <span class="c1"># =&gt; 3</span>
+</span><span class='line'><span class="mi">3</span><span class="o">.</span><span class="n">pred</span> <span class="c1"># =&gt; 2</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">56</span><span class="o">.</span><span class="n">chr</span> <span class="c1"># =&gt; &quot;8&quot; 文字コードで対応する文字列を返す</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&quot;123&quot;</span><span class="o">.</span><span class="n">to_i</span> <span class="c1"># =&gt; 123</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>浮動小数点数</h2>
+
+<p>Floatクラス。あまり意識せずに使っても勝手にFloatクラス扱いしてくれたりするので楽。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">num</span> <span class="o">=</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span class='line'><span class="n">num</span><span class="o">.</span><span class="n">class</span> <span class="c1"># =&gt; Float</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>有理数無理数</h2>
+
+<p>Rationalが有理数クラスなわけだが、プログラミングにおいて無理数有理数の別が必要になる場面が想定できない数学オンチなのでよくわからん。Ruby Silverにも出なかった気がするし割愛でいっかな。。。なお複素数は文字通りComplexクラス。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -696,98 +852,6 @@ s.bitesize &hellip;">
 
 
 <p>そんなこんなで記事の変換が終わったら、あとはoctopressのレポジトリで<code>/source/_posts</code>の中に全ファイルブチ込んで<code>rake generate</code>かければ生成されます。最初はちょっと戸惑いもありましたが、やれてしまうと案外簡単に移行できるなという感じです。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/21/post/">Developers Summit 2015に行ってきた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-21T13:28:29+09:00'><span class='date'>2015-02-21 (Sat)</span> <span class='time'>1:28 pm</span></time>
-        
-         | <a href="/blog/2015/02/21/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Developers Summit 2015の2日目に行ってきました。うちの会社とは少し毛色が違うイベントということもあり、これまで業務時間を利用して行くということはなかなかできなかったんですが、今年はたまたま休みが入ったので行けました。</p>
-
-<p>マネジメント的な話から、かなり技術よりの話まで、幅広く聞くことができたのは面白かったです。一方でそれほどベンダーロックインされた話もなく、自分の業務に何かしらのフィードバックを持ち込みやすそうな構成になっているのだなという点もよくわかりました。人は多くてちょい疲れますけど。。あと会場の目黒雅叙園、IT系のイベントやってるとは思えないぐらい綺麗な場所ですね。。まぁ元は結婚式場などなどなわけだけど。渡風亭とか、屋内に茅葺きの一軒家があるもんでびっくりした。</p>
-
-<p>以下、参加セッション別に簡潔に。</p>
-
-<h2>進化する！インテル RealSense テクノロジー</h2>
-
-<p>インテルが売り出している、Kinectのような3Dカメラのデモを交えた紹介。990ドルで買えて、SDKキットは無料で落とせるらしいので、こういうのも試してみると面白いのかも。自宅での趣味開発ってこれまでコード書いてるだけに結局は終始してしまっていたのだけど、昨今の流行りに乗ってラズパイでなんかやってみたりっていうIoTっぽいのも楽しそうだし、Unityみたいな簡単に本格的なアプリケーションを作れるフレームワークもいいのかなと。RealSenseもUnityに対応しているみたいです。</p>
-
-<h3>関連</h3>
-
-<ul>
-<li><a href="http://japanese.engadget.com/2014/06/30/engadget-fes-realsense-3d/">Engadget Fes：インテル「RealSense 3Dカメラ」をタッチ＆トライ。表情も認識 #egfes - Engadget Japanese</a></li>
-</ul>
-
-
-<h2>クラウドを活かす組織運営 ～クラウドガバナンス入門</h2>
-
-<p>すでにSlideShareが上がってますね。</p>
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/44913374" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/yuya_lush/2015-44913374" title="デブサミ2015 クラウドを活かす組織運営 ガバナンス入門" target="_blank">デブサミ2015 クラウドを活かす組織運営 ガバナンス入門</a> </strong> from <strong><a href="//www.slideshare.net/yuya_lush" target="_blank">Yuya Yoshida</a></strong> </div></p>
-
-<p>様々なケーススタディを元にした、組織内でクラウドを導入する場合のガバナンスノウハウの紹介。クラウドの導入とは単なる技術的な変革にとどまらず、リソース調達のタイムスパンが飛躍的に短くなったり、管理手法としてスパイラルが適していたりと、ビジネスの枠組み自体が変化することを意識して、ガバナンスルールを変えなくてはならないという点が印象的でした。またスキルセットの話（属人化とか能力評価の方法）はクラウド運営にとどまらず、いろいろと応用できそうな話でした。</p>
-
-<h2>おさえておきたいモダンなチーム開発を支えるツール連携</h2>
-
-<p>こちらもSliedeShareあり。</p>
-
-<iframe src="//www.slideshare.net/slideshow/embed_code/44917265" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-
-
-<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/tomohn/20b4-devsumi-devsumib" title="おさえておきたいモダンなチーム開発を支えるツール連携【20-B-4】 #devsumi #devsumiB" target="_blank">おさえておきたいモダンなチーム開発を支えるツール連携【20-B-4】 #devsumi #devsumiB</a> </strong> from <strong><a href="//www.slideshare.net/tomohn" target="_blank">Tomoharu Nagasawa</a></strong> </div></p>
-
-<p>システム企画にConfluence、BTSにJIRA、開発にGitHubといった形でそれぞれ個別のツールを使って管理しているところを、Atlassian社のツールを使って連携させていきましょうというような話。こういったツールとまったくもって無縁の仕事をしているので若干ぼんやり聞いてしまいましたけど、やっぱツールで仕事回せるのは間違いが少なくて良さそうだな、と。上がどうにもしてくれないなら、自分でなんとかせねばなぁ。</p>
-
-<h2>実践！Infrastructure as a Codeの取り組みと改善</h2>
-
-<p>サイバード社の実例に基づいたInfrastructure as a Codeの現場レベルでのお話。正直言って途中から用語についていけなくなってしまったのだけど、オンプレミスでVMware上に仮想マシン立ててばかりいる自分とは隔世の感があることだけはよくわかりました。Chefはともかく、AWSには早いとこ業務で関わりを持たなくてはまずそう。AMI？ ChefとAWSの連携？ オートスケーリングの制御？</p>
-
-<h2>情報革命時代における新しい多様性の共存と、これからのエンジニアのキャリア、評価制度について</h2>
-
-<p>ビズリーチCTOの竹内氏によるお話。「多様性」とは内向型人間（イントロバート）と外向型人間（エクストロバート）のことであり、エンジニアには前者が多い一方で、営業には後者が多く、両者が相互理解していくこと、また近代資本主義下ではエクストロバート偏重文化があることを指摘した上で、イントロバートに対する配慮をどのように進めるべきかという内容でした。自分もイントロバートではあると思うので、結構興味深い内容。</p>
-
-<p>外向型の振る舞い方を内向型に対して強要すること、またその逆はハラスメントに相当すると考え、双方の立場を理解して付き合っていかなくてはならないと。またイントロバートはビジネススキル、マネジメントスキルがなかなか理解できない側面もあるので、そういったスキルはきちんと理論的に分解して説き、「インストール」していくべきである。確かに自分も「なるべく社交的に振る舞わなくてはならない」という強迫観念のようなものがあるんですけど、一方で外向型の人が内向型に合わせてくれても良いはずなんですよね、多少は。</p>
-
-<p>このあたりのお話はスーザン・ケイン氏の主張が下地になっているとのことなので、後で調べてみたいところ。</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ScNIhIe6_5Y" frameborder="0" allowfullscreen></iframe>
-
-
-<h2>変革のSIer～挑戦者たち～</h2>
-
-<p>NRIと日立ソリューションズのSEによるパネディス形式でのセッション。ごめんなさい、本日寝不足につき正直半分寝てました。。</p>
-
-<p>お話としては大きく二本立てで、保守的なSIerの内部で新しいものを導入していくにはどうすればいいのか？という話と、SIerが持つ技術をOSS化した事例の紹介。前者についてはリスク（悪い面の話だけではなく、将来予測が難しいことをリスクと呼ぶ）を可視化して検討を重ねていくことが大切であり、後者についてはオープン化の時代に対応していくために、OSSとして自社技術を公表することによる外部へのアピールの重要性と、またそれを実践するにあたっての困難が話の主軸でした。</p>
-
-<p>大きなことをやる必要はない、世の中には解決すべき問題は多いので、小さなことからでも変えていくべきだという話がセッションの中でありましたが、自分としてはドラスティックな変革が必要だよなーという思いもあってちょっともにょもにょ。結局小さなことしかゲリラ戦を仕掛けていくしかないとしたら、なかなかに気の遠くなる話です。</p>
 </div>
   
   

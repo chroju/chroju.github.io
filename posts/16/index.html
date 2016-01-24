@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。 Ruby on Rails環境構築ガイドposted with amazlet at 15.03.01黒田 努 &hellip;">
+  <meta name="description" content="Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。 インストール まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,150 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/19/post/">Rails環境構築（1） Vagrantで仮想マシン構築</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-19T21:08:00+09:00'><span class='date'>2014-01-19 (Sun)</span> <span class='time'>9:08 pm</span></time>
+        
+         | <a href="/blog/2014/01/19/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。</p>
+
+<h2>インストール</h2>
+
+<p>まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」からいろいろ読んどくといいと思う。公式のRead meに勝るものはないです。</p>
+
+<p><a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p>
+
+<p>インストールしたらバージョン確認。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant -v</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>boxの追加</h2>
+
+<p>まずはboxと呼ばれる仮想マシンイメージをvagrantに追加する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant box add hoge url</span></code></pre></td></tr></table></div></figure>
+
+
+<p>hogeは適当なイメージ名、urlはウェブで公開されているboxのurl。イメージは<a href="http://www.vagrantbox.es/">ココ</a>に大量にあるので、任意のサーバーのURLをコピってくればOK。ほとんどがLinux、ちょこっとだけBSD。</p>
+
+<h2>vagrantの初期化</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir vagrant
+</span><span class='line'>$ cd vagrant
+</span><span class='line'>$ vagrant init hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vagrant initでカレントディレクトリをvagrant用に初期化する。なのでmkdirは好きなとこに好きなフォルダ作ればよい。そこに仮想マシンの設定ファイルが作られるので。vagrant initの引数にはさっきvagrant box addで追加した仮想マシンイメージの名前を渡してやる。渡さないとデフォルト値で設定ファイルが作られてしまう。これで最初ハマった。ちなみにどうハマるかというと、vagrant upしたときにこんなエラーが出る。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>There are errors in the configuration of this machine. Please fix
+</span><span class='line'>the following errors and try again:
+</span><span class='line'>
+</span><span class='line'>vm:
+</span><span class='line'>* The box 'base' could not be found.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「base」という名前のboxがないというエラー。どうもデフォルトでbaseという名前が使われるらしいのだが、さっきbox addした名前と異なるので、そんなboxはないから立ち上げられませんよということ。もしこの状態になってしまった場合の対処としては、vagrantfileのconfig.vm.boxの値を該当の仮想マシンイメージ名に替えてやれば上がるようになる。</p>
+
+<p>話が飛んでしまったが、Vagrantfileはvagrant initしたディレクトリの中に出力されている。で、仮想マシンを上げる前にちょっとコイツの編集が必要。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  # Create a private network, which allows host-only access to the machine
+</span><span class='line'>  # using a specific IP.
+</span><span class='line'>  config.vm.network :private_network, ip: "192.168.xx.xx"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上のconfig〜行のコメントアウトを外してやって、IPを適当に設定する。が、自分の環境だとこれだけでは仮想マシンを起動した時にエラーが出てしまって、さらにprivate_networkをpublic_networkに替えてやらなくてはならなかった。ググってるとこの手順やってる人ほとんどいないんだけど、何が原因だろう。</p>
+
+<h2>仮想マシンの起動</h2>
+
+<p>で、ここまでやっていよいよVM起動。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant up</span></code></pre></td></tr></table></div></figure>
+
+
+<p>てっきりVirtual boxがGUIでも上がってくるのかと思ったが、仮想マシン上がりましたよ―というメッセージが表示されるだけでGUI上は何の変化もない。なのでOSが上がってるのかわかりにくいんだけど、SSHで入ると実際入れるのでどうも上がっているらしい（ちなみにGUIでVirtual box上げてももちろん起動状態はわかる。あとvagrant statusコマンドでもわかる）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vagrant ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>bashのsshコマンド発行しなくても、vagrantの独自コマンドで入れる。楽。ちなみに入るときのユーザーは勝手にvagrantというユーザーが作られているんだとか。あとはもう好きにやっちゃってーというところ。他に使いそうなコマンドは以下の表あたりか。</p>
+
+<table>
+<thead>
+<tr>
+<th> コマンド         </th>
+<th> 意味                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> vagrant halt     </td>
+<td> 仮想マシンの停止        </td>
+</tr>
+<tr>
+<td> vagrant destroy  </td>
+<td> 仮想マシンの削除        </td>
+</tr>
+<tr>
+<td> vagrant box list </td>
+<td> 仮想マシンイメージリストの表示 </td>
+</tr>
+<tr>
+<td> vagrant status   </td>
+<td> 仮想マシンの状態確認      </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>vagrantが真価を発揮するのって多分chef-soloと組み合わせたときなので、今の段階だと「わざわざマウス使わずともターミナル上で仮想マシン上げられて便利〜」ぐらいの感想しか正直ないです。もっと勉強しよ。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://www.happytrap.jp/blogs/2013/07/26/10602/">Vagrantで仮想サーバ構築 | HAPPY*TRAP</a></p>
+
+<p><a href="http://qiita.com/nobu_blast/items/828cf7c002100a0fdeb2">vagrant + virtualbox 仮想サーバ構築 - Qiita [キータ]</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -332,89 +476,6 @@
 
 
 <p>このあたりはトレードオフなので、両方使ってみて「より良い方」を選べばいいだけの話。ただし、手帳は1年ものなので、なかなか「気に入らないから買い直そう」というのがすぐ出来ないのが痛いところ。本来あるべき姿としては、あまりツールが何であるかにこだわりすぎず、出来るやり方でやってみることこそが重要なんだろう。物理的なガジェットだけじゃなく、タスク管理サービスとかでもそうだと思う（Wunderlistがいいか、Google Tasksがいいかで1か月悩んだことへの自戒。。。）</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/28/post/">『Webを支える技術』読了</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-28T01:14:00+09:00'><span class='date'>2013-12-28 (Sat)</span> <span class='time'>1:14 am</span></time>
-        
-         | <a href="/blog/2013/12/28/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51qo6pgjaSL._SL160_.jpg" alt="Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">山本 陽平 <br />技術評論社 <br />売り上げランキング: 13,031<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774142042/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
-
-<p>言わずと知れた名著、なんですかね。元はと言えば山本陽平氏の<a href="http://yohei-y.blogspot.jp/2005/04/rest_23.html">REST解説記事</a>をWebで見かけて、えっらいわかりやすかったもんで著作にも手を出してみたという感じ。あとRails触り始めたというのもあって、一度は読んでおくべきかな、と。</p>
-
-<p>全体の印象としてはかなり平易な言葉で書かれてて読みやすい。ただ、多少の前提知識は必要とされるので、ウェブサービスを初めてこれから作ってみようみたいな人が読んでも厳しいと思う。自分はRailsかじってたので、それになぞらえて読み進めることができた。というか、この本読むとRuby on Railsが本当にRESTfulに設計されているんだってことが追認できる。</p>
-
-<p>目次</p>
-
-<ul>
-<li><p>第1部 Web概論</p></li>
-<li><p>第1章 Webとはなにか</p></li>
-<li>第2章 Webの歴史</li>
-<li><p>第3章 REST ―― Webのアーキテクチャスタイル</p></li>
-<li><p>第2部 URI</p></li>
-<li><p>第4章 URIの仕様</p></li>
-<li><p>第5章 URIの設計</p></li>
-<li><p>第3部 URI</p></li>
-<li><p>第6章 HTTPの基本</p></li>
-<li>第7章 HTTPメソッド</li>
-<li>第8章 ステータスコード</li>
-<li><p>第9章 HTTPヘッダ</p></li>
-<li><p>第4部 ハイパーメディアフォーマット</p></li>
-<li><p>第10章 HTML</p></li>
-<li>第11章 microformats</li>
-<li>第12章 Atom</li>
-<li>第13章 Atom Publishing Protocol</li>
-<li><p>第14章 JSON</p></li>
-<li><p>第5部 Webサービスの設計</p></li>
-<li><p>第15章 読み取り専用のWebサービスの設計</p></li>
-<li>第16章 書き込み可能なWebサービスの設計</li>
-<li>第17章 リソースの設計</li>
-</ul>
-
-
-<p></blockquote></p>
-
-<p>ポイントピックアップ</p>
-
-<ul>
-<li>POSTとPUTの使い分け。前者は作成したリソースURIをサーバーが規定し、後者はクライアント（というかリクエスト）で規定できる。</li>
-<li>HTTPメソッドには「冪等性」と「安全性」の性質がある。冪等性は「ある操作を何度行っても結果が同じこと」。DELETEメソッドは何度発行しようと同じ結果になる。安全性は「操作対象のリソースの状態を変化させないこと」。GETを発行してもリソースは変化しない。POSTは冪等でも安全でもない。</li>
-<li>セマンティックWeb、ウェブの意味論。リソースの意味をどのようにプログラムから処理するか？</li>
-<li><p>RESTfulなウェブサービスの性質はアドレス可能性、接続性、統一インタフェース、ステートレス性の4つ。</p></li>
-<li><p>アドレス可能性 ＝ URIで一意にリソースを指し示せる性質。</p></li>
-<li>接続性 ＝ リソースをリンクで接続する性質。</li>
-<li>統一インタフェース ＝ GET/POST/PUT/DELETEということ（でOK？）。</li>
-<li><p>ステートレス性 ＝ HTTPはステートレス。但しCookieによるセッション管理が現実には行われる。</p></li>
-<li><p>Webサービス設計において重要なことはシンプルに保つこと、リソースを基準として考えること、POSTでだいたいなんでもできること（え？）</p></li>
-<li>リソースはそれ自身ですべての情報を表せた方が通信が効率的になるため、あえて正規化を行わない（このへん、DB設計と同一視してたわ）</li>
-</ul>
-
 </div>
   
   

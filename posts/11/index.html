@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="インフラ/ネットワークエンジニアのためのネットワーク技術&設計入門posted with amazlet at 15.03.01みやた ひろし SBクリエイティブ 売り上げランキング: 8,231Amazon.co.jpで詳細を見る 去年の末ぐらいに話題になってた本だと思うけど、読み終えた。 &hellip;">
+  <meta name="description" content="ExhiBi 初めてウェブサービスをローンチしました。ネタとしてはすでにゴマンとある美術展の検索サービスです。既存のものがあんまりしっくりこなかったので、自分向けに対象を絞って、掲載情報も絞ったものを作ろうかと。ただし現時点だと絞りすぎてまだ出来てなくてMOTとMOMATしか範囲に入ってないッス。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/29/post/">美術展検索サービスExhiBiを見切り発車しました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-29T22:45:00+09:00'><span class='date'>2014-12-29 (Mon)</span> <span class='time'>10:45 pm</span></time>
+        
+         | <a href="/blog/2014/12/29/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.chroju.net/exhibi">ExhiBi</a></p>
+
+<p>初めてウェブサービスをローンチしました。ネタとしてはすでにゴマンとある美術展の検索サービスです。既存のものがあんまりしっくりこなかったので、自分向けに対象を絞って、掲載情報も絞ったものを作ろうかと。ただし現時点だと<s>絞りすぎて</s>まだ出来てなくてMOTとMOMATしか範囲に入ってないッス。タイトル通り超見切り発車。なおExhiBiと書いてエキシビと読みます。</p>
+
+<p>技術的な面では自分が「コードを書けないエンジニア（GUIによる設定ばかりに従事しているインフラエンジニア）」なので、何かしら書けるようになりたいよねということで、汎用性も高そうで文法的にもしっくりきたRubyを選びました（細々した理由は他にもいろいろとありますが……）。フレームワークには当然のごとくRails、中身のデータはMechanizeで美術館サイトから取ってきてます。あとはInfrastructure as Codeを意識したかったので、ChefとCapistranoを軸に構築してます。若干手作業が残ってしまったのが気掛かりなので、後々なんとかしたいところ。</p>
+
+<p>しっかしRailsのデプロイ、めっちゃめちゃハマりポイント多かったんですがなんなんですかね……。開発自体は半月で終わったけどデプロイで1か月以上苦しんでました。自分が単に知見がないってだけの話なのか、元々そういうものなのか。<a href="http://www.oreilly.co.jp/books/9784873114002/">オライリーもRailsのデプロイだけで1冊出してる</a>ぐらいなので、結構難しいものなのやも。</p>
+
+<p>今後やりたいことは取りあえずこんな感じ。</p>
+
+<ul>
+<li>対象美術館を増やす</li>
+<li>気になる展覧会をクリップしとく機能</li>
+<li>気になる美術館を同上</li>
+<li>レスポンシブ、とかデザイン面をもうちょっと</li>
+<li>コードきたねーので整える</li>
+<li>はてなブログのembed記法に対応させる（冒頭のリンクだとなんかダサい）</li>
+</ul>
+
+
+<p>コードは一応<a href="https://github.com/chroju/exhibi/">GitHubに上げてます</a>が、場当たり的に直しちゃったところもあるんで汚いです。ていうか仕事でコード書いたことないからもう少し作法とか身につけたい。</p>
+
+<p>なんとか年内にあげようと思ってたんで、間に合ってホッとしました。技術的な話はおいおい少しずつブログにまとめていきます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -278,147 +332,6 @@
 <p>でもこの本にも書いてある通り、まずは素の状態で試してみるべきなのだ、本来。Vimは最初からできることが豊富にある。テキストを扱う上で必要な操作がいくらでも揃っているので、まずはそれらを味わってみて、足りなければvimrcで味付けしていけばいい。そうじゃないとVimの設計思想というか、Vimによってテキストをどう扱うべきなのかという原則論が見えてこない。</p>
 
 <p>本書はプラギンの話は皆無で、Vimが最初から備えている機能を中心に解説されている。<code>.</code>を始めとした繰り返し操作を多用する考え方だとか、テキスト対Vimというありがちな考え方だけではなく、ファイル対Vimという考え方もしなくてはならないとか、学べることは本当に多かった。あまりに分量が多いので一気にすべてのことを実践できるわけではないが、これはと思ったとこから取り入れていきたい。おそらくVimはツールではなくて思想なのだ。親指シフトやHHKBなんかと同じように、最速でテキストを編集するための思想。もちろんここでいう「Vim」には「Emacs」も当てはまってくるのだろうけど。あと正規表現ちゃんと覚えなあかんなと思った。後半の検索、置換のあたりは当然ながら正規表現を使える前提の話が多くて、きちんと使えてない自分には少ししんどかった。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/28/post/">awesomeウィンドウマネージャーの見栄えを良くする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-28T09:33:00+09:00'><span class='date'>2014-09-28 (Sun)</span> <span class='time'>9:33 am</span></time>
-        
-         | <a href="/blog/2014/09/28/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。</p>
-
-<h1>テーマファイルの構成</h1>
-
-<p>awesomeの設定はいくつかのLuaファイルを使って書き換えていく。基本的には全体設定を司る<code>~/.config/awesome/rc.lua</code>と、外観やテーマを司るライブラリである、Beautifulの設定ファイル<code>~/.config/awesome/themes/default/theme.lua</code>の2つを覚えておけばいいのかなと。いずれも初期状態では配置されてないので、デフォルトファイルをコピーしてきて使う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua
-</span><span class='line'># cp -r /usr/share/awesome/themes/default ~/.config/awesome/themes/default</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Beautifulについてはrc.luaの中で設定ファイルのパスが指定できるので、<code>default</code>という名前が嫌だったら任意で変えてもOK。あとは正直<a href="http://awesome.naquadah.org/wiki/Awesome_3_configuration">awesomeのWiki</a>見るのが手っ取り早いとは思うのだが、設定したところだけ書いておく。ちなみに<a href="http://chroju89.hatenablog.jp/entry/2014/09/23/190304">前回記事</a>で書いたが、awesomeのデフォルトターミナルの設定も<code>rc.lua</code>を使うので、外観変える必要なくても<code>rc.lua</code>だけは確実に要ると思う。</p>
-
-<h1>タグリストの書き換え</h1>
-
-<p>awesomeでは仮想デスクトップを&#8221;tag&#8221;と呼んで扱っていて、デフォルトの状態だと左上に1から8まで（だったかな？）の数字がタグの番号として並んでいる。あまりわかりやすいものではないし、そんなに多くタグも使わないので書き換える。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">tags</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synType&quot;</span><span class="o">&gt;</span><span class="p">{}</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synStatement&quot;</span><span class="o">&gt;</span><span class="k">for</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">screen</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synStatement&quot;</span><span class="o">&gt;</span><span class="k">do</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">-- Each screen has its own tag table.&lt;/span&gt;</span>
-</span><span class='line'>    <span class="n">tags</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">awful</span><span class="p">.</span><span class="n">tag</span><span class="p">(</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synType&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">Firefox&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">Terminal&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">Vim&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">other&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synType&quot;</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">layouts</span><span class="p">[</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">])</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synStatement&quot;</span><span class="o">&gt;</span><span class="k">end</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>あとウィンドウを開いているタグは小さな正方形が表示されたりしていて鬱陶しかったのと、あまり見栄えも良くなかったので、正方形を表示されないようにした上で、フォーカスしているタグは文字色を変えることにした。これはbeautifulの方で設定する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">theme</span><span class="p">.</span><span class="n">taglist_fg_focus</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">#f15c22&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">-- theme.taglist_squares_sel   = &quot;/usr/share/awesome/themes/default/taglist/squarefw.png&quot;&lt;/span&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">-- theme.taglist_squares_unsel = &quot;/usr/share/awesome/themes/default/taglist/squarew.png&quot;&lt;/span&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>1行目がフォーカスされているときのfg、フォアグラウンドカラーの設定。2、3行目はデフォルトで入ってる設定だったのでコメントアウトしておいた。</p>
-
-<h1>ウィジェットの表示</h1>
-
-<p>画面上の情報表示はウィジェットとして扱う。ウィジェットを管理するライブラリはいくつかあるみたいなんだが、取っつきやすそうなので自分は<code>vicious</code>を<code>rc.lua</code>の中で<code>require</code>して使っている。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="err">$</span> <span class="n">yaourt</span> <span class="o">-</span><span class="n">S</span> <span class="n">vicious</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>インストールした上で、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synStatement&quot;</span><span class="o">&gt;</span><span class="kd">local</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="n">vicious</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synIdentifier&quot;</span><span class="o">&gt;</span><span class="nb">require</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">vicious&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定の順序としては、awesomeがもともと備えているウィジェット生成用のAPIである<code>wibox</code>を使ってウィジェットのの原型をセットし、これに<code>vicious</code>を使って表示させたい情報をセットする。ここではバッテリー状態と音量、Wi-Fiの状態を表示させる。どんな情報を表示させられるのか、詳細は<a href="http://git.sysphere.org/vicious/tree/README">ここ</a>。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">--&lt;/span&gt;</span>
-</span><span class='line'><span class="n">battxtwidget</span> <span class="o">=</span> <span class="n">wibox</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">textbox</span><span class="p">()</span>
-</span><span class='line'><span class="n">vicious</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">battxtwidget</span><span class="p">,</span> <span class="n">vicious</span><span class="p">.</span><span class="n">widgets</span><span class="p">.</span><span class="n">bat</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s"> Battery: &lt;span color=&#39;#ffffff&#39;&gt;$2%&lt;/span&gt; &quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="mi">60</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">BAT0&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">)</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">--&lt;/span&gt;</span>
-</span><span class='line'><span class="n">soundwidget</span> <span class="o">=</span> <span class="n">wibox</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">textbox</span><span class="p">()</span>
-</span><span class='line'><span class="n">vicious</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">soundwidget</span><span class="p">,</span> <span class="n">vicious</span><span class="p">.</span><span class="n">widgets</span><span class="p">.</span><span class="n">volume</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s"> Vol: &lt;span color=&#39;#ffffff&#39;&gt;$1&lt;/span&gt; &quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">Master&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">)</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">--&lt;/span&gt;</span>
-</span><span class='line'><span class="n">wifiwidget</span> <span class="o">=</span> <span class="n">wibox</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">textbox</span><span class="p">()</span>
-</span><span class='line'><span class="n">vicious</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">wifiwidget</span><span class="p">,</span> <span class="n">vicious</span><span class="p">.</span><span class="n">widgets</span><span class="p">.</span><span class="n">wifi</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s"> Wi-Fi: &lt;span color=&#39;#ffffff&#39;&gt;${ssid}&lt;/span&gt; &quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="mi">60</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synConstant&quot;</span><span class="o">&gt;</span><span class="s2">&quot;</span><span class="s">wlp1s0&quot;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ウィジェットを作ったら、画面上のレイアウトにウィジェットをセットする。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">-- Widgets that are aligned to the right&lt;/span&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synStatement&quot;</span><span class="o">&gt;</span><span class="kd">local</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="n">right_layout</span> <span class="o">=</span> <span class="n">wibox</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">fixed</span><span class="p">.</span><span class="n">horizontal</span><span class="p">()</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">synComment&quot;</span><span class="o">&gt;</span><span class="c1">-- if s == 1 then right_layout:add(wibox.widget.systray()) end&lt;/span&gt;</span>
-</span><span class='line'><span class="n">right_layout</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">soundwidget</span><span class="p">)</span>
-</span><span class='line'><span class="n">right_layout</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">battxtwidget</span><span class="p">)</span>
-</span><span class='line'><span class="n">right_layout</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">wifiwidget</span><span class="p">)</span>
-</span><span class='line'><span class="n">right_layout</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">mytextclock</span><span class="p">)</span>
-</span><span class='line'><span class="n">right_layout</span><span class="p">:</span><span class="n">add</span><span class="p">(</span><span class="n">mylayoutbox</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>自分がした設定はこの程度。あとはbeautifulで<code>theme.font = "sans 10"</code>の設定でフォントサイズを少し大きくしたぐらいだが、beautifulの設定ファイルを見ればわかる通り、かなり細かく色やら何やら設定ができる。このへんに凝り始めるとキリがないので自分はやめることにしたが、好きな人はやってみたらいいんじゃないですかね。1つ、GitHubですげーカッコイイテーマ配ってるの見つけたんで貼っときます。Samuraizuとか思い出すなー。</p>
-
-<ul>
-<li><a href="https://github.com/copycat-killer/awesome-copycats">copycat-killer/awesome-copycats · GitHub</a></li>
-</ul>
-
 </div>
   
   

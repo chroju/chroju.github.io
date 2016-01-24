@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</loc>
+    <lastmod>2016-01-24T22:57:39+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</loc>
     <lastmod>2016-01-20T00:48:28+09:00</lastmod>
   </url>
@@ -386,18 +390,18 @@
   </url>
   <url>
     <loc>http://chroju.github.io/blog/archives/</loc>
-    <lastmod>2016-01-20T00:53:04+09:00</lastmod>
+    <lastmod>2016-01-24T23:00:42+09:00</lastmod>
   </url>
   <url>
     <loc>http://chroju.github.io/</loc>
-    <lastmod>2016-01-20T00:53:04+09:00</lastmod>
+    <lastmod>2016-01-24T23:00:42+09:00</lastmod>
   </url>
   <url>
     <loc>http://chroju.github.io/archives/</loc>
-    <lastmod>2016-01-20T00:53:04+09:00</lastmod>
+    <lastmod>2016-01-24T23:00:42+09:00</lastmod>
   </url>
   <url>
     <loc>http://chroju.github.io/about/</loc>
-    <lastmod>2016-01-20T00:53:04+09:00</lastmod>
+    <lastmod>2016-01-24T23:00:42+09:00</lastmod>
   </url>
 </urlset>

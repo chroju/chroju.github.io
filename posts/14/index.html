@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="ヒカリエ綺麗すぎる。。。 えー。こちらのイベントに参加してきました。こういう社外での勉強会チックなものに参加するって初めてですげービビってたけどわりと楽しめた。 登壇者の方はSIerを経てWeb系に行かれたということでしたけど、その理由が「コードを書けないことへの危機感」だとか「3. &hellip;">
+  <meta name="description" content="Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,208 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/06/02-post/">Chef soloはじめの一歩</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-06T13:56:00+09:00'><span class='date'>2014-05-06 (Tue)</span> <span class='time'>1:56 pm</span></time>
+        
+         | <a href="/blog/2014/05/06/02-post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。</p>
+
+<p>参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" alt="入門Chef Solo - Infrastructure as Code" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">伊藤直也 (2013-03-11)<br />売り上げランキング: 2,821<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<h2>基本構成</h2>
+
+<p>chefの基本構成を取りあえず押さえる。</p>
+
+<ul>
+<li>chef: インフラ自動化のフレームワーク</li>
+<li>chef solo: 本来クラサバ構成で扱うChefをスタンドアロンで使えるようにしたもの</li>
+<li>knife-solo: リモートからchef soloの実行に必要なツール</li>
+<li>Berkshelf: サードパーティクックブックの管理に使う</li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>上記のものを全部インストール。Gemfile書いてる場合はそっちに追加で。また最後に<code>rbenv rehash</code>を忘れずに。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install chef -v 11.10 --no-ri --no-rdoc
+</span><span class='line'>gem install knife-solo --no-ri --no-rdoc
+</span><span class='line'>gem install berkshelf
+</span><span class='line'>rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにChefの最新はv11.12.xなんだけど、どうもバグがあるっぽく上手くいかなかったのでバージョン指定で古いの入れてる。</p>
+
+<ul>
+<li>参考：<a href="http://qiita.com/sakatuba@github/items/1548818b02735b2047ad">Chef 11.12.2のknife configureが失敗する - Qiita</a></li>
+</ul>
+
+
+<h2>セットアップ</h2>
+
+<p>初期設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>knife configure # 対話は全部デフォでOK
+</span><span class='line'>knife solo init chef-repo # chef-repoフォルダがレポジトリとして作られる
+</span><span class='line'>cd chef-repo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>chef soloを使うリモート側へもchefをインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ knife solo prepare vagrant@192.168.1.1</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Berkshelf</h2>
+
+<p>続いてBerkshelfの初期設定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しかし、ここでまさかのエラー。。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cannot load such file -- hitimes/hitimes (LoadError)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/copiousfreetime/hitimes/issues/17">ここ</a>によればgem updateしてからhitimesを再インストールすれば大丈夫だよ的な話。やってみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem update
+</span><span class='line'>$ gem -v
+</span><span class='line'>2.2.2
+</span><span class='line'>$ gem install hitimes
+</span><span class='line'>$ rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>気を取り直して。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks init
+</span><span class='line'>The resource at '/Users/chroju/Dropbox/lab/chef/vagrant-repo/metadata.rb' does not appear to be a valid cookbook. Does it have a metadata.rb?</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(&lsquo;A`)ｳﾞｧｰ</p>
+
+<p>わけわからんし、<code>berks init</code>しなくてもBerkfile自前で作りゃイケるらしいので諦めることにする。Berksfileを<code>touch</code>してからvimで編集。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>site :opscode
+</span><span class='line'>
+</span><span class='line'>cookbook 'sudo'
+</span><span class='line'>cookbook 'iptables`</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileと似たような書き方で、<code>cookbook 'hoge'</code>と書くとそのクックブックが<a href="http://community.opscode.com/">Opscode</a>からインストールされる。Opscode以外のGitHubで公開されているクックブックを使う場合は、これもGemfileのように<code>cookbook 'fuga' git:"..."</code>の形でURL指定が可能。</p>
+
+<p>そしていざインストール……だがまたしてもエラー。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks install --path cookbooks
+</span><span class='line'>DEPRECATED: `berks install --path [PATH}` has been replaced by `berks vendor`.
+</span><span class='line'>DEPRECATED: Re-run your command as `berks vendor [PATH]` or see `berks help vendor`.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そろそろこのあたりから笑えてきた。調べたところ、Berkshelf v3.xでは<code>berks install --path hoge</code>は使えないらしいス。<code>berks vendor hoge</code>が今どきらしい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ berks vendor cookbooks
+</span><span class='line'>destination already exists /Users/chroju/Dropbox/lab/chef/vagrant-repo/cookbooks. Delete it and try again or use a different filepath.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>えー。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm -rf cookbooks
+</span><span class='line'>$ berks vendor cookbooks
+</span><span class='line'>
+</span><span class='line'>DEPRECATED: Your Berksfile contains a site location pointing to the Opscode Community Site (site :opscode). Site locations have been replaced by the source location. Change this to: 'source "http://api.berkshelf.com"' to remove this warning. For more information visit https://github.com/berkshelf/berkshelf/wiki/deprecated-locations
+</span><span class='line'>Resolving cookbook dependencies...
+</span><span class='line'>Using iptables (0.13.2)
+</span><span class='line'>Using sudo (2.5.2)
+</span><span class='line'># 以下略</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文句言いながらもやってくれました。冒頭の1行目の書き方は<code>site :opscode</code>というのが通例だったけど、v2.0から<code>source "https://api.berkshelf.com"</code>に変わった模様。ただ、コマンドは通るには通るんだけど。</p>
+
+<p>最初に<code>berks vendor cookbooks</code>したときに出たエラー、要は「すでにあるフォルダにはインストールできねーよ」って話なのだが、だとしたらBerksfileを書き換えて追加インストールしたいときはどうしたらいいんだろう？というのは素朴な疑問。サードパーティのクックブックは直接編集しない（変数などは自分のレシピの方で代入する）のが基本らしいので、一度フォルダを消してから再度<code>berks vendro cookbooks</code>でも不都合はないと言えばないのだが、なんだか馬鹿らしい感じもする。</p>
+
+<p>あと<code>berks install</code>コマンドもあるんだけど使い方わかってない。</p>
+
+<h2>レシピ作成</h2>
+
+<p>その前におさえる基本。</p>
+
+<ul>
+<li>nodes/hostname.json : 実行するレシピをrun_listとして記述</li>
+<li>solo.rb : chefが利用する各種パスの設定ファイル（knife soloの場合は生成されない）</li>
+<li>cookbooks/hoge/recipes/default.rb : レシピ本体</li>
+<li>cookbooks/hoge/templates/default/* : テンプレートファイル</li>
+<li>cookbooks/hoge/files/* : 静的ファイル</li>
+<li>cookbooks/hoge/attributes/* : 変数の格納</li>
+</ul>
+
+
+<p>あとcookbooksフォルダはサードパーティ製のものを入れて、自家製のクックブックはsite-cookbooksフォルダに入れるっていうルールもある。名前がわかりにくいが。</p>
+
+<p>このへん押さえつつ、次回はレシピ作成編です。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -619,440 +821,6 @@
 
 
 <p>たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/09/post/">突然だけどVimperatorrcを晒してみる</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-09T10:29:00+09:00'><span class='date'>2014-02-09 (Sun)</span> <span class='time'>10:29 am</span></time>
-        
-         | <a href="/blog/2014/02/09/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。</p>
-
-<p>vimperator自体は何年か前から使っていたのだが、カスタマイズはあまりせずにデフォルトの状態で使っていた。が、操作によってはマウス使った方が便利だったり、ちょっと中途半端な状態にあったので、一念発起してちょこちょこいじってみた。まだいじれる余地はありそうなんだけど。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" vim: set filetype=vim :</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Vimで編集するとき、vimperatorrc用のハイライトがないので、似たところでfiletypeをvimとして認識させてます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" General
-</span><span class='line'>"============================
-</span><span class='line'>
-</span><span class='line'>" 入力欄に自動フォーカスしない
-</span><span class='line'>set focuscontent
-</span><span class='line'>" ビジュアルベルを表示しない
-</span><span class='line'>set visualbell
-</span><span class='line'>highlight Bell display:none
-</span><span class='line'>" :oなどでの補完候補をサーチエンジン、履歴に限定
-</span><span class='line'>set complete=sl
-</span><span class='line'>" Hintモードでアルファベット使用
-</span><span class='line'>set hintchars=jfnvurhgytbkdmcielsxoe
-</span><span class='line'>" ツールバーはアドオンとタブのみ表示
-</span><span class='line'>set gui=addons,nobookmarks,nomenu,nonavigation,tas
-</span><span class='line'>" commandモードでIMEオフ
-</span><span class='line'>style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここまでは基本、一般的な設定しかないかと。set complete=slは地味に効く。で、なぜか現状set hintcharsが動いてないれす。。。何がいけないのかわからん。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" Key mapping
-</span><span class='line'>"============================
-</span><span class='line'>
-</span><span class='line'>" google検索を手早くする
-</span><span class='line'>noremap s :open&lt;Space&gt;google&lt;Space&gt;
-</span><span class='line'>noremap ,s :tabopen&lt;Space&gt;google&lt;Space&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここからキーマッピング。:openで検索もURL開くのも両方いけるのはいけるんだが、vimperatorでの自動判別がうまいこといかない（例えば「twitter おすすめ」とかで:openすると、Twitter検索で「おすすめ」を探した結果が表示されるとか）ときがあるので、明示的に:open googleを一発で開けるようにしてます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" OS分岐
-</span><span class='line'>" dをブラウザ標準の「タブを閉じる」にマッピング
-</span><span class='line'>" vimperatorrcのリロード
-</span><span class='line'>js&lt;&lt;EOM
-</span><span class='line'>if(liberator.has("MacUnix")) {
-</span><span class='line'>  liberator.execute("map d &lt;M-w&gt;");
-</span><span class='line'>  liberator.execute("map ,r :source&lt;Space&gt;~/.vimperatorrc&lt;CR&gt;");
-</span><span class='line'>} else {
-</span><span class='line'>  liberator.execute("map d &lt;C-w&gt;");
-</span><span class='line'>  liberator.execute("map ,r :source&lt;Space&gt;~/_vimperatorrc&lt;CR&gt;");
-</span><span class='line'>}
-</span><span class='line'>EOM</span></code></pre></td></tr></table></div></figure>
-
-
-<p>dを打ったときに左隣のタブにフォーカスが移るのが気に入らないので、OSデフォルトの「タブを閉じる」ショートカットにdをリンクさせて、タブを閉じたときの挙動はTab Mix Plusで「直前のアクティブタブに移る」ように設定してる。このへん、vimperatorrcだけでなんとか設定できないものか。</p>
-
-<p>あと、,rでvimperatorrcの再読み込みさせてます。この2つの設定はOSによって微妙に異なるので、分岐させますた。MacとWindowsでしか使ってないのでかなり適当な分岐。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" 移動幅
-</span><span class='line'>noremap j 5j
-</span><span class='line'>noremap k 5k
-</span><span class='line'>" タブ移動
-</span><span class='line'>nnoremap h &lt;C-p&gt;
-</span><span class='line'>nnoremap l &lt;C-n&gt;
-</span><span class='line'>" タブの位置変更
-</span><span class='line'>map &lt;C-l&gt; :tabmove! +1&lt;CR&gt;
-</span><span class='line'>map &lt;C-h&gt; :tabmove! -1&lt;CR&gt;
-</span><span class='line'>" undo一覧から開く
-</span><span class='line'>nnoremap U :undo&lt;Space&gt;
-</span><span class='line'>let g:hint_tombloo_key = 'r'
-</span><span class='line'>" ブラウザ再起動
-</span><span class='line'>nnoremap &lt;C-r&gt; :restart&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>わりと良くある感じのキーマッピング。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" VisualモードでC-gで選択しているテキストでGoogle検索
-</span><span class='line'>vmap &lt;silent&gt; &lt;C-g&gt; y&lt;Esc&gt;&lt;Esc&gt;P</span></code></pre></td></tr></table></div></figure>
-
-
-<p>コメントの通り。Visualモードで文字列選択した状態でC-g押すと、選択文字列でGoogle検索します。URLの場合はそのまま開いてくれるはずだけど、やったことなし。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" タブのピン止めを@でトグル
-</span><span class='line'>" http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e
-</span><span class='line'>javascript &lt;&lt;EOM
-</span><span class='line'>liberator.modules.commands.addUserCommand(["togglepin"], "add pin to current tab",
-</span><span class='line'>function(){
-</span><span class='line'>    var currentTab = gBrowser.mCurrentTab
-</span><span class='line'>    if(currentTab.pinned){
-</span><span class='line'>        gBrowser.unpinTab(currentTab)
-</span><span class='line'>    }
-</span><span class='line'>    else{
-</span><span class='line'>        gBrowser.pinTab(currentTab)
-</span><span class='line'>    }
-</span><span class='line'>});
-</span><span class='line'>EOM
-</span><span class='line'>nnoremap @ :togglepin&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>地味にピン止め使うのでキーマッピングしました。Firefoxのこの全部Javascriptでなんとかなる感じ好きよ。大好き。ちなみに以下エントリーから丸コピーしてます。</p>
-
-<p><a href="http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e">Vimperator - タブのピン留めをトグルする - Qiita</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" colorscheme
-</span><span class='line'>"============================
-</span><span class='line'>" デフォルトのヒント派手すぎ＞＜
-</span><span class='line'>hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
-</span><span class='line'>hi HintElem color: gray; background-color: #a1e4e6;
-</span><span class='line'>hi HintActive color: black; background-color: #ff8700;
-</span><span class='line'>
-</span><span class='line'>" デフォルトのエラー赤くてこわい＞＜
-</span><span class='line'>hi ErrorMsg color:white; background-color: #ec6aa1;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>デフォルトのヒントモードが色彩的に大変ウザいので……。色はもうちょい改善の余地あるかなと思ってる。</p>
-
-<p><a href="http://www.flickr.com/photos/chroju/12396935955/"> title=&ldquo;スクリーンショット 2014-02-09 10.09.25 by chroju, on Flickr&rdquo;><img src="http://farm6.staticflickr.com/5548/12396935955_dae9869fd9.jpg" width="500" height="257" alt="スクリーンショット 2014-02-09 10.09.25"></a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" qmarks
-</span><span class='line'>"============================
-</span><span class='line'>qmark m https://mail.google.com/
-</span><span class='line'>qmark b http://b.hatena.ne.jp/chroju
-</span><span class='line'>qmark t http://chroju.tumblr.com/
-</span><span class='line'>qmark f http://cloud.feedly.com/#latest
-</span><span class='line'>qmark p http://getpocket.com/a/queue
-</span><span class='line'>qmark B http://chroju.hatenablog.jp/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>QuickMarks設定。これ入れておくと、例えばgomでアクティブタブにGmailが開きます。gnmで新規タブで開ける。あんまり使ってない。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" plugin
-</span><span class='line'>"============================
-</span><span class='line'>
-</span><span class='line'>" plugin_loader
-</span><span class='line'>let g:plugin_loader_roots = "~\vimperator\vimperator-plugins\ ~/.vimperator/vimperator-plugins/"
-</span><span class='line'>let g:plugin_loader_plugins = "_libly,direct_bookmark,sbmcommentsviewer,caret-hint,appendAnchor,stella,feedSomeKeys_3,commandBookmarklet,copy"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここからプラグイン。プラグイン管理は<a href="https://github.com/vimpr/vimperator-plugins/blob/master/plugin_loader.js">plugin_loader</a>を使うとアホみたいに便利です。</p>
-
-<p>普通、プラグインって~/.vimperator/plugin/フォルダに入れて（あるいはシンボリックリンク貼って）読み込ませると思うのだが、このplugin_loaderを~/.vimperator/pluginフォルダに入れれば、以下設定が適用可能に。</p>
-
-<ul>
-<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_roots => 読み込むプラグインが配置されたフォルダを指定（複数可）</li>
-<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_plugins => 読み込むプラグイン名を指定（.jsは除外でOK）</li>
-</ul>
-
-
-<p>つまり<a href="https://github.com/vimpr/vimperator-plugins.git">https://github.com/vimpr/vimperator-plugins.git</a>をどっかにgit cloneしておいて、そのフォルダに対してg:plugin_loader_rootsを指定しておけばどのプラギンもシンボリックリンクとか貼らずに好きに使えるってわけです。便利過ぎ。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" Evernote Clearly
-</span><span class='line'>nnoremap e :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(false)&lt;CR&gt;
-</span><span class='line'>nnoremap E :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(true)&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>プラグインじゃないけど。。。アドオンのEvernote Clearyの操作をeとEにマッピングさせてる。これもどっかで拾ったコードです。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" direct_bookmark
-</span><span class='line'>let g:direct_sbm_use_services_by_tag = "h"
-</span><span class='line'>let g:direct_sbm_use_services_by_post = "h"
-</span><span class='line'>source! $HOME/.vimperatorrc.local</span></code></pre></td></tr></table></div></figure>
-
-
-<p>direct_bookmarkの設定。コマンドからdeliciousとかはてブとかソシアルブックマアクに投稿できるヤツです。はてブしか使ってないので、はてブだけで使えるように。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" vのみではてブコメント表示
-</span><span class='line'>map v :viewSBMComments&lt;Space&gt;-t&lt;Space&gt;h&lt;Space&gt;-f&lt;Space&gt;id,comment&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>sbmcommentsviewerの設定。ソシアルブックマアクのコメントがコマンドで見られるようになるヤツ。これもはてブだけに設定。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" feedSomeKeys
-</span><span class='line'>command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args&gt;
-</span><span class='line'>lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r &lt;S-i&gt;  a # [ ] ? gi gs gt gd ga gc
-</span><span class='line'>lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
-</span><span class='line'>lazy fmaps -u='feedly\.com' j k n p o v gm ga gg gl / r m x s t l f b
-</span><span class='line'>lazy fmaps -e=vkeydown -u='www\.tumblr\.com/' j k r t q p n L l&lt;CR&gt;
-</span><span class='line'>lazy fmaps -u='www\.pixiv\.net/member_illust\.php\?mode=manga&amp;illust_id=[0-9]+' j k</span></code></pre></td></tr></table></div></figure>
-
-
-<p>feedSomeKeysの設定。特定URL下で特定キーを無効化するプラギン。:ignorekeysより細かく設定ができるから好き。ただ、いまいち設定方法が飲み込めてなかったりもする。現状はGmail、feedly、Tumblr、pixivの漫画モード（？）で設定させてる。Gmailの設定が被ってるとこなんとかしたい。。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>" copy.js
-</span><span class='line'>javascript &lt;&lt;EOM
-</span><span class='line'>(function () {
-</span><span class='line'>  liberator.globalVariables.copy_templates = [
-</span><span class='line'>    { label: 'titleAndURL',    value: '%TITLE%\n%URL%' },
-</span><span class='line'>    { label: 'markdown',       value: '[%TITLE%](%URL%)' },
-</span><span class='line'>    { label: 'title',          value: '%TITLE%' },
-</span><span class='line'>    { label: 'anchor',         value: '[%TITLE%](%URL%)' },
-</span><span class='line'>    { label: 'selanchor',      value: '[ title="%TITLE%"&gt;%SEL%](%URL%)' },
-</span><span class='line'>
-</span><span class='line'>    { label: 'amazon',   value: 'copy clean amazon url from current page',
-</span><span class='line'>      custom: function() {
-</span><span class='line'>        var m = content.document.location.pathname.match(/dp\/(\d+)/);
-</span><span class='line'>        return m ? ('http://amazon.jp/dp/' + m[1]) : null;
-</span><span class='line'>      }
-</span><span class='line'>    },
-</span><span class='line'>  ];
-</span><span class='line'>})();
-</span><span class='line'>EOM
-</span><span class='line'>
-</span><span class='line'>" 特によく使う機能をキーマッピング
-</span><span class='line'>map ,y :copy&lt;Space&gt;titleAndURL&lt;CR&gt;
-</span><span class='line'>map ,my :copy&lt;Space&gt;markdown&lt;CR&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>copy.jsの設定。いろいろと好きな形式でコピーが出来るようになる。{ label〜のとこの設定がそれに当たりまして、例えば:copy markdownコマンドでマークダウン記法用にタイトルとURLがコピーできる。ブログ書いてるとこれホント便利。</p>
-
-<p>基本的には%TITLE%や%URL%といった変数を使って設定するんだけど、javascriptも欠けます。label: amazonではAmazonのURLを短い（アフィ用のパラメータとか除外した）状態でコピれるようjavascriptで書かれてる。詳しくは以下エントリー。</p>
-
-<p><a href="http://qiita.com/hadashiA/items/83e2fef39bac531577e2">JavaScript - vimperatorプラグインcopy.jsで、いま開いてるamazonの本のページの短いURLをクリップボードにコピる。あと正規表現で好きなとこコピる - Qiita</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"============================
-</span><span class='line'>" about:config
-</span><span class='line'>"============================
-</span><span class='line'>
-</span><span class='line'>set! network.dns.disableIPv6=true
-</span><span class='line'>set! network.http.pipelining=true
-</span><span class='line'>set! network.http.proxy.pipelining=true
-</span><span class='line'>set! network.http.pipelining.maxrequests=8
-</span><span class='line'>set! network.http.max-connections-per-server=32
-</span><span class='line'>set! security.dialog_enable_delay=0
-</span><span class='line'>set! browser.tabs.closeWindowWithLastTab=false
-</span><span class='line'>set! browser.cache.memory.capacity=16384
-</span><span class='line'>set! browser.sessionstore.interval=500000
-</span><span class='line'>set! dom.popup_maximum=50
-</span><span class='line'>set! browser.cache.disk.enable=false
-</span><span class='line'>set! browser.cache.memory.capacity=-1
-</span><span class='line'>set! layout.spellcheckDefault=0
-</span><span class='line'>set! javascript.options.mem.high_water_mark=32</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Vimperatorはset!でabout:configの設定ができます！　便利！　これでabout:configの内容も共有できるよ！　設定内容はウン年前にやったままなので、具体的に何やってんのか覚えてないれす。メモリ周りの設定が主だったと思うので、最近の比較的軽くなったFxなら要らない設定もあるかも。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"読み込み完了メッセージ
-</span><span class='line'>echo "vimperatorrc loaded."
-</span><span class='line'>
-</span><span class='line'>" [EOF]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最後に、vimperatorrcが読み込まれたとき用のechoを入れる。これがないと,r押しても読み込まれたのかわかんないので。</p>
-
-<p>vimperator、Vimmerじゃなくても便利なのでじゃんじゃん使いましょう晒しましょう。</p>
 </div>
   
   
