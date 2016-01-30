@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。 &hellip;">
+  <meta name="description" content="自分の状況を客観的に評価する（タスク、財務管理、スケジュール管理など）とき、「ペルソナ」を考え方として導入するとわりと捗ることに最近気付いた。 このご時世、人格が一面的という方はあまりいないのではないかと思う。要は家庭での顔、仕事での顔、趣味での顔とかそういうのだ。これを「ペルソナ」と呼んだのだが &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/06/post/">自分のことを「ペルソナ」から見返してみる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-06T17:27:00+09:00'><span class='date'>2014-05-06 (Tue)</span> <span class='time'>5:27 pm</span></time>
+        
+         | <a href="/blog/2014/05/06/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自分の状況を客観的に評価する（タスク、財務管理、スケジュール管理など）とき、「ペルソナ」を考え方として導入するとわりと捗ることに最近気付いた。</p>
+
+<p>このご時世、人格が一面的という方はあまりいないのではないかと思う。要は家庭での顔、仕事での顔、趣味での顔とかそういうのだ。これを「ペルソナ」と呼んだのだが、自分にはどんなペルソナがあるのか把握した上で、各ペルソナごとに状況を振り返ってみると漏れが少なくなる。</p>
+
+<p>使える場面としては、例えばGTDの週次レビュー。ToDoリストに漏れがないか考えるとき、各ペルソナごとに数分ずつ考えてみる。あるいは「高度」の概念を取り入れるとき、ペルソナごとの高度の視点を持ってみる。</p>
+
+<p>あるいは家計簿。どのペルソナに対してどれだけお金を使っているかで出費のバランスを管理する。時間の使い方を振り返るときも、案外趣味の時間がすげー多いなとか気付けたりして有意義。</p>
+
+<p>自分の場合は今のところ、生活、仕事、趣味、開発、家庭・友人、教養と6つのペルソナに分けてみている。なかなかMECEというわけにはいかないのだが、「生活」は自分自身の身の回りのこと（病気や健康、衣食住）であるのに対して「家庭・友人」は実家の事情やプライベートな友人関係の話という具合に分けていたり、仕事上必要な技術知識は「仕事」に振り分け、家で勉強している知識は「開発」に入れたりとか、そういうことをしている。</p>
+
+<p>まぁ要するに、自分なりに状況整理できる手がかりがあれば良いのではないか、という話。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -646,181 +688,6 @@
 <p>個人的な思いなのだが、<a href="http://capistranorb.com/">Capistrano公式</a>の「Getting Started」は説明が不十分な気がしてならない。デプロイに至るまでの設定ファイルの書き方やら何やらは確かにだいたい載っているのだが、ではCapistrano3の内部実装がどうなっているのかとか、タスクを自分で書くにはどうすればよいのかといったあたりの情報が足りない。自分はまだこのDSLを読み下せないのだが、rakeあたりを知っていると結構書けるものなんだろうか？　ひょっとしたら、自分のようなRubyやRails初心者が安易に手を出すものではないのかなぁとか思う。</p>
 
 <p>ただ、GitHubにいずれもソースが上がっているので、根気よく読んでいけばCapistranoが何をしているのか、また何を求めているのかは理解できる。誰かの書いたノウハウに頼るより、ソースにあたるのが大切なのは基本だと思う。常に。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/20/post/">Rails環境構築（5）Capistranoによるデプロイ ※未完</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-20T00:03:00+09:00'><span class='date'>2014-02-20 (Thu)</span> <span class='time'>12:03 am</span></time>
-        
-         | <a href="/blog/2014/02/20/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。</p>
-
-<p>Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。</p>
-
-<p>3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは<a href="http://capistranorb.com/">本家</a>をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。</p>
-
-<ul>
-<li><a href="http://threetreeslight.com/post/68344998681/capistrano-3-x-rails">capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight</a></li>
-<li><a href="http://labs.gree.jp/blog/2013/12/10084/">入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&#8217; Blog</a></li>
-<li><a href="http://takkkun.hatenablog.com/entry/2013/10/12/Capistrano_3%E3%81%B8%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D">Capistrano 3への手引き - 今日のごはんは素麺です</a></li>
-<li><a href="http://d.hatena.ne.jp/ria10/20130526/1369583203">capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記</a></li>
-<li><a href="http://kakakakakku.hatenablog.com/entry/2013/12/11/090204">Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog</a></li>
-</ul>
-
-
-<h2>Capistranoとは？</h2>
-
-<p>そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。</p>
-
-<h2>インストール</h2>
-
-<p>インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>group :development do
-</span><span class='line'>  gem 'capistrano', '~&gt; 3.1.0'
-</span><span class='line'>  gem 'capistrano-rails', '~&gt; 1.0.0'
-</span><span class='line'>  gem 'capistrano-bundler', '~&gt; 1.1.2'
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。</p>
-
-<h2>初期作業</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle exec cap install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。</p>
-
-<ul>
-<li>Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述</li>
-<li>config/deploy.rb : デプロイタスクを記述</li>
-<li>config/deploy/hoge.rb : 各サーバー情報を記述</li>
-</ul>
-
-
-<h2>Capfile編集</h2>
-
-<p>capistrano-railsと同bundlerを読み込むため、Capfileを開いて以下追記。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'capistrano/rails'
-</span><span class='line'>require 'capistrano/bundler'</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>config/deploy.rb編集</h2>
-
-<p>いろいろコメントアウトしてあってどれを使えばいいかよくわかんなかったりもするのだが、最低限以下は必要っぽい。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set &lt;span class="synConstant"&gt;:application&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
-</span><span class='line'>set &lt;span class="synConstant"&gt;:repo_url&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;git@github.com:chroju/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
-</span><span class='line'>set &lt;span class="synConstant"&gt;:deploy_to&lt;/span&gt;, &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;/var/www/hoge&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;
-</span><span class='line'>set &lt;span class="synConstant"&gt;:scm&lt;/span&gt;, &lt;span class="synConstant"&gt;:git&lt;/span&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上から。1行目はアプリケーション名。これはどこかで使われる設定ではないようなので、適当に入れておけばよさそう。2行目はGithubのリポジトリURL。3行目はデプロイ先となるサーバー上のディレクトリパス指定。ここではApacheの設定にならってみた。4行目は使用しているSCMの指定。とはいえ、現状Gitしか対応していないのでこれ以外の書き方は不可。</p>
-
-<p>ファイル後半にはデプロイタスクのデフォルト設定が書かれている。一応、ここはそのままでも動くみたい。自分で何か特別なことをやらせたい場合は当然ながら編集する必要があるが、まだその域に至ってないです。</p>
-
-<h2>config/deploy/hoge.rb編集</h2>
-
-<p>ここではステージング環境としてvagrantを使うものと仮定。WebサーバーやDBサーバーを分けたりはせず、1台のサーバーですべてをまかなうこととする。よってstaging.rbを編集する。このファイルもデフォルトでいろいろ書かれてはいるのだが、とりあえず次の4行があればOK。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>server &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;127.0.0.1&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, port: &lt;span class="synConstant"&gt;2222&lt;/span&gt;, user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;, roles: &lt;span class="synSpecial"&gt;%w{&lt;/span&gt;&lt;span class="synConstant"&gt;web, app, db&lt;/span&gt;&lt;span class="synSpecial"&gt;}&lt;/span&gt;, ssh_options: {
-</span><span class='line'>  user: &lt;span class="synSpecial"&gt;'&lt;/span&gt;&lt;span class="synConstant"&gt;vagrant&lt;/span&gt;&lt;span class="synSpecial"&gt;'&lt;/span&gt;,
-</span><span class='line'>  keys: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;~/.vagrant.d/insecure_private_key&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;,
-</span><span class='line'>  auth_methods: &lt;span class="synSpecial"&gt;%w(&lt;/span&gt;&lt;span class="synConstant"&gt;publickey&lt;/span&gt;&lt;span class="synSpecial"&gt;)&lt;/span&gt;
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>server〜で1台のサーバーの設定を一括で書ける。言わずもがな、まず対象IP。portがポート番号、userがSSHログインするユーザー名。roleはこのサーバーの役割を書く。web、app、dbの中から当てはまるものを書けばいいようだが、allという指定もできるとかできないとか。ssh_options:でさらに詳しい内容を記述。userはさっきのと被ってるので不要な気がするのだが、他のサイトを見てたら書いている設定があったので取りあえず入れてる。keysは認証に使うキーのパス。auth_methods:で認証方法を指定しているが、通例publickey認証とする。
-ここに書いた設定の大半はvagrant ssh-configコマンドで拾えるので、自分の環境に合った設定に書き換えて下さい。</p>
-
-<h2>デプロイ実行</h2>
-
-<p>で、あとはデプロイでいけちゃうみたいです。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec staging deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>stagingをproductionに換えればproduction.rbの設定に則ります。あと、末尾に:checkを付けるとコマンドが通るかコールドでチェックしてくれるので、まずは:checkをした方がいい。あと、cap -Tで実行可能なコマンドがずらずら出てくる。デプロイのロールバックしたり、rake db:migrateを走らせたり、結構いろんなことができるので一度見ておくと吉。</p>
-
-<h2>ハマった点</h2>
-
-<p>自分の場合は以上の手順で上手くいきませんでした。何点かハマったポイントをば。</p>
-
-<h3>デプロイ先ディレクトリのパーミッション</h3>
-
-<p>大変アホみたいな話だが最初これでmkdirが上手くいかなかった。公式ドキュメントの<a href="http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/">ココ</a>に書いてあるけど、SSHユーザーはsudoなしでデプロイ先ディレクトリを操作できる権限がなきゃダメです。vagrantユーザーは~/var配下の操作権限なかったので弾かれた次第。。。</p>
-
-<p>対応としてはさっきのリンク先に書いてある手順通り<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080219/294154/">sgid</a>の設定とかしてあげたらなんとかなりました。あるいはパスワードなしでsudo実行可能にしてやっても動くみたいだけど、当然ながらサーバーセキュリティ的にはNGなので。まぁvagrantであればどうでもいいかもしんないけど。</p>
-
-<h3>SQLiteのエラー</h3>
-
-<p>deploy中にsqlite3.hが存在しないよというエラーが発生。<a href="http://www.guanxiaohua2k6.com/2012/07/sqlite3h-is-missing.html">このページ</a>に書いてあるのとまったく同じ症例だったので、同様の対策をしてあげて解決。これは俺のvagrant環境の準備に不備があったってことでいいんだろうか。根本原因がイマイチ謎。</p>
-
-<h3>rake db:migrateのエラー</h3>
-
-<p>そして現在進行形で未解決なのがこのエラー。デフォルトのデプロイタスクでは途中でデプロイ先サーバー上でRAILS_ENV=staging bundle exec rake db:migrateを叩くんだけど、これが次のエラーで停まってしまう。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>DEBUG [4be84d91]        rake aborted!
-</span><span class='line'>DEBUG [4be84d91]        database configuration does not specify adapter</span></code></pre></td></tr></table></div></figure>
-
-
-<p>いくつか思い当たった原因に取り組んではみたのだが、なおエラーが起きている。</p>
-
-<ul>
-<li>RAILS_ENV=hogeを追加した場合、Gemfileのgroup :hogeを見に行くのだが、stagingグループを用意していなかった（<a href="http://opentechnica.blogspot.jp/2012/01/railsenv.html">参考</a>）。</li>
-<li>database.ymlにstagingの設定を用意していなかった。</li>
-</ul>
-
-
-<p>たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。</p>
 </div>
   
   

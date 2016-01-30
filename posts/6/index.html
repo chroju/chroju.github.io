@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="GTDという言葉もなんだか多義的に使われているような気がするが、自分の場合は「今あるタスクを『高度』の概念から見直して、きちんと前に進むことができているか確認すること」と、「やるべきことが全部可視化されていること」に重点を置いている。 &hellip;">
+  <meta name="description" content="つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。 用途としては非常に個人的なもので、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/03/google-spread-sheet-update-via-ruby/">Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-03T19:52:10+09:00'><span class='date'>2015-05-03 (Sun)</span> <span class='time'>7:52 pm</span></time>
+        
+         | <a href="/blog/2015/05/03/google-spread-sheet-update-via-ruby/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><script src="https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js"></script>
+
+
+<p>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。</p>
+
+<p>用途としては非常に個人的なもので、各種オンラインバンクの残高をスクレイピングしてハッシュで返してくれるスクリプトをいくつか作ってあったので、その戻り値を使ってオートで家計簿作れたらいいなーという思いによるものです。ハッシュのキーをそのままスプレッドシート内の項目名として使っているので、シンボルではなく文字列をキーとして使ってしまっているのがあまりよろしくないのかなぁとは思うのだが、いつか改善するってーことで、とりあえず動くものを作ることを優先させた。んで、これって結構汎用的に使えそうなスクリプトかもなと思って公開した次第。</p>
+
+<p>Googleスプレッドシートをいじるのには<code>google-drive-ruby</code>というGemを使ってます。Githubは<a href="https://github.com/gimite/google-drive-ruby">ここ</a>。<code>def initialize</code>内の処理は、このGemの初期設定によるものなので、Gemの方のReadme読んでもらえればよいかと。単純な話、GoogleのOAuth API使っているだけの話です。ただ、このコードだと叩くたびにブラウザからAPI使用許可を与えてやって、success codeをコピーしてコマンドラインで入力してやらなくちゃならないっていう手間があって、そこまで省く方法なにかありそうだけどまだ調べてない。あと気になっている点としては、このGemでセルの値を取ると、表示値しか取れないこと。式を入れているセルについては、式を取るか表示値を取るか選べるといいなぁと思ったんだけど、そこまではできないらしい。しかしまぁ、とにかくGoogleスプレッドシートという、APIで叩けるクラウドの表計算ソフトがあるというのは本当に便利なことですね、って感じ。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://qiita.com/inokappa/items/2566b21f4b1deac6f95b">RubyからGoogle SpreadSheet をいじるメモ - Qiita</a></li>
+<li><a href="http://qiita.com/yumiyon/items/d7c370b3b8582431a3de">Google DriveのスプレッドシートにRubyでアクセスする方法 - Qiita</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -646,168 +693,6 @@
 
 
 <p>Dirクラスも触れたいのだが、長くなるので一旦ここまで。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/06/study-ruby-time/">Ruby基礎復習(7) Timeクラス</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-06T22:53:30+09:00'><span class='date'>2015-04-06 (Mon)</span> <span class='time'>10:53 pm</span></time>
-        
-         | <a href="/blog/2015/04/06/study-ruby-time/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>『パーフェクトRuby』p.190より。</p>
-
-<p><code>Time#now</code>か<code>Time#new</code>で現在時刻が取得可能。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="c1"># =&gt; 2015-03-16 23:25:32 +0900</span>
-</span><span class='line'><span class="kp">new</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span> <span class="c1"># =&gt; 2015-03-16 23:25:32 +0900</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">zone</span> <span class="c1"># =&gt; &quot;JST&quot;</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">getutc</span> <span class="c1"># =&gt; 2015-03-16 14:25:32 UTC</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">utc</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">zone</span> <span class="c1"># =&gt; &quot;UTC&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>現在時刻以外のTimeオブジェクトを生成するには<code>Time#at</code>でUNIX秒を引数に指定するか、<code>Time#utc</code>か<code>Time#local</code>で直接時刻を指定する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># =&gt; 1970-01-01 09:00:00 +0900</span>
-</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">utc</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># =&gt; 2015-01-01 02:30:40 UTC (最後の100はマイクロ秒)</span>
-</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># =&gt; 2015-01-01 02:30:40 +0900</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>#to_i</code>、<code>#to_f</code>、<code>#to_r</code>の戻り値はUNIX秒。<code>#to_s</code>で文字列表現が返る。<code>#to_a</code>は秒、分、時、日、月、年、曜日、その年の通算日数、夏時間の真偽判定、タイムゾーンの配列を返す。なお、この配列フォーマットを展開して<code>Time#utc</code>や<code>Time#local</code>の引数として与えることもできる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">to_i</span> <span class="c1"># =&gt; 1426515932</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">to_f</span> <span class="c1"># =&gt; 1426515932.978824</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">to_r</span> <span class="c1"># =&gt; (178314491622353/125000)</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">to_s</span> <span class="c1"># =&gt; &quot;2015-03-16 23:25:32 +0900&quot;</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">to_a</span> <span class="c1"># =&gt; [32, 25, 23, 16, 3, 2015, 1, 75, false, &quot;JST&quot;]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>#to_s</code>の戻り値は上記フォーマットの固定だが、任意のフォーマットで文字列表現を得たい場合は<code>#strftime</code>を使う。使えるフォーマット文字列は<a href="http://docs.ruby-lang.org/ja/1.9.3/class/Time.html">公式ドキュメント</a>参照で。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;今日は%Y年%m月%d日、今は%H時%M分を%S秒過ぎたところです。&quot;</span><span class="p">)</span> <span class="c1"># =&gt; &quot;今日は2015年3月16日、今は23時25分を32秒過ぎたところです。&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>逆に文字列表現からTimeオブジェクトを得たい場合は<code>#strptime</code>が使える。</p>
-
-<h2>参照</h2>
-
-<ul>
-<li><a href="http://qiita.com/riocampos/items/de59263ac4e991a98f49">Ruby - 日本語表記の日時をTimeオブジェクトに変換（Time.strptimeメソッド） - Qiita</a></li>
-</ul>
-
-
-<p>その他もろもろの出力。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">year</span> <span class="c1"># =&gt; 2015</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">month</span> <span class="c1"># =&gt; 3</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">day</span> <span class="c1"># =&gt; 16</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="c1"># =&gt; 23</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">min</span> <span class="c1"># =&gt; 25</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">sec</span> <span class="c1"># =&gt; 32</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">nsec</span> <span class="c1"># =&gt; 978824000 (ナノ秒)</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">wday</span> <span class="c1"># =&gt; 1 (曜日は日曜を0としてカウント)</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">yday</span> <span class="c1"># =&gt; 75 (年初からの日数)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>曜日やサマータイム(DST)については疑問符のメソッドで真偽判定できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">dst?</span> <span class="c1"># =&gt; false</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">sunday?</span> <span class="c1"># =&gt; false</span>
-</span><span class='line'><span class="n">now</span><span class="o">.</span><span class="n">monday?</span> <span class="c1"># =&gt; true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Timeオブジェクト同士の比較についてはナノ秒まで判定されるので、そのあたりに注意とのこと。以下のようなことがあり得る。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="c1"># =&gt; 2015-03-16 23:25:32 +0900</span>
-</span><span class='line'><span class="kp">new</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span> <span class="c1"># =&gt; 2015-03-16 23:25:32 +0900</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">now</span> <span class="o">==</span> <span class="kp">new</span> <span class="c1"># =&gt; false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>整数を与えることによる加算減算は秒として取り扱われる。Timeオブジェクト同士の減算も可能。その場合は差分の秒数が浮動小数点数で返る。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span> <span class="c1"># =&gt; 2015-03-16 23:25:32 +0900</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">now</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># =&gt; 2015-03-16 23:25:33 +0900</span>
-</span><span class='line'><span class="n">now</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1"># =&gt; 2015-03-16 23:25:31 +0900</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>なお時間や日時を扱うクラスには他に<code>Date</code>や<code>DateTime</code>もあるが、組み込みのライブラリはこの<code>Time</code>だけ。どれを使えばええんや？ってのは、探してみたら大変詳しいQiitaを見つけたんでそっちに譲ります。</p>
-
-<h2>参考</h2>
-
-<ul>
-<li><a href="http://qiita.com/jnchito/items/cae89ee43c30f5d6fa2c">RubyとRailsにおけるTime, Date, DateTime, TimeWithZoneの違い - Qiita</a></li>
-</ul>
-
 </div>
   
   

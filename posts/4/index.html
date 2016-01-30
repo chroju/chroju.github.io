@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="chroju - Qiita 気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽かなと思って。あと先日の暗号化に関する記事みたいなまとめ記事、 &hellip;">
+  <meta name="description" content="久しぶりに稼働させているExhiBiというサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。 kaminari ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。 amatsuda/kaminari &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/08/08/exhibi-update/">Kaminariの実装をしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-08T19:47:30+09:00'><span class='date'>2015-08-08 (Sat)</span> <span class='time'>7:47 pm</span></time>
+        
+         | <a href="/blog/2015/08/08/exhibi-update/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>久しぶりに稼働させている<a href="http://chroju.net/exhibi">ExhiBi</a>というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。</p>
+
+<h1>kaminari</h1>
+
+<p>ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari" title="amatsuda/kaminari" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="https://github.com/amatsuda/kaminari" target="_blank">amatsuda/kaminari</a></iframe>
+
+
+<p>bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは<code>controller</code>で<code>#index</code>のようなリソースを拾ってくるアクションに<code>.page</code>をかましてやるようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># もともとはExhibition.all.order...</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="vi">@exhibitions</span> <span class="o">=</span> <span class="no">Exhibition</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s2">&quot;start_date DESC&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>あとは<code>view</code>でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='slim'><span class='line'><span class="p">=</span> <span class="n">paginate</span> <span class="vi">@exhibitions</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>なお、実装当初は<code>undefined method 'deep_symbolize_keys'</code>などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は<code>config/locales/ja.yml</code>が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。</p>
+
+<p>もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。</p>
+
+<h1>id以外の要素でmodle#showにアクセスする</h1>
+
+<p>例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fawakia%2Fitems%2Fc2c790dc51e5b084af10" title="Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://qiita.com/awakia/items/c2c790dc51e5b084af10" target="_blank">Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita</a></iframe>
+
+
+<p>やってることはなんともシンプルで、<code>Museum.find(n)</code>で呼んでいたところを<code>Museum.find_by_name_en_or_id(hoge)</code>と出来るようにしただけですね。<code>#to_param</code>でサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。</p>
+
+<p>ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通に<code>bundle exec rake g migration</code>してから<code>rake db:migrate</code>するだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦<code>rake db:migrate:reset</code>してから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Fdifference-bettween-rake-db-migrate-reset.html" title="rake db:reset と rake db:migrate:reset の違い | EasyRamble" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://easyramble.com/difference-bettween-rake-db-migrate-reset.html" target="_blank">rake db:reset と rake db:migrate:reset の違い | EasyRamble</a></iframe>
+
+
+<p>自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -533,61 +612,6 @@
 <li>Outlookの予定表使いづらすぎて辛いんだけど、Exchangeと同期できるアプリでなんか良い代替ないッスか。。。</li>
 </ul>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/03/how-about-your-troubleshooting/">すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-03T00:20:52+09:00'><span class='date'>2015-07-03 (Fri)</span> <span class='time'>12:20 am</span></time>
-        
-         | <a href="/blog/2015/07/03/how-about-your-troubleshooting/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
-
-<p>改めて見るとすげー名前のイベント……行ってきた。</p>
-
-<p>障害対応は嫌いです。ていうか好きな人がいるならお目にかかってみたいもんですが、しかしシステムを動かす以上障害は避けられないし、それならばなるべく負担を軽減したいというのが人の、いやエンジニアの性。つわけでよりよいソリューションを探す目的で行ってきたイベントだったんですが、結局のところ <strong>より深い闇を知るだけの結果に終わった。</strong></p>
-
-<p>世の中闇だらけですわ。闇しかないですわ。自分なんかぜんぜん甘いなっていうか闇とすら呼べないんじゃないかっていう。詳しくは書けませんけど世の中運用者って苦労してんなって認識新たにしました。まぁだからって闇を甘受していいわけじゃなくて、だからこそやることあるんだけどさ。</p>
-
-<p>得た知見をザクっとまとめちゃいますけど、</p>
-
-<ul>
-<li>明文化と記録は何事も大事。顧客との契約にせよ、手順や構成にせよ、障害記録にせよ。</li>
-<li>ただ記録するんじゃなくて探しやすいようにとか考えないと意味ない(Wikiに書き散らしても役には立たない)</li>
-<li>日頃からの点検などによる障害の抑止も重要。障害訓練とか。</li>
-<li>スーパーエンジニアだから治せるって状態は脱したいのでスキルの底上げは必要。</li>
-<li>電話かかってくるのウザいけど必要。確実に対応しなきゃならない障害なら絶対電話。別にTwilioとかでいいので。</li>
-</ul>
-
-
-<p>障害対応って辛くないはずはないのだが、だったらより辛くない方法を探さねばなと思う。アラートの対象は極力絞ったり、自動復旧でイケる事象はスクリプト組んでおいたり。</p>
-
-<p>あと自分はもともと金融系SEで、運用に用いてたのもJP1やTivoliみたいな商用製品が多かった故、会場で交聞いたnagiosやらcactiやらCloudWatchやらを学ばねばというところ。顧客とビジネスモデルが変わっただけで、見える技術領域もほんとに変わるものだと思う。</p>
-
-<p>こういうopsやインフラに絞ったイベント、なかなかない気がするので良いですね。</p>
 </div>
   
   

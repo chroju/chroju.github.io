@@ -9,10 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。 必要なもの Ruby ……当然のごとく
-Rails ……当然のごとく
-rbenv ……RubyとRailsの管理システム
-ruby-build …… &hellip;">
+  <meta name="description" content="generate scaffoldはMVC全部作ってくれて便利なんだけど、うっかりカラム名間違えたりしたときの対処法ってあるのかしら。後から変更したい場合は全部逐一手動で変更してね☆ってことだとさすがに面倒臭すぎるんだが……。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +110,47 @@ ruby-build …… &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/21/post/">RoRでScaffold作成を間違えたときの対処法が知りたい</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-09-21T12:11:00+09:00'><span class='date'>2013-09-21 (Sat)</span> <span class='time'>12:11 pm</span></time>
+        
+         | <a href="/blog/2013/09/21/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>generate scaffoldはMVC全部作ってくれて便利なんだけど、うっかりカラム名間違えたりしたときの対処法ってあるのかしら。後から変更したい場合は全部逐一手動で変更してね☆ってことだとさすがに面倒臭すぎるんだが……。</p>
+
+<p>とりあえず今はscaffoldを削除してイチから作り直す形で対処しているが。</p>
+
+<blockquote>$ rails destroy scaffold hoge</blockquote>
+
+
+<p>このとき、db:migrateすでにしちゃってるならsqlite入ってDROP TABLEするのも忘れずに。</p>
+
+<p>後からアプリ改修して新しい属性付け足したりとかって場面もあるだろうし、何かしらscaffoldに変更をかける手段はあるんじゃないかと思って探してるんだけど見つからない。ぐぬぬ。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -426,56 +464,6 @@ $ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを�
 <li><p>Rubyの文法ってなんか慣れない。。。</p></li>
 </ul>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/23/post/">Kaoriya版Vimでtxtファイルの自動改行が解除できない件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-07-23T22:00:00+09:00'><span class='date'>2013-07-23 (Tue)</span> <span class='time'>10:00 pm</span></time>
-        
-         | <a href="/blog/2013/07/23/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>2週間ぐらいハマってた。</p>
-
-<p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>
-
-<p>で、結論。Kaoriya版Vimのデフォルト設定により、textwidthが上書かれてしまうらしい。</p>
-
-<blockquote>Kaoriya版Vimではデフォルトの設定ファイルであるvimrc_example.vimを読み込んでおり、その設定ファイル内でテキストファイルを開いたときにtextwidth=78の設定が上書きされてしまうらしい。
-
-[Vimのtextwidth設定と.vimrc - 続・日々の雑感](http://d.hatena.ne.jp/WK6/20120606/1338993826)</blockquote>
-
-
-<p>なので引用元の記事にもある通り、.vimrcに以下を挿入すればおｋ。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">autocmd</span><span class="p">&lt;</span><span class="sr">/span&gt; &lt;span class=&quot;synType&quot;&gt;FileType&lt;/</span>span<span class="p">&gt;</span> text <span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">setlocal</span><span class="p">&lt;</span><span class="sr">/span&gt; &lt;span class=&quot;synPreProc&quot;&gt;textwidth&lt;/</span>span<span class="p">&gt;=</span><span class="m">0</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
 </div>
   
   

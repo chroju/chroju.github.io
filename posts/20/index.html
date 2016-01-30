@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、 &hellip;">
+  <meta name="description" content="2週間ぐらいハマってた。 プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/23/post/">Kaoriya版Vimでtxtファイルの自動改行が解除できない件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-07-23T22:00:00+09:00'><span class='date'>2013-07-23 (Tue)</span> <span class='time'>10:00 pm</span></time>
+        
+         | <a href="/blog/2013/07/23/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2週間ぐらいハマってた。</p>
+
+<p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>
+
+<p>で、結論。Kaoriya版Vimのデフォルト設定により、textwidthが上書かれてしまうらしい。</p>
+
+<blockquote>Kaoriya版Vimではデフォルトの設定ファイルであるvimrc_example.vimを読み込んでおり、その設定ファイル内でテキストファイルを開いたときにtextwidth=78の設定が上書きされてしまうらしい。
+
+[Vimのtextwidth設定と.vimrc - 続・日々の雑感](http://d.hatena.ne.jp/WK6/20120606/1338993826)</blockquote>
+
+
+<p>なので引用元の記事にもある通り、.vimrcに以下を挿入すればおｋ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">autocmd</span><span class="p">&lt;</span><span class="sr">/span&gt; &lt;span class=&quot;synType&quot;&gt;FileType&lt;/</span>span<span class="p">&gt;</span> text <span class="p">&lt;</span>span class<span class="p">=</span><span class="s2">&quot;synStatement&quot;</span><span class="p">&gt;</span><span class="k">setlocal</span><span class="p">&lt;</span><span class="sr">/span&gt; &lt;span class=&quot;synPreProc&quot;&gt;textwidth&lt;/</span>span<span class="p">&gt;=</span><span class="m">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>

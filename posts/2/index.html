@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="Team Geek ―Googleのギークたちはいかにしてチームを作るのかposted with amazlet at 15.12.14Brian W. Fitzpatrick Ben Collins-Sussman オライリージャパン 売り上げランキング: 18,890Amazon.co. &hellip;">
+  <meta name="description" content="秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。 サーバー構成の「仕様書」代わりとして &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/31/serverspec-first-impression/">Serverspecファーストインプレッション</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-31T19:22:54+09:00'><span class='date'>2015-12-31 (Thu)</span> <span class='time'>7:22 pm</span></time>
+        
+         | <a href="/blog/2015/12/31/serverspec-first-impression/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。</p>
+
+<h2>サーバー構成の「仕様書」代わりとして</h2>
+
+<p>自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。</p>
+
+<p>Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。</p>
+
+<p>中には<a href="http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/">cronで監視チックに実行させている例</a>もあるようだが、それもアリかなと思う。</p>
+
+<h2>導入は簡単だが探求にはRubyスキル必須</h2>
+
+<p>Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。</p>
+
+<p>例えば私が初めて書いた<code>spec_helper.rb</code>はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;serverspec&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;yaml&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">properties</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;properties.yml&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">host</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;TARGET_HOST&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="n">set_property</span> <span class="n">properties</span><span class="o">[</span><span class="n">host</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">set</span> <span class="ss">:backend</span><span class="p">,</span> <span class="ss">:exec</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。</p>
+
+<p>自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。</p>
+
+<h2>国産OSSであるアドバンテージ</h2>
+
+<p>Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&#8217;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。</p>
+
+<p><a href="http://rebuild.fm/75/">Rebuild: 75: Book Driven Development (gosukenator)</a></p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg" alt="Serverspec" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Serverspec</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.12.31</div></div><div class="amazlet-detail">宮下 剛輔 <br />オライリージャパン <br />売り上げランキング: 213,793<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。<a href="https://github.com/ryotarai/infrataster">Infrataster</a>とも組み合わせられれば、よりテストの質は増しそう。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -416,52 +498,6 @@
 
 
 <p>懇親会、<a href="https://twitter.com/chroju/status/657852424502276096">TRIGGER ANIMATION EXPO</a>に行けるチャンスがここしかなかったのと、200人という大所帯にぼっち参戦する勇気がないのと（あと、さすがに薄い話しかできなさそうであまり意味はないかなと思った）で行かなかったんだけど、生ハム原木はうらやましかった。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/">インフラエンジニアの幸福論</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-10-20T23:35:46+09:00'><span class='date'>2015-10-20 (Tue)</span> <span class='time'>11:35 pm</span></time>
-        
-         | <a href="/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1年前、<a href="http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4">インフラエンジニアは死んだ</a>。</p>
-
-<p>遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。</p>
-
-<p>どうもLambdaが出たあたりから<a href="http://blog.takuros.net/entry/2015/10/19/081349">サーバーレスアーキテクチャ</a>という言葉が取り沙汰されてきているようで、アプリやDBを動かすための基盤としてサーバーが必要だという前提はすでに崩れている。AWSを触れる前はVPSを触っていたので、どうもAWS＝EC2というイメージから抜け出せずにいたが、実際には<a href="http://i-think-it.net/how-to-aws">「EC2を使ったら負け」</a>なんて言葉も目にする時代にある。ここ最近Circle CIを触ってみていても、テストの実行基盤となるサーバーなんて考え方をする必要はなくて、テスト用の環境はyamlで書けてしまうし、別のインスタンスが欲しければDockerで済ませられる。まぁherokuあたりからすでにそういう風潮だったよなという気もするが、単純にアプリをデプロイしてしまって実行基盤は全部お任せという状態から、LambdaとS3とCognitoを組み合わせて云々みたいな柔軟なアーキテクチャを採用できる状態にまで変化してきている。</p>
-
-<p>AWSを管理する人間が旧来のインフラエンジニアである必要性を当人としてはあまり感じていないし、実際に昨今のWeb企業あたりだとアプリエンジニアがAWSエンジニアを兼ねている場合も少なくないとは思う。規模が大きくなれば構成設計にインフラエンジニアの視点が必要になったりもするのかもしれないが、そこで必要とされるスキルは必ずしも旧来のインフラスキルとは直結していない。1000万円のLBとCiscoのスイッチとDELLのサーバーを買ってきて配線して起動して設定していくスキルと、ブラウザ上でELBやEC2のセキュリティグループを設定するスキルは明らかに異なるもので、故に2015年におけるインフラ＝AWSの領域においては、旧来のインフラエンジニアと非インフラエンジニアが同じ土俵で戦えなくもなかったりする（さすがに言い過ぎ感あるか）。これまで培ってきたインフラスキルというものは、必ずしも2015年に戦える武器にはなっていない。</p>
-
-<p>もちろん一方でEC2もオンプレの環境もまだ健在ではあるし、これが10年後に撤廃されるかというと、現状のMFのように残り続けるとは思う。特に金融のような特殊領域ではどうしてもクラウド移行が難しいということもある。だから旧来のインフラエンジニアが死に絶えることはないのだろうが、それでもパイが小さくなることは事実だし、物理環境の障害だとか5年ごとのリプレースだとか、テンションの上がらない類の仕事に携わり続けることを余儀なくされる。</p>
-
-<p>テンションの上がる仕事がしたいと言うと軽薄になってしまうが、誰だって夜中にタクシーでデータセンターに駆け付ける機会は極力少なくしたいと思うわけで、これまで注力していたいわゆる「オープン系」の需要が狭まる中で、インフラエンジニアの「幸福論」のようなものは求められつつある気がする。より少なくなる、かつ結構しんどい椅子に座り続けるのは個人的に嫌なので、Docker、ServerSpec、Ansibleあたりの領域でガッツリ存在感を示せるようになるか、あるいはそれらを生み出す側、より下のレイヤーで技術的に研ぎ澄まされていくかの二択なのかなと最近は思いつつある。とはいえ後者はどう考えても狭き門であり、現実的には前者を日常的な業務としつつ、要はRubyエンジニアがgem書くような感覚でツール作ったりOSSにイッチョカミしたりもたまにやれるぐらいの力があるといいのだろうなと思う。</p>
-
-<p>何はともあれやはり「勉強する」以外に道がないことは今も昔も変わってないし、ある意味で過渡期にある技術として、いまインフラは面白いところにあるとは思っている。これについていけるかついていけないかっていうシンプルな問いでもあって、自分の希望としてはついていきたい。今からアプリに鞍替えする気はなく、カーネル書けるかって言えば書けないだろうし、かといって今のまま障害対応で夜に起こされるのを続けるわけにもいかない。だったら2015年におけるインフラというものを学んでいくしかないわけで、幸いなことに、学べば「物理ハードウェアからの開放」というある程度の報酬が待ち受けていることは確実になっている。どれだけ頑張ってもサーバーのファームウェアのバグで泣かされるような時代ではなく、ある意味でインフラエンジニアが「インフラを学び直す」ことは美味しい選択肢ではある。また場合によっては、インフラエンジニアとしてより良い環境へ適時シフトしていく（惰性でずっとオンプレ使う方針の会社との喧嘩は早々に諦める）こともまた必要になるのだと思っている。</p>
-
-<p>とかなんとか書きながら考えていたら、<a href="http://blog.hifumi.info/2015/02/23/wakateinfra/">若手インフラエンジニア現状確認会</a>とやらで似たような話が上がっていた。個人的な実感としてはITエンジニア100人の企業であれば5～9人ぐらいがインフラかなと思うので、若手インフラが少ないというよりは全体的にインフラエンジニアが少ないのだと思っているが、その分情報交換とか大切にしなきゃなと思う。エンジニア仲間増やしたい。</p>
 </div>
   
   

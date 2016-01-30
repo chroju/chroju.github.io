@@ -4,7 +4,7 @@
   <title><![CDATA[the world as code]]></title>
   <link href="http://chroju.github.io/atom.xml" rel="self"/>
   <link href="http://chroju.github.io/"/>
-  <updated>2016-01-24T23:00:42+09:00</updated>
+  <updated>2016-01-30T10:46:27+09:00</updated>
   <id>http://chroju.github.io/</id>
   <author>
     <name><![CDATA[chroju]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ops JAWS#3に行ってきた]]></title>
+    <link href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/"/>
+    <updated>2016-01-30T10:32:13+09:00</updated>
+    <id>http://chroju.github.io/blog/2016/01/30/ops-jaws-3</id>
+    <content type="html"><![CDATA[<p>その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。</p>
+
+<p>メインとなったのはconfig rulesのハンズオン。</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/g0o2kIUtI0yKmw" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/okochang/opsjaws-20160128" title="OpsJAWS 20160128" target="_blank">OpsJAWS 20160128</a> </strong> from <strong><a href="//www.slideshare.net/okochang" target="_blank">hideaki yanase</a></strong> </div></p>
+
+<p>AWSリソース、使っているうちに無秩序になっていき、ルールの統一がはかれなくなったり、全体像が見えづらくなったりということはありがちですが、config rulesを使ってもうシステム的に制御しちゃいましょうというテーマ。例えばCloudTrailが有効化されていない場合にアラートを上げる、とか。監視結果が変化すると、それをトリガーにLambdaをinvokeしたりもできるので、それこそなんでもできる感じ。</p>
+
+<p>やってみて気付いたけど、やっぱり自分は運用が好きなのかもしれない。システムによって、本来不確かであったり信用性に劣っていたりするはずの人間の動作を制御する、というのが好きなんだろうなと。SEやってた頃は運用の制御はExcel資料が元になることが多くて、それ自体は特に楽しくなかったのだけど、システム的に作りこんでいくのはわくわくする。これはいい気付きだったし、次回も是非参加してみたい。</p>
+
+<p>問題としてはやはり、Lambda Functionを書くのにpythonかnode.jsを使う必要がある（いまさらJavaってのもなぁ）ので、次回参加するのであればそれまでにpythonをある程度やっておかねばなぁというところ。</p>
+
+<p>その他、昨年とてもおもしろく読ませていただいたSDの特集『なぜ「運用でカバー」がダメなのか』を書かれた運用設計ラボの波多野氏がいらっしゃっていたりして、個人的にはテンション上がったりもしました。「運用でカバー」をググるとトップに出てくる、なんだか好評を得てしまった拙記事はこちら（あえて移行前ブログを貼るアレ）。</p>
+
+<p><a href="http://chroju89.hatenablog.jp/entry/2015/02/11/164926">Software Design 2015年2月号『なぜ「運用でカバー」がダメなのか』読了 - そのねこが学ぶとき</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Personal Knowledge Base]]></title>
@@ -1364,38 +1390,6 @@
 <li>Outlookの予定表使いづらすぎて辛いんだけど、Exchangeと同期できるアプリでなんか良い代替ないッスか。。。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight]]></title>
-    <link href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/"/>
-    <updated>2015-07-03T00:20:52+09:00</updated>
-    <id>http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting</id>
-    <content type="html"><![CDATA[<p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
-
-<p>改めて見るとすげー名前のイベント……行ってきた。</p>
-
-<p>障害対応は嫌いです。ていうか好きな人がいるならお目にかかってみたいもんですが、しかしシステムを動かす以上障害は避けられないし、それならばなるべく負担を軽減したいというのが人の、いやエンジニアの性。つわけでよりよいソリューションを探す目的で行ってきたイベントだったんですが、結局のところ <strong>より深い闇を知るだけの結果に終わった。</strong></p>
-
-<p>世の中闇だらけですわ。闇しかないですわ。自分なんかぜんぜん甘いなっていうか闇とすら呼べないんじゃないかっていう。詳しくは書けませんけど世の中運用者って苦労してんなって認識新たにしました。まぁだからって闇を甘受していいわけじゃなくて、だからこそやることあるんだけどさ。</p>
-
-<p>得た知見をザクっとまとめちゃいますけど、</p>
-
-<ul>
-<li>明文化と記録は何事も大事。顧客との契約にせよ、手順や構成にせよ、障害記録にせよ。</li>
-<li>ただ記録するんじゃなくて探しやすいようにとか考えないと意味ない(Wikiに書き散らしても役には立たない)</li>
-<li>日頃からの点検などによる障害の抑止も重要。障害訓練とか。</li>
-<li>スーパーエンジニアだから治せるって状態は脱したいのでスキルの底上げは必要。</li>
-<li>電話かかってくるのウザいけど必要。確実に対応しなきゃならない障害なら絶対電話。別にTwilioとかでいいので。</li>
-</ul>
-
-
-<p>障害対応って辛くないはずはないのだが、だったらより辛くない方法を探さねばなと思う。アラートの対象は極力絞ったり、自動復旧でイケる事象はスクリプト組んでおいたり。</p>
-
-<p>あと自分はもともと金融系SEで、運用に用いてたのもJP1やTivoliみたいな商用製品が多かった故、会場で交聞いたnagiosやらcactiやらCloudWatchやらを学ばねばというところ。顧客とビジネスモデルが変わっただけで、見える技術領域もほんとに変わるものだと思う。</p>
-
-<p>こういうopsやインフラに絞ったイベント、なかなかない気がするので良いですね。</p>
 ]]></content>
   </entry>
   

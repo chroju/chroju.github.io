@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。 テーマファイルの構成 awesomeの設定はいくつかのLuaファイルを使って書き換えていく。 &hellip;">
+  <meta name="description" content="実践Vim 思考のスピードで編集しよう!posted with amazlet at 15.03.01Drew Neil アスキー・メディアワークス 売り上げランキング: 15,673Amazon.co.jpで詳細を見る 何ヶ月か前にKindleでアスキー本のセールをやっていたことがあって、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/02/post/">『実践Vim』でVimの思想を身につける</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-10-02T23:45:00+09:00'><span class='date'>2014-10-02 (Thu)</span> <span class='time'>11:45 pm</span></time>
+        
+         | <a href="/blog/2014/10/02/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51xLKL7w92L._SL160_.jpg" alt="実践Vim 思考のスピードで編集しよう!" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">実践Vim 思考のスピードで編集しよう!</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Drew Neil <br />アスキー・メディアワークス <br />売り上げランキング: 15,673<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048916599/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>何ヶ月か前にKindleでアスキー本のセールをやっていたことがあって、そのときに買ったのをやっと読み終えた。技術書を電子書籍で読むというのは、感覚の問題なんだけどどうも身が入らない。ドッグイヤー付けたりとか書き込んでみたりとか出来なかったり、あるいは満員電車の中とかでも手軽に読めすぎてしまって、腰を据えて勉強する感覚がなくなるからなのかなぁという気がしている。なお、これまでKindle読むのにはXPERIA Z1fを使っていたが、さすがにしんどくてiPad miniを買った模様。もちろん、他にも理由はあったけど。</p>
+
+<p>自分はVimを使い始めて1年ちょいというところで、これまでVim本をきちんと読んだことはなかったのだが、読んでよかったと思う。</p>
+
+<p>Vimの情報はネットにありふれすぎていて、素のVimから触り始める人ってあんまりいないような気がする。自分も最初からKaoriya版を使っていたし、使い始めてまもなくGitHubやQiitaから他人のvimrcを拝借してきて、NeoBundleでプラギン入れて使っていた。特にプラギンまわりが楽しすぎて、ほうほうVimはこんなことができるのかー！とｗｋｔｋしながら1か月ぐらいはvimrc触りまくってたように思う。自分の<a href="https://github.com/chroju/dotfiles/commits/master/.vimrc">GitHub</a>見るとまーよくわかる。</p>
+
+<p>でもこの本にも書いてある通り、まずは素の状態で試してみるべきなのだ、本来。Vimは最初からできることが豊富にある。テキストを扱う上で必要な操作がいくらでも揃っているので、まずはそれらを味わってみて、足りなければvimrcで味付けしていけばいい。そうじゃないとVimの設計思想というか、Vimによってテキストをどう扱うべきなのかという原則論が見えてこない。</p>
+
+<p>本書はプラギンの話は皆無で、Vimが最初から備えている機能を中心に解説されている。<code>.</code>を始めとした繰り返し操作を多用する考え方だとか、テキスト対Vimというありがちな考え方だけではなく、ファイル対Vimという考え方もしなくてはならないとか、学べることは本当に多かった。あまりに分量が多いので一気にすべてのことを実践できるわけではないが、これはと思ったとこから取り入れていきたい。おそらくVimはツールではなくて思想なのだ。親指シフトやHHKBなんかと同じように、最速でテキストを編集するための思想。もちろんここでいう「Vim」には「Emacs」も当てはまってくるのだろうけど。あと正規表現ちゃんと覚えなあかんなと思った。後半の検索、置換のあたりは当然ながら正規表現を使える前提の話が多くて、きちんと使えてない自分には少ししんどかった。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -931,49 +974,6 @@ BIOS の代わりに UEFI を使う64ビットの Windows とデュアルブー�
 <li><a href="http://opamp.hatenablog.jp/entry/2013/08/13/201544">ArchLinuxでibus+mozcな環境を構築 - opamp_sando&rsquo;s blog</a></li>
 </ul>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/24/post/">Webスクレイピング手法は何かしら身に付けると便利そう</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-08-24T23:31:00+09:00'><span class='date'>2014-08-24 (Sun)</span> <span class='time'>11:31 pm</span></time>
-        
-         | <a href="/blog/2014/08/24/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近<a href="http://tokyoscrapper.connpass.com/event/7107/">Webスクレイピング勉強会</a>が開かれましたが、自分これは「補欠」になってしまった上に別の予定が入ってしまって行けなくなり、なので自分なりにスクレイピングやってみました。人気の勉強会ってすぐ満席になりますよね。。ホントは勉強会情報とかすくれーぴんぐして逃さずゲトできるようになりたい。まぁこの分野は先人が作ったサービス等いろいろありますが、push型の配信してくれるものってまだない気がするのよね（あったっけ？）</p>
-
-<p>Ruby好きなので使ったのはMechanizeです。nokogiriではない。ネットバンクから毎月残高拾ってきて記録してって手でやってたんだけど、いい加減自動化できないかと思いまして。なのでログイン処理とかまで任せるためにMechanize。</p>
-
-<script src="https://gist.github.com/6cfb9869b7733d362af3.js"> </script>
-
-
-<p>で、使ってみた結果、これめちゃくちゃ便利というか、Web上に掲載されているあらゆるデータを抽出して使い回せるようになるので、やり方一つぐらい身に付けといて損はない気がしますね。</p>
-
-<p>冒頭に挙げたWebスクレイピング勉強会の第2回で<a href="http://dev.classmethod.jp/study_meeting/web-scraping-tokyo-2nd/">kimonoの中の人がしゃべっていた</a>みたいですが、その中でも「セマンティックWebは失敗だった。だからkimonoが必要なんだ」という考え方にはわりと共感できるところがあります。Webってこれだけ情報に溢れたのに、そこから情報を抽出する手立てが限られているのは勿体ないですよね。</p>
-
-<p>ただ、kimonoが最終解のままで良いとも思っていなくて、セマンティックWebは失敗したのかもしれないけど、それに代わるアーキテクチャは何かしら必要なんじゃないかと。Web標準への準拠という、フロントサイドの思想がだいぶ一般的になってきた今日、次に考えていくべきはアーキテクチャの標準化ではないかという気がします。</p>
 </div>
   
   

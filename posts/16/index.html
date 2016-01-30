@@ -9,7 +9,7 @@
   <meta name="author" content="chroju">
 
   
-  <meta name="description" content="Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。 インストール まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」 &hellip;">
+  <meta name="description" content="環境構築エントリーその2。まっさらなOSにRubyを入れていきます。 まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,124 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/23/post/">Rails環境構築（2）Rubyのインストール + α</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-23T22:55:00+09:00'><span class='date'>2014-01-23 (Thu)</span> <span class='time'>10:55 pm</span></time>
+        
+         | <a href="/blog/2014/01/23/post/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。</p>
+
+<p>まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、postgresqlなんかもまぁ必要だろう。gccとかは要る……のか？</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum -y install gcc gcc-c++ make autoconf openssl-devel readline-devel libyaml-devel postgresql9.1-devel wget git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>続いて意気揚々とRubyを入れたいとこだが、その前にrbenvを入れる。以前にエントリーで書いたこともあったけど、rbenvを使ってRubyをインストールすると、複数のバージョンのRubyを切り替えて使えるようになるので大変便利。インストールもwgetでダウンロードしてビルドしてなんてやり方をせず、rbenv installコマンドで簡単にできるようになる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+</span><span class='line'>$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rbenv自体のインストールもgithubからのクローンで済むのでスマートですね。ついでにもう1個git cloneしているのはruby-buildって奴で、これがないとrbenv install（rbenv使ってRubyをインストールするためのコマンド）が使えないらしい。で、入れたらPATHを通します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bash_profile
+</span><span class='line'>$ echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bash_profile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PATHを通したらbash_profileを再読み込みして、それからtype rbenvコマンドを打ってインストールの正常完了を確認する。ちなみに自分は最初、bash_profileの再読み込み忘れて慌てました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bash_profile
+</span><span class='line'>$ type rbenv # rbenv is a functionと表示されればOK</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここまでの手順はGitHubでrbenvのREADMEにも書かれてるから一読を推奨。</p>
+
+<p>rbenvが入ったので、早速Rubyをインストール。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install --list #インストール可能なバージョンが一覧表示される
+</span><span class='line'>$ rbenv install 1.9.3-p484 #入れるバージョンは任意で</span></code></pre></td></tr></table></div></figure>
+
+
+<p>もちろん複数バージョン入れてもOK。Rubyのインストールが完了したら、どのバージョンを使うか確定させる。使うコマンドはrbenv global。安易に想像できる話ではあるが、rbenv localもある。前者が文字通りシステム全体、どのシェルでも使われるバージョンであるのに対し、後者はローカル環境、すなわち今後入れるRailsのアプリケーションディレクトリとか、そういう環境でのRubyバージョンを指定するもの。今はローカル環境がないので、rbenv globalだけ指定すればいい。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv global 1.9.3-p484
+</span><span class='line'>$ ruby -v #確認</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上でRubyは入ったわけだけど、ついでに今後使うのでBundlerも入れておく。BundlerはRubyGemsを管理するためのツールであり、RubyGemsとはRubyのパッケージ管理システムのことである。GemはRailsでもめちゃめちゃ使うし、そもそものRailsもGemで入れることになるので、ここでBundlerを入れておく。</p>
+
+<p>ちなみにGem自体はRubyと一緒にすでに入っている。が、バージョンが古い場合があるので更新してあげる必要がある。GemだけでももちろんRailsをインストールしたりはできるんだけど、その後の落とした各Gemの管理がマンドクセーってなるので、Bundlerが必要になる。まぁ詳しくは次回あたりで。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gem update --system
+</span><span class='line'>$ gem -v #最新のバージョンになったことを確認</span></code></pre></td></tr></table></div></figure>
+
+
+<p>じゃあ喜び勇んでGemを使ってBundler入れましょう！と行きたいところだが、まだやることがある。デフォルトだとGemで何かをインストールしたとき、ずらずらーっとメッセージが出てくるのだが、それを消すためのおまじない。これで体感2倍ぐらいインストールが速くなるらしい。方法は簡単で、~/.gemrcファイルを新規で作成して、以下の内容を書き入れる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem: --no-ri --no-rdoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>書き入れるって簡単にいうけどエディタは何使えばいいんだよ？って人はviあたり使っとけばいいと思う。もっといえば$ sudo yum install vimすればいいと思うんだが、そのあたりの話はまたおいおい。</p>
+
+<p>はい、やっとこれで準備完了。Bundler入れます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv exec gem install bundler
+</span><span class='line'>$ bundle -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで作業完了！のはずなんだが、なぜか自分はbundleにPATHが通ってなかったらしく、$ bundle -vできませんでした。なんでだろ？　仕方ないので<a href="http://qiita.com/hyshhryk/items/7e728ad57d963454b142">ココ</a>のやり方に従ってなんとかPATHは通ったんだけど、リンク先が何をやっていたのかはっきり言ってわかっておらず、不安。EXECUTABLE DIRECTORYってなんスか？</p>
+
+<p>まーとりあえずRubyとBundlerは入ったので、次回はRailsのインストールといきますかね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://blog.ruedap.com/2011/05/14/ruby-gem-install-no-ri-no-rdoc-gemrc">RubyGemsでgemのインストール時に&ndash;no-ri &ndash;no-rdocをデフォルトにする - アインシュタインの電話番号</a></li>
+<li><a href="http://qiita.com/ongaeshi/items/b07beebca21ba7ed8e7f">rbenv &amp; ruby-build の使い方メモ - Qiita [キータ]</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -420,62 +538,6 @@
 
 
 <p>仕方ないので他のGem使おうかと。んー……なんなんだろ。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/05/post/">今年はほぼ日からEDITに浮気しました</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-05T00:47:00+09:00'><span class='date'>2014-01-05 (Sun)</span> <span class='time'>12:47 am</span></time>
-        
-         | <a href="/blog/2014/01/05/post/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.flickr.com/photos/chroju/11754549826/"> title=&ldquo;ほぼ日→EDIT by chroju, on Flickr&rdquo;><img src="http://farm4.staticflickr.com/3816/11754549826_38e5d312cd.jpg" width="500" height="500" alt="ほぼ日→EDIT"></a></p>
-
-<p>浮気しました。</p>
-
-<p>就職2年目から2年間ほぼ日手帳を使い続けたけど、今年はEDIT。ライバル側に浮気してしまいました。理由はいくつかある。ほぼ日手帳に愛想を尽かした点が多いかな。</p>
-
-<ul>
-<li>紙面サイズが小さい。EDITの方が書くスペースが多い。</li>
-<li>「今日の一言」が邪魔。手帳を書くときに脇目を逸らしたくない。</li>
-<li>価格が高い。一番安いタイプだと、ポリエステルカバーのザラザラした手触りが苦手。</li>
-</ul>
-
-
-<p>これはほぼ日が悪いというより、単に好みの問題だと思ってる。いわゆる「ほぼ日らしさ」が好きな人であれば多分たまらないんだろうし、俺も当初はそうだったんだけど、仕事で書くことが増えたり、もっといろんな用途で使いたくなってくると、徐々に物足りなくなってきた。よりシンプルで、スマートな印象があるEDITの方が魅力的に見えてしまった。</p>
-
-<p>まだ使い始めて3日なのだが、EDITにも当然いまいちだなぁという点はある。</p>
-
-<ul>
-<li>ペンを挿すパーツがチープで心許ない。ほぼ日のバタフライストッパーは素敵。</li>
-<li>紙質がすべっすべで気持ちいいんだけど、心持ちめくりにくい。</li>
-<li>ほぼ日の月ごとにインク色が違うのは、パラパラめくるときにすごいわかりやすかった。</li>
-</ul>
-
-
-<p>このあたりはトレードオフなので、両方使ってみて「より良い方」を選べばいいだけの話。ただし、手帳は1年ものなので、なかなか「気に入らないから買い直そう」というのがすぐ出来ないのが痛いところ。本来あるべき姿としては、あまりツールが何であるかにこだわりすぎず、出来るやり方でやってみることこそが重要なんだろう。物理的なガジェットだけじゃなく、タスク管理サービスとかでもそうだと思う（Wunderlistがいいか、Google Tasksがいいかで1か月悩んだことへの自戒。。。）</p>
 </div>
   
   
