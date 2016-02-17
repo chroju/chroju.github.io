@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    $ vagrant sshで仮想マシンに入れなくなった場合の対処法 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>$ vagrant sshで仮想マシンに入れなくなった場合の対処法</h1>
+      <div class="meta">
+        Feb 2, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃねと思ったんだけど、なんとか元に戻せたので対処法まとめとく。</p>
+
+<p>といっても簡単な話です。</p>
+
+<ul>
+<li>Virtual BoxをGUIで開く</li>
+<li>該当仮想マシンがリストに入ってるので強制終了し、Virtual Box上で起動し直す</li>
+<li>rootでログイン（パスワードはデフォルトでvagrant）</li>
+<li>おかしい箇所を直す</li>
+</ul>
+
+<p>コマンド叩いて操作してるので忘れがちだけど、vagrantはVirtual Box上（有料版ならVMware上も有り得るが）に仮想マシンを立ててるので、普通にGUIから入ればいい話です。rootで入ってぐいぐいヤバそうなとこ直して、直したらターミナルからssh試してみてってのを交互に繰り返して直しませう。</p>
+
+<p>rootで入り直す前に一度VM落とす手順を入れましたが、こうしないとGUIから入れないみたいです。僕の場合だとターミナルでiptablesとかいじって、よしじゃあsshログインできるか試してみようってことで一旦ログアウトしたら入れなくなった（アホだ）のでVMが立ち上がりっぱなしになっちゃったわけなんだけど、この状態で取りあえずVirtual Box開いてみたらコンソールを表示するボタンがグレーアウトされてました。なので一旦強制終了するしかないです。</p>
+
+<h2 id="余談:cc6559aa6b2ca71ffc8de305dd69550d">余談</h2>
+
+<p>ちなみに今回何をやらかしたのかだけど、ポイントとしてはsshのポート番号を変えた（/.ssh/configをいじった）のと、iptablesをいじったのの二点。これを普通のVMの感覚でやっちゃったのがマズかったみたい。</p>
+
+<p>まず、vagrant sshで使われているポート番号はデフォルトで22ではなく、2222なのです。これはホスト側で$ vagrant ssh-configコマンドを打ってみるとわかる。</p>
+
+<pre><code>Host default
+  Hostname 127.0.0.1
+  User vagrant
+  Port 2222
+</code></pre>
+
+<p>一方、ssh以外の各vagrantコマンドについても、いずれもsshを使っている模様。vagrant upもvagrant haltもssh経由で命令しているみたいです。ただ、こちらは通常通りPort 22を使っているのでややこしい。このあたりの事情を踏まえた上でポート番号あれこれしないと、必要なはずのポート塞いじゃってうああああああってなっちゃうっぽい。</p>
+
+<p>まぁvagrantで作ったサーバーを表に公開することはあんまりないと思うんで、このへん触らないのが吉かも。練習でやりたいのであれば、vagrant以外でサーバー用意してやった方が良さそうな気がします。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://girigiribauer.com/archives/1127">Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 | girigiribauer.com</a></li>
+<li><a href="http://d.hatena.ne.jp/okinaka/20110805/1312474847">Vagrant のベースBOX作成手順 (Scientific Linux 6.1) - エンジニアきまぐれTips</a></li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/02/02/2014-02-02-post/" rel="prev">Rails環境構築（4）nginx導入</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/02/09/2014-02-09-post/" rel="next">突然だけどVimperatorrcを晒してみる</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

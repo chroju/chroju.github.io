@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    chefでさくらVPSの初期構築を全部自動化してみた | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/05/30/2014-05-30-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>chefでさくらVPSの初期構築を全部自動化してみた</h1>
+      <div class="meta">
+        May 30, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>Chefでサーバー構築を全部自動化して、借りているさくらVPSに当ててみた。意地でも手作業はまったく入れない完全自動構築設定。これはよい。毎回手作業やらずに済むというのは、抜け漏れをなくすという点でも、構築時間を短縮するという面でも本当に楽。</p>
+
+<h2 id="前提:5258afb5b5a801bdb59a35a0efcbe00e">前提</h2>
+
+<p>今回構築するサーバーの前提は次の通り。</p>
+
+<ul>
+<li>CentOS 6.4環境で試行</li>
+<li>vagrantを使って試験後、さくらVPSに対して適用</li>
+
+<li><p>基本の設定として以下を実施</p></li>
+
+<li><p>構築用のユーザーを作成</p></li>
+
+<li><p>構築用ユーザーにsudo権限を付与</p></li>
+
+<li><p>構築用ユーザーを秘密鍵認証でsshログイン許可</p></li>
+
+<li><p>rootによるsshログインを禁止</p></li>
+
+<li><p>パスワード認証によるログインを禁止</p></li>
+
+<li><p>sshのポート番号を変更</p></li>
+
+<li><p>ssh, http以外のアクセスをiptablesでシャットアウト</p></li>
+
+<li><p>nginxを導入</p></li>
+
+<li><p>将来的にunicornを入れるための設定を準備</p></li>
+
+<li><p>極力サードパーティクックブックは使わない（ブラックボックス化が嫌）</p></li>
+</ul>
+
+<h2 id="レシピ:5258afb5b5a801bdb59a35a0efcbe00e">レシピ</h2>
+
+<p>まず「どんなサーバーだろうとまず実行するだろうセキュリティ上の設定」はdefault_tasksというレシピにまとめた。</p>
+
+<h3 id="default-tasks:5258afb5b5a801bdb59a35a0efcbe00e">default_tasks</h3>
+
+<pre><code># sshdサービスの有効化
+service &quot;sshd&quot; do
+  supports :status =&gt; true, :restart =&gt; true, :reload =&gt; true
+  action [ :enable, :start ]
+end
+
+# sshd_configの配置
+template &quot;sshd_config&quot; do
+  path &quot;/etc/ssh/sshd_config&quot;
+  source &quot;sshd_config.erb&quot;
+  owner &quot;root&quot;
+  group &quot;root&quot;
+  mode 0600
+  notifies :restart, &quot;service[sshd]&quot;
+end
+
+# iptablesの設定
+iptables_rule &quot;iptables&quot;
+</code></pre>
+
+<p>sshdの有効化と、templateを使ったsshd_configの配置、そしてiptablesの設定。このうちiptablesについてはサードパーティ・クックブックを使っている。</p>
+
+<p><a href="https://github.com/opscode-cookbooks/iptables">opscode-cookbooks/iptables</a></p>
+
+<p>iptablesに挿入したい内容をtemplateで用意し、<code>iptables_rule &quot;template name&quot;</code>の形でレシピ内に書き込んでおくと、templateの内容がそのままiptablesに追加されるというシンプルなレシピ。まぁ、これぐらいはサードパーティ使ってもよいかな、と。iptablesを丸ごとtemplate化してアップロードするという手もあるにはあるのだが。</p>
+
+<p>sshd_configはCentOSから引っ張ってきたものをそのまま流用し、Attributesを使っていろいろと書き換えられるように仕込んだ。長いので割愛するけど、設定可能なAttributesはこんな感じ。</p>
+
+<pre><code>  &quot;sshd&quot; : {
+    &quot;Port&quot; : 22,
+    &quot;MaxStartups&quot; : 10,
+    &quot;PermitRootLogin&quot; : &quot;yes&quot;,
+    &quot;RSAAuthentication&quot; : &quot;yes&quot;,
+    &quot;PubkeyAuthentication&quot; : &quot;yes&quot;,
+    &quot;AuthorizedKeysFile&quot; : &quot;.ssh/authorized_keys&quot;,
+    &quot;PasswordAuthentication&quot; : &quot;yes&quot;
+  },
+</code></pre>
+
+<p>よく編集する箇所を中心にAttributesとしてみた。他に設定したい項目が増えたら随時足していけば良いかなと。</p>
+
+<h3 id="users:5258afb5b5a801bdb59a35a0efcbe00e">users</h3>
+
+<p>ユーザーの作成は別のレシピに切り分け。</p>
+
+<pre><code># wheelグループの作成
+group &quot;wheel&quot; do
+  gid 10
+  action :create
+end
+
+# data bagsよりユーザーを作成
+data_ids = data_bag('users')
+
+data_ids.each do |id|
+  # ユーザー作成
+  u = data_bag_item('users', id)
+  user u['username'] do
+    password u['password']
+    supports :manage_home =&gt; true, :non_unique =&gt; false
+    group u['group']
+    action [:create]
+  end
+
+  # ssh公開鍵配置用のディレクトリ作成
+  directory &quot;/home/#{id}/.ssh&quot; do
+    owner u[&quot;id&quot;]
+    group u[&quot;id&quot;]
+    mode 0700
+    action :create
+  end
+
+  # ssh公開鍵の配置
+  file &quot;/home/#{id}/.ssh/authorized_keys&quot; do
+    owner u[&quot;id&quot;]
+    mode 0600
+    content u[&quot;key&quot;]
+    action :create_if_missing
+  end
+end
+</code></pre>
+
+<p>sudoを許可するユーザーをwheelグループに入れるという定番設定。wheelを実際にsudo許可するのはまた別のレシピの仕事で、ここではグループとユーザーの作成のみ。</p>
+
+<p>ユーザー作成にはdata_bagを使った。<a href="http://girigiribauer.com/archives/1066">こちら</a>を参考として作っている。ポイントとしては公開鍵まで登録させていること。fileリソースを使って実にシンプルな配置の仕方だけど、非常に楽ではある。</p>
+
+<p>あまり詳しくは知らないのだが、data_bagについては暗号化する方法があるみたいなので、公開鍵を生でべろっと貼っとくのが気になる場合はそのへんも仕掛けておくと良さそう。</p>
+
+<h3 id="nginx:5258afb5b5a801bdb59a35a0efcbe00e">nginx</h3>
+
+<p>一番苦労した気がするし、あまり美しくない。。。</p>
+
+<pre><code>
+# nginxインストール
+package &quot;nginx&quot; do
+  action :install
+end
+
+# nginx有効化
+service &quot;nginx&quot; do
+  supports :status =&gt; true, :restart =&gt; true, :reload =&gt; true
+  action [ :enable, :start ]
+end
+
+# templateからnginx.confを配置
+template &quot;nginx&quot; do
+  path &quot;/etc/nginx/nginx.conf&quot;
+  source &quot;nginx.conf.erb&quot;
+  owner &quot;root&quot;
+  group &quot;root&quot;
+  mode 0644
+  notifies :reload, &quot;service[nginx]&quot;
+end
+
+# ディレクトリ作成
+directories = [&quot;/etc/nginx/sites-available&quot;,&quot;/etc/nginx/sites-enabled&quot;,&quot;/var/www&quot;,&quot;/var/www/#{node['nginx']['root']}&quot;,&quot;/var/www/#{node['unicorn']['root']}&quot;]
+directories.each do |directory_name|
+  directory &quot;#{directory_name}&quot; do
+    owner &quot;root&quot;
+    group &quot;root&quot;
+    mode 0644
+    action :create
+  end
+end
+
+# sites設定をtemplateごとに実行
+node['nginx']['nginx_sites'].each do |site|
+  # templateからsites-available配下に設定ファイルを配置
+  template &quot;nginx_sites_available&quot; do
+    path &quot;/etc/nginx/sites-available/#{site}&quot;
+    source &quot;nginx/#{site}.erb&quot;
+    owner &quot;root&quot;
+    group &quot;root&quot;
+    mode 0644
+  end
+
+  # sites-enabled配下へシンボリックリンクを配置
+  link &quot;/etc/nginx/sites-enabled/#{site}&quot; do
+    to &quot;/etc/nginx/sites-available/#{site}&quot;
+    link_type :symbolic
+    action :create
+    notifies :reload, &quot;service[nginx]&quot;
+  end
+
+end
+</code></pre>
+
+<p>インストール、サービス有効化、templateからのnginx.confアップロードまでは良いとして。ディレクトリ作成がなんか。。。汚い。。。</p>
+
+<p>/var/wwwを掘って、その中にウェブサイトのルートを置いたり、バーチャルホストの設定でsites-availableとかその辺を使っているもんで、ディレクトリ作成の量が多くなってしまった。いずれも設定は同じなので配列でやるのがベターだとは思うのだが、どうにも汚い。なんとかしたいとこではある。</p>
+
+<p>あとはsites-availableにtemplateから設定ファイルを配置して、linkリソースでsites-enabledにシンボリックリンクを貼って終了。nginxの使い方はsites-availableを使うパターンだけではないので、もう少しスッキリさせることはできそう。</p>
+
+<h2 id="サードパーティ-クックブック:5258afb5b5a801bdb59a35a0efcbe00e">サードパーティ・クックブック</h2>
+
+<p>サードパーティとして導入したのはさっきのiptablesと、sudoの2つ。</p>
+
+<p><a href="https://github.com/opscode-cookbooks/sudo">opscode-cookbooks/sudo</a></p>
+
+<p>sudoはvisudoを<code>execute</code>で走らせるってのも怖いし、その後ファイル編集をどうやったらいいのかよくわからんなってのと、sudoresファイルをtemplateで上げるってのもちょっと怖いという感覚的な問題からサードパーティ採用とした。</p>
+
+<p>使い方としては簡単なもので、変数でsudoを許可するユーザーやグループを指定して、passwordlessとするかどうかを設定するぐらいで終わり。</p>
+
+<pre><code>  &quot;authorization&quot; : {
+    &quot;sudo&quot; : {
+      &quot;groups&quot; : [&quot;wheel&quot;],
+      &quot;passwordless&quot; : &quot;true&quot;
+    }
+  },
+</code></pre>
+
+<p>冒頭でも書いた通り、なるべくサードパーティを使わない方針で行きたいんだけど、自力でレシピを書けないor書く自信がないところは已むなく実績のあるサードパーティを使ったという感じ。まぁサードパーティと言っても結局は人の手で書かれたレシピなので、自分でchef力上げれば相応なレシピは自力で書けるはず。このあたりは結局「どこまでchef力の向上に時間を割くか」という部分とトレードオフになるのかと。</p>
+
+<h2 id="今後やりたいこと:5258afb5b5a801bdb59a35a0efcbe00e">今後やりたいこと</h2>
+
+<p>最終的にこのサーバーではRails動かしたいので、Rubyやpostgresqlのインストールを今後実装したい。あと「取りあえず動けばいいや」路線で一度作ってしまったので、もう少しメンテナンス性の高いもの、読みやすいレシピには育てたいところ。</p>
+
+<p>汎用的に誰でもどんな用途でも使えるって感じではないと思うが、とりあえずGitHubには上げてみた。秘伝のタレのようにこれをじわじわ育てていくというのは良いなぁ。Linuxの勉強をするごとにきっと強靭なレシピとなっていくのだろう。まさに「レシピ」だな、これは。</p>
+
+<p>まずは静的なページをってことで、近日中にプロフィールでも置いて公開する予定。</p>
+
+<p><a href="https://github.com/chroju/chef_web_server">https://github.com/chroju/chef_web_server</a></p>
+
+<h2 id="参考:5258afb5b5a801bdb59a35a0efcbe00e">参考</h2>
+
+<ul>
+<li><a href="http://tsuchikazu.net/vps_chef_solo/">さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog</a></li>
+<li><a href="http://ch.nicovideo.jp/dwango-engineer/blomaga/ar334285">Chef Soloと Knife Soloでの ニコニコサーバー構築 (4) ～コツ編～:dwango エンジニア ブロマガ:ドワンゴ研究開発チャンネル(ドワンゴグループのエンジニア) - ニコニコチャンネル:生活</a></li>
+<li><a href="http://d.hatena.ne.jp/ntaku/20130324/1364132658">入門Chef-Soloを片手にRailsアプリを動作させるところまでやってみた - プログラミングノート</a></li>
+<li><a href="http://m-tkg.hatenadiary.jp/entry/2013/12/12/151254">単純な環境構築を知る -Chefでiptables書き換え- - 技術いろいろ勉強メモ</a></li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/" rel="prev">Chef soloはじめの一歩</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/06/05/2014-06-05-post/" rel="next">chroju.netを開設してみた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

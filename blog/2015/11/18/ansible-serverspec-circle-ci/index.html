@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI</h1>
+      <div class="meta">
+        Nov 18, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
+
+<p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>
+
+<p><a href="https://github.com/chroju/ansible-ruby-devs">chroju/ansible-ruby-devs</a></p>
+
+<h1 id="ansibleにテストは必要か:8898f3cea5a7bf5fef79cdda3e165592">Ansibleにテストは必要か？</h1>
+
+<p>AnsibleはPlaybookに書かれた設定通りにサーバーをセッティングしてくれるツールなのだから、傍証としてのテストは必要ないし、そもそもそれはAnsibleに対する信頼の問題だという話がある。（かのオライリーのServerspec本でも「Serverspecの必要性」を状況に応じて説明した章がある）が、自分は以下の理由からAnsible実行後のテストは必要と考えている。</p>
+
+<ol>
+<li><h2 id="playbookの書き方が間違っている:8898f3cea5a7bf5fef79cdda3e165592">Playbookの書き方が間違っている</h2>
+
+<p>確かにPlaybookに書いた内容通りにサーバーは組まれるのだが、そもそもPlaybookの書き方がおかしくて、想定通りの実行結果にならない可能性はある。そのレベルであればコードレビューで気付くべきではないかという話もあるが、こういう趣味の個人開発では難しかったり、レビューで漏れがあったりというのも有り得るわけで、自動テストに任せられるならその方が確かかとは思う。</p></li>
+
+<li><h2 id="冪等性の問題:8898f3cea5a7bf5fef79cdda3e165592">冪等性の問題</h2>
+
+<p>特にshellモジュールを用いたときなどは冪等性が維持されない可能性があり、複数回の実行で想定外のサーバー状態になる可能性はある。</p></li>
+</ol>
+
+<h1 id="テストツールの選定:8898f3cea5a7bf5fef79cdda3e165592">テストツールの選定</h1>
+
+<p>普通にServerspec。Ansibleで定義したインベントリファイルやrolesをServerspecと共有してくれる<a href="http://qiita.com/volanja/items/5e97432d6b231dbb31c1">ansible_spec</a>というツールもあり、当初はこちらを使おうとしていた。が、前述した「Ansibleの書き方自体が間違っている可能性」をテストするとなると、できるだけAnsibleとテストツールは疎結合とするべきと考え、ファイルや設定は一切共有しない形でServerspecを使っている。</p>
+
+<h1 id="circle-ciの利用:8898f3cea5a7bf5fef79cdda3e165592">Circle CIの利用</h1>
+
+<p>繰り返しになるが初である。インフラエンジニアがCIをすることはまぁない（なかった）。そんな頻繁に設定を変えるわけでもなし。インフラCIが可能かつ必要となったのは、Infrastructure as Codeの台頭と、クラウドネイティブ化によりImmutableかつ極めて速いライフサイクルでサーバーインフラが更新されるようになったことによるもの。</p>
+
+<p>で、Circle CIでググってもそんなに使い方みたいな初歩的な記事は出ない。どうもCIツールの使い方なんてのはJenkins登場の頃に身につけてて当然だろって感じの扱いっぽい。実際使いながら自分なりに理解したのは「レポジトリをpushすると、それを使って自動的にテストやデプロイを回してくれる」ツールということで、Circle CIについてはこんな感じに認識してるんだがあってんのかなぁ。</p>
+
+<ul>
+<li>レポジトリの使用言語やファイル構成を見て良きに計らって勝手にテストしてくれる。</li>
+<li>もちろん自分でテストコマンドを書いてもOKで、Circle CIにやってほしいことは <code>circle.yml</code> というYAMLファイルに書いてレポジトリの第一階層に置いておく。</li>
+<li>GitHub連携を前提としており、連携したレポジトリの <code>push</code> をトリガーとして動作する。</li>
+<li>動作としてはCircle CI上でDockerコンテナ（ubuntuベース）を起動→レポジトリを <code>git clone</code> →circle.ymlを読んで実行</li>
+</ul>
+
+<h1 id="実装:8898f3cea5a7bf5fef79cdda3e165592">実装</h1>
+
+<p>実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。</p>
+
+<p><a href="http://stormcat.hatenablog.com/entry/2015/02/04/004227">CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&lt;)</a></p>
+
+<pre><code class="language-yaml">machine:
+  timezone:
+    Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
+
+  cache_directories:
+    - &quot;~/docker&quot;
+
+test:
+  override:
+    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c 'ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;&amp; cd /ansible/spec &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec'
+</code></pre>
+
+<p>この方法の肝はAnsibleとServerspecのフォルダを<code>docker run</code>の<code>-v</code>オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。</p>
+
+<p>テストにおいてはインベントリファイルも<code>site.yml</code>もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと<code>load</code>するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。</p>
+
+<p>実行結果はslackの個人チャンネルに流している。GtiHubに上げるだけで勝手にテストして結果も自動通知されるというのはとても楽しい。やれることの自由度が広すぎて夢が広がる。</p>
+
+<h1 id="つまずいた点:8898f3cea5a7bf5fef79cdda3e165592">つまずいた点</h1>
+
+<ul>
+<li>Dockerfile初挑戦につき、結構戸惑った。Ansibleでsshd_configを編集させていたのだが、コンテナにそもそもsshが入ってなくてコケたりした。</li>
+<li>Circle CIでのカレントディレクトリの扱いがわからず、しばらく <code>circle.yml</code> で指定するファイルパスに悩まされた。クローンしたレポジトリの中にいる状態で始まるっぽい？</li>
+<li><code>docker run</code> に <code>&amp;&amp;</code> 付きでコマンド渡すときに <code>/bin/sh -c</code> が必要だとしばらく気付かなかった。</li>
+<li>Dockerコンテナを <code>save</code> して <code>load</code> してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。</li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/" rel="prev">オープンソースカンファレンス2015 Tokyo/Fall行ってきた</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/12/04/docker-first-impression/" rel="next">Dockerファーストインプレッション</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2013/07/21/2013-07-21-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</h1>
+      <div class="meta">
+        Jul 21, 2013 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、まずは動かしてみることにした。購入したのは以下の本。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>各所で絶賛されているのを見かけた上、立ち読みしてみた感じでもRubyのインストールという初歩から始まっていてわかりやすそうだった。候補としてはもうひとつ、インプレスの『基礎 Ruby on Rails』もあったんだけど、ザッと見た感じでは『Railsによる〜』の方が記載が細かそうだったのでこっちを選んだ。</p>
+
+<p>さて、VPSでRuby on Railsを作るにあたり、どこまでの範囲を学べば良いのだろう。今回買った本だとおそらくはRailsとRuby、DBあたりのコーディングが内容の主なようで、インフラ側のチューニングの話なんぞは載っていなさそうだった。自分が想像するとこだとLinuxというかOSの準備、VPSであるならばOSに接続するためのSSHの使い方、ウェブに公開するのでそのあたりのセキュリティ、DBやApacheなどのアプリインストールなどなど、やることはかなりありそう。あとView側の問題として、Coffe ScriptやSCSSあたりもやんなくちゃいけないんだろうな。JavaScriptとCSSはそれなりに書いたことあるけど、せっかくだし挑戦してみたい。</p>
+
+<p>……という感じのビジョンを描いているのだが、やはり全部まともにイチからやっていたらかなりの時間が必要だと思う。とりあえず作ってみて、あとは気になったところを徐々に手をつけていく感じでやっていきたい。あと、環境構築系だとこの本が良さそうだなーと目をつけている。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>……で、『Railsによる〜』はとりあえず1章読破したのだが、まさかのここでつまずくという事件発生。つまずくのはえーよｗｗｗ</p>
+
+<p>CentOSにRVMを入れようとしたのだが、以下のコマンドが通らなかった。curlのエラーっぽいんだけど、今をもって解消できてない。一応他の方法でRVMは入ったので、しばらく保留にしとこうかと思っている。</p>
+
+<blockquote>   bash < <(curl -s [https://rvm.beginrescueend.com/install/rvm)](https://rvm.beginrescueend.com/install/rvm))</blockquote>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2013/07/20/2013-07-20-post/" rel="prev">お勉強ブログ、はじめます</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2013/07/23/2013-07-23-post/" rel="next">Kaoriya版Vimでtxtファイルの自動改行が解除できない件</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

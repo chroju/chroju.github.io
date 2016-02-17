@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Serverspecファーストインプレッション | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Serverspecファーストインプレッション</h1>
+      <div class="meta">
+        Dec 31, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。</p>
+
+<h2 id="サーバー構成の-仕様書-代わりとして:2f71ca6ad43585246ea937c7a0e168d3">サーバー構成の「仕様書」代わりとして</h2>
+
+<p>自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。</p>
+
+<p>Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。</p>
+
+<p>中には<a href="http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/">cronで監視チックに実行させている例</a>もあるようだが、それもアリかなと思う。</p>
+
+<h2 id="導入は簡単だが探求にはrubyスキル必須:2f71ca6ad43585246ea937c7a0e168d3">導入は簡単だが探求にはRubyスキル必須</h2>
+
+<p>Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。</p>
+
+<p>例えば私が初めて書いた<code>spec_helper.rb</code>はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。</p>
+
+<pre><code class="language-ruby">require 'serverspec'
+require 'yaml'
+
+properties = YAML.load_file('properties.yml')
+
+host = ENV['TARGET_HOST']
+set_property properties[host]
+
+set :backend, :exec
+</code></pre>
+
+<p>実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。</p>
+
+<p>自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。</p>
+
+<h2 id="国産ossであるアドバンテージ:2f71ca6ad43585246ea937c7a0e168d3">国産OSSであるアドバンテージ</h2>
+
+<p>Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&rsquo;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。</p>
+
+<p><a href="http://rebuild.fm/75/">Rebuild: 75: Book Driven Development (gosukenator)</a></p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg" alt="Serverspec" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Serverspec</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.12.31</div></div><div class="amazlet-detail">宮下 剛輔 <br />オライリージャパン <br />売り上げランキング: 213,793<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。<a href="https://github.com/ryotarai/infrataster">Infrataster</a>とも組み合わせられれば、よりテストの質は増しそう。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/12/14/review-team-geek/" rel="prev">『Team Geek』読了</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/" rel="next">2015年総括</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Personal Knowledge Base | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Personal Knowledge Base</h1>
+      <div class="meta">
+        Jan 24, 2016 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>昨年は転職のゴタゴタがあったりしてメモを取る習慣というものがどこかに消え失せてしまっていたので、年始にあたり生涯幾度目かわからないがメモ環境について再考している。本当に何度目だよ、と思うのだが、これはもう生涯模索しながらいくしかないし、最適解なんてのは時と場合によって変わるものだとは思う。</p>
+
+<p>しかしオライリーから『エンジニアのための時間管理術』は出ているのに、『情報整理術』が出ていないのはなぜなのか。むしろそっちが職種的に重要じゃないのか。ブログやQiitaでもあまり見かけない。</p>
+
+<h2 id="evernoteの呪縛:75a3e4d39cced19f482a87dc88309f83">Evernoteの呪縛</h2>
+
+<p>現代においてメモ、ノートというと真っ先に挙がってくるのがEvernoteであり、自分も確かに使ってはいる。使ってはいるが、正直に言って愛憎は入り混じっている。基本的には使いたくない。でも使わずにはいられなくて、ついついいろいろとぶち込んでしまう。</p>
+
+<p>Evernoteの肝は、ありとあらゆるフォーマットの資料を何でも入れることができて、それがsearchableになることにあると思っている。昨日読んだブログのエントリー。1年前に契約したサービスの証明書。3ヶ月前に読んだ本の感想。そういったものをすべて並列に保存することができ、検索すればすぐに出てくる。放っておけば消えて無くなるような情報が「死蔵」されなくなる。だから取りあえず「いいな」と思ったものがあればEvernoteに入れてしまう。特に開発終了が発表されたClearlyが自分にとってはクリーンヒットで、良いなと思った文章があれば迷わずClearlyを使っていた。ググればまた出ると言われればその通りだが、同じ検索キーワードをまた思い出せるとも限らないし、ページが消滅することだってままある。</p>
+
+<p>しかし実際に突っ込んだ情報をもう一度掘り出せるのかどうか。文字情報であれば確かに検索できるのだが、画像はどうか。音声は。またpdfは。それを防ぐためか、ノートブックやタグ付けという能動的な整理手法も用意されているわけだが、次々と投げ込んだ資料を1つずつ分類していくのは骨が折れるし、メールクライアントにあるようなオートフィルタリングはいまだにできない（サードパーティーのアプリならあるけど）。また実際に検索をかけたときも、ノートの読み込み速度はそれほど速いものではなく、特にモバイルアプリに関してはどうにもストレスフルだ。</p>
+
+<p>結果的に何でも入れられるがサルベージが難しいゴミ箱、あれば安心感があるので離れられないけど、積極的に何か活用していこうとは思えない存在と化してきている。</p>
+
+<h2 id="何をメモするのか:75a3e4d39cced19f482a87dc88309f83">何をメモするのか</h2>
+
+<p>そもそも何をそんなに悩むほどメモしたいのか。改めて考えるとよくわからないなぁで思考が停まりそうになったが、いくつか挙げてみる。</p>
+
+<ul>
+<li>Tech関連でも日常の中の疑問でもそうだが、ググるのは簡単だがその知識はすぐ忘れてしまう。どこからどんな情報を得て、どんな結論に至ったのかは書き留めておきたい。</li>
+<li>スニペットやチートシート。頭悪いのでコマンドや文法をすぐ参照できるようにしておきたい。</li>
+<li>読書メモ。簡単な本の概要、感想、それを受けて何を実践するのか。</li>
+<li>ポエム。客観的な事実や資料より感情より、主観よりのもの。課題に関する考えとか哲学とか。</li>
+<li>チェックリスト。日常の指針になるような。定例作業の手順もそうだし、持ち物リスト、忘れがちなポリシー的なものとか。</li>
+</ul>
+
+<p>こうして挙げてみると参照頻度、パブリックorプライベートといった軸で分類できそうな気がしてくる。またそれによって選ぶべきツールも変わりそうだ。例えばEvernoteは先に書いた通り遅い、分類が面倒という特徴を自分は見出しているが、逆にそれほど素早く引き出す必要のないもの、つまり参照頻度が低い「もしものためのメモ」などであればEvernoteでも構わないことになる。</p>
+
+<p>スニペットやチートシートは本当に秒で出てきて欲しいし、シンタックスハイライトが効いてないと辛いみたいなところがあったりもするので、Evernoteには向かないことになる。この目的だと自分の中ではGistやKobitoが最近のヒットではある。</p>
+
+<p>思うに、Evernoteや梅棹忠夫先生が掲げるような「すべてのメモを一箇所に集める」というのはちょっと厳しいのではないか。目的の違うメモであれば、適切なフォーマットも自ずと変わってくる。もちろん分散していろんなところにメモがある状況というのはわかりにくくはあるが、目的がはっきり定まっていればツールの選択に迷うことはない。自分はEvernoteにスニペットを格納したことはないし、日常生活で使うチェックリストをGistのPublicで保存したこともない。</p>
+
+<h2 id="personal-knowledge-base:75a3e4d39cced19f482a87dc88309f83">Personal Knowledge Base</h2>
+
+<p>ここでようやくタイトル回収するのだけど、海外ではこの手のツールをPersonal Knowledge Base(PKB)と呼ぶらしい。<a href="https://en.wikipedia.org/wiki/Personal_knowledge_base">Wikipediaの記述</a>の細かさを見ると、国内よりはだいぶホットな話題っぽく思われる。いろいろこのワードでググッてみたのだが、今のところうなずけたのは以下のあたり。</p>
+
+<ul>
+<li><a href="http://www.acuriousmix.com/2014/09/03/designing-a-personal-knowledgebase/">Designing a Personal Knowledgebase – A Curious Mix</a></li>
+<li><a href="https://news.ycombinator.com/item?id=8270759">Designing a Personal Knowledgebase | Hacker News</a></li>
+<li><a href="http://programmers.stackexchange.com/questions/729/how-do-you-manage-your-knowledge-base">How do you manage your knowledge base? - Programmers Stack Exchange</a></li>
+</ul>
+
+<p>特に一番上の記事はだいぶ熱い。俺の理想とするPKBはこんなのだ！！！ってめっちゃ細かく書いているが、わりと同意できる内容ではあった。下2つのフォーラム系の記事を見ると、案外多いのが個人Wikiを使っている人。確かにフレキシブルな編集が可能という点では、2016年現在に至ってもWikiの優位性はかなり高い気がする。でもさすがに今更感あるなーということで手を出す気にはなれない。あるいはorg-modeが結構評判よくて、Vimmerじゃなければ手を出していたようには思う。</p>
+
+<p>PKBの定義に関してはWikipediaの記事にあるが、情報の一次ソースそのものではなくて、そこから得られた知識をまとめるものということ。</p>
+
+<blockquote>
+<p>Its purpose is not simply to aggregate all the information sources one has seen, but to preserve the knowledge that one has learned from those sources.</p>
+</blockquote>
+
+<p>これについては深く同意するところで、情報そのものなら別に本自体とかウェブページを直接見たりとかすればいいんだけど、それら複数の資料から自分なりに導いた知識、学習結果というものをまとめておきたいのだ。そう考えてみると、Qiitaに特にそういう内容は多く書いているし、一次ソースに関してはウェブクリップなり、本のページを撮影したものなりをEvernoteに入れているので、やっぱりツールの棲み分けになってくるのかなぁと思えてくる。ちなみに一次ソースにあたる情報をまとめたものはPIM(Personal Information Management)と言うらしい。</p>
+
+<h2 id="結論:75a3e4d39cced19f482a87dc88309f83">結論？</h2>
+
+<p>書いていけば結論見えるかなと思ってここまで書いてみたが、なかなか見えてこない。結局のところ自分の中ではGistが一番近くはある。Gistboxを使えばタグ分類ができるし、<a href="https://github.com/lambdalisue/vim-gista">vim-gista</a>を使うことでVimキーバインドでの編集もできる。コードハイライトもMarkdownのプレビューも出来て至れり尽くせり。引っかかるのは非techなメモを入れるのがGitHubである故に心理的に憚られるなぁというのと、モバイル端末からの閲覧にあまりいいツールがないこと。</p>
+
+<p>んで一方で公開したい情報はこうやってブログにまとめたり、Qiitaにまとめたりもしているので、そこの分断も若干もどかしい。さっきツールは分けるしかないかもと言っておいてアレだが。ちなみにブログはこういう文章過多な場合、いわばポエムだとかツール、技術に関する考察をまとめる場、Qiitaはよりtechそのものに寄ったものを書く場と使い分けている。こういったところで公開共有するほどでもねーやってものはGistかなと。あんまりにも初歩的な内容とかQiitaに流すの憚られるじゃないですか。タグで追ってる人には必ず見られるわけだから。</p>
+
+<p>Evernoteに関しては、結局一次ソースにあたる情報を端からブチ込んで安心感を得るツールとしては今後も使い続けそう。しかしClearlyがなくなるのが本当につらい。Web Clipperのあの鈍重な動きは「何も考えずとりあえずクリップ」するにはちょっと抵抗ある。仕方ないか。しかしウェブクリップというのもどこまで意味のあるものやら。。その後情報が更新されても追えなくなるわけだし。</p>
+
+<p>何はともあれ、とりあえず「記録残せ」から始めなくてはと思う。悩んで結論出ないから記録しないみたいな状態が続くのが一番よろしくない。悩みながらも進めていくしかないんだろうな。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/" rel="prev">東京Node学園付属小学校1限目に行ってきた</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/" rel="next">Ops JAWS#3に行ってきた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    tmuxをなんとなく使ってたのできちんと使うようにしてみた | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/07/20/2014-07-20-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>tmuxをなんとなく使ってたのできちんと使うようにしてみた</h1>
+      <div class="meta">
+        Jul 20, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。</p>
+
+<h2 id="tmuxとは:8bdba3883e970ce583911c0d346f93a6">tmuxとは</h2>
+
+<p>たーみなるまるちぷれくさー。ターミナル操作が便利になる系の、まぁ今更自分が説明する必要はないですね。せいぜいVagrantとVPSいじりながらローカルでもVim開くみたいなことしかやってないので宝の持ち腐れ感はハンパねーですが、とりあえず知っといた方がいいやってのとなんとなくカッコいいっていう理由だけで使ってる。</p>
+
+<p>なお、インストール自体はだいぶ前に実行したのでやり方忘れた。たしかHomebrewで入れられたと思う。</p>
+
+<h2 id="tmux-conf:8bdba3883e970ce583911c0d346f93a6">.tmux.conf</h2>
+
+<p>ルートディレクトリ上に生成される設定ファイル。tmuxに関する設定は基本的にここに書く。</p>
+
+<script src="https://gist.github.com/705c90c240abe035a98e.js"> </script>
+
+<p>自分の設定ファイルを張ってみたけど、よく見られる設定の寄せ集めだとは思う。tmuxはなんかESCキーの反応が悪いらしく、その調整用の設定。ペイン分割したときに各ペインごとでマウススクロールができるようにする設定。文字コードの設定。色の設定。これは上手くやればもうちょっと見やすくなるんだろうなとは思ってるけど、面倒なので半端なとこで終えている感がある。カラーパレット見て色名探してみたいのめんどいよぉ。</p>
+
+<p>あとキーバインド。デフォルトのプレフィックスが<code>C-b</code>なんだけど、使いづらいので<code>C-z</code>に当て替えてる。他にやってるのは.tmux.confをすぐ読み込むための設定と、ペイン移動や分割のショートカット、あとはウィンドウやセッションのkill。</p>
+
+<p>コピーモードについてはよくあるviライクなキーバインドが使えるってやつをそのまま使っている。コピーモードに入るときのデフォルトキーが<code>[</code>なのが気に食わんので、これも<code>y</code>に変更してある。でもよく考えたら<code>v</code>の方が相応しいなこれ。。。</p>
+
+<h2 id="powerline:8bdba3883e970ce583911c0d346f93a6">powerline</h2>
+
+<p>残りはpowerlineに関しての設定。ステータスラインがカッコよくなります的なやつ。これも入れ方忘れたけど、<a href="https://github.com/erikw/tmux-powerline">公式のREADME</a>によれば<code>git clone</code>するみたい。</p>
+
+<p>これ、入れたはいいけど天気とか上手いことでなくてしばらく放置していた。今回改めて先のREADME読んでみたところ、GNU grepが要るみたいで、インストールしてgrepコマンドを置き換えたら上手くいった。やっぱりREADMEはちゃんと読むべき。自戒。他にもCPUとメモリ使用状況のグラフィカルな表示のためには<a href="https://github.com/thewtex/tmux-mem-cpu-load">thewtex/tmux-mem-cpu-load</a>が必要だったりする。</p>
+
+<p>設定は主に3ファイルを用いる。</p>
+
+<ul>
+<li>~/.tmux.conf</li>
+<li>~/tmux-powerline/themes/default.sh</li>
+<li>~/.tmux-powerlinerc</li>
+</ul>
+
+<p>まず.tmux.confにpowerlineを使うってことを宣言しなくては使えない。先の.tmux.confで言えば一番下の方の設定。上からステータスラインを表示する設定、更新インターバルの設定、UTF-8の使用設定、ウィンドウリストを左側に配置（これは好みによってcenterにする人もいるみたい）、ステータスラインの長さの設定。で、最後の2行で<code>powerline.sh</code>を読み込ませている。</p>
+
+<p>実際にpowerlineに何を表示させるか、という設定は~/tmux-powerline/themes/default.shを変更して行う。</p>
+
+<script src="https://gist.github.com/bd1d33a4cb73807e6f22.js"> </script>
+
+<p>デフォルトで表示できるものについてはすでに入っているので、これをコメントアウトしたりして好きなものを表示できるよう変える。各.shの後ろについている数字は表示部分の文字色と背景色。<code>~/tmux-powerline/color_palette.sh</code>を実行すると、設定できる色と色名の一覧が表示できるので、これを使って設定する。まぁ、おこのみで。あと各表示部分の境界をカッコいい感じにするための設定が入ってたりするが、このへんはググれば出てくるので割愛（適当）。なお、default.shを直接触りたくない場合は、コピーして名前変えて使えばOK。</p>
+
+<p>さらに、表示内容の細かな設定に.tmux-powerlinercを使う。このファイルは元々置かれていないので、<code>./tmux-powerline/generate_rc.sh</code>を実行して生成する。よくいじるのは天気の設定で表示する地域を入れたり、時間や日付の表記を好きに変えたりってところかと。これについてはコメントでどういじればいいのか書いてあるので、見ればわかると思う。</p>
+
+<p>tmux-powerlineについては自作のshellを使って好きな内容を表示させたりもできるようだけど、現状そこまでの情熱は傾けていない。</p>
+
+<h2 id="tmuxinator:8bdba3883e970ce583911c0d346f93a6">tmuxinator</h2>
+
+<p>tmuxを立ち上げたあと、ペイン分割をいちいち手でやるのが手間なので、自動化しちゃいましょうというツール。単に分割するだけではなく、各ペインでコマンド実行させることもできるので、例えば最初からVim開いておいたりディレクトリ変えておいたり<code>git pull</code>させておいたりとか、いろいろできる。工夫次第。自分は今のところよく使っていたペイン分割を自動化させることしかしていない。以下のページが大変わかりやすかった。</p>
+
+<p><a href="http://tactosh.com/2014/01/tmux-window-pane-tmuxinator/">tmuxのwindow, pane設定を一発で再現できるtmuxinatorが便利 | TACTOSH</a></p>
+
+<p>以上、超適当かつ簡潔なまとめでした。まぁ、あまりにもこの分野は先駆者が多いので。。</p>
+
+<p><strong>参考</strong></p>
+
+<ul>
+<li><a href="http://kanjuku-tomato.blogspot.jp/2014/02/tmux.html">tmuxを使い始めたので基本的な機能の使い方とかを整理してみた - 完熟トマト</a></li>
+<li><a href="http://qiita.com/syui/items/dc509f208b464838b948">tmux-powerline - Qiita</a></li>
+<li><a href="http://saku-na63.hatenablog.com/entry/2013/10/13/223010">tmux-powerlineを使う - memo63</a></li>
+<li><a href="http://qiita.com/naoty_k/items/869b00fdde27c2225989">Ruby - tmuxinatorで一瞬で開発環境を起動する - Qiita</a></li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/06/05/2014-06-05-post/" rel="prev">chroju.netを開設してみた</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/08/10/2014-08-10-post/" rel="next">何を勉強したらいいのかわからなくなってきた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

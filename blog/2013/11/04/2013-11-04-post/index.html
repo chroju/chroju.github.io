@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2013/11/04/2013-11-04-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい</h1>
+      <div class="meta">
+        Nov 4, 2013 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>Rails入門の定番書。このブログで何度か読んでいる途中経過を報告してきたか、ようやく読み終えることができた。読了というか、読み終わったのはもうだいぶ前ではあるんだけど。しかし予定していた以上に時間をかけてしまった。。。最初は写経しながら読んでいたのだが、どうにも時間がかかりすぎてイライラしていて、途中からはザーッとRailsの概略を掴むためだけのような読み方になってしまった。写経した方がやっぱり頭には入ると思うのだけど、それでサンプルアプリを作ったところで、応用してすぐ自分のアプリを作れるとは限らなくて、なんとももどかしい。結果としてはまだ消化しきれてなくて、行ったり来たり読み返しながら自分なりにアプリを作り始めているのが今の段階。</p>
+
+<p>この本は表題通り、架空のアジャイル開発案件を進めるかのように、徐々にRailsアプリを作る過程をなぞっていくことで、Railsで出来ること、Railsでアプリを作ることを教える構成を取っている。なので実践的でわかりやすい反面、解説なしにいきなりソースを提示されたりもするので「なぜこういうコードで動くのか？」が掴みにくいことも少なくなかった。アプリの完成まで読み進めると、その後に「Rails詳説」としてRailsの規約やらフレームワークを解説するページが現れるのだが、個人的には正直逆の構成の方が掴みやすい。あるいはアジャイル開発を1段階進めていくごとに、そこで書いたソースの詳細な解説を挟むようにしてほしい。</p>
+
+<p>というのも、Railsはコードを省略したり、フレームワークによって自動生成されたりするものが非常に多い。だから初見ではどこまで書けば良いのか、どこからオートで作り上げてくれるのか、感覚が掴めないのだ。俺はウェブアプリケーションとしては初歩的なJavaアプリの経験しかないのだが、それと比べてRailsのアプリ構築は遥かに簡単な印象を受ける。正確に言えば、自分で書かなくてはならない部分が少ない。しかしそれ故に、手で書かなかった部分がどう動いているのかがわかりづらく、技術を手中に収めた感覚がない。Javaのウェブアプリはプラグインなどを使わない限りは「書いたものが動く」感覚だったので、手とアプリが連動しているという錯覚があった。</p>
+
+<p>本書のような「実際に作る過程を見せる」という技術書は世の中に数多くあるし、基本的にはその方が「わかりやすい」本になるのだと思う。が、ことRailsに関しては作る前に「Railsは何を成してくれるのか」を解説してくれる本が必要なんじゃないかと。もちろん、本書においては「Rails詳説」の章がその役割を果たしているわけで、もう少し読み込まないとRailsをモノには出来そうにない。</p>
+
+<p>次の本としては、これまた定番であるレシピブックを買った。これとRails詳説を片手に、Railsがどう動くのか？を学びながら、まずはローカル環境でアプリを作ってみる。外観まで含め、年内にきちんと形になるところまで持っていきたい。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41Tnr3W6b0L._SL160_.jpg" alt="Rails3レシピブック 190の技" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Rails3レシピブック 190の技</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">高橋 征義 松田 明 諸橋 恭介 <br />ソフトバンククリエイティブ <br />売り上げランキング: 57,121<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2013/10/20/2013-10-20-post/" rel="prev">短時間に限定して図書館で情報をザッピングするという勉強法</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2013/11/10/2013-11-10-post/" rel="next">GTD環境 2013年秋版</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

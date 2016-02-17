@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>情報タスク管理 on the world as code</title>
+    <link>http://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 情報タスク管理 on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 29 Apr 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>GTD環境 2015年春版（Workflowy最強説）</title>
+      <link>http://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</link>
+      <pubDate>Wed, 29 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</guid>
+      <description>
+
+&lt;p&gt;GTDという言葉もなんだか多義的に使われているような気がするが、自分の場合は「今あるタスクを『高度』の概念から見直して、きちんと前に進むことができているか確認すること」と、「やるべきことが全部可視化されていること」に重点を置いている。&lt;/p&gt;
+
+&lt;p&gt;前回GTD関連をきちんとまとめ直したのはどうも&lt;a href=&#34;http://chroju.github.io/blog/2013/11/10/post/&#34;&gt;この記事&lt;/a&gt;のようなのだが、さすがに古くてここからだいぶ変わっている。とかく面倒であるということが中心にあって、使うツールは少なければ少ない方がよいし、完全に管理しようとするよりもある程度割り切ってしまった方が上手く回る。現時点で使っているのはほとんどGoogle Calendarと&lt;a href=&#34;https://workflowy.com/&#34;&gt;Workflowy&lt;/a&gt;だけだ。特にWorkflowyにはだいぶ助けられている感がある。&lt;/p&gt;
+
+&lt;h2 id=&#34;workflowy:08c561d3ac15e365fea18887991b6fd7&#34;&gt;Workflowy&lt;/h2&gt;
+
+&lt;p&gt;オンラインのアウトライナーツールである。そんなのVimでいいんじゃねーかと思ったこともあったが、わりと使い勝手が良くて使い続けている。ポイントとしてはショートカットがかなり豊富で、TabやShift + Tabでインデント／アウトデントできるなんてのはもちろん、Ctrl + Enterで取り消し線引けたり、階層の折りたたみもできたりと、キーボードだけでほとんどの操作が完結できる点にある。あと貧相ではあるがiPadアプリとAndroidアプリがあるのでモバイル環境でも使えるし、@hogeとか#fugaって形式でタグを生成して絞込かけたりもできる。タグで絞り込んだ状態や一部階層だけを表示した状態にはそれぞれパーマリンクが与えられるから、アクセスも楽でよい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.flickr.com/photos/chroju/17114714740&#34; title=&#34;2015-04-29blog by chroju, on Flickr&#34;&gt;&lt;img src=&#34;https://farm8.staticflickr.com/7700/17114714740_7849a4f7cc.jpg&#34; width=&#34;424&#34; height=&#34;500&#34; alt=&#34;2015-04-29blog&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;自分がこれを何に使っているかと言えば、ほぼGTDの全部と言っていい。各高度の可視化、PJ（高度1000mにあたる）ごとの手順、細切れのタスク、などなど。GTDというのは単なるタスク管理の手法ではなく、高度のような文章化される内容まで管理しなくてはならなかったり、あるいは単純にタスクだけを目にするのではなくて、マイルールとか目標といったものも一度に管理したいなという思いもあったので、結果的にいわゆるタスク管理系のソフトを捨ててWorkflowyに辿り着いた。アウトライナーなのでフォーマットは自由だが、階層化できるので高度ごと、ジャンルごとなどでまとまった意味単位を作りやすいし、取り消し線機能を使えばタスク管理っぽいこともできる。フットワーク軽く使えるという点でこれはだいぶ重宝する。&lt;/p&gt;
+
+&lt;p&gt;あとWorkflowyでは1日の更新差分をメールで転送してくれる機能があって、これ使ってEvernoteに差分を貯めこんでいる。週次レビューでその週にやったことを見直すときに便利。&lt;/p&gt;
+
+&lt;h2 id=&#34;google-calendar:08c561d3ac15e365fea18887991b6fd7&#34;&gt;Google Calendar&lt;/h2&gt;
+
+&lt;p&gt;いわずもがなのカレンダー。これ以外にクラウドのカレンダーツールって選択肢あんのかもわからないぐらいのデファクトスタンダード。ただWeb版の使い勝手はあまり良いとは思えていなくて、代わりに&lt;a href=&#34;https://calendar.sunrise.am/&#34;&gt;Sunrise Calendar&lt;/a&gt;を使っている。予定を追加するとき、Google Calendarみたいに別画面へ遷移することなく、バルーン上ですべての項目を登録できるあたりがお気に入り。あと全体的に使われている色の彩度が低めで見やすい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.flickr.com/photos/chroju/17094816017&#34; title=&#34;2015-04-29blog2 by chroju, on Flickr&#34;&gt;&lt;img src=&#34;https://farm9.staticflickr.com/8703/17094816017_e1bb19b134.jpg&#34; width=&#34;474&#34; height=&#34;500&#34; alt=&#34;2015-04-29blog2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;時間の決まったタスクだとか、繰り返しやることなんかはすべてGoogle Calendar行きである。あとWorkflowy上で記録しているタスクでも、今日やれそうだ、明日やれるかなと思ったらGoogle Calendarにツッコんでリマインダーかけている。スマホだと予定確認には&lt;a href=&#34;https://play.google.com/store/apps/details?id=com.anydo.cal&amp;amp;hl=ja&#34;&gt;Cal&lt;/a&gt;を使っているので、リマインダーについてもピックアップしてくれて忘れにくい。ちなみにCalを使っている理由は、スマホでカレンダー見るときは先々の予定を考えるときより、その日の予定とタスクを確認するときの方が多かったから、CalのUIがしっくり来たってことです。というかスマホの小さい画面だと月間予定とか見るのはしんどい。&lt;/p&gt;
+
+&lt;h2 id=&#34;回し方:08c561d3ac15e365fea18887991b6fd7&#34;&gt;回し方&lt;/h2&gt;
+
+&lt;p&gt;基本的にはこれらのツールを使って週単位でタスクを回している。1週間終えた金曜日の夜に週次レビュータイムを設けていて、さっき書いたWorkflowyの差分やらモレスキンやDropboxに溜め込んだメモを下に、KPTで週を振り返る。で、終わったタスクはWorkflowyから消して、予定見ながら空いている時間を確認しつつ、次週やることをNext Actionとしてピックアップする。長期間進んでいないプロジェクトなどがあれば要チェック。塩漬けのタスクがあれば「やる必要があるのか」再検討。週の行動目標をタスクとは別に何かしら定めてWorkflowyに記入。まぁ、そんな感じです。&lt;/p&gt;
+
+&lt;p&gt;問題点として、だいたい毎週進歩がないというか似たようなProblemが出てきちゃってるなぁというのが最近あるので、Tryにあたる内容はちゃんとタスクに落としこむことと、無理なくスモールスタートにできる範囲にしといた方がいいってことです。GTDは確かにやること、頭の中を可視化はしてくれるけど、結局それを進めていくのは自分だってことを忘れちゃいけないので。というか、そこがGTDで一番キモだし難しいところなんじゃないかなと思っている。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>『エンジニアのための時間管理術』読了</title>
+      <link>http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</link>
+      <pubDate>Sat, 07 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</guid>
+      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51jWtxU0sAL._SL160_.jpg&#34; alt=&#34;エンジニアのための時間管理術&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;エンジニアのための時間管理術&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.07&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Thomas A. Limoncelli &lt;br /&gt;オライリー・ジャパン &lt;br /&gt;売り上げランキング: 12,858&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873113075/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;先日のデブサミでオライリーの書籍販売があったわけですけど、5000円以上購入でトートバッグプレゼントというのに釣られて買った1冊です。本当は2冊で5000円届くはずだったんだけど、そのときはディスカウントがあったばかりに5000円に届かず3冊という、得したんだか買いすぎちゃったんだかよくわからない感じでした。まぁ、前々から気になって立ち読みしまくってた1冊なので、買うきっかけくれたことには感謝。&lt;/p&gt;
+
+&lt;p&gt;内容はGTDとか散々やってきてる自分にとってそれほど新鮮味のあるものではありませんでした。煩わしいタイムマネジメントに関することは全部頭の中から放り出して、その日のタスク、スケジュール、目標なんかはひとつの場所にまとめておこうねっていうのが全体の趣旨です。あとはエンジニアならではなのかな？と思えることとして、手順の文書化の話だったり、スクリプトによる雑事の自動化周りの話がちょっぴり載ってたりはします。&lt;/p&gt;
+
+&lt;p&gt;本書内ではタイムマネジメントに使う媒体（デジタルでもアナログでもなんでもいいけど、とりあえず何かしら「1か所」にまとめる）のことをオーガナイザーと読んでいるのですが、そこに書くことは大きく3つあり、1つは365日のタスク。GTDをはじめ、よく聞かれるタスク管理法だと「やるべきこと」は全部1つのリストにドバっと書き出していることが多いわけだけど、本書ではそういう「永遠に終わらないリスト」は「破滅のリスト」と呼んで回避するよう告げている。タスクリストを1日分でクローズドにすることで、その日にやったことを明示的にリスト内で「潰せる」ようにし、達成感を味わえるようにした方がよいと。2つ目はカレンダー。日時の決まった予定だとか、繰り返しのルーチンはカレンダーに書いちゃった方が早い。3つ目が長期的な目標。月単位や年単位の長いスパンで何を実現したいのか？を書き出しておく。その手順は細かく分割した上で、365日のタスクリストや、カレンダー上に載ることになる。そして目標リストは定期的に見直して、更新していく。&lt;/p&gt;
+
+&lt;p&gt;自分が今やってることとこれ、わりとよく似ていて。自分の場合、スケジュールがGoogle Calendarで、タスクリストはAny.do。以前todo.txtを使っているという記事を書いたこともあるのだけど、最近乗り換えてしまった。なぜかと言うとスマホアプリのCalを使うと、1日のGCal上の予定とAny.doのタスクがまとめて見られてすんごい楽だから。&lt;/p&gt;
+
+&lt;div id=&#34;appreach-box&#34; style=&#34;text-align:left;&#34;&gt;
+    &lt;img id=&#34;appreach-image&#34; src=&#34;http://a512.phobos.apple.com/us/r30/Purple6/v4/78/bb/1d/78bb1d61-0262-76c4-2edb-f421111365d4/mzl.fxvayqgf.png&#34; alt=&#34;Cal – Calendar for iCloud, Google &amp;amp;amp; Exchange&#34; style=&#34;float:left; margin:10px; width:25%; max-width:120px; border-radius:10%;&#34; pagespeed_url_hash=&#34;248610482&#34;&gt;
+    &lt;div class=&#34;appreach-info&#34; style=&#34;margin: 10px;&#34;&gt;
+      &lt;div id=&#34;appreach-appname&#34;&gt;Cal – Calendar for iCloud, Google &amp;amp; Exchange&lt;/div&gt;
+      &lt;div id=&#34;appreach-developer&#34; style=&#34;font-size:80%; display:inline-block; _display:inline;&#34;&gt;
+        開発元:&lt;a id=&#34;appreach-developerurl&#34; href=&#34;https://itunes.apple.com/jp/artist/halo-inc./id499497834?uo=4&#34; target=&#34;_blank&#34; rel=&#34;nofollow&#34;&gt;Any.DO&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div id=&#34;appreach-price&#34; style=&#34;font-size:80%; display:inline-block; _display:inline;&#34;&gt;無料&lt;/div&gt;
+      &lt;div class=&#34;appreach-powered&#34; style=&#34;font-size:80%; display:inline-block; _display:inline;&#34;&gt;
+        posted with &lt;a href=&#34;http://appreach.t-tu.com/&#34; title=&#34;アプリーチ&#34; target=&#34;_blank&#34; rel=&#34;nofollow&#34;&gt;アプリーチ&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;br&gt;
+      &lt;div class=&#34;appreach-links&#34; style=&#34;float:left;&#34;&gt;
+        &lt;div id=&#34;appreach-itunes-link&#34; style=&#34;display: inline-block; _display: inline;&#34;&gt;
+          &lt;a id=&#34;appreach-itunes&#34; href=&#34;https://itunes.apple.com/jp/app/cal-calendar-for-icloud-google/id648287824?mt=8&amp;amp;uo=4&amp;amp;at=11lHd9&#34; target=&#34;_blank&#34; rel=&#34;nofollow&#34;&gt;
+           &lt;img src=&#34;http://appreach.t-tu.com/img/itune_en.png.pagespeed.ce.8asOsm0ta-.png&#34; style=&#34;height:40px;&#34; pagespeed_url_hash=&#34;1074815294&#34;&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div id=&#34;appreach-gplay-link&#34; style=&#34;display:inline-block; _display:inline;&#34;&gt;
+          &lt;a id=&#34;appreach-gplay&#34; href=&#34;https://play.google.com/store/apps/details?id=com.anydo.cal&#34; target=&#34;_blank&#34; rel=&#34;nofollow&#34;&gt;
+           &lt;img src=&#34;http://appreach.t-tu.com/img/gplay_en.png.pagespeed.ce.1AAXzseXga.png&#34; style=&#34;height:40px;&#34; pagespeed_url_hash=&#34;45329112&#34;&gt;
+           &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;appreach-footer&#34; style=&#34;margin-bottom:10px; clear: left;&#34;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;GTDが唄うような「すべてのタスクが網羅されたリスト」ってのはあまりに雑多で自分も嫌いで、なのでAny.doの中身は週に一度見直して、その週にやることを「TODAY」として扱うようにしている。日次リストが本当は理想なのだろうけど、残業も少なくない中で日次でできるタスクなんざたかが知れているので週次がちょうどいい。今日できなくても明日やればいい、みたいな調整もわりと楽に出来るし。&lt;/p&gt;
+
+&lt;p&gt;長期的なやりたいこととか取り組んでいることはプレーンテキストで残している。タスク管理アプリのカテゴリー機能などを使う人も多いようだけど、長期的な取り組みはだいたいがその途上で疑問が湧いてきたり、参考URLなぞを書きたくなるもので。だから柔軟なフォーマットで記録しておきたいなという思いが強く、今はプレーンテキストを使っている。&lt;/p&gt;
+
+&lt;p&gt;だいたいこれで上手く回ってるかなーと思ってはいるのだが、気にかかっていることが2つだけある。1つはルーチンの扱い。そのほとんどが家事ではあるのだが、定期的にやらなきゃならんことって案外多くて、Google calendarに全部記録するとなかなかにとんでもない量になって嫌気が差す。かといって他のリストを使うというのもあまり効率的には思えないので、現状は「日次タスク」というような大きな予定枠を取っておき、メモ欄にその内容を細かに書く、といった運用になっている。もうちょっとスマートにならぬものか。あとルーチンって定期的に決まったタイミングでやるもののみならず、普段はやらないけどたまに思い出さなくちゃならないよね！みたいなものもあって、そういうのまで「決まった日時に繰り返す」としてカレンダーに入れちゃうとちょっとしんどいなぁと思える。でも、そうした方が忘れずに済むのだろうなぁとも思うから、なるたけ割り切るようにしている。&lt;/p&gt;
+
+&lt;p&gt;もう1つ気にかかっているのは、クローズしたタスクや、長期的な取り組みの進捗はきちんと記録を残したいなということ。例えるなら&lt;a href=&#34;http://shigotano.info/mbr/taskchute2/paypal.php&#34;&gt;TaskChute&lt;/a&gt;。自分はこれを仕事で使っているのだが、完了したタスクは取り消し線を引いた上できちんと残るようになってて、今週どのPJに多くの時間を割いたのかとか、そういやあのタスクいつやったっけ、みたいなのを後から振り返れるようになっている。これをAny.doや、プレーンテキストによる長期タスク管理の中でも回したい。進んでいる感覚を持ちたい。暫定的には週次レビューでタスクの棚卸しをするとき、その週のやったことリストを残すことで運用している。自分が何かをやったんだ、前に進んでいるんだという実感を持つことはすごく大事。なんとなく頭の中がもやっとしてるときに、達成記録を読むとちょっとホッとするし、逆に最近取り組んでいない領域があると、ああやらなきゃなって思える。&lt;/p&gt;
+
+&lt;p&gt;んで、書評じゃなくて自分のタスク管理の話になってしまったが、毎日のライフサイクルをエンジニアリングするという思想は今後も重視していきたいなと思う。もうずっと迷いながら、やり方を模索しながらなのでときに嫌になったりはするのだけど、エンジニアリングすること自体が楽しくもあるし、それが「システム」である限りは常に保守運用は必要だよなとも思っている。とりあえず中心に置いている考え方は、「ルーチンを確実に回し、タスクを効率的に処理して、やりたいことをやる時間を増やす」こと。ここだけブレなければ大丈夫かなと思っている。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ブログ書けてない不安</title>
+      <link>http://chroju.github.io/blog/2014/11/10/2014-11-10-post/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/11/10/2014-11-10-post/</guid>
+      <description>&lt;p&gt;インプットに対してアウトプットの量が少ないなと前から思っている。ブログを書いてるとアウトプットの履歴が残るから「アウトプットしてない」時期が明確にわかり、それを見て不安になったりもするんだけど、結局書けてない、ということが続く。&lt;/p&gt;
+
+&lt;p&gt;何かコーディングするときや構築するとき、わからないことがあるとついついググって探して実装して、そのままにしてしまうことが多いんだけど、これだと一過性で終わってしまって、結局記憶に残らず終わったりする。せめてはてブしたりEvernoteにクリッピングしたり、ぐらいはするときもあるのだが、これはこれでクリップしたまま記憶の底に埋もれていくので、やっぱり身になった気がしない。きちんと知識の定着を図るなら、何度も繰り返し試してみるか、インプットした内容を頭の中で咀嚼して、その経緯を自分なりにアウトプットし直すのが一番いい。&lt;/p&gt;
+
+&lt;p&gt;なんで書けないのか？というと怠惰という理由が最も強いように思う。特に壁にぶつかったときは山のようにググって比較検討して答えを見つけようとしてしまうから、結局どのページを見て正答に至ったのかが曖昧になったりしやすい。まずは公式ドキュメントにあたるだとか、試行錯誤した結果でさえ一つ一つ丁寧にログを残すだとか、そういうことをできていない。&lt;/p&gt;
+
+&lt;p&gt;ちなみにメモツールとしてはアナログだとモレスキンのラージ、デジタルだとVimプラギンのQfixHowmを主に使っている。QfixHowmを使っているのは正確にはプライベーとのPC上だけで、要はDropboxにプレーンテキストでメモを書き溜めている形になる。アナログについては、先月までは常に1日1ページ手帳のEDITを携えてメモ代わりに使っていたんだけど、ページが足りなくなることも多かったし、そもそもスケジュール管理はGoogle Calendarに全部移行していたので、もう手帳を持つ意味もないなと思い、自由度の高いモレスキンに変えた。職場の関係でDropboxは使えないし、ノートPCを叩きながら打ち合わせに臨むのも好ましいとされていないので、アナログのメモはどうしても捨てられずにいる。あと思考を巡らせるときなんかには自由度の高いフォーマットの方が好ましくて、iPad miniにタッチペンとか使うよりも広めのノートの方が脳と手が直結しやすくて楽。&lt;/p&gt;
+
+&lt;p&gt;基本的にはこれらに「なんでも書く」方針でいるのだが、散漫な思いつきなどは書けていても、本を読んだり勉強しながら書く習慣がない。tmux開いてコーディングして、ウィンドウを切り替えてメモしてという手順を踏めばいいはずなんだけど、ついつい怠ってしまう。プログラマーの三大美徳に「怠惰」が含まれてはいるが、究極の怠惰は生産性を持たないものだと思う。&lt;/p&gt;
+
+&lt;p&gt;書くためにどうしたらいいのか？という問いに対する答えは自分でもまだ見出だせていない。こういうのはもう性格レベルの問題なので、「意識する」とかそういう類の対策じゃなんの意味もなくて、もっと根本的にメモせざるを得ない状況を生み出すしかないのだと思う。あるいはメモの効用をより強く自覚すること。怠惰とはいえ、本当に必要だと思っていることはそれなりにこなせてはいるので、メモを書いてないことで痛い目見るような経験がもっと増えれば変わるような気はする。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>自分のことを「ペルソナ」から見返してみる</title>
+      <link>http://chroju.github.io/blog/2014/05/06/2014-05-06-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/05/06/2014-05-06-post/</guid>
+      <description>&lt;p&gt;自分の状況を客観的に評価する（タスク、財務管理、スケジュール管理など）とき、「ペルソナ」を考え方として導入するとわりと捗ることに最近気付いた。&lt;/p&gt;
+
+&lt;p&gt;このご時世、人格が一面的という方はあまりいないのではないかと思う。要は家庭での顔、仕事での顔、趣味での顔とかそういうのだ。これを「ペルソナ」と呼んだのだが、自分にはどんなペルソナがあるのか把握した上で、各ペルソナごとに状況を振り返ってみると漏れが少なくなる。&lt;/p&gt;
+
+&lt;p&gt;使える場面としては、例えばGTDの週次レビュー。ToDoリストに漏れがないか考えるとき、各ペルソナごとに数分ずつ考えてみる。あるいは「高度」の概念を取り入れるとき、ペルソナごとの高度の視点を持ってみる。&lt;/p&gt;
+
+&lt;p&gt;あるいは家計簿。どのペルソナに対してどれだけお金を使っているかで出費のバランスを管理する。時間の使い方を振り返るときも、案外趣味の時間がすげー多いなとか気付けたりして有意義。&lt;/p&gt;
+
+&lt;p&gt;自分の場合は今のところ、生活、仕事、趣味、開発、家庭・友人、教養と6つのペルソナに分けてみている。なかなかMECEというわけにはいかないのだが、「生活」は自分自身の身の回りのこと（病気や健康、衣食住）であるのに対して「家庭・友人」は実家の事情やプライベートな友人関係の話という具合に分けていたり、仕事上必要な技術知識は「仕事」に振り分け、家で勉強している知識は「開発」に入れたりとか、そういうことをしている。&lt;/p&gt;
+
+&lt;p&gt;まぁ要するに、自分なりに状況整理できる手がかりがあれば良いのではないか、という話。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>今年はほぼ日からEDITに浮気しました</title>
+      <link>http://chroju.github.io/blog/2014/01/05/2014-01-05-post/</link>
+      <pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/01/05/2014-01-05-post/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.flickr.com/photos/chroju/11754549826/&#34;&gt; title=&amp;ldquo;ほぼ日→EDIT by chroju, on Flickr&amp;rdquo;&amp;gt;&lt;img src=&#34;http://farm4.staticflickr.com/3816/11754549826_38e5d312cd.jpg&#34; width=&#34;500&#34; height=&#34;500&#34; alt=&#34;ほぼ日→EDIT&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;浮気しました。&lt;/p&gt;
+
+&lt;p&gt;就職2年目から2年間ほぼ日手帳を使い続けたけど、今年はEDIT。ライバル側に浮気してしまいました。理由はいくつかある。ほぼ日手帳に愛想を尽かした点が多いかな。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;紙面サイズが小さい。EDITの方が書くスペースが多い。&lt;/li&gt;
+&lt;li&gt;「今日の一言」が邪魔。手帳を書くときに脇目を逸らしたくない。&lt;/li&gt;
+&lt;li&gt;価格が高い。一番安いタイプだと、ポリエステルカバーのザラザラした手触りが苦手。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これはほぼ日が悪いというより、単に好みの問題だと思ってる。いわゆる「ほぼ日らしさ」が好きな人であれば多分たまらないんだろうし、俺も当初はそうだったんだけど、仕事で書くことが増えたり、もっといろんな用途で使いたくなってくると、徐々に物足りなくなってきた。よりシンプルで、スマートな印象があるEDITの方が魅力的に見えてしまった。&lt;/p&gt;
+
+&lt;p&gt;まだ使い始めて3日なのだが、EDITにも当然いまいちだなぁという点はある。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ペンを挿すパーツがチープで心許ない。ほぼ日のバタフライストッパーは素敵。&lt;/li&gt;
+&lt;li&gt;紙質がすべっすべで気持ちいいんだけど、心持ちめくりにくい。&lt;/li&gt;
+&lt;li&gt;ほぼ日の月ごとにインク色が違うのは、パラパラめくるときにすごいわかりやすかった。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;このあたりはトレードオフなので、両方使ってみて「より良い方」を選べばいいだけの話。ただし、手帳は1年ものなので、なかなか「気に入らないから買い直そう」というのがすぐ出来ないのが痛いところ。本来あるべき姿としては、あまりツールが何であるかにこだわりすぎず、出来るやり方でやってみることこそが重要なんだろう。物理的なガジェットだけじゃなく、タスク管理サービスとかでもそうだと思う（Wunderlistがいいか、Google Tasksがいいかで1か月悩んだことへの自戒。。。）&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GTD環境 2013年秋版</title>
+      <link>http://chroju.github.io/blog/2013/11/10/2013-11-10-post/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/11/10/2013-11-10-post/</guid>
+      <description>
+
+&lt;p&gt;先日GTDの聖典を読み込み、ちょっと久しぶりにGTD環境を再構築した。今年に入ってからCatch Notesを使ったGTDを試すも、PCを使ってる時にわざわざブラウザからタスク追加するのが面倒になり、初夏あたりでtodo.txtに乗り換えた。しかしこれもソートがしづらいだとか、複数のリスト持つのが面倒（たぶん俺のVimスキルがアップすればなんとかなるんだけど）などがあり、晩夏あたりでストップしてしまっていた。それから先々週頃までGTD環境は空白状態。そして2ヶ月ぶりぐらいの再構築に至ったわけだが、やっぱしGTDやっとくとなんとなく気が楽ね。&lt;/p&gt;
+
+&lt;p&gt;で、どうにもツールに振り回されすぎてる嫌いがあるので、ここらでもう一度自分がやっていることをまとめておく。やりたいことを一つに定めれば、どんなツールを使っていようとも迷うことはない。そういう状態に持っていきたい。&lt;/p&gt;
+
+&lt;h3 id=&#34;仕事とプライベートで環境を分ける:384df800b66ab9e7ca269300fd678490&#34;&gt;仕事とプライベートで環境を分ける&lt;/h3&gt;
+
+&lt;p&gt;入社当初、Toodledoで仕事もプライベートもすべてのタスクを管理していたことがあったのだが、これは無理だった。自分の職場の事情故の話ではあるが、会社PCではクラウドサービスの使用が禁じられているし、また仕事の資料を家に持ち帰ることはできない。つまり仕事のタスクをいつでも見られるようにとToodledoに入れておいても、会社ではそれを確認できないし、家では仕事の状況を確認する資料がないからタスクレビューができない。&lt;/p&gt;
+
+&lt;p&gt;よって今は仕事とプライベートのGTD環境を完全に分けている。仕事ではTaskChuteを使い、TaskChuteはGTDには向かないなどという声もあるが、まぁ仕事のタスクなんて今すぐやるか、いつかやるかのほぼ2択なので、降ってきたタスクを適当な日付にぶちこんでおしまいである。「いつかやる」リストに行くはずのタスクは1週間後の日付でとりあえず入れておけばいいだけだし、「連絡待ち」リストに行くタスクは適したタイミングで「○○さんに例の件確認」と入れればいい。正直、仕事はこれで本当にうまく回っている。&lt;/p&gt;
+
+&lt;p&gt;仕事とプライベートのGTD環境を分けることには利点もある。TaskChuteは会社のファイルサーバーに置いてあるので家からは確認のしようがなく、ON-OFFのメリハリがつくようになった。家に帰ってタスクリストを開いたら、仕事の予定がいっぱい入っているなんて状態は、精神によろしくない。&lt;/p&gt;
+
+&lt;h3 id=&#34;軌道修正を図りやすくする:384df800b66ab9e7ca269300fd678490&#34;&gt;軌道修正を図りやすくする&lt;/h3&gt;
+
+&lt;p&gt;ではプライベートのGTD環境とは何のためにあるのかということだが、軌道修正を図りやすくするためのものだと考えている。&lt;/p&gt;
+
+&lt;p&gt;プライベートのタスクとは何か。主には家事、勉強、娯楽に分けられる。このうち家事は細切れのタスクがほとんどだが、娯楽と勉強はPJのような形になることが多い。それは例えばRailsを習得する、だったり、秋の気になるアートイベントに行きまくる、だったり。&lt;/p&gt;
+
+&lt;p&gt;ただ、プライベートで抱えるPJを毎日コツコツ回せるかというと、なかなか時間は取れないもので、中には1ヶ月近く放置になってしまうものもある。そんなときに、「あれ？そういえばあれやりたくてやりかけにしてたけど、どこまでやったっけ？」とならないよう、フローの洗い出しと経過の記録を怠らないようにする。また進んでないPJにすぐ気付き、対策を打てるようにしておく。&lt;/p&gt;
+
+&lt;p&gt;そして長く時間を費やす「PJ」は、往々にして相応の理由がある。例えばRails習得はWeb系の転職を考えているからであり、ではWeb系になぜ転職したいのか？といえば、、、といった具合に、理由はより大きな理由に遡及できる。自分の立ち位置を見失わないためにも、理由の記録と記憶は必要だ。これを管理するには、GTDでいう高度の概念がふさわしい。&lt;/p&gt;
+
+&lt;h3 id=&#34;ユビキタスキャプチャーを重視する:384df800b66ab9e7ca269300fd678490&#34;&gt;ユビキタスキャプチャーを重視する&lt;/h3&gt;
+
+&lt;p&gt;週次レビュー以上に自分が意識しているのがユビキタスキャプチャー。いくらトリガーリストがあると言っても、やはり2時間うんうん唸ってタスクを書き出したところで、一度忘れたタスクは思い出しづらい。思いついたこと、インプットされた情報はとにかくすぐメモる。この方が確実だ。&lt;/p&gt;
+
+&lt;p&gt;ただ、自分はどうもこれが苦手で。あまり深く考えない性格なのか、気付けば新たな情報を右の耳から左の耳へ聞き流していることがある。どうすりゃいいんだろうな、これ。&lt;/p&gt;
+
+&lt;h3 id=&#34;todoリストに手間をかけすぎない:384df800b66ab9e7ca269300fd678490&#34;&gt;ToDoリストに手間をかけすぎない&lt;/h3&gt;
+
+&lt;p&gt;ToodledoはGTDに最適だとよく言われる。自分も使っていたが、そのことは肯定できる。だが、ちょっとガチガチに設定できすぎるような気もする。アレに凝りすぎると、ToDoリストを管理するというToDoに1日相当な時間を使いそうになる。&lt;/p&gt;
+
+&lt;p&gt;だからToDoリストは手間をかけすぎないのがいい。先に言及したTaskChuteはその点すごく楽で、開いたらAlt+s -&amp;gt; aで行を追加し、日付とタスク名と見積時間を入れれば登録完了だ。プロジェクトの入力も可だが、そのへんはお好みで。&lt;/p&gt;
+
+&lt;p&gt;プライベートでは今、Wunderlistを使っている。これもまた実にシンプルなツール。次点でTodo.txtだが、これはすでに述べた通りちょっと単機能すぎる。Google Tasksもまた然り。&lt;/p&gt;
+
+&lt;h3 id=&#34;いつやるのか-を明確にする:384df800b66ab9e7ca269300fd678490&#34;&gt;「いつやるのか」を明確にする&lt;/h3&gt;
+
+&lt;p&gt;GTDは元来、タスクのスケジューリングは必要としない。GTDにおいては、ToDoリストとは「時間があるときにやることのリスト」であり、やる時間が決まっているものはカレンダーに登録するべきだからだ。でも現実、そう上手くいくか？ この1週間のどこか空いた日で必ずやるとか、そういうタスクもあるだろう。&lt;/p&gt;
+
+&lt;p&gt;自分はWunderlistのスターを「スケジューリング」として使っている。スターが付いたタスクとは、「今週やるべきタスク」だ。「時間があるときにやること」の中でも、最優先でやるべきことにスターを付けている。&lt;/p&gt;
+
+&lt;p&gt;タスクのスケジューリングは重要だ。いつまでもリストに眠り続けるタスクを産まないためにも。&lt;/p&gt;
+
+&lt;h3 id=&#34;現在の環境:384df800b66ab9e7ca269300fd678490&#34;&gt;現在の環境&lt;/h3&gt;
+
+&lt;p&gt;以上の方針を踏まえた上で、次のようなGTD環境（プライベートver）を回している。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Wunderlist =&amp;gt; タスクリスト&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;すべての「やること」がここにある。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;リストはNext、Someday、Want＝やりたいこと、各PJ。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;PJはノートを使って目的と〆切を書いている。タスクには最初マイルストーンだけを置いておき、実際に進めながら細かいタスクへ分解している。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.flickr.com/photos/chroju/10776411723/&#34;&gt; title=&amp;ldquo;スクリーンショット 2013-11-10 21.20.34 by chroju, on Flickr&amp;rdquo;&amp;gt;&lt;img src=&#34;http://farm6.staticflickr.com/5548/10776411723_fee1923491.jpg&#34; width=&#34;500&#34; height=&#34;410&#34; alt=&#34;スクリーンショット 2013-11-10 21.20.34&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Google Calendar =&amp;gt; 予定管理&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;アナログ管理とすべきかだいぶ悩んだけど、繰り返しの予定とかが管理しやすいのでデジタルに軍配。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;基本はプライベートの予定。仕事や休日や深夜のものだけ入れる。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;「やる日が決まっているタスク」もここに入れる。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Dropbox&amp;amp;txt =&amp;gt; ユビキタスキャプチャーその1&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;デジタルのユビキタスキャプチャー管理。メモはやっぱプレーンテキスト最強。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Macで扱うときはQFixHowmを使っている。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Androidで扱うときはDraft。これ最強。このエントリーもDraftで書いてます。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ポイントはクイック入力機能、Markdownの入力補助、全文検索機能。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;amp;hl=ja&#34;&gt; target=&amp;rdquo;_blank&amp;rdquo; rel=&amp;ldquo;nofollow&amp;rdquo;&amp;gt;&lt;img class=&#34;alignleft&#34; align=&#34;left&#34; src=&#34;https://lh6.ggpht.com/AwZSLYU7QIp0nnwNEzPxR1Nmx03aKnOEmLAA_SOCW0miZ75oblV6JZU4NS6Lf3DB2jU1=w300&#34; width=&#34;85&#34; style=&#34;margin:0px 10px 1px 5px;padding:0px;border:none&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;amp;hl=ja&#34;&gt; target=&amp;rdquo;_blank&amp;rdquo; rel=&amp;ldquo;nofollow&amp;rdquo;&amp;gt;&lt;strong&gt;&lt;span style=&#34;font-size:120%&#34;&gt;Draft 0.12&lt;/span&gt;&lt;/strong&gt;&lt;/a&gt;&lt;br&gt;カテゴリ: 仕事効率化&lt;br&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=com.mvilla.draft&amp;amp;amp;hl=ja&#34;&gt; target=&amp;rdquo;_blank&amp;rdquo; rel=&amp;ldquo;nofollow&amp;rdquo;&amp;gt;Google Playで詳細を見る&lt;/a&gt;&lt;br style=&#34;clear: both;&#34;&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Dropbox&amp;amp;txt =&amp;gt; GTDの中枢&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ユビキタスキャプチャー用のフォルダの中にGTDというフォルダを掘ってる&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ここに何を入れているかというと、GTDで使う資料系一式。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;例えばGTD.txtは、自分流GTDのフローと、各「高度」を書き込んでいる。GTDってなんだっけ状態になったらここに戻ってくる。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;あとトリガーリストとかもここ。GTD関連でタスクでないもの全般って感じか。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.flickr.com/photos/chroju/10776412153/&#34;&gt; title=&amp;ldquo;スクリーンショット 2013-11-10 21.21.54 by chroju, on Flickr&amp;rdquo;&amp;gt;&lt;img src=&#34;http://farm8.staticflickr.com/7401/10776412153_43304f8401_n.jpg&#34; width=&#34;279&#34; height=&#34;320&#34; alt=&#34;スクリーンショット 2013-11-10 21.21.54&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;ほぼ日手帳 =&amp;gt; ユビキタスキャプチャーその2&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;アナログのユビキタスキャプチャー。仕事中は専らこれ。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;予定もタスクもデジタル管理にしちゃったので、もはやただの日付入りメモ帳。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ホントはライフログっぽいこともしたいんだけど、TaskChuteがあるしいいやってなってる。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;来年はEDITに浮気予定。ほぼ日よりシンプルで使いやすそうなので。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こんなところ。正直プレーンテキスト最強論者（デバイスを選ばない、フォーマットフリー、Dropboxで共有＆バックアップも瞬時、Vimで編集もクソ楽）なので、全部プレーンテキストにまとめたいとも思ってるんだが、なかなか上手くいかなかった。まぁ予定はまず無理だし、タスクもちと辛い。いや、やってやれないこともないのだが、面倒だ。期日順に並べ替えたり、PJと期日の2つの観点からタスクを絞り込んだりとか、そういう有機的な操作はやっぱり専用アプリを使ったほうがいい。すなわちそれがWunderlistだった。&lt;/p&gt;
+
+&lt;p&gt;あと悩んでるのが、日課や週末の家事のような定期的タスク。Googleカレンダーに試しに繰り返しの予定で入れてはみたが、毎日同じ予定が表示されるのはちょっとウザかったり。かといってWunderlistで繰り返し設定して、毎日ちまちま消してくのもウザい。プレーンテキストでリスト化しとくのが楽かなーと思うのだが、それだと「やることは全部Wunderlistに集約」という原則が崩れてしまうし。むー。&lt;/p&gt;
+
+&lt;p&gt;とりあえずこの路線を1年は続けたい。浮気して、違うツール設定して試して、また戻ってきてなんて時間は、GTDの根本に反するような無駄に過ぎない。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GTDの原典読んでみたら意外にいろいろ勘違いしてたという話</title>
+      <link>http://chroju.github.io/blog/2013/10/14/2013-10-14-post/</link>
+      <pubDate>Mon, 14 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/10/14/2013-10-14-post/</guid>
+      <description>
+
+&lt;p&gt;GTDというかタスク管理についてはもうだいぶ長いこと悩んできたのだが、もうなんともにっちもさっちもいかなくなってきたので、ついに原典を紐解いてみた。といっても本当の原典ではなく、実践編の方。まぁWebでつまみ食い程度とはいえ、一応GTDの理念は知った上でタスク管理してたので、実践編の方が役に立ちそうかな、と。でも実際読んでみて、案外GTDの基礎を勘違いしてることに気付いたり。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51rqNl71s%2BL._SL160_.jpg&#34; alt=&#34;ひとつ上のGTD ストレスフリーの整理術 実践編――仕事というゲームと人生というビジネスに勝利する方法&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;ひとつ上のGTD ストレスフリーの整理術 実践編――仕事というゲームと人生というビジネスに勝利する方法&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;デビッド・アレン &lt;br /&gt;二見書房 &lt;br /&gt;売り上げランキング: 14,427&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4576101714/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;gtdは頭の中を書き出すことがすべてではない:cd9507943eaf5822aca365c6ad5eab2d&#34;&gt;GTDは頭の中を書き出すことがすべてではない&lt;/h2&gt;
+
+&lt;p&gt;GTDってなんとなく「2時間かけて頭の中を書き出しましょう」「そのリストを1週間おきに週次レビューで見なおして最新の状態を保ちましょう」っていうのが核だと思っていたのだが、それがすべてではなかった。というより、それはあくまで始まりである。書き出して意識の外で保存するだけでは中途半端で、それを「どう処理するのか？」という点で見極めた上で、適切なリストに並べておかなくてはならない。例えば時間の決まっている行動であればカレンダーに書き込むことになるし、誰かに頼めることであれば、依頼した上で「連絡待ち」リストに入れる。今は使わないが、いずれ興味が出そうなことであれば、数日後に思い出せるようリマインダーに仕込んでおく。&lt;/p&gt;
+
+&lt;p&gt;GTDとはすなわち「絶え間なく入ってくる情報を適切に整理し、すぐ行動に移せるようリスト化しておく」ことに他ならない。単なる「タスク管理」とはその意味で異なる。&lt;/p&gt;
+
+&lt;h2 id=&#34;高度-という考え方を取り入れる:cd9507943eaf5822aca365c6ad5eab2d&#34;&gt;「高度」という考え方を取り入れる&lt;/h2&gt;
+
+&lt;p&gt;目の前のタスクを処理する、整理する他に、GTDには高度という考え方がある。一つ一つの具体的な行動を高度0メートルとして、それを1000メートル、2000メートルという名前の「より広い視点」から位置づけるのだ。例えば「GTDの本を読んだ感想をブログにまとめる」は、より広い視点から言えば「タスク管理方法を考えなおす」というプロジェクトの一部だ。さらにこのプロジェクトは、「時間を効率的に使う」という目標の一端を担うものとなる。という具合。&lt;/p&gt;
+
+&lt;p&gt;今気になっていることをリスト化して行動に移すという水平思考と同時に、GTDにはその各行動がどう位置づけられ、どのような優先順位とすべきなのかという垂直思考の考え方がある。この点ってあまりWebのGTD系記事では触れられていない気がして新鮮だった。そして特に「プロジェクト」や「目標」の管理に手を焼いていたので、ちょっと助かった思い。&lt;/p&gt;
+
+&lt;p&gt;とはいえ、この本はプロジェクトのリストとNext Actionリストの結びつけについては明確な答えを用意していない。きちんと整理された状態であれば、自ずと各リストの関連性が見えてくるといった回答が成されていたのだが、そんな曖昧なことに任せてられるかｗというのが正直なところ。プロジェクトには進行する上でのフローがあり、各フローをいつ、どのようにこなしていくかという視点から考えて、まとめておくことが必要なんじゃないかと思う。&lt;/p&gt;
+
+&lt;h2 id=&#34;ゴールは-常に最善の行動を取れるようになる-こと:cd9507943eaf5822aca365c6ad5eab2d&#34;&gt;ゴールは「常に最善の行動を取れるようになる」こと&lt;/h2&gt;
+
+&lt;p&gt;何度も書くが、GTDはタスク管理の手法、ではない。今気になっていることと、それらの位置づけ、見通しをリスト化することにより、「今すべきこと」を明らかにすることだ。単なるタスク管理では、突発タスクを割り込ませる余裕がなくなったり、先々への見通しを持たず、目先の「やること」だけに集中してしまいがちだったりする。&lt;/p&gt;
+
+&lt;p&gt;GTDでは常にすべての行動がリスト化されているので、例えば突発的なタスクがあっても、それを既存のリストの中に位置づけ直した上で、いつどのように行動すべきかを捉え直すことができる。仮にその余裕がないほどの事態であったとすれば、すぐ元の状態、正常な状態に戻れることが重要だという。リストは完璧である必要はないが、信頼に足るもの、心の中の「気になっているもの」をすべて書き出したものである必要はある。そしてその状態を保つからこそ、常に最善の行動を取ることができる。&lt;/p&gt;
+
+&lt;h2 id=&#34;今後この本をどう活かすか:cd9507943eaf5822aca365c6ad5eab2d&#34;&gt;今後この本をどう活かすか&lt;/h2&gt;
+
+&lt;p&gt;GTDの基本概念を捉え直すことはできた。その上で今悩んでいるのは以下のようなこと。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;様々なリストが必要なようだが、何で管理するのか？（Google Tasks？、プレーンテキスト？、Evernoteは重いので論外）&lt;/li&gt;
+&lt;li&gt;リストを見る気力もないときはどうしよう？（本書では「やる気がないことにすることリスト」も作っていたが、それすら見る気にならない時もある）&lt;/li&gt;
+&lt;li&gt;「次にやること」を実際いつやるのか、スケジューリングする必要はないか？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;GTDというのはあくまで、自分の日々の状況を「最善」にするための補助ツールに過ぎないわけで、それに長々と時間をかけてしまうのは本末転倒。早いとこやり方を決めて、自分なりに進めていきたいところなのだが、はてさて。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

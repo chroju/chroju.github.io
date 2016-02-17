@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Ruby基礎復習(6) Hash | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/04/05/study-ruby-hash/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Ruby基礎復習(6) Hash</h1>
+      <div class="meta">
+        Apr 5, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>『パーフェクトRuby』p.179より。</p>
+
+<p>まず基本的なとこで。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2}
+
+hash.each do |key, val|
+  p &quot;#{key}: #{val}&quot;
+end # =&gt; &quot;hoge: 1&quot;, &quot;fuga: 2&quot;
+
+hash.each_key do |key|
+  p key
+end # =&gt; &quot;hoge&quot;, &quot;fuga&quot;
+
+hash.each_value do |val|
+  p val
+end # =&gt; &quot;1&quot;, &quot;2&quot;
+
+hash[:hoge] = 3
+p hash # =&gt; {hoge: 3, fuga: 2}
+hash[:piyo] = 4
+p hash # =&gt; {hoge: 3, fuga: 2, piyo: 4}
+
+hash.delete(:piyo)
+hash # =&gt; {hoge: 3, fuga: 2}
+
+hash.empty? # =&gt; false
+hash.length # =&gt; 2
+</code></pre>
+
+<p>ハッシュの生成は<code>Hash[]</code>により偶数個の引数から行うこともできる。</p>
+
+<pre><code class="language-ruby">ary = [&quot;hoge&quot;, 1, &quot;fuga&quot;, 2]
+Hash[*ary] # =&gt; {hoge: 1, fuga: 2}
+
+ary = [[&quot;hoge&quot;, 1], [&quot;fuga&quot;, 2]]
+Hash[ary] # =&gt; {hoge: 1, fuga: 2}
+</code></pre>
+
+<p>Arrayクラスと同様の<code>#select</code>、<code>#reject</code>、<code>#keep_if</code>、<code>#delete_if</code>操作が可能。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2, piyo: 3}
+
+hash.select {|key, val| val.even? } # =&gt; {fuga: 2}
+p hash # =&gt; {hoge: 1, fuga: 2, piyo: 3}
+hash.select! {|key, val| val.even? } # =&gt; {fuga: 2}
+p hash # =&gt; {fuga: 2}
+
+hash = {hoge: 1, fuga: 2, piyo: 3}
+
+hash.reject {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+p hash # =&gt; {hoge: 1, fuga: 2, piyo: 3}
+hash.reject! {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+p hash # =&gt; {hoge: 1, piyo: 3}
+
+hash.select! {|key, val| val.even? } # =&gt; nil
+hash.keep_if {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+hash.reject! {|key, val| val.even? } # =&gt; nil
+hash.delete_if {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+</code></pre>
+
+<p>Hashの統合は<code>Hash#merge</code>を用いる。キーが重複する場合は、引数で渡されたハッシュの値で上書きされる。ブロックを引き渡している場合は、キー重複時の処理をブロックの中で定義できる。破壊的操作である<code>Hash#merge!</code>は<code>Hash#update</code>とも書くことが出来る。</p>
+
+<pre><code class="language-ruby">a = {hoge: 1, fuga: 2}
+b = {hoge: 3, piyo: 4}
+a.merge(b) # =&gt; {hoge: 3, fuga: 2, piyo: 4}
+p a # =&gt; {hoge: 1, fuga: 2}
+
+a.merge!(b) {|key, a_val, b_val|
+  a_val + b_val
+} # =&gt; {hoge: 4, fuga: 2, piyo: 4}
+p a # =&gt; {hoge: 4, fuga: 2, piyo: 4}
+</code></pre>
+
+<p>キーと値の取得に関して。特に特定キーの存在確認については、<code>Hash#has_key?</code>を用いる。通常の<code>Hash[]</code>による呼び出しだと、値が存在しない場合でもnilが返ってきてしまい、値がnilなのか、それとも存在していないのか区別がつかないため。あるいは<code>Hash#fetch</code>を用いれば、値が存在しない場合の返り値を指定できる。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2, piyo: 3, hogehoge: nil}
+
+hash.keys # =&gt; [:hoge, :fuga, :piyo]
+hash.key(2) # =&gt; :fuga
+
+hash.values # =&gt; [1, 2, 3]
+hash.values_at(:fuga) # =&gt; [2]
+hash.values_at(:fuga, :piyo) # =&gt; [2, 3]
+
+hash[:hogehoge] # =&gt; nil
+hash[:foo] # =&gt; nil
+hash.has_key?(:foo) # =&gt; false
+# 以下すべてhas_key?と同義
+hash.member?(:foo)
+hash.include?(:foo)
+hash.key?(:foo)
+
+hash.fetch(:foo) # =&gt; nil
+hash.fetch(:foo, &quot;error&quot;) # =&gt; &quot;error&quot;
+hash.fetch(:foo){|key| &quot;#{key} not exists&quot;} # =&gt; &quot;foo not exists&quot;
+
+hash.has_value?(3) # =&gt; true
+hash.value?(3) # =&gt; true
+</code></pre>
+
+<p>Hashにはデフォルト値の概念があり、<code>Hash#new</code>の引数に与えた値が、存在しないキーを参照したときの返り値となる（デフォルトはnil）。ここで指定した値はすべて同一オブジェクトであり、破壊的操作をする場合などは注意が必要。また<code>Hash#default=</code>や<code>Hash#default_proc=</code>により、既存のHashオブジェクトに対してもデフォルト値の変更が可能。</p>
+
+<pre><code class="language-ruby">hash = Hash.new(&quot;null&quot;)
+hash[:foo] # =&gt; &quot;null&quot;
+
+hash.default = &quot;undefined&quot;
+hash[:foo] # =&gt; &quot;undefined&quot;
+default = hash.default
+default.reverse!
+hash[:foo] # =&gt; &quot;denifednu&quot;
+
+hash.default_proc = -&gt;(hash, key) {&quot;Key: #{key} not exists&quot;}
+hash[:foo] # =&gt; &quot;Key: foo not exists&quot;
+</code></pre>
+
+<p>ハッシュ変換系のメソッド。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2}
+
+hash.invert # =&gt; {1: hoge, 2: fuga}
+hash.to_a # =&gt; [[:hoge, 1], [:fuga, 2]]
+hash.sort # =&gt; [[:fuga, 2], [:hoge, 1]]
+</code></pre>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/04/04/the-world-as-code/" rel="prev">the world as code</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/04/06/study-ruby-time/" rel="next">Ruby基礎復習(7) Timeクラス</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

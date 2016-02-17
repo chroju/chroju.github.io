@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Rails環境構築（5）Capistranoによるデプロイ ※未完 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/02/20/2014-02-20-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Rails環境構築（5）Capistranoによるデプロイ ※未完</h1>
+      <div class="meta">
+        Feb 20, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。</p>
+
+<p>Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。</p>
+
+<p>3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは<a href="http://capistranorb.com/">本家</a>をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。</p>
+
+<ul>
+<li><a href="http://threetreeslight.com/post/68344998681/capistrano-3-x-rails">capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight</a></li>
+<li><a href="http://labs.gree.jp/blog/2013/12/10084/">入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&rsquo; Blog</a></li>
+<li><a href="http://takkkun.hatenablog.com/entry/2013/10/12/Capistrano_3%E3%81%B8%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D">Capistrano 3への手引き - 今日のごはんは素麺です</a></li>
+<li><a href="http://d.hatena.ne.jp/ria10/20130526/1369583203">capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記</a></li>
+<li><a href="http://kakakakakku.hatenablog.com/entry/2013/12/11/090204">Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog</a></li>
+</ul>
+
+<h2 id="capistranoとは:9acf56c276173962532edfc972e2d93b">Capistranoとは？</h2>
+
+<p>そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。</p>
+
+<h2 id="インストール:9acf56c276173962532edfc972e2d93b">インストール</h2>
+
+<p>インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。</p>
+
+<pre><code>group :development do
+  gem 'capistrano', '~&gt; 3.1.0'
+  gem 'capistrano-rails', '~&gt; 1.0.0'
+  gem 'capistrano-bundler', '~&gt; 1.1.2'
+end
+</code></pre>
+
+<p>capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。</p>
+
+<h2 id="初期作業:9acf56c276173962532edfc972e2d93b">初期作業</h2>
+
+<pre><code>$ bundle exec cap install
+</code></pre>
+
+<p>初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。</p>
+
+<ul>
+<li>Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述</li>
+<li>config/deploy.rb : デプロイタスクを記述</li>
+<li>config/deploy/hoge.rb : 各サーバー情報を記述</li>
+</ul>
+
+<h2 id="capfile編集:9acf56c276173962532edfc972e2d93b">Capfile編集</h2>
+
+<p>capistrano-railsと同bundlerを読み込むため、Capfileを開いて以下追記。</p>
+
+<pre><code>require 'capistrano/rails'
+require 'capistrano/bundler'
+</code></pre>
+
+<h2 id="config-deploy-rb編集:9acf56c276173962532edfc972e2d93b">config/deploy.rb編集</h2>
+
+<p>いろいろコメントアウトしてあってどれを使えばいいかよくわかんなかったりもするのだが、最低限以下は必要っぽい。</p>
+
+<pre><code>set &lt;span class=&quot;synConstant&quot;&gt;:application&lt;/span&gt;, &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;hoge&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;
+set &lt;span class=&quot;synConstant&quot;&gt;:repo_url&lt;/span&gt;, &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;git@github.com:chroju/hoge&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;
+set &lt;span class=&quot;synConstant&quot;&gt;:deploy_to&lt;/span&gt;, &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;/var/www/hoge&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;
+set &lt;span class=&quot;synConstant&quot;&gt;:scm&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;:git&lt;/span&gt;
+
+</code></pre>
+
+<p>上から。1行目はアプリケーション名。これはどこかで使われる設定ではないようなので、適当に入れておけばよさそう。2行目はGithubのリポジトリURL。3行目はデプロイ先となるサーバー上のディレクトリパス指定。ここではApacheの設定にならってみた。4行目は使用しているSCMの指定。とはいえ、現状Gitしか対応していないのでこれ以外の書き方は不可。</p>
+
+<p>ファイル後半にはデプロイタスクのデフォルト設定が書かれている。一応、ここはそのままでも動くみたい。自分で何か特別なことをやらせたい場合は当然ながら編集する必要があるが、まだその域に至ってないです。</p>
+
+<h2 id="config-deploy-hoge-rb編集:9acf56c276173962532edfc972e2d93b">config/deploy/hoge.rb編集</h2>
+
+<p>ここではステージング環境としてvagrantを使うものと仮定。WebサーバーやDBサーバーを分けたりはせず、1台のサーバーですべてをまかなうこととする。よってstaging.rbを編集する。このファイルもデフォルトでいろいろ書かれてはいるのだが、とりあえず次の4行があればOK。</p>
+
+<pre><code>server &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;127.0.0.1&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;, port: &lt;span class=&quot;synConstant&quot;&gt;2222&lt;/span&gt;, user: &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;vagrant&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;, roles: &lt;span class=&quot;synSpecial&quot;&gt;%w{&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;web, app, db&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;}&lt;/span&gt;, ssh_options: {
+  user: &lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;vagrant&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;'&lt;/span&gt;,
+  keys: &lt;span class=&quot;synSpecial&quot;&gt;%w(&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;~/.vagrant.d/insecure_private_key&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;)&lt;/span&gt;,
+  auth_methods: &lt;span class=&quot;synSpecial&quot;&gt;%w(&lt;/span&gt;&lt;span class=&quot;synConstant&quot;&gt;publickey&lt;/span&gt;&lt;span class=&quot;synSpecial&quot;&gt;)&lt;/span&gt;
+}
+
+</code></pre>
+
+<p>server〜で1台のサーバーの設定を一括で書ける。言わずもがな、まず対象IP。portがポート番号、userがSSHログインするユーザー名。roleはこのサーバーの役割を書く。web、app、dbの中から当てはまるものを書けばいいようだが、allという指定もできるとかできないとか。ssh_options:でさらに詳しい内容を記述。userはさっきのと被ってるので不要な気がするのだが、他のサイトを見てたら書いている設定があったので取りあえず入れてる。keysは認証に使うキーのパス。auth_methods:で認証方法を指定しているが、通例publickey認証とする。
+ここに書いた設定の大半はvagrant ssh-configコマンドで拾えるので、自分の環境に合った設定に書き換えて下さい。</p>
+
+<h2 id="デプロイ実行:9acf56c276173962532edfc972e2d93b">デプロイ実行</h2>
+
+<p>で、あとはデプロイでいけちゃうみたいです。</p>
+
+<pre><code>bundle exec staging deploy
+</code></pre>
+
+<p>stagingをproductionに換えればproduction.rbの設定に則ります。あと、末尾に:checkを付けるとコマンドが通るかコールドでチェックしてくれるので、まずは:checkをした方がいい。あと、cap -Tで実行可能なコマンドがずらずら出てくる。デプロイのロールバックしたり、rake db:migrateを走らせたり、結構いろんなことができるので一度見ておくと吉。</p>
+
+<h2 id="ハマった点:9acf56c276173962532edfc972e2d93b">ハマった点</h2>
+
+<p>自分の場合は以上の手順で上手くいきませんでした。何点かハマったポイントをば。</p>
+
+<h3 id="デプロイ先ディレクトリのパーミッション:9acf56c276173962532edfc972e2d93b">デプロイ先ディレクトリのパーミッション</h3>
+
+<p>大変アホみたいな話だが最初これでmkdirが上手くいかなかった。公式ドキュメントの<a href="http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/">ココ</a>に書いてあるけど、SSHユーザーはsudoなしでデプロイ先ディレクトリを操作できる権限がなきゃダメです。vagrantユーザーは~/var配下の操作権限なかったので弾かれた次第。。。</p>
+
+<p>対応としてはさっきのリンク先に書いてある手順通り<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080219/294154/">sgid</a>の設定とかしてあげたらなんとかなりました。あるいはパスワードなしでsudo実行可能にしてやっても動くみたいだけど、当然ながらサーバーセキュリティ的にはNGなので。まぁvagrantであればどうでもいいかもしんないけど。</p>
+
+<h3 id="sqliteのエラー:9acf56c276173962532edfc972e2d93b">SQLiteのエラー</h3>
+
+<p>deploy中にsqlite3.hが存在しないよというエラーが発生。<a href="http://www.guanxiaohua2k6.com/2012/07/sqlite3h-is-missing.html">このページ</a>に書いてあるのとまったく同じ症例だったので、同様の対策をしてあげて解決。これは俺のvagrant環境の準備に不備があったってことでいいんだろうか。根本原因がイマイチ謎。</p>
+
+<h3 id="rake-db-migrateのエラー:9acf56c276173962532edfc972e2d93b">rake db:migrateのエラー</h3>
+
+<p>そして現在進行形で未解決なのがこのエラー。デフォルトのデプロイタスクでは途中でデプロイ先サーバー上でRAILS_ENV=staging bundle exec rake db:migrateを叩くんだけど、これが次のエラーで停まってしまう。</p>
+
+<pre><code>DEBUG [4be84d91]        rake aborted!
+DEBUG [4be84d91]        database configuration does not specify adapter
+</code></pre>
+
+<p>いくつか思い当たった原因に取り組んではみたのだが、なおエラーが起きている。</p>
+
+<ul>
+<li>RAILS_ENV=hogeを追加した場合、Gemfileのgroup :hogeを見に行くのだが、stagingグループを用意していなかった（<a href="http://opentechnica.blogspot.jp/2012/01/railsenv.html">参考</a>）。</li>
+<li>database.ymlにstagingの設定を用意していなかった。</li>
+</ul>
+
+<p>たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/02/09/2014-02-09-post/" rel="prev">突然だけどVimperatorrcを晒してみる</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/04/06/2014-04-06-post/" rel="next">Capistrano3がわからんので今一度イチから考えなおしてみる</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

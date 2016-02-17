@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Book on the world as code</title>
+    <link>http://chroju.github.io/categories/book/</link>
+    <description>Recent content in Book on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 14 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>『Team Geek』読了</title>
+      <link>http://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
+      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41SlY0zvpKL._SL160_.jpg&#34; alt=&#34;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.14&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Brian W. Fitzpatrick Ben Collins-Sussman &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 18,890&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要はあって、何かやりたいことがあればいわゆる政治的な課題に悩まされることになったりもする。本を読むときはつい技術系のものや個人のハッカーマインドに関するものを読みがちだけど、歳も歳だし組織論もかじろうかということで読んだ。元々読むつもりはあったが、紀伊國屋書店新宿本店でオライリーカレンダーのプレゼントやってたので背中押された。&lt;/p&gt;
+
+&lt;p&gt;とても元も子もないまとめ方をしてしまうと、&lt;a href=&#34;http://blog.glidenote.com/blog/2015/08/17/move-to-akamai/&#34;&gt;KAIZEN Platform, Inc. のエンジニア行動指針&lt;/a&gt;がだいぶ本書に影響を受けたと思われるものになっていて、これに全社員がコミットできている状態というのは理想的なのだろうなと思ったりした。本書の内容にはとても賛同できるのだが、「組織論」である以上は自分だけが納得していても仕方なくて、社内でこの内容を文化として定着させなくてはならない。そこのハードルがなかなかに高い。&lt;/p&gt;
+
+&lt;p&gt;本書でもそのあたりの話には「組織的操作の技法」として第5章をまるまる当てて触れられていて、例えば「道がないなら道を作る」＝草の根からツールの導入などを始めていく、「許可を求めるより寛容を求めるほうが簡単」、「安全なポジションまで昇進する」といったことが書かれている。結局はできることからやっていく、しかなくなってしまうのかもしれない。&lt;/p&gt;
+
+&lt;p&gt;個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。&lt;/p&gt;
+
+&lt;p&gt;こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

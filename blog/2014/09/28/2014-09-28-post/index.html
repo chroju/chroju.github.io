@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    awesomeウィンドウマネージャーの見栄えを良くする | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/09/28/2014-09-28-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>awesomeウィンドウマネージャーの見栄えを良くする</h1>
+      <div class="meta">
+        Sep 28, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。</p>
+
+<h1 id="テーマファイルの構成:0f9e51d768c1f3c9942ee70db57f3480">テーマファイルの構成</h1>
+
+<p>awesomeの設定はいくつかのLuaファイルを使って書き換えていく。基本的には全体設定を司る<code>~/.config/awesome/rc.lua</code>と、外観やテーマを司るライブラリである、Beautifulの設定ファイル<code>~/.config/awesome/themes/default/theme.lua</code>の2つを覚えておけばいいのかなと。いずれも初期状態では配置されてないので、デフォルトファイルをコピーしてきて使う。</p>
+
+<pre><code># cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua
+# cp -r /usr/share/awesome/themes/default ~/.config/awesome/themes/default
+</code></pre>
+
+<p>Beautifulについてはrc.luaの中で設定ファイルのパスが指定できるので、<code>default</code>という名前が嫌だったら任意で変えてもOK。あとは正直<a href="http://awesome.naquadah.org/wiki/Awesome_3_configuration">awesomeのWiki</a>見るのが手っ取り早いとは思うのだが、設定したところだけ書いておく。ちなみに<a href="http://chroju89.hatenablog.jp/entry/2014/09/23/190304">前回記事</a>で書いたが、awesomeのデフォルトターミナルの設定も<code>rc.lua</code>を使うので、外観変える必要なくても<code>rc.lua</code>だけは確実に要ると思う。</p>
+
+<h1 id="タグリストの書き換え:0f9e51d768c1f3c9942ee70db57f3480">タグリストの書き換え</h1>
+
+<p>awesomeでは仮想デスクトップを&rdquo;tag&rdquo;と呼んで扱っていて、デフォルトの状態だと左上に1から8まで（だったかな？）の数字がタグの番号として並んでいる。あまりわかりやすいものではないし、そんなに多くタグも使わないので書き換える。</p>
+
+<pre><code class="language-lua">tags = &lt;span class=&quot;synType&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;synStatement&quot;&gt;for&lt;/span&gt; s = &lt;span class=&quot;synConstant&quot;&gt;1&lt;/span&gt;, screen.count() &lt;span class=&quot;synStatement&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;synComment&quot;&gt;-- Each screen has its own tag table.&lt;/span&gt;
+    tags[s] = awful.tag(&lt;span class=&quot;synType&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;synConstant&quot;&gt;&quot;Firefox&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Terminal&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Vim&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;other&quot;&lt;/span&gt; &lt;span class=&quot;synType&quot;&gt;}&lt;/span&gt;, s, layouts[&lt;span class=&quot;synConstant&quot;&gt;1&lt;/span&gt;])
+&lt;span class=&quot;synStatement&quot;&gt;end&lt;/span&gt;
+
+</code></pre>
+
+<p>あとウィンドウを開いているタグは小さな正方形が表示されたりしていて鬱陶しかったのと、あまり見栄えも良くなかったので、正方形を表示されないようにした上で、フォーカスしているタグは文字色を変えることにした。これはbeautifulの方で設定する。</p>
+
+<pre><code class="language-lua">theme.taglist_fg_focus = &lt;span class=&quot;synConstant&quot;&gt;&quot;#f15c22&quot;&lt;/span&gt;
+&lt;span class=&quot;synComment&quot;&gt;-- theme.taglist_squares_sel   = &quot;/usr/share/awesome/themes/default/taglist/squarefw.png&quot;&lt;/span&gt;
+&lt;span class=&quot;synComment&quot;&gt;-- theme.taglist_squares_unsel = &quot;/usr/share/awesome/themes/default/taglist/squarew.png&quot;&lt;/span&gt;
+
+</code></pre>
+
+<p>1行目がフォーカスされているときのfg、フォアグラウンドカラーの設定。2、3行目はデフォルトで入ってる設定だったのでコメントアウトしておいた。</p>
+
+<h1 id="ウィジェットの表示:0f9e51d768c1f3c9942ee70db57f3480">ウィジェットの表示</h1>
+
+<p>画面上の情報表示はウィジェットとして扱う。ウィジェットを管理するライブラリはいくつかあるみたいなんだが、取っつきやすそうなので自分は<code>vicious</code>を<code>rc.lua</code>の中で<code>require</code>して使っている。</p>
+
+<pre><code>$ yaourt -S vicious
+</code></pre>
+
+<p>インストールした上で、</p>
+
+<pre><code class="language-lua">&lt;span class=&quot;synStatement&quot;&gt;local&lt;/span&gt; vicious = &lt;span class=&quot;synIdentifier&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;synConstant&quot;&gt;&quot;vicious&quot;&lt;/span&gt;)
+
+</code></pre>
+
+<p>設定の順序としては、awesomeがもともと備えているウィジェット生成用のAPIである<code>wibox</code>を使ってウィジェットのの原型をセットし、これに<code>vicious</code>を使って表示させたい情報をセットする。ここではバッテリー状態と音量、Wi-Fiの状態を表示させる。どんな情報を表示させられるのか、詳細は<a href="http://git.sysphere.org/vicious/tree/README">ここ</a>。</p>
+
+<pre><code class="language-lua">&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
+battxtwidget = wibox.widget.textbox()
+vicious.register(battxtwidget, vicious.widgets.bat, &lt;span class=&quot;synConstant&quot;&gt;&quot; Battery: &lt;span color='#ffffff'&gt;$2%&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;60&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;BAT0&quot;&lt;/span&gt;)
+&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
+soundwidget = wibox.widget.textbox()
+vicious.register(soundwidget, vicious.widgets.volume, &lt;span class=&quot;synConstant&quot;&gt;&quot; Vol: &lt;span color='#ffffff'&gt;$1&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Master&quot;&lt;/span&gt;)
+&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
+wifiwidget = wibox.widget.textbox()
+vicious.register(wifiwidget, vicious.widgets.wifi, &lt;span class=&quot;synConstant&quot;&gt;&quot; Wi-Fi: &lt;span color='#ffffff'&gt;${ssid}&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;60&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;wlp1s0&quot;&lt;/span&gt;)
+
+</code></pre>
+
+<p>ウィジェットを作ったら、画面上のレイアウトにウィジェットをセットする。</p>
+
+<pre><code class="language-lua">&lt;span class=&quot;synComment&quot;&gt;-- Widgets that are aligned to the right&lt;/span&gt;
+&lt;span class=&quot;synStatement&quot;&gt;local&lt;/span&gt; right_layout = wibox.layout.fixed.horizontal()
+&lt;span class=&quot;synComment&quot;&gt;-- if s == 1 then right_layout:add(wibox.widget.systray()) end&lt;/span&gt;
+right_layout:add(soundwidget)
+right_layout:add(battxtwidget)
+right_layout:add(wifiwidget)
+right_layout:add(mytextclock)
+right_layout:add(mylayoutbox[s])
+
+</code></pre>
+
+<p>自分がした設定はこの程度。あとはbeautifulで<code>theme.font = &quot;sans 10&quot;</code>の設定でフォントサイズを少し大きくしたぐらいだが、beautifulの設定ファイルを見ればわかる通り、かなり細かく色やら何やら設定ができる。このへんに凝り始めるとキリがないので自分はやめることにしたが、好きな人はやってみたらいいんじゃないですかね。1つ、GitHubですげーカッコイイテーマ配ってるの見つけたんで貼っときます。Samuraizuとか思い出すなー。</p>
+
+<ul>
+<li><a href="https://github.com/copycat-killer/awesome-copycats">copycat-killer/awesome-copycats · GitHub</a></li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/09/23/2014-09-23-post/" rel="prev">Arch Linux &#43; awesome with Windows 8.1 in VAIO Pro</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/10/02/2014-10-02-post/" rel="next">『実践Vim』でVimの思想を身につける</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

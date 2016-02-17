@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Capistrano on the world as code</title>
+    <link>http://chroju.github.io/categories/capistrano/</link>
+    <description>Recent content in Capistrano on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 12 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/capistrano/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</title>
+      <link>http://chroju.github.io/blog/2014/04/12/2014-04-12-post/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/04/12/2014-04-12-post/</guid>
+      <description>
+
+&lt;p&gt;いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでに&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/02/20/000348&#34;&gt;こちら&lt;/a&gt;のエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。&lt;/p&gt;
+
+&lt;h2 id=&#34;今回作成したファイル:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;今回作成したファイル&lt;/h2&gt;
+
+&lt;p&gt;以下4ファイルを作成した。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Capfile&lt;/li&gt;
+&lt;li&gt;config/deploy.rb&lt;/li&gt;
+&lt;li&gt;config/deploy/staging.rb&lt;/li&gt;
+&lt;li&gt;lib/capistrano/tasks/unicorn.cap&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基本的にCapistranoを使う場合「必須」なのは上2つのファイル。&lt;code&gt;deploy/hoge.rb&lt;/code&gt;も確実に必要にはなるが、デプロイ先の環境が本番なのかステージングなのかでproduction.rbとstaging.rbを使い分けることになる。もちろん、ステージング環境を用意していない場合はstaging.rbは不要。また4つ目のファイルだが、自分の場合はunicornをデプロイ先で使っているので、デプロイ後にunicornを再起動する目的で独自タスクを作成している。説明が遅れたが、今回デプロイ先となる環境は大雑把に以下の通り。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Vagrant 1.4.3&lt;/li&gt;
+&lt;li&gt;CentOS 6.4&lt;/li&gt;
+&lt;li&gt;Postgresql 9.1&lt;/li&gt;
+&lt;li&gt;Ruby 1.9.3(rbenv)&lt;/li&gt;
+&lt;li&gt;Nginx + unicorn&lt;/li&gt;
+&lt;li&gt;位置付けはステージング環境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;capfile:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;Capfile&lt;/h2&gt;
+
+&lt;script src=&#34;https://gist.github.com/10530780.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;ここはだいたい環境を問わず同じになってくる箇所。まず&lt;code&gt;capistrano/setup&lt;/code&gt;と&lt;code&gt;capistrano/deploy&lt;/code&gt;は&lt;code&gt;require&lt;/code&gt;が必須。RailsをCapistranoで扱う場合は、&lt;code&gt;capistrano/bundler&lt;/code&gt;から&lt;code&gt;capistrano/rails/assets&lt;/code&gt;までも必須となる。rbenvを使っている場合は&lt;code&gt;capistrano/rbenv&lt;/code&gt;が必要。rbenvをどこにインストールしたのかにより、&lt;code&gt;set :rbenv_type&lt;/code&gt;を指定する。あとはデプロイするアプリケーションで使うRubyのバージョンも指定してやる。rvmを使う場合も似たような&lt;code&gt;capistrano/rvm&lt;/code&gt;を使うみたいだが、そちらはよくわからんので割愛。&lt;/p&gt;
+
+&lt;p&gt;で、ここまでがrequireということなので、デプロイ元サーバーにGemfile書いてインストールしておくことを忘れずに。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;group :development do
+  gem &#39;capistrano&#39;, &#39;~&amp;gt; 3.1.0&#39;, :require =&amp;gt; false
+  gem &#39;capistrano-rails&#39;, &#39;~&amp;gt; 1.0.0&#39;, :require =&amp;gt; false
+    gem &#39;capistrano-rbenv&#39;, &#39;~&amp;gt; 2.0&#39;, :require =&amp;gt; false
+  gem &#39;capistrano-bundler&#39;, &#39;~&amp;gt; 1.1.2&#39;, :require =&amp;gt; false
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最終行は独自カスタムタスクを読み込むための行。デフォルトで入っているのでそのままにしておけばよい。先のunicorn.capのように、何か独自タスクを作った場合はこのパスに入れれば読み込むよーということでもある。&lt;/p&gt;
+
+&lt;p&gt;なお、以前書いたエントリーでは&lt;code&gt;capistrano3/unicorn&lt;/code&gt;も&lt;code&gt;require&lt;/code&gt;していたのだが、これは撤回した。詳細はunicorn.capについて説明するときに後述。&lt;/p&gt;
+
+&lt;h2 id=&#34;staging-rb:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;staging.rb&lt;/h2&gt;
+
+&lt;script src=&#34;https://gist.github.com/10530945.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;ステージング環境、というかデプロイ先環境の設定を書く。vagrantを使う場合はだいたいこれと同じように書いておけば通るんじゃないかと思う。Vagrantはデフォルトではvagrantユーザーによるsshが可能になっているので、それをそのまま使わせてもらっている。何か他のユーザーで入りたい場合などは頑張るしかない。&lt;/p&gt;
+
+&lt;p&gt;一点だけ注意すべきは、&lt;code&gt;RAILS_ENV&lt;/code&gt;がstagingに設定されるということ。Capistrano3では&lt;code&gt;cap install&lt;/code&gt;を叩くとデフォルトでstaging.rbとproduction.rbが作られ、&lt;code&gt;RAILS_ENV&lt;/code&gt;もこのファイル名に倣うことになるのだが、Railsの動作環境は通常test, development, productionの3種類であり、stagingは存在していない。従ってこのままデプロイを始めてもうまくはいかない。面倒であればstaging.rbは使わず、production.rbだけを使っていてもいいかもしれない。&lt;/p&gt;
+
+&lt;p&gt;staging.rbを使う場合は、Rails側で環境の準備が必要になる。やることは大きく3つ。&lt;/p&gt;
+
+&lt;h3 id=&#34;1-database-ymlにstagingを作成する:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;1. database.ymlにstagingを作成する&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;rake db:migrate&lt;/code&gt;などのDB系のコマンドはi&lt;code&gt;RAILS_ENV&lt;/code&gt;を指定して実行される。ここで指定された&lt;code&gt;RAILS_ENV&lt;/code&gt;をdatabase.ymlに見に行くので、設定を入れておく必要がある。ステージング環境の本来の意味を考えると、production用の記述をそのままコピーするだけで良いはず。&lt;/p&gt;
+
+&lt;h3 id=&#34;2-config-environments-staging-rbを作成する:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;2. config/environments/staging.rbを作成する&lt;/h3&gt;
+
+&lt;p&gt;動作環境設定ファイルとして、デフォルトではproduction.rbとdevelopment.rbだけが用意されているので、これもproduction.rbをコピーしてstaging.rbを作る。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-gemfileにgroup-stagingを作成する:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;3. Gemfileにgroup :stagingを作成する&lt;/h3&gt;
+
+&lt;p&gt;これは&lt;code&gt;RAILS_ENV&lt;/code&gt;と直結するわけではないが、GemfileのグループもRails環境ごとに作られているのでstagingを設けてやった方が良さそう。これもここまでと同様の話で、&lt;code&gt;group :staging, :production do&lt;/code&gt;としてやるだけで良い。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参考：&lt;a href=&#34;http://spring-mt.tumblr.com/post/33209507135/rails-staging&#34;&gt;railsでstaging環境を作る - CubicLouve&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;deploy-rb:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;deploy.rb&lt;/h2&gt;
+
+&lt;script src=&#34;https://gist.github.com/10530987.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;いよいよデプロイ用の設定。面倒なので説明は省くが、だいたいはコメント読めば設定できるはず。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;linked_files&lt;/code&gt;と&lt;code&gt;linked_dirs&lt;/code&gt;は&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/04/06/191336&#34;&gt;前回のエントリー&lt;/a&gt;で書いた通り、shared配下に置いているファイルやフォルダのうち、currentに必要となるものを指定することでシンボリックリンクを張ってくれるというものなのだが、ではshared配下にこれらファイルやフォルダはいつ作られるのか？というのがかねてから疑問だった。&lt;/p&gt;
+
+&lt;p&gt;結論を言えば、&lt;code&gt;linked_files&lt;/code&gt;は勝手には作成されない。というより、ここに指定したファイルがshared下に存在しない場合、Capistranoはデプロイ時にエラーを吐いてくる。正確に言えば&lt;code&gt;deploy:check:linked_files&lt;/code&gt;というタスクがあり、ここで存在確認を行っている（&lt;a href=&#34;https://github.com/capistrano/capistrano/blob/master/lib/capistrano/tasks/deploy.rake&#34;&gt;参照&lt;/a&gt;）。したがってこのタスクが投げられる前にファイルは別でアップロードしなくてはならない。ここではdetabase.ymlを指定しているので、アップロードタスクを独自で組み込んでいる。詳細は後述。&lt;/p&gt;
+
+&lt;p&gt;一方の&lt;code&gt;linked_dirs&lt;/code&gt;は、shared配下に存在しない場合は&lt;code&gt;deploy:check:make_linked_dirs&lt;/code&gt;で空っぽのフォルダとして作成してくれる。逆に言えば、元々ファイルが入っているようなフォルダをここで指定することはあまりないということ。例えばbundleなり、logやtmpなり、アプリが動作する中で必要とされるフォルダ（従ってGitHubで静的に管理はしていないフォルダ）がここに来ている。なお、shared/bundleは&lt;code&gt;capistrano/bundle&lt;/code&gt;が&lt;code&gt;bundle install --path&lt;/code&gt;で指定するデフォルトのフォルダなんだそうだが、古いバージョンの&lt;code&gt;capistrano/bundle&lt;/code&gt;ではshared/vendor/bundleにインストールするらしいので要確認。&lt;/p&gt;
+
+&lt;p&gt;後半では独自タスクを3つ追加している。&lt;/p&gt;
+
+&lt;p&gt;1つ目はdatabase.ymlをアップロードするタスク。デプロイ先にshared/configフォルダを作成した上で、ローカルのconfig/database.ymlをアップロードしている。2つ目は&lt;code&gt;bundle exec rake db:create&lt;/code&gt;を発動するタスク。Capistranoやcapistrano/railsにはDB作成用のタスクは一切含まれていないので、自力であらかじめ作っておく必要がある。手動で作成したり、Chefなんかで仕込んでおく手もあるのだろうが、ここではCapistranoのタスクとして書いている。必要になるのはもちろん初回1回限りなので、デプロイのルーチンの中には組み込んでいない。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参照：&lt;a href=&#34;http://yss44.hatenablog.com/entry/2013/12/01/150215&#34;&gt;Capistrano3で快適デプロイ生活!! - Less is Best&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;3つ目はunicornを再起動するタスク。これはunicorn.capの中で作成した&lt;code&gt;unicorn:restart&lt;/code&gt;というタスクを呼んでいる。&lt;/p&gt;
+
+&lt;p&gt;最後の2行は独自タスクのルーチンへの組み込み。database.ymlのアップロードは真っ先にやらなくてはならないので、&lt;code&gt;deploy:starting&lt;/code&gt;というデフォルトで言えば最初のタスクのさらに前に組み入れている。一方のunicorn再起動は&lt;code&gt;deploy:publishing&lt;/code&gt;の後、ほぼすべてのタスクが終わったタイミング。&lt;/p&gt;
+
+&lt;h2 id=&#34;unicorn-cap:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;unicorn.cap&lt;/h2&gt;
+
+&lt;script src=&#34;https://gist.github.com/10531064.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;ほぼほぼ以下エントリーの中身をそのまま使わせてもらいました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参照：&lt;a href=&#34;http://qiita.com/satococoa/items/9b0cc416ffc042680b9b&#34;&gt;unicorn + rails 用 Capistrano 3 の設定ファイル - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;異なる箇所は&lt;code&gt;start_unicorn&lt;/code&gt;の内部処理。元エントリーでは&lt;code&gt;bundle exec unicorn&lt;/code&gt;を叩いているのだが、自分としては&lt;code&gt;bundle exec unicorn_rails&lt;/code&gt;を叩く認識だったので書き換えている。ここの書き換えが必要なのかどうかはちょっと自信がない。またコマンドのオプションとして&lt;code&gt;--path hoge&lt;/code&gt;を指定しているのだが、これはサブディレクトリでRailsアプリを動作させたいため。予定として&lt;a href=&#34;http://www.chroju.net/&#34;&gt;http://www.chroju.net/&lt;/a&gt;は静的なサイト、www.chroju.net/hogeでアプリごとにフォルダ作って管理としたかったもので。まー、こういう要らんチューニングを最初からやろうとするから迷走するわけなのだが。はじめはマニュアル通りにまず写経すべきだと思います。はい。サブディレクトリ云々の件はまた別途エントリー書きます。&lt;/p&gt;
+
+&lt;p&gt;ちなみにパスの指定やら何やらやらないのであれば、&lt;a href=&#34;https://github.com/tablexi/capistrano3-unicorn&#34;&gt;capistrano3-unicorn&lt;/a&gt;を使うのも手だと思う。&lt;/p&gt;
+
+&lt;h2 id=&#34;その他トラブルなど:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;その他トラブルなど&lt;/h2&gt;
+
+&lt;p&gt;以上、ここまでの設定にはそれなりに自信がある。とりあえず&lt;code&gt;bundle exec cap staging deploy&lt;/code&gt;を叩いてエラーが出ないことも確認はした。が、現状アプリは動いてない。。。いや、正確に言うと一度動いたのだが、その後Vagrant落として、セキュリティアップデートのためにiMacも再起動してもう一度やってみたところ、ダメダメになってしまったのだ。何が原因なのやらさっぱりだ。。。トラブルは3つほど遭遇している。&lt;/p&gt;
+
+&lt;h3 id=&#34;1-gitが通らない:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;1. Gitが通らない&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;git ls-remote&lt;/code&gt;で&lt;code&gt;Permission denid(publickey)&lt;/code&gt;のエラーが出るという事象が発生、その先に進めなくなった。これについてはドンピシャなエントリーを探し当てたので、そのまま解決策を適用したらなんとかなった。なぜこのエラーが起きたのかまではまだ深堀りできてない。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参考：&lt;a href=&#34;http://peteoliveira.com/deploying-with-capistrano-3-failing-permission-denied-publickey/&#34;&gt;Deploying with Capistrano 3 failing – Permission denied (publickey) | Pete Oliveira&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;2-404が返される:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;2. 404が返される&lt;/h3&gt;
+
+&lt;p&gt;Nginxは動いている。unicornもプロセスは上がっているのだが、アプリを配置したフォルダを見に行くとThe page you were looking for doesn&amp;rsquo;t exist.というメッセージが返される状態。他の有りもしないフォルダを見に行こうとするとNginxがBad Gatewayを返してくるし、unicorn.stderr.rbにログが残っているのでアクセスはできているようなのだが、なぜ表示に至らないのかわからない。&lt;/p&gt;
+
+&lt;p&gt;ちなみにstaging.logにはActionController::RoutingErrorが出ている。？？？&lt;/p&gt;
+
+&lt;h3 id=&#34;3-assets周りが不具合起こしている模様:24ae9da41fdb1f2e286ffdf567be8468&#34;&gt;3. Assets周りが不具合起こしている模様&lt;/h3&gt;
+
+&lt;p&gt;Vagrantを落とす前はアプリ自体つながりはしたのだが、jsとcssが反映されていない状態だった。ソースから探ってjsとcssをブラウザ上で開いてみたのだが、真っ白になっていた。アセットコンパイルのエラーなのかと思い、サーバー上でもコンパイル後のファイルを開いたりしてみたが、こっちは中身がきちんと書かれていた。なんなんだ一体。&lt;/p&gt;
+
+&lt;p&gt;以上。だいたい整ったはずなのだが、まだまだ先が長そうでいい加減ゲンナリしている。自分、この手のこと向いてないのかもしれんと思い始めた。。。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Capistrano3がわからんので今一度イチから考えなおしてみる</title>
+      <link>http://chroju.github.io/blog/2014/04/06/2014-04-06-post/</link>
+      <pubDate>Sun, 06 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/04/06/2014-04-06-post/</guid>
+      <description>
+
+&lt;p&gt;前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。&lt;/p&gt;
+
+&lt;h2 id=&#34;capistranoは何をしてくれるのか:6a161c08a002bfe74109273909e4e237&#34;&gt;Capistranoは何をしてくれるのか&lt;/h2&gt;
+
+&lt;p&gt;そもそもCapistranoとは何をしてくれるツールなのか？&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/yuku_t/items/01c0ec4389db143e27f5&#34;&gt;Capistrano3のデプロイフレームワークの使い方 - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Capistranoは2まではRailsのデプロイツールだったけど、3は汎用的なデプロイツールに変わっている。したがってデフォルトの状態ではRails用のデプロイタスクは特に含まれていない。このあたりが上の方のリンク先で語られている内容になる。&lt;/p&gt;
+
+&lt;p&gt;ではデフォルトでのデプロイタスクは何をするのかと言えば、およそサーバーへのデプロイとして一般的に行われるようなものが組み込まれている。&lt;a href=&#34;https://github.com/capistrano/capistrano/tree/master/lib/capistrano/tasks&#34;&gt;capistrano/lib/capistrano/tasks&lt;/a&gt;あたりを探るとデフォルトタスクがよくわかる。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;releases、sharedなどディレクトリの作成&lt;/li&gt;
+&lt;li&gt;レポジトリからgit clone&lt;/li&gt;
+&lt;li&gt;linked_files、linked_dirsの存在確認とシンボリックリンク作成&lt;/li&gt;
+&lt;li&gt;currentディレクトリへのシンボリックリンク作成&lt;/li&gt;
+&lt;li&gt;最古世代の削除、クリーンナップ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ざっくり見てしまうと、単純にサーバーへファイルを上げて自動的に世代管理をさせるだけであればこれだけでもなんとかなりそうなところではある。逆にこれらが煩わしいのであれば、&lt;a href=&#34;http://labs.gree.jp/blog/2013/12/10084/&#34;&gt;デフォルトタスクを無効化して使う手もある。&lt;/a&gt;デフォルトタスクの内容がよくわからないのであれば、一旦無効化してすべて自分でタスクを書くというのも手だと思う。&lt;/p&gt;
+
+&lt;p&gt;Railsをデプロイする場合はこれだけでは足りないので、capistrano/railsやcapistrano/bundleを追加で読み込むことになる。&lt;/p&gt;
+
+&lt;h2 id=&#34;capistranoのディレクトリ構成:6a161c08a002bfe74109273909e4e237&#34;&gt;Capistranoのディレクトリ構成&lt;/h2&gt;
+
+&lt;p&gt;Capistranoでデフォルトのデプロイを行った時、デプロイ先サーバーに作成されるディレクトリについてもよくわかってないのでまとめておく。deploy.rbのdeploy_toで指定したディレクトリ内に、次の3つのディレクトリが作られる。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;releases : デプロイした内容を世代管理する&lt;/li&gt;
+&lt;li&gt;shared : bundleとかdatabase.ymlとかGitで管理してないファイル置き場（多分）&lt;/li&gt;
+&lt;li&gt;current : releasesの最新世代とsharedのシンボリックリンクが置かれる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基本的に「デプロイ」される先はreleasesだ。releases配下にはデプロイ時のタイムスタンプから生成された名前のフォルダが作られ、その中にごっそりデプロイしたファイルが入っている。タイムスタンプが付くということは当然世代管理されているわけだが、保持される世代数はdeploy.rbの&lt;code&gt;set :keep_releases&lt;/code&gt;で好きに指定できる。で、最新世代についてはcurrent配下にシンボリックリンクが自動的に貼られる。&lt;/p&gt;
+
+&lt;p&gt;sharedは正直よくわからない。デプロイのたびに更新するわけではない、すなわちGitで管理をしていないファイルやディレクトリを置いておくみたいなのだが、では&lt;strong&gt;どうやって配置すれば良いのか？&lt;/strong&gt;がわからない。配置したファイルのうち、必要なものについてはlinked_dirsとlinked_filesで指定すればcurrent配下にこれもまたシンボリックリンクが貼られる。しかし、&lt;strong&gt;どうやって配置すれば良いのかわからない。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;関連：&lt;a href=&#34;http://qiita.com/shunsugai@github/items/a112182ff5c0bb49249a&#34;&gt;[自分用メモ]Capistrano3のlinked_filesって自分でuploadしなきゃダメですか？ - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;で、これを書いていて気付いたのだが、アプリの中身がcurrent配下に展開されるということは、ウェブサーバーの設定もdeploy_toではなくてcurrentに飛ばすようにしておかないといけないわけだ。俺だけかも知れんが、案外罠ではないかという気がする。&lt;/p&gt;
+
+&lt;h2 id=&#34;capistrano-rails:6a161c08a002bfe74109273909e4e237&#34;&gt;capistrano/rails&lt;/h2&gt;
+
+&lt;p&gt;取りあえずsharedの話はほっといて、Railsをデプロイする話に戻る。冒頭でデフォルトタスクにはRailsに対するものは何もないと書いたが、それではRails用のデプロイタスクはどこで生成されているのか？ 答えから書けば、capistrano-railsを読み込むことによって初めて生成される。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/yuku_t/items/78f32d6e5d21aee4e745&#34;&gt;Capistrano3におけるRailsのデプロイタスクの内部実装 - Qiita&lt;/a&gt;
+いわく、追加されるタスクは主に3つ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;assets compile(deploy:compile_assets)&lt;/li&gt;
+&lt;li&gt;assetsのタイムスタンプ更新(deploy:normalize_assets)&lt;/li&gt;
+&lt;li&gt;db:migrate(deploy:migrate)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;逆に言えば、ここで追加される以外のタスクはデフォルトでは&lt;strong&gt;行われない&lt;/strong&gt;ということになる。その点を配慮せずにただググって適当なdeploy.rbをコピーしたりしただけでは、思ったとおりのデプロイは出来ない。&lt;/p&gt;
+
+&lt;p&gt;一例として自分がハマったのが、&lt;code&gt;db:create&lt;/code&gt;は行われないということ。schema.rbを使って初回デプロイのときに上手いこと云々なんてことは一切してくれないので、このあたりは自分で書くか、サーバーを作ったときに予めDBをこしらえておく必要がある。&lt;/p&gt;
+
+&lt;h2 id=&#34;capistrano-bundle:6a161c08a002bfe74109273909e4e237&#34;&gt;capistrano/bundle&lt;/h2&gt;
+
+&lt;p&gt;もうひとつ、RailsをCapistranoでデプロイする場合に必要なのがcapistrano/bundler。Rails使っててGemfileがないなんてことはないだろうし、というかcapistrano/railsの中で&lt;a href=&#34;https://github.com/capistrano/rails/blob/master/lib/capistrano/rails.rb&#34;&gt;明示的にrequireされている。&lt;/a&gt;何をやっているのかと言えば、簡単な話しである。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  before &#39;deploy:updated&#39;, &#39;bundler:install&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;デフォルトではshared配下にbundleディレクトリを作ってbundle installをかけてくれる。パスについては&lt;code&gt;set :bundle_path&lt;/code&gt;オプションで自由に指定ができる。&lt;/p&gt;
+
+&lt;h2 id=&#34;capistrano-rbenv:6a161c08a002bfe74109273909e4e237&#34;&gt;capistrano/rbenv&lt;/h2&gt;
+
+&lt;p&gt;あとよく使われるものとして、capistrano/rbenvがある。デプロイ先のサーバーで、Rubyをrbenvを使って入れてる場合には必須になるもの。中身はよく知らないが、そこまで気にしなくても良いのではないかという感覚がある。入れたらdeploy.rbに&lt;code&gt;set :rbenv_ruby_version&lt;/code&gt;で使うRubyのバージョンを指定すればOK。&lt;/p&gt;
+
+&lt;p&gt;同じ類のものとして、capistrano/rvmももちろんあります。&lt;/p&gt;
+
+&lt;h2 id=&#34;ソースにあたることの必要性:6a161c08a002bfe74109273909e4e237&#34;&gt;ソースにあたることの必要性&lt;/h2&gt;
+
+&lt;p&gt;以上がCapistrano3でRailsをデプロイする場合の主なデフォルトタスクの内容になる。繰り返しになるが、これ以外に何をやりたいのならタスクは書く必要がある。よく言われるのがデプロイ後のウェブサーバーの再起動で、unicornを再起動するタスクを追加している例はよく見かける。ただ、これも&lt;a href=&#34;https://github.com/tablexi/capistrano3-unicorn&#34;&gt;capistrano3-unicorn&lt;/a&gt;という便利なものがすでに作られていたりはする。&lt;/p&gt;
+
+&lt;p&gt;個人的な思いなのだが、&lt;a href=&#34;http://capistranorb.com/&#34;&gt;Capistrano公式&lt;/a&gt;の「Getting Started」は説明が不十分な気がしてならない。デプロイに至るまでの設定ファイルの書き方やら何やらは確かにだいたい載っているのだが、ではCapistrano3の内部実装がどうなっているのかとか、タスクを自分で書くにはどうすればよいのかといったあたりの情報が足りない。自分はまだこのDSLを読み下せないのだが、rakeあたりを知っていると結構書けるものなんだろうか？　ひょっとしたら、自分のようなRubyやRails初心者が安易に手を出すものではないのかなぁとか思う。&lt;/p&gt;
+
+&lt;p&gt;ただ、GitHubにいずれもソースが上がっているので、根気よく読んでいけばCapistranoが何をしているのか、また何を求めているのかは理解できる。誰かの書いたノウハウに頼るより、ソースにあたるのが大切なのは基本だと思う。常に。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（5）Capistranoによるデプロイ ※未完</title>
+      <link>http://chroju.github.io/blog/2014/02/20/2014-02-20-post/</link>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/02/20/2014-02-20-post/</guid>
+      <description>
+
+&lt;p&gt;だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。&lt;/p&gt;
+
+&lt;p&gt;Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。&lt;/p&gt;
+
+&lt;p&gt;3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは&lt;a href=&#34;http://capistranorb.com/&#34;&gt;本家&lt;/a&gt;をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://threetreeslight.com/post/68344998681/capistrano-3-x-rails&#34;&gt;capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://labs.gree.jp/blog/2013/12/10084/&#34;&gt;入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&amp;rsquo; Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://takkkun.hatenablog.com/entry/2013/10/12/Capistrano_3%E3%81%B8%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D&#34;&gt;Capistrano 3への手引き - 今日のごはんは素麺です&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/ria10/20130526/1369583203&#34;&gt;capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://kakakakakku.hatenablog.com/entry/2013/12/11/090204&#34;&gt;Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;capistranoとは:9acf56c276173962532edfc972e2d93b&#34;&gt;Capistranoとは？&lt;/h2&gt;
+
+&lt;p&gt;そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。&lt;/p&gt;
+
+&lt;h2 id=&#34;インストール:9acf56c276173962532edfc972e2d93b&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;group :development do
+  gem &#39;capistrano&#39;, &#39;~&amp;gt; 3.1.0&#39;
+  gem &#39;capistrano-rails&#39;, &#39;~&amp;gt; 1.0.0&#39;
+  gem &#39;capistrano-bundler&#39;, &#39;~&amp;gt; 1.1.2&#39;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。&lt;/p&gt;
+
+&lt;h2 id=&#34;初期作業:9acf56c276173962532edfc972e2d93b&#34;&gt;初期作業&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bundle exec cap install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述&lt;/li&gt;
+&lt;li&gt;config/deploy.rb : デプロイタスクを記述&lt;/li&gt;
+&lt;li&gt;config/deploy/hoge.rb : 各サーバー情報を記述&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;capfile編集:9acf56c276173962532edfc972e2d93b&#34;&gt;Capfile編集&lt;/h2&gt;
+
+&lt;p&gt;capistrano-railsと同bundlerを読み込むため、Capfileを開いて以下追記。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &#39;capistrano/rails&#39;
+require &#39;capistrano/bundler&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;config-deploy-rb編集:9acf56c276173962532edfc972e2d93b&#34;&gt;config/deploy.rb編集&lt;/h2&gt;
+
+&lt;p&gt;いろいろコメントアウトしてあってどれを使えばいいかよくわかんなかったりもするのだが、最低限以下は必要っぽい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:application&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;hoge&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;
+set &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:repo_url&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;git@github.com:chroju/hoge&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;
+set &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:deploy_to&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;/var/www/hoge&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;
+set &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:scm&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:git&amp;lt;/span&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上から。1行目はアプリケーション名。これはどこかで使われる設定ではないようなので、適当に入れておけばよさそう。2行目はGithubのリポジトリURL。3行目はデプロイ先となるサーバー上のディレクトリパス指定。ここではApacheの設定にならってみた。4行目は使用しているSCMの指定。とはいえ、現状Gitしか対応していないのでこれ以外の書き方は不可。&lt;/p&gt;
+
+&lt;p&gt;ファイル後半にはデプロイタスクのデフォルト設定が書かれている。一応、ここはそのままでも動くみたい。自分で何か特別なことをやらせたい場合は当然ながら編集する必要があるが、まだその域に至ってないです。&lt;/p&gt;
+
+&lt;h2 id=&#34;config-deploy-hoge-rb編集:9acf56c276173962532edfc972e2d93b&#34;&gt;config/deploy/hoge.rb編集&lt;/h2&gt;
+
+&lt;p&gt;ここではステージング環境としてvagrantを使うものと仮定。WebサーバーやDBサーバーを分けたりはせず、1台のサーバーですべてをまかなうこととする。よってstaging.rbを編集する。このファイルもデフォルトでいろいろ書かれてはいるのだが、とりあえず次の4行があればOK。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;127.0.0.1&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;, port: &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;2222&amp;lt;/span&amp;gt;, user: &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;vagrant&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;, roles: &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;%w{&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;web, app, db&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;}&amp;lt;/span&amp;gt;, ssh_options: {
+  user: &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;vagrant&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;,
+  keys: &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;%w(&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;~/.vagrant.d/insecure_private_key&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;)&amp;lt;/span&amp;gt;,
+  auth_methods: &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;%w(&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;publickey&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;)&amp;lt;/span&amp;gt;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;server〜で1台のサーバーの設定を一括で書ける。言わずもがな、まず対象IP。portがポート番号、userがSSHログインするユーザー名。roleはこのサーバーの役割を書く。web、app、dbの中から当てはまるものを書けばいいようだが、allという指定もできるとかできないとか。ssh_options:でさらに詳しい内容を記述。userはさっきのと被ってるので不要な気がするのだが、他のサイトを見てたら書いている設定があったので取りあえず入れてる。keysは認証に使うキーのパス。auth_methods:で認証方法を指定しているが、通例publickey認証とする。
+ここに書いた設定の大半はvagrant ssh-configコマンドで拾えるので、自分の環境に合った設定に書き換えて下さい。&lt;/p&gt;
+
+&lt;h2 id=&#34;デプロイ実行:9acf56c276173962532edfc972e2d93b&#34;&gt;デプロイ実行&lt;/h2&gt;
+
+&lt;p&gt;で、あとはデプロイでいけちゃうみたいです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec staging deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;stagingをproductionに換えればproduction.rbの設定に則ります。あと、末尾に:checkを付けるとコマンドが通るかコールドでチェックしてくれるので、まずは:checkをした方がいい。あと、cap -Tで実行可能なコマンドがずらずら出てくる。デプロイのロールバックしたり、rake db:migrateを走らせたり、結構いろんなことができるので一度見ておくと吉。&lt;/p&gt;
+
+&lt;h2 id=&#34;ハマった点:9acf56c276173962532edfc972e2d93b&#34;&gt;ハマった点&lt;/h2&gt;
+
+&lt;p&gt;自分の場合は以上の手順で上手くいきませんでした。何点かハマったポイントをば。&lt;/p&gt;
+
+&lt;h3 id=&#34;デプロイ先ディレクトリのパーミッション:9acf56c276173962532edfc972e2d93b&#34;&gt;デプロイ先ディレクトリのパーミッション&lt;/h3&gt;
+
+&lt;p&gt;大変アホみたいな話だが最初これでmkdirが上手くいかなかった。公式ドキュメントの&lt;a href=&#34;http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/&#34;&gt;ココ&lt;/a&gt;に書いてあるけど、SSHユーザーはsudoなしでデプロイ先ディレクトリを操作できる権限がなきゃダメです。vagrantユーザーは~/var配下の操作権限なかったので弾かれた次第。。。&lt;/p&gt;
+
+&lt;p&gt;対応としてはさっきのリンク先に書いてある手順通り&lt;a href=&#34;http://itpro.nikkeibp.co.jp/article/COLUMN/20080219/294154/&#34;&gt;sgid&lt;/a&gt;の設定とかしてあげたらなんとかなりました。あるいはパスワードなしでsudo実行可能にしてやっても動くみたいだけど、当然ながらサーバーセキュリティ的にはNGなので。まぁvagrantであればどうでもいいかもしんないけど。&lt;/p&gt;
+
+&lt;h3 id=&#34;sqliteのエラー:9acf56c276173962532edfc972e2d93b&#34;&gt;SQLiteのエラー&lt;/h3&gt;
+
+&lt;p&gt;deploy中にsqlite3.hが存在しないよというエラーが発生。&lt;a href=&#34;http://www.guanxiaohua2k6.com/2012/07/sqlite3h-is-missing.html&#34;&gt;このページ&lt;/a&gt;に書いてあるのとまったく同じ症例だったので、同様の対策をしてあげて解決。これは俺のvagrant環境の準備に不備があったってことでいいんだろうか。根本原因がイマイチ謎。&lt;/p&gt;
+
+&lt;h3 id=&#34;rake-db-migrateのエラー:9acf56c276173962532edfc972e2d93b&#34;&gt;rake db:migrateのエラー&lt;/h3&gt;
+
+&lt;p&gt;そして現在進行形で未解決なのがこのエラー。デフォルトのデプロイタスクでは途中でデプロイ先サーバー上でRAILS_ENV=staging bundle exec rake db:migrateを叩くんだけど、これが次のエラーで停まってしまう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DEBUG [4be84d91]        rake aborted!
+DEBUG [4be84d91]        database configuration does not specify adapter
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;いくつか思い当たった原因に取り組んではみたのだが、なおエラーが起きている。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RAILS_ENV=hogeを追加した場合、Gemfileのgroup :hogeを見に行くのだが、stagingグループを用意していなかった（&lt;a href=&#34;http://opentechnica.blogspot.jp/2012/01/railsenv.html&#34;&gt;参考&lt;/a&gt;）。&lt;/li&gt;
+&lt;li&gt;database.ymlにstagingの設定を用意していなかった。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;たぶんRAILS_ENV周りの設定が何かおかしいと思うのだが、わからないので取りあえず保留にしている。というか、これに行き当たるまでRAILS_ENVのことを全然知らなかった自分にも問題大有りなので、一度Railsの勉強に立ち返ってみている次第。知識がないと、連鎖的に他のこともできなくなってくるなぁというのを痛感している。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Ruby基礎復習(8) Fileクラス | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Ruby基礎復習(8) Fileクラス</h1>
+      <div class="meta">
+        Apr 10, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>『パーフェクトRuby』p.196より。わりと苦手な分野。</p>
+
+<p>まずはファイルをひらく。<code>#open</code>して変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。<code>#read</code>はファイルの内容全体を読み込む一方、<code>#gets</code>を使うと1行ずつ読み込むことができる。あるいは<code>#each_line</code>や<code>#each_char</code>といったメソッドも。</p>
+
+<pre><code class="language-ruby">file = File.open('example.txt')
+p file.read # example.txtの内容を表示
+file.close
+
+File.open 'example.txt' do |file|
+  p file.read
+end
+
+File.read('example.txt')
+
+File.open 'example.txt' do |file|
+  while line = file.gets
+    p line
+  end
+end
+
+File.open 'example.txt' do |file|
+  f.each_line do |line|
+    p line
+  end
+end
+</code></pre>
+
+<p>書き込むときは<code>#open</code>の第二引数にファイルを開くモードを指定する。デフォルトは<code>'r'</code>、すなわち読み込みモードで、他は以下の通り。基本は<code>r</code>が読み込み、<code>w</code>が書き込み、<code>a</code>が追記で、<code>+</code>を付けると読み書き両用モードになる。また<code>b</code>を後置するとバイナリモードで開かれる。</p>
+
+<p>| r  | 読み込みモード         |
+| r+ | 読み書き両用モード（読み書き位置は先頭から）       |
+| w  | 上書き書き込みモード   |
+| w+ | 新規作成して読み書き両用モード |
+| a  | 追記書き込みモード       |
+| a+ | 追記読み書き両用モード（読み込み位置は先頭から、書き込みは追記形式）  |</p>
+
+<pre><code class="language-ruby">File.open 'example.txt', 'w' do |f|
+  f.write 'hoge'
+end
+</code></pre>
+
+<p>もっと単純に<code>#write</code>メソッドだけでも書き込み可能。</p>
+
+<pre><code class="language-ruby">File.write 'example.txt', 'fuga'
+</code></pre>
+
+<p>先のファイルを開くモードの話の中で「読み込み位置は先頭から」という表現があったが、IOオブジェクトではファイル内の今どこを読み／書きしているかというアクセス位置が存在する。<code>#gets</code>では1行ずつ読み込みを行ったように、読み／書きを行うことでアクセス位置は進んでいく。先頭まで戻りたい場合は<code>#rewind</code>を使う。また<code>#seek</code>メソッドは第二引数に定数で指定した基準位置より、第一引数の整数分アクセス位置を移動させることができる。<code>#pos</code>は絶対的にアクセス位置を指定して動かせる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.puts
+  f.rewind # 先頭位置まで戻る
+
+  f.seek 10 # 先頭から10進む
+  f.seek -10, IO::SEEK_END # 末尾（SEEK_END）から10戻った位置に移動
+
+  f.pos = 25 # 先頭から25バイト目に移動
+  f.pos # =&gt; 25
+end
+</code></pre>
+
+<p>文字のエンコーディングについては、「外部」と「内部」という概念を持つ。外部はファイルのエンコーディング情報であり、内部はRuby上で処理する際のエンコーディング情報。例えばEUC-JPのファイルをutf-8で変換して取り扱い、書き込みはEUC-JPで、といったことができる。エンコーディングの設定には<code>#set_encoding</code>メソッドを使う。引数を1つだけ取る場合は外部エンコーディングを設定し、2つ取る場合は第一引数が外部、第二引数が内部を設定する。あるいは<code>File#open</code>するときに、読み書きモードと一緒にエンコーディングも指定することができる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.set_encoding('utf-8') # 外部エンコーディングをutf-8に設定
+
+  f.set_encoding('utf-8', 'EUC-JP') # 外部エンコーディングをutf-8、内部エンコーディングをEUC-JPに設定
+  f.set_encoding('utf-8:EUC-JP') # 外部エンコーディングをutf-8、内部エンコーディングをEUC-JPに設定
+end
+
+File.open 'example.txt', 'r:utf-8:EUC-JP' do |f|
+  p f.external_encoding # =&gt; &quot;utf-8&quot;
+  p f.internal_encoding # =&gt; &quot;EUC-JP&quot;
+end
+</code></pre>
+
+<p>ファイルのロックには<code>#flock</code>メソッドを利用する。ロックのモードは<a href="http://docs.ruby-lang.org/ja/1.9.3/method/File/i/flock.html">ここに記載の定数</a>を使って指定するのだが、主に<code>File::LOCK_EX</code>が排他ロックであることを覚えとけばいいような気も。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt', 'w' do |f|
+  f.flock File::LOCK_EX
+end
+</code></pre>
+
+<p>その他、ファイル情報取得系のメソッドをつらつらと。これらはファイルオブジェクトから取得するだけではなく、<code>File.atime(filename)</code>の形で<code>File</code>クラスのクラスメソッドでも呼び出すことができる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.atime # 最終アクセス日時
+  f.ctime # 最終変更日時
+  f.mtime # 最終更新日時
+
+  f.size # ファイルサイズ
+
+  f.ftype # ファイルタイプ 以下真偽判定メソッドも有り
+  f.file?
+  f.directory?
+  f.symlink?
+
+  f.writable? # =&gt; false
+  f.readable? # =&gt; true
+  f.executable? # =&gt; false
+
+  f.owned? # =&gt; false (自身がファイル所有者か？)
+  f.gid # ファイル所有者のGID
+  f.uid # ファイル所有者のUID
+end
+</code></pre>
+
+<p>ファイル操作系。</p>
+
+<pre><code class="language-ruby"># ファイル名変更、ファイル移動
+File.rename 'hoge', 'fuga'
+File.rename 'hoge', 'dir/hoge'
+
+# ファイル削除
+File.unlink 'hoge'
+
+# シンボリックリンク作成
+File.symlink 'target', 'link'
+
+# ハードリンク作成
+File.link 'target', 'link'
+
+# ファイルモード変更
+File.chmod 0600, 'filename'
+
+# 所有者、グループの変更
+File.chown 100, 100, 'filename'
+</code></pre>
+
+<p>ファイルパスに関するもろもろ。</p>
+
+<pre><code class="language-ruby"># ファイルのあるディレクトリパスの取得
+File.dirname(&quot;etc/sample.txt&quot;) # =&gt; &quot;/etc&quot;
+
+# 第一引数に与えたファイルパスに対する、ファイル名の取得。第二引数でsuffix指定。
+File.basename(&quot;etc/sample.txt&quot;) # =&gt; &quot;sample.txt&quot;
+File.basename(&quot;etc/sample.txt&quot;, &quot;.txt&quot;) # =&gt; &quot;sample&quot;
+
+# 拡張子の取得
+File.extname(&quot;etc/sample.txt&quot;) # =&gt; &quot;.txt&quot;
+
+# ファイルパスの連結（引数は可変長）
+File.join(&quot;/usr/local&quot;, &quot;bin/ruby&quot;) # =&gt; &quot;/usr/local/bin/ruby&quot;
+
+# ファイルパスからdirnameとbasenameを取得し配列生成
+File.split(&quot;/usr/local/bin/ruby&quot;) # =&gt; [&quot;/usr/local/bin&quot;, &quot;ruby&quot;]
+
+# 絶対パスの展開
+File.expand_path(&quot;~&quot;) # =&gt; &quot;/home/chroju&quot;
+File.expand_path(&quot;filename&quot;, &quot;~&quot;) # =&gt; &quot;/home/chroju/filename&quot;
+
+# absolute_pathでは~を展開しない
+File.absolute_path(&quot;~&quot;) # =&gt; &quot;/home/chroju/~&quot;
+</code></pre>
+
+<p>Dirクラスも触れたいのだが、長くなるので一旦ここまで。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/04/06/study-ruby-time/" rel="prev">Ruby基礎復習(7) Timeクラス</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/04/14/study-ruby-dir/" rel="next">Ruby基礎復習(9) Dirクラス</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

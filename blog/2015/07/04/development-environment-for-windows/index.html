@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/07/04/development-environment-for-windows/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</h1>
+      <div class="meta">
+        Jul 4, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。</p>
+
+<h2 id="chocolatey:2c0d31532a91b6fc3e3d338234f27ca1">Chocolatey</h2>
+
+<p>Windowsでのパッケージ管理。不可欠かというとそうでもないとは思うのだが、アップデート含め一括管理が可能なので、精神衛生上良さそうだという意味で使ってみている。どうでもいいが名前がかわいい。</p>
+
+<p>インストール自体はPowershellからワンライナーを叩くだけなので難しくはないのだが、よくわからないエラーで止まることが多くて、現状使い切れてない。Proxyの設定はしたし、powershellの権限も<code>RemoteSigned</code>にしたのだけど、何がいけないのか。。。</p>
+
+<pre><code> Unable to index into an object of type System.IO.FileInfo.
+ 発生場所 C:\ProgramData\chocolatey\helpers\functions\Write-ChocolateyFailure.ps
+ 1:24 文字:8
+ +   throw &lt;&lt;&lt;&lt;  &quot;$failureMessage&quot;
+     + CategoryInfo          : OperationStopped: (Unable to index...em.IO.FileI
+    nfo.:String) []、RuntimeException
+     + FullyQualifiedErrorId : Unable to index into an object of type System.IO
+    .FileInfo.
+The install of clover was NOT successful.
+Error while running 'C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstall.ps1'.
+ See log for details.
+</code></pre>
+
+<h3 id="参考:2c0d31532a91b6fc3e3d338234f27ca1">参考</h3>
+
+<p><a href="http://qiita.com/himinato/items/11f4dc9a23afebbc242c">windowsの開発環境は一瞬で整うwith chocolatey - Qiita</a></p>
+
+<h2 id="コンソール:2c0d31532a91b6fc3e3d338234f27ca1">コンソール</h2>
+
+<p>cmdだと貧弱貧弱ゥ！なので、とか、bashコマンド試し打ちしたい場合が多いとか、そういう理由でコンソールは入れ直す。</p>
+
+<p>Gitを入れると自動的にGit bashが入るので、コマンド環境としてはこれを使っている。ターミナルアプリは最近ちょっと話題になっていたのでConEmuを入れてみた。もちろんChocolateyで。</p>
+
+<ul>
+<li>Font charsetを「Shiftjis」に設定</li>
+<li>フォントは<a href="http://github.com/yascentur/RictyDiminished">Ricty Diminished</a>を利用</li>
+<li>lsで日本語が化けるので<code>~/.bashrc</code>に<code>alias ls='ls --show-control-chars --colors'</code>を設定</li>
+</ul>
+
+<h3 id="参考-1:2c0d31532a91b6fc3e3d338234f27ca1">参考</h3>
+
+<p><a href="http://astra.digi2.jp/a/e/setup-conemu-as-japanese-cmd.html">ConEmuの初期設定(日本語表示環境を構築) - Diary on wind @astra.dat</a>
+<a href="http://qiita.com/ironsand/items/ec0675644a55a69855d6">Ruby - 【無理】WindowsのコンソールでUnicodeを使いたい - Qiita</a></p>
+
+<p>Windowsで開発する場合の最大のネックは、CLIの貧弱さ以上にcp932にあると思うの。</p>
+
+<h2 id="autohotkey:2c0d31532a91b6fc3e3d338234f27ca1">AutoHotkey</h2>
+
+<p>キーバインド変えたいことが多いので愛用。とりあえず<code>&lt;ESC&gt;</code>と間違えて隣の<code>F1</code>押してヘルプ出てしまうことが多いので、<code>F1</code>は潰している。</p>
+
+<pre><code class="language-autohotkey">F1::Return
+</code></pre>
+
+<p>あとOutlookの使い勝手があまり好きではないので、配布されていたGmailライクなキーバインドを実現する設定を使わせていただいている。しかしOutlook2013、差出人名の表示がやたらでかかったり、フォルダのツリー表示が文字だけ（アイコンとかツリーを表す罫線がない）になっていて見づらかったり、UI面で難がありすぎる。。。</p>
+
+<h3 id="参考-2:2c0d31532a91b6fc3e3d338234f27ca1">参考</h3>
+
+<p><a href="http://www.autohotkey.com/board/topic/102227-gmailkeys-for-outlook-2013/">GmailKeys for Outlook 2013 - Scripts and Functions - AutoHotkey Community</a></p>
+
+<h2 id="メモアプリ:2c0d31532a91b6fc3e3d338234f27ca1">メモアプリ</h2>
+
+<p>技術的なことをやってるとどうしてもメモを取る必要性が出てくるのだが、いろんなところに書き散らしていると後から見返せないのでそれなりの整理はしておきたいと常々思う。</p>
+
+<p>元々は自宅だとDropbox + QFixHowm(Vim)、会社だと（あまり技術的な話が多くなかったので＆クラウド系アプリは使えなかったので）別個の環境で同様にQFixHowmを使っていたのだが、比較的技術的なノウハウをとりためることも増えたので、可能なら自宅からも参照できるメモ環境を会社でも作りたいなと思い直している。</p>
+
+<p>個人的に理想としているのはこんな感じ。</p>
+
+<ul>
+<li>クラウド同期が取れる、可能ならDropboxがいい</li>
+<li>全文検索ができる</li>
+<li>（可能なら）vimキーバインドが使える</li>
+<li>（可能なら）Markdownプレビューができる</li>
+</ul>
+
+<p>いろいろ検証はしてみたが、どれもしっくり来ていない。なんかないものか。</p>
+
+<h3 id="kobito:2c0d31532a91b6fc3e3d338234f27ca1">Kobito</h3>
+
+<ul>
+<li>Markdownエディタとしては優秀。ハイライトも綺麗。</li>
+<li>vimモードがあってそこそこ快適。若干表示がズレることがあるが、設定いじれば修正は可能かも。</li>
+<li>クラウド同期はできない。あとファイル実体見れないのがなんとなく気持ち悪い。</li>
+</ul>
+
+<h3 id="evernote:2c0d31532a91b6fc3e3d338234f27ca1">Evernote</h3>
+
+<ul>
+<li>Markdownエディタとしては論外。</li>
+<li>アカウントは持っているが、すでにプライベートメモがどっさり入ってるので会社で開きにくい。</li>
+</ul>
+
+<h3 id="gistbox:2c0d31532a91b6fc3e3d338234f27ca1">GistBox</h3>
+
+<ul>
+<li>Markdownエディタではないし、フォーム入力なので編集は貧弱。</li>
+<li>GitHub経由で同期取れる点は魅力。</li>
+<li>Gistはスニペット置き場のイメージが強く、文章の保存はしっくりこない。</li>
+</ul>
+
+<h3 id="wri-pe:2c0d31532a91b6fc3e3d338234f27ca1">Wri.pe</h3>
+
+<ul>
+<li>今のところ最良と思われる。</li>
+<li>フォーム入力型の編集にはなってしまうが、<a href="https://github.com/akahuku/wasavi">Wasavi</a>使うことでVimっぽくできる。</li>
+<li>ログインすれば自宅からでもメモは見られるので一応同期可能。</li>
+<li>Dropbox連携はあるが、あくまでバックアップをzipでストックさせるだけなので、家ではVimで編集します、とかはスムーズにできなくて微妙。</li>
+</ul>
+
+<h3 id="cirrus-editor:2c0d31532a91b6fc3e3d338234f27ca1">Cirrus Editor</h3>
+
+<ul>
+<li>Dropbox内のtxtファイルをブラウザで直接編集できるのは今のところこれぐらいしか見つからない。</li>
+<li>新規ファイルの追加ができないので、メモ環境としては使えない。</li>
+</ul>
+
+<p>ひとまずWri.pe使ってますけどだいぶ辛さあります。今日日はやっぱりKobito使ってるエンジニアが多いんだろうか。あるいはメモなんていらない？ うーん。。。</p>
+
+<p><strong>……と思ってたらWasaviがDropbox連携機能もってた！！！</strong></p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fappsweets.net%2Fwasavi%2F" title="wasavi - appsweets akahuku labs." style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://appsweets.net/wasavi/" target="_blank">wasavi - appsweets akahuku labs.</a></iframe>
+
+<ul>
+<li>連携すると<code>:write</code>や<code>:edit</code>がWasavi上で使えるようになる。
+
+<ul>
+<li>つまりWri.peをWasaviで編集していて、Dropboxにツッコみたくなったら<code>:write hoge.txt</code>すればよい。</li>
+<li>逆にDropboxのテキストをWri.peに持ってきたければ<code>:edit fuga.txt</code>とすればよい。</li>
+</ul></li>
+<li>さらに<code>http://qasavi.appsweets.net</code>につなぐと単独でWasaviをブラウザエディタとして使える。Dropboxのオンラインエディタになる。</li>
+</ul>
+
+<p>ヤバイだろうこれ。。。highlightはさすがに無理とか、Dropbox使えると言っても<code>ls</code>は使えないのでファイラとしては微妙とか、そういうのはもろもろあるとは言え、Dropboxのファイルを直接ブラウザ上でVimライクな編集できるってのは恐ろしく便利。単なるVimのエミュレートに留まらず、ブラウザとDropboxのシームレスな連携ができるという点が肝だと思う。Dropboxで書きためていたブログの下書きを、はてなブログの編集画面上で直接呼び出すこともできるわけだ。ちなみにGoogle DriveとOne Note連携もあるので、そちらがお好みであればそちらでも。</p>
+
+<p>これまでぜんぜん見たこともないソフトだったけど、これだいぶいいものなのでは？？？</p>
+
+<h2 id="その他アプリケーション:2c0d31532a91b6fc3e3d338234f27ca1">その他アプリケーション</h2>
+
+<ul>
+<li><a href="http://www.forest.impress.co.jp/library/software/clover/">Clover</a> エクスプローラーのタブ化</li>
+<li>chrome全盛になりつつある気はするが、Vimp使いたくてFirefox</li>
+<li>VirtualBoxにVagrantはもはや定番</li>
+<li>Outlookの予定表使いづらすぎて辛いんだけど、Exchangeと同期できるアプリでなんか良い代替ないッスか。。。</li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/" rel="prev">すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/" rel="next">暗号化とハッシュ化に関する基本的な事柄まとめ</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

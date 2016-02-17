@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Chef soloはじめの一歩 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Chef soloはじめの一歩</h1>
+      <div class="meta">
+        May 6, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。</p>
+
+<p>参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" alt="入門Chef Solo - Infrastructure as Code" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">伊藤直也 (2013-03-11)<br />売り上げランキング: 2,821<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<h2 id="基本構成:87154f663fbbf30fe8a304ebb3b61c17">基本構成</h2>
+
+<p>chefの基本構成を取りあえず押さえる。</p>
+
+<ul>
+<li>chef: インフラ自動化のフレームワーク</li>
+<li>chef solo: 本来クラサバ構成で扱うChefをスタンドアロンで使えるようにしたもの</li>
+<li>knife-solo: リモートからchef soloの実行に必要なツール</li>
+<li>Berkshelf: サードパーティクックブックの管理に使う</li>
+</ul>
+
+<h2 id="インストール:87154f663fbbf30fe8a304ebb3b61c17">インストール</h2>
+
+<p>上記のものを全部インストール。Gemfile書いてる場合はそっちに追加で。また最後に<code>rbenv rehash</code>を忘れずに。</p>
+
+<pre><code>gem install chef -v 11.10 --no-ri --no-rdoc
+gem install knife-solo --no-ri --no-rdoc
+gem install berkshelf
+rbenv rehash
+</code></pre>
+
+<p>ちなみにChefの最新はv11.12.xなんだけど、どうもバグがあるっぽく上手くいかなかったのでバージョン指定で古いの入れてる。</p>
+
+<ul>
+<li>参考：<a href="http://qiita.com/sakatuba@github/items/1548818b02735b2047ad">Chef 11.12.2のknife configureが失敗する - Qiita</a></li>
+</ul>
+
+<h2 id="セットアップ:87154f663fbbf30fe8a304ebb3b61c17">セットアップ</h2>
+
+<p>初期設定。</p>
+
+<pre><code>knife configure # 対話は全部デフォでOK
+knife solo init chef-repo # chef-repoフォルダがレポジトリとして作られる
+cd chef-repo
+</code></pre>
+
+<p>chef soloを使うリモート側へもchefをインストール。</p>
+
+<pre><code>$ knife solo prepare vagrant@192.168.1.1
+</code></pre>
+
+<h2 id="berkshelf:87154f663fbbf30fe8a304ebb3b61c17">Berkshelf</h2>
+
+<p>続いてBerkshelfの初期設定。</p>
+
+<pre><code>$ berks init
+</code></pre>
+
+<p>しかし、ここでまさかのエラー。。。</p>
+
+<pre><code>cannot load such file -- hitimes/hitimes (LoadError)
+</code></pre>
+
+<p><a href="https://github.com/copiousfreetime/hitimes/issues/17">ここ</a>によればgem updateしてからhitimesを再インストールすれば大丈夫だよ的な話。やってみる。</p>
+
+<pre><code>$ gem update
+$ gem -v
+2.2.2
+$ gem install hitimes
+$ rbenv rehash
+</code></pre>
+
+<p>気を取り直して。</p>
+
+<pre><code>$ berks init
+The resource at '/Users/chroju/Dropbox/lab/chef/vagrant-repo/metadata.rb' does not appear to be a valid cookbook. Does it have a metadata.rb?
+</code></pre>
+
+<p>(&lsquo;A`)ｳﾞｧｰ</p>
+
+<p>わけわからんし、<code>berks init</code>しなくてもBerkfile自前で作りゃイケるらしいので諦めることにする。Berksfileを<code>touch</code>してからvimで編集。</p>
+
+<pre><code>site :opscode
+
+cookbook 'sudo'
+cookbook 'iptables`
+</code></pre>
+
+<p>Gemfileと似たような書き方で、<code>cookbook 'hoge'</code>と書くとそのクックブックが<a href="http://community.opscode.com/">Opscode</a>からインストールされる。Opscode以外のGitHubで公開されているクックブックを使う場合は、これもGemfileのように<code>cookbook 'fuga' git:&quot;...&quot;</code>の形でURL指定が可能。</p>
+
+<p>そしていざインストール……だがまたしてもエラー。</p>
+
+<pre><code>$ berks install --path cookbooks
+DEPRECATED: `berks install --path [PATH}` has been replaced by `berks vendor`.
+DEPRECATED: Re-run your command as `berks vendor [PATH]` or see `berks help vendor`.
+</code></pre>
+
+<p>そろそろこのあたりから笑えてきた。調べたところ、Berkshelf v3.xでは<code>berks install --path hoge</code>は使えないらしいス。<code>berks vendor hoge</code>が今どきらしい。</p>
+
+<pre><code>$ berks vendor cookbooks
+destination already exists /Users/chroju/Dropbox/lab/chef/vagrant-repo/cookbooks. Delete it and try again or use a different filepath.
+</code></pre>
+
+<p>えー。</p>
+
+<pre><code>$ rm -rf cookbooks
+$ berks vendor cookbooks
+
+DEPRECATED: Your Berksfile contains a site location pointing to the Opscode Community Site (site :opscode). Site locations have been replaced by the source location. Change this to: 'source &quot;http://api.berkshelf.com&quot;' to remove this warning. For more information visit https://github.com/berkshelf/berkshelf/wiki/deprecated-locations
+Resolving cookbook dependencies...
+Using iptables (0.13.2)
+Using sudo (2.5.2)
+# 以下略
+</code></pre>
+
+<p>文句言いながらもやってくれました。冒頭の1行目の書き方は<code>site :opscode</code>というのが通例だったけど、v2.0から<code>source &quot;https://api.berkshelf.com&quot;</code>に変わった模様。ただ、コマンドは通るには通るんだけど。</p>
+
+<p>最初に<code>berks vendor cookbooks</code>したときに出たエラー、要は「すでにあるフォルダにはインストールできねーよ」って話なのだが、だとしたらBerksfileを書き換えて追加インストールしたいときはどうしたらいいんだろう？というのは素朴な疑問。サードパーティのクックブックは直接編集しない（変数などは自分のレシピの方で代入する）のが基本らしいので、一度フォルダを消してから再度<code>berks vendro cookbooks</code>でも不都合はないと言えばないのだが、なんだか馬鹿らしい感じもする。</p>
+
+<p>あと<code>berks install</code>コマンドもあるんだけど使い方わかってない。</p>
+
+<h2 id="レシピ作成:87154f663fbbf30fe8a304ebb3b61c17">レシピ作成</h2>
+
+<p>その前におさえる基本。</p>
+
+<ul>
+<li>nodes/hostname.json : 実行するレシピをrun_listとして記述</li>
+<li>solo.rb : chefが利用する各種パスの設定ファイル（knife soloの場合は生成されない）</li>
+<li>cookbooks/hoge/recipes/default.rb : レシピ本体</li>
+<li>cookbooks/hoge/templates/default/* : テンプレートファイル</li>
+<li>cookbooks/hoge/files/* : 静的ファイル</li>
+<li>cookbooks/hoge/attributes/* : 変数の格納</li>
+</ul>
+
+<p>あとcookbooksフォルダはサードパーティ製のものを入れて、自家製のクックブックはsite-cookbooksフォルダに入れるっていうルールもある。名前がわかりにくいが。</p>
+
+<p>このへん押さえつつ、次回はレシピ作成編です。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/05/06/2014-05-06-post/" rel="prev">自分のことを「ペルソナ」から見返してみる</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/05/30/2014-05-30-post/" rel="next">chefでさくらVPSの初期構築を全部自動化してみた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

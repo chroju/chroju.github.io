@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    技術書のサンプル試す場合はバージョンを揃えるべきなのか | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2013/08/03/2013-08-03-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>技術書のサンプル試す場合はバージョンを揃えるべきなのか</h1>
+      <div class="meta">
+        Aug 3, 2013 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進めず。</p>
+
+<p>問題が起きたのはp.79。モデルクラスのrbファイルにvalidatesメソッドによる検証過程を書き入れ、test/functional/xxxに有効なテストデータ（とされるもの）を入れてrake testコマンドを発行したところ、エラーが出る。何度やってもエラーが出る。仕方ないので一旦先に進もうともしたのだが、次に編集対象になっていたtest/unitフォルダが見当たらない。念のため別プロジェクトを作ったりもしてみたが、やはりtest/unitは生成されなかった。さすがにディレクトリ構造丸ごと違うとなると、自分のミスというよりはバージョンの相違によるものではないかと思い至る。この本ではRubyの1.9.2とrails 3.1.0を使っていたが、僕の環境はRuby2.0とrails 4.0.0だった（もっと他にも「バージョンが原因ではないか？」と思い当たった根拠があったはずなのだが失念。トラブルシュートは記録しながらやるべきだったなー……）。</p>
+
+<p>というわけでRubyとrailsのバージョンを下げる。Rubyについてはrvmで管理しているので簡単に変更できたが、問題はrails。軽くググった感じでは、一度アンインストールしてから再度バージョン指定して入れなおせばよいという話だった。</p>
+
+<blockquote>   #gem uninstall rails
+
+   #gem install rails -v 3.1.0</blockquote>
+
+<p>が、これだけで再びrake testを試すとまだエラー。Gemfile内のバージョン表記を変えろとのことだったので変更し、#bundle update。bundleについてはよくわかってないのでおいおい調べる予定。</p>
+
+<p>しかし、まだエラー。エラーというより、SECURITY WARNINGとやらが表示された。どうもrails過去バージョンの脆弱性に起因するらしい。こういった事例がいくつかあり、最終的にはRails 3.2.13まで上げざるを得なかった。</p>
+
+<p><a href="http://blog.popowa.com/2013/02/security-warning-no-secret-option.html">popowa: SECURITY WARNING: No secret option provided to Rack::Session::Cookie と出たら</a></p>
+
+<p><a href="http://stackoverflow.com/questions/14206775/rails-emits-warning-rackfile-headers-parameter-replaces-cache-control-after">Rails emits warning: &ldquo;Rack::File headers parameter replaces cache_control after Rack 1.5&rdquo; - Stack Overflow</a></p>
+
+<p>ここまででもうかなり疲れていたのだが、これでもまだ尚エラーが出るから嫌になる。Gemfileのcoffee-railsのバージョンがよろしくないらしく、以下サイトを参考にして編集。</p>
+
+<p><a href="http://detham.tumblr.com/post/40225529175/rails-3-1-3-3-2-11-railties">Rails 3.1.3 -&gt; 3.2.11 のアップデートで railties のdependencyが競合エラーになった - The longest day in my life</a></p>
+
+<p>んで結論を言えばこれでもまだ上手く行かず、最終的にはRailsとRubyのバージョンを揃えた上で、イチからプロジェクトを作りなおしたらやっとエラーが出なくなった。もう自分のやってること何もかも間違ってる気がしてくる。</p>
+
+<p>で、今回の一件からの考察というか帰結なのだが、技術書に沿って勉強していく場合、やはり技術書と同じバージョンの環境で進めていくべきなのだろうか。僕はそのへんわりと甘く見てしまっていたので、今回は「いや最新環境に慣れといた方がいいんじゃね？　Ruby2.0も最近出たとこで覚えといた方が得な気がするし」などという考えでRuby2.0とRails4.0.0を使っていたのだが、結果はこれである。Androidの勉強も似たような考え方でだいたい最新か、あるいは一つ前のOSで構築していたのだが、あちらは後方互換性が高いのか、それほど困ることもなかったので、Ruby on Railsでも安易に同じ事をしてしまった。</p>
+
+<p>新しい環境に慣れておいた方がいい、というのはあると思う。が、技術書を読み進めていく上では、万が一バージョン相違によるエラーが出た場合、今回のように大きなロスを被ることになる。技術書、特にある分野での最初の一冊なんてのはとにかくまずは一冊流してみた方がいいわけで、最新バージョンへの対応なんてのはその後でゆっくり覚えればいいのかもしれない。旧バージョンの方がノウハウが多く蓄積されていて、エラー対処がしやすいという利点もある。とはいえ、Railsは旧バージョンを使っていると脆弱性の警告が出る場合があるので、新しいバージョンを使わざるを得ない場合もあるようなのだが。。。</p>
+
+<p>あと、今回のトラブルシュートでいろいろググってみたところ、<a href="http://stackoverflow.com">Stack Overflow</a>が引っかかってくることが非常に多かった。やっぱ英語は必須。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2013/07/25/2013-07-25-post/" rel="prev">『RailsによるアジャイルWebアプリケーション開発』第I部 読了</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2013/09/04/2013-09-04-post/" rel="next">『RailsによるアジャイルWebアプリケーション開発』第II部読了</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

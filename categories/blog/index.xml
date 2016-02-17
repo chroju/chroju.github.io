@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on the world as code</title>
+    <link>http://chroju.github.io/categories/blog/</link>
+    <description>Recent content in Blog on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 25 Jul 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Qiitaはじめました</title>
+      <link>http://chroju.github.io/blog/2015/07/25/start-qiita/</link>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/07/25/start-qiita/</guid>
+      <description>&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fchroju&#34; title=&#34;chroju - Qiita&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://qiita.com/chroju&#34; target=&#34;_blank&#34;&gt;chroju - Qiita&lt;/a&gt;&lt;/iframe&gt;
+
+&lt;p&gt;気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽かなと思って。あと先日の&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/&#34;&gt;暗号化に関する記事&lt;/a&gt;みたいなまとめ記事、tips系はやはりQiitaの方がフットワーク軽くて使いやすいような気がする。更新した場合にも履歴が残るし。&lt;/p&gt;
+
+&lt;p&gt;ブログとの使い分けが難しそうな気はするが、いわゆる勉強メモみたいな頻繁に見返すものをQiitaに上げて、ブログの方はもっとガッチリとした長文、たとえば勉強会の記録だとか技術に対する考え、あるいは何かを作った系の記事などを上げたらいいのではと思っている。まぁこのへんはあまり縛られず、あくまで中心に据えているのは自分用メモとしての役割なので、自分が使いやすいようなやり方でやれればいいかなと思っている。&lt;/p&gt;
+
+&lt;p&gt;ブログは多くとも週2回程度の更新だったが、Qiitaはもっと高い頻度でいろいろ貯めこんでいきたいし、そうできるような仕事をしていきたい所存。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>the world as code</title>
+      <link>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
+      <description>&lt;p&gt;世界を構成するのはテクストである、という考え方が好きだ。より正確な言い方をするならば記号論やミーム的な考え方になるのだと思うが、記述されたもの、意味を成して認識されたものだけが実在足りうる、というような世界観をなんとなく抱いている。『ニルヤの島』では個人の生が物語へと還元され、データとして外部記憶装置へ保存されるようになった。『from the nothing, with love』では、ジェームズが自らを「生起しつつあるテクスト」であると述懐する。あるいはヘプタポッドの言語は、未来をも決定論的に「記述」する。&lt;/p&gt;
+
+&lt;p&gt;特にことインターネットの隆盛により、世界はテクストの、ミームの満ちるものへと変容しつつあるように思う。インターネット上に存在する「個人」とは、すなわちミームに他ならない。インターネットへのアクセスをしていても、能動的にテクストを紡がない個人は存在しないに等しい。この世界では個人は、あるいはあらゆる事象はデータへと還元され、そして半永久的にミームの海を彷徨っていく。&lt;/p&gt;
+
+&lt;p&gt;上述したように、最近頓に多い「言葉」に関するSFのなかで、最も好きなのは『屍者の帝国』なのだけど、ここでは人間の魂自体が「言葉」によるものと解されており、そして屍者は「言葉」によってフランケンシュタインと化す。言葉は物質化する。書物がそうであるように。歴史上の人物がそうであるように。これが自らもまた「物質化した言葉」であるはずのヴァン・ヘルシングの言葉であるというのは皮肉でもあるのだと思うが、生きとし生けるものが言葉によりもたらされるというハッキリとした記述と、それに基づいて構成された世界観は実に興味深い。&lt;/p&gt;
+
+&lt;p&gt;Infrastructure as Code、物理的な世界の技術であったはずのITインフラが、近年言語により記述され、管理、構築されるフェーズへと転換したように。Internet of Things、家電や家具といった非電子的であったはずの「モノ」たちが、APIを提供して「言語」による働きかけを許すようになったように。我々エンジニアの一つの使命は、万物の情報化であると思う。言語が支配する世界にすべてを置き換え、言語を介した制御を可能とすること。それがエンジニアとしてやるべきことなのだと。&lt;/p&gt;
+
+&lt;p&gt;私はなぜ書くのか？という問いに対する答えはあまりに簡単で、それは生きるに等しい行為だからだ。語らぬ者は存在しないのならば、語る以外に選択肢はない。世界と関わりたいのならば、言語によって働きかけていくしかない。紡いだ言葉がミームの海を流れていき、対岸でやがて物語として物質化する日を夢見る。言葉が世界を構成し、言葉が万物を紡ぎ上げて、やがて物語と化していく。&lt;/p&gt;
+
+&lt;p&gt;the world as code.&lt;/p&gt;
+
+&lt;p&gt;世界は言葉で成り立っている。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4150114587/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51191C0153L._SL160_.jpg&#34; alt=&#34;あなたの人生の物語 (ハヤカワ文庫SF)&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4150114587/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;あなたの人生の物語 (ハヤカワ文庫SF)&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.04.03&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;テッド・チャン &lt;br /&gt;早川書房 &lt;br /&gt;売り上げランキング: 10,379&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4150114587/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>はてなブログからの記事移行を完了した</title>
+      <link>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://chroju89.hatenablog.jp/&#34;&gt;旧ブログ&lt;/a&gt;から全記事移行完了しました。ちょっとだけ疲れた。&lt;/p&gt;
+
+&lt;p&gt;もともとはてなブログで記事を書いてたわけですが、こちらは記事のエクスポート形式がMovableType形式にしか対応してないので、そこからMarkdownに変換し直したりだとか、はてなキーワードリンクを削除したりとか、地道にいろいろやらねばならず。たぶんスクリプトでガチャーンと一発でやれるんでしょうけど、力が足りないのでvimでファイル開いて変換ポイント確認してはポチポチコマンドで置換してやりました。&lt;/p&gt;
+
+&lt;h2 id=&#34;エクスポートファイルの分割:6542ff07ba9940bcfbe79c8ca068e0ca&#34;&gt;エクスポートファイルの分割&lt;/h2&gt;
+
+&lt;p&gt;はてなブログからエクスポートすると、最初は全記事が1ファイルに連なった状態で吐かれます。自分はMT使った経験ないんでわかりませんが、これは「そういうもの」と考えていいんですかね。一方のoctopressはエントリーごとに分割されているので、まずはこのエクスポートファイルを1記事ずつ分割してやらなくてはならない。あとヘッダの形式も微妙に両者で異なるので、ここの変換も必要。&lt;/p&gt;
+
+&lt;p&gt;なんか変換ツール落ちてないかなと堕落した感じで探しまわってたら、一応ありました。&lt;/p&gt;
+
+&lt;script src=&#34;https://gist.github.com/railsbros-dirk/2351046.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;名前がMT to Markdownなので完全にMarkdownへ変換してくれるものかと期待したのだけど、実際やってくれるのは先ほど挙げた「分割」と「ヘッダの書き換え」程度です。中身はHTMLタグのまま。一方で自分の環境だと&lt;code&gt;&amp;lt;&lt;/code&gt;が&lt;code&gt;&amp;amp;lt;&lt;/code&gt;に変わってしまうといった副作用もあり。あと元のヘッダにあったBASENAMEだとかCONVERT BREAKSといった文字列がそのまま本文内に残ってたり。。。ちょっと謎。ただ、変換が楽になるのは確か。&lt;/p&gt;
+
+&lt;h2 id=&#34;vimによる置換:6542ff07ba9940bcfbe79c8ca068e0ca&#34;&gt;vimによる置換&lt;/h2&gt;
+
+&lt;p&gt;スクリプト力弱いので、あとはvimによる力技です。今回初めて複数ファイルを一挙にvimで扱うってやったけど、便利ですね。&lt;/p&gt;
+
+&lt;p&gt;vimではバッファリストがあるのは知っていたけど、一方で引数リストっていうのもあって、&lt;code&gt;:args hoge.txt fuga.txt&lt;/code&gt;とかでファイルリストを作れます。元々は名前の通り、vimを起動するときに与えた引数が入ってるリストらしいのだけど、任意に書き換えができるのであまり「引数」リストという感じはしない。バッファ内の全ファイルへのコマンド実行は&lt;code&gt;:bufdo&lt;/code&gt;で出来るし、引数リストについても似た感じで&lt;code&gt;:argdo&lt;/code&gt;が使える。このあたりを上手く活用すれば、今回のような複数ファイルを一挙に処理するのはたやすい。&lt;/p&gt;
+
+&lt;p&gt;例えば先の&lt;code&gt;&amp;amp;lt;&lt;/code&gt;を&lt;code&gt;&amp;lt;&lt;/code&gt;に全置換したり。他にも置換コマンドはh1タグを&lt;code&gt;#&lt;/code&gt;に変換するだとか、いろいろな形で使いました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:argdo %s/&amp;amp;lt;/&amp;lt;/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;CONVERT BREAKSと書かれた行を全部消したり。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:argdo g/CONVERT BREAKS/d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自分が今回初めて身に付けた知識でもっとも有効だったのは、検索でマッチした文字列を置換後の文字列内で指定する方法ですかね。検索パターンの括弧でくくった部分（vimなのでエスケープして&lt;code&gt;\(&lt;/code&gt;と&lt;code&gt;\)&lt;/code&gt;で囲った部分、ということになりますが）を、置換パターンから&lt;code&gt;\1&lt;/code&gt;で指定できる。これははてなキーワードのリンクを一掃するのに役立ちました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:argdo %s/&amp;lt;a class=&amp;quot;keyword&amp;quot;\(.\{-}\)&amp;lt;\/a&amp;gt;/\1/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あー、あとこのコマンドで重要なのは&lt;code&gt;{-}&lt;/code&gt;の部分ですかね。これで最短マッチになるらしい。他、細かなとこだと改行コードを入力するには&lt;code&gt;&amp;lt;C-v&amp;gt;&amp;lt;C-m&amp;gt;&lt;/code&gt;と打つとか、&lt;code&gt;&amp;lt;C-r&amp;gt;/&lt;/code&gt;で直前の検索パターンをコマンドラインに入力できるとか、いろいろこの機会に調べられてタメになりました。&lt;/p&gt;
+
+&lt;h3 id=&#34;参考:6542ff07ba9940bcfbe79c8ca068e0ca&#34;&gt;参考&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://scriptogr.am/error1009/post/201211151634&#34;&gt;Vimで最短マッチと検索してから置換 - // Nice Catch! :)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://lesguillemets.github.io/blog/2014/08/05/vim-reuse-last-search-for-replace.html&#34;&gt;Vim で直前の検索パターンを部分的に再利用する - Xeebi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.eightsee.net/?m=pc&amp;amp;a=noticeinfodetail&amp;amp;notice_no=31&#34;&gt;改行コード変換 vi で改行コード一括置換　-eightsee.net&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ファイルのリネーム:6542ff07ba9940bcfbe79c8ca068e0ca&#34;&gt;ファイルのリネーム&lt;/h2&gt;
+
+&lt;p&gt;また先のコードで分割したMarkdownファイルは自動的にファイル名も振ってくれるんですけど、日本語の場合は漢字をなんとなく頑張って読んでローマ字に変換してくれた、気持ちはありがたいけど残念な感じのものになっちゃいます。なのでこれも一括変換。&lt;/p&gt;
+
+&lt;p&gt;ファイル名一括変換だと&lt;code&gt;rename&lt;/code&gt;コマンドってのがあるのですね。Linuxだと標準で入ってるけどUNIX系にはないだとか。なのでMacにも入ってなかったので、Homebrewでインストール。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ brew install rename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使い方としては&lt;code&gt;rename &#39;s/hoge/fuga/&#39; *.markdown&lt;/code&gt;形式が使える、要はvimの置換コマンドっぽく書けるので、vimmerならこれが便利ではないかと。正規表現も当然使えます。ただし、vimで必要なあの面倒くさいエスケープの数々が要らなくなっていたり、先ほど書いた&lt;code&gt;\1&lt;/code&gt;によるマッチ文字列の流用が&lt;code&gt;$1&lt;/code&gt;に変わっていたり、若干の使用感の違いはあります。でも便利。&lt;/p&gt;
+
+&lt;h3 id=&#34;参考-1:6542ff07ba9940bcfbe79c8ca068e0ca&#34;&gt;参考&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://qiita.com/yahihi/items/dd8b3cc7c7041c3f03b9&#34;&gt;Linuxでrenameコマンドを使おう - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;そんなこんなで記事の変換が終わったら、あとはoctopressのレポジトリで&lt;code&gt;/source/_posts&lt;/code&gt;の中に全ファイルブチ込んで&lt;code&gt;rake generate&lt;/code&gt;かければ生成されます。最初はちょっと戸惑いもありましたが、やれてしまうと案外簡単に移行できるなという感じです。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>お勉強ブログ、はじめます</title>
+      <link>http://chroju.github.io/blog/2013/07/20/2013-07-20-post/</link>
+      <pubDate>Sat, 20 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/07/20/2013-07-20-post/</guid>
+      <description>
+
+&lt;p&gt;SEという職に就いて2年ちょい経ったわけだが、最近はPJリーダーとか顧客との調整とかその手の仕事ばかりを回されるようになってきて、実機を触る機会がめっきり少なくなってきてる。まぁうちはいわゆる大手SIerというヤツだから、徐々に技術っぽい仕事をしなくなるのは必然、ではある。だがしかし、あまり自分はそういうキャリアを望んでいないし、さすがに3年目で管理系の道に入ってしまうのは、ちょっと早すぎる。&lt;/p&gt;
+
+&lt;p&gt;というわけで技術ブログである。会社で触れないなら家でやるしかない。エンジニアとして自負したいのであれば、もう精一杯足掻くしかないだろうと。指を咥えて与えられた仕事だけしてたら単なるダラダラリーマンになりそうなので、それは避けたい。そしてゆくゆくは、身につけた技術によって職を替えてもみたいのだが。&lt;/p&gt;
+
+&lt;h1 id=&#34;現在位置を確認する:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;現在位置を確認する&lt;/h1&gt;
+
+&lt;p&gt;自分はインフラ系のSEなので、日頃はスイッチのconfig書いたりVMwareでガリガリ仮装環境作ったり、そういう仕事が多い。ちなみに顧客環境の都合で業務上Linuxに触れた経験がないのは内緒である。&lt;/p&gt;
+
+&lt;p&gt;というわけで、自力で学ぶのは会社から離れた方向。アプリ系を中心に据えていきたい。これまで自分が納めた言語はJava、それもわりと簡単なことしかできていないので、Javaの腕を磨くことと、もう一言語使えるようになることを目標にしたい。&lt;/p&gt;
+
+&lt;p&gt;とはいえ現在の業務も重要ではあるので、同時にインフラ周りも学べるような道が吉。&lt;/p&gt;
+
+&lt;h1 id=&#34;これから行く先を定める:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;これから行く先を定める&lt;/h1&gt;
+
+&lt;p&gt;てわけで、当面の目標は二つ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;VPSを借りて、Ruby on Railsで動くウェブサービスをつくる&lt;/li&gt;
+&lt;li&gt;Androidアプリをなんかつくる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Javaに加える「もう一言語」はRubyにした。最近流行っているようだし、出来る事の幅も広そう。Pythonにも興味は惹かれたが、まあとりあえずRubyで。&lt;/p&gt;
+
+&lt;p&gt;そしてVPS。Ruby on RailsだとHerokuあたりで建てるのが主流みたいなんだけど、勉強も兼ねて足回りから全部自分で構築する。CentOSをいじって、ApacheとかDBとか入れてガリガリつくる。これでインフラ系SEとしての勉強も一応できるはず。&lt;/p&gt;
+
+&lt;p&gt;2番目の目標の方はサブ。1個の目標だけずーっと続けるのもなかなかしんどそうなので、息抜きとしてAndroidアプリをいじりたい。作りたいもののイメージとしては、Tumblrの過去ログを漁りやすくするようなアプリが出来たらいいなーと思っている。&lt;/p&gt;
+
+&lt;h1 id=&#34;ブログをどう活用するか:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;ブログをどう活用するか&lt;/h1&gt;
+
+&lt;p&gt;と、ここまで書いておいてなんだが、実はすでに勉強は始めている。本を読みながら作ったりなんだりとしていたのだが、どうにも身になっている気がしなかったので、アウトプットの場としてブログを始めることにした次第。&lt;/p&gt;
+
+&lt;p&gt;はじめはEvernoteとかqfix_howmあたりに勉強記録をつければいいかと思ったが、それだとモチベーションが上がりにくいし、整形もしない気がしたのでブログにしてみた。はてブロならMarkdownで書けるからちゃんとフォーマットも考えつつ書けそうだし、参考文献へのリンクの処理とかも楽。んでさすがに本家の方とは内容がかけ離れすぎてるので、別ブログとして開設。まぁひっそりとやっていきます。&lt;/p&gt;
+
+&lt;p&gt;書く内容としては、何を学んだのか、何がわかったのか、わからなかった点はどこで、次回はどうするのか、ということを1日の勉強が終わったときに書き留めていきたい。特に「次回はどうするのか」がすげー重要だと個人的には思っていて、本を読んだら読みっぱなしではなく、「この本ではこのあたりのことがよくわからなかったから、次はこういう本を買おう」というビジョンが必要。そういうビジョンを持ちながら勉強するためにも、学んだ内容をアウトプットして整理する必要があると思っている。&lt;/p&gt;
+
+&lt;p&gt;あ、あとは「うたうとき」の方でたまに書いてたライフハック的というか、情報整理環境みたいのについての記事もこっちに回してくるつもり。そういうのってこだわりすぎてもいけないんだけど、ある程度整備しとかないと色々支障をきたすものだとも思っている。&lt;/p&gt;
+
+&lt;p&gt;次回以降、勉強ブログとして書き進めていきます。ちなみに現時点までの記録として、以下に開発環境と読んだ本をば。&lt;/p&gt;
+
+&lt;h1 id=&#34;これまでの足跡:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;これまでの足跡&lt;/h1&gt;
+
+&lt;h2 id=&#34;開発環境:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;開発環境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;メインマシン&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;iMac late 2010&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Mountain Lion&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Java : Eclipse 4.2&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ruby : vim（良いIDEとかあるなら教えてくだしあ＞＜）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Editor : vim（出来ること多すぎてハマり気味。精神衛生上良くない）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;サブマシン（いずれもVMware fusion上）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Cent OS 6.4（Linux勉強用）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Windows 8（ほぼ使ってない。一応持ってるWindows）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;流行りのvagrantなんかも触ってみたいですね！&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;これまで読んだ本:98a332ee1110dbf2e422ad58c8e586c8&#34;&gt;これまで読んだ本&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51KFio8rqSL._SL160_.jpg&#34; alt=&#34;楽しみながら作ってみよう! はじめてのAndroidアプリプログラミング&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;楽しみながら作ってみよう! はじめてのAndroidアプリプログラミング&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 13.07.20&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;塚田 翔也 &lt;br /&gt;マイナビ &lt;br /&gt;売り上げランキング: 15,868&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4839941009/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51pUNvCkwhL._SL160_.jpg&#34; alt=&#34;Google Androidプログラミング入門 改訂2版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Google Androidプログラミング入門 改訂2版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;江川崇 神原健一 山田暁通 佐野徹郎 郷田まり子 &lt;br /&gt;アスキー・メディアワークス &lt;br /&gt;売り上げランキング: 400,553&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4048860682/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41VI40rlsIL._SL160_.jpg&#34; alt=&#34;作りながら学ぶRuby入門 第2版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;作りながら学ぶRuby入門 第2版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;久保秋 真 &lt;br /&gt;ソフトバンククリエイティブ &lt;br /&gt;売り上げランキング: 274,090&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797371277/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Linux&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51VAhyp4eWL._SL160_.jpg&#34; alt=&#34;はじめてのCentOS6 Linuxサーバ構築編 (TECHNICAL MASTER)&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;はじめてのCentOS6 Linuxサーバ構築編 (TECHNICAL MASTER)&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;デージーネット &lt;br /&gt;秀和システム &lt;br /&gt;売り上げランキング: 210,008&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4798031275/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

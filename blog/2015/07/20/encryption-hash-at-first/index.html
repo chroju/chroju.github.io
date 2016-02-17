@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    暗号化とハッシュ化に関する基本的な事柄まとめ | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>暗号化とハッシュ化に関する基本的な事柄まとめ</h1>
+      <div class="meta">
+        Jul 20, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。</p>
+
+<ul>
+<li>暗号化とハッシュ化は違う。暗号化はデータの秘匿を目的としており、適切な鍵を用いることで復号が可能。ハッシュ化はデータの置換がそもそもの目的であり、ハッシュ関数により一定のフォーマットへ不可逆の変換を行う。</li>
+<li>ただし、衝突耐性を持つことなどにより、セキュリティ用途に適する「暗号学的ハッシュ関数」というものもあるらしい。デジタル署名やメッセージ認証符号への使用を目的とされており、逆にチェックサム等に使用するには計算が「重い」。</li>
+</ul>
+
+<h1 id="暗号:7f0cad21a5c53ce97f9a7777c6f2c4ef">暗号</h1>
+
+<p>主なアルゴリズムをざっと。</p>
+
+<h2 id="rsa:7f0cad21a5c53ce97f9a7777c6f2c4ef">RSA</h2>
+
+<ul>
+<li>公開鍵暗号。素因数分解の計算難度を根拠としたもの。サマウォで解いてたアレもたぶん素因数分解暗号だが、暗算で解かれたらたまったものではない。</li>
+<li>SSHログイン時の鍵認証やSSL認証など、広く使われる。</li>
+<li>秘密鍵生成コマンドとして<code>openssl genrsa</code>がある。SSH鍵認証では<code>ssh-keygen</code>を用いる。</li>
+</ul>
+
+<h2 id="des:7f0cad21a5c53ce97f9a7777c6f2c4ef">DES</h2>
+
+<ul>
+<li>共通鍵暗号。鍵長54bitのブロック暗号。</li>
+<li>鍵長が短すぎるため、現在では安全ではないとされるが、暗号化復号化処理を3回実行するトリプルDESという形で主に実用されている。</li>
+<li><code>openssl genrsa</code>での秘密鍵生成時に、パスフレーズによるトリプルDESでの暗号化を施すため、<code>-des3</code>オプションが用いられる。</li>
+</ul>
+
+<h2 id="aes:7f0cad21a5c53ce97f9a7777c6f2c4ef">AES</h2>
+
+<ul>
+<li>共通鍵暗号。DESの安全性低下に伴い開発された、鍵長128bit超のブロック暗号。</li>
+</ul>
+
+<h1 id="ハッシュ:7f0cad21a5c53ce97f9a7777c6f2c4ef">ハッシュ</h1>
+
+<h2 id="ソルト:7f0cad21a5c53ce97f9a7777c6f2c4ef">ソルト</h2>
+
+<p>ハッシュ化前に対象文字列に付加するランダムな文字列。同一文字列のハッシュ化時に衝突が防げる、レインボーテーブルによる探索に対する妨害になる、といった利点がある。</p>
+
+<h2 id="フィンガープリント:7f0cad21a5c53ce97f9a7777c6f2c4ef">フィンガープリント</h2>
+
+<p>SSH初回ログインで表示されるやつ。公開鍵のハッシュ値。<code>~/.ssh/known_hosts</code>に記述され、次回以降のログインで公開鍵の変更有無の確認に使われる。変更があると、サーバーなりすましの危険性もあるため警告が表示される。<code>ssh-keygen -lf</code>でも表示可能。</p>
+
+<h2 id="md5:7f0cad21a5c53ce97f9a7777c6f2c4ef">md5</h2>
+
+<ul>
+<li>出力128bitのハッシュアルゴリズム。ファイル配布時のチェックサムなどに用いられる。</li>
+<li>安全性は高くないことが判明しているため、日米ともにSHAの使用が推奨されている。</li>
+<li>コマンドは<code>md5sum</code>あるいは<code>openssl md5</code>を使用する。</li>
+<li>なおパスワードハッシュ化でよく用いられる<code>openssl passwd</code>はmd5による実装。</li>
+</ul>
+
+<h2 id="sha:7f0cad21a5c53ce97f9a7777c6f2c4ef">sha</h2>
+
+<ul>
+<li>Secure Hash Algorithm。暗号学的ハッシュ関数の一つ。</li>
+<li>SSL、SSH等で用いられる暗号化アルゴリズム。</li>
+<li>SHA-0,1,2,3が存在しており、SHA-1には脆弱性が存在するため、SSL証明書はSHA-2への全面移行が進められている。すでにGoogle ChromeではSHA-1による証明書に対して警告が表示される。</li>
+<li>SHA-2は鍵長によりSHA-224、SHA-256、SHA-384、SHA-512といったバリエーションが存在する。</li>
+<li>上述の通り<code>openssl passwd</code>はSHA非対応だが、<code>grub-crypt</code>がSHA-2によるハッシュ化に使える模様。
+参考: <a href="http://heroween.hateblo.jp/entry/2014/07/28/133713">CentOS6.5でランダムSalt付きSHA-512のシャドウパスワードを生成する - ひろうぃんの雑記</a></li>
+</ul>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/07/04/development-environment-for-windows/" rel="prev">Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/" rel="next">AnsibleとDigitalOceanでどこでも使える開発環境を作る</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

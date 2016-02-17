@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Kaminariの実装をしてみた | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/08/08/exhibi-update/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Kaminariの実装をしてみた</h1>
+      <div class="meta">
+        Aug 8, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>久しぶりに稼働させている<a href="http://chroju.net/exhibi">ExhiBi</a>というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。</p>
+
+<h1 id="kaminari:fcc76b76324f50b2931d376567b0908e">kaminari</h1>
+
+<p>ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari" title="amatsuda/kaminari" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="https://github.com/amatsuda/kaminari" target="_blank">amatsuda/kaminari</a></iframe>
+
+<p>bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは<code>controller</code>で<code>#index</code>のようなリソースを拾ってくるアクションに<code>.page</code>をかましてやるようにします。</p>
+
+<pre><code class="language-ruby"># もともとはExhibition.all.order...
+def index
+  @exhibitions = Exhibition.page(params[:page]).order(&quot;start_date DESC&quot;)
+end
+</code></pre>
+
+<p>あとは<code>view</code>でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。</p>
+
+<pre><code class="language-slim">= paginate @exhibitions
+</code></pre>
+
+<p>なお、実装当初は<code>undefined method 'deep_symbolize_keys'</code>などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は<code>config/locales/ja.yml</code>が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。</p>
+
+<p>もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。</p>
+
+<h1 id="id以外の要素でmodle-showにアクセスする:fcc76b76324f50b2931d376567b0908e">id以外の要素でmodle#showにアクセスする</h1>
+
+<p>例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fawakia%2Fitems%2Fc2c790dc51e5b084af10" title="Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://qiita.com/awakia/items/c2c790dc51e5b084af10" target="_blank">Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita</a></iframe>
+
+<p>やってることはなんともシンプルで、<code>Museum.find(n)</code>で呼んでいたところを<code>Museum.find_by_name_en_or_id(hoge)</code>と出来るようにしただけですね。<code>#to_param</code>でサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。</p>
+
+<p>ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通に<code>bundle exec rake g migration</code>してから<code>rake db:migrate</code>するだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦<code>rake db:migrate:reset</code>してから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。</p>
+
+<iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Fdifference-bettween-rake-db-migrate-reset.html" title="rake db:reset と rake db:migrate:reset の違い | EasyRamble" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="http://easyramble.com/difference-bettween-rake-db-migrate-reset.html" target="_blank">rake db:reset と rake db:migrate:reset の違い | EasyRamble</a></iframe>
+
+<p>自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/07/25/start-qiita/" rel="prev">Qiitaはじめました</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/" rel="next">Qiitaを使うということの意義</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

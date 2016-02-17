@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    SIerからサービス系の会社に転職して1か月 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>SIerからサービス系の会社に転職して1か月</h1>
+      <div class="meta">
+        Jun 28, 2015 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>SIerからサービス提供型の会社に転職して1か月ぐらい経ったので、感想とか今後のこととかまとめておく。立ち位置としてはインフラエンジニア、まぁ要は運用担当者になるのだが、BtoB、BtoCで動いている提供サービスすべてと、社内インフラまでひっくるめたありとあらゆるインフラの運用管理を受け持っている。なのでそれこそ雑用めいた仕事から構築にイッチョカミしてサーバー立てたりAWSいじったりみたいなところまで、見渡すべき範囲はアホほど広い感じ。</p>
+
+<h2 id="日常のストレスは減った:c033f22ced8d723041151906690d248b">日常のストレスは減った</h2>
+
+<p>とはいえストレスは減った。だいーぶ減った。受託開発だと当然ながら顧客側のシステムポリシーだとか会社方針が第一にあり、それが要件になって、マネージャー同士での合意、契約に流れ、そこから上司の指示のもとで設計構築というように自分の動き方を規定するピラミッドがでっかくそびえるのだが、これがごっそりなくなった。インフラ関連で必要な設定作業や修正があれば誰かがRedmineにチケット上げるので、それを期日の早いものからパカパカと片付けていく感じ。もちろん粒度のデカすぎるチケットなんかは上位者が分割して割り振りをするわけだが、制約がんじがらめの中で仕事をこなしている状態からはだいぶ脱している。</p>
+
+<p>とはいえ当然ながら責任とのトレードオフではあるわけで、チケット内の課題解決のためにスクリプト組んで実装するのか、ワークアラウンドでどうにかしちゃうのかはエンジニアの技量次第になったりするし（もちろん後者だと後から追及される可能性があるが）、そもそもスキル範囲外の話はチケット拾えなくて仕事できないとかご迷惑な場合も多々あり、なんとかせねばなという感じがある。</p>
+
+<h2 id="綺麗な運用ってどこに落ちてるんだろう:c033f22ced8d723041151906690d248b">綺麗な運用ってどこに落ちてるんだろう</h2>
+
+<p>10年程度存続している企業なので、まぁ必要悪と言っていいのか、属人化してたりブラックボックス化してたり暗黙知化していたりなんて部分は様々見られ、アカンやろなと思うし、またそういう意識がチーム全体の根底にも流れてはいる。前職でもこの辺の課題はあったのだが、逆に綺麗で整った運用ってどんな会社がしているのか興味ある。というかそういう会社の話を聞いてみたいなと。</p>
+
+<p>暗黙知化しているものについては手順化したりスクリプト化したりしていきたい。私は「すべての手作業を生まれる前に消し去りたい」と「人間は信頼性の面でコンピュータに劣る」をモットーとして掲げている人間なので、じゃかじゃかコンピュータ殿が勝手にやってくれる運用に切り替えていこうかなと思う。何年この会社にいるかなんて正直わからないけど、いなくなるまでにそれができれば本望かなと。</p>
+
+<p>ただインフラエンジニアが運用エンジニアになっていく現状に対して疑問をもたなくもない。Infrastructure as Codeなんざの流れもあり、インフラ構築も含めたDevはすべてアプリ開発者が担えるようになりつつあり、一方でOpsはインフラエンジニアが担うというような流れにあるが、本当にOps以外にやることないんですかねえ？っていう。DevOpsはバズワードとして聞き流していた節があるので、昨今の潮流とかきちんと押さえて反映しようと思う。</p>
+
+<h2 id="エンジニアの就労環境って:c033f22ced8d723041151906690d248b">エンジニアの就労環境って</h2>
+
+<p>旧来のIT企業と新進気鋭のところとで何が一番違うか？ってこれだと思うんだけど、弊社の場合もよくある事例ではあるがアーロンチェアが支給されていたり、開発運用に必要な物品はそれなりに気前よく買ってもらえたり、お菓子や飲み物が豊富に用意されていたり、オフィスがなんかシャレオツだったりみたいな感じである。旧来のSIerなんかでこういうの導入している会社はほとんどないのではないかと思うのだが、エンジニアを大事にしているか否かってことになるのだろうか。正直とても助かるし、転職の条件としては今後ちゃんと考えるようにしたい。</p>
+
+<p>あと晴れて例の関東IT健保に入れたので、どっかで寿司食いには行きたいと思う。</p>
+
+<h2 id="やろうと思えば仕事は多いけど思わないとない:c033f22ced8d723041151906690d248b">やろうと思えば仕事は多いけど思わないとない</h2>
+
+<p>利益をあげる方法って売上増やすかコスト下げるかだと思うんだが、運用エンジニアの仕事って基本的に後者である。ただ当然ながらサービスとして稼いでいる前者の仕事がそもそも必要なので、後者、要するに効率化だとか運用改善の部分に上手いこと手が回らず、効率の悪い運用をいつまでも続けている、なんてことには陥りやすい。</p>
+
+<p>前者、売上を上げるべき仕事というのは黙ってても降ってくるので、仕事はある。でもエンジニアとしてそれでいいんですか？というと、やっぱり良くないよねというか、エンジニアリングしてこそだよねと思うので、売上増やすためのタスクはさっさと終わらせて、改善や効率化にじゃんじゃん時間割きたい。そのために試行錯誤している時間ってそんなにはないので、手持ちの武器を増やす方向で進めていければと思う。取り急ぎシェルスクリプトとAWSかなぁと。</p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/" rel="prev">Ansibleの入門イベント聞いてきた話</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/" rel="next">すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+

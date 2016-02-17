@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Rails環境構築（1） Vagrantで仮想マシン構築 | the world as code
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="http://chroju.github.io/blog/2014/01/19/2014-01-19-post/"/>
+
+  
+  <link rel="stylesheet" href="http://chroju.github.io/css/sanitize.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/responsive.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/highlight_monokai.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/theme.css">
+  <link rel="stylesheet" href="http://chroju.github.io/css/custom.css">
+  
+  
+  <link href="http://chroju.github.io/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+  <link href="http://chroju.github.io/index.xml" rel="feed" type="application/rss+xml" title="the world as code" />
+
+  
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "2b9fffc6-b3fe-4988-a0ef-4f9dcce98eaa", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="http://chroju.github.io/">the world as code</a></h1>
+        
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/chroju" target="_blank">Twitter</a></li>
+          
+          <li><a href="https://github.com/chroju" target="_blank">GitHub</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Rails環境構築（1） Vagrantで仮想マシン構築</h1>
+      <div class="meta">
+        Jan 19, 2014 &nbsp;
+        
+      </div>
+    </div>
+    <article>
+      
+
+<p>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。</p>
+
+<h2 id="インストール:637477cf31071a5d75c29b138cb186fd">インストール</h2>
+
+<p>まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」からいろいろ読んどくといいと思う。公式のRead meに勝るものはないです。</p>
+
+<p><a href="http://www.vagrantup.com/">http://www.vagrantup.com/</a></p>
+
+<p>インストールしたらバージョン確認。</p>
+
+<pre><code>$ vagrant -v
+</code></pre>
+
+<h2 id="boxの追加:637477cf31071a5d75c29b138cb186fd">boxの追加</h2>
+
+<p>まずはboxと呼ばれる仮想マシンイメージをvagrantに追加する。</p>
+
+<pre><code>$ vagrant box add hoge url
+</code></pre>
+
+<p>hogeは適当なイメージ名、urlはウェブで公開されているboxのurl。イメージは<a href="http://www.vagrantbox.es/">ココ</a>に大量にあるので、任意のサーバーのURLをコピってくればOK。ほとんどがLinux、ちょこっとだけBSD。</p>
+
+<h2 id="vagrantの初期化:637477cf31071a5d75c29b138cb186fd">vagrantの初期化</h2>
+
+<pre><code>$ mkdir vagrant
+$ cd vagrant
+$ vagrant init hoge
+</code></pre>
+
+<p>vagrant initでカレントディレクトリをvagrant用に初期化する。なのでmkdirは好きなとこに好きなフォルダ作ればよい。そこに仮想マシンの設定ファイルが作られるので。vagrant initの引数にはさっきvagrant box addで追加した仮想マシンイメージの名前を渡してやる。渡さないとデフォルト値で設定ファイルが作られてしまう。これで最初ハマった。ちなみにどうハマるかというと、vagrant upしたときにこんなエラーが出る。</p>
+
+<pre><code>There are errors in the configuration of this machine. Please fix
+the following errors and try again:
+
+vm:
+* The box 'base' could not be found.
+</code></pre>
+
+<p>「base」という名前のboxがないというエラー。どうもデフォルトでbaseという名前が使われるらしいのだが、さっきbox addした名前と異なるので、そんなboxはないから立ち上げられませんよということ。もしこの状態になってしまった場合の対処としては、vagrantfileのconfig.vm.boxの値を該当の仮想マシンイメージ名に替えてやれば上がるようになる。</p>
+
+<p>話が飛んでしまったが、Vagrantfileはvagrant initしたディレクトリの中に出力されている。で、仮想マシンを上げる前にちょっとコイツの編集が必要。</p>
+
+<pre><code>  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network :private_network, ip: &quot;192.168.xx.xx&quot;
+</code></pre>
+
+<p>上のconfig〜行のコメントアウトを外してやって、IPを適当に設定する。が、自分の環境だとこれだけでは仮想マシンを起動した時にエラーが出てしまって、さらにprivate_networkをpublic_networkに替えてやらなくてはならなかった。ググってるとこの手順やってる人ほとんどいないんだけど、何が原因だろう。</p>
+
+<h2 id="仮想マシンの起動:637477cf31071a5d75c29b138cb186fd">仮想マシンの起動</h2>
+
+<p>で、ここまでやっていよいよVM起動。</p>
+
+<pre><code>$ vagrant up
+</code></pre>
+
+<p>てっきりVirtual boxがGUIでも上がってくるのかと思ったが、仮想マシン上がりましたよ―というメッセージが表示されるだけでGUI上は何の変化もない。なのでOSが上がってるのかわかりにくいんだけど、SSHで入ると実際入れるのでどうも上がっているらしい（ちなみにGUIでVirtual box上げてももちろん起動状態はわかる。あとvagrant statusコマンドでもわかる）。</p>
+
+<pre><code>$ vagrant ssh
+</code></pre>
+
+<p>bashのsshコマンド発行しなくても、vagrantの独自コマンドで入れる。楽。ちなみに入るときのユーザーは勝手にvagrantというユーザーが作られているんだとか。あとはもう好きにやっちゃってーというところ。他に使いそうなコマンドは以下の表あたりか。</p>
+
+<table>
+<thead>
+<tr>
+<th> コマンド         </th>
+<th> 意味                    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> vagrant halt     </td>
+<td> 仮想マシンの停止        </td>
+</tr>
+<tr>
+<td> vagrant destroy  </td>
+<td> 仮想マシンの削除        </td>
+</tr>
+<tr>
+<td> vagrant box list </td>
+<td> 仮想マシンイメージリストの表示 </td>
+</tr>
+<tr>
+<td> vagrant status   </td>
+<td> 仮想マシンの状態確認      </td>
+</tr>
+</tbody>
+</table>
+
+<p>vagrantが真価を発揮するのって多分chef-soloと組み合わせたときなので、今の段階だと「わざわざマウス使わずともターミナル上で仮想マシン上げられて便利〜」ぐらいの感想しか正直ないです。もっと勉強しよ。</p>
+
+<h2 id="参考:637477cf31071a5d75c29b138cb186fd">参考</h2>
+
+<p><a href="http://www.happytrap.jp/blogs/2013/07/26/10602/">Vagrantで仮想サーバ構築 | HAPPY*TRAP</a></p>
+
+<p><a href="http://qiita.com/nobu_blast/items/828cf7c002100a0fdeb2">vagrant + virtualbox 仮想サーバ構築 - Qiita [キータ]</a></p>
+
+      
+      
+      <div id="share-this" class="col span_10">
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+        <span class='st_pocket_large' displayText='Pocket'></span>
+        <span class='st_sharethis_large' displayText='ShareThis'></span>
+        <span class='st_email_large' displayText='Email'></span>  
+      </div>
+    </article>
+    
+
+
+<script type="text/javascript">
+     
+    var disqus_shortname = '';
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+  </main>
+  
+  <nav class="pagination">
+    
+      <span class="previous">&larr; <a href="http://chroju.github.io/blog/2014/01/18/2014-01-18-post/" rel="prev">Ruby on Rails環境構築はじめます</a></span>
+    
+    
+      <span class="next"><a href="http://chroju.github.io/blog/2014/01/23/2014-01-23-post/" rel="next">Rails環境構築（2）Rubyのインストール &#43; α</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      
+      written by chroju
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="http://chroju.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+</body>
+</html>
+
