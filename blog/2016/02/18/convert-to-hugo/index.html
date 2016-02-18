@@ -1,0 +1,214 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>ブログをHugoに移行した &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+</nav>
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>ブログをHugoに移行した</h1>
+                    <h2 class="headline">February 18, 2016</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。</p>
+
+<p>随所で語られているように移行自体は大したものではなく、Markdownでいずれも互換性があるし、Front MatterもYAML形式であれば同一。Hugoレポジトリの<code>content/post</code>配下に記事ファイルを突っ込めば移行としてはおしまい。多少の差異については以下の記事が詳しい。</p>
+
+<p><a href="http://deeeet.com/writing/2014/12/25/hugo/">OctopressからHugoへ移行した | SOTA</a></p>
+
+<p>ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名が<code>YYYY-MM-DD-foobar.markdown</code>の形だったのに対し、今回は記事のパーマリンクを<code>config.toml</code>で以下のように設定してしまっている。</p>
+
+<pre><code class="language-toml">[permalinks]
+    post = &quot;/blog/:year/:month/:day/:filename/&quot;
+</code></pre>
+
+<p>従って<code>/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/</code>という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事は<code>foobar.markdown</code>に直したのだが、はてなブログ時代から移植した記事は<code>YYYY-MM-DD-post.markdown</code>という適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。</p>
+
+<p>記事を公開する流れは以下のようになる。</p>
+
+<pre><code class="language-bash"># 記事作成
+$ hugo new post/title.md
+$ vi content/post/title.md
+# ビルド
+$ hugo
+# commit
+$ cd public
+$ git add .
+$ git commit -m &quot;new post&quot;
+$ git push origin master
+</code></pre>
+
+<p><code>hugo</code>コマンドでビルドすると<code>public</code>フォルダにサイト構成全体が吐かれるので、それをそのまま<code>git push</code>して終わり。ただ実際にバージョン管理したいのは<code>public</code>というより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体で<code>git push</code>してCIでビルドさせる形に変えたいと思う。</p>
+
+<p><a href="http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/">HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog</a></p>
+
+<p>なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。</p>
+
+<h2 id="その他参考記事:f9b1285b375e2fa831a443cf9e131380">その他参考記事</h2>
+
+<ul>
+<li><a href="http://qiita.com/syui/items/869538099551f24acbbf">HUGOを使ってサイトを立ち上げる方法 - Qiita</a></li>
+<li><a href="https://gohugo.io/tutorials/github-pages-blog/">Hugo - Hosting on GitHub Pages</a></li>
+</ul>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f02%2f18%2fconvert-to-hugo%2f - %e3%83%96%e3%83%ad%e3%82%b0%e3%82%92Hugo%e3%81%ab%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた<aside class="dates">Jan 20</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">2016年の行動規範<aside class="dates">Jan 3</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/">2015年総括<aside class="dates">Dec 31</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/">Serverspecファーストインプレッション<aside class="dates">Dec 31</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/14/review-team-geek/">『Team Geek』読了<aside class="dates">Dec 14</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/04/docker-first-impression/">Dockerファーストインプレッション<aside class="dates">Dec 4</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/">Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI<aside class="dates">Nov 18</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
