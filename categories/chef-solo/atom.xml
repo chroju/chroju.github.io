@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chef Solo on the world as code</title>
+    <link>http://chroju.github.io/categories/chef-solo/</link>
+    <description>Recent content in Chef Solo on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 30 May 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/chef-solo/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>chefでさくらVPSの初期構築を全部自動化してみた</title>
+      <link>http://chroju.github.io/blog/2014/05/30/2014-05-30-post/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/05/30/2014-05-30-post/</guid>
+      <description>
+
+&lt;p&gt;Chefでサーバー構築を全部自動化して、借りているさくらVPSに当ててみた。意地でも手作業はまったく入れない完全自動構築設定。これはよい。毎回手作業やらずに済むというのは、抜け漏れをなくすという点でも、構築時間を短縮するという面でも本当に楽。&lt;/p&gt;
+
+&lt;h2 id=&#34;前提:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;前提&lt;/h2&gt;
+
+&lt;p&gt;今回構築するサーバーの前提は次の通り。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 6.4環境で試行&lt;/li&gt;
+&lt;li&gt;vagrantを使って試験後、さくらVPSに対して適用&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;基本の設定として以下を実施&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;構築用のユーザーを作成&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;構築用ユーザーにsudo権限を付与&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;構築用ユーザーを秘密鍵認証でsshログイン許可&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;rootによるsshログインを禁止&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;パスワード認証によるログインを禁止&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;sshのポート番号を変更&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ssh, http以外のアクセスをiptablesでシャットアウト&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;nginxを導入&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;将来的にunicornを入れるための設定を準備&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;極力サードパーティクックブックは使わない（ブラックボックス化が嫌）&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;レシピ:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;レシピ&lt;/h2&gt;
+
+&lt;p&gt;まず「どんなサーバーだろうとまず実行するだろうセキュリティ上の設定」はdefault_tasksというレシピにまとめた。&lt;/p&gt;
+
+&lt;h3 id=&#34;default-tasks:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;default_tasks&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# sshdサービスの有効化
+service &amp;quot;sshd&amp;quot; do
+  supports :status =&amp;gt; true, :restart =&amp;gt; true, :reload =&amp;gt; true
+  action [ :enable, :start ]
+end
+
+# sshd_configの配置
+template &amp;quot;sshd_config&amp;quot; do
+  path &amp;quot;/etc/ssh/sshd_config&amp;quot;
+  source &amp;quot;sshd_config.erb&amp;quot;
+  owner &amp;quot;root&amp;quot;
+  group &amp;quot;root&amp;quot;
+  mode 0600
+  notifies :restart, &amp;quot;service[sshd]&amp;quot;
+end
+
+# iptablesの設定
+iptables_rule &amp;quot;iptables&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sshdの有効化と、templateを使ったsshd_configの配置、そしてiptablesの設定。このうちiptablesについてはサードパーティ・クックブックを使っている。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/opscode-cookbooks/iptables&#34;&gt;opscode-cookbooks/iptables&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;iptablesに挿入したい内容をtemplateで用意し、&lt;code&gt;iptables_rule &amp;quot;template name&amp;quot;&lt;/code&gt;の形でレシピ内に書き込んでおくと、templateの内容がそのままiptablesに追加されるというシンプルなレシピ。まぁ、これぐらいはサードパーティ使ってもよいかな、と。iptablesを丸ごとtemplate化してアップロードするという手もあるにはあるのだが。&lt;/p&gt;
+
+&lt;p&gt;sshd_configはCentOSから引っ張ってきたものをそのまま流用し、Attributesを使っていろいろと書き換えられるように仕込んだ。長いので割愛するけど、設定可能なAttributesはこんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;quot;sshd&amp;quot; : {
+    &amp;quot;Port&amp;quot; : 22,
+    &amp;quot;MaxStartups&amp;quot; : 10,
+    &amp;quot;PermitRootLogin&amp;quot; : &amp;quot;yes&amp;quot;,
+    &amp;quot;RSAAuthentication&amp;quot; : &amp;quot;yes&amp;quot;,
+    &amp;quot;PubkeyAuthentication&amp;quot; : &amp;quot;yes&amp;quot;,
+    &amp;quot;AuthorizedKeysFile&amp;quot; : &amp;quot;.ssh/authorized_keys&amp;quot;,
+    &amp;quot;PasswordAuthentication&amp;quot; : &amp;quot;yes&amp;quot;
+  },
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;よく編集する箇所を中心にAttributesとしてみた。他に設定したい項目が増えたら随時足していけば良いかなと。&lt;/p&gt;
+
+&lt;h3 id=&#34;users:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;users&lt;/h3&gt;
+
+&lt;p&gt;ユーザーの作成は別のレシピに切り分け。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# wheelグループの作成
+group &amp;quot;wheel&amp;quot; do
+  gid 10
+  action :create
+end
+
+# data bagsよりユーザーを作成
+data_ids = data_bag(&#39;users&#39;)
+
+data_ids.each do |id|
+  # ユーザー作成
+  u = data_bag_item(&#39;users&#39;, id)
+  user u[&#39;username&#39;] do
+    password u[&#39;password&#39;]
+    supports :manage_home =&amp;gt; true, :non_unique =&amp;gt; false
+    group u[&#39;group&#39;]
+    action [:create]
+  end
+
+  # ssh公開鍵配置用のディレクトリ作成
+  directory &amp;quot;/home/#{id}/.ssh&amp;quot; do
+    owner u[&amp;quot;id&amp;quot;]
+    group u[&amp;quot;id&amp;quot;]
+    mode 0700
+    action :create
+  end
+
+  # ssh公開鍵の配置
+  file &amp;quot;/home/#{id}/.ssh/authorized_keys&amp;quot; do
+    owner u[&amp;quot;id&amp;quot;]
+    mode 0600
+    content u[&amp;quot;key&amp;quot;]
+    action :create_if_missing
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;sudoを許可するユーザーをwheelグループに入れるという定番設定。wheelを実際にsudo許可するのはまた別のレシピの仕事で、ここではグループとユーザーの作成のみ。&lt;/p&gt;
+
+&lt;p&gt;ユーザー作成にはdata_bagを使った。&lt;a href=&#34;http://girigiribauer.com/archives/1066&#34;&gt;こちら&lt;/a&gt;を参考として作っている。ポイントとしては公開鍵まで登録させていること。fileリソースを使って実にシンプルな配置の仕方だけど、非常に楽ではある。&lt;/p&gt;
+
+&lt;p&gt;あまり詳しくは知らないのだが、data_bagについては暗号化する方法があるみたいなので、公開鍵を生でべろっと貼っとくのが気になる場合はそのへんも仕掛けておくと良さそう。&lt;/p&gt;
+
+&lt;h3 id=&#34;nginx:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;nginx&lt;/h3&gt;
+
+&lt;p&gt;一番苦労した気がするし、あまり美しくない。。。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+# nginxインストール
+package &amp;quot;nginx&amp;quot; do
+  action :install
+end
+
+# nginx有効化
+service &amp;quot;nginx&amp;quot; do
+  supports :status =&amp;gt; true, :restart =&amp;gt; true, :reload =&amp;gt; true
+  action [ :enable, :start ]
+end
+
+# templateからnginx.confを配置
+template &amp;quot;nginx&amp;quot; do
+  path &amp;quot;/etc/nginx/nginx.conf&amp;quot;
+  source &amp;quot;nginx.conf.erb&amp;quot;
+  owner &amp;quot;root&amp;quot;
+  group &amp;quot;root&amp;quot;
+  mode 0644
+  notifies :reload, &amp;quot;service[nginx]&amp;quot;
+end
+
+# ディレクトリ作成
+directories = [&amp;quot;/etc/nginx/sites-available&amp;quot;,&amp;quot;/etc/nginx/sites-enabled&amp;quot;,&amp;quot;/var/www&amp;quot;,&amp;quot;/var/www/#{node[&#39;nginx&#39;][&#39;root&#39;]}&amp;quot;,&amp;quot;/var/www/#{node[&#39;unicorn&#39;][&#39;root&#39;]}&amp;quot;]
+directories.each do |directory_name|
+  directory &amp;quot;#{directory_name}&amp;quot; do
+    owner &amp;quot;root&amp;quot;
+    group &amp;quot;root&amp;quot;
+    mode 0644
+    action :create
+  end
+end
+
+# sites設定をtemplateごとに実行
+node[&#39;nginx&#39;][&#39;nginx_sites&#39;].each do |site|
+  # templateからsites-available配下に設定ファイルを配置
+  template &amp;quot;nginx_sites_available&amp;quot; do
+    path &amp;quot;/etc/nginx/sites-available/#{site}&amp;quot;
+    source &amp;quot;nginx/#{site}.erb&amp;quot;
+    owner &amp;quot;root&amp;quot;
+    group &amp;quot;root&amp;quot;
+    mode 0644
+  end
+
+  # sites-enabled配下へシンボリックリンクを配置
+  link &amp;quot;/etc/nginx/sites-enabled/#{site}&amp;quot; do
+    to &amp;quot;/etc/nginx/sites-available/#{site}&amp;quot;
+    link_type :symbolic
+    action :create
+    notifies :reload, &amp;quot;service[nginx]&amp;quot;
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストール、サービス有効化、templateからのnginx.confアップロードまでは良いとして。ディレクトリ作成がなんか。。。汚い。。。&lt;/p&gt;
+
+&lt;p&gt;/var/wwwを掘って、その中にウェブサイトのルートを置いたり、バーチャルホストの設定でsites-availableとかその辺を使っているもんで、ディレクトリ作成の量が多くなってしまった。いずれも設定は同じなので配列でやるのがベターだとは思うのだが、どうにも汚い。なんとかしたいとこではある。&lt;/p&gt;
+
+&lt;p&gt;あとはsites-availableにtemplateから設定ファイルを配置して、linkリソースでsites-enabledにシンボリックリンクを貼って終了。nginxの使い方はsites-availableを使うパターンだけではないので、もう少しスッキリさせることはできそう。&lt;/p&gt;
+
+&lt;h2 id=&#34;サードパーティ-クックブック:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;サードパーティ・クックブック&lt;/h2&gt;
+
+&lt;p&gt;サードパーティとして導入したのはさっきのiptablesと、sudoの2つ。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/opscode-cookbooks/sudo&#34;&gt;opscode-cookbooks/sudo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;sudoはvisudoを&lt;code&gt;execute&lt;/code&gt;で走らせるってのも怖いし、その後ファイル編集をどうやったらいいのかよくわからんなってのと、sudoresファイルをtemplateで上げるってのもちょっと怖いという感覚的な問題からサードパーティ採用とした。&lt;/p&gt;
+
+&lt;p&gt;使い方としては簡単なもので、変数でsudoを許可するユーザーやグループを指定して、passwordlessとするかどうかを設定するぐらいで終わり。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;quot;authorization&amp;quot; : {
+    &amp;quot;sudo&amp;quot; : {
+      &amp;quot;groups&amp;quot; : [&amp;quot;wheel&amp;quot;],
+      &amp;quot;passwordless&amp;quot; : &amp;quot;true&amp;quot;
+    }
+  },
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;冒頭でも書いた通り、なるべくサードパーティを使わない方針で行きたいんだけど、自力でレシピを書けないor書く自信がないところは已むなく実績のあるサードパーティを使ったという感じ。まぁサードパーティと言っても結局は人の手で書かれたレシピなので、自分でchef力上げれば相応なレシピは自力で書けるはず。このあたりは結局「どこまでchef力の向上に時間を割くか」という部分とトレードオフになるのかと。&lt;/p&gt;
+
+&lt;h2 id=&#34;今後やりたいこと:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;今後やりたいこと&lt;/h2&gt;
+
+&lt;p&gt;最終的にこのサーバーではRails動かしたいので、Rubyやpostgresqlのインストールを今後実装したい。あと「取りあえず動けばいいや」路線で一度作ってしまったので、もう少しメンテナンス性の高いもの、読みやすいレシピには育てたいところ。&lt;/p&gt;
+
+&lt;p&gt;汎用的に誰でもどんな用途でも使えるって感じではないと思うが、とりあえずGitHubには上げてみた。秘伝のタレのようにこれをじわじわ育てていくというのは良いなぁ。Linuxの勉強をするごとにきっと強靭なレシピとなっていくのだろう。まさに「レシピ」だな、これは。&lt;/p&gt;
+
+&lt;p&gt;まずは静的なページをってことで、近日中にプロフィールでも置いて公開する予定。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/chef_web_server&#34;&gt;https://github.com/chroju/chef_web_server&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;参考:5258afb5b5a801bdb59a35a0efcbe00e&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://tsuchikazu.net/vps_chef_solo/&#34;&gt;さくらVPSの初期設定をChef Soloでやってみた〜サードパーティcookbookの使い方〜 | tsuchikazu blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ch.nicovideo.jp/dwango-engineer/blomaga/ar334285&#34;&gt;Chef Soloと Knife Soloでの ニコニコサーバー構築 (4) ～コツ編～:dwango エンジニア ブロマガ:ドワンゴ研究開発チャンネル(ドワンゴグループのエンジニア) - ニコニコチャンネル:生活&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/ntaku/20130324/1364132658&#34;&gt;入門Chef-Soloを片手にRailsアプリを動作させるところまでやってみた - プログラミングノート&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://m-tkg.hatenadiary.jp/entry/2013/12/12/151254&#34;&gt;単純な環境構築を知る -Chefでiptables書き換え- - 技術いろいろ勉強メモ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Chef soloはじめの一歩</title>
+      <link>http://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</guid>
+      <description>
+
+&lt;p&gt;Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。&lt;/p&gt;
+
+&lt;p&gt;参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg&#34; alt=&#34;入門Chef Solo - Infrastructure as Code&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;入門Chef Solo - Infrastructure as Code&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;伊藤直也 (2013-03-11)&lt;br /&gt;売り上げランキング: 2,821&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;基本構成:87154f663fbbf30fe8a304ebb3b61c17&#34;&gt;基本構成&lt;/h2&gt;
+
+&lt;p&gt;chefの基本構成を取りあえず押さえる。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;chef: インフラ自動化のフレームワーク&lt;/li&gt;
+&lt;li&gt;chef solo: 本来クラサバ構成で扱うChefをスタンドアロンで使えるようにしたもの&lt;/li&gt;
+&lt;li&gt;knife-solo: リモートからchef soloの実行に必要なツール&lt;/li&gt;
+&lt;li&gt;Berkshelf: サードパーティクックブックの管理に使う&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;インストール:87154f663fbbf30fe8a304ebb3b61c17&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;上記のものを全部インストール。Gemfile書いてる場合はそっちに追加で。また最後に&lt;code&gt;rbenv rehash&lt;/code&gt;を忘れずに。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install chef -v 11.10 --no-ri --no-rdoc
+gem install knife-solo --no-ri --no-rdoc
+gem install berkshelf
+rbenv rehash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみにChefの最新はv11.12.xなんだけど、どうもバグがあるっぽく上手くいかなかったのでバージョン指定で古いの入れてる。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参考：&lt;a href=&#34;http://qiita.com/sakatuba@github/items/1548818b02735b2047ad&#34;&gt;Chef 11.12.2のknife configureが失敗する - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;セットアップ:87154f663fbbf30fe8a304ebb3b61c17&#34;&gt;セットアップ&lt;/h2&gt;
+
+&lt;p&gt;初期設定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;knife configure # 対話は全部デフォでOK
+knife solo init chef-repo # chef-repoフォルダがレポジトリとして作られる
+cd chef-repo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;chef soloを使うリモート側へもchefをインストール。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ knife solo prepare vagrant@192.168.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;berkshelf:87154f663fbbf30fe8a304ebb3b61c17&#34;&gt;Berkshelf&lt;/h2&gt;
+
+&lt;p&gt;続いてBerkshelfの初期設定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ berks init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;しかし、ここでまさかのエラー。。。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cannot load such file -- hitimes/hitimes (LoadError)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/copiousfreetime/hitimes/issues/17&#34;&gt;ここ&lt;/a&gt;によればgem updateしてからhitimesを再インストールすれば大丈夫だよ的な話。やってみる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gem update
+$ gem -v
+2.2.2
+$ gem install hitimes
+$ rbenv rehash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;気を取り直して。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ berks init
+The resource at &#39;/Users/chroju/Dropbox/lab/chef/vagrant-repo/metadata.rb&#39; does not appear to be a valid cookbook. Does it have a metadata.rb?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(&amp;lsquo;A`)ｳﾞｧｰ&lt;/p&gt;
+
+&lt;p&gt;わけわからんし、&lt;code&gt;berks init&lt;/code&gt;しなくてもBerkfile自前で作りゃイケるらしいので諦めることにする。Berksfileを&lt;code&gt;touch&lt;/code&gt;してからvimで編集。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;site :opscode
+
+cookbook &#39;sudo&#39;
+cookbook &#39;iptables`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Gemfileと似たような書き方で、&lt;code&gt;cookbook &#39;hoge&#39;&lt;/code&gt;と書くとそのクックブックが&lt;a href=&#34;http://community.opscode.com/&#34;&gt;Opscode&lt;/a&gt;からインストールされる。Opscode以外のGitHubで公開されているクックブックを使う場合は、これもGemfileのように&lt;code&gt;cookbook &#39;fuga&#39; git:&amp;quot;...&amp;quot;&lt;/code&gt;の形でURL指定が可能。&lt;/p&gt;
+
+&lt;p&gt;そしていざインストール……だがまたしてもエラー。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ berks install --path cookbooks
+DEPRECATED: `berks install --path [PATH}` has been replaced by `berks vendor`.
+DEPRECATED: Re-run your command as `berks vendor [PATH]` or see `berks help vendor`.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;そろそろこのあたりから笑えてきた。調べたところ、Berkshelf v3.xでは&lt;code&gt;berks install --path hoge&lt;/code&gt;は使えないらしいス。&lt;code&gt;berks vendor hoge&lt;/code&gt;が今どきらしい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ berks vendor cookbooks
+destination already exists /Users/chroju/Dropbox/lab/chef/vagrant-repo/cookbooks. Delete it and try again or use a different filepath.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;えー。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf cookbooks
+$ berks vendor cookbooks
+
+DEPRECATED: Your Berksfile contains a site location pointing to the Opscode Community Site (site :opscode). Site locations have been replaced by the source location. Change this to: &#39;source &amp;quot;http://api.berkshelf.com&amp;quot;&#39; to remove this warning. For more information visit https://github.com/berkshelf/berkshelf/wiki/deprecated-locations
+Resolving cookbook dependencies...
+Using iptables (0.13.2)
+Using sudo (2.5.2)
+# 以下略
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;文句言いながらもやってくれました。冒頭の1行目の書き方は&lt;code&gt;site :opscode&lt;/code&gt;というのが通例だったけど、v2.0から&lt;code&gt;source &amp;quot;https://api.berkshelf.com&amp;quot;&lt;/code&gt;に変わった模様。ただ、コマンドは通るには通るんだけど。&lt;/p&gt;
+
+&lt;p&gt;最初に&lt;code&gt;berks vendor cookbooks&lt;/code&gt;したときに出たエラー、要は「すでにあるフォルダにはインストールできねーよ」って話なのだが、だとしたらBerksfileを書き換えて追加インストールしたいときはどうしたらいいんだろう？というのは素朴な疑問。サードパーティのクックブックは直接編集しない（変数などは自分のレシピの方で代入する）のが基本らしいので、一度フォルダを消してから再度&lt;code&gt;berks vendro cookbooks&lt;/code&gt;でも不都合はないと言えばないのだが、なんだか馬鹿らしい感じもする。&lt;/p&gt;
+
+&lt;p&gt;あと&lt;code&gt;berks install&lt;/code&gt;コマンドもあるんだけど使い方わかってない。&lt;/p&gt;
+
+&lt;h2 id=&#34;レシピ作成:87154f663fbbf30fe8a304ebb3b61c17&#34;&gt;レシピ作成&lt;/h2&gt;
+
+&lt;p&gt;その前におさえる基本。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;nodes/hostname.json : 実行するレシピをrun_listとして記述&lt;/li&gt;
+&lt;li&gt;solo.rb : chefが利用する各種パスの設定ファイル（knife soloの場合は生成されない）&lt;/li&gt;
+&lt;li&gt;cookbooks/hoge/recipes/default.rb : レシピ本体&lt;/li&gt;
+&lt;li&gt;cookbooks/hoge/templates/default/* : テンプレートファイル&lt;/li&gt;
+&lt;li&gt;cookbooks/hoge/files/* : 静的ファイル&lt;/li&gt;
+&lt;li&gt;cookbooks/hoge/attributes/* : 変数の格納&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;あとcookbooksフォルダはサードパーティ製のものを入れて、自家製のクックブックはsite-cookbooksフォルダに入れるっていうルールもある。名前がわかりにくいが。&lt;/p&gt;
+
+&lt;p&gt;このへん押さえつつ、次回はレシピ作成編です。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

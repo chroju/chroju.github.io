@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby On Rails on the world as code</title>
+    <link>http://chroju.github.io/categories/ruby-on-rails/</link>
+    <description>Recent content in Ruby On Rails on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 08 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/ruby-on-rails/http/chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kaminariの実装をしてみた</title>
+      <link>http://chroju.github.io/blog/2015/08/08/exhibi-update/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/08/08/exhibi-update/</guid>
+      <description>
+
+&lt;p&gt;久しぶりに稼働させている&lt;a href=&#34;http://chroju.net/exhibi&#34;&gt;ExhiBi&lt;/a&gt;というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。&lt;/p&gt;
+
+&lt;h1 id=&#34;kaminari:fcc76b76324f50b2931d376567b0908e&#34;&gt;kaminari&lt;/h1&gt;
+
+&lt;p&gt;ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。&lt;/p&gt;
+
+&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari&#34; title=&#34;amatsuda/kaminari&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;https://github.com/amatsuda/kaminari&#34; target=&#34;_blank&#34;&gt;amatsuda/kaminari&lt;/a&gt;&lt;/iframe&gt;
+
+&lt;p&gt;bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは&lt;code&gt;controller&lt;/code&gt;で&lt;code&gt;#index&lt;/code&gt;のようなリソースを拾ってくるアクションに&lt;code&gt;.page&lt;/code&gt;をかましてやるようにします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;# もともとはExhibition.all.order...
+def index
+  @exhibitions = Exhibition.page(params[:page]).order(&amp;quot;start_date DESC&amp;quot;)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとは&lt;code&gt;view&lt;/code&gt;でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-slim&#34;&gt;= paginate @exhibitions
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なお、実装当初は&lt;code&gt;undefined method &#39;deep_symbolize_keys&#39;&lt;/code&gt;などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は&lt;code&gt;config/locales/ja.yml&lt;/code&gt;が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。&lt;/p&gt;
+
+&lt;p&gt;もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。&lt;/p&gt;
+
+&lt;h1 id=&#34;id以外の要素でmodle-showにアクセスする:fcc76b76324f50b2931d376567b0908e&#34;&gt;id以外の要素でmodle#showにアクセスする&lt;/h1&gt;
+
+&lt;p&gt;例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。&lt;/p&gt;
+
+&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fawakia%2Fitems%2Fc2c790dc51e5b084af10&#34; title=&#34;Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://qiita.com/awakia/items/c2c790dc51e5b084af10&#34; target=&#34;_blank&#34;&gt;Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita&lt;/a&gt;&lt;/iframe&gt;
+
+&lt;p&gt;やってることはなんともシンプルで、&lt;code&gt;Museum.find(n)&lt;/code&gt;で呼んでいたところを&lt;code&gt;Museum.find_by_name_en_or_id(hoge)&lt;/code&gt;と出来るようにしただけですね。&lt;code&gt;#to_param&lt;/code&gt;でサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。&lt;/p&gt;
+
+&lt;p&gt;ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通に&lt;code&gt;bundle exec rake g migration&lt;/code&gt;してから&lt;code&gt;rake db:migrate&lt;/code&gt;するだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦&lt;code&gt;rake db:migrate:reset&lt;/code&gt;してから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。&lt;/p&gt;
+
+&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Fdifference-bettween-rake-db-migrate-reset.html&#34; title=&#34;rake db:reset と rake db:migrate:reset の違い | EasyRamble&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://easyramble.com/difference-bettween-rake-db-migrate-reset.html&#34; target=&#34;_blank&#34;&gt;rake db:reset と rake db:migrate:reset の違い | EasyRamble&lt;/a&gt;&lt;/iframe&gt;
+
+&lt;p&gt;自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>bundle installはどのパスに対してすべきなのか問題</title>
+      <link>http://chroju.github.io/blog/2014/01/14/2014-01-14-post/</link>
+      <pubDate>Tue, 14 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/01/14/2014-01-14-post/</guid>
+      <description>&lt;p&gt;今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;% bundle install --path vendor/bundle
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。&lt;/p&gt;
+
+&lt;p&gt;まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な&lt;a href=&#34;http://railstutorial.jp/&#34;&gt;オンラインのRoRチュートリアル&lt;/a&gt;にはこのことが書かれてなかったので、書き留めた次第。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://qiita.com/emadurandal/items/a60886152a4c99ce1017&#34;&gt;Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://memo.yomukaku.net/entries/IpCSQmo&#34;&gt;Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/blockquote&gt;&lt;/p&gt;
+
+&lt;p&gt;で、&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/01/09/235505&#34;&gt;先日のエラー&lt;/a&gt;についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>twitter-bootstrap-railsでundefined methodのエラーに嵌る</title>
+      <link>http://chroju.github.io/blog/2014/01/09/2014-01-09-post/</link>
+      <pubDate>Thu, 09 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/01/09/2014-01-09-post/</guid>
+      <description>&lt;p&gt;完全に嵌った。さっぱりわからん。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;undefined method `to_css&#39; for nil:NilClass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/seyhunak/twitter-bootstrap-rails&#34;&gt;twitter-bootstrap-rails&lt;/a&gt;を試してみているのだが、インストールしていざブラウザからアクセスしてみると、undefined methodのエラーが出てしまう。どのページにアクセスしてもダメ。&lt;/p&gt;
+
+&lt;p&gt;エラーメッセージ読んでも、そもそも#to_cssメソッドがどこにあるのかもわからんのだが、名前からしてLESSのコンパイルでトチってそうだという想像をしている。でもそれ以上はわかんない。ググっても情報はほとんどないし。&lt;/p&gt;
+
+&lt;p&gt;試しにrails newから全部やり直してみたりしたのだが、それでも尚ダメだった。READMEの通りにやってるはずなんだけどなぁ……。使ったコマンドは以下のみ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rails new TestApp
+(Gemfileを編集)
+bundle install
+rails g bootstrap:install less
+rails g bootstrap:layout application fluid
+rails g Scaffold User name:string mail:string
+rake db:migrate
+rails g bootstrap:themed Users
+rails s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;仕方ないので他のGem使おうかと。んー……なんなんだろ。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bundle execサボってエライ目にあった</title>
+      <link>http://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</link>
+      <pubDate>Sun, 08 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</guid>
+      <description>&lt;p&gt;今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……&lt;/p&gt;
+
+&lt;blockquote&gt;bundle exec rails g devise:install&lt;/blockquote&gt;
+
+&lt;p&gt;Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上のコマンドを入れるべきところでふつーにrails g devise:installとしてしまった。そしてrails g devise User ゴニョゴニョ。すると何が起きたか。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.flickr.com/photos/chroju/11270239633/&#34;&gt; title=&amp;ldquo;スクリーンショット_2013-12-08_22.57.54-3 by chroju, on Flickr&amp;rdquo;&amp;gt;&lt;img src=&#34;http://farm4.staticflickr.com/3751/11270239633_8cc563c384.jpg&#34; width=&#34;500&#34; height=&#34;404&#34; alt=&#34;スクリーンショット_2013-12-08_22.57.54-3&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;い……いねぇ……。確かにgenerateしたはずなのにurbはあるけどコントローラーもヘルパーもねぇ……。でもね、この状態でブラウザ開くとなんかログインできるんだよ。動くんだよ。幽霊かと。お前ソースはどこにあんのかと。んで探ってみたらあった。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.flickr.com/photos/chroju/11270148454/&#34;&gt; title=&amp;ldquo;スクリーンショット 2013-12-08 22.57.19 by chroju, on Flickr&amp;rdquo;&amp;gt;&lt;img src=&#34;http://farm4.staticflickr.com/3754/11270148454_9e29b9f724.jpg&#34; width=&#34;500&#34; height=&#34;291&#34; alt=&#34;スクリーンショット 2013-12-08 22.57.19&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;なんかすげえとこにあった！！！！&lt;/p&gt;
+
+&lt;p&gt;あー、要はこれがbundle execの有無による違いね。bundle execプレフィックスを付けると今の環境のGemfileからインストールしてくれるけど、付けない場合はシステム側のRubyにdeviseをインストールしてしまう。だからこんなとこにいろいろ入ってしまったと。あー。失敗だ……。&lt;/p&gt;
+
+&lt;p&gt;なんかbundle execを省略する方法もあるらしいけど、よくわかってないものをよくわかってないままに省略するのも危険なので、しばらくは自戒込めてプレフィックス付けるようにします。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい</title>
+      <link>http://chroju.github.io/blog/2013/11/04/2013-11-04-post/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/11/04/2013-11-04-post/</guid>
+      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg&#34; alt=&#34;RailsによるアジャイルWebアプリケーション開発 第4版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;RailsによるアジャイルWebアプリケーション開発 第4版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Sam Ruby Dave Thomas David Heinemeier Hansson &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 138,293&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Rails入門の定番書。このブログで何度か読んでいる途中経過を報告してきたか、ようやく読み終えることができた。読了というか、読み終わったのはもうだいぶ前ではあるんだけど。しかし予定していた以上に時間をかけてしまった。。。最初は写経しながら読んでいたのだが、どうにも時間がかかりすぎてイライラしていて、途中からはザーッとRailsの概略を掴むためだけのような読み方になってしまった。写経した方がやっぱり頭には入ると思うのだけど、それでサンプルアプリを作ったところで、応用してすぐ自分のアプリを作れるとは限らなくて、なんとももどかしい。結果としてはまだ消化しきれてなくて、行ったり来たり読み返しながら自分なりにアプリを作り始めているのが今の段階。&lt;/p&gt;
+
+&lt;p&gt;この本は表題通り、架空のアジャイル開発案件を進めるかのように、徐々にRailsアプリを作る過程をなぞっていくことで、Railsで出来ること、Railsでアプリを作ることを教える構成を取っている。なので実践的でわかりやすい反面、解説なしにいきなりソースを提示されたりもするので「なぜこういうコードで動くのか？」が掴みにくいことも少なくなかった。アプリの完成まで読み進めると、その後に「Rails詳説」としてRailsの規約やらフレームワークを解説するページが現れるのだが、個人的には正直逆の構成の方が掴みやすい。あるいはアジャイル開発を1段階進めていくごとに、そこで書いたソースの詳細な解説を挟むようにしてほしい。&lt;/p&gt;
+
+&lt;p&gt;というのも、Railsはコードを省略したり、フレームワークによって自動生成されたりするものが非常に多い。だから初見ではどこまで書けば良いのか、どこからオートで作り上げてくれるのか、感覚が掴めないのだ。俺はウェブアプリケーションとしては初歩的なJavaアプリの経験しかないのだが、それと比べてRailsのアプリ構築は遥かに簡単な印象を受ける。正確に言えば、自分で書かなくてはならない部分が少ない。しかしそれ故に、手で書かなかった部分がどう動いているのかがわかりづらく、技術を手中に収めた感覚がない。Javaのウェブアプリはプラグインなどを使わない限りは「書いたものが動く」感覚だったので、手とアプリが連動しているという錯覚があった。&lt;/p&gt;
+
+&lt;p&gt;本書のような「実際に作る過程を見せる」という技術書は世の中に数多くあるし、基本的にはその方が「わかりやすい」本になるのだと思う。が、ことRailsに関しては作る前に「Railsは何を成してくれるのか」を解説してくれる本が必要なんじゃないかと。もちろん、本書においては「Rails詳説」の章がその役割を果たしているわけで、もう少し読み込まないとRailsをモノには出来そうにない。&lt;/p&gt;
+
+&lt;p&gt;次の本としては、これまた定番であるレシピブックを買った。これとRails詳説を片手に、Railsがどう動くのか？を学びながら、まずはローカル環境でアプリを作ってみる。外観まで含め、年内にきちんと形になるところまで持っていきたい。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41Tnr3W6b0L._SL160_.jpg&#34; alt=&#34;Rails3レシピブック 190の技&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Rails3レシピブック 190の技&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;高橋 征義 松田 明 諸橋 恭介 &lt;br /&gt;ソフトバンククリエイティブ &lt;br /&gt;売り上げランキング: 57,121&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797363827/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RoRでログイン機能を実装する</title>
+      <link>http://chroju.github.io/blog/2013/10/06/2013-10-06-post/</link>
+      <pubDate>Sun, 06 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/10/06/2013-10-06-post/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;sessionに情報を保存することで「ログイン」状態を実現する&lt;/li&gt;
+&lt;li&gt;逆に言えばsession破棄で「ログアウト」扱いになる&lt;/li&gt;
+&lt;li&gt;Railsにはsessionオブジェクトが用意されており、これを使えば簡単にsessionへアクセス可能&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;……というわけで。&lt;/p&gt;
+
+&lt;h3 id=&#34;1-sessionコントローラを作成する:ab27faee839aa745804dd3d93d485227&#34;&gt;1. sessionコントローラを作成する&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rails g controller sessions new create destroy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;コントローラ作成のときは複数形！&lt;/li&gt;
+&lt;li&gt;newはログイン画面表示時に、createはログイン処理時に、destroyはログアウト処理時に使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;コントローラを作成したらとりまログイン処理を書いていく&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;span class=&amp;quot;synPreProc&amp;quot;&amp;gt;def&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;create&amp;lt;/span&amp;gt;↲
+      user = &amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;User&amp;lt;/span&amp;gt;.find_by_name(params[&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:name&amp;lt;/span&amp;gt;])↲
+      &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;if&amp;lt;/span&amp;gt; user &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;and&amp;lt;/span&amp;gt; user.authenticate(params[&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:password&amp;lt;/span&amp;gt;])↲
+          session[&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:user_id&amp;lt;/span&amp;gt;] = user.id↲
+          redirect_to tasks_url↲
+      &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;else&amp;lt;/span&amp;gt;↲
+          redirect_to login_url, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:alert&amp;lt;/span&amp;gt; =&amp;gt; &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;無効なユーザー名／パスワードです。&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&amp;quot;&amp;lt;/span&amp;gt;↲
+      &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;end&amp;lt;/span&amp;gt;↲
+  &amp;lt;span class=&amp;quot;synPreProc&amp;quot;&amp;gt;end&amp;lt;/span&amp;gt;↲
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;フォームで入力した値など、URLパラメータを受け取るときはparamsを使う&lt;/li&gt;
+&lt;li&gt;authenticateメソッドは、引数とuserのパスワードダイジェストを比較して論理値を返す&lt;/li&gt;
+&lt;li&gt;タスク管理アプリを作っているので、ログイン成功時のリダイレクト先はtasks_url&lt;/li&gt;
+&lt;li&gt;ちな、hoge_urlは絶対パス、hoge_pathは相対パスになるらしい&lt;/li&gt;
+&lt;li&gt;302 Redirectでは完全修飾URLに飛ぶのが仕様なので、redirect_toではhoge_urlを使う&lt;/li&gt;
+&lt;li&gt;失敗時はlogin_urlに返し、エラーメッセージを渡す&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;2-ログイン画面を作成する:ab27faee839aa745804dd3d93d485227&#34;&gt;2. ログイン画面を作成する&lt;/h3&gt;
+
+&lt;p&gt;/app/views/sessions/new.html.erbを編集&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;class&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;form&amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+    &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;% if flash[:alert] %&amp;gt;&amp;lt;/span&amp;gt;↲
+        &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;p&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;id&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;notice&amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; flash[:alert]&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; %&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;p&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+    &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;% end %&amp;gt;&amp;lt;/span&amp;gt;↲
+↲
+    &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; form_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; do %&amp;gt;&amp;lt;/span&amp;gt;↲
+        &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;fieldset&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;legend&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;ログインして下さい&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;legend&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+                &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; label_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; :&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;name&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;, &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&#39;ユーザー名：&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; %&amp;gt;&amp;lt;/span&amp;gt;↲
+                &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; text_field_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; :&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;name&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;, params[:&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;name&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;] %&amp;gt;&amp;lt;/span&amp;gt;↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+                &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; label_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; :password, &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&#39;パスワード：&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; %&amp;gt;&amp;lt;/span&amp;gt;↲
+                &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; password_field_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; :password, params[:password] %&amp;gt;&amp;lt;/span&amp;gt;↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+                &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;%=&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt; submit_tag&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; &amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;ログイン&amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt; %&amp;gt;&amp;lt;/span&amp;gt;↲
+            &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+        &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;fieldset&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+    &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;% end %&amp;gt;&amp;lt;/span&amp;gt;↲
+&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;lt;/&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;div&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;&amp;gt;&amp;lt;/span&amp;gt;↲
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;冒頭部分はログイン失敗時のalertメッセージ表示部分&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;flashオブジェクトについて良くわかってないので要調査&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;hoge_tagあたりのヘルパーメソッドももうちょっと調べときたい&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;3-ルーティング:ab27faee839aa745804dd3d93d485227&#34;&gt;3. ルーティング&lt;/h3&gt;
+
+&lt;p&gt;config/routes.rbを編集してlogin周りのルーティングを設定する。以下の5行を追加。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;controller sessions &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;do&amp;lt;/span&amp;gt;
+    get &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;login&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt; =&amp;gt; &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:new&amp;lt;/span&amp;gt;
+    post &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;login&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt; =&amp;gt; &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:create&amp;lt;/span&amp;gt;
+    delete &amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;logout&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;synSpecial&amp;quot;&amp;gt;&#39;&amp;lt;/span&amp;gt; =&amp;gt; &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;:destroy&amp;lt;/span&amp;gt;
+&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;end&amp;lt;/span&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;sessionsコントローラに対し、&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;/loginにGETでアクセスした場合はsessions#newを呼ぶ&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;/loginにPOSTでアクセスした場合はsessions#createを呼ぶ&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;/logoutにDELETEでアクセスした場合はsessions#destroyを呼ぶ&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;すなわちREST&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ざっくり簡単だが、とりあえずこれで認証画面とログイン処理は実装完了。&lt;/p&gt;
+
+&lt;p&gt;まだログアウトはできていないし、ログイン後の処理なんかも書いてないけど、とりあえずやりかたはわかったのでメモ。&lt;/p&gt;
+
+&lt;h3 id=&#34;参考:ab27faee839aa745804dd3d93d485227&#34;&gt;参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://ayaketan.hatenablog.com/entry/2012/12/19/210231&#34;&gt;Ruby on Rails ログイン画面の作成 - ayaketanのプログラミング勉強日記&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RoRでScaffold作成を間違えたときの対処法が知りたい</title>
+      <link>http://chroju.github.io/blog/2013/09/21/2013-09-21-post/</link>
+      <pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/09/21/2013-09-21-post/</guid>
+      <description>&lt;p&gt;generate scaffoldはMVC全部作ってくれて便利なんだけど、うっかりカラム名間違えたりしたときの対処法ってあるのかしら。後から変更したい場合は全部逐一手動で変更してね☆ってことだとさすがに面倒臭すぎるんだが……。&lt;/p&gt;
+
+&lt;p&gt;とりあえず今はscaffoldを削除してイチから作り直す形で対処しているが。&lt;/p&gt;
+
+&lt;blockquote&gt;$ rails destroy scaffold hoge&lt;/blockquote&gt;
+
+&lt;p&gt;このとき、db:migrateすでにしちゃってるならsqlite入ってDROP TABLEするのも忘れずに。&lt;/p&gt;
+
+&lt;p&gt;後からアプリ改修して新しい属性付け足したりとかって場面もあるだろうし、何かしらscaffoldに変更をかける手段はあるんじゃないかと思って探してるんだけど見つからない。ぐぬぬ。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>バージョン管理に注意しながら、Ruby on Railsの動作環境を構築する</title>
+      <link>http://chroju.github.io/blog/2013/09/16/2013-09-16-post/</link>
+      <pubDate>Mon, 16 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/09/16/2013-09-16-post/</guid>
+      <description>
+
+&lt;p&gt;資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。&lt;/p&gt;
+
+&lt;h2 id=&#34;必要なもの:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;必要なもの&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ruby ……当然のごとく&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rails ……当然のごとく&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;rbenv ……RubyとRailsの管理システム&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ruby-build ……rbenvとセットで使うっぽいがよくわかってない&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Git ……バージョン管理。必須ではない気もするがあった方がいい。rbenvとかのインストールにも使う。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;RubyGems ……Rubyのパッケージ管理システム&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Bundler ……Gemパッケージの管理システム&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こんなところだろうか。直接的に必要なものの他に、それぞれを管理するためのツールが必要だったりしてなかなかに複雑であった。あとhomebrewとかのあたりまで遡るとキリが無くなりそうなのでさすがに割愛。というかOSによっても違ってきちゃうし。readlineとかopensslとかも依存関係があるっぽいんだけどよくわからないので割愛……。んー、意味あるのかこの記事。俺がRoRで使ってる環境はちなみにCent OSなので、その前提で書きます。&lt;/p&gt;
+
+&lt;h2 id=&#34;rbenv:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;rbenv&lt;/h2&gt;
+
+&lt;p&gt;本とか読んでるとRubyのバージョン管理にはRVM使わせているものが多いんだけど、rbenvの方が軽くてBundlerとの相性も良いらしい。よってrbenvを使うことにする。&lt;/p&gt;
+
+&lt;p&gt;参考：(&lt;a href=&#34;http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm&#34;&gt;http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;インストール先のパスが迷う。。。ホームフォルダに不可視で入れるのが気持ちとしてスッキリするのでそれを採用。&lt;/p&gt;
+
+&lt;blockquote&gt;$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv&lt;/blockquote&gt;
+
+&lt;p&gt;で、bash_profileにパスを追加。&lt;/p&gt;
+
+&lt;blockquote&gt;echo &#39;export PATH=&#34;$HOME/.rbenv/bin:$PATH&#34;&#39; &gt;&gt; ~/.bash_profile
+echo &#39;eval &#34;$(rbenv init -)&#34;&#39; &gt;&gt; ~/.bash_profile
+source ~/.bash_profile&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;追記:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;追記&lt;/h3&gt;
+
+&lt;p&gt;実はこの記事書く前にすでにRVM入れちゃってたんだけど（今読んでる『RailsによるアジャイルWebアプリケーション開発』にはRVMが紹介されてたので）、RVM削除してrbenvを入れなおそうと思い立って調べてみた。そこで辿り着いたRVMのアンインストールコマンドがなかなかに衝撃的だったので追記。&lt;/p&gt;
+
+&lt;blockquote&gt;$ rvm seppuku&lt;/blockquote&gt;
+
+&lt;p&gt;切腹！！！ｗｗｗｗ&lt;/p&gt;
+
+&lt;h2 id=&#34;ruby-build:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;ruby-build&lt;/h2&gt;
+
+&lt;p&gt;よくわかってないけど入れる。わかっていることとしては、これがないとrbenv installコマンドが使えない。rbenvのプラグインとしての位置づけらしいので、.rbenvフォルダ配下に入れる。公式のREADMEにもそう書かれてます故。&lt;/p&gt;
+
+&lt;blockquote&gt;$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;ruby:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;Ruby&lt;/h2&gt;
+
+&lt;p&gt;Rubyはrbenvを使ってインストール。バージョンについては都度変わるので、$ rbenv install -lコマンドで落とせるバージョンを確認しつつ、必要なものを入れる感じで。まぁ使うバージョン選択できるんだから、そんなにセンシティブになる必要はないと思うが。&lt;/p&gt;
+
+&lt;blockquote&gt;$ rbenv install 1.9.3&lt;/blockquote&gt;
+
+&lt;p&gt;デフォで使うRubyのバージョンを設定。&lt;/p&gt;
+
+&lt;blockquote&gt;$ rbenv global 1.9.3 # これで設定
+$ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを落としたときに実行する&lt;/blockquote&gt;
+
+&lt;p&gt;インストール済みのRubyのバージョンは$ rbenv versionsで確かめられる。ちょうど今年の上半期にRuby 2.0が出たばかりだし、このあたりはしばらくの間重宝しそう。&lt;/p&gt;
+
+&lt;h2 id=&#34;rubygems:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;RubyGems&lt;/h2&gt;
+
+&lt;p&gt;入れる方法はいろいろあるみたいだけど、自分の使ってるCent OSを基本として考えて、yumで入れることにする。&lt;/p&gt;
+
+&lt;blockquote&gt;$ yum install rubygems&lt;/blockquote&gt;
+
+&lt;p&gt;めんどかったら-yオプション付ければ対話なしで全部インストールされておしまい。&lt;/p&gt;
+
+&lt;h2 id=&#34;rails:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;Rails&lt;/h2&gt;
+
+&lt;p&gt;いよいよRailsのインストール。RailsはGemパッケージとして配布されているので、今入れたRubyGemsを使ってインストールする。特定のバージョンを使う場合は-vオプションを使う。オプション無しだと最新版が入る。rbenvでRubyの複数バージョン切り替えるみたいにRailsもやってみたいんだけど、やり方がわからない。。。&lt;/p&gt;
+
+&lt;blockquote&gt;$ gem install rails&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;bundler:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;Bundler&lt;/h2&gt;
+
+&lt;p&gt;一番よくわかっていないところ。Rubyで使われるGemパッケージの管理ツールらしい。ルートディレクトリにあるGemfileに書いておいたパッケージについて、依存関係をチェックして自動でインストールしてくれるものらしい。ほお。&lt;/p&gt;
+
+&lt;blockquote&gt;$ bundle install&lt;/blockquote&gt;
+
+&lt;p&gt;Railsアプリケーションを$ rails newコマンドで作成した場合、ルートディレクトリに勝手にGemfileが作られる上、$ bundle installも自動で実行されるので、あまり意識はしなくていいっぽい。Rails自体もGemで配布されているのでbundlerを使って管理させたりとかもできるみたいなんだけど、そのあたりを調べた感じ、自分には何が何を管理してるのかメタにメタ重ねる感じで徐々に訳わからん感じになってきたので考えるのを、やめた。&lt;/p&gt;
+
+&lt;p&gt;RailsアプリケーションのGemfileにはcoffescriptやSASS、SQLiteなどをインストールするように記述されている。下手にこれいじると多分死ぬと思うんだけど、SQLiteじゃなくてMySQL使いたいとか、他のGemパッケージが何か必要になったとか、そういうときは編集してあげてから$ bundle installでおｋっぽい。便利！&lt;/p&gt;
+
+&lt;h2 id=&#34;git:c0e8053d95a0479a6e2a540c4d5b8bd7&#34;&gt;Git&lt;/h2&gt;
+
+&lt;p&gt;長くなりそうなので割愛。また別の機会にまとめたい。GitHubのアカウントも持ってる（ほぼ使ってないけど。。。）し、一度RSA認証で繋げるように設定はしたことあるんだけど、完全に忘れたんでもう一度ちゃんとまとめる。今度。&lt;/p&gt;
+
+&lt;p&gt;ツールをインストールするときは依存関係の処理とかの問題があるので、後々新バージョンが出たときに惑わないよう、なるたけ自動で管理できるような入れ方をする必要がある。その視点に立って一旦まとめてはみたけど、もっと良いやり方というのも多分あるのだろう。インストールするぐらいなら猿でも出来ると思いがちだが、これがなかなか奥が深い。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』第II部読了</title>
+      <link>http://chroju.github.io/blog/2013/09/04/2013-09-04-post/</link>
+      <pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/09/04/2013-09-04-post/</guid>
+      <description>&lt;p&gt;「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;基本的に rails generate hoge コマンドで色々作れる。scaffold、model、controllerとか、コマンドで作ればRailsが必要なファイルを用意してくれる。あとは作られたファイルをガチャガチャいじってアプリを作っていくというのが基本の流れ。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;特にscaffold。これをバチコンと叩き込むとコントローラ、モデル、ビュー、マイグレーションファイルから何から全部作られる。英語で「足場」という意味らしいがまさにそんな感じ。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;scaffold作ると編集画面（edit.html.erb）とか部分テンプレート（form.html.erb）まで作られるという至れり尽くせり感ビビる。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;create()やupdate()などの基本的なアクションも作られるので、実装したい動作によっては新しいコントローラをわざわざ作るまでもなかったり。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;テスト用のファイルも自動生成される。コントローラの機能を試すファンクションテスト、モデルの動きを試すユニットテスト、そしてアプリのフローを試す統合テスト。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;テスト用ファイルの編集方法がいまいちよくわからず。このあたりは試してみないと実感わかないかも。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;複数モデル（テーブルと読み替えてOK？）間の関係を表すには、modelsファイルにhas_manyやbelongs_toを追加する。DBを直接弄ったりはしない。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;button_to()に:remote=&amp;gt;trueを加えるだけでAjaxが追加できる。……え？&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;そもそもAjax使ったことないんでこのへんはもう少し見直したいが。。。Ajaxと言っても、再読み込みなしで画面の一部が再描画される程度の話か。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;ちなみRailsのCSSは標準でSCSSが使われている。SCSSって最近まで知らなかったけどクソ便利すぎて笑う。最初からCSSがこういう文法ならいいのに……。これもまた勉強が必要なり。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;コントローラのrespond_toメソッドは出力形式を色々替えられる。format.json、format.atomとか。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;メールの送信機能もある。。。（このへんになるともう色々出来過ぎてよくわからなくなってきた）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Railsのコードは当然ながらRubyで書くわけだが、他にヘルパーメソッドというものがある。フォーム用にボタンリンクを作るbutton_to()とか、リンクを作るlink_to()とか。Rubyをそもそもまだちゃんと理解できていないので、どれがRubyの文法でどれがヘルパーメソッドなのかの見分けもいまいちついていない状態。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;わーすげー簡単にまとめてしまった。全体の感想としては、とにかく何かと簡単かつ便利。自分でコーディングが必要な範囲は最低限。Javaでウェブアプリを組んだ経験があり、そのときはMVCそれぞれのファイルを全部イチから手で作っていたわけだが、RORではrails generate scaffoldで一発である。なんてこったい。しかし逆に言えばアプリの構造自体は全部任せて、中心的な機能や外観のコーディングだけに集中できるんだから、効率が良いわけで。&lt;/p&gt;
+
+&lt;p&gt;SCSSとかAjaxとか、ウェブアプリを作る上でよく使われる技術が標準で備わっているというのも利点だろう。だから覚えることも多い。SCSS、Ajax、あとはDBもか。DBはSQL文を直接発行するようなことはないように組まれているけど、has_manyとか正しく書くためにはDBの構造あたりを正しく知っていなくてはならない。うむ、これからいろいろと学ばなくては。&lt;/p&gt;
+
+&lt;p&gt;しかしこの本、いきなり実例から入ってしまうので理解がしやすいやらしにくいやら。実際に何か作りながら説明していく本というのは少なくないが、この本は第III部でRails全体の詳説が入る。「ここで入れるなら先に解説してくれよ！」と個人的には言いたい。いきなり知らないメソッドをバシバシ盛り込まれてどんどんコーディングを進められるより、そもRailsとはどういったディレクトリ構造になっていて、どういった動作をするものなのかという中身を知ってからの方が実例を理解しやすいのではと思う。まぁこのへんは好みか。&lt;/p&gt;
+
+&lt;p&gt;第III部を読みつつ、そろそろとりあえず何か作ってみてもいいかもしれない。SCSSやAjaxを知らない以上、見た目にこだわったりとかはできないけど、とにかくアプリっぽいもの、データを追加して編集して表示させてっていうものをまずは作る。9月はそれが目標だなー。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』第I部 読了</title>
+      <link>http://chroju.github.io/blog/2013/07/25/2013-07-25-post/</link>
+      <pubDate>Thu, 25 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/07/25/2013-07-25-post/</guid>
+      <description>
+
+&lt;p&gt;第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Rubyの簡単な紹介が主。&lt;/p&gt;
+
+&lt;h1 id=&#34;第1章-railsのインストール:658ea975e62093957802bc83a2d123f3&#34;&gt;第1章 Railsのインストール&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;apt-getを使って必要な依存関係をインストールしているけど、Cent OSではapt-getが使えず。yumで入れようとしたが、yumにはnodejsがないらしく入らない。。。やむを得ずwgetで落としてきて展開しました。&lt;/li&gt;
+&lt;li&gt;エディタはTextMateがオススメとあるけど、変えるのめんどいし取りあえずvimでいいか。。。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;第2章-hello-rails:658ea975e62093957802bc83a2d123f3&#34;&gt;第2章 Hello, Rails!&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ポート3000を使うってことでiptablesで開けてあげたりとか、そのへんは自分でやる必要があった。こういうのスムーズに出来るようにならなきゃなんだろうなぁ。&lt;/li&gt;
+&lt;li&gt;eRubyの&amp;lt;% %&amp;gt;でコード埋め込むのがなんか気持ち悪いと思ってしまう。同じ理由でJSPも苦手だった。……と思ったら、この後の章で似たようなことが書いてあった。元々HTMLとJavaScript書いたりしてたからなんだろうけど、こういうのはなるたけ分離したいと思ってしまう。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;第3章-railsアプリケーションのアーキテクチャ:658ea975e62093957802bc83a2d123f3&#34;&gt;第3章 Railsアプリケーションのアーキテクチャ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ちょっと置いてけぼり感あったので、この後の章でアプリ作りながら再読する。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;第4章-ruby入門:658ea975e62093957802bc83a2d123f3&#34;&gt;第4章 Ruby入門&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一応Rubyの基礎はさらったので割愛しよう……と思ったら！！！　『作りながら学ぶRuby入門』より記述範囲が広かった！&lt;/li&gt;
+&lt;li&gt;そういえばあの本、例外の処理とか出てこなかったな……。もう1冊、きちんとRubyの基礎をさらえる本を読んだ方が良さそうな気がしてきた。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;キーワードreturnは省略可能です。returnがない場合、最後に評価した式の結果が戻り値になります。（p.39）&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;はあ！？&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rubyの文法ってなんか慣れない。。。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</title>
+      <link>http://chroju.github.io/blog/2013/07/21/2013-07-21-post/</link>
+      <pubDate>Sun, 21 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2013/07/21/2013-07-21-post/</guid>
+      <description>&lt;p&gt;VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、まずは動かしてみることにした。購入したのは以下の本。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg&#34; alt=&#34;RailsによるアジャイルWebアプリケーション開発 第4版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;RailsによるアジャイルWebアプリケーション開発 第4版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Sam Ruby Dave Thomas David Heinemeier Hansson &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 138,293&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;各所で絶賛されているのを見かけた上、立ち読みしてみた感じでもRubyのインストールという初歩から始まっていてわかりやすそうだった。候補としてはもうひとつ、インプレスの『基礎 Ruby on Rails』もあったんだけど、ザッと見た感じでは『Railsによる〜』の方が記載が細かそうだったのでこっちを選んだ。&lt;/p&gt;
+
+&lt;p&gt;さて、VPSでRuby on Railsを作るにあたり、どこまでの範囲を学べば良いのだろう。今回買った本だとおそらくはRailsとRuby、DBあたりのコーディングが内容の主なようで、インフラ側のチューニングの話なんぞは載っていなさそうだった。自分が想像するとこだとLinuxというかOSの準備、VPSであるならばOSに接続するためのSSHの使い方、ウェブに公開するのでそのあたりのセキュリティ、DBやApacheなどのアプリインストールなどなど、やることはかなりありそう。あとView側の問題として、Coffe ScriptやSCSSあたりもやんなくちゃいけないんだろうな。JavaScriptとCSSはそれなりに書いたことあるけど、せっかくだし挑戦してみたい。&lt;/p&gt;
+
+&lt;p&gt;……という感じのビジョンを描いているのだが、やはり全部まともにイチからやっていたらかなりの時間が必要だと思う。とりあえず作ってみて、あとは気になったところを徐々に手をつけていく感じでやっていきたい。あと、環境構築系だとこの本が良さそうだなーと目をつけている。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg&#34; alt=&#34;Ruby on Rails環境構築ガイド&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Ruby on Rails環境構築ガイド&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;黒田 努 &lt;br /&gt;インプレスジャパン &lt;br /&gt;売り上げランキング: 44,343&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;……で、『Railsによる〜』はとりあえず1章読破したのだが、まさかのここでつまずくという事件発生。つまずくのはえーよｗｗｗ&lt;/p&gt;
+
+&lt;p&gt;CentOSにRVMを入れようとしたのだが、以下のコマンドが通らなかった。curlのエラーっぽいんだけど、今をもって解消できてない。一応他の方法でRVMは入ったので、しばらく保留にしとこうかと思っている。&lt;/p&gt;
+
+&lt;blockquote&gt;   bash &lt; &lt;(curl -s [https://rvm.beginrescueend.com/install/rvm)](https://rvm.beginrescueend.com/install/rvm))&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

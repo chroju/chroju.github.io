@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 18 Feb 2016 20:51:20 +0900</lastBuildDate>
-    <atom:link href="http://chroju.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ブログをHugoに移行した</title>
@@ -50,6 +50,15 @@ $ git push origin master
 &lt;p&gt;&lt;a href=&#34;http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/&#34;&gt;HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。&lt;/p&gt;
+
+&lt;h2 id=&#34;追記-2016-02-22-23-50:f9b1285b375e2fa831a443cf9e131380&#34;&gt;（追記 2016-02-22 23:50）&lt;/h2&gt;
+
+&lt;p&gt;フィードのファイルパスがデフォルトだと&lt;code&gt;index.xml&lt;/code&gt;になってしまうので、Octopressから変更がないよう&lt;code&gt;atom.xml&lt;/code&gt;に直した。&lt;code&gt;config.toml&lt;/code&gt;で指定ができる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;rssuri = &amp;quot;atom.xml&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;https://discuss.gohugo.io/t/what-is-rsslink-exactly/1195/2&#34;&gt;What is {{ .RSSlink }}, exactly? - support - Hugo Discussion&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;その他参考記事:f9b1285b375e2fa831a443cf9e131380&#34;&gt;その他参考記事&lt;/h2&gt;
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network on the world as code</title>
+    <link>http://chroju.github.io/categories/network/</link>
+    <description>Recent content in Network on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 01 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/network/http/chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>『インフラ/ネットワークエンジニアのためのネットワーク技術&amp;amp;amp;設計入門』読了</title>
+      <link>http://chroju.github.io/blog/2014/12/01/2014-12-01-post/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/12/01/2014-12-01-post/</guid>
+      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797373512/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51PKnkIrvrL._SL160_.jpg&#34; alt=&#34;インフラ/ネットワークエンジニアのためのネットワーク技術&amp;設計入門&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797373512/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;インフラ/ネットワークエンジニアのためのネットワーク技術&amp;設計入門&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;みやた ひろし &lt;br /&gt;SBクリエイティブ &lt;br /&gt;売り上げランキング: 8,231&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4797373512/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;去年の末ぐらいに話題になってた本だと思うけど、読み終えた。よかった。&lt;/p&gt;
+
+&lt;p&gt;自分はネットワークスペシャリストを持っているんだけど、IPAの資格って基礎を満遍なくさらっておくには良いんだが、じゃあその知識の中で今現場で必要なのどれよ？ってのがなかなかわかりにくい面がある。この本はその「現場で実際どうネットワークは組まれるのか？」という部分に大きく焦点が当たっていて、知識を実践的なものに洗練できる。L3をコアスイッチにして構成していくのが主流ですみたいな話から、ケーブルにタグ付けてこういう情報書いておきましょうなんていう細かいことまで載っていて隙がない。&lt;/p&gt;
+
+&lt;p&gt;こういうことができる／できないという知識があったところで、じゃあそれがネットワークを組む上でどう活きるかというのはまた別の話であって、そこを弁えてないと車輪の再発明に手を煩わせてしまったり、組んだ構成が主流から外れてたりということはままある。自分がまさにそういう状態で、ベストプラクティスをきちんと押さえていないことがずっと気がかりだったので、今ネットワークを触る上でベターなやり方、注意点を体系的に学べたのはとても良かった。知識レベルとしては応用情報技術者があれば読めるレベルだと思う。1〜2年目ぐらいでネットワークに携わり始めたぐらいの社員が読むには本当に優れた1冊です。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

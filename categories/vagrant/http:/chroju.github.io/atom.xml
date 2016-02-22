@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vagrant on the world as code</title>
+    <link>http://chroju.github.io/categories/vagrant/</link>
+    <description>Recent content in Vagrant on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 02 Feb 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://chroju.github.io/categories/vagrant/http/chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>$ vagrant sshで仮想マシンに入れなくなった場合の対処法</title>
+      <link>http://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</guid>
+      <description>
+
+&lt;p&gt;やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃねと思ったんだけど、なんとか元に戻せたので対処法まとめとく。&lt;/p&gt;
+
+&lt;p&gt;といっても簡単な話です。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Virtual BoxをGUIで開く&lt;/li&gt;
+&lt;li&gt;該当仮想マシンがリストに入ってるので強制終了し、Virtual Box上で起動し直す&lt;/li&gt;
+&lt;li&gt;rootでログイン（パスワードはデフォルトでvagrant）&lt;/li&gt;
+&lt;li&gt;おかしい箇所を直す&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;コマンド叩いて操作してるので忘れがちだけど、vagrantはVirtual Box上（有料版ならVMware上も有り得るが）に仮想マシンを立ててるので、普通にGUIから入ればいい話です。rootで入ってぐいぐいヤバそうなとこ直して、直したらターミナルからssh試してみてってのを交互に繰り返して直しませう。&lt;/p&gt;
+
+&lt;p&gt;rootで入り直す前に一度VM落とす手順を入れましたが、こうしないとGUIから入れないみたいです。僕の場合だとターミナルでiptablesとかいじって、よしじゃあsshログインできるか試してみようってことで一旦ログアウトしたら入れなくなった（アホだ）のでVMが立ち上がりっぱなしになっちゃったわけなんだけど、この状態で取りあえずVirtual Box開いてみたらコンソールを表示するボタンがグレーアウトされてました。なので一旦強制終了するしかないです。&lt;/p&gt;
+
+&lt;h2 id=&#34;余談:cc6559aa6b2ca71ffc8de305dd69550d&#34;&gt;余談&lt;/h2&gt;
+
+&lt;p&gt;ちなみに今回何をやらかしたのかだけど、ポイントとしてはsshのポート番号を変えた（/.ssh/configをいじった）のと、iptablesをいじったのの二点。これを普通のVMの感覚でやっちゃったのがマズかったみたい。&lt;/p&gt;
+
+&lt;p&gt;まず、vagrant sshで使われているポート番号はデフォルトで22ではなく、2222なのです。これはホスト側で$ vagrant ssh-configコマンドを打ってみるとわかる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host default
+  Hostname 127.0.0.1
+  User vagrant
+  Port 2222
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一方、ssh以外の各vagrantコマンドについても、いずれもsshを使っている模様。vagrant upもvagrant haltもssh経由で命令しているみたいです。ただ、こちらは通常通りPort 22を使っているのでややこしい。このあたりの事情を踏まえた上でポート番号あれこれしないと、必要なはずのポート塞いじゃってうああああああってなっちゃうっぽい。&lt;/p&gt;
+
+&lt;p&gt;まぁvagrantで作ったサーバーを表に公開することはあんまりないと思うんで、このへん触らないのが吉かも。練習でやりたいのであれば、vagrant以外でサーバー用意してやった方が良さそうな気がします。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://girigiribauer.com/archives/1127&#34;&gt;Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 | girigiribauer.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/okinaka/20110805/1312474847&#34;&gt;Vagrant のベースBOX作成手順 (Scientific Linux 6.1) - エンジニアきまぐれTips&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（1） Vagrantで仮想マシン構築</title>
+      <link>http://chroju.github.io/blog/2014/01/19/2014-01-19-post/</link>
+      <pubDate>Sun, 19 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2014/01/19/2014-01-19-post/</guid>
+      <description>
+
+&lt;p&gt;Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。&lt;/p&gt;
+
+&lt;h2 id=&#34;インストール:637477cf31071a5d75c29b138cb186fd&#34;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」からいろいろ読んどくといいと思う。公式のRead meに勝るものはないです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.vagrantup.com/&#34;&gt;http://www.vagrantup.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;インストールしたらバージョン確認。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vagrant -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;boxの追加:637477cf31071a5d75c29b138cb186fd&#34;&gt;boxの追加&lt;/h2&gt;
+
+&lt;p&gt;まずはboxと呼ばれる仮想マシンイメージをvagrantに追加する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vagrant box add hoge url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;hogeは適当なイメージ名、urlはウェブで公開されているboxのurl。イメージは&lt;a href=&#34;http://www.vagrantbox.es/&#34;&gt;ココ&lt;/a&gt;に大量にあるので、任意のサーバーのURLをコピってくればOK。ほとんどがLinux、ちょこっとだけBSD。&lt;/p&gt;
+
+&lt;h2 id=&#34;vagrantの初期化:637477cf31071a5d75c29b138cb186fd&#34;&gt;vagrantの初期化&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir vagrant
+$ cd vagrant
+$ vagrant init hoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;vagrant initでカレントディレクトリをvagrant用に初期化する。なのでmkdirは好きなとこに好きなフォルダ作ればよい。そこに仮想マシンの設定ファイルが作られるので。vagrant initの引数にはさっきvagrant box addで追加した仮想マシンイメージの名前を渡してやる。渡さないとデフォルト値で設定ファイルが作られてしまう。これで最初ハマった。ちなみにどうハマるかというと、vagrant upしたときにこんなエラーが出る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;There are errors in the configuration of this machine. Please fix
+the following errors and try again:
+
+vm:
+* The box &#39;base&#39; could not be found.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;「base」という名前のboxがないというエラー。どうもデフォルトでbaseという名前が使われるらしいのだが、さっきbox addした名前と異なるので、そんなboxはないから立ち上げられませんよということ。もしこの状態になってしまった場合の対処としては、vagrantfileのconfig.vm.boxの値を該当の仮想マシンイメージ名に替えてやれば上がるようになる。&lt;/p&gt;
+
+&lt;p&gt;話が飛んでしまったが、Vagrantfileはvagrant initしたディレクトリの中に出力されている。で、仮想マシンを上げる前にちょっとコイツの編集が必要。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network :private_network, ip: &amp;quot;192.168.xx.xx&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上のconfig〜行のコメントアウトを外してやって、IPを適当に設定する。が、自分の環境だとこれだけでは仮想マシンを起動した時にエラーが出てしまって、さらにprivate_networkをpublic_networkに替えてやらなくてはならなかった。ググってるとこの手順やってる人ほとんどいないんだけど、何が原因だろう。&lt;/p&gt;
+
+&lt;h2 id=&#34;仮想マシンの起動:637477cf31071a5d75c29b138cb186fd&#34;&gt;仮想マシンの起動&lt;/h2&gt;
+
+&lt;p&gt;で、ここまでやっていよいよVM起動。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;てっきりVirtual boxがGUIでも上がってくるのかと思ったが、仮想マシン上がりましたよ―というメッセージが表示されるだけでGUI上は何の変化もない。なのでOSが上がってるのかわかりにくいんだけど、SSHで入ると実際入れるのでどうも上がっているらしい（ちなみにGUIでVirtual box上げてももちろん起動状態はわかる。あとvagrant statusコマンドでもわかる）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vagrant ssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;bashのsshコマンド発行しなくても、vagrantの独自コマンドで入れる。楽。ちなみに入るときのユーザーは勝手にvagrantというユーザーが作られているんだとか。あとはもう好きにやっちゃってーというところ。他に使いそうなコマンドは以下の表あたりか。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt; コマンド         &lt;/th&gt;
+&lt;th&gt; 意味                    &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; vagrant halt     &lt;/td&gt;
+&lt;td&gt; 仮想マシンの停止        &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; vagrant destroy  &lt;/td&gt;
+&lt;td&gt; 仮想マシンの削除        &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; vagrant box list &lt;/td&gt;
+&lt;td&gt; 仮想マシンイメージリストの表示 &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; vagrant status   &lt;/td&gt;
+&lt;td&gt; 仮想マシンの状態確認      &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;vagrantが真価を発揮するのって多分chef-soloと組み合わせたときなので、今の段階だと「わざわざマウス使わずともターミナル上で仮想マシン上げられて便利〜」ぐらいの感想しか正直ないです。もっと勉強しよ。&lt;/p&gt;
+
+&lt;h2 id=&#34;参考:637477cf31071a5d75c29b138cb186fd&#34;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.happytrap.jp/blogs/2013/07/26/10602/&#34;&gt;Vagrantで仮想サーバ構築 | HAPPY*TRAP&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/nobu_blast/items/828cf7c002100a0fdeb2&#34;&gt;vagrant + virtualbox 仮想サーバ構築 - Qiita [キータ]&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
