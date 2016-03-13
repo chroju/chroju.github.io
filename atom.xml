@@ -6,8 +6,111 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 18 Feb 2016 20:51:20 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Mar 2016 11:45:24 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About</title>
+      <link>http://chroju.github.io/about/</link>
+      <pubDate>Sun, 13 Mar 2016 11:45:24 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/about/</guid>
+      <description>
+
+&lt;h2 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h2&gt;
+
+&lt;h3 id=&#34;career:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;career&lt;/h3&gt;
+
+&lt;p&gt;2011-2015 金融系システムエンジニア
+2015- サービスインフラエンジニア（運用）&lt;/p&gt;
+
+&lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
+
+&lt;p&gt;Ansible / Docker / Serverspec / AWS / Capistrano
+Redis / MySQL / Elasticsearch
+Ruby / Python / node.js / bash /zsh
+vim / vimperator&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JAWS DAYS 2016に行ってきた</title>
+      <link>http://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
+      <pubDate>Sun, 13 Mar 2016 11:03:24 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
+      <description>
+
+&lt;p&gt;昨年に続き。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/03/22/jaws-days-2015/&#34;&gt;JAWS DAYS 2015でAWS童貞捨ててきた · the world as code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;昨年JAWS DAYSのハンズオンでAWSアカウント作ったので、これでAWS歴丸1年。それにしては自分の力がしょっぱすぎて嫌になる。もっと活用したい。ただ今回「わからない」というセッションはなかったので（技術メインじゃないセッションをいくつか入れてたのは置いておいて）、それなりに知識はついているのかなぁという実感はできた。&lt;/p&gt;
+
+&lt;p&gt;サーバーレスアーキテクチャ、クラウドネイティブという言葉が極めて一般的になったなというのが今回の感想。事例を聞いていてもEC2並べてなんかやりますというのは当然ながらほとんどなくて、だいたいがLambda、Kinesis、API GatewayといったAWSリソースを繋ぎ合わせることでアーキテクチャを作り出している。もう従来的な言葉で言う「インフラ」というものは存在しなくなってしまった。VMwareやXenの時代というのか、あくまでサーバーという実体は変わらず、それの扱い方が変わるというだけの変化だったが、AWSがもたらしているのはサーバーそのものの消失。システムのアーキテクチャ自体の転換。何度かブログ内でも繰り返しているが、この全く新しい領域で勝負するにあたっては、アプリエンジニアもインフラエンジニアも関係ない。こういった状況下で自分が勝負できるとしたら、Opsになるのかなと思う。これまでインフラ屋が担ってきたOpsのスキルを、AWSへ適用していく。もちろん、コードをもっと書けるようにならなくてはならないといった、本来的な問題もあるが。&lt;/p&gt;
+
+&lt;p&gt;また今回全体を通して「コミュニティへの参画」というのが強調されていたようにも思う。最初のJAWS-UG代表である今春氏のセッションでも、Increments及川氏のセッションでも、社外のコミュニティに参加することの意義が説かれた。自分はお世辞にも積極参加ができているとは言いがたい状態なので、とても耳が痛い。&lt;/p&gt;
+
+&lt;h2 id=&#34;参加セッション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;参加セッション&lt;/h2&gt;
+
+&lt;h3 id=&#34;jaws-ugこれまでとこれから-キーノート:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;JAWS-UGこれまでとこれから（キーノート）&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;先述した今春氏のキーノート。&lt;/li&gt;
+&lt;li&gt;京セラドームでもイベントを開いたことがあるというのはちょっと驚き。思い切ってますなぁ。&lt;/li&gt;
+&lt;li&gt;会場に出来る会社様募集中らしい。企業が無償で場所提供してくれる業界状況というのも非常に恵まれている。というか、そういう文化圏にいて良かったと思う。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;amimoto-サーバーレスアーキテクチャ:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;AMIMOTO × サーバーレスアーキテクチャ&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;デジタルキューブ堀家氏。&lt;/li&gt;
+&lt;li&gt;先述の通り。サービスを疎結合にする。No EC2。&lt;/li&gt;
+&lt;li&gt;モバイル開発者じゃないからスルーしてたけど、mobile hub面白そう。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/serverless/serverless&#34;&gt;Serverless Framework&lt;/a&gt;気になる。
+説明のあった「Lambdaをローカルからinvokeできる」ぐらいならAWS CLIでいいんだけど、他にも活用できそう。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;外よりも中からの攻撃-事故がヤバイ-今やるべきクラウドセキュリティ対策:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;外よりも中からの攻撃・事故がヤバイ、今やるべきクラウドセキュリティ対策&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cloudpackのアイレット齊藤氏。今回一番ためになった。&lt;/li&gt;
+&lt;li&gt;セキュリティに終わりはない、完璧はない、だからきちんと監査して透明性を確保して、リスクを受け入れる。&lt;/li&gt;
+&lt;li&gt;監査は目的ではない。むしろ時代に追いつけてない監査基準もあったり。&lt;/li&gt;
+&lt;li&gt;パスワードは脆弱だからSAMLとKerberosでAD連携してSSOとかカッコイイ。&lt;/li&gt;
+&lt;li&gt;cloudpackでやっていることは公開されているらしいので後でチェック。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;deep-dive-aws-iot:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;[Deep Dive] AWS IoT&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;mobile hubと同じく敬遠してたIoTだけどなんかやれそうな気になった。&lt;/li&gt;
+&lt;li&gt;とりあえずラズパイ入手かな。あとPython頑張る。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;金融クラウド-fintech最新動向-awsで金融のイノベーション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;金融クラウド＆FINTECH最新動向　～AWSで金融のイノベーション！&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AWS、MUFG、ウェルスナビの共同セッション。&lt;/li&gt;
+&lt;li&gt;MUFGがハッカソンとかやってるんだというのは全然知らなかったし意外オブ意外。
+時代の潮目が確実に変わってきてるのかなと。&lt;/li&gt;
+&lt;li&gt;銀行システム、基幹系は今まで通り守らなくてはならない。フロントはスピードを速める必要があると。
+その意味でSIerは失くならないと個人的には思っている。少なくとも金融系は。&lt;/li&gt;
+&lt;li&gt;ウェルスナビ、これまで米富裕層に提供していたような投資診断をモバイル向けで一般にも提供すると。&lt;/li&gt;
+&lt;li&gt;ITの役割が単なる自動化や効率化じゃなくて、新たな価値、市場を創造することにある。そういう仕事したい。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;エンジニアのキャリアとアウトプットを意識した成長戦略:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;エンジニアのキャリアとアウトプットを意識した成長戦略&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Increments及川氏。&lt;/li&gt;
+&lt;li&gt;話題になったIncrements入社の理由が「誰もやりそうにないから、差別化戦略として」ってのカッコよすぎた。&lt;/li&gt;
+&lt;li&gt;及川氏の最初のキャリアであるDECという会社、不勉強につき初耳。紆余曲折の末に現在はhpの一部か。。。&lt;/li&gt;
+&lt;li&gt;Googleの社是？ &amp;ldquo;Share everything you can&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Qiitaにもっと投稿しようと思いました（こなみかん）&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>ブログをHugoに移行した</title>
@@ -810,116 +913,6 @@ git merge origin/master
 &lt;li&gt;&lt;a href=&#34;http://yuroyoro.hatenablog.com/entry/20101008/1286531851&#34;&gt;.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/sinsoku/20111025/1319497900&#34;&gt;図で分かるgit-mergeの&amp;ndash;ff, &amp;ndash;no-ff, &amp;ndash;squashの違い - アジャイルSEを目指すブログ&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>開発環境のためのansibleを出来るだけベストプラクティスでまとめた</title>
-      <link>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</link>
-      <pubDate>Thu, 24 Sep 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</guid>
-      <description>
-
-&lt;p&gt;自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで&lt;code&gt;bundle&lt;/code&gt;とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜec2:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;なぜEC2？&lt;/h2&gt;
-
-&lt;p&gt;少し前に&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/&#34;&gt;開発環境としてDigitalOceanを使うことを勧める記事&lt;/a&gt;を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。&lt;/p&gt;
-
-&lt;h2 id=&#34;ベストプラクティス構成の意識:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;ベストプラクティス構成の意識&lt;/h2&gt;
-
-&lt;p&gt;出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible&#34;&gt;chroju/ansible&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;あらゆるサーバーで共通の&lt;code&gt;common&lt;/code&gt;というロールと、開発環境用の&lt;code&gt;develop&lt;/code&gt;というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから&lt;code&gt;git clone&lt;/code&gt;しているし。&lt;/p&gt;
-
-&lt;p&gt;ansibleには公式ドキュメントに&lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_best_practices.html&#34;&gt;ディレクトリ構成のベストプラクティス&lt;/a&gt;が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;playbooksは同時に実行すべきtaskをroleとして分割する&lt;/li&gt;
-&lt;li&gt;ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する&lt;/li&gt;
-&lt;li&gt;グループごとに実行するroleと変数（group_vars）を紐つける&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は&lt;code&gt;ansible-playbook site.yml&lt;/code&gt;でよいし、一部グループだけに適用したいなら&lt;code&gt;ansible-playbook *servers.yml&lt;/code&gt;とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。&lt;/p&gt;
-
-&lt;p&gt;なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。&lt;/p&gt;
-
-&lt;p&gt;ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。&lt;/p&gt;
-
-&lt;p&gt;ansible、ファーストインプレッションはとにかく&lt;a href=&#34;http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/&#34;&gt;「楽そう」&lt;/a&gt;だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。&lt;/p&gt;
-
-&lt;h2 id=&#34;このレポジトリでやっていること:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;このレポジトリでやっていること&lt;/h2&gt;
-
-&lt;p&gt;ソース読んでもらえればわかる話ではありますが。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;common
-
-&lt;ul&gt;
-&lt;li&gt;hostname設定&lt;/li&gt;
-&lt;li&gt;localeとtimezone設定&lt;/li&gt;
-&lt;li&gt;sshd_config設定&lt;/li&gt;
-&lt;li&gt;authorized keys設定&lt;/li&gt;
-&lt;li&gt;/etc/aliasesの設定&lt;/li&gt;
-&lt;li&gt;DenyHostsインストール&lt;/li&gt;
-&lt;li&gt;logwatchインストール&lt;/li&gt;
-&lt;li&gt;iptables設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;develop
-
-&lt;ul&gt;
-&lt;li&gt;development tools、zsh、git、vim、jqのインストール&lt;/li&gt;
-&lt;li&gt;dotfilesの配置&lt;/li&gt;
-&lt;li&gt;デフォルトシェルをzshに変更&lt;/li&gt;
-&lt;li&gt;rbenvの設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;もっとも苦労したのはrbenv周りで、&lt;code&gt;git clone&lt;/code&gt;直後はpathが通ってない&lt;code&gt;~/.rbenv/bin&lt;/code&gt;配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで&lt;code&gt;sudo: yes&lt;/code&gt;としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、&lt;code&gt;sudo:&lt;/code&gt;ないし&lt;code&gt;become:&lt;/code&gt;の設定はタスク単位で考えたほうが良いと思う。また本来であれば&lt;code&gt;~/.bash_profile&lt;/code&gt;あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。&lt;/p&gt;
-
-&lt;p&gt;もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は&lt;code&gt;ec2_user&lt;/code&gt;、その他VPSの場合は&lt;code&gt;root&lt;/code&gt;がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。&lt;/p&gt;
-
-&lt;h2 id=&#34;その他技術的な話:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;その他技術的な話&lt;/h2&gt;
-
-&lt;p&gt;細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;変数名の命名規約。代入は&lt;code&gt;group_vars&lt;/code&gt;で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。&lt;/li&gt;
-&lt;li&gt;ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。&lt;/li&gt;
-&lt;li&gt;EC2には開発ツールがないので&lt;code&gt;Development tools&lt;/code&gt;でまとめてインストールしてしまったが、本当は個々に切り出したい。&lt;/li&gt;
-&lt;li&gt;ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ハッカーマインドと3冊のエッセイ</title>
-      <link>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</link>
-      <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</guid>
-      <description>&lt;p&gt;ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊のことである。しかし『それがぼくには』は重要な一冊だと思うんだけど、なんでまた絶版なんですかね。そんな古い本でもないのに。仕方なく図書館で借りたけど。&lt;/p&gt;
-
-&lt;p&gt;いわゆるハッカーマインドを描いた本としていずれも似たような印象を抱きがちだが、実際に読んでみるとスタンスはだいぶ異なる。『ハッカーと画家』はコンピュータについてあまり詳しくない人に対して、ハッカーというのはこういう人種なのだと切々と説いた本であり、故にそれほど挑発的な印象は受けず、すらすらと読み進めていくことができる。もっともこれがハッカー以外に理解できるかというとかなり疑問ではあるが、ハッカーが比較的客観的に自らを解き明かした本として参考にはなる。著者のポール・グレアムのエッセイは&lt;a href=&#34;http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t:%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7&#34;&gt;naoya_t氏による和訳&lt;/a&gt;がいくらか読めるので、これを読んで興味をそそられたら読んでみるのでもいいかもしれない。あと、Lispめっちゃ推してる。&lt;/p&gt;
-
-&lt;p&gt;『UNIXという考え方』は、ハッカー向けにハッカーマインド、というかUNIX哲学を説く本なので、これは3冊の中では最も「読むべき」本だと思った。プログラムの移植性が重要であることだとか、ソフトウェアのレバレッジを効かせて効率性を最大限に高めていくべきだとか、我々がコードを書いたりシステムを作る上で重視すべきことがいくつも盛り込まれている。&lt;/p&gt;
-
-&lt;p&gt;『それがぼくには楽しかったから』はまさにエッセイ、リーナス・トーヴァルズの半生を描いたもので、ハッカーマインド云々というよりはだいぶ読み物チック。終盤で著作権やOSSといった概念に対するリーナスの考え方が少し語られるが、ほとんどはLinuxがいかにして生まれたのか？を描いた物語と言っていい。自分はリーナスというハッカーをこれまで詳しくは知らなかったのだが、案外柔軟な人物であるという印象を受けた。OSSの考え方自体は肯定しながらも、それは押し付けるべきではない、具体的に名前を挙げてリチャード・ストールマンのやり方は強引に過ぎるとしていたり、自分は聖人君子ではなく、大金が舞い込んだときには当然喜んでしまったこともあるよなんて語っていたり、彼の人間性がとても良く出ている。まぁとはいえ、自分が否とみなしたものに対しては、それなりに厳しい批判を飛ばす人物ではあると思うが。&lt;/p&gt;
-
-&lt;p&gt;こうした本に書かれた「ハッカーマインド」なるものは、我々が仕事をする上で必須のものではないと思うし、行き過ぎるとリーナスが言うような宗教戦争チックにもなりかねない。また技術に傾倒しすぎた単なるオタクが仕事の上でも重要な人物足りえるかというと、そういうわけでもない。リーナス・トーヴァルズは偉大なハッカーの1人であろうが、彼は同時にLinux開発者という立場での活動を行うにあたり、社会性を身につけたりもしてきたわけで。単にGeekであること自体が良いこととも自分は思えない。&lt;/p&gt;
-
-&lt;p&gt;とはいえ、まだ生成されてまもなく、業界標準なんてものがあるんだかないのだかもわからない、進化の速いこの業界で仕事をしていくには、多少なりともハッカー的なマインドは必要だとも思うのだ。というか、じゃないと仕事が面白くならないんでは？　惰性で同じ技術をずっと使い続けたり、効率の悪い方法を繰り返したりしていてもお金は入るのだろうけど、それが必ずしも収入に結びつかないとしても、なんかカッコイイことやってみたいとか、楽しそうな新技術にトライしてみたいだとか、そういう感覚がないとエンジニアをやっている意味がないなと思う。エンジニアが会社を選ぶにあたって重要なのは、案外このポイントなのではなかろうか。&lt;/p&gt;
-
-&lt;p&gt;残念ながら求人票からハッカーマインドは透けてこないし、転職面接の数分でそれを読み解くことも難しいだろう（自分は以前、面接でArch Linuxの話でたまたま意気投合する機会があったりして、そういう面接が出来たら話が別なのだろうけど）。その点、最近GitHubやQiitaでエンジニアたちが企業名を出して活動していることがあるが、あれは求人票やウェブサイトでは見えにくいその会社のハッカーマインドを、外部に知らしめていく良い手段だと感じる。ビジネス的に何を成して、社会をどう変えたいのかというよりも、エンジニアとしてどういったカタチで技術にコミットしていくかの方が自分には重要だ。そういう視点で仕事をしていけたらどんなにか幸せだろうし、またそれは茨の道でもあるのだろうなと思っている。&lt;/p&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/511SV9NXW2L._SL160_.jpg&#34; alt=&#34;ハッカーと画家 コンピュータ時代の創造者たち&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;ハッカーと画家 コンピュータ時代の創造者たち&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;ポール グレアム &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 6,887&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/518ME653H3L._SL160_.jpg&#34; alt=&#34;UNIXという考え方―その設計思想と哲学&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;UNIXという考え方―その設計思想と哲学&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Mike Gancarz &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 44,838&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51WZM2W6ZBL._SL160_.jpg&#34; alt=&#34;それがぼくには楽しかったから (小プロ・ブックス)&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;それがぼくには楽しかったから (小プロ・ブックス)&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;リーナス トーバルズ デビッド ダイヤモンド &lt;br /&gt;小学館プロダクション &lt;br /&gt;売り上げランキング: 71,563&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
     </item>
     

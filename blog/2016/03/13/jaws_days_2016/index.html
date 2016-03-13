@@ -1,0 +1,242 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>JAWS DAYS 2016に行ってきた &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>JAWS DAYS 2016に行ってきた</h1>
+                    <h2 class="headline">March 13, 2016</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>昨年に続き。</p>
+
+<p><a href="http://chroju.github.io/blog/2015/03/22/jaws-days-2015/">JAWS DAYS 2015でAWS童貞捨ててきた · the world as code</a></p>
+
+<p>昨年JAWS DAYSのハンズオンでAWSアカウント作ったので、これでAWS歴丸1年。それにしては自分の力がしょっぱすぎて嫌になる。もっと活用したい。ただ今回「わからない」というセッションはなかったので（技術メインじゃないセッションをいくつか入れてたのは置いておいて）、それなりに知識はついているのかなぁという実感はできた。</p>
+
+<p>サーバーレスアーキテクチャ、クラウドネイティブという言葉が極めて一般的になったなというのが今回の感想。事例を聞いていてもEC2並べてなんかやりますというのは当然ながらほとんどなくて、だいたいがLambda、Kinesis、API GatewayといったAWSリソースを繋ぎ合わせることでアーキテクチャを作り出している。もう従来的な言葉で言う「インフラ」というものは存在しなくなってしまった。VMwareやXenの時代というのか、あくまでサーバーという実体は変わらず、それの扱い方が変わるというだけの変化だったが、AWSがもたらしているのはサーバーそのものの消失。システムのアーキテクチャ自体の転換。何度かブログ内でも繰り返しているが、この全く新しい領域で勝負するにあたっては、アプリエンジニアもインフラエンジニアも関係ない。こういった状況下で自分が勝負できるとしたら、Opsになるのかなと思う。これまでインフラ屋が担ってきたOpsのスキルを、AWSへ適用していく。もちろん、コードをもっと書けるようにならなくてはならないといった、本来的な問題もあるが。</p>
+
+<p>また今回全体を通して「コミュニティへの参画」というのが強調されていたようにも思う。最初のJAWS-UG代表である今春氏のセッションでも、Increments及川氏のセッションでも、社外のコミュニティに参加することの意義が説かれた。自分はお世辞にも積極参加ができているとは言いがたい状態なので、とても耳が痛い。</p>
+
+<h2 id="参加セッション:2e8d0bef4a75fbc8ff10011f247fcf08">参加セッション</h2>
+
+<h3 id="jaws-ugこれまでとこれから-キーノート:2e8d0bef4a75fbc8ff10011f247fcf08">JAWS-UGこれまでとこれから（キーノート）</h3>
+
+<ul>
+<li>先述した今春氏のキーノート。</li>
+<li>京セラドームでもイベントを開いたことがあるというのはちょっと驚き。思い切ってますなぁ。</li>
+<li>会場に出来る会社様募集中らしい。企業が無償で場所提供してくれる業界状況というのも非常に恵まれている。というか、そういう文化圏にいて良かったと思う。</li>
+</ul>
+
+<h3 id="amimoto-サーバーレスアーキテクチャ:2e8d0bef4a75fbc8ff10011f247fcf08">AMIMOTO × サーバーレスアーキテクチャ</h3>
+
+<ul>
+<li>デジタルキューブ堀家氏。</li>
+<li>先述の通り。サービスを疎結合にする。No EC2。</li>
+<li>モバイル開発者じゃないからスルーしてたけど、mobile hub面白そう。</li>
+<li><a href="https://github.com/serverless/serverless">Serverless Framework</a>気になる。
+説明のあった「Lambdaをローカルからinvokeできる」ぐらいならAWS CLIでいいんだけど、他にも活用できそう。</li>
+</ul>
+
+<h3 id="外よりも中からの攻撃-事故がヤバイ-今やるべきクラウドセキュリティ対策:2e8d0bef4a75fbc8ff10011f247fcf08">外よりも中からの攻撃・事故がヤバイ、今やるべきクラウドセキュリティ対策</h3>
+
+<ul>
+<li>cloudpackのアイレット齊藤氏。今回一番ためになった。</li>
+<li>セキュリティに終わりはない、完璧はない、だからきちんと監査して透明性を確保して、リスクを受け入れる。</li>
+<li>監査は目的ではない。むしろ時代に追いつけてない監査基準もあったり。</li>
+<li>パスワードは脆弱だからSAMLとKerberosでAD連携してSSOとかカッコイイ。</li>
+<li>cloudpackでやっていることは公開されているらしいので後でチェック。</li>
+</ul>
+
+<h3 id="deep-dive-aws-iot:2e8d0bef4a75fbc8ff10011f247fcf08">[Deep Dive] AWS IoT</h3>
+
+<ul>
+<li>mobile hubと同じく敬遠してたIoTだけどなんかやれそうな気になった。</li>
+<li>とりあえずラズパイ入手かな。あとPython頑張る。</li>
+</ul>
+
+<h3 id="金融クラウド-fintech最新動向-awsで金融のイノベーション:2e8d0bef4a75fbc8ff10011f247fcf08">金融クラウド＆FINTECH最新動向　～AWSで金融のイノベーション！</h3>
+
+<ul>
+<li>AWS、MUFG、ウェルスナビの共同セッション。</li>
+<li>MUFGがハッカソンとかやってるんだというのは全然知らなかったし意外オブ意外。
+時代の潮目が確実に変わってきてるのかなと。</li>
+<li>銀行システム、基幹系は今まで通り守らなくてはならない。フロントはスピードを速める必要があると。
+その意味でSIerは失くならないと個人的には思っている。少なくとも金融系は。</li>
+<li>ウェルスナビ、これまで米富裕層に提供していたような投資診断をモバイル向けで一般にも提供すると。</li>
+<li>ITの役割が単なる自動化や効率化じゃなくて、新たな価値、市場を創造することにある。そういう仕事したい。</li>
+</ul>
+
+<h3 id="エンジニアのキャリアとアウトプットを意識した成長戦略:2e8d0bef4a75fbc8ff10011f247fcf08">エンジニアのキャリアとアウトプットを意識した成長戦略</h3>
+
+<ul>
+<li>Increments及川氏。</li>
+<li>話題になったIncrements入社の理由が「誰もやりそうにないから、差別化戦略として」ってのカッコよすぎた。</li>
+<li>及川氏の最初のキャリアであるDECという会社、不勉強につき初耳。紆余曲折の末に現在はhpの一部か。。。</li>
+<li>Googleの社是？ &ldquo;Share everything you can&rdquo;</li>
+<li>Qiitaにもっと投稿しようと思いました（こなみかん）</li>
+</ul>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f03%2f13%2fjaws_days_2016%2f - JAWS%20DAYS%202016%e3%81%ab%e8%a1%8c%e3%81%a3%e3%81%a6%e3%81%8d%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた<aside class="dates">Jan 20</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">2016年の行動規範<aside class="dates">Jan 3</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/">2015年総括<aside class="dates">Dec 31</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/">Serverspecファーストインプレッション<aside class="dates">Dec 31</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/14/review-team-geek/">『Team Geek』読了<aside class="dates">Dec 14</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
