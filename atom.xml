@@ -17,19 +17,23 @@
       <guid>http://chroju.github.io/about/</guid>
       <description>
 
-&lt;h2 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h2&gt;
+&lt;h1 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h1&gt;
 
 &lt;h3 id=&#34;career:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;career&lt;/h3&gt;
 
-&lt;p&gt;2011-2015 金融系システムエンジニア
-2015- サービスインフラエンジニア（運用）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2011-2015 金融系システムエンジニア&lt;/li&gt;
+&lt;li&gt;2015- サービスインフラエンジニア（運用）&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
 
-&lt;p&gt;Ansible / Docker / Serverspec / AWS / Capistrano
-Redis / MySQL / Elasticsearch
-Ruby / Python / node.js / bash /zsh
-vim / vimperator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ansible / Docker / Serverspec / AWS&lt;/li&gt;
+&lt;li&gt;Redis / MySQL / Elasticsearch&lt;/li&gt;
+&lt;li&gt;Ruby / Python / node.js / bash / zsh&lt;/li&gt;
+&lt;li&gt;vim / vimperator&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
