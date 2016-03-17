@@ -6,8 +6,102 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 13 Mar 2016 11:03:24 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 17 Mar 2016 22:09:45 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Personal Knowledge Base 2</title>
+      <link>http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</link>
+      <pubDate>Thu, 17 Mar 2016 22:09:45 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</guid>
+      <description>
+
+&lt;p&gt;年初に&lt;a href=&#34;http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/&#34;&gt;Personal Knowledge Base · the world as code&lt;/a&gt;という記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。結論としては &lt;strong&gt;&lt;a href=&#34;https://trello.com/&#34;&gt;Trello&lt;/a&gt;&lt;/strong&gt; と &lt;strong&gt;&lt;a href=&#34;https://github.com/gollum/gollum&#34;&gt;gollum&lt;/a&gt;&lt;/strong&gt; を使っている。&lt;/p&gt;
+
+&lt;h2 id=&#34;trello:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;Trello&lt;/h2&gt;
+
+&lt;p&gt;近年よく名前を訊く、Kanban形式でのビジュアライズされたタスク管理を可能とするツール。タスク管理向けなので当初は目を向けてなかったのだけど、よくよく冷静に考えてみるとメモ管理にかなり適してそうだったので採用。&lt;/p&gt;
+
+&lt;p&gt;結果として、タスクに限らず、数多の情報を整理するツールとしてとても使いやすい。ポイントはいくつか。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;メモがカードの形で表示されて、パラパラと繰って一覧できる。&lt;/li&gt;
+&lt;li&gt;メモにラベルを付けると色で表示されるので視認しやすい。&lt;/li&gt;
+&lt;li&gt;全文検索が可能。&lt;/li&gt;
+&lt;li&gt;エクスポート機能あり（json）。&lt;/li&gt;
+&lt;li&gt;descriptionをMarkdownで書くことができる。&lt;/li&gt;
+&lt;li&gt;Android、iOSいずれもアプリあり。IFTTTも対応。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;単なるテキストメモを保存する用途であればEvernoteの上位互換だと感じる。何よりも画面全体にメモを並べることができる一覧性の高さがいい。&lt;/p&gt;
+
+&lt;p&gt;今の自分は&lt;a href=&#34;http://pileofindexcards.org/wiki/index.php?title=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8&#34;&gt;PoIC&lt;/a&gt;のような使い方をしていて、とにかくメモを書き溜めては記録、発見、参照の3つのリストに取りあえず分けて、暇なときにつらつら眺めたりしている。分類の仕方はまだ模索中なので、今後変わるかもしれない。とにかく柔軟に使えるのがいい。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/choiyaki/20140920/1411170874&#34;&gt;「Trello」というアプリがおもしろい - iPhoneと本と数学となんやかんやと&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://victorsavkin.com/post/94468744151/using-trello-for-your-personal-productivity-system&#34;&gt;Using Trello for Your Personal Productivity System | Victor Savkin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;GTDは「高度」の管理用といわゆるToDoの管理用に2つボードを設けて使ってみている。プライベートのタスクだけなのでそれほど厳密な期限管理などは必要ないし、これで十分。&lt;/p&gt;
+
+&lt;h2 id=&#34;gollum:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;gollum&lt;/h2&gt;
+
+&lt;p&gt;散発的な思いつきをTrelloに入れる一方、体系的な知識管理はgollumを使う。GitHub Wikiの機能だけが単独でオープンソース化されているもので、さくらクラウドの2万円クーポンがあったのでとりあえずサーバー1台立ててホストしている。&lt;/p&gt;
+
+&lt;p&gt;技術的なメモ書き、読書メモ、あとは趣味で行く美術展の記録などはすべてここに溜めている。Wikiだと散逸的にページを作ってしまいがちなので、トップから最大2階層までの作成と定め、1階層目は各技術ジャンルのページ、2階層目に詳細記事として配置した。こうして体系立てたメモ環境を作ってみると、自分のスキルマップが出来上がっていくようで面白い。&lt;/p&gt;
+
+&lt;p&gt;gollumを建てるのに、技術的に難しいことはほとんどない。中身はSinatraとgitなのでカスタマイズもしやすく、とりあえず安易な認証機能ぐらいは追加してみた。作成した記事は個別にMarkdownファイルになってgollumのディレクトリ直下に直置きされるのだが、これはディレクトリを切って&lt;code&gt;git submodule&lt;/code&gt;としてGitHub上に上げ、個別管理したいかなと思っている。&lt;/p&gt;
+
+&lt;h2 id=&#34;ナレッジ管理の必要性:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;ナレッジ管理の必要性&lt;/h2&gt;
+
+&lt;p&gt;ナレッジ管理が必要である、という潮流は昨今高まっているような気はしていて、Qiitaやesa.ioの登場あたりから特にそういう話はよく聞く気がする。&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2R3Nk0tCAKPUnY&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/takoratta/ss-59111661&#34; title=&#34;情報共有から始めるチーム開発とキャリア戦略&#34; target=&#34;_blank&#34;&gt;情報共有から始めるチーム開発とキャリア戦略&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/takoratta&#34;&gt;Takuya Oikawa&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;個人であれ組織であれ、我々の仕事は（まぁ他の職種も同じだとは思うが）ナレッジを溜めて活用していくことにあるので、こういう取り組みは何がしか進めるべきだろうと思う。上記スライドにもあるように、暗黙知を形式化していくことで自分内でも、社内やコミュニティ内でも知識を記憶、伝達してさらに深めることが可能になる。&lt;/p&gt;
+
+&lt;p&gt;とはいえ昨今はツールの乱立はあって、ブログとQiitaの使い分けだったり、個人的なメモをどうするかだったり、やっぱり迷うことも多い。そこはある程度自分なりの使い方を定めておかないと、後々散逸したメモの山に途方に暮れたりはしそう。あと、単純に良いツールがあったとしても、メモする習慣をつけておかないと意味がないし、どちらかといえばそっちが大事なんではという気もする。些細なことでも漫然と調べず、記録するクセをこの2ツールで付けていこうと思う。&lt;/p&gt;
+
+&lt;p&gt;以下、他に比較検討したツール群を載せておく。&lt;/p&gt;
+
+&lt;h3 id=&#34;faqt-https-faqt-co:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;&lt;a href=&#34;https://faqt.co/&#34;&gt;FAQT&lt;/a&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;比較した中ではだいぶ惹かれた。一時はこれにしようかと思った。&lt;/li&gt;
+&lt;li&gt;明確にKnowledge baseを唄ったサービス。Markdownで書いたメモがカード形式で表示できる。&lt;/li&gt;
+&lt;li&gt;Markdownプレビューが結構好みだし、外観はとてもよかった。&lt;/li&gt;
+&lt;li&gt;まだ立ち上がったばかりで、将来性はちょっと不安。&lt;/li&gt;
+&lt;li&gt;全文検索の不在が決め手になり不採用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;simplenote:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;Simplenote&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;定番メモサービス。&lt;/li&gt;
+&lt;li&gt;Markdown対応がほぼ皆無なので不採用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;quiver-http-happenapps-com-quiver:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;&lt;a href=&#34;http://happenapps.com/#quiver&#34;&gt;Quiver&lt;/a&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最近少し話題になったMac用ノートアプリ。&lt;/li&gt;
+&lt;li&gt;タグとノートブックで分類するEvernoteっぽいMarkdownノート。&lt;/li&gt;
+&lt;li&gt;データファイルをDropboxに置いてクラウド同期が可能。&lt;/li&gt;
+&lt;li&gt;外観がクールだし、結構使い勝手はよかった。&lt;/li&gt;
+&lt;li&gt;とはいえMacでしか使えないので断念（持ち歩きPCがLinuxなので）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;参考:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/the-personal-knowledge-management-saga/the-personal-knowledge-management-saga-part-1-ae9bdc575ded#.9xvxjvkkz&#34;&gt;The Personal Knowledge Management Saga: #1 — The Personal Knowledge Management Saga — Medium&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=7697050&#34;&gt;Ask HN: What do you use to organize your knowledge? | Hacker News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=8806950&#34;&gt;Ask HN: How do you manage/organize information and knowledge in your life? | Hacker News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://marcusvorwaller.com/blog/2015/12/14/personal-knowledgebases/&#34;&gt;The Sad State of Personal Knowledgebases&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>JAWS DAYS 2016に行ってきた</title>
@@ -888,88 +982,6 @@ git merge origin/master
 &lt;li&gt;&lt;a href=&#34;http://postd.cc/git-command-line-shortcuts/&#34;&gt;Gitコマンドラインショートカット | プログラミング | POSTD&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://yuroyoro.hatenablog.com/entry/20101008/1286531851&#34;&gt;.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/sinsoku/20111025/1319497900&#34;&gt;図で分かるgit-mergeの&amp;ndash;ff, &amp;ndash;no-ff, &amp;ndash;squashの違い - アジャイルSEを目指すブログ&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>開発環境のためのansibleを出来るだけベストプラクティスでまとめた</title>
-      <link>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</link>
-      <pubDate>Thu, 24 Sep 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</guid>
-      <description>
-
-&lt;p&gt;自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで&lt;code&gt;bundle&lt;/code&gt;とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜec2:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;なぜEC2？&lt;/h2&gt;
-
-&lt;p&gt;少し前に&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/&#34;&gt;開発環境としてDigitalOceanを使うことを勧める記事&lt;/a&gt;を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。&lt;/p&gt;
-
-&lt;h2 id=&#34;ベストプラクティス構成の意識:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;ベストプラクティス構成の意識&lt;/h2&gt;
-
-&lt;p&gt;出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible&#34;&gt;chroju/ansible&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;あらゆるサーバーで共通の&lt;code&gt;common&lt;/code&gt;というロールと、開発環境用の&lt;code&gt;develop&lt;/code&gt;というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから&lt;code&gt;git clone&lt;/code&gt;しているし。&lt;/p&gt;
-
-&lt;p&gt;ansibleには公式ドキュメントに&lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_best_practices.html&#34;&gt;ディレクトリ構成のベストプラクティス&lt;/a&gt;が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;playbooksは同時に実行すべきtaskをroleとして分割する&lt;/li&gt;
-&lt;li&gt;ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する&lt;/li&gt;
-&lt;li&gt;グループごとに実行するroleと変数（group_vars）を紐つける&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は&lt;code&gt;ansible-playbook site.yml&lt;/code&gt;でよいし、一部グループだけに適用したいなら&lt;code&gt;ansible-playbook *servers.yml&lt;/code&gt;とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。&lt;/p&gt;
-
-&lt;p&gt;なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。&lt;/p&gt;
-
-&lt;p&gt;ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。&lt;/p&gt;
-
-&lt;p&gt;ansible、ファーストインプレッションはとにかく&lt;a href=&#34;http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/&#34;&gt;「楽そう」&lt;/a&gt;だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。&lt;/p&gt;
-
-&lt;h2 id=&#34;このレポジトリでやっていること:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;このレポジトリでやっていること&lt;/h2&gt;
-
-&lt;p&gt;ソース読んでもらえればわかる話ではありますが。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;common
-
-&lt;ul&gt;
-&lt;li&gt;hostname設定&lt;/li&gt;
-&lt;li&gt;localeとtimezone設定&lt;/li&gt;
-&lt;li&gt;sshd_config設定&lt;/li&gt;
-&lt;li&gt;authorized keys設定&lt;/li&gt;
-&lt;li&gt;/etc/aliasesの設定&lt;/li&gt;
-&lt;li&gt;DenyHostsインストール&lt;/li&gt;
-&lt;li&gt;logwatchインストール&lt;/li&gt;
-&lt;li&gt;iptables設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;develop
-
-&lt;ul&gt;
-&lt;li&gt;development tools、zsh、git、vim、jqのインストール&lt;/li&gt;
-&lt;li&gt;dotfilesの配置&lt;/li&gt;
-&lt;li&gt;デフォルトシェルをzshに変更&lt;/li&gt;
-&lt;li&gt;rbenvの設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;もっとも苦労したのはrbenv周りで、&lt;code&gt;git clone&lt;/code&gt;直後はpathが通ってない&lt;code&gt;~/.rbenv/bin&lt;/code&gt;配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで&lt;code&gt;sudo: yes&lt;/code&gt;としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、&lt;code&gt;sudo:&lt;/code&gt;ないし&lt;code&gt;become:&lt;/code&gt;の設定はタスク単位で考えたほうが良いと思う。また本来であれば&lt;code&gt;~/.bash_profile&lt;/code&gt;あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。&lt;/p&gt;
-
-&lt;p&gt;もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は&lt;code&gt;ec2_user&lt;/code&gt;、その他VPSの場合は&lt;code&gt;root&lt;/code&gt;がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。&lt;/p&gt;
-
-&lt;h2 id=&#34;その他技術的な話:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;その他技術的な話&lt;/h2&gt;
-
-&lt;p&gt;細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;変数名の命名規約。代入は&lt;code&gt;group_vars&lt;/code&gt;で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。&lt;/li&gt;
-&lt;li&gt;ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。&lt;/li&gt;
-&lt;li&gt;EC2には開発ツールがないので&lt;code&gt;Development tools&lt;/code&gt;でまとめてインストールしてしまったが、本当は個々に切り出したい。&lt;/li&gt;
-&lt;li&gt;ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
