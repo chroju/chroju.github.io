@@ -1,0 +1,221 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>Pythonに入門している &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>Pythonに入門している</h1>
+                    <h2 class="headline">March 28, 2016</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<h2 id="pythonを学び始める:99f750581f26cd55e99e535cecc3c37d">Pythonを学び始める</h2>
+
+<p>今年の <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">行動規範</a> でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、またAnsibleもPythonで書かれているということで、Pythonの読み書きが出来た方が今後良さそうだなと思うに至った。これまでRubyをよく書いていたけど、Linuxにデフォルトで入っているのはPythonやPerlという現実的な問題もある。</p>
+
+<p>今までにやったこととしては取りあえず本を2冊読んだのと、一昨日は <a href="http://python-nyumon.connpass.com/event/26257/">入門者向けのPythonハンズオン</a> に行ったりしてみた。基礎文法はだいたいさらって、requestsのようなポピュラーなライブラリは試してみた程度。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51SI%2BAszQwL._SL160_.jpg" alt="Pythonチュートリアル 第3版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Pythonチュートリアル 第3版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 16.03.28</div></div><div class="amazlet-detail">Guido van Rossum <br />オライリージャパン <br />売り上げランキング: 24,079<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51moRIhvzhL._SL160_.jpg" alt="Pythonエンジニア養成読本［いまどきの開発ノウハウ満載！］" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Pythonエンジニア養成読本［いまどきの開発ノウハウ満載！］</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 16.03.28</div></div><div class="amazlet-detail">技術評論社 (2015-06-16)<br />売り上げランキング: 42,458<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>なおPythonチュートリアルはつい先日改版が出たのでそっちをリンクしてます。自分が買ったのは先月です（白目）</p>
+
+<h2 id="pythonに対する小並感:99f750581f26cd55e99e535cecc3c37d">Pythonに対する小並感</h2>
+
+<p>自分はアプリ屋ではないので言語に対する知見は広くないのだけど、なんとなく感じているのはこんなところ。</p>
+
+<ul>
+<li>PerlのTMTOWTDIに対して<a href="http://qiita.com/IshitaTakeshi/items/e4145921c8dbf7ba57ef#there-should-be-one---and-preferably-only-one---obvious-way-to-do-it">&ldquo;There should be one&rdquo;</a>という考え方が明確で好き。</li>
+<li>難読な記法というのが今のところあまりない。発想した通りに書いてだいたい動く気がする。</li>
+<li>インデントでブロック形成するのはcoding styleの戦争が起きなくていい。
+
+<ul>
+<li>ただし自分はインデント＝スペース2つ派だった。Pythonは4つの方が確かに見やすいけど。</li>
+</ul></li>
+<li>バージョン2.x vs 3.xの話、外から聞いてはいたけどなにこれ面倒。</li>
+<li>新参としては3.x学びたいけど、AWS Lambdaが2.7対応だし両方押さえようとしている。</li>
+<li><code>pyvenv</code>の環境の隔離の仕方がシンプルで好き。<code>pyenv</code>というのもあって紛らわしいが。</li>
+<li>というか全体的にシンプルなコンセプトで作られている印象。</li>
+</ul>
+
+<p>2.xと3.xの両輪を回さなくてはならないことを除いては、全体的にはシンプルだし書きやすくてよいなという感じがする。インフラ自動化便利ツールもそろそろなにか書いてみたい。</p>
+
+<h2 id="新しい言語の学習方法:99f750581f26cd55e99e535cecc3c37d">新しい言語の学習方法</h2>
+
+<p>あと言語学習ではいままで「とりあえず書く」というのを手法にしていたけど、複数言語を学んでみて徐々にわかってきた勘所が2点ある。</p>
+
+<h3 id="文法で押さえるべきポイントは決まっている:99f750581f26cd55e99e535cecc3c37d">文法で押さえるべきポイントは決まっている</h3>
+
+<p>例えば<code>elif</code>か<code>elsif</code>か<code>else if</code>かとか、false判定されるのはnullなのか<code>0</code>なのか<code>&quot;&quot;</code>なのかとか、複数言語を並行して遣うときに迷うポイントはわりと決まっているので、そこさえ押さえればとりあえず書ける、というのがある気がした。</p>
+
+<p>チートシートを自分用に作るのも漫然と端から文法を並べ立てるのではなく、こういうポイントに限ったものにすると効率がよさそう。</p>
+
+<h3 id="読むのも勉強:99f750581f26cd55e99e535cecc3c37d">読むのも勉強</h3>
+
+<p>書くのではなく読むのも勉強。よく言われることではあるけれど、これまであまり意識していなかった。冒頭に挙げた通り、PythonではLambdaとAnsibleという明確にきっかけとなったツールが存在しているので、これらのコードをしばらく読んでものにしてみたいと思う。</p>
+
+<p>あと個人的には最近インフラ界隈でもわりとgolangが話題で気になっているけど、それはまたおいおい（実はgo製OSSを修正して使いたくて、ちょっとだけかじってはいる）。</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f03%2f28%2fentry-python%2f - Python%e3%81%ab%e5%85%a5%e9%96%80%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している<aside class="dates">Mar 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2<aside class="dates">Mar 17</aside></a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた<aside class="dates">Jan 20</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">2016年の行動規範<aside class="dates">Jan 3</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2015/12/31/looking-back-2015/">2015年総括<aside class="dates">Dec 31</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
