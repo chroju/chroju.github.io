@@ -1,0 +1,188 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>#qpstudy 響け！アラートコール！行ってきた &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>#qpstudy 響け！アラートコール！行ってきた</h1>
+                    <h2 class="headline">April 24, 2016</h2>
+                </header>
+                <section id="post-body">
+                    <p><a href="http://www.zusaar.com/event/12327003">#qpstudy 2016.04 響け！アラートコール！　本編 一般枠 on Zusaar</a></p>
+
+<p>こちら参加してきました。アラートコール、というか監視運用をテーマとした勉強会。qpstudyことキューピー3分インフラクッキングについては、数少ないインフラ系の継続的勉強会ということで、気になってはいましたが初参加できました。</p>
+
+<p>以前にも障害対応をテーマとした勉強会に行ったことがありますが、この界隈は闇が深い。。以前のそのイベントも今回のイベントも、いずれも参加者が互いの経験を話し合う場があったわけですが、やっぱりそういうのが一番効果あるかもなぁという気がしました。特に監視運用についてはイベント内でも触れられた通りノウハウや勘に頼っている部分も大きく、他社がどういうノウハウに頼っているのか？というのはとても気になるところ。例えばサービス運用全般のガイドラインとしてITILがあるように、客観的な基準があればいいわけなんですが。</p>
+
+<p>で、監視の基準。これは確かにもう少し考え直した方がいいのかもなと思った次第。例えばメトリック監視ってよくありますけど、仮にCPUが90%使用率達したとして、それがすぐに何か異常に繋がるわけではないのですよね。だから「障害」として扱うべきは単純な閾値超過やエラーではなくて、システム的な動作不全であるはず。それと障害予兆にあたるようなワーニングメッセージは別で扱うべきであって、何が本当に必要な監視、アラートなのかというのは、どの会社でも洗い直すと結構ボロが出てきそうな気がしました。イベントではMakerelのような監視系のSaaSがフレームワークを提供してほしいという声もあったり。あとはAIによる判別。確かにメトリックやログの状態を機械学習させれば、障害予兆をAIで判断させることもできそうな気がします。</p>
+
+<p>今年度に入ってからの自分の社内ミッションは、わりと自動化に重きが置かれているのですけど、イベントでは「自動化は目的ではなく手段」という話もあり。確かに自動化自体が楽しい作業なのでついついなんでも手を出すけど、何のために、またどういった効果があると考えられるから自動化するのか、あるいは自動化の手段には何を用いるのかというところはもうちょっと考えたい。「SaaSを使わない理由って何？」って話もあったけど、そういえばそうだなと。まぁ外部にメトリックやIP持たせるのが嫌、という理由で弊社の場合は通らないかもなぁという気もしますけど、SaaSの導入だって要は監視システムをDIYするプロセスを自動化しているわけで。一考には値するはず。</p>
+
+<p>今回の勉強会はなにか結論をバーン！と提示してくれるものではなく、考えるきっかけを与えてくれるような形式だったので、明日以降ちゃんと社内に持って帰って再検討しようと思います。qpstudy、楽しいので次回もぜひ行きたいところ。</p>
+
+<script async class="speakerdeck-embed" data-id="3aaec6a7751c4245a2951a688eaa5543" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/CI5WFlfnIN2Pyf" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/zembutsu/is-it-wront-to-try-to-automate" title="Re: 運用に自動化を求めるのは間違っているだろうか" target="_blank">Re: 運用に自動化を求めるのは間違っているだろうか</a> </strong> from <strong><a href="//www.slideshare.net/zembutsu" target="_blank">Masahito Zembutsu</a></strong> </div></p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f04%2f24%2fqpstudy_alert_call%2f - %23qpstudy%20%e9%9f%bf%e3%81%91%ef%bc%81%e3%82%a2%e3%83%a9%e3%83%bc%e3%83%88%e3%82%b3%e3%83%bc%e3%83%ab%ef%bc%81%e8%a1%8c%e3%81%a3%e3%81%a6%e3%81%8d%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/">#qpstudy 響け！アラートコール！行ってきた<aside class="dates">Apr 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している<aside class="dates">Mar 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2<aside class="dates">Mar 17</aside></a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた<aside class="dates">Jan 20</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">2016年の行動規範<aside class="dates">Jan 3</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
