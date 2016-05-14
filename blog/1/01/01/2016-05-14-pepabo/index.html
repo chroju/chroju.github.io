@@ -1,0 +1,246 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title> &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1></h1>
+                    <h2 class="headline">January 1, 0001</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<h1 id="100行合ったmod-rewirteっをngx-mrubyで書き換えた話:2a4678036370ba6b526f59ef6444672c">100行合ったmod_rewirteっをngx_mrubyで書き換えた話</h1>
+
+<p>@buty4649
+mod_rewriteがかなり複雑になっていてルーティング追加時のデバッグが困難だった
+nginxとapache2とapache1が役割違うけど同居、apache2がc10kでボトルネックに
+nginxに等号しようとしたけどifのネストができないしconfigが長くなる。。。
+ngx_mruby nginx.conf内でmrubyによる拡張が出来る
+Middleware as code テストが出来る</p>
+
+<h1 id="nyah:2a4678036370ba6b526f59ef6444672c">Nyah</h1>
+
+<p>ペパボのプライベートクラウド OpenStack
+4象限のペパボの技術的なロードマップええなあ
+86%のサービスで使っている 558インスタンス（うおー）
+開発メンバーがインスタンス起動やプロビジョニングをポチポチ行える
+Mackerelでモニタリング
+コストダウン（イニシャル、ランニングとも）にもつながっている
+=&gt;移行前後で測っておいて比較したい
+アラート等の障害も減った
+but バージョンアップが半年ごとにあるので追随大変（できてない）
+機能を有効に使い切れていない部分がある。
+nyah-cli
+DVR
+バージョンアップテストは？ Terraformが通ればOKでは</p>
+
+<h1 id="高集積ホスティングによる略:2a4678036370ba6b526f59ef6444672c">高集積ホスティングによる略</h1>
+
+<p>ロリポ
+高集積にこだわる
+リソース制御の自動化
+mod_mruby mod_cgroup</p>
+
+<h1 id="インフラci:2a4678036370ba6b526f59ef6444672c">インフラCI</h1>
+
+<p>alotofwe
+アプリのCI =&gt; drone.io（コンテナ利用のCI
+puppet serverspec
+docker-in-docker</p>
+
+<h1 id="linuxユーザー管理:2a4678036370ba6b526f59ef6444672c">linuxユーザー管理</h1>
+
+<p>pyama
+ldap? /etc/passwdの構成管理ツールによる配布？ rpm? deb?
+ldap中身が複雑に成る 連携の複雑化
+アプリケーションデプロイもsshでやるからユーザーが増えていく
+stns simple toml name service Golangだ
+名前解決、更改鍵取得、sudo認証だけやる
+deploy用ユーザーの運用「deploy」
+公開鍵を並べる運用、面倒では
+=&gt; link_usersで解決できる
+組織構造の表現も出来る =&gt; link_groups
+GH:Eからデータ取ってtomlのユーザー情報つくる
+GitHub Flowでユーザー管理
+APIでいろんなDBとかから直接ユーザー取ってくるようにしたい
+passwdバックエンドを用意したい</p>
+
+<h1 id="ベンチマーク:2a4678036370ba6b526f59ef6444672c">ベンチマーク</h1>
+
+<p>fio</p>
+
+<h1 id="構成管理ツールを用いたインフラ開発フローの改善:2a4678036370ba6b526f59ef6444672c">構成管理ツールを用いたインフラ開発フローの改善</h1>
+
+<p>構成管理してたつもりだけどサーバーがおかしい挙動する？
+変更のコード化を忘れる、PRのマージ忘れる
+CIだと一からイメージ立てるけど本番は差異の反映だから差異あるやん
+=&gt; puppet, serverspec最新版と本番の差分可視化
+<a href="https://github.com/hanazuki/puppet-theatre">https://github.com/hanazuki/puppet-theatre</a></p>
+
+<h1 id="talk:2a4678036370ba6b526f59ef6444672c">talk</h1>
+
+<p>,,</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f1%2f01%2f01%2f2016-05-14-pepabo%2f -  "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/">インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた<aside class="dates">May 14</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/">#qpstudy 響け！アラートコール！行ってきた<aside class="dates">Apr 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している<aside class="dates">Mar 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2<aside class="dates">Mar 17</aside></a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた<aside class="dates">Jan 20</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>

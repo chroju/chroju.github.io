@@ -6,8 +6,58 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 24 Apr 2016 22:28:32 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 May 2016 21:58:32 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
+      <link>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
+      <pubDate>Sat, 14 May 2016 21:58:32 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://pepabo.connpass.com/event/30348/&#34;&gt;第5回ペパボテックカンファレンス〜インフラエンジニア大特集〜 - connpass&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;そもそもインフラ向けのイベントって相対的にはやっぱ少ない気がするし、かのペパボさん主催のイベントだし行く以外の選択肢はなかった。アプリ系のイベントだとだいたいが「Pythonエンジニア」みたいに言語ごとだったり、フレームワークまでテーマが絞られたりするなか、「インフラエンジニア」ってよくよく考えたらめっちゃ広いよねって感じだけど、実際の職務もまぁそんな感じだし、今回の話もだいぶ話題としては多岐に渡っていました。&lt;/p&gt;
+
+&lt;p&gt;自分の最近の関心事としては社内にAnsible導入させたいなと思いながら格闘しているのと、もっとインフラの低レイヤーの知識深めたいなと思っているのとがあるのだけど、その両面について話が聞けてとてもよかったです。&lt;/p&gt;
+
+&lt;h2 id=&#34;インフラのコード管理:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;インフラのコード管理&lt;/h2&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;c2be628f92684309baceb739c9d688a8&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;a54d0ad6100a405497f88b93385c2e3d&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;前者はdrone.io上にdocker-on-dockerでインフラCI環境を作っているという話。どうもdrone.ioだとベースイメージのバージョンが切り替えられないらしい。自分は過去にAnsibleとServerspecによるCIをCircleCIで走らせる構成を作ったことがあるのだけど、これを社内で導入するなら確かにこうなるんだろうなぁという感じだった。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;Ansible + Serverspec + Docker + circle ci によるインフラCI · the world as code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;後者はあるある、というかAnsible導入検討のなかで自分としても浮かんでいた課題で、コード管理しててもそれを更新する「人手」が必ずしもパーフェクトではないので、コードと実機状態の乖離が出る問題。解決策としてはPuppet、Serverspecと実機の照合を毎日夜間に回して、差異にすぐ気づけるようにするというものでした。わかる。すげーわかる。懇親会でも話していたのだけど、sshして作業しちゃいたいのグッと我慢してPuppetちゃんと書き換えるの大事。個人的にはPuppetとServerspec両方回すのもなかなかしんどそうなので、Serverspec単体を構成変更監視みたいに使うのでもいいかなと思う。&lt;/p&gt;
+
+&lt;p&gt;他に印象的だったのは開発側もPuppetを触る、つまり自らインフラの設定変更に手を出せるという話。現状弊社だと、フォルダ1つ掘るのでも、ファイルのコピーでも開発から依頼を受けて運用でsshするみたいなテンション上がらない運用なので、開発にコードでそれを書いてもらえるのはとても効率的に思える。インフラをコード化する一番の意味って、開発と運用という垣根を超えて、インフラを語る共通言語を技術者全体にもたらせることなのだろうなと。まさにDevOps。&lt;/p&gt;
+
+&lt;p&gt;あとそういえば「Infrastructure as Code」って言葉を聞かなかった。単語として長いなぁとは思ってたから自分も今度から「インフラのコード化」って言います。&lt;/p&gt;
+
+&lt;h2 id=&#34;低レイヤー:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;低レイヤー&lt;/h2&gt;
+
+&lt;p&gt;スライドまだ出ていないみたいだけど、ext4からxfsへの移行検討にあたって、結構ガッツリとベンチマークテストやったというLTがありました。クラウド全盛な今日このごろでも足回りは結局物理なんですよというのはまさにその通りで、自分は全然このへんの知識がないのだけどちゃんとやらなきゃなと。。。反省。。。&lt;/p&gt;
+
+&lt;p&gt;そして何よりペパボのプライベートクラウド&amp;rdquo;Nyah&amp;rdquo;の話ですねー。&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;5786d472901a4758a005deeb670746e2&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;いやもうすげーわー。あこがれるわー。OpenStack使うにあたり社内別グループ会社に経験者がいたので知見を聴けたとか、一気に5バージョン飛ばして最新バージョンへ追随させるとか、技術に対する姿勢が会社も個人もとても前向きで素敵な話だった。真似しようとして簡単に真似できる話ではないけれど、姿勢や方針については本当に参考になった。&lt;/p&gt;
+
+&lt;h2 id=&#34;懇親会:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;懇親会&lt;/h2&gt;
+
+&lt;p&gt;インド人完全無視カレーおいしかった。トムヤムクン入れてるのか。なるほど。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://calamel.jp/curry&#34;&gt;インド人完全無視カレー | インド人のアドバイスを完全無視！－カラメル&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ペパボの方と実際に話せてよかったです。なんか新しいもの社内に導入したり、広げていったりとなると「結局コミュニケーションだよね」という結論に至ったのでそこは頑張るしかないのかなぁ超ニガテ。あとKPIちゃんと出して比較しないと響かなかったりするってのは確かになという感じなので、自分も腐らず頑張らなきゃなと思い新たにしました。スーパーエンジニアすげーすげーと言っても始まらんし、やりたいならちゃんと自分でやらなきゃなーと。いやー行った甲斐がありました。ありがとうございました。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>#qpstudy 響け！アラートコール！行ってきた</title>
@@ -198,8 +248,8 @@
 &lt;h3 id=&#34;career:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;career&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;2011-2015 金融系システムエンジニア&lt;/li&gt;
-&lt;li&gt;2015- サービスインフラエンジニア（運用）&lt;/li&gt;
+&lt;li&gt;2011-2015 IT Engineer in a systems integrator (Financial)&lt;/li&gt;
+&lt;li&gt;2015- Infrastructure and Operation Engineer (ASP)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
@@ -766,92 +816,6 @@ set :backend, :exec
 &lt;p&gt;とりあえず前述のTraildashはDockerによる本番運用（外に出すものではないので本番といえるか微妙ではあるが）の発端にはなりそうなものの、いわゆるアプリ、サービスを本番稼働させるのがどんなもんなのかってところは自分自身見えてない。これをきちんと本番で扱うには可用性やら信頼性やらを担保しなくてはならないわけで、クラスタ構成に用いる&lt;a href=&#34;https://docs.docker.com/swarm/&#34;&gt;Docker Swarm&lt;/a&gt;を導入するだとか、いわゆるインフラとしてのお仕事はやっぱり必要になる。そのへんどこかで試せればなぁとは思うので、ひとまずは自分の http;//chroju.net をDocker化しようかなどと。この前OSCでさくらのクラウド2万円クーポンもらったし、Dockerによる個人PaaS的なものでも作ってみようか。&lt;/p&gt;
 
 &lt;p&gt;テストとしての利用には申し分のないところで、先日記事で上げたが&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;AnsibleとServerspecのテスト&lt;/a&gt;に使えるまっさらなOS環境としてDockerは重宝している。Infra as Codeと大変相性がよくて、よくこのタイミングで出てきてくれたなという感じがする。時代の要請なのだろうか。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI</title>
-      <link>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</link>
-      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/&#34;&gt;CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible-ruby-devs&#34;&gt;chroju/ansible-ruby-devs&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;ansibleにテストは必要か:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Ansibleにテストは必要か？&lt;/h1&gt;
-
-&lt;p&gt;AnsibleはPlaybookに書かれた設定通りにサーバーをセッティングしてくれるツールなのだから、傍証としてのテストは必要ないし、そもそもそれはAnsibleに対する信頼の問題だという話がある。（かのオライリーのServerspec本でも「Serverspecの必要性」を状況に応じて説明した章がある）が、自分は以下の理由からAnsible実行後のテストは必要と考えている。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;h2 id=&#34;playbookの書き方が間違っている:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Playbookの書き方が間違っている&lt;/h2&gt;
-
-&lt;p&gt;確かにPlaybookに書いた内容通りにサーバーは組まれるのだが、そもそもPlaybookの書き方がおかしくて、想定通りの実行結果にならない可能性はある。そのレベルであればコードレビューで気付くべきではないかという話もあるが、こういう趣味の個人開発では難しかったり、レビューで漏れがあったりというのも有り得るわけで、自動テストに任せられるならその方が確かかとは思う。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;h2 id=&#34;冪等性の問題:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;冪等性の問題&lt;/h2&gt;
-
-&lt;p&gt;特にshellモジュールを用いたときなどは冪等性が維持されない可能性があり、複数回の実行で想定外のサーバー状態になる可能性はある。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&#34;テストツールの選定:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;テストツールの選定&lt;/h1&gt;
-
-&lt;p&gt;普通にServerspec。Ansibleで定義したインベントリファイルやrolesをServerspecと共有してくれる&lt;a href=&#34;http://qiita.com/volanja/items/5e97432d6b231dbb31c1&#34;&gt;ansible_spec&lt;/a&gt;というツールもあり、当初はこちらを使おうとしていた。が、前述した「Ansibleの書き方自体が間違っている可能性」をテストするとなると、できるだけAnsibleとテストツールは疎結合とするべきと考え、ファイルや設定は一切共有しない形でServerspecを使っている。&lt;/p&gt;
-
-&lt;h1 id=&#34;circle-ciの利用:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Circle CIの利用&lt;/h1&gt;
-
-&lt;p&gt;繰り返しになるが初である。インフラエンジニアがCIをすることはまぁない（なかった）。そんな頻繁に設定を変えるわけでもなし。インフラCIが可能かつ必要となったのは、Infrastructure as Codeの台頭と、クラウドネイティブ化によりImmutableかつ極めて速いライフサイクルでサーバーインフラが更新されるようになったことによるもの。&lt;/p&gt;
-
-&lt;p&gt;で、Circle CIでググってもそんなに使い方みたいな初歩的な記事は出ない。どうもCIツールの使い方なんてのはJenkins登場の頃に身につけてて当然だろって感じの扱いっぽい。実際使いながら自分なりに理解したのは「レポジトリをpushすると、それを使って自動的にテストやデプロイを回してくれる」ツールということで、Circle CIについてはこんな感じに認識してるんだがあってんのかなぁ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;レポジトリの使用言語やファイル構成を見て良きに計らって勝手にテストしてくれる。&lt;/li&gt;
-&lt;li&gt;もちろん自分でテストコマンドを書いてもOKで、Circle CIにやってほしいことは &lt;code&gt;circle.yml&lt;/code&gt; というYAMLファイルに書いてレポジトリの第一階層に置いておく。&lt;/li&gt;
-&lt;li&gt;GitHub連携を前提としており、連携したレポジトリの &lt;code&gt;push&lt;/code&gt; をトリガーとして動作する。&lt;/li&gt;
-&lt;li&gt;動作としてはCircle CI上でDockerコンテナ（ubuntuベース）を起動→レポジトリを &lt;code&gt;git clone&lt;/code&gt; →circle.ymlを読んで実行&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;実装:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;実装&lt;/h1&gt;
-
-&lt;p&gt;実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stormcat.hatenablog.com/entry/2015/02/04/004227&#34;&gt;CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&amp;lt;)&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;machine:
-  timezone:
-    Asia/Tokyo
-  services:
-    - docker
-
-dependencies:
-  pre:
-    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
-
-  cache_directories:
-    - &amp;quot;~/docker&amp;quot;
-
-test:
-  override:
-    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c &#39;ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;amp;&amp;amp; cd /ansible/spec &amp;amp;&amp;amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;amp;&amp;amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;この方法の肝はAnsibleとServerspecのフォルダを&lt;code&gt;docker run&lt;/code&gt;の&lt;code&gt;-v&lt;/code&gt;オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。&lt;/p&gt;
-
-&lt;p&gt;テストにおいてはインベントリファイルも&lt;code&gt;site.yml&lt;/code&gt;もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと&lt;code&gt;load&lt;/code&gt;するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。&lt;/p&gt;
-
-&lt;p&gt;実行結果はslackの個人チャンネルに流している。GtiHubに上げるだけで勝手にテストして結果も自動通知されるというのはとても楽しい。やれることの自由度が広すぎて夢が広がる。&lt;/p&gt;
-
-&lt;h1 id=&#34;つまずいた点:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;つまずいた点&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Dockerfile初挑戦につき、結構戸惑った。Ansibleでsshd_configを編集させていたのだが、コンテナにそもそもsshが入ってなくてコケたりした。&lt;/li&gt;
-&lt;li&gt;Circle CIでのカレントディレクトリの扱いがわからず、しばらく &lt;code&gt;circle.yml&lt;/code&gt; で指定するファイルパスに悩まされた。クローンしたレポジトリの中にいる状態で始まるっぽい？&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;docker run&lt;/code&gt; に &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; 付きでコマンド渡すときに &lt;code&gt;/bin/sh -c&lt;/code&gt; が必要だとしばらく気付かなかった。&lt;/li&gt;
-&lt;li&gt;Dockerコンテナを &lt;code&gt;save&lt;/code&gt; して &lt;code&gt;load&lt;/code&gt; してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

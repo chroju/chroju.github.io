@@ -6,8 +6,58 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 24 Apr 2016 22:28:32 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 May 2016 21:58:32 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
+      <link>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
+      <pubDate>Sat, 14 May 2016 21:58:32 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://pepabo.connpass.com/event/30348/&#34;&gt;第5回ペパボテックカンファレンス〜インフラエンジニア大特集〜 - connpass&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;そもそもインフラ向けのイベントって相対的にはやっぱ少ない気がするし、かのペパボさん主催のイベントだし行く以外の選択肢はなかった。アプリ系のイベントだとだいたいが「Pythonエンジニア」みたいに言語ごとだったり、フレームワークまでテーマが絞られたりするなか、「インフラエンジニア」ってよくよく考えたらめっちゃ広いよねって感じだけど、実際の職務もまぁそんな感じだし、今回の話もだいぶ話題としては多岐に渡っていました。&lt;/p&gt;
+
+&lt;p&gt;自分の最近の関心事としては社内にAnsible導入させたいなと思いながら格闘しているのと、もっとインフラの低レイヤーの知識深めたいなと思っているのとがあるのだけど、その両面について話が聞けてとてもよかったです。&lt;/p&gt;
+
+&lt;h2 id=&#34;インフラのコード管理:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;インフラのコード管理&lt;/h2&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;c2be628f92684309baceb739c9d688a8&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;a54d0ad6100a405497f88b93385c2e3d&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;前者はdrone.io上にdocker-on-dockerでインフラCI環境を作っているという話。どうもdrone.ioだとベースイメージのバージョンが切り替えられないらしい。自分は過去にAnsibleとServerspecによるCIをCircleCIで走らせる構成を作ったことがあるのだけど、これを社内で導入するなら確かにこうなるんだろうなぁという感じだった。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;Ansible + Serverspec + Docker + circle ci によるインフラCI · the world as code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;後者はあるある、というかAnsible導入検討のなかで自分としても浮かんでいた課題で、コード管理しててもそれを更新する「人手」が必ずしもパーフェクトではないので、コードと実機状態の乖離が出る問題。解決策としてはPuppet、Serverspecと実機の照合を毎日夜間に回して、差異にすぐ気づけるようにするというものでした。わかる。すげーわかる。懇親会でも話していたのだけど、sshして作業しちゃいたいのグッと我慢してPuppetちゃんと書き換えるの大事。個人的にはPuppetとServerspec両方回すのもなかなかしんどそうなので、Serverspec単体を構成変更監視みたいに使うのでもいいかなと思う。&lt;/p&gt;
+
+&lt;p&gt;他に印象的だったのは開発側もPuppetを触る、つまり自らインフラの設定変更に手を出せるという話。現状弊社だと、フォルダ1つ掘るのでも、ファイルのコピーでも開発から依頼を受けて運用でsshするみたいなテンション上がらない運用なので、開発にコードでそれを書いてもらえるのはとても効率的に思える。インフラをコード化する一番の意味って、開発と運用という垣根を超えて、インフラを語る共通言語を技術者全体にもたらせることなのだろうなと。まさにDevOps。&lt;/p&gt;
+
+&lt;p&gt;あとそういえば「Infrastructure as Code」って言葉を聞かなかった。単語として長いなぁとは思ってたから自分も今度から「インフラのコード化」って言います。&lt;/p&gt;
+
+&lt;h2 id=&#34;低レイヤー:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;低レイヤー&lt;/h2&gt;
+
+&lt;p&gt;スライドまだ出ていないみたいだけど、ext4からxfsへの移行検討にあたって、結構ガッツリとベンチマークテストやったというLTがありました。クラウド全盛な今日このごろでも足回りは結局物理なんですよというのはまさにその通りで、自分は全然このへんの知識がないのだけどちゃんとやらなきゃなと。。。反省。。。&lt;/p&gt;
+
+&lt;p&gt;そして何よりペパボのプライベートクラウド&amp;rdquo;Nyah&amp;rdquo;の話ですねー。&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;5786d472901a4758a005deeb670746e2&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;いやもうすげーわー。あこがれるわー。OpenStack使うにあたり社内別グループ会社に経験者がいたので知見を聴けたとか、一気に5バージョン飛ばして最新バージョンへ追随させるとか、技術に対する姿勢が会社も個人もとても前向きで素敵な話だった。真似しようとして簡単に真似できる話ではないけれど、姿勢や方針については本当に参考になった。&lt;/p&gt;
+
+&lt;h2 id=&#34;懇親会:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;懇親会&lt;/h2&gt;
+
+&lt;p&gt;インド人完全無視カレーおいしかった。トムヤムクン入れてるのか。なるほど。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://calamel.jp/curry&#34;&gt;インド人完全無視カレー | インド人のアドバイスを完全無視！－カラメル&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ペパボの方と実際に話せてよかったです。なんか新しいもの社内に導入したり、広げていったりとなると「結局コミュニケーションだよね」という結論に至ったのでそこは頑張るしかないのかなぁ超ニガテ。あとKPIちゃんと出して比較しないと響かなかったりするってのは確かになという感じなので、自分も腐らず頑張らなきゃなと思い新たにしました。スーパーエンジニアすげーすげーと言っても始まらんし、やりたいならちゃんと自分でやらなきゃなーと。いやー行った甲斐がありました。ありがとうございました。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>#qpstudy 響け！アラートコール！行ってきた</title>
@@ -824,69 +874,6 @@ test:
 &lt;li&gt;&lt;code&gt;docker run&lt;/code&gt; に &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; 付きでコマンド渡すときに &lt;code&gt;/bin/sh -c&lt;/code&gt; が必要だとしばらく気付かなかった。&lt;/li&gt;
 &lt;li&gt;Dockerコンテナを &lt;code&gt;save&lt;/code&gt; して &lt;code&gt;load&lt;/code&gt; してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>オープンソースカンファレンス2015 Tokyo/Fall行ってきた</title>
-      <link>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</link>
-      <pubDate>Sun, 25 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</guid>
-      <description>
-
-&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/photos/chroju/22273557670/in/dateposted-public/&#34; title=&#34;このはちゃんかわいい&#34;&gt;&lt;img src=&#34;https://farm1.staticflickr.com/630/22273557670_c7c51c391b_z.jpg&#34; width=&#34;640&#34; height=&#34;640&#34; alt=&#34;このはちゃんかわいい&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;戦利品、ConoHaちゃんかわええ。&lt;/p&gt;
-
-&lt;p&gt;オープンソースカンファレンスに初めて行ってみた。2015 Tokyo/Fallです。だいぶ奥地の方でやってるなぁという印象があってなかなか行きづらかったのだが、実際行ってみると自然に囲まれて静かで建物綺麗で過ごしやすそうないい大学ですね。ちょっぴり休憩でもくもくしたりしてみたけどだいぶ捗ったし、もう少し近所なら作業環境に使いたい感じが（）&lt;/p&gt;
-
-&lt;p&gt;ぼっち参戦かつ初参戦かつコミュ障な故、ブースがんがん回ってがんがん自分から話しかけるみたいな度胸はなく、だいたいセッション聴いてました。ので、セッションごとにちょっとまとめる。&lt;/p&gt;
-
-&lt;h1 id=&#34;はじめてのオープンソース-ライセンス:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;はじめてのオープンソース・ライセンス&lt;/h1&gt;
-
-&lt;p&gt;オープンソース自体の考え方だとかは知ってはいたのだが、ライセンスがMITとかApacheとかそういういろいろがあるのがよくわかってなかったので。話の中で教えていただいた&lt;a href=&#34;http://www.catch.jp/oss-license/2013/09/10/github/&#34;&gt;Githubによる、オープンソースライセンスの選び方 | オープンソース・ライセンスの談話室&lt;/a&gt;というページが確かに詳しそうなので後で読まなければなと思った。ギッハブ使ってるのに全然これ理解してなかった。&lt;/p&gt;
-
-&lt;h1 id=&#34;実録-hinemos導入経験者が語る-実運用でのあるある話:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;実録！Hinemos導入経験者が語る、実運用でのあるある話&lt;/h1&gt;
-
-&lt;p&gt;最近実務でHinemosを使っているもので。監視設定をグループ（スコープ）単位で作ってしまうと静観するときに設定変更がしんどいだとかっていう本当にあるあるな話と、&lt;a href=&#34;http://www.hinemos.info/option/utility&#34;&gt;Hinemos Utility&lt;/a&gt;が便利だという話など。Hinemos Utility、設定のインポートエクスポートがあるので、GUIポチポチの面倒臭さから救われそうな気はした。あるある話の方は他の監視ツールでもわりと似たところあるので、結局アーキテクチャーってどんなツールでも大して変わらんのかなぁ、そのへんどうにかしたツールないかなぁとか思った。&lt;/p&gt;
-
-&lt;p&gt;そういえばセッションはTISの主催だったのだが、同社といえば&lt;a href=&#34;http://thinkit.co.jp/author/3519&#34;&gt;Zabbixの池田氏&lt;/a&gt;の印象が強いので、Zabbixと比較して同社としてどう考えてるのかってあたりも聞きたかった。&lt;/p&gt;
-
-&lt;h1 id=&#34;飲食ok-発表者募集中-1日目-ライトニングトーク-by-oscスポンサー:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;[飲食OK]（発表者募集中！）1日目-ライトニングトーク（by OSCスポンサー）&lt;/h1&gt;
-
-&lt;p&gt;なかなかカオスにライトニングトーク。飲食OKでしたけど学食せっかくなので使いたかったので無飲食で。言及してるとキリがないので割愛。&lt;/p&gt;
-
-&lt;h1 id=&#34;ubuntuの最新情報:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;Ubuntuの最新情報&lt;/h1&gt;
-
-&lt;p&gt;Ubuntu使ってない。てかDebian系ほとんど触った経験ないんで触らなきゃなと思いました。&lt;/p&gt;
-
-&lt;h1 id=&#34;zabbixでdockerも監視してみよう:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;ZabbixでDockerも監視してみよう&lt;/h1&gt;
-
-&lt;p&gt;最後の質疑で出た話で、新陳代謝の高いコンテナの監視に既存ツールの分単位での監視感覚が役に立つのか？っていうのがあったのだけど、わりとそれに同意した。自分はコンテナを実サービスで運用した経験がないのでアレなのだが、その性質からして既存サーバーより速いスピードで起動停止を繰り返すことは有り得ると思うし、むしろアーキテクチャーの考え方がスピーディーなものに変わるためには監視ツールの在り方も変わんなきゃならないんじゃないかなぁと思った。答えは出てないけど。&lt;/p&gt;
-
-&lt;h1 id=&#34;コンテナ-docker-時代のインフラ技術-運用管理に迫る:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;コンテナ(Docker)時代のインフラ技術・運用管理に迫る！&lt;/h1&gt;
-
-&lt;p&gt;Docker最新事情という感じで、Dockerの概要もそこそこに周辺ツールや開発状況をいろいろ舐めていく感じのセッション。Docker触り始めたばかりの自分にはとてもありがたかった。Docker machine、Docker Swarm、docker-composeだとかなかなかにワクワクする話。&lt;/p&gt;
-
-&lt;h1 id=&#34;aozorahackの今までとこれから-インターネット電子図書館-青空文庫-をエンジニアリングで支える:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;aozorahackの今までとこれから ～インターネット電子図書館「青空文庫」をエンジニアリングで支える～&lt;/h1&gt;
-
-&lt;p&gt;ここから2日目。春に&lt;a href=&#34;https://atnd.org/events/66230&#34;&gt;青空文庫アイディアソン&lt;/a&gt;が開かれて話題になりましたが、そのときから興味があったので話を聞いてみた。青空文庫の誕生が1997年、オープンソースという言葉が生まれたのが1998年ということで、オープンソースより古い歴史を持つ青空文庫がOSSライクな発想をしていたはずもない！という出発点だったようなのだが、それを変えていこうという試み。もともとサードパーティ的にビューアやコンバータを作る動きは周辺にあったわけで、それをまとめて今風の開発をしていくとなると面白そうだなと思う。自分は業務エンジニア＋趣味エンジニアでしかないけど、こういうボランティアというか、自らの意志で参画していくエンジニアリング活動というのがOSSの在り方なんだとここで初めて腑に落ちた気がした。&lt;/p&gt;
-
-&lt;h1 id=&#34;solaris-zoneとpuppet-serverspecでインフラ-ci:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;Solaris ZoneとPuppet、Serverspecでインフラ CI&lt;/h1&gt;
-
-&lt;p&gt;Solarisわからないけどインフラ周りの知識手広くしたいなということで行ってはみたがやっぱりわからなかった。知識って広くて浅いか狭くて深いかの二択だと勝手に思ってたけど、実際それなりに出来るエンジニアってそこそこ手広く平均点取れる人が多い気がしていて、例えばこのセッションであればUNIX（Solaris）の知識にコンテナ（Zone）の知識、んでPuppetはRubyだし、ServerspecもRubyというかRSpecなんですよね。エンジニアとしての幅、ちょっと見直したいなと思わされたセッション。&lt;/p&gt;
-
-&lt;h1 id=&#34;パネルディスカッション-今こそ語るエンジニアの幸せな未来-osc東京編:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;【パネルディスカッション】今こそ語るエンジニアの幸せな未来 ～OSC東京編～&lt;/h1&gt;
-
-&lt;p&gt;春に行ったJAWS DAYSでも同様のパネディスを聴いてはいたので実質第二回というか。こういう話題が定期的に持ち上がるようになったのって、さくらインターネットが15周年迎えたこともあるようにエンジニアの高齢化（家庭環境の変化）があるような気はする。働き方はライフステージによっても、世の中の技術動向やビジネス動向によっても変わるので、結局時間と金銭的余裕のあるうちに勉強して、常に自分が働きやすい場所にいられるようバリューを磨いておくしかないのだろうなと思う。そういう話でした。&lt;/p&gt;
-
-&lt;p&gt;以上、9セッション。知識のザッピングとしてこういうセッション形式のイベントはやはり良いなと。いわゆる勉強会だとだいたいが自分の興味関心のあることだけに集中してしまうのだが、こういう機会だとせっかくなのでってことで脇道に逸れたりしやすいので、知識の幅増やす機会にはなりやすいですね。OSS、TISのようにビジネスとして取り扱っている人たちもいれば、aozorahackのような草の根の動きもあったり、有り様はいろいろであって、んでGitHubで取りあえずソース読むところからいつでも手を付けられる時代にあるので、何かしらやってみると面白いのかもしれない。尻込みしてるのではなく。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;テロ &lt;a href=&#34;https://twitter.com/hashtag/osc15tk?src=hash&#34;&gt;#osc15tk&lt;/a&gt; &lt;a href=&#34;https://t.co/OEa2JYMezY&#34;&gt;pic.twitter.com/OEa2JYMezY&lt;/a&gt;&lt;/p&gt;&amp;mdash; T.Kabu (@disco_v8) &lt;a href=&#34;https://twitter.com/disco_v8/status/657855359357337600&#34;&gt;2015, 10月 24&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;懇親会、&lt;a href=&#34;https://twitter.com/chroju/status/657852424502276096&#34;&gt;TRIGGER ANIMATION EXPO&lt;/a&gt;に行けるチャンスがここしかなかったのと、200人という大所帯にぼっち参戦する勇気がないのと（あと、さすがに薄い話しかできなさそうであまり意味はないかなと思った）で行かなかったんだけど、生ハム原木はうらやましかった。&lt;/p&gt;
 </description>
     </item>
     
