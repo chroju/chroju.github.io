@@ -6,8 +6,43 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 14 May 2016 21:58:32 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jun 2016 23:46:12 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Serverlessの時代とas code</title>
+      <link>http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</link>
+      <pubDate>Sun, 05 Jun 2016 23:46:12 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</guid>
+      <description>
+
+&lt;p&gt;先週&lt;a href=&#34;http://ansible-users.connpass.com/event/31222/&#34;&gt;Ansible Meetup in Tokyo 2016.06&lt;/a&gt;と、&lt;a href=&#34;http://www.awssummit.tokyo/&#34;&gt;AWS Summit Tokyo 2016&lt;/a&gt;に行ってきたので軽めのレポートにします。&lt;/p&gt;
+
+&lt;h2 id=&#34;aws-summit:95a87fd1a47a72aa1bf662cfd38baf72&#34;&gt;AWS Summit&lt;/h2&gt;
+
+&lt;p&gt;AWS Summitは初参加でしたが、会場を見渡したときのスーツ率の高さからいわゆるEnterprise系のイベントに近いのかと思いきや、DevConの方を中心にテクニカルな話題も多めで楽しめました。とはいえAWSサービス紹介にとどまるセッションや、タイトル通りの内容ではなく、各企業の内部事情を抽象的に話すだけで終わるようなセッションも少なくなく、セッションの選択はそれなりにコツがいるなとも思ったのですが。。&lt;/p&gt;
+
+&lt;p&gt;自分が受けたセッションで特に多く話されていたのは、Serverlessの話とDevOps、具体的にはCI/CDの話。いずれも要はこれまで複雑に運用していたシステムが、AWSのマネージドサービスを使うことで簡単に実現できるという話なのですが、特にServerlessに力を入れてる感じがしました。Lambdaの話がすごく多い。先日Serverless confで「サーバーを叩き割る」というパフォーマンスで話題になった、AWSのTim Wagnerも来てましたしね。&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;This is how you go &lt;a href=&#34;https://twitter.com/hashtag/serverless?src=hash&#34;&gt;#serverless&lt;/a&gt; – @timalleneagner &lt;a href=&#34;https://t.co/SpllWVz76u&#34;&gt;pic.twitter.com/SpllWVz76u&lt;/a&gt;&lt;/p&gt;&amp;mdash; Lars Trieloff (@trieloff) &lt;a href=&#34;https://twitter.com/trieloff/status/735839549729996800&#34;&gt;2016年5月26日&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Lambda、簡単なジョブや解析処理であればEC2立てずとも実行が可能になるわけで、いわゆるアプリケーションが担っていた仕事、これまでサーバーを立てなければならなかった部分がごっそり持っていかれることになる。Lambda自体は発表が2014年なのでそれなりに経っているけれど、Pythonに対応したあたりから実用される動きが大きくなってきたような感触があります。とはいえLambdaだけですべて済むというわけでもなく、例えばそのエンドポイントとしてAPI Gatewayが使えたり、SNSと連携してメッセージのプッシュを行ったりと、これまで連綿と作られてきたAWS各サービスがあって、それらを繋げる部分に位置することで真価を発揮している。そう考えるとLambdaが単体ですごいというより、AWS全体を見回したときに足りなかった1ピースを埋めてくれたような印象がある。&lt;/p&gt;
+
+&lt;h2 id=&#34;ansible:95a87fd1a47a72aa1bf662cfd38baf72&#34;&gt;Ansible&lt;/h2&gt;
+
+&lt;p&gt;そこに来てAnsible、というのはどういう位置付けになるのか。Ansibleの役割はServerlessとは対極、基本的にはサーバーの設定管理というところになります。仮にシステムをServerlessに置き換えていくのだとしたら、ひょっとしたら徐々に要らなくなってくるツールなのかもと思ったり。無論、AnsibleにもAWSモジュールがあるけれど、端々まで対応しているというわけではなく、AWSの設定を管理するのであればCloudFormationやTerraformを使う方が現実的かなという気がします（AWS Summit内で、CloudFormationにLambdaや周辺サービスの設定を書いて、サーバーレスのマイクロサービスをパッケージングする手法が紹介されてました。Lambdaのコードもそのjsonの中に含むので「つらそう」という声は多かったですが）&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://docs.ansible.com/ansible/list_of_cloud_modules.html&#34;&gt;Cloud Modules — Ansible Documentation&lt;/a&gt;v&lt;/p&gt;
+
+&lt;p&gt;まぁ、とはいえ現状を鑑みてサーバーが一切なくなるというのはまずないとも思います。AWS Summitでの趣旨も別にサーバー全廃しろよと言ってるわけではなくて、Lambdaに肩代わりさせることでコストダウンしたり効率化が図れる部分が大きいよという点。だからポイントとしてはAWSのマネージドサービスを上手く使えないかというのが設計上第一に来て、困難な部分はEC2（やオンプレのサーバー）を使用するという発想の転換にあるのかと。&lt;/p&gt;
+
+&lt;p&gt;そしていずれにせよas codeであることが求められる。AWS上のマネージドサービスはもはや「インフラ」という言葉で括るにはふさわしくないように思いますが、システムおあらゆるレイヤーをcodeで管理し、アプリケーションと同じCI/CDのサイクルに載せてDevOpsで回していくことはもはや必須になる。そこで使うツールには選択の余地があって、Ansibleでもある程度AWSレイヤーをまかなえたりするし、一方でマネージドサービスはTerraformなどを使う方法もある。そのあたりの匙加減が難しい。&lt;/p&gt;
+
+&lt;p&gt;さらに言えば、まだツールが充実しきったとも言えない気がするんですよね。GitHubへのcommitをトリガーとしてサーバーの設定変更まで行うような、インフラCIの手法はまだ確立しきったとは言い難い（そういえばCodePipelineにOpsWorksが対応しましたね）し、Serverspecのようなインフラテストツールもより広がる必要がある。インフラの考え方はここ数年どんどん変化してますけど、まだまだ本格的な動きはこれからなんじゃないかという気がしています。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
@@ -776,46 +811,6 @@ set :backend, :exec
 &lt;p&gt;個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。&lt;/p&gt;
 
 &lt;p&gt;こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Dockerファーストインプレッション</title>
-      <link>http://chroju.github.io/blog/2015/12/04/docker-first-impression/</link>
-      <pubDate>Fri, 04 Dec 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/12/04/docker-first-impression/</guid>
-      <description>
-
-&lt;p&gt;前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。&lt;/p&gt;
-
-&lt;h2 id=&#34;仮想マシン-と考えるとdockerは理解しづらい:ccbe1575a20deb569178af4585ba95c4&#34;&gt;「仮想マシン」と考えるとDockerは理解しづらい&lt;/h2&gt;
-
-&lt;p&gt;Dockerを「仮想マシン」と称する文章も随所で見かけていたが、これを仮想マシンとして捉えると理解からは遠のく。自分自身、Dockerの概念的な理解にはかなり手こずっていて、OSがないのにどうやって「マシン」が動くのかわからなかったし、 &lt;code&gt;chroot&lt;/code&gt; のようにファイルシステム上に仮想的なディレクトリツリーを設けるものなのかと思っていた。&lt;/p&gt;
-
-&lt;p&gt;Dockerは隔絶された名前空間上で展開されるプロセスに過ぎない。確かにコンテナはOSのような振る舞いを見せるが、そこにいわゆるVMwareやXenのような仮想「マシン」はない。あくまでホストOSの一部リソースを切り出して、仮想的に扱う技術に過ぎない。&lt;/p&gt;
-
-&lt;h2 id=&#34;vagrantの代替:ccbe1575a20deb569178af4585ba95c4&#34;&gt;Vagrantの代替？&lt;/h2&gt;
-
-&lt;p&gt;一度理解して、 &lt;code&gt;docker run&lt;/code&gt; を叩けるようになると利便性は即座に理解できる。OSをブートさせるわけではないのでコンテナの起動は従来の「仮想マシン」と比べて格段に速く、CircleCIで使われている用途同様、テスト用にまっさらな環境が即席で欲しいときには大変重宝する。こういう用途にはもともとVagrantが適していたのだと思うが、本当にすぐ使い捨ててしまいたいようなOS環境であれば、Dockerを使ったほうが遥かに手軽に起動も破棄もこなせる。&lt;/p&gt;
-
-&lt;p&gt;ただあまりに簡単に起動、破棄ができるものの、作成したコンテナのイメージはコンテナ終了後も基本的に残存するので、調子に乗っているうちにいつの間にかディスクがかなり消費されていることが何度かあった。コンテナライフサイクルの把握と運用整備はマスト。&lt;/p&gt;
-
-&lt;h2 id=&#34;ポータブルなインフラストラクチャー:ccbe1575a20deb569178af4585ba95c4&#34;&gt;ポータブルなインフラストラクチャー&lt;/h2&gt;
-
-&lt;p&gt;Dockerを実用できる一例として、先日Traildashを採用する機会があった。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/AppliedTrust/traildash&#34;&gt;AppliedTrust/traildash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;CloudTrailという、AWS APIへのアクセスログをjsonで吐いてくれるAWSサービスがあるのだが、それをElasticsearchで集計してKibanaでブラウザ表示してくれるツール。このツールはDockerイメージで配布されていて、自分のサーバー上にpullしてきて、AWS APIへアクセスするための環境変数をいくつか設定するだけで使えるようになる。自分はElasticsearchの運用経験はないのだが、実質的に &lt;code&gt;docker run&lt;/code&gt; コマンド一発だけでそれが使えてしまう。（そのことの是非は置いておくとして）Dockerがアプリケーションサイドで実現することってこういうことなんだろうと。herokuが出たとき、ローカルからインターネットへのサービスのポータビリティが劇的に向上したわけだが、Dockerは稼働先を問わないわけで、ポータビリティはさらに拡大する。&lt;/p&gt;
-
-&lt;p&gt;これはインフラ側としても嬉しいところで、今までnginxやらDBやらというミドル的な部分はアプリとしての要求もあり、インフラとしての要求もあり、双方の要件がガッシリ絡んでしまっていて、設定を後から見返すと「これなにゆえにこうなったんだっけ？」ってことが少なくなかったり、構築分担が面倒だったりというのがあって。コンテナとしてアプリをデプロイするとなると、サーバーとコンテナが明確に分離される。疎結合になる。ミドルの調整はコンテナ内だけを気にして行えばよいので、サーバーはとりあえずDocker動いてくれればいいやみたいな状態になる。雑だけど楽だろうなという気がぼんやりしている。&lt;/p&gt;
-
-&lt;h2 id=&#34;dockerの運用:ccbe1575a20deb569178af4585ba95c4&#34;&gt;Dockerの運用&lt;/h2&gt;
-
-&lt;p&gt;とりあえず前述のTraildashはDockerによる本番運用（外に出すものではないので本番といえるか微妙ではあるが）の発端にはなりそうなものの、いわゆるアプリ、サービスを本番稼働させるのがどんなもんなのかってところは自分自身見えてない。これをきちんと本番で扱うには可用性やら信頼性やらを担保しなくてはならないわけで、クラスタ構成に用いる&lt;a href=&#34;https://docs.docker.com/swarm/&#34;&gt;Docker Swarm&lt;/a&gt;を導入するだとか、いわゆるインフラとしてのお仕事はやっぱり必要になる。そのへんどこかで試せればなぁとは思うので、ひとまずは自分の http;//chroju.net をDocker化しようかなどと。この前OSCでさくらのクラウド2万円クーポンもらったし、Dockerによる個人PaaS的なものでも作ってみようか。&lt;/p&gt;
-
-&lt;p&gt;テストとしての利用には申し分のないところで、先日記事で上げたが&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;AnsibleとServerspecのテスト&lt;/a&gt;に使えるまっさらなOS環境としてDockerは重宝している。Infra as Codeと大変相性がよくて、よくこのタイミングで出てきてくれたなという感じがする。時代の要請なのだろうか。&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,199 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>Serverlessの時代とas code &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>Serverlessの時代とas code</h1>
+                    <h2 class="headline">June 5, 2016</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>先週<a href="http://ansible-users.connpass.com/event/31222/">Ansible Meetup in Tokyo 2016.06</a>と、<a href="http://www.awssummit.tokyo/">AWS Summit Tokyo 2016</a>に行ってきたので軽めのレポートにします。</p>
+
+<h2 id="aws-summit:95a87fd1a47a72aa1bf662cfd38baf72">AWS Summit</h2>
+
+<p>AWS Summitは初参加でしたが、会場を見渡したときのスーツ率の高さからいわゆるEnterprise系のイベントに近いのかと思いきや、DevConの方を中心にテクニカルな話題も多めで楽しめました。とはいえAWSサービス紹介にとどまるセッションや、タイトル通りの内容ではなく、各企業の内部事情を抽象的に話すだけで終わるようなセッションも少なくなく、セッションの選択はそれなりにコツがいるなとも思ったのですが。。</p>
+
+<p>自分が受けたセッションで特に多く話されていたのは、Serverlessの話とDevOps、具体的にはCI/CDの話。いずれも要はこれまで複雑に運用していたシステムが、AWSのマネージドサービスを使うことで簡単に実現できるという話なのですが、特にServerlessに力を入れてる感じがしました。Lambdaの話がすごく多い。先日Serverless confで「サーバーを叩き割る」というパフォーマンスで話題になった、AWSのTim Wagnerも来てましたしね。</p>
+
+<p><blockquote class="twitter-tweet" data-lang="ja"><p lang="en" dir="ltr">This is how you go <a href="https://twitter.com/hashtag/serverless?src=hash">#serverless</a> – @timalleneagner <a href="https://t.co/SpllWVz76u">pic.twitter.com/SpllWVz76u</a></p>&mdash; Lars Trieloff (@trieloff) <a href="https://twitter.com/trieloff/status/735839549729996800">2016年5月26日</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>Lambda、簡単なジョブや解析処理であればEC2立てずとも実行が可能になるわけで、いわゆるアプリケーションが担っていた仕事、これまでサーバーを立てなければならなかった部分がごっそり持っていかれることになる。Lambda自体は発表が2014年なのでそれなりに経っているけれど、Pythonに対応したあたりから実用される動きが大きくなってきたような感触があります。とはいえLambdaだけですべて済むというわけでもなく、例えばそのエンドポイントとしてAPI Gatewayが使えたり、SNSと連携してメッセージのプッシュを行ったりと、これまで連綿と作られてきたAWS各サービスがあって、それらを繋げる部分に位置することで真価を発揮している。そう考えるとLambdaが単体ですごいというより、AWS全体を見回したときに足りなかった1ピースを埋めてくれたような印象がある。</p>
+
+<h2 id="ansible:95a87fd1a47a72aa1bf662cfd38baf72">Ansible</h2>
+
+<p>そこに来てAnsible、というのはどういう位置付けになるのか。Ansibleの役割はServerlessとは対極、基本的にはサーバーの設定管理というところになります。仮にシステムをServerlessに置き換えていくのだとしたら、ひょっとしたら徐々に要らなくなってくるツールなのかもと思ったり。無論、AnsibleにもAWSモジュールがあるけれど、端々まで対応しているというわけではなく、AWSの設定を管理するのであればCloudFormationやTerraformを使う方が現実的かなという気がします（AWS Summit内で、CloudFormationにLambdaや周辺サービスの設定を書いて、サーバーレスのマイクロサービスをパッケージングする手法が紹介されてました。Lambdaのコードもそのjsonの中に含むので「つらそう」という声は多かったですが）</p>
+
+<p><a href="http://docs.ansible.com/ansible/list_of_cloud_modules.html">Cloud Modules — Ansible Documentation</a>v</p>
+
+<p>まぁ、とはいえ現状を鑑みてサーバーが一切なくなるというのはまずないとも思います。AWS Summitでの趣旨も別にサーバー全廃しろよと言ってるわけではなくて、Lambdaに肩代わりさせることでコストダウンしたり効率化が図れる部分が大きいよという点。だからポイントとしてはAWSのマネージドサービスを上手く使えないかというのが設計上第一に来て、困難な部分はEC2（やオンプレのサーバー）を使用するという発想の転換にあるのかと。</p>
+
+<p>そしていずれにせよas codeであることが求められる。AWS上のマネージドサービスはもはや「インフラ」という言葉で括るにはふさわしくないように思いますが、システムおあらゆるレイヤーをcodeで管理し、アプリケーションと同じCI/CDのサイクルに載せてDevOpsで回していくことはもはや必須になる。そこで使うツールには選択の余地があって、Ansibleでもある程度AWSレイヤーをまかなえたりするし、一方でマネージドサービスはTerraformなどを使う方法もある。そのあたりの匙加減が難しい。</p>
+
+<p>さらに言えば、まだツールが充実しきったとも言えない気がするんですよね。GitHubへのcommitをトリガーとしてサーバーの設定変更まで行うような、インフラCIの手法はまだ確立しきったとは言い難い（そういえばCodePipelineにOpsWorksが対応しましたね）し、Serverspecのようなインフラテストツールもより広がる必要がある。インフラの考え方はここ数年どんどん変化してますけど、まだまだ本格的な動きはこれからなんじゃないかという気がしています。</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f06%2f05%2faws_summit_ansible_meetup_2016%2f - Serverless%e3%81%ae%e6%99%82%e4%bb%a3%e3%81%a8as%20code "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/">Serverlessの時代とas code<aside class="dates">Jun 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/">インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた<aside class="dates">May 14</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/">#qpstudy 響け！アラートコール！行ってきた<aside class="dates">Apr 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している<aside class="dates">Mar 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2<aside class="dates">Mar 17</aside></a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base<aside class="dates">Jan 24</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
