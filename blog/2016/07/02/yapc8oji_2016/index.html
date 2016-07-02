@@ -1,0 +1,220 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>YAPC経験ないけどパチモンの方に行った &middot; the world as code</title>
+		<link rel="shortcut icon" href="http://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="http://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="http://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="http://chroju.github.io/atom/index.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='http://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="http://chroju.github.io/atom/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>YAPC経験ないけどパチモンの方に行った</h1>
+                    <h2 class="headline">July 2, 2016</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>イベントレポートに見せかけたポエムです。</p>
+
+<p>技術ブログとかQiitaとかやってると、更新してない間はあんまり成果出てないってことでバロメーターになっていいですね。先月はあんまり具体的な成果に繋がることは仕事でもプライベートでもしていない。。。何をやっていたかというと、</p>
+
+<ul>
+<li>AWS運用見直しのためにホワイトペーパーやユースケース読み漁り</li>
+<li>EFK(Elasticsearch + Fluentd + Kibana)スタックをDockerでやろうとしてまだ途中</li>
+<li>セキュリティ知識つけるために『暗号技術入門』と「徳丸本」を読破。</li>
+</ul>
+
+<p>あたり？ というわけでなんだか煮詰まった状態で久しぶりの勉強会というかイベントになったのが<a href="http://yapcasia8oji-2016mid.hachiojipm.org/">YAP (achimon) C::Asia Hachioji 2016 mid in Shinagawa</a>でした。昨年まで開催されていたYAPC::Asiaの「続き」として開かれたカンファレンス。</p>
+
+<h2 id="本物は経験ない:638b4b255b4936649f18e3f0cddd54e5">本物は経験ない</h2>
+
+<p>タイトルにも書いたけど本物のYAPCは一度も行ってないです。昨年転職するまではOfficeを主戦場としたSEだったのでアンテナ低かったし、タイトルにPerlって入ってるけど自分Perlエンジニアじゃないし、Perlを冠しながらあんなイベントだとは知らなかったし？ 結局内実をきちんと知ったのは昨年の開催中だったので時はめちゃめちゃ遅すぎた感じであった。RubyKaigiとかAWS Summitのような大きめのカンファレンスは経験あるにはあるけど、ビッグサイトで開催されていたという規模はちょっと想像できないですね。もったいないことをした。</p>
+
+<h2 id="技術スタックを掘り下げたい:638b4b255b4936649f18e3f0cddd54e5">技術スタックを掘り下げたい</h2>
+
+<p>今回いろいろとトークを聞いていて思ったのだけど、技術スタックをもっと掘り下げていきたいなという思いがした。こういう場で話される内容って、そのエンジニアの得意領域だったり経験だったりが活きるもので、ちょっとググって資料つくりましたとか、大して思い入れはないけどやってみたので喋りますとかそういうのじゃないんですよね。掘り下げがあるから話が面白くなる。実体験だから身にしみてわかる。そういうものだよなと。先月はAWS Summitにも行ったのだけど、今日の方が面白かった。それは企業がお膳立てした話じゃなくて、エンジニアがボトムアップに立ち上げたイベントだからだろうなと思う。</p>
+
+<p>転職してちゃんとエンジニアっぽいこと仕事でできてるなーと感じ始めてから、自分はだいたい1年ぐらいなのだけど、この1年は業務についていくためと時代についていくため、とにかく広くいろいろ調べてやってみるというばかりで、あんま掘り下げってしてないんですよね。「インフラエンジニア」って肩書はよくあるものだけど、その守備範囲ってすさまじく広いので、DBなのか、AWSなのか、ネットワークなのか、セキュリティなのかみたいな、自分を位置づける技術スタックは持っておきたいなと思った。よくT字型とか言われるけど、広く浅い知識はもった上で、一部分で深掘りを進めていかないと、自分が何をすべきか見失いそう、というか見失ってるな最近と。</p>
+
+<h2 id="エントロピーの増大期間:638b4b255b4936649f18e3f0cddd54e5">エントロピーの増大期間</h2>
+
+<p>突然話は変わるけど、自分はPoICという方法論がわりと好きで。要は情報カードに発見や記録をメモしていきましょうみたいな知的生産の話なのだけど、この中で面白いなと思っている話として、<a href="http://pileofindexcards.org/wiki/index.php?title=PoIC_%E3%82%92%E9%80%9A%E3%81%98%E3%81%A6%E8%A6%8B%E3%81%88%E3%81%9F%E3%81%93%E3%81%A8#.E6.83.85.E5.A0.B1.E3.81.A8.E3.82.A8.E3.83.B3.E3.83.88.E3.83.AD.E3.83.94.E3.83.BC.E3.81.AB.E3.81.A4.E3.81.84.E3.81.A6">エントロピーに絡めた話</a>がある。頭の中の乱雑な情報をカードに書いて書き溜めておくことで、そのストックの中でエントロピーを高めて生産性を生み出すという考え方。</p>
+
+<p>これって外山滋比古のいう「メタノート」とか、あるいはジョブズのスタンフォードでのスピーチにあった「Connecting the dots」と話は似ていて、要はある程度蓄積されてこないと情報や知識って意味を成さなかったりするもんなんですよね。学習曲線も正比例のグラフを描かないことは有名だけど、何かを学んだり取り入れたりすることがすぐに成果を生むわけではなくて、ある程度価値となるまでには時間がかかる。</p>
+
+<p>冒頭に書いたように、先月ぐらいって自分はあんまり成果出せなかったなっていうのがあって、停滞感にもやもやしていたんだけど、エントロピーの増大期間という考え方をすると、まぁそんな焦る必要もないのかなと。きちんと日頃から必要な知識に向き合って習得していくことで、徐々に掘り下げってできてくるのかなと思う。</p>
+
+<p>で、エモい話だけしてイベントレポート終わるわけにもいかないので具体的な話も書きますが、今回MySQLの話4回ぐらい聞いていて、改めてDB弱いなと思った次第。</p>
+
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/F89iwACdqldnT" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/yoku0825/ss-63664674" title="とあるイルカの近況報告" target="_blank">とあるイルカの近況報告</a> </strong> from <strong><a href="//www.slideshare.net/yoku0825" target="_blank">yoku0825</a></strong> </div></p>
+
+<p>弊社もMySQLがメインで使っているので、いい加減真面目に追いかけておきたい。正規形の話も数年前に受けた応用情報の復習みたいで勉強できた。</p>
+
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/6yzSDaOxaTOWN" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/yoku0825/mysql-63658697" title="MySQLと正規形のはなし" target="_blank">MySQLと正規形のはなし</a> </strong> from <strong><a href="//www.slideshare.net/yoku0825" target="_blank">yoku0825</a></strong> </div></p>
+
+<p>これは現地で聴いてなくて後から読んだスライドだけど、esa.ioの姿勢はとてもいいなと思う。頑張り過ぎないのあたりとかすごい大切だと思っていて、最初からベストなやり方するより、とりあえず導入した方がいいってことは多い。あと移行日記。移行じゃなくても技術的な日記書きたい。一つの技術を長期間追ってると徐々に目的見失ったり、そうだアレもやらなきゃみたいに脇道逸れたりしやすいんだけど、これぐらい砕けて感情的に書くと、それがなくなりそう。</p>
+
+<script async class="speakerdeck-embed" data-id="7aa606badc2d4782a14eeba7c2755309" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p>あと個人的にはHashicorp Vaultがとても気になりました（資料はちらとググったけど、まだ上がってない？）。クレデンシャル情報、どうしてもLDAPやIAMのような集中管理に載り切らないものが出てきてしまうけど、これなら集約的に管理できて、しかもAPIあるから取り回しも楽そう。</p>
+
+<p>いろいろ考えることの多い1日でした。自分がどこに向いて進むのか、もっかい考えようと思う。</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="http://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fchroju.github.io%2fblog%2f2016%2f07%2f02%2fyapc8oji_2016%2f - YAPC%e7%b5%8c%e9%a8%93%e3%81%aa%e3%81%84%e3%81%91%e3%81%a9%e3%83%91%e3%83%81%e3%83%a2%e3%83%b3%e3%81%ae%e6%96%b9%e3%81%ab%e8%a1%8c%e3%81%a3%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/07/02/yapc8oji_2016/">YAPC経験ないけどパチモンの方に行った<aside class="dates">Jul 2</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/">Serverlessの時代とas code<aside class="dates">Jun 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/">インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた<aside class="dates">May 14</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/">#qpstudy 響け！アラートコール！行ってきた<aside class="dates">Apr 24</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している<aside class="dates">Mar 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2<aside class="dates">Mar 17</aside></a>
+        </li>
+        
+   
+    
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた<aside class="dates">Mar 13</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した<aside class="dates">Feb 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた<aside class="dates">Jan 30</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://chroju.github.io/js/main.js"></script>
+<script src="http://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>

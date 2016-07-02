@@ -6,8 +6,64 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 05 Jun 2016 23:46:12 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 Jul 2016 22:11:59 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>YAPC経験ないけどパチモンの方に行った</title>
+      <link>http://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</link>
+      <pubDate>Sat, 02 Jul 2016 22:11:59 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</guid>
+      <description>
+
+&lt;p&gt;イベントレポートに見せかけたポエムです。&lt;/p&gt;
+
+&lt;p&gt;技術ブログとかQiitaとかやってると、更新してない間はあんまり成果出てないってことでバロメーターになっていいですね。先月はあんまり具体的な成果に繋がることは仕事でもプライベートでもしていない。。。何をやっていたかというと、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AWS運用見直しのためにホワイトペーパーやユースケース読み漁り&lt;/li&gt;
+&lt;li&gt;EFK(Elasticsearch + Fluentd + Kibana)スタックをDockerでやろうとしてまだ途中&lt;/li&gt;
+&lt;li&gt;セキュリティ知識つけるために『暗号技術入門』と「徳丸本」を読破。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;あたり？ というわけでなんだか煮詰まった状態で久しぶりの勉強会というかイベントになったのが&lt;a href=&#34;http://yapcasia8oji-2016mid.hachiojipm.org/&#34;&gt;YAP (achimon) C::Asia Hachioji 2016 mid in Shinagawa&lt;/a&gt;でした。昨年まで開催されていたYAPC::Asiaの「続き」として開かれたカンファレンス。&lt;/p&gt;
+
+&lt;h2 id=&#34;本物は経験ない:638b4b255b4936649f18e3f0cddd54e5&#34;&gt;本物は経験ない&lt;/h2&gt;
+
+&lt;p&gt;タイトルにも書いたけど本物のYAPCは一度も行ってないです。昨年転職するまではOfficeを主戦場としたSEだったのでアンテナ低かったし、タイトルにPerlって入ってるけど自分Perlエンジニアじゃないし、Perlを冠しながらあんなイベントだとは知らなかったし？ 結局内実をきちんと知ったのは昨年の開催中だったので時はめちゃめちゃ遅すぎた感じであった。RubyKaigiとかAWS Summitのような大きめのカンファレンスは経験あるにはあるけど、ビッグサイトで開催されていたという規模はちょっと想像できないですね。もったいないことをした。&lt;/p&gt;
+
+&lt;h2 id=&#34;技術スタックを掘り下げたい:638b4b255b4936649f18e3f0cddd54e5&#34;&gt;技術スタックを掘り下げたい&lt;/h2&gt;
+
+&lt;p&gt;今回いろいろとトークを聞いていて思ったのだけど、技術スタックをもっと掘り下げていきたいなという思いがした。こういう場で話される内容って、そのエンジニアの得意領域だったり経験だったりが活きるもので、ちょっとググって資料つくりましたとか、大して思い入れはないけどやってみたので喋りますとかそういうのじゃないんですよね。掘り下げがあるから話が面白くなる。実体験だから身にしみてわかる。そういうものだよなと。先月はAWS Summitにも行ったのだけど、今日の方が面白かった。それは企業がお膳立てした話じゃなくて、エンジニアがボトムアップに立ち上げたイベントだからだろうなと思う。&lt;/p&gt;
+
+&lt;p&gt;転職してちゃんとエンジニアっぽいこと仕事でできてるなーと感じ始めてから、自分はだいたい1年ぐらいなのだけど、この1年は業務についていくためと時代についていくため、とにかく広くいろいろ調べてやってみるというばかりで、あんま掘り下げってしてないんですよね。「インフラエンジニア」って肩書はよくあるものだけど、その守備範囲ってすさまじく広いので、DBなのか、AWSなのか、ネットワークなのか、セキュリティなのかみたいな、自分を位置づける技術スタックは持っておきたいなと思った。よくT字型とか言われるけど、広く浅い知識はもった上で、一部分で深掘りを進めていかないと、自分が何をすべきか見失いそう、というか見失ってるな最近と。&lt;/p&gt;
+
+&lt;h2 id=&#34;エントロピーの増大期間:638b4b255b4936649f18e3f0cddd54e5&#34;&gt;エントロピーの増大期間&lt;/h2&gt;
+
+&lt;p&gt;突然話は変わるけど、自分はPoICという方法論がわりと好きで。要は情報カードに発見や記録をメモしていきましょうみたいな知的生産の話なのだけど、この中で面白いなと思っている話として、&lt;a href=&#34;http://pileofindexcards.org/wiki/index.php?title=PoIC_%E3%82%92%E9%80%9A%E3%81%98%E3%81%A6%E8%A6%8B%E3%81%88%E3%81%9F%E3%81%93%E3%81%A8#.E6.83.85.E5.A0.B1.E3.81.A8.E3.82.A8.E3.83.B3.E3.83.88.E3.83.AD.E3.83.94.E3.83.BC.E3.81.AB.E3.81.A4.E3.81.84.E3.81.A6&#34;&gt;エントロピーに絡めた話&lt;/a&gt;がある。頭の中の乱雑な情報をカードに書いて書き溜めておくことで、そのストックの中でエントロピーを高めて生産性を生み出すという考え方。&lt;/p&gt;
+
+&lt;p&gt;これって外山滋比古のいう「メタノート」とか、あるいはジョブズのスタンフォードでのスピーチにあった「Connecting the dots」と話は似ていて、要はある程度蓄積されてこないと情報や知識って意味を成さなかったりするもんなんですよね。学習曲線も正比例のグラフを描かないことは有名だけど、何かを学んだり取り入れたりすることがすぐに成果を生むわけではなくて、ある程度価値となるまでには時間がかかる。&lt;/p&gt;
+
+&lt;p&gt;冒頭に書いたように、先月ぐらいって自分はあんまり成果出せなかったなっていうのがあって、停滞感にもやもやしていたんだけど、エントロピーの増大期間という考え方をすると、まぁそんな焦る必要もないのかなと。きちんと日頃から必要な知識に向き合って習得していくことで、徐々に掘り下げってできてくるのかなと思う。&lt;/p&gt;
+
+&lt;p&gt;で、エモい話だけしてイベントレポート終わるわけにもいかないので具体的な話も書きますが、今回MySQLの話4回ぐらい聞いていて、改めてDB弱いなと思った次第。&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/F89iwACdqldnT&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/yoku0825/ss-63664674&#34; title=&#34;とあるイルカの近況報告&#34; target=&#34;_blank&#34;&gt;とあるイルカの近況報告&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/yoku0825&#34; target=&#34;_blank&#34;&gt;yoku0825&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;弊社もMySQLがメインで使っているので、いい加減真面目に追いかけておきたい。正規形の話も数年前に受けた応用情報の復習みたいで勉強できた。&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/6yzSDaOxaTOWN&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/yoku0825/mysql-63658697&#34; title=&#34;MySQLと正規形のはなし&#34; target=&#34;_blank&#34;&gt;MySQLと正規形のはなし&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/yoku0825&#34; target=&#34;_blank&#34;&gt;yoku0825&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;これは現地で聴いてなくて後から読んだスライドだけど、esa.ioの姿勢はとてもいいなと思う。頑張り過ぎないのあたりとかすごい大切だと思っていて、最初からベストなやり方するより、とりあえず導入した方がいいってことは多い。あと移行日記。移行じゃなくても技術的な日記書きたい。一つの技術を長期間追ってると徐々に目的見失ったり、そうだアレもやらなきゃみたいに脇道逸れたりしやすいんだけど、これぐらい砕けて感情的に書くと、それがなくなりそう。&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;7aa606badc2d4782a14eeba7c2755309&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;あと個人的にはHashicorp Vaultがとても気になりました（資料はちらとググったけど、まだ上がってない？）。クレデンシャル情報、どうしてもLDAPやIAMのような集中管理に載り切らないものが出てきてしまうけど、これなら集約的に管理できて、しかもAPIあるから取り回しも楽そう。&lt;/p&gt;
+
+&lt;p&gt;いろいろ考えることの多い1日でした。自分がどこに向いて進むのか、もっかい考えようと思う。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Serverlessの時代とas code</title>
@@ -289,12 +345,7 @@
 
 &lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Ansible / Docker / Serverspec / AWS&lt;/li&gt;
-&lt;li&gt;Redis / MySQL / Elasticsearch&lt;/li&gt;
-&lt;li&gt;Ruby / Python / node.js / bash / zsh&lt;/li&gt;
-&lt;li&gt;vim / vimperator&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Ansible / Docker / Serverspec / AWS / Elasticsearch&lt;/p&gt;
 </description>
     </item>
     
@@ -791,26 +842,6 @@ set :backend, :exec
 &lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg&#34; alt=&#34;Serverspec&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Serverspec&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.31&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;宮下 剛輔 &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 213,793&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。&lt;a href=&#34;https://github.com/ryotarai/infrataster&#34;&gt;Infrataster&lt;/a&gt;とも組み合わせられれば、よりテストの質は増しそう。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>『Team Geek』読了</title>
-      <link>http://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
-      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
-      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41SlY0zvpKL._SL160_.jpg&#34; alt=&#34;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.14&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Brian W. Fitzpatrick Ben Collins-Sussman &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 18,890&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要はあって、何かやりたいことがあればいわゆる政治的な課題に悩まされることになったりもする。本を読むときはつい技術系のものや個人のハッカーマインドに関するものを読みがちだけど、歳も歳だし組織論もかじろうかということで読んだ。元々読むつもりはあったが、紀伊國屋書店新宿本店でオライリーカレンダーのプレゼントやってたので背中押された。&lt;/p&gt;
-
-&lt;p&gt;とても元も子もないまとめ方をしてしまうと、&lt;a href=&#34;http://blog.glidenote.com/blog/2015/08/17/move-to-akamai/&#34;&gt;KAIZEN Platform, Inc. のエンジニア行動指針&lt;/a&gt;がだいぶ本書に影響を受けたと思われるものになっていて、これに全社員がコミットできている状態というのは理想的なのだろうなと思ったりした。本書の内容にはとても賛同できるのだが、「組織論」である以上は自分だけが納得していても仕方なくて、社内でこの内容を文化として定着させなくてはならない。そこのハードルがなかなかに高い。&lt;/p&gt;
-
-&lt;p&gt;本書でもそのあたりの話には「組織的操作の技法」として第5章をまるまる当てて触れられていて、例えば「道がないなら道を作る」＝草の根からツールの導入などを始めていく、「許可を求めるより寛容を求めるほうが簡単」、「安全なポジションまで昇進する」といったことが書かれている。結局はできることからやっていく、しかなくなってしまうのかもしれない。&lt;/p&gt;
-
-&lt;p&gt;個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。&lt;/p&gt;
-
-&lt;p&gt;こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。&lt;/p&gt;
 </description>
     </item>
     
