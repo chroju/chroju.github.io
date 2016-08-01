@@ -6,8 +6,56 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 02 Jul 2016 22:11:59 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Aug 2016 22:30:41 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>『SOFT SKILLS』と「やっていく気持ち」</title>
+      <link>http://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</link>
+      <pubDate>Mon, 01 Aug 2016 22:30:41 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</guid>
+      <description>
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51xVQQcUloL._SL160_.jpg&#34; alt=&#34;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 16.08.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;日経BP社 (2016-06-02)&lt;br /&gt;売り上げランキング: 223&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;『SOFT SKILLS』読みました。印象としてはいわゆるライフハックな内容をエンジニア向けに落とし込んで解説している本、とういう感じ。ただ、単にテクニックだけを載せたペラペラした内容ではなくて、成功するためにはハードワークを避けるべきではない（第47章）ということもまた語っていたり、実情に即した書き方である点が好感が持てる。というか全体的にマッチョ寄り。&lt;/p&gt;
+
+&lt;p&gt;この手の「ソフトスキル」、つまりエンジニアやギークが「よく生きる」ための本というのがこれまで皆無だったわけではなくて、例えば『&lt;a href=&#34;https://www.oreilly.co.jp/books/4873113075/&#34;&gt;エンジニアのための時間管理術&lt;/a&gt;』や、『&lt;a href=&#34;https://www.oreilly.co.jp/books/9784873117287/&#34;&gt;ヘルシープログラマー&lt;/a&gt;』に書いてあることと一部の記載は似通っている。本書のポイントとしては、プロダクティビティ、精神、肉体、金銭といった横断的なソフトスキルを幅広くまとめ、またそれらを「エンジニアとしてより良く生きるために、直接的なエンジニアリング以外の領域をどうすべきか？」という視点でまとめた本はあまりなかったのだと思う。自分はライフハックがわりと好きでかじりまくった時期があったので、ちょっと目新しさに劣る部分はあったのだけど、そういう分野を敬遠してきたエンジニアにとっては新鮮な話が多いはず。&lt;/p&gt;
+
+&lt;h2 id=&#34;行き先を定めてから-走るスピードを上げる:bb74715ff9a558243ee1e3e3558cd789&#34;&gt;行き先を定めてから、走るスピードを上げる&lt;/h2&gt;
+
+&lt;p&gt;個人的にライフハックに対して感じていることがあって、タスクをどう処理するか？とかライフログがなんちゃらみたいな「目の前のことに対応する方法」は多いのだけど、それをすることで何を得るの？っていうのがあんまりなくて。早く帰れますとか生産性が上がりますでもまぁいいんだけど、それって本来「手段」となるべき部分で、生産性を上げて何を成したいのかというのが重要だよなとずっと思っている。&lt;/p&gt;
+
+&lt;p&gt;本書の構成はその点で言えば第1部が「キャリアを築こう」で行き先を定める部分にあたり、第2部「自分を売り込め！」でそのために最も必要なことを語り、第3部以降でいわゆるライフハック的な、プロダクティビティや肉体精神の維持といった話に入っていく。順序としてはやっぱりこれが正しくて、行き先を定めておかないと、何のために走力を上げたいのかという目的を見失ってしまう。&lt;/p&gt;
+
+&lt;h2 id=&#34;日常での実践:bb74715ff9a558243ee1e3e3558cd789&#34;&gt;日常での実践&lt;/h2&gt;
+
+&lt;p&gt;本書の内容で自分がいま実践できていることって、実際のところあまりなかった。目標を持とう、と言われてそういえばあまり具体的な目標ないなと気付いたし、そこまで自己アピールして「売り込み」ができてもいないし、投資はちょっと前ちょろちょろETFを買ってみたっきりだし、肉体と精神に関しては自信がない。&lt;/p&gt;
+
+&lt;p&gt;生産性に関しては少し前にrebuild.fmで取り扱っていたこともあり、自分は今ポモドーロを使っている。本書で紹介されているKanbanFlowは使っていないけれど、Trelloでざっくりした自分のプロジェクトの状況をダッシュボード的に管理して、細かい「やるべきこと」はTodoistに入れて、Chrome ExtentionのToggl Buttonでポモドーロタイマーを使っている。ポモドーロは25分間集中させることに意味があるように語られがちだけど、実際は1日の消化ポモドーロ数を見て自分の生産性を測るのに適していると書いてあって、そうそうそれだよ！という感じだった。タスクの消化数だと、タスクごとに工数が異なるのでなかなか生産性とイコールにはならないのだが、ポモドーロだとそれができる。あるいはアジャイルにおけるPivotal Trackerの考え方が生産性の計測には良いのかなと思っている。&lt;/p&gt;
+
+&lt;p&gt;その他の部分は取りあえずやれることから手をつけたいかなと。ただ冒頭にも書いた通りわりとマッチョ寄りな内容が多くて、例えば自分は精神力に本当に自信がないのだが、その改善策として「理想的な自己イメージを想像することだ」と言われてもなかなか難しい（文中でも「難しい」とは書かれているけど）。あるいはこういう記述。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;その上で聞きたいのは、あなたは負けるつもりなのかということだ。単純に自分は仕事に集中することができないと諦めるのか、それとも抵抗に立ち向かい、障害を乗り越えようとするのか。それはあなただけができる選択だ。単にしなければならない仕事をすると決心すればいいだけだ。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;いや厳しい。。。とはいえ言っていることもごもっともなので、「やるしかねえ」と腹くくるかなぁという感じです。いい刺激になりました。以下、やること取りあえずでメモ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ポモドーロでの生産性計測を継続する。&lt;/li&gt;
+&lt;li&gt;キャリア上の目標を定めてみる。&lt;/li&gt;
+&lt;li&gt;どっかでLTする。年内中を目標に。&lt;/li&gt;
+&lt;li&gt;瞑想を取り入れる。余裕あったら筋トレする。ランニングは見送る。&lt;/li&gt;
+&lt;li&gt;ハードワークを避けない。難しい課題、つまらない課題でも挑む姿勢。&lt;/li&gt;
+&lt;li&gt;何かを学ぶときは漫然と行わず、本書の10ステップに取りあえず従ってみる。&lt;/li&gt;
+&lt;li&gt;メモの頻度を上げる。自分の内面の状態管理に使う。&lt;/li&gt;
+&lt;li&gt;脂肪ではなくタンパク質の摂取。フルーツの摂取を心がける。&lt;/li&gt;
+&lt;li&gt;自己イメージを持つという話は納得できてないので、本書で紹介されてる『自分を動かす』読んでおく。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>YAPC経験ないけどパチモンの方に行った</title>
@@ -819,26 +867,6 @@ set :backend, :exec
 &lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg&#34; alt=&#34;Serverspec&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Serverspec&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.31&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;宮下 剛輔 &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 213,793&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。&lt;a href=&#34;https://github.com/ryotarai/infrataster&#34;&gt;Infrataster&lt;/a&gt;とも組み合わせられれば、よりテストの質は増しそう。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>『Team Geek』読了</title>
-      <link>http://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
-      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
-      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41SlY0zvpKL._SL160_.jpg&#34; alt=&#34;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.14&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Brian W. Fitzpatrick Ben Collins-Sussman &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 18,890&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要はあって、何かやりたいことがあればいわゆる政治的な課題に悩まされることになったりもする。本を読むときはつい技術系のものや個人のハッカーマインドに関するものを読みがちだけど、歳も歳だし組織論もかじろうかということで読んだ。元々読むつもりはあったが、紀伊國屋書店新宿本店でオライリーカレンダーのプレゼントやってたので背中押された。&lt;/p&gt;
-
-&lt;p&gt;とても元も子もないまとめ方をしてしまうと、&lt;a href=&#34;http://blog.glidenote.com/blog/2015/08/17/move-to-akamai/&#34;&gt;KAIZEN Platform, Inc. のエンジニア行動指針&lt;/a&gt;がだいぶ本書に影響を受けたと思われるものになっていて、これに全社員がコミットできている状態というのは理想的なのだろうなと思ったりした。本書の内容にはとても賛同できるのだが、「組織論」である以上は自分だけが納得していても仕方なくて、社内でこの内容を文化として定着させなくてはならない。そこのハードルがなかなかに高い。&lt;/p&gt;
-
-&lt;p&gt;本書でもそのあたりの話には「組織的操作の技法」として第5章をまるまる当てて触れられていて、例えば「道がないなら道を作る」＝草の根からツールの導入などを始めていく、「許可を求めるより寛容を求めるほうが簡単」、「安全なポジションまで昇進する」といったことが書かれている。結局はできることからやっていく、しかなくなってしまうのかもしれない。&lt;/p&gt;
-
-&lt;p&gt;個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。&lt;/p&gt;
-
-&lt;p&gt;こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。&lt;/p&gt;
 </description>
     </item>
     
