@@ -6,8 +6,34 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Aug 2016 22:30:41 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 03 Oct 2016 23:52:14 +0900</lastBuildDate>
     <atom:link href="http://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ServerlessConfとエンジニアの職掌に関して</title>
+      <link>http://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</link>
+      <pubDate>Mon, 03 Oct 2016 23:52:14 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://tokyo.serverlessconf.io/&#34;&gt;ServerlessConf Tokyo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;10月1日に開かれたServerlessConf Tokyoに行ってきました。会場で一度「サーバーエンジニアの方ってどれぐらいいますか？」という質問がありましたけど、そのときの挙手によればサーバー、インフラ寄りのエンジニアはだいぶ少数派だったみたいですね。まぁサーバーなくなっちゃってんだからそりゃそうだろって感じなんだけど、自分としてはインフラエンジニアの立場から見て「サーバーがない！」という状況はどう映るのか、どう向き合えばいいのかというのがだいぶ気にかかってました。それでなくてもクラウドの登場、特にAWSが当たり前のものとなってからはインフラエンジニア不要論が常に囁かれてはきたわけで。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/&#34;&gt;インフラエンジニアの幸福論 · the world as code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;改めてサーバーレスとはなんだろうと。いや、サーバーがないはずはないじゃんというのはよく聞く反論で、仰る通りAWS Lambdaといえど裏側では当然Amazon Linuxが、物理的なサーバーが動作しており、サーバーレスって言葉はあまりよろしくないんではみたいな話もあります。とはいえ運用するエンジニアの視点からすると、サーバーというスコープはごっそり消失しているような状態ではあるので、個人的にはあながち的を外しているとも思ってはいないです。しかしそうすると今度は、従来のherokuやAWSマネージドサービスだってサーバーレスだったことになるじゃん？というのが自分の疑問としてはあったのですけど、この点はだいぶ思い違いをしていたなと今回認識を改めました。&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-slide=&#34;1&#34; data-id=&#34;8808b232125a4fbda7155ea8128e99cc&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;端的にサーバーレスで受けられる恩恵をまとめたものとしては、このスライドが非常にわかりやすくてピンときました。これまでビジネスロジックはサーバーというモノシリックなエンティティの中に組み込まれ、サーバーを基本単位として扱われることが主だったわけだったですけど、サーバーレス、いわゆるFaaSの世界ではビジネスロジックが単一の機能＝関数を単位としたマイクロサービスへ分割されます。そして実行媒体は常時稼動が前提であったサーバーやデーモンから、immutableなライフサイクルを持ったコンテナへ移されるため、自ずとステートレスな状態が保たれる。FaaSの実行はイベントドリブンで必要なときのみに絞られるので、リソースの効率性も従来とは考え方がまったく変わってくる。サーバーレスというのは、こういったソフトウェアアーキテクチャーの全体的な転換点として捉えなければならないんだなというのがやっと掴めました。&lt;/p&gt;
+
+&lt;p&gt;確かに実行媒体であるはずのコンテナすらも隠蔽され、コードを書いて渡してしまえばそれだけで実行されるサーバーレスな世界というのは、インフラエンジニアという旧来の職種が入る余地はなさそうには見えます。でも自分の立場から見て、こういったサーバーレスの世界でやること皆無になるか？というとそうは思えなくて、ハードウェアリソースを如何に効率的に使うかだとか、リソース部分をすべて別の事業者に委ねてしまった状態で、可用性やパフォーマンスをどう担保していくかだとか、インフラエンジニアの視点から出来ることっていろいろあると思うんですよね。まぁそりゃ今までみたいにLinuxにSSHして云々だとか、ネットワーク機器の設定をどうのってのをやる機会はほぼ無いのかもしれないけれど、「インフラエンジニア」の定義を技術領域からミッションに変えることで、見えていく先はあるんじゃないかなと。&lt;/p&gt;
+
+&lt;p&gt;またイベント内でこれも何度も聴いたんですけど、当然ながらサーバーレスは銀の弾丸ではないです。ステートフルであることが相応しいソフトウェアもあるし、デーモンを常駐させる必要性も現在皆無になったわけではない。サーバーレスを至上として、ソフトウェアをどうすればサーバーレスに出来るか？と考えるよりは、ソフトウェアをより望ましい状態にするために、アーキテクチャーとしてサーバーレスを選択することが適切か？という考え方をするべきなのではないかなと感じました。&lt;/p&gt;
+
+&lt;p&gt;エンジニアの職掌は従来だと技術領域のレイヤーで隔てられることが多かったですが、技術分野の変容もさることながら、アーキテクチャーすら10年待たずにガラガラと形を変えていく時代においては、技術レイヤーへのフォーカスだけで職種を定義すると痛い目を見そうな気がしてきました。まずはミッション先にありきであって、そのための手段として技術やアーキテクチャーを選択する。そういう発想でいくと、「インフラエンジニア」と呼ばれる職種にも未来はある気がします。あるいは最近それがSREといった呼び方に変わったりしているのも、その証左であるんじゃないかなと。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>『SOFT SKILLS』と「やっていく気持ち」</title>
@@ -816,57 +842,6 @@ $ git push origin master
 &lt;li&gt;たのしいインフラの歩き方&lt;/li&gt;
 &lt;li&gt;他&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Serverspecファーストインプレッション</title>
-      <link>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
-      <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
-      <description>
-
-&lt;p&gt;秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;サーバー構成の-仕様書-代わりとして:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;サーバー構成の「仕様書」代わりとして&lt;/h2&gt;
-
-&lt;p&gt;自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。&lt;/p&gt;
-
-&lt;p&gt;Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。&lt;/p&gt;
-
-&lt;p&gt;中には&lt;a href=&#34;http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/&#34;&gt;cronで監視チックに実行させている例&lt;/a&gt;もあるようだが、それもアリかなと思う。&lt;/p&gt;
-
-&lt;h2 id=&#34;導入は簡単だが探求にはrubyスキル必須:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;導入は簡単だが探求にはRubyスキル必須&lt;/h2&gt;
-
-&lt;p&gt;Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。&lt;/p&gt;
-
-&lt;p&gt;例えば私が初めて書いた&lt;code&gt;spec_helper.rb&lt;/code&gt;はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;serverspec&#39;
-require &#39;yaml&#39;
-
-properties = YAML.load_file(&#39;properties.yml&#39;)
-
-host = ENV[&#39;TARGET_HOST&#39;]
-set_property properties[host]
-
-set :backend, :exec
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。&lt;/p&gt;
-
-&lt;p&gt;自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。&lt;/p&gt;
-
-&lt;h2 id=&#34;国産ossであるアドバンテージ:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;国産OSSであるアドバンテージ&lt;/h2&gt;
-
-&lt;p&gt;Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&amp;rsquo;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rebuild.fm/75/&#34;&gt;Rebuild: 75: Book Driven Development (gosukenator)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg&#34; alt=&#34;Serverspec&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Serverspec&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.31&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;宮下 剛輔 &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 213,793&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。&lt;a href=&#34;https://github.com/ryotarai/infrataster&#34;&gt;Infrataster&lt;/a&gt;とも組み合わせられれば、よりテストの質は増しそう。&lt;/p&gt;
 </description>
     </item>
     
