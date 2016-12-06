@@ -6,17 +6,8 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 05 Nov 2016 22:57:42 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 25 Oct 2016 00:20:02 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>my_first_lt</title>
-      <link>https://chroju.github.io/blog/2016/11/05/my_first_lt/</link>
-      <pubDate>Sat, 05 Nov 2016 22:57:42 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/11/05/my_first_lt/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>多義化するOpsのミッションについて</title>
@@ -715,6 +706,122 @@ $ git push origin master
 &lt;p&gt;くっだらないものでもなんでも構わんから、とりあえず手を動かして「作る」ことが楽しいって経験をもっとしてもいいのかもなと思った。インフラのデリバリー、運用の効率化、そういうのも大切ではあるけれど、我々がそもそもビジネスとして提供しているサービス、システムとはなんぞやって部分をもう一度見返してみたい気がした。言語は単なるツール、ではないはず。だからこういう勉強会もいいけど、ハンズオンとかもっと行ってみるべきかなと。具体的に今回の勉強会で見かけた中ではMEANスタックが気になるのでやっておきたい。ちょうどMongoに手を付けたかったし。&lt;/p&gt;
 
 &lt;p&gt;以上、取り留めのない感想でした。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2016年の行動規範</title>
+      <link>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</link>
+      <pubDate>Sun, 03 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</guid>
+      <description>
+
+&lt;p&gt;うまいことまとまらないのでつらつら。&lt;/p&gt;
+
+&lt;h2 id=&#34;問題意識:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;問題意識&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;時間、お金の使い方がいまだに下手。
+
+&lt;ul&gt;
+&lt;li&gt;きちんと考えず浪費している機会が多い。&lt;/li&gt;
+&lt;li&gt;時間ならタスクシュート、お金ならZaimを使ったりした経験はあるが結局とまったりしている。&lt;/li&gt;
+&lt;li&gt;昨年は10年以上続いていた日記すらもとめてしまった。&lt;/li&gt;
+&lt;li&gt;何か忙しい課題が仕事なりプライベートなりに鎮座すると、他に回す手が一切なくなったりしてバランス悪い。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;メモ環境の再考。
+
+&lt;ul&gt;
+&lt;li&gt;インプットが「ググって終わり」の場合が多く、次にその情報が必要になったときも結局ググってる。&lt;/li&gt;
+&lt;li&gt;読んだ本が本当に身になっている気がしない。&lt;/li&gt;
+&lt;li&gt;Evernoteがメモの死蔵場になっている。&lt;/li&gt;
+&lt;li&gt;デジタルメモはVimと&lt;a href=&#34;https://github.com/glidenote/memolist.vim&#34;&gt;memolist.vim&lt;/a&gt;を基本にしているけど、書き散らして終わってる感。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;技術探求の不足
+
+&lt;ul&gt;
+&lt;li&gt;やってるけどやりきれてないというか。&lt;/li&gt;
+&lt;li&gt;Qiitaで話題になっているのを見て、ザッと読んでなんとなく無理そうと思うと閉じちゃったり。&lt;/li&gt;
+&lt;li&gt;いつか使うかな？と思ってPocketにつっこんでそのまんまの積読があまりに多い。&lt;/li&gt;
+&lt;li&gt;流行ってる→やろうとか、こういうツールほしい→作ろうの瞬発力上げたい。&lt;/li&gt;
+&lt;li&gt;本読みたい。というか去年文化資本にあまりに触らなすぎた。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;仲間がほしい
+
+&lt;ul&gt;
+&lt;li&gt;懇親会とか行ってもその場限りの話しかできなかったりでエンジニア仲間社外にあんまいない。&lt;/li&gt;
+&lt;li&gt;社内の技術課題解決するのに社外で話すってのも大切そう。&lt;/li&gt;
+&lt;li&gt;ていうかエンジニアとしてもうちょい知名度上げてみたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;解消していくために:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;解消していくために&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;時間とお金の定量評価
+
+&lt;ul&gt;
+&lt;li&gt;お金は娯楽費にx万までみたいな予算持ってるので、時間も定量評価したい。コード書く時間を週に必ずx時間とか。&lt;/li&gt;
+&lt;li&gt;タイムロギングしたいけどTogglとか使うの面倒。とりあえずやってみるか。難しけりゃ1日の最後にノートに記憶から書き出すんでもいいかなと。&lt;/li&gt;
+&lt;li&gt;週ごとのノートにしたい。PDCA回すのにちょうど良いスパンだと思う。今週ダメなら来週帳尻合わせるとか出来るわけで。&lt;/li&gt;
+&lt;li&gt;そういう用途だと紙ノートよりEvernoteの方が良さそう。1ノートに対して1週間という形が取れるので。&lt;/li&gt;
+&lt;li&gt;じゃあ日記もここに載ってくる形でいっか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;メモをもっかいちゃんとする
+
+&lt;ul&gt;
+&lt;li&gt;技術テーマごとにちゃんとノート取る。ブログに上げるといった方がいいか。&lt;/li&gt;
+&lt;li&gt;ブログ記事にならないレベルのものはQiita。二番煎じ三番煎じでQiitaレベルに値しないものはGist。&lt;/li&gt;
+&lt;li&gt;でもGistあんまり使いやすくない……。&lt;/li&gt;
+&lt;li&gt;メモを見返す時間をちゃんと作る。週次レビュー的なあれ。金曜夜が第一候補。無理なら土曜。&lt;/li&gt;
+&lt;li&gt;というかそれぐらいの時間は取れるようなスケジューリングをする。去年はそれすら難しいぐらいアホほど予定入れてた。&lt;/li&gt;
+&lt;li&gt;頭のなかちゃんと棚卸するの大事。&lt;/li&gt;
+&lt;li&gt;手元のモレスキンはタイムライン的なリアルタイムメモ用にする。アナログは見返すの無理。ざざっと時系列で追う目的でしか使えない。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;散逸的な勉強をしない
+
+&lt;ul&gt;
+&lt;li&gt;とりあえずおもしろそうなもの、役に立つはずのものに片っ端から手をつけるのやめる。&lt;/li&gt;
+&lt;li&gt;Pocketに記事を置いとくのはいいけど、1週間ぐらい経ったら躊躇なく消す（自動化できないかな）。&lt;/li&gt;
+&lt;li&gt;上述の通りブログに上げることを目的としてノートを取っていく。参照する記事はノート上で繰り回す。&lt;/li&gt;
+&lt;li&gt;スーパーマンになろうとしない（選択と集中、less is more）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;技術的な瞬発力の向上
+
+&lt;ul&gt;
+&lt;li&gt;手足のように使える言語がほしい。Rubyかじったんだからちゃんとやり切る。&lt;/li&gt;
+&lt;li&gt;もう1個。デフォルトで入ってる言語だと楽なんだが。Pythonかなー。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://orangain.hatenablog.com/entry/python3-as-default&#34;&gt;LinuxディストリビューションにおけるPython 3デフォルト化の流れ - orangain flavor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;実際の開発経験を積む。API叩くとかやる。動かす。&lt;/li&gt;
+&lt;li&gt;原則としてCLIで操作する。GUIに頼らない。コマンドでなんとかならないかとまず考える。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;文化資本に触れたい
+
+&lt;ul&gt;
+&lt;li&gt;1クール3本のアニメ&lt;/li&gt;
+&lt;li&gt;1か月2冊の小説&lt;/li&gt;
+&lt;li&gt;1か月2本の映画&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;エンジニアとしての活動
+
+&lt;ul&gt;
+&lt;li&gt;なんかユーザーグループ入ってみたい。職種的に考えるとJAWS-UG？&lt;/li&gt;
+&lt;li&gt;これだけはという技術分野ほしい。Ansibleが今自分の中でキテるのでもっと。&lt;/li&gt;
+&lt;li&gt;GitHubをソーシャルにちゃんと使う。横断的な検索とかフォローとかプルリク出してみるとか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;挑むべき技術分野:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;挑むべき技術分野&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;上述の通り武器言語としてのRuby、Python。&lt;/li&gt;
+&lt;li&gt;hubotいじる上でnode.jsを少しだけ。&lt;/li&gt;
+&lt;li&gt;DB経験がさらっさらと言っていいほどないのでMySQL（Mariaでいいか）とRedis。&lt;/li&gt;
+&lt;li&gt;インフラ関連技術は継続。Ansible、Serverspec、AWS。&lt;/li&gt;
+&lt;li&gt;最近流行ってるOSSツール類。Elasticsearch、HashiCorp周り、Docker、Sensu、Rundeck、&lt;/li&gt;
+&lt;li&gt;総合するとこれやってみるといいかも→ &lt;a href=&#34;http://syou6162.hatenablog.com/entry/2015/12/21/000843&#34;&gt;今年よかった習慣: ライフログ収集および可視化 - syou6162&amp;rsquo;s blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
