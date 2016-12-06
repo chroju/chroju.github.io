@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Serverspec on the world as code</title>
-    <link>http://chroju.github.io/categories/serverspec/</link>
+    <link>https://chroju.github.io/categories/serverspec/</link>
     <description>Recent content in Serverspec on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 31 Dec 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/serverspec/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/serverspec/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Serverspecファーストインプレッション</title>
-      <link>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
+      <link>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
       <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
+      <guid>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
       <description>
 
 &lt;p&gt;秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。&lt;/p&gt;

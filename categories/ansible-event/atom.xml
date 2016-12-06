@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ansible Event on the world as code</title>
-    <link>http://chroju.github.io/categories/ansible-event/</link>
+    <link>https://chroju.github.io/categories/ansible-event/</link>
     <description>Recent content in Ansible Event on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 25 Jun 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/ansible-event/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/ansible-event/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Ansibleの入門イベント聞いてきた話</title>
-      <link>http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</link>
+      <link>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</link>
       <pubDate>Thu, 25 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</guid>
+      <guid>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://atnd.org/events/66419&#34;&gt;これ&lt;/a&gt;行ってきた。ざくっと感想を箇条書きで。&lt;/p&gt;
 
 &lt;ul&gt;

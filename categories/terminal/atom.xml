@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Terminal on the world as code</title>
-    <link>http://chroju.github.io/categories/terminal/</link>
+    <link>https://chroju.github.io/categories/terminal/</link>
     <description>Recent content in Terminal on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 20 Jul 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/terminal/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/terminal/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>tmuxをなんとなく使ってたのできちんと使うようにしてみた</title>
-      <link>http://chroju.github.io/blog/2014/07/20/2014-07-20-post/</link>
+      <link>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</link>
       <pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/07/20/2014-07-20-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</guid>
       <description>
 
 &lt;p&gt;tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。&lt;/p&gt;

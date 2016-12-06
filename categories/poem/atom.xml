@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Poem on the world as code</title>
-    <link>http://chroju.github.io/categories/poem/</link>
+    <link>https://chroju.github.io/categories/poem/</link>
     <description>Recent content in Poem on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 03 Jan 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/poem/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/poem/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>2016年の行動規範</title>
-      <link>http://chroju.github.io/blog/2016/01/03/manifesto-2016/</link>
+      <link>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</link>
       <pubDate>Sun, 03 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/01/03/manifesto-2016/</guid>
+      <guid>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</guid>
       <description>
 
 &lt;p&gt;うまいことまとまらないのでつらつら。&lt;/p&gt;
@@ -127,10 +127,10 @@
     
     <item>
       <title>2015年総括</title>
-      <link>http://chroju.github.io/blog/2015/12/31/looking-back-2015/</link>
+      <link>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</link>
       <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/12/31/looking-back-2015/</guid>
+      <guid>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</guid>
       <description>
 
 &lt;p&gt;いろいろとチャレンジングに動いてみただけに、難しい年だった。&lt;/p&gt;
@@ -201,10 +201,10 @@
     
     <item>
       <title>インフラエンジニアの幸福論</title>
-      <link>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</link>
+      <link>https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</link>
       <pubDate>Tue, 20 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</guid>
+      <guid>https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</guid>
       <description>&lt;p&gt;1年前、&lt;a href=&#34;http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4&#34;&gt;インフラエンジニアは死んだ&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。&lt;/p&gt;
@@ -225,10 +225,10 @@
     
     <item>
       <title>Qiitaを使うということの意義</title>
-      <link>http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</link>
+      <link>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</link>
       <pubDate>Sun, 09 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</guid>
+      <guid>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/chroju/&#34;&gt;Qiitaにいくつか記事を上げてみて&lt;/a&gt;思ったことを。&lt;/p&gt;
@@ -258,10 +258,10 @@
     
     <item>
       <title>the world as code</title>
-      <link>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
+      <link>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
       <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
       <description>&lt;p&gt;世界を構成するのはテクストである、という考え方が好きだ。より正確な言い方をするならば記号論やミーム的な考え方になるのだと思うが、記述されたもの、意味を成して認識されたものだけが実在足りうる、というような世界観をなんとなく抱いている。『ニルヤの島』では個人の生が物語へと還元され、データとして外部記憶装置へ保存されるようになった。『from the nothing, with love』では、ジェームズが自らを「生起しつつあるテクスト」であると述懐する。あるいはヘプタポッドの言語は、未来をも決定論的に「記述」する。&lt;/p&gt;
 
 &lt;p&gt;特にことインターネットの隆盛により、世界はテクストの、ミームの満ちるものへと変容しつつあるように思う。インターネット上に存在する「個人」とは、すなわちミームに他ならない。インターネットへのアクセスをしていても、能動的にテクストを紡がない個人は存在しないに等しい。この世界では個人は、あるいはあらゆる事象はデータへと還元され、そして半永久的にミームの海を彷徨っていく。&lt;/p&gt;

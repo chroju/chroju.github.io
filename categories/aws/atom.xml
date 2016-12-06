@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Aws on the world as code</title>
-    <link>http://chroju.github.io/categories/aws/</link>
+    <link>https://chroju.github.io/categories/aws/</link>
     <description>Recent content in Aws on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 15 May 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/aws/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/aws/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>JAWS-UG初心者支部の立ち上げに行ってきた #jawsug_bgnr</title>
-      <link>http://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</link>
+      <link>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</link>
       <pubDate>Fri, 15 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</guid>
+      <guid>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://jawsug-beginner.doorkeeper.jp/events/22161&#34;&gt;JAWS-UG初心者支部【第1回】2015年5月14日(木) - JAWS-UG初心者支部 | Doorkeeper&lt;/a&gt;&lt;/p&gt;
@@ -51,10 +51,10 @@
     
     <item>
       <title>JAWS DAYS 2015でAWS童貞捨ててきた</title>
-      <link>http://chroju.github.io/blog/2015/03/22/jaws-days-2015/</link>
+      <link>https://chroju.github.io/blog/2015/03/22/jaws-days-2015/</link>
       <pubDate>Sun, 22 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/22/jaws-days-2015/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/22/jaws-days-2015/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.flickr.com/photos/chroju/16701892109&#34; title=&#34;#jawsdays 初心者ハンズオンなう by chroju, on Flickr&#34;&gt;&lt;img src=&#34;https://farm9.staticflickr.com/8687/16701892109_b35dd45f3a_n.jpg&#34; width=&#34;320&#34; height=&#34;320&#34; alt=&#34;#jawsdays 初心者ハンズオンなう&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://jawsdays2015.jaws-ug.jp/&#34;&gt;JAWS DAYS&lt;/a&gt;、前々からやってるのは知ってたんですけど、自分はAWS経験ないし行ってもわかんねーかなと思ってなんとなく行かずにいたんですが、今回タイムテーブル覗いてみたら初心者向けハンズオンもあったので意を決して行ってきました。&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ruby on the world as code</title>
-    <link>http://chroju.github.io/categories/ruby/</link>
+    <link>https://chroju.github.io/categories/ruby/</link>
     <description>Recent content in Ruby on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 03 May 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/ruby/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/ruby/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</title>
-      <link>http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
+      <link>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
       <pubDate>Sun, 03 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
+      <guid>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
       <description>
 
 &lt;script src=&#34;https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js&#34;&gt;&lt;/script&gt;
@@ -36,10 +36,10 @@
     
     <item>
       <title>Ruby基礎学習(10) Mix-in</title>
-      <link>http://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</link>
+      <link>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</link>
       <pubDate>Fri, 24 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</guid>
       <description>
 
 &lt;p&gt;Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。&lt;/p&gt;
@@ -91,10 +91,10 @@
     
     <item>
       <title>Ruby基礎復習(9) Dirクラス</title>
-      <link>http://chroju.github.io/blog/2015/04/14/study-ruby-dir/</link>
+      <link>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</link>
       <pubDate>Tue, 14 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/14/study-ruby-dir/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</guid>
       <description>&lt;p&gt;『パーフェクトRuby』p.208より。&lt;/p&gt;
 
 &lt;p&gt;Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる。従って多くの操作を特異メソッドで行うことができる。&lt;/p&gt;
@@ -140,10 +140,10 @@ dir.each {|f| p f} # =&amp;gt; &amp;quot;.&amp;quot;, &amp;quot;..&amp;quot;, &a
     
     <item>
       <title>Ruby基礎復習(8) Fileクラス</title>
-      <link>http://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</link>
+      <link>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</link>
       <pubDate>Fri, 10 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</guid>
       <description>&lt;p&gt;『パーフェクトRuby』p.196より。わりと苦手な分野。&lt;/p&gt;
 
 &lt;p&gt;まずはファイルをひらく。&lt;code&gt;#open&lt;/code&gt;して変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。&lt;code&gt;#read&lt;/code&gt;はファイルの内容全体を読み込む一方、&lt;code&gt;#gets&lt;/code&gt;を使うと1行ずつ読み込むことができる。あるいは&lt;code&gt;#each_line&lt;/code&gt;や&lt;code&gt;#each_char&lt;/code&gt;といったメソッドも。&lt;/p&gt;
@@ -304,10 +304,10 @@ File.absolute_path(&amp;quot;~&amp;quot;) # =&amp;gt; &amp;quot;/home/chroju/~&a
     
     <item>
       <title>Ruby基礎復習(7) Timeクラス</title>
-      <link>http://chroju.github.io/blog/2015/04/06/study-ruby-time/</link>
+      <link>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</link>
       <pubDate>Mon, 06 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/06/study-ruby-time/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</guid>
       <description>
 
 &lt;p&gt;『パーフェクトRuby』p.190より。&lt;/p&gt;
@@ -400,10 +400,10 @@ now - 1 # =&amp;gt; 2015-03-16 23:25:31 +0900
     
     <item>
       <title>Ruby基礎復習(6) Hash</title>
-      <link>http://chroju.github.io/blog/2015/04/05/study-ruby-hash/</link>
+      <link>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</link>
       <pubDate>Sun, 05 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/05/study-ruby-hash/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</guid>
       <description>&lt;p&gt;『パーフェクトRuby』p.179より。&lt;/p&gt;
 
 &lt;p&gt;まず基本的なとこで。&lt;/p&gt;
@@ -533,10 +533,10 @@ hash.sort # =&amp;gt; [[:fuga, 2], [:hoge, 1]]
     
     <item>
       <title>Ruby基礎復習(5) 配列(Array)</title>
-      <link>http://chroju.github.io/blog/2015/03/18/study-ruby-array/</link>
+      <link>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</link>
       <pubDate>Wed, 18 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/18/study-ruby-array/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</guid>
       <description>&lt;p&gt;『パーフェクトRuby』p.171より。&lt;/p&gt;
 
 &lt;p&gt;まずは配列の生成をいくつか。&lt;code&gt;#new(a,b)&lt;/code&gt;で生成したとき、各要素は同じオブジェクトとなるので注意。またブロックで受け取ると、インデックスを引数としてブロック内の処理を実行した結果が値となる。&lt;/p&gt;
@@ -699,10 +699,10 @@ p a # =&amp;gt; [5, 9, 0, 3, 7]
     
     <item>
       <title>Ruby基礎復習(4) EnumerableとComparable</title>
-      <link>http://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</link>
+      <link>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</link>
       <pubDate>Tue, 17 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</guid>
       <description>
 
 &lt;p&gt;『パーフェクトRuby』p.164より。&lt;/p&gt;
@@ -853,10 +853,10 @@ people.sort_by {|person| person.age} # =&amp;gt; [taro, takeshi, hanako]
     
     <item>
       <title>Ruby基礎復習(3) Numericクラス</title>
-      <link>http://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</link>
+      <link>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</link>
       <pubDate>Mon, 16 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</guid>
       <description>
 
 &lt;p&gt;パーフェクトRuby p.144より。&lt;/p&gt;
@@ -941,10 +941,10 @@ num.class # =&amp;gt; Float
     
     <item>
       <title>Ruby基礎復習(2) Stringクラス</title>
-      <link>http://chroju.github.io/blog/2015/03/15/study-ruby-string/</link>
+      <link>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</link>
       <pubDate>Sun, 15 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/15/study-ruby-string/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</guid>
       <description>&lt;p&gt;パーフェクトRuby p.148から学習。文字列ことStringクラス。&lt;/p&gt;
 
 &lt;p&gt;まずは基本操作系。&lt;/p&gt;
@@ -1033,10 +1033,10 @@ str.split(&amp;quot;,&amp;quot;) # =&amp;gt; [&amp;quot;Alice&amp;quot;, &amp;qu
     
     <item>
       <title>Ruby基礎復習(1) 基礎文法</title>
-      <link>http://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</link>
+      <link>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</link>
       <pubDate>Sun, 08 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</guid>
       <description>
 
 &lt;p&gt;去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあえず受けたら見事に落ちたんですけど、その後再受験申し込み期間あるの忘れてて棒に振るとかよくわからんことやりました。そのままなんとなーくやる気なくなってたけど、さすがにSilverクラスの知識はきちんと押さえるべきだろってことで、しばらく手元の『パーフェクトRuby』使って自分用チートシートっぽくまとめてみます。超基礎なので退屈な記事が続く予定。&lt;/p&gt;
@@ -1159,10 +1159,10 @@ end # =&amp;gt; &#39;これはstandarderrorです&#39;
     
     <item>
       <title>Webスクレイピング手法は何かしら身に付けると便利そう</title>
-      <link>http://chroju.github.io/blog/2014/08/24/2014-08-24-post/</link>
+      <link>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</link>
       <pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/08/24/2014-08-24-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</guid>
       <description>&lt;p&gt;最近&lt;a href=&#34;http://tokyoscrapper.connpass.com/event/7107/&#34;&gt;Webスクレイピング勉強会&lt;/a&gt;が開かれましたが、自分これは「補欠」になってしまった上に別の予定が入ってしまって行けなくなり、なので自分なりにスクレイピングやってみました。人気の勉強会ってすぐ満席になりますよね。。ホントは勉強会情報とかすくれーぴんぐして逃さずゲトできるようになりたい。まぁこの分野は先人が作ったサービス等いろいろありますが、push型の配信してくれるものってまだない気がするのよね（あったっけ？）&lt;/p&gt;
 
 &lt;p&gt;Ruby好きなので使ったのはMechanizeです。nokogiriではない。ネットバンクから毎月残高拾ってきて記録してって手でやってたんだけど、いい加減自動化できないかと思いまして。なのでログイン処理とかまで任せるためにMechanize。&lt;/p&gt;

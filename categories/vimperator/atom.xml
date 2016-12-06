@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vimperator on the world as code</title>
-    <link>http://chroju.github.io/categories/vimperator/</link>
+    <link>https://chroju.github.io/categories/vimperator/</link>
     <description>Recent content in Vimperator on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 09 Feb 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/vimperator/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/vimperator/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>突然だけどVimperatorrcを晒してみる</title>
-      <link>http://chroju.github.io/blog/2014/02/09/2014-02-09-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</link>
       <pubDate>Sun, 09 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/02/09/2014-02-09-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</guid>
       <description>&lt;p&gt;非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。&lt;/p&gt;
 
 &lt;p&gt;vimperator自体は何年か前から使っていたのだが、カスタマイズはあまりせずにデフォルトの状態で使っていた。が、操作によってはマウス使った方が便利だったり、ちょっと中途半端な状態にあったので、一念発起してちょこちょこいじってみた。まだいじれる余地はありそうなんだけど。&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技術勉強全般 on the world as code</title>
-    <link>http://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</link>
+    <link>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</link>
     <description>Recent content in 技術勉強全般 on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 20 Oct 2013 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>短時間に限定して図書館で情報をザッピングするという勉強法</title>
-      <link>http://chroju.github.io/blog/2013/10/20/2013-10-20-post/</link>
+      <link>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</link>
       <pubDate>Sun, 20 Oct 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/10/20/2013-10-20-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</guid>
       <description>&lt;p&gt;新しい分野の勉強をするときって、ネットの情報だけでは不十分だったり信頼性に欠けたりするし、だから書籍に頼ろうと思うんだけど、どんな本
 を選べばいいのかわからなかったりもして悩ましい。かといって時間をかけて何冊も読む暇もないし、そんなにかけるお金もない。そういうとき、
 基本に帰って図書館に行ってみたら良いのですよね。&lt;/p&gt;
@@ -47,10 +47,10 @@
     
     <item>
       <title>技術書のサンプル試す場合はバージョンを揃えるべきなのか</title>
-      <link>http://chroju.github.io/blog/2013/08/03/2013-08-03-post/</link>
+      <link>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</link>
       <pubDate>Sat, 03 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/08/03/2013-08-03-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</guid>
       <description>&lt;p&gt;『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進めず。&lt;/p&gt;
 
 &lt;p&gt;問題が起きたのはp.79。モデルクラスのrbファイルにvalidatesメソッドによる検証過程を書き入れ、test/functional/xxxに有効なテストデータ（とされるもの）を入れてrake testコマンドを発行したところ、エラーが出る。何度やってもエラーが出る。仕方ないので一旦先に進もうともしたのだが、次に編集対象になっていたtest/unitフォルダが見当たらない。念のため別プロジェクトを作ったりもしてみたが、やはりtest/unitは生成されなかった。さすがにディレクトリ構造丸ごと違うとなると、自分のミスというよりはバージョンの相違によるものではないかと思い至る。この本ではRubyの1.9.2とrails 3.1.0を使っていたが、僕の環境はRuby2.0とrails 4.0.0だった（もっと他にも「バージョンが原因ではないか？」と思い当たった根拠があったはずなのだが失念。トラブルシュートは記録しながらやるべきだったなー……）。&lt;/p&gt;

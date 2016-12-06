@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on the world as code</title>
-    <link>http://chroju.github.io/categories/blog/</link>
+    <link>https://chroju.github.io/categories/blog/</link>
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 25 Jul 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/blog/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/blog/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Qiitaはじめました</title>
-      <link>http://chroju.github.io/blog/2015/07/25/start-qiita/</link>
+      <link>https://chroju.github.io/blog/2015/07/25/start-qiita/</link>
       <pubDate>Sat, 25 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/07/25/start-qiita/</guid>
+      <guid>https://chroju.github.io/blog/2015/07/25/start-qiita/</guid>
       <description>&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fchroju&#34; title=&#34;chroju - Qiita&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://qiita.com/chroju&#34; target=&#34;_blank&#34;&gt;chroju - Qiita&lt;/a&gt;&lt;/iframe&gt;
 
 &lt;p&gt;気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽かなと思って。あと先日の&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/&#34;&gt;暗号化に関する記事&lt;/a&gt;みたいなまとめ記事、tips系はやはりQiitaの方がフットワーク軽くて使いやすいような気がする。更新した場合にも履歴が残るし。&lt;/p&gt;
@@ -27,10 +27,10 @@
     
     <item>
       <title>the world as code</title>
-      <link>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
+      <link>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
       <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
+      <guid>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
       <description>&lt;p&gt;世界を構成するのはテクストである、という考え方が好きだ。より正確な言い方をするならば記号論やミーム的な考え方になるのだと思うが、記述されたもの、意味を成して認識されたものだけが実在足りうる、というような世界観をなんとなく抱いている。『ニルヤの島』では個人の生が物語へと還元され、データとして外部記憶装置へ保存されるようになった。『from the nothing, with love』では、ジェームズが自らを「生起しつつあるテクスト」であると述懐する。あるいはヘプタポッドの言語は、未来をも決定論的に「記述」する。&lt;/p&gt;
 
 &lt;p&gt;特にことインターネットの隆盛により、世界はテクストの、ミームの満ちるものへと変容しつつあるように思う。インターネット上に存在する「個人」とは、すなわちミームに他ならない。インターネットへのアクセスをしていても、能動的にテクストを紡がない個人は存在しないに等しい。この世界では個人は、あるいはあらゆる事象はデータへと還元され、そして半永久的にミームの海を彷徨っていく。&lt;/p&gt;
@@ -51,10 +51,10 @@
     
     <item>
       <title>はてなブログからの記事移行を完了した</title>
-      <link>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</link>
+      <link>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</link>
       <pubDate>Sun, 01 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</guid>
+      <guid>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://chroju89.hatenablog.jp/&#34;&gt;旧ブログ&lt;/a&gt;から全記事移行完了しました。ちょっとだけ疲れた。&lt;/p&gt;
@@ -125,10 +125,10 @@
     
     <item>
       <title>お勉強ブログ、はじめます</title>
-      <link>http://chroju.github.io/blog/2013/07/20/2013-07-20-post/</link>
+      <link>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</link>
       <pubDate>Sat, 20 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/07/20/2013-07-20-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</guid>
       <description>
 
 &lt;p&gt;SEという職に就いて2年ちょい経ったわけだが、最近はPJリーダーとか顧客との調整とかその手の仕事ばかりを回されるようになってきて、実機を触る機会がめっきり少なくなってきてる。まぁうちはいわゆる大手SIerというヤツだから、徐々に技術っぽい仕事をしなくなるのは必然、ではある。だがしかし、あまり自分はそういうキャリアを望んでいないし、さすがに3年目で管理系の道に入ってしまうのは、ちょっと早すぎる。&lt;/p&gt;

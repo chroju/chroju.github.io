@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>キャリアプラン on the world as code</title>
-    <link>http://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</link>
+    <link>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</link>
     <description>Recent content in キャリアプラン on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 28 Jun 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>SIerからサービス系の会社に転職して1か月</title>
-      <link>http://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</link>
+      <link>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</link>
       <pubDate>Sun, 28 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</guid>
+      <guid>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</guid>
       <description>
 
 &lt;p&gt;SIerからサービス提供型の会社に転職して1か月ぐらい経ったので、感想とか今後のこととかまとめておく。立ち位置としてはインフラエンジニア、まぁ要は運用担当者になるのだが、BtoB、BtoCで動いている提供サービスすべてと、社内インフラまでひっくるめたありとあらゆるインフラの運用管理を受け持っている。なのでそれこそ雑用めいた仕事から構築にイッチョカミしてサーバー立てたりAWSいじったりみたいなところまで、見渡すべき範囲はアホほど広い感じ。&lt;/p&gt;
@@ -49,10 +49,10 @@
     
     <item>
       <title>ファッション無職になった</title>
-      <link>http://chroju.github.io/blog/2015/05/16/i-am-neet-now/</link>
+      <link>https://chroju.github.io/blog/2015/05/16/i-am-neet-now/</link>
       <pubDate>Sat, 16 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/05/16/i-am-neet-now/</guid>
+      <guid>https://chroju.github.io/blog/2015/05/16/i-am-neet-now/</guid>
       <description>&lt;p&gt;退職エントリーに対して「で、誰？」っていうレスが付くのがもはや定番化しているような気もするけど、ブログなんてだいたいはチラ裏なんだから「誰？」なんて退職エントリーに限らずなんだってそうやんけ、と思ったりはしてます。誰だかわかんない人の文章読むのがネットの醍醐味なんだから、あえて煽らなくてもいいじゃんねー？というネタにマジレス。&lt;/p&gt;
 
 &lt;p&gt;というわけで退職、自体は実際にはまだなのだが、すでに現職はフェードアウトしてファッション無職期間に入っていたりする。半月以上の休暇なんて大学以来だからちょっとワクワクしてるし、大学4年の春休みに「こんなに休めることはもうないんやで」とか言われたのは嘘だったんだなーとも思ってる。んで、インフラ系SEを辞めて、来月からSaaS事業者でインフラエンジニアをすることになる。転職にあたってそもそも何がきっかけになったのか、忘れないよう書き留めておく。&lt;/p&gt;
@@ -75,10 +75,10 @@
     
     <item>
       <title>何を勉強したらいいのかわからなくなってきた</title>
-      <link>http://chroju.github.io/blog/2014/08/10/2014-08-10-post/</link>
+      <link>https://chroju.github.io/blog/2014/08/10/2014-08-10-post/</link>
       <pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/08/10/2014-08-10-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/08/10/2014-08-10-post/</guid>
       <description>&lt;p&gt;このブログ始めて1年経ったけど、まー振り返ってみるとだいぶ話題の幅が広いっつーかまとまりがないっつーか、俺はいったい何エンジニアなんだって感じの内容になりつつある。絶賛迷走中、何を勉強してるのかよくわからない、感じに。&lt;/p&gt;
 
 &lt;p&gt;ここまでは完全に興味関心に頼ってそのときやりたいことを取りあえずやってみる、という感じの勉強をしてきてしまった。いや、正確に言えばそこまで何も考えていないわけでもない。自分はインフラ、それもWindows方面にかなり偏ったエンジニアなので、Linuxを触る機会を増やすだとか、アプリ寄りの技術も触れてみるだとか、そういうことは意識してきたつもりだ。とはいえ基礎から積み上げるような学習ではないし、そうやって身につけてきたことが実際の仕事で役立ったためしも、今のところない。実際のところ仕事で学べるところはOJTで学べばいいやと思っている節があったりして、趣味の勉強の目的が迷子になりつつあるように思う。&lt;/p&gt;
@@ -95,10 +95,10 @@
     
     <item>
       <title>エンジニアの転職において「技術」とは目的か手段か</title>
-      <link>http://chroju.github.io/blog/2014/05/01/2014-05-01-post/</link>
+      <link>https://chroju.github.io/blog/2014/05/01/2014-05-01-post/</link>
       <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/05/01/2014-05-01-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/05/01/2014-05-01-post/</guid>
       <description>&lt;p&gt;&lt;a title=&#34;By 江戸村のとくぞう (投稿者自身による作品) [CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons&#34; href=&#34;http://commons.wikimedia.org/wiki/File%3A%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG&#34;&gt;&lt;img width=&#34;512&#34; alt=&#34;渋谷ヒカリエー２&#34; src=&#34;//upload.wikimedia.org/wikipedia/commons/thumb/7/76/%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG/512px-%E6%B8%8B%E8%B0%B7%E3%83%92%E3%82%AB%E3%83%AA%E3%82%A8%E3%83%BC%EF%BC%92.JPG&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;ヒカリエ綺麗すぎる。。。&lt;/p&gt;

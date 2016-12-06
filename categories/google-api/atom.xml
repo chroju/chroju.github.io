@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Google Api on the world as code</title>
-    <link>http://chroju.github.io/categories/google-api/</link>
+    <link>https://chroju.github.io/categories/google-api/</link>
     <description>Recent content in Google Api on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 03 May 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/google-api/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/google-api/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</title>
-      <link>http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
+      <link>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
       <pubDate>Sun, 03 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
+      <guid>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
       <description>
 
 &lt;script src=&#34;https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js&#34;&gt;&lt;/script&gt;

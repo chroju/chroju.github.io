@@ -2,19 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>the world as code</title>
-    <link>http://chroju.github.io/</link>
+    <link>https://chroju.github.io/</link>
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 25 Oct 2016 00:20:02 +0900</lastBuildDate>
-    <atom:link href="http://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Nov 2016 22:57:42 +0900</lastBuildDate>
+    <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>my_first_lt</title>
+      <link>https://chroju.github.io/blog/2016/11/05/my_first_lt/</link>
+      <pubDate>Sat, 05 Nov 2016 22:57:42 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/11/05/my_first_lt/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>多義化するOpsのミッションについて</title>
-      <link>http://chroju.github.io/blog/2016/10/25/what_is_ops/</link>
+      <link>https://chroju.github.io/blog/2016/10/25/what_is_ops/</link>
       <pubDate>Tue, 25 Oct 2016 00:20:02 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/10/25/what_is_ops/</guid>
+      <guid>https://chroju.github.io/blog/2016/10/25/what_is_ops/</guid>
       <description>
 
 &lt;p&gt;今年度から運用の担当になったんですけど、最近消化不良を起こしつつあります。立場としては言われたことだけやるオペレーターという形じゃなくて、いわゆるインフラエンジニアっぽい感じだけど構築はやりませんよって感じです。日々のオペレーションや障害対応をやりつつ、一方でDevOpsの整備とかに注力している感じ。でも自分のミッションはそこまで社内で明確化されているわけではなくて、どうもそのあたりに消化不良の原因がある。&lt;/p&gt;
@@ -65,10 +74,10 @@
     
     <item>
       <title>ServerlessConfとエンジニアの職掌に関して</title>
-      <link>http://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</link>
+      <link>https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</link>
       <pubDate>Mon, 03 Oct 2016 23:52:14 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</guid>
+      <guid>https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://tokyo.serverlessconf.io/&#34;&gt;ServerlessConf Tokyo&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;10月1日に開かれたServerlessConf Tokyoに行ってきました。会場で一度「サーバーエンジニアの方ってどれぐらいいますか？」という質問がありましたけど、そのときの挙手によればサーバー、インフラ寄りのエンジニアはだいぶ少数派だったみたいですね。まぁサーバーなくなっちゃってんだからそりゃそうだろって感じなんだけど、自分としてはインフラエンジニアの立場から見て「サーバーがない！」という状況はどう映るのか、どう向き合えばいいのかというのがだいぶ気にかかってました。それでなくてもクラウドの登場、特にAWSが当たり前のものとなってからはインフラエンジニア不要論が常に囁かれてはきたわけで。&lt;/p&gt;
@@ -91,10 +100,10 @@
     
     <item>
       <title>『SOFT SKILLS』と「やっていく気持ち」</title>
-      <link>http://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</link>
+      <link>https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</link>
       <pubDate>Mon, 01 Aug 2016 22:30:41 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</guid>
+      <guid>https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</guid>
       <description>
 
 &lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51xVQQcUloL._SL160_.jpg&#34; alt=&#34;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;SOFT SKILLS　ソフトウェア開発者の人生マニュアル&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 16.08.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;日経BP社 (2016-06-02)&lt;br /&gt;売り上げランキング: 223&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B01GDS0994/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
@@ -139,10 +148,10 @@
     
     <item>
       <title>YAPC経験ないけどパチモンの方に行った</title>
-      <link>http://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</link>
+      <link>https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</link>
       <pubDate>Sat, 02 Jul 2016 22:11:59 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</guid>
+      <guid>https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</guid>
       <description>
 
 &lt;p&gt;イベントレポートに見せかけたポエムです。&lt;/p&gt;
@@ -195,10 +204,10 @@
     
     <item>
       <title>Serverlessの時代とas code</title>
-      <link>http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</link>
+      <link>https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</link>
       <pubDate>Sun, 05 Jun 2016 23:46:12 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</guid>
+      <guid>https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</guid>
       <description>
 
 &lt;p&gt;先週&lt;a href=&#34;http://ansible-users.connpass.com/event/31222/&#34;&gt;Ansible Meetup in Tokyo 2016.06&lt;/a&gt;と、&lt;a href=&#34;http://www.awssummit.tokyo/&#34;&gt;AWS Summit Tokyo 2016&lt;/a&gt;に行ってきたので軽めのレポートにします。&lt;/p&gt;
@@ -230,10 +239,10 @@
     
     <item>
       <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
-      <link>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
+      <link>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
       <pubDate>Sat, 14 May 2016 21:58:32 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
+      <guid>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;http://pepabo.connpass.com/event/30348/&#34;&gt;第5回ペパボテックカンファレンス〜インフラエンジニア大特集〜 - connpass&lt;/a&gt;&lt;/p&gt;
@@ -280,10 +289,10 @@
     
     <item>
       <title>#qpstudy 響け！アラートコール！行ってきた</title>
-      <link>http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</link>
+      <link>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</link>
       <pubDate>Sun, 24 Apr 2016 22:28:32 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</guid>
+      <guid>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.zusaar.com/event/12327003&#34;&gt;#qpstudy 2016.04 響け！アラートコール！　本編 一般枠 on Zusaar&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;こちら参加してきました。アラートコール、というか監視運用をテーマとした勉強会。qpstudyことキューピー3分インフラクッキングについては、数少ないインフラ系の継続的勉強会ということで、気になってはいましたが初参加できました。&lt;/p&gt;
@@ -304,10 +313,10 @@
     
     <item>
       <title>Pythonに入門している</title>
-      <link>http://chroju.github.io/blog/2016/03/28/entry-python/</link>
+      <link>https://chroju.github.io/blog/2016/03/28/entry-python/</link>
       <pubDate>Mon, 28 Mar 2016 22:29:39 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/03/28/entry-python/</guid>
+      <guid>https://chroju.github.io/blog/2016/03/28/entry-python/</guid>
       <description>
 
 &lt;h2 id=&#34;pythonを学び始める:99f750581f26cd55e99e535cecc3c37d&#34;&gt;Pythonを学び始める&lt;/h2&gt;
@@ -362,10 +371,10 @@
     
     <item>
       <title>Personal Knowledge Base 2</title>
-      <link>http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</link>
+      <link>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</link>
       <pubDate>Thu, 17 Mar 2016 22:09:45 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</guid>
+      <guid>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</guid>
       <description>
 
 &lt;p&gt;年初に&lt;a href=&#34;http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/&#34;&gt;Personal Knowledge Base · the world as code&lt;/a&gt;という記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。結論としては &lt;strong&gt;&lt;a href=&#34;https://trello.com/&#34;&gt;Trello&lt;/a&gt;&lt;/strong&gt; と &lt;strong&gt;&lt;a href=&#34;https://github.com/gollum/gollum&#34;&gt;gollum&lt;/a&gt;&lt;/strong&gt; を使っている。&lt;/p&gt;
@@ -456,10 +465,10 @@
     
     <item>
       <title>About</title>
-      <link>http://chroju.github.io/about/</link>
+      <link>https://chroju.github.io/about/</link>
       <pubDate>Sun, 13 Mar 2016 11:45:24 +0900</pubDate>
       
-      <guid>http://chroju.github.io/about/</guid>
+      <guid>https://chroju.github.io/about/</guid>
       <description>
 
 &lt;h1 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h1&gt;
@@ -479,10 +488,10 @@
     
     <item>
       <title>JAWS DAYS 2016に行ってきた</title>
-      <link>http://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
+      <link>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
       <pubDate>Sun, 13 Mar 2016 11:03:24 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
+      <guid>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
       <description>
 
 &lt;p&gt;昨年に続き。&lt;/p&gt;
@@ -558,10 +567,10 @@
     
     <item>
       <title>ブログをHugoに移行した</title>
-      <link>http://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
+      <link>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
       <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
+      <guid>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
       <description>
 
 &lt;p&gt;すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。&lt;/p&gt;
@@ -618,10 +627,10 @@ $ git push origin master
     
     <item>
       <title>Ops JAWS#3に行ってきた</title>
-      <link>http://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
+      <link>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
       <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
+      <guid>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
       <description>&lt;p&gt;その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。&lt;/p&gt;
 
 &lt;p&gt;メインとなったのはconfig rulesのハンズオン。&lt;/p&gt;
@@ -642,10 +651,10 @@ $ git push origin master
     
     <item>
       <title>Personal Knowledge Base</title>
-      <link>http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</link>
+      <link>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</link>
       <pubDate>Sun, 24 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</guid>
+      <guid>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</guid>
       <description>
 
 &lt;p&gt;昨年は転職のゴタゴタがあったりしてメモを取る習慣というものがどこかに消え失せてしまっていたので、年始にあたり生涯幾度目かわからないがメモ環境について再考している。本当に何度目だよ、と思うのだが、これはもう生涯模索しながらいくしかないし、最適解なんてのは時と場合によって変わるものだとは思う。&lt;/p&gt;
@@ -709,26 +718,6 @@ $ git push origin master
 &lt;p&gt;Evernoteに関しては、結局一次ソースにあたる情報を端からブチ込んで安心感を得るツールとしては今後も使い続けそう。しかしClearlyがなくなるのが本当につらい。Web Clipperのあの鈍重な動きは「何も考えずとりあえずクリップ」するにはちょっと抵抗ある。仕方ないか。しかしウェブクリップというのもどこまで意味のあるものやら。。その後情報が更新されても追えなくなるわけだし。&lt;/p&gt;
 
 &lt;p&gt;何はともあれ、とりあえず「記録残せ」から始めなくてはと思う。悩んで結論出ないから記録しないみたいな状態が続くのが一番よろしくない。悩みながらも進めていくしかないんだろうな。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>東京Node学園付属小学校1限目に行ってきた</title>
-      <link>http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</link>
-      <pubDate>Wed, 20 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://connpass.com/event/23463/&#34;&gt;【増枠！】東京Node学園付属小学校 1時限目 - connpass&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;東京node学園というNode.jsのユーザーコミュニティがありますが、その入門者向けバージョンが立ち上がったので行ってきました。&lt;/p&gt;
-
-&lt;p&gt;自分がNode.jsを扱った経験はAWS Lambdaとhubotで遊ぶために既存のスクリプトを少し触ったぐらいで、おそらくは小学校というより幼稚園レベルだったと思いますが、それ以前にやはりフロントエンドの集まりにインフラのエンジニアが行くというのはちょっと自分でも場違い感を覚えずにはいられず、さすがに提供できる話もないやろなってことで懇親会は出ずに帰ってしまいました（）。しかし刺激になったのは確かというか、フロントエンドの世界にちょっとだけ触れられる良い機会ではあったかなと。&lt;/p&gt;
-
-&lt;p&gt;そもそもにして自分にとって「言語」は最近手足になってきていて、Ansible使いたいからPythonやっておこうとか、Docker理解したいからgolangかなとかそういう選択ばかりするようになっていたのだが、フロントエンドにとって新しい言語というのは可能性の広がりなのだなーと当たり前のようなことに気付いた。例えば最近Kobitoの実装などで話題のElectronはNode.jsなわけで、サーバーサイドスクリプトであるNode.jsを学ぶことで、デスクトップアプリケーションを従前よりは容易に構築できる可能性になる。作れるものの幅が増える、やれることが膨らんでいくことはエンジニアにとってとても楽しい。&lt;/p&gt;
-
-&lt;p&gt;くっだらないものでもなんでも構わんから、とりあえず手を動かして「作る」ことが楽しいって経験をもっとしてもいいのかもなと思った。インフラのデリバリー、運用の効率化、そういうのも大切ではあるけれど、我々がそもそもビジネスとして提供しているサービス、システムとはなんぞやって部分をもう一度見返してみたい気がした。言語は単なるツール、ではないはず。だからこういう勉強会もいいけど、ハンズオンとかもっと行ってみるべきかなと。具体的に今回の勉強会で見かけた中ではMEANスタックが気になるのでやっておきたい。ちょうどMongoに手を付けたかったし。&lt;/p&gt;
-
-&lt;p&gt;以上、取り留めのない感想でした。&lt;/p&gt;
 </description>
     </item>
     

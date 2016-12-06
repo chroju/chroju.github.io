@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>環境構築 on the world as code</title>
-    <link>http://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link>
+    <link>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link>
     <description>Recent content in 環境構築 on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 02 Feb 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Rails環境構築（4）nginx導入</title>
-      <link>http://chroju.github.io/blog/2014/02/02/2014-02-02-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</link>
       <pubDate>Sun, 02 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/02/02/2014-02-02-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</guid>
       <description>&lt;p&gt;nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
@@ -55,10 +55,10 @@ $ sudo chkconfig nginx on
     
     <item>
       <title>Rails環境構築（3）PostgreSQLインストール</title>
-      <link>http://chroju.github.io/blog/2014/01/26/2014-01-26-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</link>
       <pubDate>Sun, 26 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/01/26/2014-01-26-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</guid>
       <description>
 
 &lt;p&gt;ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。&lt;/p&gt;
@@ -142,10 +142,10 @@ host   all           all            ::1/128                     md5
     
     <item>
       <title>Rails環境構築（2）Rubyのインストール &#43; α</title>
-      <link>http://chroju.github.io/blog/2014/01/23/2014-01-23-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</link>
       <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/01/23/2014-01-23-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</guid>
       <description>
 
 &lt;p&gt;環境構築エントリーその2。まっさらなOSにRubyを入れていきます。&lt;/p&gt;
@@ -223,10 +223,10 @@ $ bundle -v
     
     <item>
       <title>Ruby on Rails環境構築はじめます</title>
-      <link>http://chroju.github.io/blog/2014/01/18/2014-01-18-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</link>
       <pubDate>Sat, 18 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/01/18/2014-01-18-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</guid>
       <description>&lt;p&gt;Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。&lt;/p&gt;
 
 &lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg&#34; alt=&#34;Ruby on Rails環境構築ガイド&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Ruby on Rails環境構築ガイド&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;黒田 努 &lt;br /&gt;インプレスジャパン &lt;br /&gt;売り上げランキング: 44,343&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;

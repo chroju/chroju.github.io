@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capistrano on the world as code</title>
-    <link>http://chroju.github.io/categories/capistrano/</link>
+    <link>https://chroju.github.io/categories/capistrano/</link>
     <description>Recent content in Capistrano on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 12 Apr 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/capistrano/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/capistrano/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</title>
-      <link>http://chroju.github.io/blog/2014/04/12/2014-04-12-post/</link>
+      <link>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</link>
       <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/04/12/2014-04-12-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</guid>
       <description>
 
 &lt;p&gt;いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでに&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/02/20/000348&#34;&gt;こちら&lt;/a&gt;のエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。&lt;/p&gt;
@@ -153,10 +153,10 @@ end
     
     <item>
       <title>Capistrano3がわからんので今一度イチから考えなおしてみる</title>
-      <link>http://chroju.github.io/blog/2014/04/06/2014-04-06-post/</link>
+      <link>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</link>
       <pubDate>Sun, 06 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/04/06/2014-04-06-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</guid>
       <description>
 
 &lt;p&gt;前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。&lt;/p&gt;
@@ -245,10 +245,10 @@ end
     
     <item>
       <title>Rails環境構築（5）Capistranoによるデプロイ ※未完</title>
-      <link>http://chroju.github.io/blog/2014/02/20/2014-02-20-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</link>
       <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/02/20/2014-02-20-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</guid>
       <description>
 
 &lt;p&gt;だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。&lt;/p&gt;

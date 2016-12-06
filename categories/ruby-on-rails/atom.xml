@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ruby On Rails on the world as code</title>
-    <link>http://chroju.github.io/categories/ruby-on-rails/</link>
+    <link>https://chroju.github.io/categories/ruby-on-rails/</link>
     <description>Recent content in Ruby On Rails on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 08 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/ruby-on-rails/atom/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://chroju.github.io/categories/ruby-on-rails/atom/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Kaminariの実装をしてみた</title>
-      <link>http://chroju.github.io/blog/2015/08/08/exhibi-update/</link>
+      <link>https://chroju.github.io/blog/2015/08/08/exhibi-update/</link>
       <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/08/08/exhibi-update/</guid>
+      <guid>https://chroju.github.io/blog/2015/08/08/exhibi-update/</guid>
       <description>
 
 &lt;p&gt;久しぶりに稼働させている&lt;a href=&#34;http://chroju.net/exhibi&#34;&gt;ExhiBi&lt;/a&gt;というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。&lt;/p&gt;
@@ -60,10 +60,10 @@ end
     
     <item>
       <title>bundle installはどのパスに対してすべきなのか問題</title>
-      <link>http://chroju.github.io/blog/2014/01/14/2014-01-14-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/14/2014-01-14-post/</link>
       <pubDate>Tue, 14 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/01/14/2014-01-14-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/01/14/2014-01-14-post/</guid>
       <description>&lt;p&gt;今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;% bundle install --path vendor/bundle
@@ -86,10 +86,10 @@ end
     
     <item>
       <title>twitter-bootstrap-railsでundefined methodのエラーに嵌る</title>
-      <link>http://chroju.github.io/blog/2014/01/09/2014-01-09-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/09/2014-01-09-post/</link>
       <pubDate>Thu, 09 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/01/09/2014-01-09-post/</guid>
+      <guid>https://chroju.github.io/blog/2014/01/09/2014-01-09-post/</guid>
       <description>&lt;p&gt;完全に嵌った。さっぱりわからん。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;undefined method `to_css&#39; for nil:NilClass
@@ -118,10 +118,10 @@ rails s
     
     <item>
       <title>Bundle execサボってエライ目にあった</title>
-      <link>http://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</link>
+      <link>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</link>
       <pubDate>Sun, 08 Dec 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</guid>
       <description>&lt;p&gt;今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……&lt;/p&gt;
 
 &lt;blockquote&gt;bundle exec rails g devise:install&lt;/blockquote&gt;
@@ -144,10 +144,10 @@ rails s
     
     <item>
       <title>『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい</title>
-      <link>http://chroju.github.io/blog/2013/11/04/2013-11-04-post/</link>
+      <link>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</link>
       <pubDate>Mon, 04 Nov 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/11/04/2013-11-04-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</guid>
       <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg&#34; alt=&#34;RailsによるアジャイルWebアプリケーション開発 第4版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;RailsによるアジャイルWebアプリケーション開発 第4版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Sam Ruby Dave Thomas David Heinemeier Hansson &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 138,293&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Rails入門の定番書。このブログで何度か読んでいる途中経過を報告してきたか、ようやく読み終えることができた。読了というか、読み終わったのはもうだいぶ前ではあるんだけど。しかし予定していた以上に時間をかけてしまった。。。最初は写経しながら読んでいたのだが、どうにも時間がかかりすぎてイライラしていて、途中からはザーッとRailsの概略を掴むためだけのような読み方になってしまった。写経した方がやっぱり頭には入ると思うのだけど、それでサンプルアプリを作ったところで、応用してすぐ自分のアプリを作れるとは限らなくて、なんとももどかしい。結果としてはまだ消化しきれてなくて、行ったり来たり読み返しながら自分なりにアプリを作り始めているのが今の段階。&lt;/p&gt;
@@ -166,10 +166,10 @@ rails s
     
     <item>
       <title>RoRでログイン機能を実装する</title>
-      <link>http://chroju.github.io/blog/2013/10/06/2013-10-06-post/</link>
+      <link>https://chroju.github.io/blog/2013/10/06/2013-10-06-post/</link>
       <pubDate>Sun, 06 Oct 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/10/06/2013-10-06-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/10/06/2013-10-06-post/</guid>
       <description>
 
 &lt;ul&gt;
@@ -289,10 +289,10 @@ rails s
     
     <item>
       <title>RoRでScaffold作成を間違えたときの対処法が知りたい</title>
-      <link>http://chroju.github.io/blog/2013/09/21/2013-09-21-post/</link>
+      <link>https://chroju.github.io/blog/2013/09/21/2013-09-21-post/</link>
       <pubDate>Sat, 21 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/09/21/2013-09-21-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/09/21/2013-09-21-post/</guid>
       <description>&lt;p&gt;generate scaffoldはMVC全部作ってくれて便利なんだけど、うっかりカラム名間違えたりしたときの対処法ってあるのかしら。後から変更したい場合は全部逐一手動で変更してね☆ってことだとさすがに面倒臭すぎるんだが……。&lt;/p&gt;
 
 &lt;p&gt;とりあえず今はscaffoldを削除してイチから作り直す形で対処しているが。&lt;/p&gt;
@@ -307,10 +307,10 @@ rails s
     
     <item>
       <title>バージョン管理に注意しながら、Ruby on Railsの動作環境を構築する</title>
-      <link>http://chroju.github.io/blog/2013/09/16/2013-09-16-post/</link>
+      <link>https://chroju.github.io/blog/2013/09/16/2013-09-16-post/</link>
       <pubDate>Mon, 16 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/09/16/2013-09-16-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/09/16/2013-09-16-post/</guid>
       <description>
 
 &lt;p&gt;資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。&lt;/p&gt;
@@ -412,10 +412,10 @@ $ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを�
     
     <item>
       <title>『RailsによるアジャイルWebアプリケーション開発』第II部読了</title>
-      <link>http://chroju.github.io/blog/2013/09/04/2013-09-04-post/</link>
+      <link>https://chroju.github.io/blog/2013/09/04/2013-09-04-post/</link>
       <pubDate>Wed, 04 Sep 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/09/04/2013-09-04-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/09/04/2013-09-04-post/</guid>
       <description>&lt;p&gt;「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -458,10 +458,10 @@ $ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを�
     
     <item>
       <title>『RailsによるアジャイルWebアプリケーション開発』第I部 読了</title>
-      <link>http://chroju.github.io/blog/2013/07/25/2013-07-25-post/</link>
+      <link>https://chroju.github.io/blog/2013/07/25/2013-07-25-post/</link>
       <pubDate>Thu, 25 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/07/25/2013-07-25-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/07/25/2013-07-25-post/</guid>
       <description>
 
 &lt;p&gt;第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Rubyの簡単な紹介が主。&lt;/p&gt;
@@ -505,10 +505,10 @@ $ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを�
     
     <item>
       <title>Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</title>
-      <link>http://chroju.github.io/blog/2013/07/21/2013-07-21-post/</link>
+      <link>https://chroju.github.io/blog/2013/07/21/2013-07-21-post/</link>
       <pubDate>Sun, 21 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/07/21/2013-07-21-post/</guid>
+      <guid>https://chroju.github.io/blog/2013/07/21/2013-07-21-post/</guid>
       <description>&lt;p&gt;VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、まずは動かしてみることにした。購入したのは以下の本。&lt;/p&gt;
 
 &lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg&#34; alt=&#34;RailsによるアジャイルWebアプリケーション開発 第4版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;RailsによるアジャイルWebアプリケーション開発 第4版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.03.01&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Sam Ruby Dave Thomas David Heinemeier Hansson &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 138,293&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
