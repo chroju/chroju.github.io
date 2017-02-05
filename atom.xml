@@ -6,8 +6,56 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 28 Dec 2016 18:05:19 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 05 Feb 2017 23:34:24 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Baroccoで分割キーボードデビューした</title>
+      <link>https://chroju.github.io/blog/2017/02/05/barocco_review/</link>
+      <pubDate>Sun, 05 Feb 2017 23:34:24 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/05/barocco_review/</guid>
+      <description>
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/gp/chroju/hY667o&#34; title=&#34;Baroccoとどいた&#34;&gt;&lt;img src=&#34;https://c1.staticflickr.com/1/579/31813875193_36398a3d15.jpg&#34; width=&#34;500&#34; height=&#34;500&#34; alt=&#34;Baroccoとどいた&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;20代がまもなく終わってしまうということもあり、今年はある程度健康維持、環境維持というところに注力して、快適かつ健全な肉体と精神を保とうと一応考えてます。んでその一環として1日の半分近くを費やすキーボード入力の身体への負担を改善すべく、 &lt;a href=&#34;https://www.mistelkeyboard.com/keyboards&#34;&gt;Barocco&lt;/a&gt; を買いました。&lt;/p&gt;
+
+&lt;p&gt;昨年10月に国内で販売開始、その後さまざまなレビューは出ているので、懸念点は織り込み済みで、半ば流行り始めである分割キーボードの将来に投資する意味合いを込めて購入に至った感覚です。まぁErgoDoxに投資するほどガチでは今のところないかなとか、あまりに通常のキーボードからかけ離れると他のキーボード使いづらくなりそうとか考えた結果、Baroccoが妥当ではという判断に落ち着きました。よく聞かれる不満としてHHKBとの配列や機能的差異があったんですが、幸い？にもHHKB未経験なのでその点は問題なく。&lt;/p&gt;
+
+&lt;h2 id=&#34;impression:6c2ca2e9265235284de999f27b4426d6&#34;&gt;Impression&lt;/h2&gt;
+
+&lt;p&gt;使い始めてまだ1週間も経っていないので、慣れが必要ではあるし、判断には時期尚早ではあるけど、今のところ悪くないなという感じです。&lt;/p&gt;
+
+&lt;h3 id=&#34;キー配列:6c2ca2e9265235284de999f27b4426d6&#34;&gt;キー配列&lt;/h3&gt;
+
+&lt;p&gt;キー配列はHHKBとの比較、というのはわからないものの、確かに少ししんどいところがあって、例えばバッククォートがFn + ESCという変則仕様でだいぶつらい。&lt;/p&gt;
+
+&lt;p&gt;また自分はアローキーをよく使うんですが、これもFn + j, k, l, iで少々微妙。キー配列を替えているのは今のところ以下。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アローキーはデフォルトの機能で「右下Shift , Fn, Pn, Ctrlをアローキーに変更できる」というものがあったので、これを使用。&lt;/li&gt;
+&lt;li&gt;アローキーに変更して埋もれたFnは、右Altに担わせる。&lt;/li&gt;
+&lt;li&gt;Aの隣のCapsLockをCtrlに変更（ただし、これは元から使っていたソフトウェア側の機能）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;タイプ感:6c2ca2e9265235284de999f27b4426d6&#34;&gt;タイプ感&lt;/h3&gt;
+
+&lt;p&gt;あんまりメカニカルを使ったことがないし、キーボードマニアでもないんですけど、打ちやすいし不満はないです。CHERRY MXなので期待を裏切ることはないかと。メカニカルは黒軸と青軸しか経験ないんですが、今回も黒軸にしました。赤軸がオーソドックスな気がするんですけど、店頭で試しに触ってみてもどうもあの軽さに馴染めなくて。&lt;/p&gt;
+
+&lt;h3 id=&#34;分割キーボード:6c2ca2e9265235284de999f27b4426d6&#34;&gt;分割キーボード&lt;/h3&gt;
+
+&lt;p&gt;肝心の「分割」という点ですけど、真ん中に位置するYやBは両手どちらも使って打っていたので、たまに空振ったりしてます。でもそれを除いてはそれほど問題なく打てています。&lt;/p&gt;
+
+&lt;p&gt;変わったのは姿勢ですね。弊社はアーロンチェアが支給されていて、この椅子って基本的に深く腰掛けるのがベストな座り方だと思うんですけど、これまではついつい前かがみになってしまい、いまいち活かしきれてなかったんです。Barocco導入後は深く腰掛けて、胸を開き、両手を軽く開いた場所にキーボードを配置できるので、アーロンチェアに合った座り方ができるようになった気がしてます。両手のポジションを自由に決めてタイピングができるというのは思っていたより快適でした。いいんじゃないでしょうか、分割キーボード。&lt;/p&gt;
+
+&lt;h2 id=&#34;結果:6c2ca2e9265235284de999f27b4426d6&#34;&gt;結果&lt;/h2&gt;
+
+&lt;p&gt;よい買い物だったと思います。ただメカニカル、ちょっとやっぱり音がするなぁという感じで、購入するときに店頭物色してて触った静音のキーボードも気になってしまったりして、キーボード沼にはまらないかだけ不安です。HHKBやRealForceの分割も出て、分割キーボードの選択肢が増えるといいんですけど。&lt;/p&gt;
+
+&lt;p&gt;Barocco現在は品薄のようで、Amazonで2万円近くになったりしてますが、割高なので時期を待った方が良さそうです。私が買ったのはツクモのネットショップですが、黒軸と青軸だけが17000円ぐらいで残ってました。あとは新宿西口のヨドに赤軸18000円を見かけましたが、まだあるかどうか。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>2016年総括 - 技術者って何なのかやっと理解した</title>
@@ -720,66 +768,6 @@
 &lt;li&gt;及川氏の最初のキャリアであるDECという会社、不勉強につき初耳。紆余曲折の末に現在はhpの一部か。。。&lt;/li&gt;
 &lt;li&gt;Googleの社是？ &amp;ldquo;Share everything you can&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;Qiitaにもっと投稿しようと思いました（こなみかん）&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ブログをHugoに移行した</title>
-      <link>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
-      <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
-      <description>
-
-&lt;p&gt;すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。&lt;/p&gt;
-
-&lt;p&gt;随所で語られているように移行自体は大したものではなく、Markdownでいずれも互換性があるし、Front MatterもYAML形式であれば同一。Hugoレポジトリの&lt;code&gt;content/post&lt;/code&gt;配下に記事ファイルを突っ込めば移行としてはおしまい。多少の差異については以下の記事が詳しい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した | SOTA&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名が&lt;code&gt;YYYY-MM-DD-foobar.markdown&lt;/code&gt;の形だったのに対し、今回は記事のパーマリンクを&lt;code&gt;config.toml&lt;/code&gt;で以下のように設定してしまっている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[permalinks]
-    post = &amp;quot;/blog/:year/:month/:day/:filename/&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;従って&lt;code&gt;/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/&lt;/code&gt;という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事は&lt;code&gt;foobar.markdown&lt;/code&gt;に直したのだが、はてなブログ時代から移植した記事は&lt;code&gt;YYYY-MM-DD-post.markdown&lt;/code&gt;という適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。&lt;/p&gt;
-
-&lt;p&gt;記事を公開する流れは以下のようになる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 記事作成
-$ hugo new post/title.md
-$ vi content/post/title.md
-# ビルド
-$ hugo
-# commit
-$ cd public
-$ git add .
-$ git commit -m &amp;quot;new post&amp;quot;
-$ git push origin master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;hugo&lt;/code&gt;コマンドでビルドすると&lt;code&gt;public&lt;/code&gt;フォルダにサイト構成全体が吐かれるので、それをそのまま&lt;code&gt;git push&lt;/code&gt;して終わり。ただ実際にバージョン管理したいのは&lt;code&gt;public&lt;/code&gt;というより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体で&lt;code&gt;git push&lt;/code&gt;してCIでビルドさせる形に変えたいと思う。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/&#34;&gt;HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。&lt;/p&gt;
-
-&lt;h2 id=&#34;追記-2016-02-22-23-50:f9b1285b375e2fa831a443cf9e131380&#34;&gt;（追記 2016-02-22 23:50）&lt;/h2&gt;
-
-&lt;p&gt;フィードのファイルパスがデフォルトだと&lt;code&gt;index.xml&lt;/code&gt;になってしまうので、Octopressから変更がないよう&lt;code&gt;atom.xml&lt;/code&gt;に直した。&lt;code&gt;config.toml&lt;/code&gt;で指定ができる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;rssuri = &amp;quot;atom.xml&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参考：&lt;a href=&#34;https://discuss.gohugo.io/t/what-is-rsslink-exactly/1195/2&#34;&gt;What is {{ .RSSlink }}, exactly? - support - Hugo Discussion&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;その他参考記事:f9b1285b375e2fa831a443cf9e131380&#34;&gt;その他参考記事&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/syui/items/869538099551f24acbbf&#34;&gt;HUGOを使ってサイトを立ち上げる方法 - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hugo - Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

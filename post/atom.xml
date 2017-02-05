@@ -6,8 +6,56 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 28 Dec 2016 18:05:19 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 05 Feb 2017 23:34:24 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Baroccoで分割キーボードデビューした</title>
+      <link>https://chroju.github.io/blog/2017/02/05/barocco_review/</link>
+      <pubDate>Sun, 05 Feb 2017 23:34:24 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/05/barocco_review/</guid>
+      <description>
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/gp/chroju/hY667o&#34; title=&#34;Baroccoとどいた&#34;&gt;&lt;img src=&#34;https://c1.staticflickr.com/1/579/31813875193_36398a3d15.jpg&#34; width=&#34;500&#34; height=&#34;500&#34; alt=&#34;Baroccoとどいた&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;20代がまもなく終わってしまうということもあり、今年はある程度健康維持、環境維持というところに注力して、快適かつ健全な肉体と精神を保とうと一応考えてます。んでその一環として1日の半分近くを費やすキーボード入力の身体への負担を改善すべく、 &lt;a href=&#34;https://www.mistelkeyboard.com/keyboards&#34;&gt;Barocco&lt;/a&gt; を買いました。&lt;/p&gt;
+
+&lt;p&gt;昨年10月に国内で販売開始、その後さまざまなレビューは出ているので、懸念点は織り込み済みで、半ば流行り始めである分割キーボードの将来に投資する意味合いを込めて購入に至った感覚です。まぁErgoDoxに投資するほどガチでは今のところないかなとか、あまりに通常のキーボードからかけ離れると他のキーボード使いづらくなりそうとか考えた結果、Baroccoが妥当ではという判断に落ち着きました。よく聞かれる不満としてHHKBとの配列や機能的差異があったんですが、幸い？にもHHKB未経験なのでその点は問題なく。&lt;/p&gt;
+
+&lt;h2 id=&#34;impression:6c2ca2e9265235284de999f27b4426d6&#34;&gt;Impression&lt;/h2&gt;
+
+&lt;p&gt;使い始めてまだ1週間も経っていないので、慣れが必要ではあるし、判断には時期尚早ではあるけど、今のところ悪くないなという感じです。&lt;/p&gt;
+
+&lt;h3 id=&#34;キー配列:6c2ca2e9265235284de999f27b4426d6&#34;&gt;キー配列&lt;/h3&gt;
+
+&lt;p&gt;キー配列はHHKBとの比較、というのはわからないものの、確かに少ししんどいところがあって、例えばバッククォートがFn + ESCという変則仕様でだいぶつらい。&lt;/p&gt;
+
+&lt;p&gt;また自分はアローキーをよく使うんですが、これもFn + j, k, l, iで少々微妙。キー配列を替えているのは今のところ以下。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;アローキーはデフォルトの機能で「右下Shift , Fn, Pn, Ctrlをアローキーに変更できる」というものがあったので、これを使用。&lt;/li&gt;
+&lt;li&gt;アローキーに変更して埋もれたFnは、右Altに担わせる。&lt;/li&gt;
+&lt;li&gt;Aの隣のCapsLockをCtrlに変更（ただし、これは元から使っていたソフトウェア側の機能）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;タイプ感:6c2ca2e9265235284de999f27b4426d6&#34;&gt;タイプ感&lt;/h3&gt;
+
+&lt;p&gt;あんまりメカニカルを使ったことがないし、キーボードマニアでもないんですけど、打ちやすいし不満はないです。CHERRY MXなので期待を裏切ることはないかと。メカニカルは黒軸と青軸しか経験ないんですが、今回も黒軸にしました。赤軸がオーソドックスな気がするんですけど、店頭で試しに触ってみてもどうもあの軽さに馴染めなくて。&lt;/p&gt;
+
+&lt;h3 id=&#34;分割キーボード:6c2ca2e9265235284de999f27b4426d6&#34;&gt;分割キーボード&lt;/h3&gt;
+
+&lt;p&gt;肝心の「分割」という点ですけど、真ん中に位置するYやBは両手どちらも使って打っていたので、たまに空振ったりしてます。でもそれを除いてはそれほど問題なく打てています。&lt;/p&gt;
+
+&lt;p&gt;変わったのは姿勢ですね。弊社はアーロンチェアが支給されていて、この椅子って基本的に深く腰掛けるのがベストな座り方だと思うんですけど、これまではついつい前かがみになってしまい、いまいち活かしきれてなかったんです。Barocco導入後は深く腰掛けて、胸を開き、両手を軽く開いた場所にキーボードを配置できるので、アーロンチェアに合った座り方ができるようになった気がしてます。両手のポジションを自由に決めてタイピングができるというのは思っていたより快適でした。いいんじゃないでしょうか、分割キーボード。&lt;/p&gt;
+
+&lt;h2 id=&#34;結果:6c2ca2e9265235284de999f27b4426d6&#34;&gt;結果&lt;/h2&gt;
+
+&lt;p&gt;よい買い物だったと思います。ただメカニカル、ちょっとやっぱり音がするなぁという感じで、購入するときに店頭物色してて触った静音のキーボードも気になってしまったりして、キーボード沼にはまらないかだけ不安です。HHKBやRealForceの分割も出て、分割キーボードの選択肢が増えるといいんですけど。&lt;/p&gt;
+
+&lt;p&gt;Barocco現在は品薄のようで、Amazonで2万円近くになったりしてますが、割高なので時期を待った方が良さそうです。私が買ったのはツクモのネットショップですが、黒軸と青軸だけが17000円ぐらいで残ってました。あとは新宿西口のヨドに赤軸18000円を見かけましたが、まだあるかどうか。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>2016年総括 - 技術者って何なのかやっと理解した</title>
@@ -758,30 +806,6 @@ $ git push origin master
 &lt;li&gt;&lt;a href=&#34;http://qiita.com/syui/items/869538099551f24acbbf&#34;&gt;HUGOを使ってサイトを立ち上げる方法 - Qiita&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hugo - Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Ops JAWS#3に行ってきた</title>
-      <link>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
-      <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
-      <description>&lt;p&gt;その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。&lt;/p&gt;
-
-&lt;p&gt;メインとなったのはconfig rulesのハンズオン。&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/g0o2kIUtI0yKmw&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/okochang/opsjaws-20160128&#34; title=&#34;OpsJAWS 20160128&#34; target=&#34;_blank&#34;&gt;OpsJAWS 20160128&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/okochang&#34; target=&#34;_blank&#34;&gt;hideaki yanase&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;AWSリソース、使っているうちに無秩序になっていき、ルールの統一がはかれなくなったり、全体像が見えづらくなったりということはありがちですが、config rulesを使ってもうシステム的に制御しちゃいましょうというテーマ。例えばCloudTrailが有効化されていない場合にアラートを上げる、とか。監視結果が変化すると、それをトリガーにLambdaをinvokeしたりもできるので、それこそなんでもできる感じ。&lt;/p&gt;
-
-&lt;p&gt;やってみて気付いたけど、やっぱり自分は運用が好きなのかもしれない。システムによって、本来不確かであったり信用性に劣っていたりするはずの人間の動作を制御する、というのが好きなんだろうなと。SEやってた頃は運用の制御はExcel資料が元になることが多くて、それ自体は特に楽しくなかったのだけど、システム的に作りこんでいくのはわくわくする。これはいい気付きだったし、次回も是非参加してみたい。&lt;/p&gt;
-
-&lt;p&gt;問題としてはやはり、Lambda Functionを書くのにpythonかnode.jsを使う必要がある（いまさらJavaってのもなぁ）ので、次回参加するのであればそれまでにpythonをある程度やっておかねばなぁというところ。&lt;/p&gt;
-
-&lt;p&gt;その他、昨年とてもおもしろく読ませていただいたSDの特集『なぜ「運用でカバー」がダメなのか』を書かれた運用設計ラボの波多野氏がいらっしゃっていたりして、個人的にはテンション上がったりもしました。「運用でカバー」をググるとトップに出てくる、なんだか好評を得てしまった拙記事はこちら（あえて移行前ブログを貼るアレ）。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2015/02/11/164926&#34;&gt;Software Design 2015年2月号『なぜ「運用でカバー」がダメなのか』読了 - そのねこが学ぶとき&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
