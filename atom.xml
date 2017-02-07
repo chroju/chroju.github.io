@@ -6,8 +6,94 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 05 Feb 2017 23:34:24 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Feb 2017 15:37:51 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>サーバーレスっぽいインフラをどう管理していくか</title>
+      <link>https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/</link>
+      <pubDate>Tue, 07 Feb 2017 15:37:51 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/</guid>
+      <description>
+
+&lt;h2 id=&#34;きっかけ:a2ab268b227616aa8c43281c29ecf3b9&#34;&gt;きっかけ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。&lt;/li&gt;
+&lt;li&gt;とはいえ完全に静的なサイトだとS3だけで事が済んでしまい面白くない（）ので、自分のブログの最新エントリーを動的に書き加えるような処理を与え、動的に生成されるページをLambdaで作ることにした。&lt;/li&gt;
+&lt;li&gt;サーバーレスの時代にいくつかデプロイフレームワークが出てきていたので、それを使えればと思った。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;……という感じでサーバーレスっぽい何かを作った。いや作ろうとしたってレベルか……。&lt;/p&gt;
+
+&lt;p&gt;実は個人で使っているクラウド上のサーバーが、今年1月の時点で3台ありまして。1台はプライベート用途のContainer Linux @さくらクラウド。1台は先に書いたパブリック用途のウェブサーバー @さくらVPS。んで踏み台として、必要なときだけ起動するEC2を1台。ああ、もう1台Herokuもhubot用に使ってたか。これはDockerにしちゃって消しましたが。&lt;/p&gt;
+
+&lt;p&gt;まぁさすがにちょっと無駄に多いから整理したいなという思いがきっかけとなった。VPS、数年前だとエンジニアは1人1台持ってnginxとMySQL運用しろみたいな気風もあったけど、なんだかそんな時代も去った感もあり。どちらかと言えばどこかのPaaSでなんか作る方が今風なのかも。&lt;/p&gt;
+
+&lt;p&gt;詳細な設計は&lt;a href=&#34;http://qiita.com/chroju/items/827dbb9e820f41820e14&#34;&gt;Qiitaに上げました&lt;/a&gt;ので、そちらをご参照ください。&lt;/p&gt;
+
+&lt;h2 id=&#34;使用したツール:a2ab268b227616aa8c43281c29ecf3b9&#34;&gt;使用したツール&lt;/h2&gt;
+
+&lt;h3 id=&#34;サーバーレスなデプロイツール:a2ab268b227616aa8c43281c29ecf3b9&#34;&gt;サーバーレスなデプロイツール&lt;/h3&gt;
+
+&lt;p&gt;これらのフレームワーク群をまとめてどう呼べばよいものか。。。「サーバーレスフレームワーク」がしっくり来るんだけど、これはすでに使ってしまっているプロダクトがあるから使えない……あの名前、汎用的過ぎてちょっとどうかと思うんだけど。&lt;/p&gt;
+
+&lt;p&gt;今回せっかくなので、フレームワークを使ってみることにしました。試したのは以下3種類。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;カバー範囲&lt;/th&gt;
+&lt;th&gt;感想&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/serverless/serverless&#34;&gt;Serverless Framework&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;中でCloud  Formationを使っているのでわりとなんでも。&lt;/td&gt;
+&lt;td&gt;多機能で何でもできる印象。CFn直接使うのと学習コストを比べたい感じがする。&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/awslabs/chalice&#34;&gt;chalice&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;API Gateway, Lambda&lt;/td&gt;
+&lt;td&gt;レスポンスがjsonに限定されるなどまだ機能は少ないが、その分簡単なAPIならサクッと作れて楽。何よりIAMポリシーを自動生成してくれるのが最高。&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/apex/apex&#34;&gt;Apex&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Lambda&lt;/td&gt;
+&lt;td&gt;Lambdaを手作業でzipしてデプロイするのが面倒なときに使いたいツール。GolangでLambdaを書けたりする機能もある。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;試用の結果、今回の目的はHTMLの返却だったのでchaliceは一旦諦めて、Serverless Frameworkでもよかったんだけど、ちょっと今回払う学習コストとしては見合わなさそうな印象があったので、Apexを使うことにした。&lt;/p&gt;
+
+&lt;p&gt;触った印象としてはApexも非常に学習コストが少なくて良いのだが、今後に期待したいのはChalice。awslabsが作っているので、というのもあるけれど、おそらくサーバーレスアーキテクチャーとして多い用途の1つであろう、API GatewayとLambdaを使ってREST APIを返す、という使い方においては必要十分な機能が満たされているように思います。&lt;/p&gt;
+
+&lt;h3 id=&#34;html5-up:a2ab268b227616aa8c43281c29ecf3b9&#34;&gt;HTML5 UP!&lt;/h3&gt;
+
+&lt;p&gt;以前は自分でせこせこHTMLやCSS書いてたんですが、カッコよいデザインがいいので今回は&lt;a href=&#34;https://html5up.net/&#34;&gt;HTML5 UP!&lt;/a&gt;を使いました。やりたいことに注力して、専門外の部分は外から力借りるってとても大切だし、今はあらゆる側面でそれができる時代になりました。以下の記事のおかげです。ありがとう。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://qiita.com/mhimuro/items/405590746e67971aac47?utm_content=buffer86566&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer&#34;&gt;「プログラマでしょ？ホームページ作ってよ！」を1日で対応する - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;サーバーレスの管理問題:a2ab268b227616aa8c43281c29ecf3b9&#34;&gt;サーバーレスの管理問題&lt;/h2&gt;
+
+&lt;p&gt;冒頭に挙げたQiitaの記事に書きましたが、だいーぶ四苦八苦しました。かれこれ2週間ぐらい？かかった？&lt;/p&gt;
+
+&lt;p&gt;例えばRDSやEC2ならオンプレで使っていたLinuxなりMySQLなりを単に置き換えたものとして扱えるわけですけど、API Gatewayなどは抽象化されたインフラなので、どんな機能を持っているのかは全部AWSの采配次第なわけです。従って当然ながらできることとできないことがあり、それをきちんと把握した上で、低コストでアーキテクチャーを設計するというのはなかなかにサービス仕様への理解が必要になります。AWSを持ち上げすぎることは、ベンダーロックインとどう違うのかという意見もありますが、まさにそれです。&lt;/p&gt;
+
+&lt;p&gt;使えるようになると確かにとても楽ではありますが、一方でこれに依存し切るのもどうなんだろうな、という思いがあるのも事実で。要所要所でLambda + API Gatewayを限定的に使うならまだしも、3つ4つのサービスを繋がるピタゴラスイッチになってきたら管理コストの方が高くなる可能性が強そうです。先に挙げたApexやChaliceが非常にシンプルなデプロイツールになっているのは、構成自体もシンプルに仕上げるためだと思います。Serverless Frameworkのように守備範囲の広いツールは一見便利ですが、その分カオスにもなりやすい。&lt;/p&gt;
+
+&lt;p&gt;サーバーレスとかマイクロサービスやりたいなら、Lambda中心に組み上げるのもいいけど、Dockerやコンテナ指向になった方が幸せになれるんじゃないかなぁ、とぼんやり考えています。いや、わかんない。今後ひょっとしたらサーバーレスを管理するための画期的ツールが現れるのかもしれないが、現時点では「使いすぎる」ことは避けたいなという思いです。構築コスト、運用コスト、さらには更改コストとはきちんと天秤にかけたいところです。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Baroccoで分割キーボードデビューした</title>
@@ -690,85 +776,6 @@
 &lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
 
 &lt;p&gt;Ansible / Docker / Serverspec / AWS / Elasticsearch&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JAWS DAYS 2016に行ってきた</title>
-      <link>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
-      <pubDate>Sun, 13 Mar 2016 11:03:24 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
-      <description>
-
-&lt;p&gt;昨年に続き。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/03/22/jaws-days-2015/&#34;&gt;JAWS DAYS 2015でAWS童貞捨ててきた · the world as code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;昨年JAWS DAYSのハンズオンでAWSアカウント作ったので、これでAWS歴丸1年。それにしては自分の力がしょっぱすぎて嫌になる。もっと活用したい。ただ今回「わからない」というセッションはなかったので（技術メインじゃないセッションをいくつか入れてたのは置いておいて）、それなりに知識はついているのかなぁという実感はできた。&lt;/p&gt;
-
-&lt;p&gt;サーバーレスアーキテクチャ、クラウドネイティブという言葉が極めて一般的になったなというのが今回の感想。事例を聞いていてもEC2並べてなんかやりますというのは当然ながらほとんどなくて、だいたいがLambda、Kinesis、API GatewayといったAWSリソースを繋ぎ合わせることでアーキテクチャを作り出している。もう従来的な言葉で言う「インフラ」というものは存在しなくなってしまった。VMwareやXenの時代というのか、あくまでサーバーという実体は変わらず、それの扱い方が変わるというだけの変化だったが、AWSがもたらしているのはサーバーそのものの消失。システムのアーキテクチャ自体の転換。何度かブログ内でも繰り返しているが、この全く新しい領域で勝負するにあたっては、アプリエンジニアもインフラエンジニアも関係ない。こういった状況下で自分が勝負できるとしたら、Opsになるのかなと思う。これまでインフラ屋が担ってきたOpsのスキルを、AWSへ適用していく。もちろん、コードをもっと書けるようにならなくてはならないといった、本来的な問題もあるが。&lt;/p&gt;
-
-&lt;p&gt;また今回全体を通して「コミュニティへの参画」というのが強調されていたようにも思う。最初のJAWS-UG代表である今春氏のセッションでも、Increments及川氏のセッションでも、社外のコミュニティに参加することの意義が説かれた。自分はお世辞にも積極参加ができているとは言いがたい状態なので、とても耳が痛い。&lt;/p&gt;
-
-&lt;h2 id=&#34;参加セッション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;参加セッション&lt;/h2&gt;
-
-&lt;h3 id=&#34;jaws-ugこれまでとこれから-キーノート:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;JAWS-UGこれまでとこれから（キーノート）&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;先述した今春氏のキーノート。&lt;/li&gt;
-&lt;li&gt;京セラドームでもイベントを開いたことがあるというのはちょっと驚き。思い切ってますなぁ。&lt;/li&gt;
-&lt;li&gt;会場に出来る会社様募集中らしい。企業が無償で場所提供してくれる業界状況というのも非常に恵まれている。というか、そういう文化圏にいて良かったと思う。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;amimoto-サーバーレスアーキテクチャ:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;AMIMOTO × サーバーレスアーキテクチャ&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;デジタルキューブ堀家氏。&lt;/li&gt;
-&lt;li&gt;先述の通り。サービスを疎結合にする。No EC2。&lt;/li&gt;
-&lt;li&gt;モバイル開発者じゃないからスルーしてたけど、mobile hub面白そう。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/serverless/serverless&#34;&gt;Serverless Framework&lt;/a&gt;気になる。
-説明のあった「Lambdaをローカルからinvokeできる」ぐらいならAWS CLIでいいんだけど、他にも活用できそう。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;外よりも中からの攻撃-事故がヤバイ-今やるべきクラウドセキュリティ対策:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;外よりも中からの攻撃・事故がヤバイ、今やるべきクラウドセキュリティ対策&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;cloudpackのアイレット齊藤氏。今回一番ためになった。&lt;/li&gt;
-&lt;li&gt;セキュリティに終わりはない、完璧はない、だからきちんと監査して透明性を確保して、リスクを受け入れる。&lt;/li&gt;
-&lt;li&gt;監査は目的ではない。むしろ時代に追いつけてない監査基準もあったり。&lt;/li&gt;
-&lt;li&gt;パスワードは脆弱だからSAMLとKerberosでAD連携してSSOとかカッコイイ。&lt;/li&gt;
-&lt;li&gt;cloudpackでやっていることは公開されているらしいので後でチェック。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;deep-dive-aws-iot:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;[Deep Dive] AWS IoT&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;mobile hubと同じく敬遠してたIoTだけどなんかやれそうな気になった。&lt;/li&gt;
-&lt;li&gt;とりあえずラズパイ入手かな。あとPython頑張る。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;金融クラウド-fintech最新動向-awsで金融のイノベーション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;金融クラウド＆FINTECH最新動向　～AWSで金融のイノベーション！&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AWS、MUFG、ウェルスナビの共同セッション。&lt;/li&gt;
-&lt;li&gt;MUFGがハッカソンとかやってるんだというのは全然知らなかったし意外オブ意外。
-時代の潮目が確実に変わってきてるのかなと。&lt;/li&gt;
-&lt;li&gt;銀行システム、基幹系は今まで通り守らなくてはならない。フロントはスピードを速める必要があると。
-その意味でSIerは失くならないと個人的には思っている。少なくとも金融系は。&lt;/li&gt;
-&lt;li&gt;ウェルスナビ、これまで米富裕層に提供していたような投資診断をモバイル向けで一般にも提供すると。&lt;/li&gt;
-&lt;li&gt;ITの役割が単なる自動化や効率化じゃなくて、新たな価値、市場を創造することにある。そういう仕事したい。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;エンジニアのキャリアとアウトプットを意識した成長戦略:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;エンジニアのキャリアとアウトプットを意識した成長戦略&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Increments及川氏。&lt;/li&gt;
-&lt;li&gt;話題になったIncrements入社の理由が「誰もやりそうにないから、差別化戦略として」ってのカッコよすぎた。&lt;/li&gt;
-&lt;li&gt;及川氏の最初のキャリアであるDECという会社、不勉強につき初耳。紆余曲折の末に現在はhpの一部か。。。&lt;/li&gt;
-&lt;li&gt;Googleの社是？ &amp;ldquo;Share everything you can&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Qiitaにもっと投稿しようと思いました（こなみかん）&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
