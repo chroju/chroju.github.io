@@ -6,8 +6,103 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 07 Feb 2017 15:37:51 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Feb 2017 23:30:43 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>VimperatorからVivaldi &#43; Vimiumへ乗り換える</title>
+      <link>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</link>
+      <pubDate>Wed, 15 Feb 2017 23:30:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</guid>
+      <description>
+
+&lt;p&gt;Firefox 51から、Vimperatorの一部機能が使用できなくなる状態が発生した。これについてはGitHub上でFixが進んでいるが、2017-02-15現在だとまだ修正版の公開までには至っていない。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vimperator/vimperator-labs/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aissue%20FF51&#34;&gt;Issues · vimperator/vimperator-labs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;もう数年間vimpを使っている身として、一時は修正版を待とうかとも思ったのだが、&lt;a href=&#34;http://internet.watch.impress.co.jp/docs/news/1031773.html&#34;&gt;今年11月からWebExtentionに移行する&lt;/a&gt;際にも同様の混乱が様々ありそうだし、代替策の模索を始めた。&lt;/p&gt;
+
+&lt;h2 id=&#34;why-vivaldi:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Why Vivaldi ?&lt;/h2&gt;
+
+&lt;p&gt;とはいえ、今の時代に代替となるブラウザはほぼChrome一択になってしまう。ChromeにもVimライクなKey configを実現する&lt;a href=&#34;http://internet.watch.impress.co.jp/docs/news/1031773.html&#34;&gt;Vimium&lt;/a&gt;があり、触れたこともあるのだが、自分はどうもChromeが苦手で移れずにいた。&lt;/p&gt;
+
+&lt;p&gt;一番大きいのがUIをカスタマイズする余地がないこと。例えばFirefoxだと多段タブをTab Mix Plusで実現しているのだが、Chromeだとこういったことはできず、大量のタブを開くとファビコンのみの表示に縮小されてしまう。またアドレスバーが上部で固定されているのも、個人的には邪魔くさい。&lt;/p&gt;
+
+&lt;p&gt;そこで&lt;a href=&#34;https://vivaldi.com/&#34;&gt;Vivaldi&lt;/a&gt;を採用しようと考えた。VivaldiはChromeエクステンションが互換動作するのでVimiumも使える上、UIがかなりフレキシブルにカスタマイズできる。&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/gp/chroju/3ZEy43&#34; title=&#34;vivaldi&#34;&gt;&lt;img src=&#34;https://c1.staticflickr.com/1/298/32875812446_92ae4222dc_z.jpg&#34; width=&#34;640&#34; height=&#34;452&#34; alt=&#34;vivaldi&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;多段タブこそできないものの、タブバーを上部ではなく横に表示することで、ファビコンだけに縮小されることは免れた。アドレスバーも要らないと言えば要らないのだが、SSLの確認用途もあるので下部表示へ変更している。&lt;/p&gt;
+
+&lt;h2 id=&#34;vimperator-to-vimium:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Vimperator to Vimium&lt;/h2&gt;
+
+&lt;p&gt;まずそもそもなのだが、VimiumではVimperatorの完全な代替には成り得ない。Vimperatorの真髄はjavascriptを介してOSの挙動を骨の髄までコマンド操作に置き換えるところにあったわけだけど、Vimiumでコマンド操作可能なのは、あくまでエクステンション内部で定義されているものに限られる。Vimperatorのような好き勝手はできない。&lt;/p&gt;
+
+&lt;p&gt;なのでVimperatorで自分にとってのキラーとなっていた機能だけでも移植を検討した。&lt;/p&gt;
+
+&lt;h3 id=&#34;key-mapping:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Key mapping&lt;/h3&gt;
+
+&lt;p&gt;key mappingは自由に替えられるので、自分の&lt;code&gt;.vimperatorrc&lt;/code&gt;に合わせる形で変更した。&lt;/p&gt;
+
+&lt;p&gt;なおctrlキーを交えたマッピングを行う場合、ブラウザデフォルトのショートカットと衝突する恐れがあるが、Vivaldiはショートカット定義を自由に替えられるため、キーバインドを解除すれば衝突しなくなる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unmap d
+map d removeTab
+unmap T
+map b Vomnibar.activateTabSelection
+map ;t LinkHints.activateModeToOpenInNewForegroundTab
+unmap X
+map u restoreTab
+map @ togglePinTab
+map O Vomnibar.activateEditUrl
+map l nextTab
+map h previousTab
+unmap &amp;lt;c-h&amp;gt;
+map &amp;lt;c-h&amp;gt; moveTabLeft
+map &amp;lt;c-l&amp;gt; moveTabRight
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;quick-marks:ff758502856daf3cb793532fffa2dbe8&#34;&gt;quick marks&lt;/h3&gt;
+
+&lt;p&gt;Vimのmarkっぽい機能として、VimperatorではURLにmarkを設定できるquickmarks (qmark) という機能があって重宝していた。例えば&lt;code&gt;q&lt;/code&gt;にQiitaを設定しておくと、&lt;code&gt;goq&lt;/code&gt;でカレントタブ、&lt;code&gt;gnq&lt;/code&gt;で新しいタブにQiitaが開く。&lt;/p&gt;
+
+&lt;p&gt;Vimiumでは再現できなかったので、現状Vomnibar（ブックマーク、履歴等からインクリメンタルサーチするランチャー）からブックマークを呼ぶ形で対応している。どうもREADMEを読む限りでは&lt;code&gt;map X createTab http://www.bbc.com/news&lt;/code&gt;といったキーバインドが可能らしいのだが、なぜか上手くいっていない。&lt;/p&gt;
+
+&lt;h3 id=&#34;copy-js:ff758502856daf3cb793532fffa2dbe8&#34;&gt;copy.js&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-plugins/blob/master/copy.js&#34;&gt;vimperator-plugins/copy.js at master · vimpr/vimperator-plugins&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Pluginになるが、URLやページタイトルを加工して好きな形でクリップボードへ取り込むコマンドを設定できる、copy.jsというものがあった。&lt;/p&gt;
+
+&lt;p&gt;こちらも再現はできなさそうなのだが、ブログ等を書くときにMarkdown形式でのURLコピーがどうしてもほしかったので、Vomnibarからbookmarkletを呼ぶ形で対応している。&lt;/p&gt;
+
+&lt;h3 id=&#34;commandbookmarklet-js:ff758502856daf3cb793532fffa2dbe8&#34;&gt;commandBookmarklet.js&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-plugins/blob/master/commandBookmarklet.js&#34;&gt;vimperator-plugins/commandBookmarklet.js at master · vimpr/vimperator-plugins&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ブックマークレットをコマンドで呼べるPlugin。そもそもVimiumにはコマンドモードがないので土台無理なわけで、Vomnibarから呼ぶという手段に頼るしか無くなっている。&lt;/p&gt;
+
+&lt;p&gt;良くも悪くも、以前コマンドモードでやっていたことは、ブックマークレットで再現してVomnibarからどうにかして呼ぶ、という形でだいたいは回避している。&lt;/p&gt;
+
+&lt;p&gt;また一方でVivaldiには「クイックコマンド」という機能があって、デフォルトだとF2を押すとVomnibarにも似たランチャーが起動する。ここからブックマーク、履歴、オープンなタブ、設定項目等をインクリメントに呼び出せるので、Vimiumが無くてもある程度キーボードで操作ができたりする。まぁ、インクリメンタルサーチするより、Vimiumの割り当てコマンドの方がタイプ数は少なくて済むので、あまり使ってはいない。&lt;/p&gt;
+
+&lt;h2 id=&#34;frustrated:ff758502856daf3cb793532fffa2dbe8&#34;&gt;frustrated&lt;/h2&gt;
+
+&lt;p&gt;以上の設定でなんとなく使えてはいるのだが、不満の話も。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;マスターパスワード設定がないので、あまりパスワードを記憶させたくない。&lt;/li&gt;
+&lt;li&gt;Firefox Syncのようなブックマーク、エクステンションの同期機能がない。&lt;/li&gt;
+&lt;li&gt;http/https以外のプロトコルで開いているタブ上では、Vimiumが効かない。&lt;/li&gt;
+&lt;li&gt;Vimiumは&lt;code&gt;.vimperatorrc&lt;/code&gt;のような設定の外出しが出来ない。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;そもそもにして、Firefoxの先を儚んでいるときに、先が不透明な更なるマイナーブラウザに移るという選択もどうかと思ったが、Vivaldiの開発が終わってしまった暁には大人しくChromeに移ろうと思う。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>サーバーレスっぽいインフラをどう管理していくか</title>
@@ -753,29 +848,6 @@
 &lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=8806950&#34;&gt;Ask HN: How do you manage/organize information and knowledge in your life? | Hacker News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://marcusvorwaller.com/blog/2015/12/14/personal-knowledgebases/&#34;&gt;The Sad State of Personal Knowledgebases&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://chroju.github.io/about/</link>
-      <pubDate>Sun, 13 Mar 2016 11:45:24 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h1&gt;
-
-&lt;h3 id=&#34;career:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;career&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;2011-2015 IT Engineer in a systems integrator (Financial)&lt;/li&gt;
-&lt;li&gt;2015- Infrastructure and Operation Engineer (ASP)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;interest:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;interest&lt;/h3&gt;
-
-&lt;p&gt;Ansible / Docker / Serverspec / AWS / Elasticsearch&lt;/p&gt;
 </description>
     </item>
     

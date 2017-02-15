@@ -6,8 +6,103 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 07 Feb 2017 15:37:51 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Feb 2017 23:30:43 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>VimperatorからVivaldi &#43; Vimiumへ乗り換える</title>
+      <link>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</link>
+      <pubDate>Wed, 15 Feb 2017 23:30:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</guid>
+      <description>
+
+&lt;p&gt;Firefox 51から、Vimperatorの一部機能が使用できなくなる状態が発生した。これについてはGitHub上でFixが進んでいるが、2017-02-15現在だとまだ修正版の公開までには至っていない。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vimperator/vimperator-labs/issues?utf8=%E2%9C%93&amp;amp;q=is%3Aissue%20FF51&#34;&gt;Issues · vimperator/vimperator-labs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;もう数年間vimpを使っている身として、一時は修正版を待とうかとも思ったのだが、&lt;a href=&#34;http://internet.watch.impress.co.jp/docs/news/1031773.html&#34;&gt;今年11月からWebExtentionに移行する&lt;/a&gt;際にも同様の混乱が様々ありそうだし、代替策の模索を始めた。&lt;/p&gt;
+
+&lt;h2 id=&#34;why-vivaldi:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Why Vivaldi ?&lt;/h2&gt;
+
+&lt;p&gt;とはいえ、今の時代に代替となるブラウザはほぼChrome一択になってしまう。ChromeにもVimライクなKey configを実現する&lt;a href=&#34;http://internet.watch.impress.co.jp/docs/news/1031773.html&#34;&gt;Vimium&lt;/a&gt;があり、触れたこともあるのだが、自分はどうもChromeが苦手で移れずにいた。&lt;/p&gt;
+
+&lt;p&gt;一番大きいのがUIをカスタマイズする余地がないこと。例えばFirefoxだと多段タブをTab Mix Plusで実現しているのだが、Chromeだとこういったことはできず、大量のタブを開くとファビコンのみの表示に縮小されてしまう。またアドレスバーが上部で固定されているのも、個人的には邪魔くさい。&lt;/p&gt;
+
+&lt;p&gt;そこで&lt;a href=&#34;https://vivaldi.com/&#34;&gt;Vivaldi&lt;/a&gt;を採用しようと考えた。VivaldiはChromeエクステンションが互換動作するのでVimiumも使える上、UIがかなりフレキシブルにカスタマイズできる。&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/gp/chroju/3ZEy43&#34; title=&#34;vivaldi&#34;&gt;&lt;img src=&#34;https://c1.staticflickr.com/1/298/32875812446_92ae4222dc_z.jpg&#34; width=&#34;640&#34; height=&#34;452&#34; alt=&#34;vivaldi&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;多段タブこそできないものの、タブバーを上部ではなく横に表示することで、ファビコンだけに縮小されることは免れた。アドレスバーも要らないと言えば要らないのだが、SSLの確認用途もあるので下部表示へ変更している。&lt;/p&gt;
+
+&lt;h2 id=&#34;vimperator-to-vimium:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Vimperator to Vimium&lt;/h2&gt;
+
+&lt;p&gt;まずそもそもなのだが、VimiumではVimperatorの完全な代替には成り得ない。Vimperatorの真髄はjavascriptを介してOSの挙動を骨の髄までコマンド操作に置き換えるところにあったわけだけど、Vimiumでコマンド操作可能なのは、あくまでエクステンション内部で定義されているものに限られる。Vimperatorのような好き勝手はできない。&lt;/p&gt;
+
+&lt;p&gt;なのでVimperatorで自分にとってのキラーとなっていた機能だけでも移植を検討した。&lt;/p&gt;
+
+&lt;h3 id=&#34;key-mapping:ff758502856daf3cb793532fffa2dbe8&#34;&gt;Key mapping&lt;/h3&gt;
+
+&lt;p&gt;key mappingは自由に替えられるので、自分の&lt;code&gt;.vimperatorrc&lt;/code&gt;に合わせる形で変更した。&lt;/p&gt;
+
+&lt;p&gt;なおctrlキーを交えたマッピングを行う場合、ブラウザデフォルトのショートカットと衝突する恐れがあるが、Vivaldiはショートカット定義を自由に替えられるため、キーバインドを解除すれば衝突しなくなる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unmap d
+map d removeTab
+unmap T
+map b Vomnibar.activateTabSelection
+map ;t LinkHints.activateModeToOpenInNewForegroundTab
+unmap X
+map u restoreTab
+map @ togglePinTab
+map O Vomnibar.activateEditUrl
+map l nextTab
+map h previousTab
+unmap &amp;lt;c-h&amp;gt;
+map &amp;lt;c-h&amp;gt; moveTabLeft
+map &amp;lt;c-l&amp;gt; moveTabRight
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;quick-marks:ff758502856daf3cb793532fffa2dbe8&#34;&gt;quick marks&lt;/h3&gt;
+
+&lt;p&gt;Vimのmarkっぽい機能として、VimperatorではURLにmarkを設定できるquickmarks (qmark) という機能があって重宝していた。例えば&lt;code&gt;q&lt;/code&gt;にQiitaを設定しておくと、&lt;code&gt;goq&lt;/code&gt;でカレントタブ、&lt;code&gt;gnq&lt;/code&gt;で新しいタブにQiitaが開く。&lt;/p&gt;
+
+&lt;p&gt;Vimiumでは再現できなかったので、現状Vomnibar（ブックマーク、履歴等からインクリメンタルサーチするランチャー）からブックマークを呼ぶ形で対応している。どうもREADMEを読む限りでは&lt;code&gt;map X createTab http://www.bbc.com/news&lt;/code&gt;といったキーバインドが可能らしいのだが、なぜか上手くいっていない。&lt;/p&gt;
+
+&lt;h3 id=&#34;copy-js:ff758502856daf3cb793532fffa2dbe8&#34;&gt;copy.js&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-plugins/blob/master/copy.js&#34;&gt;vimperator-plugins/copy.js at master · vimpr/vimperator-plugins&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Pluginになるが、URLやページタイトルを加工して好きな形でクリップボードへ取り込むコマンドを設定できる、copy.jsというものがあった。&lt;/p&gt;
+
+&lt;p&gt;こちらも再現はできなさそうなのだが、ブログ等を書くときにMarkdown形式でのURLコピーがどうしてもほしかったので、Vomnibarからbookmarkletを呼ぶ形で対応している。&lt;/p&gt;
+
+&lt;h3 id=&#34;commandbookmarklet-js:ff758502856daf3cb793532fffa2dbe8&#34;&gt;commandBookmarklet.js&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-plugins/blob/master/commandBookmarklet.js&#34;&gt;vimperator-plugins/commandBookmarklet.js at master · vimpr/vimperator-plugins&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ブックマークレットをコマンドで呼べるPlugin。そもそもVimiumにはコマンドモードがないので土台無理なわけで、Vomnibarから呼ぶという手段に頼るしか無くなっている。&lt;/p&gt;
+
+&lt;p&gt;良くも悪くも、以前コマンドモードでやっていたことは、ブックマークレットで再現してVomnibarからどうにかして呼ぶ、という形でだいたいは回避している。&lt;/p&gt;
+
+&lt;p&gt;また一方でVivaldiには「クイックコマンド」という機能があって、デフォルトだとF2を押すとVomnibarにも似たランチャーが起動する。ここからブックマーク、履歴、オープンなタブ、設定項目等をインクリメントに呼び出せるので、Vimiumが無くてもある程度キーボードで操作ができたりする。まぁ、インクリメンタルサーチするより、Vimiumの割り当てコマンドの方がタイプ数は少なくて済むので、あまり使ってはいない。&lt;/p&gt;
+
+&lt;h2 id=&#34;frustrated:ff758502856daf3cb793532fffa2dbe8&#34;&gt;frustrated&lt;/h2&gt;
+
+&lt;p&gt;以上の設定でなんとなく使えてはいるのだが、不満の話も。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;マスターパスワード設定がないので、あまりパスワードを記憶させたくない。&lt;/li&gt;
+&lt;li&gt;Firefox Syncのようなブックマーク、エクステンションの同期機能がない。&lt;/li&gt;
+&lt;li&gt;http/https以外のプロトコルで開いているタブ上では、Vimiumが効かない。&lt;/li&gt;
+&lt;li&gt;Vimiumは&lt;code&gt;.vimperatorrc&lt;/code&gt;のような設定の外出しが出来ない。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;そもそもにして、Firefoxの先を儚んでいるときに、先が不透明な更なるマイナーブラウザに移るという選択もどうかと思ったが、Vivaldiの開発が終わってしまった暁には大人しくChromeに移ろうと思う。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>サーバーレスっぽいインフラをどう管理していくか</title>
@@ -752,85 +847,6 @@
 &lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=7697050&#34;&gt;Ask HN: What do you use to organize your knowledge? | Hacker News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=8806950&#34;&gt;Ask HN: How do you manage/organize information and knowledge in your life? | Hacker News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://marcusvorwaller.com/blog/2015/12/14/personal-knowledgebases/&#34;&gt;The Sad State of Personal Knowledgebases&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>JAWS DAYS 2016に行ってきた</title>
-      <link>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
-      <pubDate>Sun, 13 Mar 2016 11:03:24 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
-      <description>
-
-&lt;p&gt;昨年に続き。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/03/22/jaws-days-2015/&#34;&gt;JAWS DAYS 2015でAWS童貞捨ててきた · the world as code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;昨年JAWS DAYSのハンズオンでAWSアカウント作ったので、これでAWS歴丸1年。それにしては自分の力がしょっぱすぎて嫌になる。もっと活用したい。ただ今回「わからない」というセッションはなかったので（技術メインじゃないセッションをいくつか入れてたのは置いておいて）、それなりに知識はついているのかなぁという実感はできた。&lt;/p&gt;
-
-&lt;p&gt;サーバーレスアーキテクチャ、クラウドネイティブという言葉が極めて一般的になったなというのが今回の感想。事例を聞いていてもEC2並べてなんかやりますというのは当然ながらほとんどなくて、だいたいがLambda、Kinesis、API GatewayといったAWSリソースを繋ぎ合わせることでアーキテクチャを作り出している。もう従来的な言葉で言う「インフラ」というものは存在しなくなってしまった。VMwareやXenの時代というのか、あくまでサーバーという実体は変わらず、それの扱い方が変わるというだけの変化だったが、AWSがもたらしているのはサーバーそのものの消失。システムのアーキテクチャ自体の転換。何度かブログ内でも繰り返しているが、この全く新しい領域で勝負するにあたっては、アプリエンジニアもインフラエンジニアも関係ない。こういった状況下で自分が勝負できるとしたら、Opsになるのかなと思う。これまでインフラ屋が担ってきたOpsのスキルを、AWSへ適用していく。もちろん、コードをもっと書けるようにならなくてはならないといった、本来的な問題もあるが。&lt;/p&gt;
-
-&lt;p&gt;また今回全体を通して「コミュニティへの参画」というのが強調されていたようにも思う。最初のJAWS-UG代表である今春氏のセッションでも、Increments及川氏のセッションでも、社外のコミュニティに参加することの意義が説かれた。自分はお世辞にも積極参加ができているとは言いがたい状態なので、とても耳が痛い。&lt;/p&gt;
-
-&lt;h2 id=&#34;参加セッション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;参加セッション&lt;/h2&gt;
-
-&lt;h3 id=&#34;jaws-ugこれまでとこれから-キーノート:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;JAWS-UGこれまでとこれから（キーノート）&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;先述した今春氏のキーノート。&lt;/li&gt;
-&lt;li&gt;京セラドームでもイベントを開いたことがあるというのはちょっと驚き。思い切ってますなぁ。&lt;/li&gt;
-&lt;li&gt;会場に出来る会社様募集中らしい。企業が無償で場所提供してくれる業界状況というのも非常に恵まれている。というか、そういう文化圏にいて良かったと思う。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;amimoto-サーバーレスアーキテクチャ:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;AMIMOTO × サーバーレスアーキテクチャ&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;デジタルキューブ堀家氏。&lt;/li&gt;
-&lt;li&gt;先述の通り。サービスを疎結合にする。No EC2。&lt;/li&gt;
-&lt;li&gt;モバイル開発者じゃないからスルーしてたけど、mobile hub面白そう。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/serverless/serverless&#34;&gt;Serverless Framework&lt;/a&gt;気になる。
-説明のあった「Lambdaをローカルからinvokeできる」ぐらいならAWS CLIでいいんだけど、他にも活用できそう。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;外よりも中からの攻撃-事故がヤバイ-今やるべきクラウドセキュリティ対策:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;外よりも中からの攻撃・事故がヤバイ、今やるべきクラウドセキュリティ対策&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;cloudpackのアイレット齊藤氏。今回一番ためになった。&lt;/li&gt;
-&lt;li&gt;セキュリティに終わりはない、完璧はない、だからきちんと監査して透明性を確保して、リスクを受け入れる。&lt;/li&gt;
-&lt;li&gt;監査は目的ではない。むしろ時代に追いつけてない監査基準もあったり。&lt;/li&gt;
-&lt;li&gt;パスワードは脆弱だからSAMLとKerberosでAD連携してSSOとかカッコイイ。&lt;/li&gt;
-&lt;li&gt;cloudpackでやっていることは公開されているらしいので後でチェック。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;deep-dive-aws-iot:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;[Deep Dive] AWS IoT&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;mobile hubと同じく敬遠してたIoTだけどなんかやれそうな気になった。&lt;/li&gt;
-&lt;li&gt;とりあえずラズパイ入手かな。あとPython頑張る。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;金融クラウド-fintech最新動向-awsで金融のイノベーション:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;金融クラウド＆FINTECH最新動向　～AWSで金融のイノベーション！&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;AWS、MUFG、ウェルスナビの共同セッション。&lt;/li&gt;
-&lt;li&gt;MUFGがハッカソンとかやってるんだというのは全然知らなかったし意外オブ意外。
-時代の潮目が確実に変わってきてるのかなと。&lt;/li&gt;
-&lt;li&gt;銀行システム、基幹系は今まで通り守らなくてはならない。フロントはスピードを速める必要があると。
-その意味でSIerは失くならないと個人的には思っている。少なくとも金融系は。&lt;/li&gt;
-&lt;li&gt;ウェルスナビ、これまで米富裕層に提供していたような投資診断をモバイル向けで一般にも提供すると。&lt;/li&gt;
-&lt;li&gt;ITの役割が単なる自動化や効率化じゃなくて、新たな価値、市場を創造することにある。そういう仕事したい。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;エンジニアのキャリアとアウトプットを意識した成長戦略:2e8d0bef4a75fbc8ff10011f247fcf08&#34;&gt;エンジニアのキャリアとアウトプットを意識した成長戦略&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Increments及川氏。&lt;/li&gt;
-&lt;li&gt;話題になったIncrements入社の理由が「誰もやりそうにないから、差別化戦略として」ってのカッコよすぎた。&lt;/li&gt;
-&lt;li&gt;及川氏の最初のキャリアであるDECという会社、不勉強につき初耳。紆余曲折の末に現在はhpの一部か。。。&lt;/li&gt;
-&lt;li&gt;Googleの社是？ &amp;ldquo;Share everything you can&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Qiitaにもっと投稿しようと思いました（こなみかん）&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
