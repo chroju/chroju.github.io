@@ -6,8 +6,70 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 15 Feb 2017 23:30:43 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 05 May 2017 17:53:22 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>O&#39;Reilly『Infrastructure as Code』読了</title>
+      <link>https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/</link>
+      <pubDate>Fri, 05 May 2017 17:53:22 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://www.oreilly.co.jp/books/9784873117966/&#34;&gt;O&amp;rsquo;Reillyの『Infrastructure as Code』&lt;/a&gt;を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い方にフォーカスした本はいくらか出ていたけれど、おそらく「Infrastructure as Code」の考え方や、システム運用への採用方法を包括してまとめた本は初めてということになるのかな。&lt;/p&gt;
+
+&lt;h2 id=&#34;ツールとプロセス:c5dd0fd4fec41295c5ca6082aaf01be5&#34;&gt;ツールとプロセス&lt;/h2&gt;
+
+&lt;p&gt;端的に内容を説明してしまうと、Infrastructure as Codeで使用するツールを&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ダイナミックインフラストラクチャプラットフォーム（AWS等パブリック、プライベート問わずプログラマブルな操作が可能なインフラプラットフォーム）&lt;/li&gt;
+&lt;li&gt;インフラストラクチャ定義ツール（Terraformのような、構築するインフラ環境を定義するツール）&lt;/li&gt;
+&lt;li&gt;サーバー構成ツール（Ansible、Chef等のサーバー内部の設定を定義するツール）&lt;/li&gt;
+&lt;li&gt;インフラストラクチャサービス（モニタリング、サービスディスカバリ等の環境管理用のツール）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の4つに大きく分類して、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;インフラのプロビジョニング&lt;/li&gt;
+&lt;li&gt;サーバーテンプレートの管理&lt;/li&gt;
+&lt;li&gt;サーバーのアップデート、更新&lt;/li&gt;
+&lt;li&gt;サーバーの破棄&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;といったライフサイクルを、各ツールを使ってどう管理するかを説いた本。後半で第10章をまるごと「インフラストラクチャのためのソフトウェア工学プラクティス」の説明に充てて、継続的インテグレーションやVCSの方法論を書いていたりして、DevOpsの名のもとにソフトウェア管理に対して導入されてきた手法を、インフラへも適用していくための本になっている。なのでサーバーを構築したらそれでおしまいではなくて、ダイナミックにサーバーが生成／廃棄される環境であれば、自動的にログは退避できるようにしておく必要があるだとか、システムマネジメント全体に焦点が当てられている。&lt;/p&gt;
+
+&lt;p&gt;ツールの使い方自体はドキュメントを読むなり、Qiitaを探るなりすればだいたいわかるんだけど、それをどう運用すれば効率的になるのか、より効果が得られるかという、プラクティスを知りたい思いが強かったので、大いに参考になった。&lt;/p&gt;
+
+&lt;h2 id=&#34;徹底的な自動化アプローチ:c5dd0fd4fec41295c5ca6082aaf01be5&#34;&gt;徹底的な自動化アプローチ&lt;/h2&gt;
+
+&lt;p&gt;例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。&lt;/p&gt;
+
+&lt;p&gt;Terraformであれば、EC2を立てた後に自動的にAnsibleを呼ぶようなことも機能でできるらしいけど、そういった連携の仕組みがツール自体に存在しなければ、構築したサーバーのIPアドレスやユーザーの情報を「サーバー構成ツール」へ渡す必要がある。1例として挙がっていたのが「構成レジストリ」と呼ばれる、サーバー情報を中央集権的に管理するツール。インフラストラクチャ定義ツールは立てたサーバーの情報をここに登録し、サーバー構成ツールが情報を引き出して、サーバー設定のデプロイを行う。具体的に「構成レジストリ」として使えるツールについてはそれほど言及がなかったけど、CygamesだとElasticsearchを使ってサーバー情報を管理しているという話を聞いたことがあって、実装としてはこれに近いのだと思う。&lt;/p&gt;
+
+&lt;script async class=&#34;speakerdeck-embed&#34; data-slide=&#34;46&#34; data-id=&#34;c6f07c336b90417f9a1361c9afb5eb07&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;あるいはAnsibleなどを導入したときによく聞かれるのが、結局手動でサーバー構成を変更してしまって、Playbookと実情に乖離が出てしまうという問題（本書ではこれによる構成差異の発生を「構成ドリフト」と呼んでいる）。これに対してはイミュータブルなサーバー管理をするのが最も良いとされる。なぜなら構成ドリフトを起こしても、定期的にイチから生成したサーバーに置き換えられていれば、そのたびに構成ドリフトもリセットされるから。&lt;/p&gt;
+
+&lt;p&gt;この本全体で貫かれているのは、とかく徹底的な自動化と、ワークフローのパイプライン化を行なって、各タスクからシステム管理者の手動オペレーションをなくすということ。これによりシステム管理者はインフラ構築、変更の「門番」としての役割から解放され、問題への対応といったより生産的なタスクへ移ることができるし、システムの変更によりサービスに対して発生する影響も低減できるとしている。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;自律的なオートメーションこそ、Infrastructure as Codeが確実に機能する秘訣である。チームがセキュリティを向上させる新しいウェブサーバーの設定オプションを見つけたら、それをオートメーションツールのなかに組み込む。チームは、もう1度そのことについて考えようとしなくても、現在及び将来のすべての関連サーバーにそれが適用されることを知っている。 (p.254)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;共通言語として利用したい:c5dd0fd4fec41295c5ca6082aaf01be5&#34;&gt;共通言語として利用したい&lt;/h2&gt;
+
+&lt;p&gt;先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は&lt;a href=&#34;https://www.amazon.co.jp/dp/462108786X&#34;&gt;『Fearless Change』&lt;/a&gt;でも使われていた。&lt;/p&gt;
+
+&lt;p&gt;で、結論としてとても良い本だとは思うのだけど、これを全部導入するとなるとなかなかにパワーが必要になる。特に、すでに手動でのサーバー管理を絶賛実施中の環境に対して導入する場合には、インフラに対する考え方自体を、秘伝のタレのように継ぎ足して使うものから、外部で管理している設定と常に同期して使うもの、すぐに破棄と生成のサイクルを回せるものへと変えていかなくてはならないので、組織的な協力が必要になってくる。しかも必要なのは一部ワークフローの自動化ではなく、徹底的な自動化、インフラ環境の自律的な動作。&lt;/p&gt;
+
+&lt;p&gt;まぁ、とはいえインフラパイプライン全体をいきなり用意して導入するのも難しいのは確かなので、まずは頻繁に変更が入る設定など、Infrastructure as Codeの恩恵が大きそうなところから始めてみるべきかと思う。少しずつでも確実にこれは実現していきたいなと思える本だった。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51YYyQ6-t6L._SL160_.jpg&#34; alt=&#34;Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 17.05.05&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Kief Morris &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 25,983&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>VimperatorからVivaldi &#43; Vimiumへ乗り換える</title>
@@ -754,100 +816,6 @@ map &amp;lt;c-l&amp;gt; moveTabRight
 &lt;p&gt;書くのではなく読むのも勉強。よく言われることではあるけれど、これまであまり意識していなかった。冒頭に挙げた通り、PythonではLambdaとAnsibleという明確にきっかけとなったツールが存在しているので、これらのコードをしばらく読んでものにしてみたいと思う。&lt;/p&gt;
 
 &lt;p&gt;あと個人的には最近インフラ界隈でもわりとgolangが話題で気になっているけど、それはまたおいおい（実はgo製OSSを修正して使いたくて、ちょっとだけかじってはいる）。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Personal Knowledge Base 2</title>
-      <link>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</link>
-      <pubDate>Thu, 17 Mar 2016 22:09:45 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</guid>
-      <description>
-
-&lt;p&gt;年初に&lt;a href=&#34;http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/&#34;&gt;Personal Knowledge Base · the world as code&lt;/a&gt;という記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。結論としては &lt;strong&gt;&lt;a href=&#34;https://trello.com/&#34;&gt;Trello&lt;/a&gt;&lt;/strong&gt; と &lt;strong&gt;&lt;a href=&#34;https://github.com/gollum/gollum&#34;&gt;gollum&lt;/a&gt;&lt;/strong&gt; を使っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;trello:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;Trello&lt;/h2&gt;
-
-&lt;p&gt;近年よく名前を訊く、Kanban形式でのビジュアライズされたタスク管理を可能とするツール。タスク管理向けなので当初は目を向けてなかったのだけど、よくよく冷静に考えてみるとメモ管理にかなり適してそうだったので採用。&lt;/p&gt;
-
-&lt;p&gt;結果として、タスクに限らず、数多の情報を整理するツールとしてとても使いやすい。ポイントはいくつか。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;メモがカードの形で表示されて、パラパラと繰って一覧できる。&lt;/li&gt;
-&lt;li&gt;メモにラベルを付けると色で表示されるので視認しやすい。&lt;/li&gt;
-&lt;li&gt;全文検索が可能。&lt;/li&gt;
-&lt;li&gt;エクスポート機能あり（json）。&lt;/li&gt;
-&lt;li&gt;descriptionをMarkdownで書くことができる。&lt;/li&gt;
-&lt;li&gt;Android、iOSいずれもアプリあり。IFTTTも対応。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;単なるテキストメモを保存する用途であればEvernoteの上位互換だと感じる。何よりも画面全体にメモを並べることができる一覧性の高さがいい。&lt;/p&gt;
-
-&lt;p&gt;今の自分は&lt;a href=&#34;http://pileofindexcards.org/wiki/index.php?title=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8&#34;&gt;PoIC&lt;/a&gt;のような使い方をしていて、とにかくメモを書き溜めては記録、発見、参照の3つのリストに取りあえず分けて、暇なときにつらつら眺めたりしている。分類の仕方はまだ模索中なので、今後変わるかもしれない。とにかく柔軟に使えるのがいい。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/choiyaki/20140920/1411170874&#34;&gt;「Trello」というアプリがおもしろい - iPhoneと本と数学となんやかんやと&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://victorsavkin.com/post/94468744151/using-trello-for-your-personal-productivity-system&#34;&gt;Using Trello for Your Personal Productivity System | Victor Savkin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;GTDは「高度」の管理用といわゆるToDoの管理用に2つボードを設けて使ってみている。プライベートのタスクだけなのでそれほど厳密な期限管理などは必要ないし、これで十分。&lt;/p&gt;
-
-&lt;h2 id=&#34;gollum:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;gollum&lt;/h2&gt;
-
-&lt;p&gt;散発的な思いつきをTrelloに入れる一方、体系的な知識管理はgollumを使う。GitHub Wikiの機能だけが単独でオープンソース化されているもので、さくらクラウドの2万円クーポンがあったのでとりあえずサーバー1台立ててホストしている。&lt;/p&gt;
-
-&lt;p&gt;技術的なメモ書き、読書メモ、あとは趣味で行く美術展の記録などはすべてここに溜めている。Wikiだと散逸的にページを作ってしまいがちなので、トップから最大2階層までの作成と定め、1階層目は各技術ジャンルのページ、2階層目に詳細記事として配置した。こうして体系立てたメモ環境を作ってみると、自分のスキルマップが出来上がっていくようで面白い。&lt;/p&gt;
-
-&lt;p&gt;gollumを建てるのに、技術的に難しいことはほとんどない。中身はSinatraとgitなのでカスタマイズもしやすく、とりあえず安易な認証機能ぐらいは追加してみた。作成した記事は個別にMarkdownファイルになってgollumのディレクトリ直下に直置きされるのだが、これはディレクトリを切って&lt;code&gt;git submodule&lt;/code&gt;としてGitHub上に上げ、個別管理したいかなと思っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;ナレッジ管理の必要性:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;ナレッジ管理の必要性&lt;/h2&gt;
-
-&lt;p&gt;ナレッジ管理が必要である、という潮流は昨今高まっているような気はしていて、Qiitaやesa.ioの登場あたりから特にそういう話はよく聞く気がする。&lt;/p&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/2R3Nk0tCAKPUnY&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/takoratta/ss-59111661&#34; title=&#34;情報共有から始めるチーム開発とキャリア戦略&#34; target=&#34;_blank&#34;&gt;情報共有から始めるチーム開発とキャリア戦略&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&#34;_blank&#34; href=&#34;//www.slideshare.net/takoratta&#34;&gt;Takuya Oikawa&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;個人であれ組織であれ、我々の仕事は（まぁ他の職種も同じだとは思うが）ナレッジを溜めて活用していくことにあるので、こういう取り組みは何がしか進めるべきだろうと思う。上記スライドにもあるように、暗黙知を形式化していくことで自分内でも、社内やコミュニティ内でも知識を記憶、伝達してさらに深めることが可能になる。&lt;/p&gt;
-
-&lt;p&gt;とはいえ昨今はツールの乱立はあって、ブログとQiitaの使い分けだったり、個人的なメモをどうするかだったり、やっぱり迷うことも多い。そこはある程度自分なりの使い方を定めておかないと、後々散逸したメモの山に途方に暮れたりはしそう。あと、単純に良いツールがあったとしても、メモする習慣をつけておかないと意味がないし、どちらかといえばそっちが大事なんではという気もする。些細なことでも漫然と調べず、記録するクセをこの2ツールで付けていこうと思う。&lt;/p&gt;
-
-&lt;p&gt;以下、他に比較検討したツール群を載せておく。&lt;/p&gt;
-
-&lt;h3 id=&#34;faqt-https-faqt-co:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;&lt;a href=&#34;https://faqt.co/&#34;&gt;FAQT&lt;/a&gt;&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;比較した中ではだいぶ惹かれた。一時はこれにしようかと思った。&lt;/li&gt;
-&lt;li&gt;明確にKnowledge baseを唄ったサービス。Markdownで書いたメモがカード形式で表示できる。&lt;/li&gt;
-&lt;li&gt;Markdownプレビューが結構好みだし、外観はとてもよかった。&lt;/li&gt;
-&lt;li&gt;まだ立ち上がったばかりで、将来性はちょっと不安。&lt;/li&gt;
-&lt;li&gt;全文検索の不在が決め手になり不採用。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;simplenote:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;Simplenote&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;定番メモサービス。&lt;/li&gt;
-&lt;li&gt;Markdown対応がほぼ皆無なので不採用。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;quiver-http-happenapps-com-quiver:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;&lt;a href=&#34;http://happenapps.com/#quiver&#34;&gt;Quiver&lt;/a&gt;&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;最近少し話題になったMac用ノートアプリ。&lt;/li&gt;
-&lt;li&gt;タグとノートブックで分類するEvernoteっぽいMarkdownノート。&lt;/li&gt;
-&lt;li&gt;データファイルをDropboxに置いてクラウド同期が可能。&lt;/li&gt;
-&lt;li&gt;外観がクールだし、結構使い勝手はよかった。&lt;/li&gt;
-&lt;li&gt;とはいえMacでしか使えないので断念（持ち歩きPCがLinuxなので）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;参考:8e8c37db9487c4a72f25b3d52d64fa82&#34;&gt;参考&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://medium.com/the-personal-knowledge-management-saga/the-personal-knowledge-management-saga-part-1-ae9bdc575ded#.9xvxjvkkz&#34;&gt;The Personal Knowledge Management Saga: #1 — The Personal Knowledge Management Saga — Medium&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=7697050&#34;&gt;Ask HN: What do you use to organize your knowledge? | Hacker News&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=8806950&#34;&gt;Ask HN: How do you manage/organize information and knowledge in your life? | Hacker News&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://marcusvorwaller.com/blog/2015/12/14/personal-knowledgebases/&#34;&gt;The Sad State of Personal Knowledgebases&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
