@@ -6,8 +6,61 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 05 May 2017 17:53:22 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jun 2017 23:35:55 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Toilの地獄から抜け出す術を知りたい</title>
+      <link>https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/</link>
+      <pubDate>Mon, 12 Jun 2017 23:35:55 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/</guid>
+      <description>
+
+&lt;p&gt;最近とても停滞感があってよろしくないので一度ブログに吐き出すなどします。&lt;/p&gt;
+
+&lt;h2 id=&#34;toilが多すぎる:cf2c09af71974207c95eb1721a23fec8&#34;&gt;Toilが多すぎる&lt;/h2&gt;
+
+&lt;p&gt;現状、自分はオペレーションエンジニア（決まった手順しかやらないオペレーターではなくて、問題解決や運用体制の構築とかやる感じの）という位置付けで働いていて、日々のシステム運用に関するタスクをもろもろ片付ける他に、長年澱のように蓄積された技術的負債とか、暗黙的な運用を改善していくことも任務だったりします。Googleが名付けたところで言えば前者がToilってやつですね、いわゆる。自動でできるはずなのにマニュアルで行われていて、サービスの増加に比例してどんどん業務を圧迫していくような類の仕事。&lt;/p&gt;
+
+&lt;p&gt;で、&lt;a href=&#34;https://landing.google.com/sre/book/chapters/eliminating-toil.html&#34;&gt;SRE本&lt;/a&gt;ではToilを日常の仕事の5割以下に収めろと言ってるんですが、全然自分の場合収まっていない。TodoistやTogglで最近はToilが1日に占める割合を計測しているのだけど、いずれもほぼ8〜9割。実感としても将来的な投資に費やせている時間ってのがほとんどないです。&lt;/p&gt;
+
+&lt;p&gt;実際のところ何がToilとして積み重なっているのかというと、手動でコマンドを打つような作業がほとんど。弊社では基本的に本番稼働中のシステムでオペレーションする人間を限定しているので、デプロイや設定の確認（ドキュメントがなかったりバージョン管理してなかったりするので、実機確認が必要になる機会が多々ある）等々自分らがやらねばならんのですが。しかし手動でやることがあまりに多い。数年に渡ってエンジニアのUNIXコマンドスキルに依存していた運用のツケが回ってきている。ある程度自動化すればいちいち手を動かさなくてよかったり、サーバーの状態、設定を確認するような作業であれば適切な可視化をすれば済む話であったり、解決策は見えているのだけど、手を打つ方に時間を回せていない状態。それなりに「どうすればいいか」がわかってはいるので、その分余計に「改善に時間が回せない」ことへの歯がゆさが強くてメンタルに優しくなかったりしている。&lt;/p&gt;
+
+&lt;h2 id=&#34;改善に必要なスキルは多方面に渡る:cf2c09af71974207c95eb1721a23fec8&#34;&gt;改善に必要なスキルは多方面に渡る&lt;/h2&gt;
+
+&lt;p&gt;DevOpsなんて言葉はもう枯れていて、SREという職種も珍しくなくなってきた昨今、先に挙げたようなありがちな技術的負債に対する汎用的な解決策は世の中に溢れていて、自分も見知ってはいる。でも、それを実際にどう現場へ適用していくかが本当の課題。&lt;/p&gt;
+
+&lt;p&gt;そもそもの時間が取れないってのはどしたらいいんですかね。『&lt;a href=&#34;https://www.amazon.co.jp/dp/B00QQKCV6E&#34;&gt;エッセンシャル思考&lt;/a&gt;』よろしく、本当に必要な依頼以外は「断る」というのは1つの選択かもしれない。うまいことやらないと怒られそうだけど。個人的な思いとしてはある程度残業時間増やしてでも時間確保するしかねーなってのと、あとは改善を進める効率を上げることなのかなと。例えばチームで使っているツールのAPIを叩くラッパースクリプトを書いたりとかよくしてるんですが、自分はお世辞にもプログラムを書くのが速い方ではないので、最近は1年ぐらいプログラマーとして働いてスキル上げたいなと思うぐらい。&lt;/p&gt;
+
+&lt;p&gt;時間が取れたとして、どうするか。改善は大きなことをいきなりやろうとしてもうまくいかないので「小さく始める」というのはよく言われることですが、小さく始めるにしても自分の業務だけが楽になるんじゃ意味がないから、自ずと他の人を何かしらは巻き込む形になる。なのでコミュニケーションスキル、と言わずともプレゼンテーションスキルは少なくとも必要。そう、技術的な解決策をいくら知っていてもそれだけではダメで、やはり組織でやっていく以上、当たり前の話として対人的なスキルは不可欠になるんですよね。自分が楽になるから、確実性が上がるから、ではなくて、双方ハッピーになれるという話をしなくてはならない。これが結構難しくて。単に設定をバージョン管理して可視化します、という話であっても、元々その設定を確認して開発に活用していた人たちの業務プロセスには変化が生まれる。それをメリットとして受け入れてもらえるか。改善を進めるというのを自分は十字軍にはしたくないと思っていて、そのへんのバランスには常々気を遣っていたり。&lt;/p&gt;
+
+&lt;p&gt;あとは自分の現場のように多方面に様々な課題が山積していると、その中のどの課題をまず解決するか、どのように解決するかという取捨選択も重要。局所最適にならず、なるべく全体最適で、さらにレバレッジを効かせられるようなことからどんどんやっていくべきで、些末なことに囚われるべきではない。どうしても課題をパラパラ並べていくと、手を付けやすそうなこととか、技術的に面白そうなことからやりたくなっちゃうんだけど、そこをグッと我慢しなければならない。&lt;/p&gt;
+
+&lt;p&gt;つわけで改善、と一言で言っても、求められるのは純粋なコンピュータに関する技術、だけではなくて、社会学や人文学がやっぱり必要になってくるなぁというのを実感する日々です。そしてそのどれもが自分には足りていないような気がして、強く閉塞感を覚えてしまっているのも事実であり。課題は一度バラして並べてあるので、それがなかなか崩れていかないのがとてももどかしくてしんどい。&lt;/p&gt;
+
+&lt;h2 id=&#34;あらゆる情報の流れを制御したい:cf2c09af71974207c95eb1721a23fec8&#34;&gt;あらゆる情報の流れを制御したい&lt;/h2&gt;
+
+&lt;p&gt;まぁしんどい話ばかりしていても仕方ないので具体的にやっていることも書きます。。だいたいは散逸してしまっている運用を統制していこうという向きが強い。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;時系列データベース（主にinfluxDB）を用いたメトリクスデータの集約。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;あらゆるもののバージョン管理、コマンドによるオペレーションの推進、必要に応じてAPIをラップしたCLIツールの作成。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ansibleやfabricでの構成管理、デプロイの統一。&lt;/li&gt;
+&lt;li&gt;言語はだいたいPythonを使っているけど、クロスコンパイルしてバイナリ配布できるGoに興味がある感じ。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/&#34;&gt;Infrastructure as Code&lt;/a&gt;記載の構成レジストリ（サーバー情報を集約したデータベース）やKVSによる設定情報の統制管理。&lt;/li&gt;
+&lt;li&gt;あとは人間のオペレーションをどうコントロールできるか、という視点から認知科学やデザインを少しかじったり。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;とにかく暗黙知に頼った運用が多すぎて、結果として「運用でカバー」せざるを得なくなってToilがかさむ、という本当にしんどい循環をしてしまっているので、様々な情報の集約、可視化、管理をしたい感じ。たぶん自分が興味あるのは情報の流れをつくる、それに乗せることで人間の仕事を最適化していくということっぽいんですよね。それができるのはとても楽しくはあるけど、つらくもあり。結果技術というよりプロセスの話を最近多く学んでいるのでブログも書けてなかったり。そういや暗黙知つながりでポランニーの『暗黙知の次元』読んだりもしてるのだが、もはや自分が何屋かわからんな。&lt;/p&gt;
+
+&lt;p&gt;ちょっと正解が何なのかよくわからなくなってきたので、一旦立ち止まって冷静にならないとダメそう。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>O&#39;Reilly『Infrastructure as Code』読了</title>
@@ -758,64 +811,6 @@ map &amp;lt;c-l&amp;gt; moveTabRight
 &lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;3aaec6a7751c4245a2951a688eaa5543&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
 
 &lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/CI5WFlfnIN2Pyf&#34; width=&#34;425&#34; height=&#34;355&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/zembutsu/is-it-wront-to-try-to-automate&#34; title=&#34;Re: 運用に自動化を求めるのは間違っているだろうか&#34; target=&#34;_blank&#34;&gt;Re: 運用に自動化を求めるのは間違っているだろうか&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/zembutsu&#34; target=&#34;_blank&#34;&gt;Masahito Zembutsu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Pythonに入門している</title>
-      <link>https://chroju.github.io/blog/2016/03/28/entry-python/</link>
-      <pubDate>Mon, 28 Mar 2016 22:29:39 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/03/28/entry-python/</guid>
-      <description>
-
-&lt;h2 id=&#34;pythonを学び始める:99f750581f26cd55e99e535cecc3c37d&#34;&gt;Pythonを学び始める&lt;/h2&gt;
-
-&lt;p&gt;今年の &lt;a href=&#34;http://chroju.github.io/blog/2016/01/03/manifesto-2016/&#34;&gt;行動規範&lt;/a&gt; でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、またAnsibleもPythonで書かれているということで、Pythonの読み書きが出来た方が今後良さそうだなと思うに至った。これまでRubyをよく書いていたけど、Linuxにデフォルトで入っているのはPythonやPerlという現実的な問題もある。&lt;/p&gt;
-
-&lt;p&gt;今までにやったこととしては取りあえず本を2冊読んだのと、一昨日は &lt;a href=&#34;http://python-nyumon.connpass.com/event/26257/&#34;&gt;入門者向けのPythonハンズオン&lt;/a&gt; に行ったりしてみた。基礎文法はだいたいさらって、requestsのようなポピュラーなライブラリは試してみた程度。&lt;/p&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51SI%2BAszQwL._SL160_.jpg&#34; alt=&#34;Pythonチュートリアル 第3版&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Pythonチュートリアル 第3版&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 16.03.28&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Guido van Rossum &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 24,079&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117534/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51moRIhvzhL._SL160_.jpg&#34; alt=&#34;Pythonエンジニア養成読本［いまどきの開発ノウハウ満載！］&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Pythonエンジニア養成読本［いまどきの開発ノウハウ満載！］&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 16.03.28&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;技術評論社 (2015-06-16)&lt;br /&gt;売り上げランキング: 42,458&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/B00ZR7WZOU/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;なおPythonチュートリアルはつい先日改版が出たのでそっちをリンクしてます。自分が買ったのは先月です（白目）&lt;/p&gt;
-
-&lt;h2 id=&#34;pythonに対する小並感:99f750581f26cd55e99e535cecc3c37d&#34;&gt;Pythonに対する小並感&lt;/h2&gt;
-
-&lt;p&gt;自分はアプリ屋ではないので言語に対する知見は広くないのだけど、なんとなく感じているのはこんなところ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PerlのTMTOWTDIに対して&lt;a href=&#34;http://qiita.com/IshitaTakeshi/items/e4145921c8dbf7ba57ef#there-should-be-one---and-preferably-only-one---obvious-way-to-do-it&#34;&gt;&amp;ldquo;There should be one&amp;rdquo;&lt;/a&gt;という考え方が明確で好き。&lt;/li&gt;
-&lt;li&gt;難読な記法というのが今のところあまりない。発想した通りに書いてだいたい動く気がする。&lt;/li&gt;
-&lt;li&gt;インデントでブロック形成するのはcoding styleの戦争が起きなくていい。
-
-&lt;ul&gt;
-&lt;li&gt;ただし自分はインデント＝スペース2つ派だった。Pythonは4つの方が確かに見やすいけど。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;バージョン2.x vs 3.xの話、外から聞いてはいたけどなにこれ面倒。&lt;/li&gt;
-&lt;li&gt;新参としては3.x学びたいけど、AWS Lambdaが2.7対応だし両方押さえようとしている。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pyvenv&lt;/code&gt;の環境の隔離の仕方がシンプルで好き。&lt;code&gt;pyenv&lt;/code&gt;というのもあって紛らわしいが。&lt;/li&gt;
-&lt;li&gt;というか全体的にシンプルなコンセプトで作られている印象。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2.xと3.xの両輪を回さなくてはならないことを除いては、全体的にはシンプルだし書きやすくてよいなという感じがする。インフラ自動化便利ツールもそろそろなにか書いてみたい。&lt;/p&gt;
-
-&lt;h2 id=&#34;新しい言語の学習方法:99f750581f26cd55e99e535cecc3c37d&#34;&gt;新しい言語の学習方法&lt;/h2&gt;
-
-&lt;p&gt;あと言語学習ではいままで「とりあえず書く」というのを手法にしていたけど、複数言語を学んでみて徐々にわかってきた勘所が2点ある。&lt;/p&gt;
-
-&lt;h3 id=&#34;文法で押さえるべきポイントは決まっている:99f750581f26cd55e99e535cecc3c37d&#34;&gt;文法で押さえるべきポイントは決まっている&lt;/h3&gt;
-
-&lt;p&gt;例えば&lt;code&gt;elif&lt;/code&gt;か&lt;code&gt;elsif&lt;/code&gt;か&lt;code&gt;else if&lt;/code&gt;かとか、false判定されるのはnullなのか&lt;code&gt;0&lt;/code&gt;なのか&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;なのかとか、複数言語を並行して遣うときに迷うポイントはわりと決まっているので、そこさえ押さえればとりあえず書ける、というのがある気がした。&lt;/p&gt;
-
-&lt;p&gt;チートシートを自分用に作るのも漫然と端から文法を並べ立てるのではなく、こういうポイントに限ったものにすると効率がよさそう。&lt;/p&gt;
-
-&lt;h3 id=&#34;読むのも勉強:99f750581f26cd55e99e535cecc3c37d&#34;&gt;読むのも勉強&lt;/h3&gt;
-
-&lt;p&gt;書くのではなく読むのも勉強。よく言われることではあるけれど、これまであまり意識していなかった。冒頭に挙げた通り、PythonではLambdaとAnsibleという明確にきっかけとなったツールが存在しているので、これらのコードをしばらく読んでものにしてみたいと思う。&lt;/p&gt;
-
-&lt;p&gt;あと個人的には最近インフラ界隈でもわりとgolangが話題で気になっているけど、それはまたおいおい（実はgo製OSSを修正して使いたくて、ちょっとだけかじってはいる）。&lt;/p&gt;
 </description>
     </item>
     
