@@ -1,0 +1,244 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>builderson2017に行ってきた &middot; the world as code</title>
+		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="https://chroju.github.io/atom.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='https://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="https://chroju.github.io/atom.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>builderson2017に行ってきた</h1>
+                    <h2 class="headline">August 6, 2017</h2>
+                </header>
+                <section id="post-body">
+                    <p><a href="https://builderscon.io/tokyo/2017">builderscon Tokyo 2017</a>に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しいですね。</p>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3246.0166435539!2d139.64466915084074!3d35.55329114448822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185f76e18c9d4d%3A0xc4a6f4b87d35fcb0!2z5pel5ZCJ6aeF!5e0!3m2!1sja!2sjp!4v1501994501383" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<p>会場になっていた<a href="http://www.kcc.keio.ac.jp">協生館</a>は大学施設というよりは少し街に開かれているのか、コンビニがあるのはもちろん、驚いたことにHUB（スイッチングじゃなくて酒飲めるアレ）があったり、ホールには全席電源とLANポートが完備されていたり、IT系カンファレンスには最適の場所じゃないかという声をTwitterで見かけたりしました。とてもいいとこでした。</p>
+
+<p>ビルコン初めてでしたけど、名前通りにと言うのか、まさに何かを「build」しましたという発表が多かったり、テーマでもある「知らなかったを聞く」機会に多く恵まれてよかったです。自分はOps側の人間なので、それほどbuildするという機会が多くはないんですけど、あんまりそこにハードル高く考えず、なんかやってみたいなと思ったら稚拙でもいいから作ればいいんだなという感覚が強くなった気がします。</p>
+
+<p>あと完全に私事ですが元同僚と遭遇したりして、前職と今とで全然やってること違うのにこういう機会があるってこと、ジャンルの壁を設けない横断的なカンファレンスってやっぱいいなと思いましたね。会社という枠が良い意味でそれほど強い意味を持たない、というのはこの業界の好きなとこです。</p>
+
+<p>今回は以下のセッションを聴きました。いずれもbuildersconのページからスライド資料に飛べるはずです。</p>
+
+<ul>
+<li>横山三国志に「うむ」は何コマある？〜マンガ全文検索システムの構築
+
+<ul>
+<li>この週末だいぶバズったアレです。</li>
+<li>コマの切り取り、OCR、全文検索、ウェブページのフロント、それぞれにOSSを的確に使っていて、発表自体もすごく参考になりました。</li>
+<li>個人利用できて楽しいことできるAPIとか結構あるんやんと思った。APIに自分でも触ってみたくなるセッション。</li>
+</ul></li>
+<li>Anatomy of DDoS
+
+<ul>
+<li>CloudFlareの中の人によるゲストセッション。</li>
+<li>DDoSと一口に言ってもOSI7層それぞれに手法と対応があるとか、IoTでデバイスばらまかれるとそれだけセキュリティの穴も増えるよねみたいな基礎から丁寧な話。</li>
+</ul></li>
+<li>RDBアンチパターンリファクタリング
+
+<ul>
+<li>今回のベストトーク賞。</li>
+<li>RDBに限らずリファクタリング全般に言えるYAGNIの話、技術的負債のうちどれを優先して返済するのかみたいな視点が参考になった。</li>
+</ul></li>
+<li>LT
+
+<ul>
+<li>QRコードは分割できるという話がマニアックながら何かに使えそう。</li>
+<li>もうマジで何でもいいから作ればいいじゃんという感を覚えた。作るは正義。</li>
+</ul></li>
+<li>サーバーサイドKotlin
+
+<ul>
+<li>Kotlinのnullable型がよいという話。</li>
+</ul></li>
+<li>OSSで始めるセキュリティログ収集
+
+<ul>
+<li>osqueryの話</li>
+<li>OSからログ、メトリクス情報を吸い出す手段って対象ごとにバラけてて面倒だなと思ってたんだけど、それに対する1つの回答になりそう。</li>
+</ul></li>
+<li>OSS貢献超入門
+
+<ul>
+<li>がんばりましょう。。。時間つくりましょう。。。</li>
+</ul></li>
+<li>Serverless Server Side Swift
+
+<ul>
+<li>Swiftはバイナリで動いてランタイム要らないのでAWS Lambdaで使えるって話。</li>
+<li>Lambdaのランタイム制約しんどいって話はよく聞くけど、正直バイナリそのまま突っ込んでまで別言語使いたいという気持ちはいまいちわからない。</li>
+</ul></li>
+<li>ここが辛いよサーバーレス。だが私は乗り越えた
+
+<ul>
+<li>サーバーレス実運用した上でのノウハウの話。</li>
+<li>フェイルオーバーの実装とか、テストのときの環境エミュレートとか。つらいのとてもわかる。</li>
+</ul></li>
+</ul>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="https://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fchroju.github.io%2fblog%2f2017%2f08%2f06%2fbuilderson_2017%2f - builderson2017%e3%81%ab%e8%a1%8c%e3%81%a3%e3%81%a6%e3%81%8d%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/08/06/builderson_2017/">builderson2017に行ってきた<aside class="dates">Aug 6</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/">Toilの地獄から抜け出す術を知りたい<aside class="dates">Jun 12</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/">O&#39;Reilly『Infrastructure as Code』読了<aside class="dates">May 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/">VimperatorからVivaldi &#43; Vimiumへ乗り換える<aside class="dates">Feb 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/">サーバーレスっぽいインフラをどう管理していくか<aside class="dates">Feb 7</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/05/barocco_review/">Baroccoで分割キーボードデビューした<aside class="dates">Feb 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/28/looking_back_2016/">2016年総括 - 技術者って何なのかやっと理解した<aside class="dates">Dec 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/10/25/what_is_ops/">多義化するOpsのミッションについて<aside class="dates">Oct 25</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://chroju.github.io/js/main.js"></script>
+<script src="https://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>

@@ -6,8 +6,84 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 12 Jun 2017 23:35:55 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 06 Aug 2017 21:25:43 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>builderson2017に行ってきた</title>
+      <link>https://chroju.github.io/blog/2017/08/06/builderson_2017/</link>
+      <pubDate>Sun, 06 Aug 2017 21:25:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/08/06/builderson_2017/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://builderscon.io/tokyo/2017&#34;&gt;builderscon Tokyo 2017&lt;/a&gt;に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しいですね。&lt;/p&gt;
+
+&lt;iframe src=&#34;https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3246.0166435539!2d139.64466915084074!3d35.55329114448822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185f76e18c9d4d%3A0xc4a6f4b87d35fcb0!2z5pel5ZCJ6aeF!5e0!3m2!1sja!2sjp!4v1501994501383&#34; width=&#34;600&#34; height=&#34;450&#34; frameborder=&#34;0&#34; style=&#34;border:0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;会場になっていた&lt;a href=&#34;http://www.kcc.keio.ac.jp&#34;&gt;協生館&lt;/a&gt;は大学施設というよりは少し街に開かれているのか、コンビニがあるのはもちろん、驚いたことにHUB（スイッチングじゃなくて酒飲めるアレ）があったり、ホールには全席電源とLANポートが完備されていたり、IT系カンファレンスには最適の場所じゃないかという声をTwitterで見かけたりしました。とてもいいとこでした。&lt;/p&gt;
+
+&lt;p&gt;ビルコン初めてでしたけど、名前通りにと言うのか、まさに何かを「build」しましたという発表が多かったり、テーマでもある「知らなかったを聞く」機会に多く恵まれてよかったです。自分はOps側の人間なので、それほどbuildするという機会が多くはないんですけど、あんまりそこにハードル高く考えず、なんかやってみたいなと思ったら稚拙でもいいから作ればいいんだなという感覚が強くなった気がします。&lt;/p&gt;
+
+&lt;p&gt;あと完全に私事ですが元同僚と遭遇したりして、前職と今とで全然やってること違うのにこういう機会があるってこと、ジャンルの壁を設けない横断的なカンファレンスってやっぱいいなと思いましたね。会社という枠が良い意味でそれほど強い意味を持たない、というのはこの業界の好きなとこです。&lt;/p&gt;
+
+&lt;p&gt;今回は以下のセッションを聴きました。いずれもbuildersconのページからスライド資料に飛べるはずです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;横山三国志に「うむ」は何コマある？〜マンガ全文検索システムの構築
+
+&lt;ul&gt;
+&lt;li&gt;この週末だいぶバズったアレです。&lt;/li&gt;
+&lt;li&gt;コマの切り取り、OCR、全文検索、ウェブページのフロント、それぞれにOSSを的確に使っていて、発表自体もすごく参考になりました。&lt;/li&gt;
+&lt;li&gt;個人利用できて楽しいことできるAPIとか結構あるんやんと思った。APIに自分でも触ってみたくなるセッション。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Anatomy of DDoS
+
+&lt;ul&gt;
+&lt;li&gt;CloudFlareの中の人によるゲストセッション。&lt;/li&gt;
+&lt;li&gt;DDoSと一口に言ってもOSI7層それぞれに手法と対応があるとか、IoTでデバイスばらまかれるとそれだけセキュリティの穴も増えるよねみたいな基礎から丁寧な話。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RDBアンチパターンリファクタリング
+
+&lt;ul&gt;
+&lt;li&gt;今回のベストトーク賞。&lt;/li&gt;
+&lt;li&gt;RDBに限らずリファクタリング全般に言えるYAGNIの話、技術的負債のうちどれを優先して返済するのかみたいな視点が参考になった。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;LT
+
+&lt;ul&gt;
+&lt;li&gt;QRコードは分割できるという話がマニアックながら何かに使えそう。&lt;/li&gt;
+&lt;li&gt;もうマジで何でもいいから作ればいいじゃんという感を覚えた。作るは正義。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;サーバーサイドKotlin
+
+&lt;ul&gt;
+&lt;li&gt;Kotlinのnullable型がよいという話。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;OSSで始めるセキュリティログ収集
+
+&lt;ul&gt;
+&lt;li&gt;osqueryの話&lt;/li&gt;
+&lt;li&gt;OSからログ、メトリクス情報を吸い出す手段って対象ごとにバラけてて面倒だなと思ってたんだけど、それに対する1つの回答になりそう。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;OSS貢献超入門
+
+&lt;ul&gt;
+&lt;li&gt;がんばりましょう。。。時間つくりましょう。。。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Serverless Server Side Swift
+
+&lt;ul&gt;
+&lt;li&gt;Swiftはバイナリで動いてランタイム要らないのでAWS Lambdaで使えるって話。&lt;/li&gt;
+&lt;li&gt;Lambdaのランタイム制約しんどいって話はよく聞くけど、正直バイナリそのまま突っ込んでまで別言語使いたいという気持ちはいまいちわからない。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ここが辛いよサーバーレス。だが私は乗り越えた
+
+&lt;ul&gt;
+&lt;li&gt;サーバーレス実運用した上でのノウハウの話。&lt;/li&gt;
+&lt;li&gt;フェイルオーバーの実装とか、テストのときの環境エミュレートとか。つらいのとてもわかる。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Toilの地獄から抜け出す術を知りたい</title>
@@ -787,30 +863,6 @@ map &amp;lt;c-l&amp;gt; moveTabRight
 &lt;p&gt;&lt;a href=&#34;http://calamel.jp/curry&#34;&gt;インド人完全無視カレー | インド人のアドバイスを完全無視！－カラメル&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;ペパボの方と実際に話せてよかったです。なんか新しいもの社内に導入したり、広げていったりとなると「結局コミュニケーションだよね」という結論に至ったのでそこは頑張るしかないのかなぁ超ニガテ。あとKPIちゃんと出して比較しないと響かなかったりするってのは確かになという感じなので、自分も腐らず頑張らなきゃなと思い新たにしました。スーパーエンジニアすげーすげーと言っても始まらんし、やりたいならちゃんと自分でやらなきゃなーと。いやー行った甲斐がありました。ありがとうございました。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>#qpstudy 響け！アラートコール！行ってきた</title>
-      <link>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</link>
-      <pubDate>Sun, 24 Apr 2016 22:28:32 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.zusaar.com/event/12327003&#34;&gt;#qpstudy 2016.04 響け！アラートコール！　本編 一般枠 on Zusaar&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;こちら参加してきました。アラートコール、というか監視運用をテーマとした勉強会。qpstudyことキューピー3分インフラクッキングについては、数少ないインフラ系の継続的勉強会ということで、気になってはいましたが初参加できました。&lt;/p&gt;
-
-&lt;p&gt;以前にも障害対応をテーマとした勉強会に行ったことがありますが、この界隈は闇が深い。。以前のそのイベントも今回のイベントも、いずれも参加者が互いの経験を話し合う場があったわけですが、やっぱりそういうのが一番効果あるかもなぁという気がしました。特に監視運用についてはイベント内でも触れられた通りノウハウや勘に頼っている部分も大きく、他社がどういうノウハウに頼っているのか？というのはとても気になるところ。例えばサービス運用全般のガイドラインとしてITILがあるように、客観的な基準があればいいわけなんですが。&lt;/p&gt;
-
-&lt;p&gt;で、監視の基準。これは確かにもう少し考え直した方がいいのかもなと思った次第。例えばメトリック監視ってよくありますけど、仮にCPUが90%使用率達したとして、それがすぐに何か異常に繋がるわけではないのですよね。だから「障害」として扱うべきは単純な閾値超過やエラーではなくて、システム的な動作不全であるはず。それと障害予兆にあたるようなワーニングメッセージは別で扱うべきであって、何が本当に必要な監視、アラートなのかというのは、どの会社でも洗い直すと結構ボロが出てきそうな気がしました。イベントではMakerelのような監視系のSaaSがフレームワークを提供してほしいという声もあったり。あとはAIによる判別。確かにメトリックやログの状態を機械学習させれば、障害予兆をAIで判断させることもできそうな気がします。&lt;/p&gt;
-
-&lt;p&gt;今年度に入ってからの自分の社内ミッションは、わりと自動化に重きが置かれているのですけど、イベントでは「自動化は目的ではなく手段」という話もあり。確かに自動化自体が楽しい作業なのでついついなんでも手を出すけど、何のために、またどういった効果があると考えられるから自動化するのか、あるいは自動化の手段には何を用いるのかというところはもうちょっと考えたい。「SaaSを使わない理由って何？」って話もあったけど、そういえばそうだなと。まぁ外部にメトリックやIP持たせるのが嫌、という理由で弊社の場合は通らないかもなぁという気もしますけど、SaaSの導入だって要は監視システムをDIYするプロセスを自動化しているわけで。一考には値するはず。&lt;/p&gt;
-
-&lt;p&gt;今回の勉強会はなにか結論をバーン！と提示してくれるものではなく、考えるきっかけを与えてくれるような形式だったので、明日以降ちゃんと社内に持って帰って再検討しようと思います。qpstudy、楽しいので次回もぜひ行きたいところ。&lt;/p&gt;
-
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;3aaec6a7751c4245a2951a688eaa5543&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/CI5WFlfnIN2Pyf&#34; width=&#34;425&#34; height=&#34;355&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/zembutsu/is-it-wront-to-try-to-automate&#34; title=&#34;Re: 運用に自動化を求めるのは間違っているだろうか&#34; target=&#34;_blank&#34;&gt;Re: 運用に自動化を求めるのは間違っているだろうか&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/zembutsu&#34; target=&#34;_blank&#34;&gt;Masahito Zembutsu&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
