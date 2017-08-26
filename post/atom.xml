@@ -6,8 +6,70 @@
     <description>Recent content in Posts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 06 Aug 2017 21:25:43 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Aug 2017 12:04:57 +0900</lastBuildDate>
     <atom:link href="https://chroju.github.io/post/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AWS Certified Sysops Administratorを取得した</title>
+      <link>https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/</link>
+      <pubDate>Sat, 26 Aug 2017 12:04:57 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/certification/certified-sysops-admin-associate/&#34;&gt;AWS認定Sysopsアドミニストレータ&lt;/a&gt;という資格を取得しました。AWSには5種類の認定資格がありまして、レベル的には「アソシエイト」と「プロフェッショナル」の2段階に分かれるのですが、これは下位にあたる「アソシエイト」のものです。本当は「プロフェッショナル」にあたるDevOpsアドミニストレータがほしいなと思ったんですけど、受験資格としてSysopsが必要だったのでまずは、という感じで取りました。&lt;/p&gt;
+
+&lt;h2 id=&#34;準備したこと:7bb8df30076c755bc962bd78a435e365&#34;&gt;準備したこと&lt;/h2&gt;
+
+&lt;p&gt;試験要項には「モニタリングとメトリクス」とか「ネットワークの基本的な知識」といった抽象的な試験範囲は書かれているんですが、具体的にどのAWSサービスが出題されるかは書かれていないので正直勉強しづらかったです。ウェブで漁ればある程度受験記を書かれている方がいるので読んどいた方がいいのと、実際の問題に慣れる意味でサンプル問題は確認しておくこと、あと模試が2000円ぐらいで受けられるので受けとくのは必須です。サンプル問題も模試も先のリンク先から飛べます。&lt;/p&gt;
+
+&lt;p&gt;実際受けたところだと、Sysopsで出題されるサービスは以下あたりという感触。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;EC2&lt;/li&gt;
+&lt;li&gt;VPC&lt;/li&gt;
+&lt;li&gt;RDS&lt;/li&gt;
+&lt;li&gt;S3&lt;/li&gt;
+&lt;li&gt;Route53&lt;/li&gt;
+&lt;li&gt;ELB(Classic, ALBいずれも)&lt;/li&gt;
+&lt;li&gt;Auto Scaling&lt;/li&gt;
+&lt;li&gt;EBS&lt;/li&gt;
+&lt;li&gt;Elastic Beanstalk&lt;/li&gt;
+&lt;li&gt;ElastiCache&lt;/li&gt;
+&lt;li&gt;Opsworks&lt;/li&gt;
+&lt;li&gt;CloudWatch&lt;/li&gt;
+&lt;li&gt;CloudFormation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ここに並べた各サービスについて、&lt;a href=&#34;https://aws.amazon.com/jp/aws-jp-introduction/&#34;&gt;AWS クラウドサービス活用資料集 | AWS&lt;/a&gt;に存在するBlackBeltの資料を読み、その上でざざっと公式のドキュメントを眺めました。たまによく読まないと解けない引っ掛けはありますが、重箱の隅をつつくような変な問題はないので、きちんとサービスの仕様とプラクティスを押さえれば得点はできます。準備期間は1か月ぐらい？&lt;/p&gt;
+
+&lt;p&gt;ただ、自分の場合はこの大半のサービスを実際に使った経験があるので、それにより得点できた感は否めないです。逆に触ったことがないElastiCacheあたりは弱かったりしたので、触っとくか、それが難しい方ならAmazonが開催しているトレーニングを受講した方がたぶん無難です。&lt;/p&gt;
+
+&lt;h2 id=&#34;問題の傾向:7bb8df30076c755bc962bd78a435e365&#34;&gt;問題の傾向&lt;/h2&gt;
+
+&lt;p&gt;実際に出る問題はユースケースを想定したものが多く、丸暗記でどうにかなる感じではないです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;構成に関する情報が記載され、そこからシングルポイントを見つける問題
+
+&lt;ul&gt;
+&lt;li&gt;IGWやVGWやNGWとか、AWSマネージドの範囲がどう冗長化されてるか答えられないといけない&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;RDSやEC2のインスタンス障害時の想定動作&lt;/li&gt;
+&lt;li&gt;欲しいメトリクスをAWSサービスを使って取得、通知する方法の考案&lt;/li&gt;
+&lt;li&gt;ネットワークの疎通ができない際や、CPU等がサチってるときの対処方法を考えさせる問題&lt;/li&gt;
+&lt;li&gt;クライアントが保存するデータの高セキュリティな保管、読み出し方法を考えさせる問題&lt;/li&gt;
+&lt;li&gt;負荷上昇を見据えて、可用性と金銭的コストを踏まえた適切なスケーリング設計の作成&lt;/li&gt;
+&lt;li&gt;既存のオンプレミスデータセンターと連携した上で、高可用なシステムを組む問題&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こんな感じですかね。漫然とAWSを使っているとわからないけど、EBSの種類をちゃんと吟味してるかとか、SPOFが無いかどうかつぶさにチェックしているかとか、そういう点で差がつく気がします。&lt;/p&gt;
+
+&lt;h2 id=&#34;今後:7bb8df30076c755bc962bd78a435e365&#34;&gt;今後&lt;/h2&gt;
+
+&lt;p&gt;冒頭にも書いたとおりDevOpsも受けようと思います。が、この手の資格にはつきものの2年ごとの更新が面倒だなぁという気もしたりしてどうも。AWSは必要なサービスを必要なだけ使えればそれでいいものだとは思いますが、網羅的に仕様を押さえてどっぷりAWSを使いこなしたいという場合には、体系的な知識獲得に悪くない資格だと感じてます。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>builderson2017に行ってきた</title>
@@ -813,56 +875,6 @@ map &amp;lt;c-l&amp;gt; moveTabRight
 &lt;p&gt;そしていずれにせよas codeであることが求められる。AWS上のマネージドサービスはもはや「インフラ」という言葉で括るにはふさわしくないように思いますが、システムおあらゆるレイヤーをcodeで管理し、アプリケーションと同じCI/CDのサイクルに載せてDevOpsで回していくことはもはや必須になる。そこで使うツールには選択の余地があって、Ansibleでもある程度AWSレイヤーをまかなえたりするし、一方でマネージドサービスはTerraformなどを使う方法もある。そのあたりの匙加減が難しい。&lt;/p&gt;
 
 &lt;p&gt;さらに言えば、まだツールが充実しきったとも言えない気がするんですよね。GitHubへのcommitをトリガーとしてサーバーの設定変更まで行うような、インフラCIの手法はまだ確立しきったとは言い難い（そういえばCodePipelineにOpsWorksが対応しましたね）し、Serverspecのようなインフラテストツールもより広がる必要がある。インフラの考え方はここ数年どんどん変化してますけど、まだまだ本格的な動きはこれからなんじゃないかという気がしています。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
-      <link>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
-      <pubDate>Sat, 14 May 2016 21:58:32 +0900</pubDate>
-      
-      <guid>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://pepabo.connpass.com/event/30348/&#34;&gt;第5回ペパボテックカンファレンス〜インフラエンジニア大特集〜 - connpass&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;そもそもインフラ向けのイベントって相対的にはやっぱ少ない気がするし、かのペパボさん主催のイベントだし行く以外の選択肢はなかった。アプリ系のイベントだとだいたいが「Pythonエンジニア」みたいに言語ごとだったり、フレームワークまでテーマが絞られたりするなか、「インフラエンジニア」ってよくよく考えたらめっちゃ広いよねって感じだけど、実際の職務もまぁそんな感じだし、今回の話もだいぶ話題としては多岐に渡っていました。&lt;/p&gt;
-
-&lt;p&gt;自分の最近の関心事としては社内にAnsible導入させたいなと思いながら格闘しているのと、もっとインフラの低レイヤーの知識深めたいなと思っているのとがあるのだけど、その両面について話が聞けてとてもよかったです。&lt;/p&gt;
-
-&lt;h2 id=&#34;インフラのコード管理:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;インフラのコード管理&lt;/h2&gt;
-
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;c2be628f92684309baceb739c9d688a8&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
-
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;a54d0ad6100a405497f88b93385c2e3d&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;前者はdrone.io上にdocker-on-dockerでインフラCI環境を作っているという話。どうもdrone.ioだとベースイメージのバージョンが切り替えられないらしい。自分は過去にAnsibleとServerspecによるCIをCircleCIで走らせる構成を作ったことがあるのだけど、これを社内で導入するなら確かにこうなるんだろうなぁという感じだった。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;Ansible + Serverspec + Docker + circle ci によるインフラCI · the world as code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;後者はあるある、というかAnsible導入検討のなかで自分としても浮かんでいた課題で、コード管理しててもそれを更新する「人手」が必ずしもパーフェクトではないので、コードと実機状態の乖離が出る問題。解決策としてはPuppet、Serverspecと実機の照合を毎日夜間に回して、差異にすぐ気づけるようにするというものでした。わかる。すげーわかる。懇親会でも話していたのだけど、sshして作業しちゃいたいのグッと我慢してPuppetちゃんと書き換えるの大事。個人的にはPuppetとServerspec両方回すのもなかなかしんどそうなので、Serverspec単体を構成変更監視みたいに使うのでもいいかなと思う。&lt;/p&gt;
-
-&lt;p&gt;他に印象的だったのは開発側もPuppetを触る、つまり自らインフラの設定変更に手を出せるという話。現状弊社だと、フォルダ1つ掘るのでも、ファイルのコピーでも開発から依頼を受けて運用でsshするみたいなテンション上がらない運用なので、開発にコードでそれを書いてもらえるのはとても効率的に思える。インフラをコード化する一番の意味って、開発と運用という垣根を超えて、インフラを語る共通言語を技術者全体にもたらせることなのだろうなと。まさにDevOps。&lt;/p&gt;
-
-&lt;p&gt;あとそういえば「Infrastructure as Code」って言葉を聞かなかった。単語として長いなぁとは思ってたから自分も今度から「インフラのコード化」って言います。&lt;/p&gt;
-
-&lt;h2 id=&#34;低レイヤー:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;低レイヤー&lt;/h2&gt;
-
-&lt;p&gt;スライドまだ出ていないみたいだけど、ext4からxfsへの移行検討にあたって、結構ガッツリとベンチマークテストやったというLTがありました。クラウド全盛な今日このごろでも足回りは結局物理なんですよというのはまさにその通りで、自分は全然このへんの知識がないのだけどちゃんとやらなきゃなと。。。反省。。。&lt;/p&gt;
-
-&lt;p&gt;そして何よりペパボのプライベートクラウド&amp;rdquo;Nyah&amp;rdquo;の話ですねー。&lt;/p&gt;
-
-&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;5786d472901a4758a005deeb670746e2&#34; data-ratio=&#34;1.77777777777778&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;いやもうすげーわー。あこがれるわー。OpenStack使うにあたり社内別グループ会社に経験者がいたので知見を聴けたとか、一気に5バージョン飛ばして最新バージョンへ追随させるとか、技術に対する姿勢が会社も個人もとても前向きで素敵な話だった。真似しようとして簡単に真似できる話ではないけれど、姿勢や方針については本当に参考になった。&lt;/p&gt;
-
-&lt;h2 id=&#34;懇親会:85286d0ca73ff0f2087672f05a11ae61&#34;&gt;懇親会&lt;/h2&gt;
-
-&lt;p&gt;インド人完全無視カレーおいしかった。トムヤムクン入れてるのか。なるほど。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://calamel.jp/curry&#34;&gt;インド人完全無視カレー | インド人のアドバイスを完全無視！－カラメル&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ペパボの方と実際に話せてよかったです。なんか新しいもの社内に導入したり、広げていったりとなると「結局コミュニケーションだよね」という結論に至ったのでそこは頑張るしかないのかなぁ超ニガテ。あとKPIちゃんと出して比較しないと響かなかったりするってのは確かになという感じなので、自分も腐らず頑張らなきゃなと思い新たにしました。スーパーエンジニアすげーすげーと言っても始まらんし、やりたいならちゃんと自分でやらなきゃなーと。いやー行った甲斐がありました。ありがとうございました。&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,230 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.16-DEV" />
+		<title>AWS Certified Sysops Administratorを取得した &middot; the world as code</title>
+		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="https://chroju.github.io/atom.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='https://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="https://chroju.github.io/atom.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>AWS Certified Sysops Administratorを取得した</h1>
+                    <h2 class="headline">August 26, 2017</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p><a href="https://aws.amazon.com/jp/certification/certified-sysops-admin-associate/">AWS認定Sysopsアドミニストレータ</a>という資格を取得しました。AWSには5種類の認定資格がありまして、レベル的には「アソシエイト」と「プロフェッショナル」の2段階に分かれるのですが、これは下位にあたる「アソシエイト」のものです。本当は「プロフェッショナル」にあたるDevOpsアドミニストレータがほしいなと思ったんですけど、受験資格としてSysopsが必要だったのでまずは、という感じで取りました。</p>
+
+<h2 id="準備したこと:7bb8df30076c755bc962bd78a435e365">準備したこと</h2>
+
+<p>試験要項には「モニタリングとメトリクス」とか「ネットワークの基本的な知識」といった抽象的な試験範囲は書かれているんですが、具体的にどのAWSサービスが出題されるかは書かれていないので正直勉強しづらかったです。ウェブで漁ればある程度受験記を書かれている方がいるので読んどいた方がいいのと、実際の問題に慣れる意味でサンプル問題は確認しておくこと、あと模試が2000円ぐらいで受けられるので受けとくのは必須です。サンプル問題も模試も先のリンク先から飛べます。</p>
+
+<p>実際受けたところだと、Sysopsで出題されるサービスは以下あたりという感触。</p>
+
+<ul>
+<li>EC2</li>
+<li>VPC</li>
+<li>RDS</li>
+<li>S3</li>
+<li>Route53</li>
+<li>ELB(Classic, ALBいずれも)</li>
+<li>Auto Scaling</li>
+<li>EBS</li>
+<li>Elastic Beanstalk</li>
+<li>ElastiCache</li>
+<li>Opsworks</li>
+<li>CloudWatch</li>
+<li>CloudFormation</li>
+</ul>
+
+<p>ここに並べた各サービスについて、<a href="https://aws.amazon.com/jp/aws-jp-introduction/">AWS クラウドサービス活用資料集 | AWS</a>に存在するBlackBeltの資料を読み、その上でざざっと公式のドキュメントを眺めました。たまによく読まないと解けない引っ掛けはありますが、重箱の隅をつつくような変な問題はないので、きちんとサービスの仕様とプラクティスを押さえれば得点はできます。準備期間は1か月ぐらい？</p>
+
+<p>ただ、自分の場合はこの大半のサービスを実際に使った経験があるので、それにより得点できた感は否めないです。逆に触ったことがないElastiCacheあたりは弱かったりしたので、触っとくか、それが難しい方ならAmazonが開催しているトレーニングを受講した方がたぶん無難です。</p>
+
+<h2 id="問題の傾向:7bb8df30076c755bc962bd78a435e365">問題の傾向</h2>
+
+<p>実際に出る問題はユースケースを想定したものが多く、丸暗記でどうにかなる感じではないです。</p>
+
+<ul>
+<li>構成に関する情報が記載され、そこからシングルポイントを見つける問題
+
+<ul>
+<li>IGWやVGWやNGWとか、AWSマネージドの範囲がどう冗長化されてるか答えられないといけない</li>
+</ul></li>
+<li>RDSやEC2のインスタンス障害時の想定動作</li>
+<li>欲しいメトリクスをAWSサービスを使って取得、通知する方法の考案</li>
+<li>ネットワークの疎通ができない際や、CPU等がサチってるときの対処方法を考えさせる問題</li>
+<li>クライアントが保存するデータの高セキュリティな保管、読み出し方法を考えさせる問題</li>
+<li>負荷上昇を見据えて、可用性と金銭的コストを踏まえた適切なスケーリング設計の作成</li>
+<li>既存のオンプレミスデータセンターと連携した上で、高可用なシステムを組む問題</li>
+</ul>
+
+<p>こんな感じですかね。漫然とAWSを使っているとわからないけど、EBSの種類をちゃんと吟味してるかとか、SPOFが無いかどうかつぶさにチェックしているかとか、そういう点で差がつく気がします。</p>
+
+<h2 id="今後:7bb8df30076c755bc962bd78a435e365">今後</h2>
+
+<p>冒頭にも書いたとおりDevOpsも受けようと思います。が、この手の資格にはつきものの2年ごとの更新が面倒だなぁという気もしたりしてどうも。AWSは必要なサービスを必要なだけ使えればそれでいいものだとは思いますが、網羅的に仕様を押さえてどっぷりAWSを使いこなしたいという場合には、体系的な知識獲得に悪くない資格だと感じてます。</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="https://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fchroju.github.io%2fblog%2f2017%2f08%2f26%2faws_sysops_administrator%2f - AWS%20Certified%20Sysops%20Administrator%e3%82%92%e5%8f%96%e5%be%97%e3%81%97%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/">AWS Certified Sysops Administratorを取得した<aside class="dates">Aug 26</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/08/06/builderson_2017/">builderson2017に行ってきた<aside class="dates">Aug 6</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/">Toilの地獄から抜け出す術を知りたい<aside class="dates">Jun 12</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/">O&#39;Reilly『Infrastructure as Code』読了<aside class="dates">May 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/">VimperatorからVivaldi &#43; Vimiumへ乗り換える<aside class="dates">Feb 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/">サーバーレスっぽいインフラをどう管理していくか<aside class="dates">Feb 7</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/05/barocco_review/">Baroccoで分割キーボードデビューした<aside class="dates">Feb 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/28/looking_back_2016/">2016年総括 - 技術者って何なのかやっと理解した<aside class="dates">Dec 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://chroju.github.io/js/main.js"></script>
+<script src="https://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>
