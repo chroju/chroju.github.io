@@ -6,8 +6,11 @@
     <description>Recent content in Exhibi on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sat, 08 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chroju.github.io/categories/exhibi/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/categories/exhibi/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Kaminariの実装をしてみた</title>
@@ -15,47 +18,16 @@
       <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/08/08/exhibi-update/</guid>
-      <description>
-
-&lt;p&gt;久しぶりに稼働させている&lt;a href=&#34;http://chroju.net/exhibi&#34;&gt;ExhiBi&lt;/a&gt;というサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。&lt;/p&gt;
-
-&lt;h1 id=&#34;kaminari:fcc76b76324f50b2931d376567b0908e&#34;&gt;kaminari&lt;/h1&gt;
-
-&lt;p&gt;ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。&lt;/p&gt;
-
-&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari&#34; title=&#34;amatsuda/kaminari&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;https://github.com/amatsuda/kaminari&#34; target=&#34;_blank&#34;&gt;amatsuda/kaminari&lt;/a&gt;&lt;/iframe&gt;
-
-&lt;p&gt;bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは&lt;code&gt;controller&lt;/code&gt;で&lt;code&gt;#index&lt;/code&gt;のようなリソースを拾ってくるアクションに&lt;code&gt;.page&lt;/code&gt;をかましてやるようにします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;# もともとはExhibition.all.order...
-def index
-  @exhibitions = Exhibition.page(params[:page]).order(&amp;quot;start_date DESC&amp;quot;)
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは&lt;code&gt;view&lt;/code&gt;でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-slim&#34;&gt;= paginate @exhibitions
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なお、実装当初は&lt;code&gt;undefined method &#39;deep_symbolize_keys&#39;&lt;/code&gt;などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は&lt;code&gt;config/locales/ja.yml&lt;/code&gt;が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。&lt;/p&gt;
-
-&lt;p&gt;もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。&lt;/p&gt;
-
-&lt;h1 id=&#34;id以外の要素でmodle-showにアクセスする:fcc76b76324f50b2931d376567b0908e&#34;&gt;id以外の要素でmodle#showにアクセスする&lt;/h1&gt;
-
-&lt;p&gt;例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。&lt;/p&gt;
-
-&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Fqiita.com%2Fawakia%2Fitems%2Fc2c790dc51e5b084af10&#34; title=&#34;Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://qiita.com/awakia/items/c2c790dc51e5b084af10&#34; target=&#34;_blank&#34;&gt;Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita&lt;/a&gt;&lt;/iframe&gt;
-
-&lt;p&gt;やってることはなんともシンプルで、&lt;code&gt;Museum.find(n)&lt;/code&gt;で呼んでいたところを&lt;code&gt;Museum.find_by_name_en_or_id(hoge)&lt;/code&gt;と出来るようにしただけですね。&lt;code&gt;#to_param&lt;/code&gt;でサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。&lt;/p&gt;
-
-&lt;p&gt;ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通に&lt;code&gt;bundle exec rake g migration&lt;/code&gt;してから&lt;code&gt;rake db:migrate&lt;/code&gt;するだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦&lt;code&gt;rake db:migrate:reset&lt;/code&gt;してから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。&lt;/p&gt;
-
-&lt;iframe class=&#34;bookmarklet hatena-embed&#34; src=&#34;http://hatenablog.com/embed?url=http%3A%2F%2Feasyramble.com%2Fdifference-bettween-rake-db-migrate-reset.html&#34; title=&#34;rake db:reset と rake db:migrate:reset の違い | EasyRamble&#34; style=&#34;border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;&#34;&gt;&lt;a href=&#34;http://easyramble.com/difference-bettween-rake-db-migrate-reset.html&#34; target=&#34;_blank&#34;&gt;rake db:reset と rake db:migrate:reset の違い | EasyRamble&lt;/a&gt;&lt;/iframe&gt;
-
-&lt;p&gt;自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。&lt;/p&gt;
-</description>
+      <description>久しぶりに稼働させているExhiBiというサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。
+kaminari ページネーションでデファクトスタンダード状態であるkaminariを使ってみました。
+amatsuda/kaminari bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずはcontrollerで#indexのようなリソースを拾ってくるアクションに.pageをかましてやるようにします。
+# もともとはExhibition.all.order... def index @exhibitions = Exhibition.page(params[:page]).order(&amp;quot;start_date DESC&amp;quot;) end  あとはviewでページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。
+= paginate @exhibitions  なお、実装当初はundefined method &#39;deep_symbolize_keys&#39;などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因はconfig/locales/ja.ymlが一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。
+もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。
+id以外の要素でmodle#showにアクセスする 例えばExhiBiの場合は美術館ごとのページにアクセスするには、これまでmuseums/2みたいなURLになっていたわけですが、カッコ悪いし使い勝手も悪いのでmuseums/motなど、英名でアクセスできるよう変えました。参考にしたのは以下ページ。
+Railsで、URLにIDでなく名前を入力して、アクセスする方法 - Qiita やってることはなんともシンプルで、Museum.find(n)で呼んでいたところをMuseum.find_by_name_en_or_id(hoge)と出来るようにしただけですね。#to_paramでサービス内のリンクもすべて英名表記URLに変更できています。こういう柔軟さはRailsやっぱりいいですね。
+ただ自分の場合ちょっと問題があったのは、これまでテーブルに英名表記のカラムを入れてなかったので、新たに追加する必要がありました。まぁ普通にbundle exec rake g migrationしてからrake db:migrateするだけなんですけど、ローカルで開発しているときに何故かこれが通らず、一旦rake db:migrate:resetしてから改めて打つハメになったりした。このへんの話は以下記事がちょっと詳しかったり。
+rake db:reset と rake db:migrate:reset の違い | EasyRamble 自分はインフラエンジニアなので、Railsを実務で使うってことはほとんどこの先皆無だとは思うんですけど、自己表現手段としてやっぱりRailsぐらい使えておくと良さそうだなと改めて思います。例えばインフラの勉強でサーバー運用してみようとなっても、上で何か動いてないとあんまり勉強にならなかったり。自分がどんなことをしているのか？を外にアッピルする意味では、こういうの1つぐらい持っとくといいのだろうなと思います。yamlの勉強しなきゃとか、今回そういう派生効果もありましたので。近々作れたらもう1個サービス作ってみようと思ってます。</description>
     </item>
     
   </channel>

@@ -6,8 +6,11 @@
     <description>Recent content in Ansible on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Thu, 24 Sep 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chroju.github.io/categories/ansible/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/categories/ansible/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>開発環境のためのansibleを出来るだけベストプラクティスでまとめた</title>
@@ -15,80 +18,21 @@
       <pubDate>Thu, 24 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</guid>
-      <description>
-
-&lt;p&gt;自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで&lt;code&gt;bundle&lt;/code&gt;とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;なぜec2:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;なぜEC2？&lt;/h2&gt;
-
-&lt;p&gt;少し前に&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/&#34;&gt;開発環境としてDigitalOceanを使うことを勧める記事&lt;/a&gt;を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。&lt;/p&gt;
-
-&lt;h2 id=&#34;ベストプラクティス構成の意識:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;ベストプラクティス構成の意識&lt;/h2&gt;
-
-&lt;p&gt;出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible&#34;&gt;chroju/ansible&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;あらゆるサーバーで共通の&lt;code&gt;common&lt;/code&gt;というロールと、開発環境用の&lt;code&gt;develop&lt;/code&gt;というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから&lt;code&gt;git clone&lt;/code&gt;しているし。&lt;/p&gt;
-
-&lt;p&gt;ansibleには公式ドキュメントに&lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_best_practices.html&#34;&gt;ディレクトリ構成のベストプラクティス&lt;/a&gt;が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;playbooksは同時に実行すべきtaskをroleとして分割する&lt;/li&gt;
-&lt;li&gt;ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する&lt;/li&gt;
-&lt;li&gt;グループごとに実行するroleと変数（group_vars）を紐つける&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は&lt;code&gt;ansible-playbook site.yml&lt;/code&gt;でよいし、一部グループだけに適用したいなら&lt;code&gt;ansible-playbook *servers.yml&lt;/code&gt;とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。&lt;/p&gt;
-
-&lt;p&gt;なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。&lt;/p&gt;
-
-&lt;p&gt;ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。&lt;/p&gt;
-
-&lt;p&gt;ansible、ファーストインプレッションはとにかく&lt;a href=&#34;http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/&#34;&gt;「楽そう」&lt;/a&gt;だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。&lt;/p&gt;
-
-&lt;h2 id=&#34;このレポジトリでやっていること:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;このレポジトリでやっていること&lt;/h2&gt;
-
-&lt;p&gt;ソース読んでもらえればわかる話ではありますが。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;common
-
-&lt;ul&gt;
-&lt;li&gt;hostname設定&lt;/li&gt;
-&lt;li&gt;localeとtimezone設定&lt;/li&gt;
-&lt;li&gt;sshd_config設定&lt;/li&gt;
-&lt;li&gt;authorized keys設定&lt;/li&gt;
-&lt;li&gt;/etc/aliasesの設定&lt;/li&gt;
-&lt;li&gt;DenyHostsインストール&lt;/li&gt;
-&lt;li&gt;logwatchインストール&lt;/li&gt;
-&lt;li&gt;iptables設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;develop
-
-&lt;ul&gt;
-&lt;li&gt;development tools、zsh、git、vim、jqのインストール&lt;/li&gt;
-&lt;li&gt;dotfilesの配置&lt;/li&gt;
-&lt;li&gt;デフォルトシェルをzshに変更&lt;/li&gt;
-&lt;li&gt;rbenvの設定&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;もっとも苦労したのはrbenv周りで、&lt;code&gt;git clone&lt;/code&gt;直後はpathが通ってない&lt;code&gt;~/.rbenv/bin&lt;/code&gt;配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで&lt;code&gt;sudo: yes&lt;/code&gt;としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、&lt;code&gt;sudo:&lt;/code&gt;ないし&lt;code&gt;become:&lt;/code&gt;の設定はタスク単位で考えたほうが良いと思う。また本来であれば&lt;code&gt;~/.bash_profile&lt;/code&gt;あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。&lt;/p&gt;
-
-&lt;p&gt;もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は&lt;code&gt;ec2_user&lt;/code&gt;、その他VPSの場合は&lt;code&gt;root&lt;/code&gt;がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。&lt;/p&gt;
-
-&lt;h2 id=&#34;その他技術的な話:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;その他技術的な話&lt;/h2&gt;
-
-&lt;p&gt;細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;変数名の命名規約。代入は&lt;code&gt;group_vars&lt;/code&gt;で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。&lt;/li&gt;
-&lt;li&gt;ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。&lt;/li&gt;
-&lt;li&gt;EC2には開発ツールがないので&lt;code&gt;Development tools&lt;/code&gt;でまとめてインストールしてしまったが、本当は個々に切り出したい。&lt;/li&gt;
-&lt;li&gt;ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description> 自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxでbundleとかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。
+なぜEC2？ 少し前に開発環境としてDigitalOceanを使うことを勧める記事を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。
+ベストプラクティス構成の意識 出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。
+chroju/ansible
+あらゆるサーバーで共通のcommonというロールと、開発環境用のdevelopというロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリからgit cloneしているし。
+ansibleには公式ドキュメントにディレクトリ構成のベストプラクティスが上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。
+ playbooksは同時に実行すべきtaskをroleとして分割する ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する グループごとに実行するroleと変数（group_vars）を紐つける  taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合はansible-playbook site.ymlでよいし、一部グループだけに適用したいならansible-playbook *servers.ymlとすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。
+なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。
+ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。
+ansible、ファーストインプレッションはとにかく「楽そう」だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。
+このレポジトリでやっていること ソース読んでもらえればわかる話ではありますが。
+ common  hostname設定 localeとtimezone設定 sshd_config設定 authorized keys設定 /etc/aliasesの設定 DenyHostsインストール logwatchインストール iptables設定  develop  development tools、zsh、git、vim、jqのインストール dotfilesの配置 デフォルトシェルをzshに変更 rbenvの設定   もっとも苦労したのはrbenv周りで、git clone直後はpathが通ってない~/.rbenv/bin配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルでsudo: yesとしてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、sudo:ないしbecome:の設定はタスク単位で考えたほうが良いと思う。また本来であれば~/.bash_profileあたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。
+もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合はec2_user、その他VPSの場合はrootがデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。
+その他技術的な話 細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。
+ 変数名の命名規約。代入はgroup_varsで行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。 ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。 EC2には開発ツールがないのでDevelopment toolsでまとめてインストールしてしまったが、本当は個々に切り出したい。 ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。  </description>
     </item>
     
   </channel>

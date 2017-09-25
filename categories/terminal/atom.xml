@@ -6,8 +6,11 @@
     <description>Recent content in Terminal on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 20 Jul 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chroju.github.io/categories/terminal/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/categories/terminal/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>tmuxをなんとなく使ってたのできちんと使うようにしてみた</title>
@@ -15,71 +18,26 @@
       <pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</guid>
-      <description>
-
-&lt;p&gt;tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。&lt;/p&gt;
-
-&lt;h2 id=&#34;tmuxとは:8bdba3883e970ce583911c0d346f93a6&#34;&gt;tmuxとは&lt;/h2&gt;
-
-&lt;p&gt;たーみなるまるちぷれくさー。ターミナル操作が便利になる系の、まぁ今更自分が説明する必要はないですね。せいぜいVagrantとVPSいじりながらローカルでもVim開くみたいなことしかやってないので宝の持ち腐れ感はハンパねーですが、とりあえず知っといた方がいいやってのとなんとなくカッコいいっていう理由だけで使ってる。&lt;/p&gt;
-
-&lt;p&gt;なお、インストール自体はだいぶ前に実行したのでやり方忘れた。たしかHomebrewで入れられたと思う。&lt;/p&gt;
-
-&lt;h2 id=&#34;tmux-conf:8bdba3883e970ce583911c0d346f93a6&#34;&gt;.tmux.conf&lt;/h2&gt;
-
-&lt;p&gt;ルートディレクトリ上に生成される設定ファイル。tmuxに関する設定は基本的にここに書く。&lt;/p&gt;
-
-&lt;script src=&#34;https://gist.github.com/705c90c240abe035a98e.js&#34;&gt; &lt;/script&gt;
-
-&lt;p&gt;自分の設定ファイルを張ってみたけど、よく見られる設定の寄せ集めだとは思う。tmuxはなんかESCキーの反応が悪いらしく、その調整用の設定。ペイン分割したときに各ペインごとでマウススクロールができるようにする設定。文字コードの設定。色の設定。これは上手くやればもうちょっと見やすくなるんだろうなとは思ってるけど、面倒なので半端なとこで終えている感がある。カラーパレット見て色名探してみたいのめんどいよぉ。&lt;/p&gt;
-
-&lt;p&gt;あとキーバインド。デフォルトのプレフィックスが&lt;code&gt;C-b&lt;/code&gt;なんだけど、使いづらいので&lt;code&gt;C-z&lt;/code&gt;に当て替えてる。他にやってるのは.tmux.confをすぐ読み込むための設定と、ペイン移動や分割のショートカット、あとはウィンドウやセッションのkill。&lt;/p&gt;
-
-&lt;p&gt;コピーモードについてはよくあるviライクなキーバインドが使えるってやつをそのまま使っている。コピーモードに入るときのデフォルトキーが&lt;code&gt;[&lt;/code&gt;なのが気に食わんので、これも&lt;code&gt;y&lt;/code&gt;に変更してある。でもよく考えたら&lt;code&gt;v&lt;/code&gt;の方が相応しいなこれ。。。&lt;/p&gt;
-
-&lt;h2 id=&#34;powerline:8bdba3883e970ce583911c0d346f93a6&#34;&gt;powerline&lt;/h2&gt;
-
-&lt;p&gt;残りはpowerlineに関しての設定。ステータスラインがカッコよくなります的なやつ。これも入れ方忘れたけど、&lt;a href=&#34;https://github.com/erikw/tmux-powerline&#34;&gt;公式のREADME&lt;/a&gt;によれば&lt;code&gt;git clone&lt;/code&gt;するみたい。&lt;/p&gt;
-
-&lt;p&gt;これ、入れたはいいけど天気とか上手いことでなくてしばらく放置していた。今回改めて先のREADME読んでみたところ、GNU grepが要るみたいで、インストールしてgrepコマンドを置き換えたら上手くいった。やっぱりREADMEはちゃんと読むべき。自戒。他にもCPUとメモリ使用状況のグラフィカルな表示のためには&lt;a href=&#34;https://github.com/thewtex/tmux-mem-cpu-load&#34;&gt;thewtex/tmux-mem-cpu-load&lt;/a&gt;が必要だったりする。&lt;/p&gt;
-
-&lt;p&gt;設定は主に3ファイルを用いる。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;~/.tmux.conf&lt;/li&gt;
-&lt;li&gt;~/tmux-powerline/themes/default.sh&lt;/li&gt;
-&lt;li&gt;~/.tmux-powerlinerc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;まず.tmux.confにpowerlineを使うってことを宣言しなくては使えない。先の.tmux.confで言えば一番下の方の設定。上からステータスラインを表示する設定、更新インターバルの設定、UTF-8の使用設定、ウィンドウリストを左側に配置（これは好みによってcenterにする人もいるみたい）、ステータスラインの長さの設定。で、最後の2行で&lt;code&gt;powerline.sh&lt;/code&gt;を読み込ませている。&lt;/p&gt;
-
-&lt;p&gt;実際にpowerlineに何を表示させるか、という設定は~/tmux-powerline/themes/default.shを変更して行う。&lt;/p&gt;
-
-&lt;script src=&#34;https://gist.github.com/bd1d33a4cb73807e6f22.js&#34;&gt; &lt;/script&gt;
-
-&lt;p&gt;デフォルトで表示できるものについてはすでに入っているので、これをコメントアウトしたりして好きなものを表示できるよう変える。各.shの後ろについている数字は表示部分の文字色と背景色。&lt;code&gt;~/tmux-powerline/color_palette.sh&lt;/code&gt;を実行すると、設定できる色と色名の一覧が表示できるので、これを使って設定する。まぁ、おこのみで。あと各表示部分の境界をカッコいい感じにするための設定が入ってたりするが、このへんはググれば出てくるので割愛（適当）。なお、default.shを直接触りたくない場合は、コピーして名前変えて使えばOK。&lt;/p&gt;
-
-&lt;p&gt;さらに、表示内容の細かな設定に.tmux-powerlinercを使う。このファイルは元々置かれていないので、&lt;code&gt;./tmux-powerline/generate_rc.sh&lt;/code&gt;を実行して生成する。よくいじるのは天気の設定で表示する地域を入れたり、時間や日付の表記を好きに変えたりってところかと。これについてはコメントでどういじればいいのか書いてあるので、見ればわかると思う。&lt;/p&gt;
-
-&lt;p&gt;tmux-powerlineについては自作のshellを使って好きな内容を表示させたりもできるようだけど、現状そこまでの情熱は傾けていない。&lt;/p&gt;
-
-&lt;h2 id=&#34;tmuxinator:8bdba3883e970ce583911c0d346f93a6&#34;&gt;tmuxinator&lt;/h2&gt;
-
-&lt;p&gt;tmuxを立ち上げたあと、ペイン分割をいちいち手でやるのが手間なので、自動化しちゃいましょうというツール。単に分割するだけではなく、各ペインでコマンド実行させることもできるので、例えば最初からVim開いておいたりディレクトリ変えておいたり&lt;code&gt;git pull&lt;/code&gt;させておいたりとか、いろいろできる。工夫次第。自分は今のところよく使っていたペイン分割を自動化させることしかしていない。以下のページが大変わかりやすかった。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://tactosh.com/2014/01/tmux-window-pane-tmuxinator/&#34;&gt;tmuxのwindow, pane設定を一発で再現できるtmuxinatorが便利 | TACTOSH&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;以上、超適当かつ簡潔なまとめでした。まぁ、あまりにもこの分野は先駆者が多いので。。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://kanjuku-tomato.blogspot.jp/2014/02/tmux.html&#34;&gt;tmuxを使い始めたので基本的な機能の使い方とかを整理してみた - 完熟トマト&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/syui/items/dc509f208b464838b948&#34;&gt;tmux-powerline - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://saku-na63.hatenablog.com/entry/2013/10/13/223010&#34;&gt;tmux-powerlineを使う - memo63&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/naoty_k/items/869b00fdde27c2225989&#34;&gt;Ruby - tmuxinatorで一瞬で開発環境を起動する - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description> tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。
+tmuxとは たーみなるまるちぷれくさー。ターミナル操作が便利になる系の、まぁ今更自分が説明する必要はないですね。せいぜいVagrantとVPSいじりながらローカルでもVim開くみたいなことしかやってないので宝の持ち腐れ感はハンパねーですが、とりあえず知っといた方がいいやってのとなんとなくカッコいいっていう理由だけで使ってる。
+なお、インストール自体はだいぶ前に実行したのでやり方忘れた。たしかHomebrewで入れられたと思う。
+.tmux.conf ルートディレクトリ上に生成される設定ファイル。tmuxに関する設定は基本的にここに書く。
+ 自分の設定ファイルを張ってみたけど、よく見られる設定の寄せ集めだとは思う。tmuxはなんかESCキーの反応が悪いらしく、その調整用の設定。ペイン分割したときに各ペインごとでマウススクロールができるようにする設定。文字コードの設定。色の設定。これは上手くやればもうちょっと見やすくなるんだろうなとは思ってるけど、面倒なので半端なとこで終えている感がある。カラーパレット見て色名探してみたいのめんどいよぉ。
+あとキーバインド。デフォルトのプレフィックスがC-bなんだけど、使いづらいのでC-zに当て替えてる。他にやってるのは.tmux.confをすぐ読み込むための設定と、ペイン移動や分割のショートカット、あとはウィンドウやセッションのkill。
+コピーモードについてはよくあるviライクなキーバインドが使えるってやつをそのまま使っている。コピーモードに入るときのデフォルトキーが[なのが気に食わんので、これもyに変更してある。でもよく考えたらvの方が相応しいなこれ。。。
+powerline 残りはpowerlineに関しての設定。ステータスラインがカッコよくなります的なやつ。これも入れ方忘れたけど、公式のREADMEによればgit cloneするみたい。
+これ、入れたはいいけど天気とか上手いことでなくてしばらく放置していた。今回改めて先のREADME読んでみたところ、GNU grepが要るみたいで、インストールしてgrepコマンドを置き換えたら上手くいった。やっぱりREADMEはちゃんと読むべき。自戒。他にもCPUとメモリ使用状況のグラフィカルな表示のためにはthewtex/tmux-mem-cpu-loadが必要だったりする。
+設定は主に3ファイルを用いる。
+ ~/.tmux.conf ~/tmux-powerline/themes/default.sh ~/.tmux-powerlinerc  まず.tmux.confにpowerlineを使うってことを宣言しなくては使えない。先の.tmux.confで言えば一番下の方の設定。上からステータスラインを表示する設定、更新インターバルの設定、UTF-8の使用設定、ウィンドウリストを左側に配置（これは好みによってcenterにする人もいるみたい）、ステータスラインの長さの設定。で、最後の2行でpowerline.shを読み込ませている。
+実際にpowerlineに何を表示させるか、という設定は~/tmux-powerline/themes/default.shを変更して行う。
+ デフォルトで表示できるものについてはすでに入っているので、これをコメントアウトしたりして好きなものを表示できるよう変える。各.shの後ろについている数字は表示部分の文字色と背景色。~/tmux-powerline/color_palette.shを実行すると、設定できる色と色名の一覧が表示できるので、これを使って設定する。まぁ、おこのみで。あと各表示部分の境界をカッコいい感じにするための設定が入ってたりするが、このへんはググれば出てくるので割愛（適当）。なお、default.shを直接触りたくない場合は、コピーして名前変えて使えばOK。
+さらに、表示内容の細かな設定に.tmux-powerlinercを使う。このファイルは元々置かれていないので、./tmux-powerline/generate_rc.shを実行して生成する。よくいじるのは天気の設定で表示する地域を入れたり、時間や日付の表記を好きに変えたりってところかと。これについてはコメントでどういじればいいのか書いてあるので、見ればわかると思う。
+tmux-powerlineについては自作のshellを使って好きな内容を表示させたりもできるようだけど、現状そこまでの情熱は傾けていない。
+tmuxinator tmuxを立ち上げたあと、ペイン分割をいちいち手でやるのが手間なので、自動化しちゃいましょうというツール。単に分割するだけではなく、各ペインでコマンド実行させることもできるので、例えば最初からVim開いておいたりディレクトリ変えておいたりgit pullさせておいたりとか、いろいろできる。工夫次第。自分は今のところよく使っていたペイン分割を自動化させることしかしていない。以下のページが大変わかりやすかった。
+tmuxのwindow, pane設定を一発で再現できるtmuxinatorが便利 | TACTOSH
+以上、超適当かつ簡潔なまとめでした。まぁ、あまりにもこの分野は先駆者が多いので。。
+参考
+ tmuxを使い始めたので基本的な機能の使い方とかを整理してみた - 完熟トマト tmux-powerline - Qiita tmux-powerlineを使う - memo63 Ruby - tmuxinatorで一瞬で開発環境を起動する - Qiita  </description>
     </item>
     
   </channel>

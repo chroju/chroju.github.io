@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="the world as code">
 		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
-		<meta name="generator" content="Hugo 0.16-DEV" />
+		<meta name="generator" content="Hugo 0.27.1" />
 		<title>Serverlessの時代とas code &middot; the world as code</title>
 		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
 		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
@@ -45,7 +45,7 @@
 
 <p>先週<a href="http://ansible-users.connpass.com/event/31222/">Ansible Meetup in Tokyo 2016.06</a>と、<a href="http://www.awssummit.tokyo/">AWS Summit Tokyo 2016</a>に行ってきたので軽めのレポートにします。</p>
 
-<h2 id="aws-summit:95a87fd1a47a72aa1bf662cfd38baf72">AWS Summit</h2>
+<h2 id="aws-summit">AWS Summit</h2>
 
 <p>AWS Summitは初参加でしたが、会場を見渡したときのスーツ率の高さからいわゆるEnterprise系のイベントに近いのかと思いきや、DevConの方を中心にテクニカルな話題も多めで楽しめました。とはいえAWSサービス紹介にとどまるセッションや、タイトル通りの内容ではなく、各企業の内部事情を抽象的に話すだけで終わるようなセッションも少なくなく、セッションの選択はそれなりにコツがいるなとも思ったのですが。。</p>
 
@@ -56,7 +56,7 @@
 
 <p>Lambda、簡単なジョブや解析処理であればEC2立てずとも実行が可能になるわけで、いわゆるアプリケーションが担っていた仕事、これまでサーバーを立てなければならなかった部分がごっそり持っていかれることになる。Lambda自体は発表が2014年なのでそれなりに経っているけれど、Pythonに対応したあたりから実用される動きが大きくなってきたような感触があります。とはいえLambdaだけですべて済むというわけでもなく、例えばそのエンドポイントとしてAPI Gatewayが使えたり、SNSと連携してメッセージのプッシュを行ったりと、これまで連綿と作られてきたAWS各サービスがあって、それらを繋げる部分に位置することで真価を発揮している。そう考えるとLambdaが単体ですごいというより、AWS全体を見回したときに足りなかった1ピースを埋めてくれたような印象がある。</p>
 
-<h2 id="ansible:95a87fd1a47a72aa1bf662cfd38baf72">Ansible</h2>
+<h2 id="ansible">Ansible</h2>
 
 <p>そこに来てAnsible、というのはどういう位置付けになるのか。Ansibleの役割はServerlessとは対極、基本的にはサーバーの設定管理というところになります。仮にシステムをServerlessに置き換えていくのだとしたら、ひょっとしたら徐々に要らなくなってくるツールなのかもと思ったり。無論、AnsibleにもAWSモジュールがあるけれど、端々まで対応しているというわけではなく、AWSの設定を管理するのであればCloudFormationやTerraformを使う方が現実的かなという気がします（AWS Summit内で、CloudFormationにLambdaや周辺サービスの設定を書いて、サーバーレスのマイクロサービスをパッケージングする手法が紹介されてました。Lambdaのコードもそのjsonの中に含むので「つらそう」という声は多かったですが）</p>
 
@@ -97,6 +97,13 @@
             <ul id="post-list" class="archive readmore">
     <h3>Read more</h3>
     
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した<aside class="dates">Sep 26</aside></a>
+        </li>
+        
+   
     
         
         <li>
@@ -157,13 +164,6 @@
         
         <li>
             <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
-        </li>
-        
-   
-    
-        
-        <li>
-            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
         </li>
         
    

@@ -6,8 +6,11 @@
     <description>Recent content in Abouts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 13 Mar 2016 11:45:24 +0900</lastBuildDate>
-    <atom:link href="https://chroju.github.io/about/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/about/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>About</title>
@@ -15,15 +18,7 @@
       <pubDate>Sun, 13 Mar 2016 11:45:24 +0900</pubDate>
       
       <guid>https://chroju.github.io/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;chroju:d680e8a854a7cbad6d490c445cba2eba&#34;&gt;chroju&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Profile: &lt;a href=&#34;https://chroju.net&#34;&gt;https://chroju.net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Contact: chor.chroju@gmail.com&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description> chroju  Profile: https://chroju.net Contact: chor.chroju@gmail.com  </description>
     </item>
     
   </channel>

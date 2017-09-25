@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="the world as code">
 		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
-		<meta name="generator" content="Hugo 0.16-DEV" />
+		<meta name="generator" content="Hugo 0.27.1" />
 		<title>サーバーレスっぽいインフラをどう管理していくか &middot; the world as code</title>
 		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
 		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
@@ -43,7 +43,7 @@
                 <section id="post-body">
                     
 
-<h2 id="きっかけ:a2ab268b227616aa8c43281c29ecf3b9">きっかけ</h2>
+<h2 id="きっかけ">きっかけ</h2>
 
 <ul>
 <li>VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。</li>
@@ -59,9 +59,9 @@
 
 <p>詳細な設計は<a href="http://qiita.com/chroju/items/827dbb9e820f41820e14">Qiitaに上げました</a>ので、そちらをご参照ください。</p>
 
-<h2 id="使用したツール:a2ab268b227616aa8c43281c29ecf3b9">使用したツール</h2>
+<h2 id="使用したツール">使用したツール</h2>
 
-<h3 id="サーバーレスなデプロイツール:a2ab268b227616aa8c43281c29ecf3b9">サーバーレスなデプロイツール</h3>
+<h3 id="サーバーレスなデプロイツール">サーバーレスなデプロイツール</h3>
 
 <p>これらのフレームワーク群をまとめてどう呼べばよいものか。。。「サーバーレスフレームワーク」がしっくり来るんだけど、これはすでに使ってしまっているプロダクトがあるから使えない……あの名前、汎用的過ぎてちょっとどうかと思うんだけど。</p>
 
@@ -101,7 +101,7 @@
 
 <p>触った印象としてはApexも非常に学習コストが少なくて良いのだが、今後に期待したいのはChalice。awslabsが作っているので、というのもあるけれど、おそらくサーバーレスアーキテクチャーとして多い用途の1つであろう、API GatewayとLambdaを使ってREST APIを返す、という使い方においては必要十分な機能が満たされているように思います。</p>
 
-<h3 id="html5-up:a2ab268b227616aa8c43281c29ecf3b9">HTML5 UP!</h3>
+<h3 id="html5-up">HTML5 UP!</h3>
 
 <p>以前は自分でせこせこHTMLやCSS書いてたんですが、カッコよいデザインがいいので今回は<a href="https://html5up.net/">HTML5 UP!</a>を使いました。やりたいことに注力して、専門外の部分は外から力借りるってとても大切だし、今はあらゆる側面でそれができる時代になりました。以下の記事のおかげです。ありがとう。</p>
 
@@ -109,7 +109,7 @@
 <li><a href="http://qiita.com/mhimuro/items/405590746e67971aac47?utm_content=buffer86566&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">「プログラマでしょ？ホームページ作ってよ！」を1日で対応する - Qiita</a></li>
 </ul>
 
-<h2 id="サーバーレスの管理問題:a2ab268b227616aa8c43281c29ecf3b9">サーバーレスの管理問題</h2>
+<h2 id="サーバーレスの管理問題">サーバーレスの管理問題</h2>
 
 <p>冒頭に挙げたQiitaの記事に書きましたが、だいーぶ四苦八苦しました。かれこれ2週間ぐらい？かかった？</p>
 
@@ -148,6 +148,13 @@
             <ul id="post-list" class="archive readmore">
     <h3>Read more</h3>
     
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した<aside class="dates">Sep 26</aside></a>
+        </li>
+        
+   
     
         
         <li>
@@ -208,13 +215,6 @@
         
         <li>
             <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
-        </li>
-        
-   
-    
-        
-        <li>
-            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
         </li>
         
    

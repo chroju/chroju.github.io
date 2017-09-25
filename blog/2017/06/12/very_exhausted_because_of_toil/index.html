@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="the world as code">
 		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
-		<meta name="generator" content="Hugo 0.16-DEV" />
+		<meta name="generator" content="Hugo 0.27.1" />
 		<title>Toilの地獄から抜け出す術を知りたい &middot; the world as code</title>
 		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
 		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
@@ -45,7 +45,7 @@
 
 <p>最近とても停滞感があってよろしくないので一度ブログに吐き出すなどします。</p>
 
-<h2 id="toilが多すぎる:cf2c09af71974207c95eb1721a23fec8">Toilが多すぎる</h2>
+<h2 id="toilが多すぎる">Toilが多すぎる</h2>
 
 <p>現状、自分はオペレーションエンジニア（決まった手順しかやらないオペレーターではなくて、問題解決や運用体制の構築とかやる感じの）という位置付けで働いていて、日々のシステム運用に関するタスクをもろもろ片付ける他に、長年澱のように蓄積された技術的負債とか、暗黙的な運用を改善していくことも任務だったりします。Googleが名付けたところで言えば前者がToilってやつですね、いわゆる。自動でできるはずなのにマニュアルで行われていて、サービスの増加に比例してどんどん業務を圧迫していくような類の仕事。</p>
 
@@ -53,7 +53,7 @@
 
 <p>実際のところ何がToilとして積み重なっているのかというと、手動でコマンドを打つような作業がほとんど。弊社では基本的に本番稼働中のシステムでオペレーションする人間を限定しているので、デプロイや設定の確認（ドキュメントがなかったりバージョン管理してなかったりするので、実機確認が必要になる機会が多々ある）等々自分らがやらねばならんのですが。しかし手動でやることがあまりに多い。数年に渡ってエンジニアのUNIXコマンドスキルに依存していた運用のツケが回ってきている。ある程度自動化すればいちいち手を動かさなくてよかったり、サーバーの状態、設定を確認するような作業であれば適切な可視化をすれば済む話であったり、解決策は見えているのだけど、手を打つ方に時間を回せていない状態。それなりに「どうすればいいか」がわかってはいるので、その分余計に「改善に時間が回せない」ことへの歯がゆさが強くてメンタルに優しくなかったりしている。</p>
 
-<h2 id="改善に必要なスキルは多方面に渡る:cf2c09af71974207c95eb1721a23fec8">改善に必要なスキルは多方面に渡る</h2>
+<h2 id="改善に必要なスキルは多方面に渡る">改善に必要なスキルは多方面に渡る</h2>
 
 <p>DevOpsなんて言葉はもう枯れていて、SREという職種も珍しくなくなってきた昨今、先に挙げたようなありがちな技術的負債に対する汎用的な解決策は世の中に溢れていて、自分も見知ってはいる。でも、それを実際にどう現場へ適用していくかが本当の課題。</p>
 
@@ -65,7 +65,7 @@
 
 <p>つわけで改善、と一言で言っても、求められるのは純粋なコンピュータに関する技術、だけではなくて、社会学や人文学がやっぱり必要になってくるなぁというのを実感する日々です。そしてそのどれもが自分には足りていないような気がして、強く閉塞感を覚えてしまっているのも事実であり。課題は一度バラして並べてあるので、それがなかなか崩れていかないのがとてももどかしくてしんどい。</p>
 
-<h2 id="あらゆる情報の流れを制御したい:cf2c09af71974207c95eb1721a23fec8">あらゆる情報の流れを制御したい</h2>
+<h2 id="あらゆる情報の流れを制御したい">あらゆる情報の流れを制御したい</h2>
 
 <p>まぁしんどい話ばかりしていても仕方ないので具体的にやっていることも書きます。。だいたいは散逸してしまっている運用を統制していこうという向きが強い。</p>
 
@@ -115,6 +115,13 @@
             <ul id="post-list" class="archive readmore">
     <h3>Read more</h3>
     
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した<aside class="dates">Sep 26</aside></a>
+        </li>
+        
+   
     
         
         <li>
@@ -175,13 +182,6 @@
         
         <li>
             <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
-        </li>
-        
-   
-    
-        
-        <li>
-            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
         </li>
         
    

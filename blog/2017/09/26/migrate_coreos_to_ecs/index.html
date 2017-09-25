@@ -1,0 +1,297 @@
+    <!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="the world as code">
+		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
+		<meta name="generator" content="Hugo 0.27.1" />
+		<title>CoreOSからECSへDockerを移行した &middot; the world as code</title>
+		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/highlight.css">
+		<link rel="stylesheet" href="https://chroju.github.io/css/monosocialiconsfont.css">
+		
+		<link href="https://chroju.github.io/atom.xml" rel="alternate" type="application/rss+xml" title="the world as code" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://chroju.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+		<a href='https://chroju.github.io/about'>About</a>
+	
+
+	
+	<a class="cta" href="https://chroju.github.io/atom.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper">
+            <article class="post">
+                <header>
+                    <h1>CoreOSからECSへDockerを移行した</h1>
+                    <h2 class="headline">September 26, 2017</h2>
+                </header>
+                <section id="post-body">
+                    
+
+<p>CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。</p>
+
+<h2 id="従来の環境">従来の環境</h2>
+
+<p>従来は以下のような環境を使っていました。</p>
+
+<ul>
+<li>さくらクラウドでCoreOSを起動（イメージがデフォルトで用意されていて嬉しい）</li>
+<li>コンテナは個人的なログ用influxDB、Grafana、個人slack用hubotの3つ。</li>
+<li>オーケストレーションツールは使っていない（docker composeで管理、systemdで自動起動）</li>
+<li>それ以外に運用っぽいことも特にしてない。</li>
+</ul>
+
+<p>プライベートかつ、とりあえずDocker触って動かしたいという理由だけで作った環境だったので、正直扱いは雑でして、たまにコンテナ落ちてて、hubotに呼びかけてから気付くみたいなこともままありました。</p>
+
+<p>それが地味にストレスだったのと、せっかくDocker使うならもうちょいオーケストレーションとかちゃんとしたいってことで移行を決断しました。</p>
+
+<h2 id="移行先の検討">移行先の検討</h2>
+
+<p>CoreOSは従来であれば<a href="https://coreos.com/fleet/docs/latest/launching-containers-fleet.html">fleet</a>という独自のオーケストレーションツールを持っていましたが（今も正確には現役ですが）、このリンク先にもある通り、現状はk8s使えってことになってます。</p>
+
+<p>なのでさくらクラウド続投してk8sで頑張るというのも手ではあったのですが、仕事ではAWS使うことが多いというのと、個人的にここ最近聴いたDockerのproduction利用の話がだいたいECSだったのとで、管理も楽そうだしECSでいいかなという感じでした。</p>
+
+<p>ただ、k8sであればオンプレやら何やらといった環境を問わずに運用が可能だし、クラウドに載せたければGKEでそのノウハウ活かせるしという利点があり、長期視点で汎用性の高い技術選択、という視点だとk8sの方がいいのではと思ったりしてます。</p>
+
+<h2 id="ecsの概念">ECSの概念</h2>
+
+<p>簡単に触れておきます。</p>
+
+<h3 id="cluster">cluster</h3>
+
+<p>コンテナをホストするEC2インスタンス群。</p>
+
+<h3 id="task-definition">task definition</h3>
+
+<p>cluster上でコンテナをどう配置するかという定義。</p>
+
+<h3 id="task">task</h3>
+
+<p>task definitionに基いて稼働するコンテナ群。</p>
+
+<h3 id="service">service</h3>
+
+<p>taskを永続的なプロセスとして稼働させるECSの機能。</p>
+
+<p>taskは「service」として動かすことで、コンテナが落ちても勝手に上げ直してくれるようなイイ感じのやつになります。serviceの定義の中でAuto Scalingの設定したりとかもできるらしいですが、今回そこまでやってないです。要らないし。</p>
+
+<h2 id="移行作業">移行作業</h2>
+
+<p>ぶっちゃけ、すごく簡単でそんなにやったことはないです。</p>
+
+<p>はじめはTerraformで環境作るかとか思ってたんですが、<del>tfファイルをゼロから書くのがだるくなったので</del>他にも手段があるんじゃないかと調べていたところ、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI.html">ECS CLI</a>というAWS提供のコマンドツールがありました。</p>
+
+<p>で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。</p>
+
+<pre><code class="language-bash"># clusterを起動
+$ ecs-cli up --keypair hoge --size 1 --instance-type t2.micro --capability-iam --port 8080 3000 8086
+# docker-compose.ymlからserviceを起動
+$ ecs-cli compose --file docker-compose.yml service up
+</code></pre>
+
+<p>これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。</p>
+
+<p>ただ、<code>ecs-cli up</code>で賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。</p>
+
+<p>まぁ自分の場合はプライベート用途で複雑な要件もなかったので、ECS CLIで十分です。構成管理という面でも、先のコマンドを書いたシェルスクリプトとdocker-compose.ymlさえあれば環境再現はすぐできるので、拍子抜けするほど楽でした。</p>
+
+<h2 id="運用">運用</h2>
+
+<p>当初の動機が「コンテナがバンバン落ちる不健全な環境を抜け出したい」でもあったので、多少なり運用も組み立てています。</p>
+
+<h3 id="監視">監視</h3>
+
+<p>自分がproduction環境でのDocker運用経験がほとんどないこともあり、正直ベストな監視の仕方がよくわかっていません。例えば最低10台以上のコンテナを動かしてガリガリ処理させたいような環境を動かしたいとして、稼働台数10台を下回ったらアラート上げたいと個人的には思うんですが、そういう運用でいいんですかね。それともオーケストレーションでコンテナ数確保されるから監視しなくてよい、のかどうなのか。</p>
+
+<p>と言うのも、意外というかなんというか、Amazon CloudWatchではコンテナの稼働状態に関するメトリクスはほとんど取れません。CPUとメモリの使用率だけです。稼働台数ぐらいありそうなものなんですけどね。ECSの監視はどうしてんだろうみなさんというのは改めて調べておきたいところ。</p>
+
+<p>結局のところ、自分は2方面で監視してます。</p>
+
+<p>1つはCloudWatch Eventsで、serviceの稼動状態に変化が起きたことをトリガーとしてLambdaなどを発火できる機能があります。これを使ってコンテナが落ちたりしたときにはslackに通知されるようにしました（鏡音リンちゃんが教えてくれます）。ただ、先述の通り「落ちてもすぐ自動で上がる」ようにはなってるので、なんか頻繁に落ちてるなとか、落ちたまま上がらないなとかを気付くためだけの用途です。</p>
+
+<p><a href="https://gyazo.com/589d57ff847e6d90239b9f2856a25620"><img src="https://i.gyazo.com/589d57ff847e6d90239b9f2856a25620.png" alt="https://gyazo.com/589d57ff847e6d90239b9f2856a25620" /></a></p>
+
+<p>2つ目はMackerelのDockerプラグイン。</p>
+
+<p><a href="https://mackerel.io/ja/docs/entry/advanced/docker">Dockerをモニタリングする - Mackerel ヘルプ</a></p>
+
+<p>これも1インスタンス上で動いているコンテナごとのメトリクスをグラフ表示するだけなので、コンテナ個別の死活などは取れないです。あくまでメトリクスグラフの描画のために使ってます。</p>
+
+<p>聴くところだとDataDogはコンテナの稼働台数とか取れるみたいですね？</p>
+
+<h3 id="バックアップ">バックアップ</h3>
+
+<p>ECSのインスタンスを落としたらそのままデータ死ぬという状況はさすがに怖いのでバックアップ。これも悩みましたけど、ズボラにCloudWatch Eventsで日に1回EBSスナップショット取らせてます。</p>
+
+<h2 id="罠っぽいところ">罠っぽいところ</h2>
+
+<p>最後にハマリポイントをいくつか。</p>
+
+<h3 id="docker-compose-ymlが必ずしも直接使えない">docker-compose.ymlが必ずしも直接使えない</h3>
+
+<p>docker-compose.ymlがほぼそのまま使えるのは使えるのですが、具体的にはmemlimitを各コンテナで設定しておかないと、メモリ足りないと言って落ちたりします。CoreOSだとリソースなど見ずに上げろと言えば上げてくれるんですが、ECSはそのあたりシビアに見てます。</p>
+
+<h3 id="ecs-cli-service-upが無限ループする">ecs-cli service upが無限ループする</h3>
+
+<p>コンテナのserviceを起動する<code>ecs-cli service up</code>コマンドですが、どうも一度起動命令を送った後、全コンテナがRUNNING状態になるのをひたすら待っているようで。</p>
+
+<p>何かタスク定義に不備（先のメモリ不足とか）があるとserviceは一度落ち、そしてserviceは永続稼働前提なので再度コンテナを起動し、そしてまた落ちるという無限ループに陥るのですが、ECS CLIはそれを拾ってくれないです。なのでupしてからしばらく応答がなければ、無限ループに陥ったと判断し、コマンドキャンセルしてGUIからログとか見に行った方がいいです。</p>
+
+<h3 id="docker-hub-privateとの連携が面倒">Docker Hub Privateとの連携が面倒</h3>
+
+<p>ECS上でDocker Hubのプライベートレジストリに置いたイメージを動かしたい場合、cluster上のインスタンスに一旦ログインして、設定ファイルにログイン情報を書き込む必要があります。ちょっと面倒だし、手段としてもあんまりイケていない感じがするので、もう少しなんとかならないかなと。まぁECR使ってくれってことなんでしょうけど。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>単純に「コンテナを動かす」だけであれば非常にシンプルに出来ており、docker-compose.ymlという既存の資産も使えるので、ECSが使われる理由はちょっとわかった気がします。特にECS CLIがあることで、Dockerイメージを更新したときなど、CIで自動的にデプロイをトリガーできたりするのはいいですね。</p>
+
+<p>機会があればk8sも使ってみて、使い勝手とか比較したいところ。</p>
+
+                </section>
+            </article>
+            <footer id="post-meta" class="clearfix">
+                
+                        <img class="avatar" src="https://chroju.github.io/images/avatar.png">
+                        <div>
+                            <span class="dark">the world as code</span>
+                            <span></span>
+                        </div>
+                    
+                <section id="sharing">
+                    <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fchroju.github.io%2fblog%2f2017%2f09%2f26%2fmigrate_coreos_to_ecs%2f - CoreOS%e3%81%8b%e3%82%89ECS%e3%81%b8Docker%e3%82%92%e7%a7%bb%e8%a1%8c%e3%81%97%e3%81%9f "><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+                </section>
+            </footer>
+
+            
+
+            <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した<aside class="dates">Sep 26</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/">AWS Certified Sysops Administratorを取得した<aside class="dates">Aug 26</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/08/06/builderson_2017/">builderson2017に行ってきた<aside class="dates">Aug 6</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/">Toilの地獄から抜け出す術を知りたい<aside class="dates">Jun 12</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/">O&#39;Reilly『Infrastructure as Code』読了<aside class="dates">May 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/">VimperatorからVivaldi &#43; Vimiumへ乗り換える<aside class="dates">Feb 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/">サーバーレスっぽいインフラをどう管理していくか<aside class="dates">Feb 7</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/02/05/barocco_review/">Baroccoで分割キーボードデビューした<aside class="dates">Feb 5</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/28/looking_back_2016/">2016年総括 - 技術者って何なのかやっと理解した<aside class="dates">Dec 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
+        </li>
+        
+   
+</ul>
+            <footer id="footer">
+    
+        
+<div id="social">
+    
+    <a class="symbol" href="https://github.com/chroju">
+        circlegithubalt
+    </a>
+    
+    <a class="symbol" href="https://twitter.com/chroju">
+        circletwitterbird
+    </a>
+    
+</div>
+
+    
+    <p class="small">
+    
+        written by chroju
+    
+    </p>
+</footer>
+
+        </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://chroju.github.io/js/main.js"></script>
+<script src="https://chroju.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+    </body>
+</html>

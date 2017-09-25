@@ -6,8 +6,11 @@
     <description>Recent content in Ansible Vps Linux on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chroju.github.io/categories/ansible-vps-linux/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/categories/ansible-vps-linux/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>AnsibleとDigitalOceanでどこでも使える開発環境を作る</title>
@@ -15,69 +18,21 @@
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</guid>
-      <description>
-
-&lt;p&gt;個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。&lt;/p&gt;
-
-&lt;p&gt;結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまで&lt;a href=&#34;http://chroju.net&#34;&gt;http://chroju.net&lt;/a&gt;をさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみると&lt;a href=&#34;https://www.digitalocean.com/&#34;&gt;DigitalOcean&lt;/a&gt;が最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。&lt;/p&gt;
-
-&lt;h2 id=&#34;digitalocean:e1b55d677e21e14c36260b6434239403&#34;&gt;DigitalOcean&lt;/h2&gt;
-
-&lt;p&gt;すでに他所で言われてはいるが、利点としてはこんなところかと思う。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;月額課金ではなく時間課金なので、使いたいだけ払えばOK&lt;/li&gt;
-&lt;li&gt;安い&lt;/li&gt;
-&lt;li&gt;アプリケーションやSSH鍵が最初から組み込まれたイメージを作れる&lt;/li&gt;
-&lt;li&gt;REST APIでだいたいのVPS操作ができる&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。&lt;/p&gt;
-
-&lt;p&gt;REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。&lt;/p&gt;
-
-&lt;div class=&#34;bookmarklet bookmarklet-gp&#34; itemscope itemtype=&#34;http://schema.org/MobileApplication&#34; style=&#34;clear:both;min-height:165px;width:100%;max-width:468px;overflow:hidden;padding:12px;border:1px solid;border-color:#eaeaea #ddd #d0d0d0;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:5px;&#34;&gt;&lt;dl class=&#34;bookmarklet-gp-info&#34; style=&#34;margin:0;&#34;&gt;&lt;dt class=&#34;bookmarklet-gp-title&#34; style=&#34;border-bottom:1px solid;border-color:#eaeaea #ddd #d0d0d0;font-weight:bold;margin:0 0 .5em 0;padding:0 0 .5em 0;&#34;&gt;&lt;img alt=&#34;Google play&#34; class=&#34;favicon&#34; style=&#34;vertical-align:middle;border:0;&#34; src=&#34;//ssl.gstatic.com/android/market_images/web/favicon.ico&#34; /&gt; &lt;span itemprop=&#34;name&#34;&gt;DigitalOcean Swimmer Android&lt;/span&gt;&lt;/dt&gt;&lt;dd class=&#34;bookmarklet-gp-desc&#34; style=&#34;font-size:.9em;margin:0;&#34;&gt;&lt;div class=&#34;bookmarklet-gp-thumb&#34; style=&#34;float:left;&#34;&gt;&lt;img src=&#34;https://lh3.ggpht.com/HXBZyHdspPh5MFgaC-rOXAZIZc8D9uM4KrQsL-gqoB1_9ZuBhthaWYLRoYJYNUY9Ytg=w300&#34; alt=&#34;DigitalOcean Swimmer Android&#34; itemprop=&#34;image&#34; style=&#34;height:120px;width:120px;max-width:100%;vertical-align:middle;border:0;margin:0 1em 0 0;&#34;&gt;&lt;/div&gt;&lt;div class=&#34;supplier&#34; itemscope itemtype=&#34;http://schema.org/Organization&#34;&gt;制作: &lt;span itemprop=&#34;name&#34;&gt;Hannoun Yassir&lt;/span&gt;&lt;/div&gt;&lt;div class=&#34;review&#34; itemtype=&#34;http://schema.org/AggregateRating&#34; itemscope itemprop=&#34;aggregateRating&#34;&gt;評価: &lt;span itemprop=&#34;ratingValue&#34;&gt;4.4&lt;/span&gt; / 5段階中&lt;/div&gt;&lt;div class=&#34;price&#34; itemtype=&#34;http://schema.org/Offer&#34; itemscope itemprop=&#34;offers&#34;&gt;価格: &lt;meta itemprop=&#34;price&#34; content=&#34;0&#34;&gt;無料&lt;small&gt; (2015/7/11 時点)&lt;/small&gt;&lt;br /&gt;&lt;/div&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=com.yassirh.digitalocean&amp;hl=ja&#34; target=&#34;_blank&#34; title=&#34;DigitalOcean Swimmer Android&#34; itemprop=&#34;url&#34; style=&#34;float:right;&#34;&gt;&lt;img src=&#34;//dl.dropboxusercontent.com/u/540358/ja_generic_rgb_wo_45.png&#34; alt=&#34;ダウンロード&#34; style=&#34;border:0;display:inline-block;height:auto;vertical-align: middle;&#34;/&gt;&lt;/a&gt;&lt;small&gt;posted by: &lt;a target=&#34;_blank&#34; href=&#34;http://hayashikejinan.com/?p=818&#34;&gt;AndroidHTML v3.1&lt;/a&gt;&lt;/small&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;/div&gt;
-
-&lt;p&gt;このアプリさえあればGUI操作はほぼ全部できる。&lt;/p&gt;
-
-&lt;p&gt;ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとして&lt;code&gt;authorized_keys&lt;/code&gt;の件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初は&lt;code&gt;root&lt;/code&gt;以外のユーザーがいないため、当然ながら&lt;code&gt;authorized_keys&lt;/code&gt;のパスも&lt;code&gt;/root/.ssh/&lt;/code&gt;配下となる。構築用には別のユーザーを設けることになると思うが、その際には&lt;code&gt;authorized_keys&lt;/code&gt;を&lt;code&gt;/home/user&lt;/code&gt;配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。&lt;/p&gt;
-
-&lt;h2 id=&#34;ansibleによる初期構築:e1b55d677e21e14c36260b6434239403&#34;&gt;Ansibleによる初期構築&lt;/h2&gt;
-
-&lt;p&gt;巷ではVagrantと連携して、&lt;code&gt;vagrant up&lt;/code&gt;でDigitalOceanにマシンを上げるのが流行ってるらしい。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/msykiino/items/d45cab7f520a3288862a&#34;&gt;vagrantではじめるクラウド開発環境（DigitalOcean編） - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.glidenote.com/blog/2013/12/05/digital-ocean-with-vagrant/&#34;&gt;VagrantとSSDなVPS(Digital Ocean)で1時間1円の使い捨て高速サーバ環境を構築する - Glide Note - グライドノート&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;とはいえ自分は冒頭に書いた通り、最悪iPad miniでもいいので外から繋ぐという運用をしたかったので、Vagrantからの起動は使えない。なので初期構築には最近学び始めたAnsibleを使ってみた。&lt;/p&gt;
-
-&lt;p&gt;インフラ管理系のツール、使ったことがあるのはChefぐらいで、Puppetは概念だけ知ってはいるが、Ansibleの特色はやはりハードルの低さ、学習コストの低さだと思う。エージェントレス、&lt;code&gt;knife&lt;/code&gt;のような特殊なコマンドもほとんど覚える必要がなく、&lt;code&gt;ansible-playbook&lt;/code&gt;コマンドさえ覚えておけばとりあえずなんとかなってしまう。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;エージェントレスなのでpipで手元のマシンにansibleを入れればすぐ使える。&lt;/li&gt;
-&lt;li&gt;設定はyamlによるplaybookに書き出すので、文法も比較的容易。&lt;/li&gt;
-&lt;li&gt;1個1個のタスクは定められたモジュールを用いて書くことになるが、やりたいことを公式Docsの&lt;a href=&#34;http://docs.ansible.com/modules_by_category.html&#34;&gt;Module Index&lt;/a&gt;で探ればわりとなんとかなる。&lt;/li&gt;
-&lt;li&gt;ディレクトリ掘ったり&lt;code&gt;knife&lt;/code&gt;みたいなコマンドいっぱい覚えなくても、とりあえずyaml1つとコマンド1つあれば始められる。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;pip経由でのインストールが必要なので非pythonista的には若干戸惑いもありましたが、学習コストの低さはハンパないのでインストールから1時間もあれば一旦サーバー建てられました。ノウハウもQiitaはじめ随所に落ちてはいるけれど、正直公式ドキュメントがかなり充実していて、&lt;a href=&#34;http://docs.ansible.com/YAMLSyntax.html&#34;&gt;YAMLのシンタックスガイド&lt;/a&gt;まで付いていたりするので、下手にググってやるよりもドキュメントちゃんと読んだ方がいいと思う。まぁ、Ansibleにかぎらずなんだってそうではあるが。ただ、複数台管理だとかアプリのデプロイだとかをやろうとすると当然ディレクトリ構成も複雑になって、既存のプラクティスが必要になってくるので、あくまで「導入の学習コストが低い」という感じだが。&lt;/p&gt;
-
-&lt;p&gt;書いたPlaybookはとりあえずGitHubに上げた。&lt;a href=&#34;http://akiyoko.hatenablog.jp/entry/2013/12/16/020529&#34;&gt;こちら&lt;/a&gt;を参考に、いわゆるVPS作るときの初期設定だけまとめている。ただしわりと俺用（dotfiles引っ張ってきたりとか）。Ansibleについてはまた別の記事でまとめようと思う。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible&#34;&gt;chroju/ansible&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;ipadからのssh接続:e1b55d677e21e14c36260b6434239403&#34;&gt;iPadからのSSH接続&lt;/h2&gt;
-
-&lt;p&gt;クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのが&lt;a href=&#34;https://panic.com/jp/prompt/&#34;&gt;Prompt2&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34; href=&#34;https://www.flickr.com/photos/chroju/19822940536&#34; title=&#34;prompt_with_digitalocean&#34;&gt;&lt;img src=&#34;https://farm1.staticflickr.com/541/19822940536_5f6201ca53_z.jpg&#34; width=&#34;640&#34; height=&#34;480&#34; alt=&#34;prompt_with_digitalocean&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;vim-lightlineもきちんと表示してくれるし日本語も可だし、外付けキーボードの煩わしささえ考慮しなければかなり快適である。当然ながら鍵認証も使えるし、ぶっちゃけWindowsのラップトップ持ち歩くぐらいならこっちの方がSSHはストレスないんじゃないかというぐらい。つないでちょこちょこっと使えればいいかなぐらいの思いだったが、嬉しい誤算だった。さすがに有料ではあるけど。&lt;/p&gt;
-
-&lt;p&gt;おかげさまで場所を選ばず開発環境につながるようになったので、ちょっと試したいツールがTLに上がってきたりしたらおもむろにiPadを取り出して試したりとかできる。すぐ復元したいのであれば、先のAndroidアプリで予めスナップショットを取ったりもできるし、楽すぎて笑える。&lt;/p&gt;
-</description>
+      <description>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。
+結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまでhttp://chroju.netをさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみるとDigitalOceanが最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。
+DigitalOcean すでに他所で言われてはいるが、利点としてはこんなところかと思う。
+ 月額課金ではなく時間課金なので、使いたいだけ払えばOK 安い アプリケーションやSSH鍵が最初から組み込まれたイメージを作れる REST APIでだいたいのVPS操作ができる  要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。
+REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。
+DigitalOcean Swimmer Android制作: Hannoun Yassir評価: 4.4 / 5段階中価格: 無料 (2015/7/11 時点)
+posted by: AndroidHTML v3.1 このアプリさえあればGUI操作はほぼ全部できる。
+ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとしてauthorized_keysの件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初はroot以外のユーザーがいないため、当然ながらauthorized_keysのパスも/root/.ssh/配下となる。構築用には別のユーザーを設けることになると思うが、その際にはauthorized_keysを/home/user配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。
+Ansibleによる初期構築 巷ではVagrantと連携して、vagrant upでDigitalOceanにマシンを上げるのが流行ってるらしい。
+ vagrantではじめるクラウド開発環境（DigitalOcean編） - Qiita VagrantとSSDなVPS(Digital Ocean)で1時間1円の使い捨て高速サーバ環境を構築する - Glide Note - グライドノート  とはいえ自分は冒頭に書いた通り、最悪iPad miniでもいいので外から繋ぐという運用をしたかったので、Vagrantからの起動は使えない。なので初期構築には最近学び始めたAnsibleを使ってみた。
+インフラ管理系のツール、使ったことがあるのはChefぐらいで、Puppetは概念だけ知ってはいるが、Ansibleの特色はやはりハードルの低さ、学習コストの低さだと思う。エージェントレス、knifeのような特殊なコマンドもほとんど覚える必要がなく、ansible-playbookコマンドさえ覚えておけばとりあえずなんとかなってしまう。
+ エージェントレスなのでpipで手元のマシンにansibleを入れればすぐ使える。 設定はyamlによるplaybookに書き出すので、文法も比較的容易。 1個1個のタスクは定められたモジュールを用いて書くことになるが、やりたいことを公式DocsのModule Indexで探ればわりとなんとかなる。 ディレクトリ掘ったりknifeみたいなコマンドいっぱい覚えなくても、とりあえずyaml1つとコマンド1つあれば始められる。  pip経由でのインストールが必要なので非pythonista的には若干戸惑いもありましたが、学習コストの低さはハンパないのでインストールから1時間もあれば一旦サーバー建てられました。ノウハウもQiitaはじめ随所に落ちてはいるけれど、正直公式ドキュメントがかなり充実していて、YAMLのシンタックスガイドまで付いていたりするので、下手にググってやるよりもドキュメントちゃんと読んだ方がいいと思う。まぁ、Ansibleにかぎらずなんだってそうではあるが。ただ、複数台管理だとかアプリのデプロイだとかをやろうとすると当然ディレクトリ構成も複雑になって、既存のプラクティスが必要になってくるので、あくまで「導入の学習コストが低い」という感じだが。
+書いたPlaybookはとりあえずGitHubに上げた。こちらを参考に、いわゆるVPS作るときの初期設定だけまとめている。ただしわりと俺用（dotfiles引っ張ってきたりとか）。Ansibleについてはまた別の記事でまとめようと思う。
+chroju/ansible
+iPadからのSSH接続 クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのがPrompt2。</description>
     </item>
     
   </channel>

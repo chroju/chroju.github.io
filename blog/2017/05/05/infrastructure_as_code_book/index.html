@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="author" content="the world as code">
 		<meta name="description" content="about IT Infrastructure, DevOps, and Hacker philosophy.">
-		<meta name="generator" content="Hugo 0.16-DEV" />
+		<meta name="generator" content="Hugo 0.27.1" />
 		<title>O&#39;Reilly『Infrastructure as Code』読了 &middot; the world as code</title>
 		<link rel="shortcut icon" href="https://chroju.github.io/images/favicon.ico">
 		<link rel="stylesheet" href="https://chroju.github.io/css/style.css">
@@ -45,7 +45,7 @@
 
 <p><a href="https://www.oreilly.co.jp/books/9784873117966/">O&rsquo;Reillyの『Infrastructure as Code』</a>を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い方にフォーカスした本はいくらか出ていたけれど、おそらく「Infrastructure as Code」の考え方や、システム運用への採用方法を包括してまとめた本は初めてということになるのかな。</p>
 
-<h2 id="ツールとプロセス:c5dd0fd4fec41295c5ca6082aaf01be5">ツールとプロセス</h2>
+<h2 id="ツールとプロセス">ツールとプロセス</h2>
 
 <p>端的に内容を説明してしまうと、Infrastructure as Codeで使用するツールを</p>
 
@@ -69,7 +69,7 @@
 
 <p>ツールの使い方自体はドキュメントを読むなり、Qiitaを探るなりすればだいたいわかるんだけど、それをどう運用すれば効率的になるのか、より効果が得られるかという、プラクティスを知りたい思いが強かったので、大いに参考になった。</p>
 
-<h2 id="徹底的な自動化アプローチ:c5dd0fd4fec41295c5ca6082aaf01be5">徹底的な自動化アプローチ</h2>
+<h2 id="徹底的な自動化アプローチ">徹底的な自動化アプローチ</h2>
 
 <p>例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。</p>
 
@@ -85,7 +85,7 @@
 <p>自律的なオートメーションこそ、Infrastructure as Codeが確実に機能する秘訣である。チームがセキュリティを向上させる新しいウェブサーバーの設定オプションを見つけたら、それをオートメーションツールのなかに組み込む。チームは、もう1度そのことについて考えようとしなくても、現在及び将来のすべての関連サーバーにそれが適用されることを知っている。 (p.254)</p>
 </blockquote>
 
-<h2 id="共通言語として利用したい:c5dd0fd4fec41295c5ca6082aaf01be5">共通言語として利用したい</h2>
+<h2 id="共通言語として利用したい">共通言語として利用したい</h2>
 
 <p>先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は<a href="https://www.amazon.co.jp/dp/462108786X">『Fearless Change』</a>でも使われていた。</p>
 
@@ -124,6 +124,13 @@
             <ul id="post-list" class="archive readmore">
     <h3>Read more</h3>
     
+    
+        
+        <li>
+            <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した<aside class="dates">Sep 26</aside></a>
+        </li>
+        
+   
     
         
         <li>
@@ -184,13 +191,6 @@
         
         <li>
             <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話<aside class="dates">Dec 27</aside></a>
-        </li>
-        
-   
-    
-        
-        <li>
-            <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か<aside class="dates">Dec 17</aside></a>
         </li>
         
    

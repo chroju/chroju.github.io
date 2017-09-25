@@ -6,8 +6,11 @@
     <description>Recent content in Ansible Event on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Thu, 25 Jun 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chroju.github.io/categories/ansible-event/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://chroju.github.io/categories/ansible-event/atom.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Ansibleの入門イベント聞いてきた話</title>
@@ -15,26 +18,8 @@
       <pubDate>Thu, 25 Jun 2015 00:00:00 +0000</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://atnd.org/events/66419&#34;&gt;これ&lt;/a&gt;行ってきた。ざくっと感想を箇条書きで。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれらより広い。要はCapistranoがやるようなことまでまかなえる。&lt;/li&gt;
-&lt;li&gt;それどころかHomebrewの管理あたりも可。一時期brewfileとか流行ってたけど、冪等性とか考えるとAnsible管理の方がいいかも。
-
-&lt;ul&gt;
-&lt;li&gt;最近そんな記事がちょうど上がってた。→ &lt;a href=&#34;http://dev.classmethod.jp/tool/osxc-ansible-configuration-for-mac/&#34;&gt;【要するに】osxcでMacの環境の構成を記述管理する【MacでAnsible】 ｜ Developers.IO&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;一番のポイントはエージェントレス、だと個人的にも思う。導入ハードルが低い。個人のVPSとかならChef-Zeroとかよりも気楽で良い。&lt;/li&gt;
-&lt;li&gt;yamlだからインフラ担当者でも読みやすいって点はそれほど惹かれないというか、Rubyぐらいインフラ屋でも昨今は読み書きできるべきではって気がする。
-
-&lt;ul&gt;
-&lt;li&gt;あとRubyの方がぶっちゃけ処理ベタ書きしちゃえるって点で安心感はある。Ansibleで細かいとこに手が届かないとき、どういうワークアラウンドがあるかはわかってないが。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;しかし、とはいえやっぱ楽そう。Vagrantと組み合わせて開発環境立てるみたいな小さなことからやってみて、イケると思ったら本番展開ってのもアリかもしれない。かも。&lt;/li&gt;
-&lt;li&gt;この手のツールが出たときに「こんなこともできる！すごい！」ってなりがちなんだけど、実は再発明された車輪で成り立ってる部分もあって、それshでできるよ？ってなることは結構ある（brewfileがわりとその気配あった）ので、その点に関してはきちんと見極めがしたい。&lt;/li&gt;
-&lt;li&gt;あとやっぱり構成管理ツールはインフラエンジニアから完全にdevを奪いにかかるツールではあるので、インフラ屋はスケーリングとかネットワークとか（そういえばネットワーク周りのas codeなかなか流行りませんね）障害対策とか、本気でops特化が求められるのかもなとか思った。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>これ行ってきた。ざくっと感想を箇条書きで。
+ ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれらより広い。要はCapistranoがやるようなことまでまかなえる。 それどころかHomebrewの管理あたりも可。一時期brewfileとか流行ってたけど、冪等性とか考えるとAnsible管理の方がいいかも。  最近そんな記事がちょうど上がってた。→ 【要するに】osxcでMacの環境の構成を記述管理する【MacでAnsible】 ｜ Developers.IO  一番のポイントはエージェントレス、だと個人的にも思う。導入ハードルが低い。個人のVPSとかならChef-Zeroとかよりも気楽で良い。 yamlだからインフラ担当者でも読みやすいって点はそれほど惹かれないというか、Rubyぐらいインフラ屋でも昨今は読み書きできるべきではって気がする。  あとRubyの方がぶっちゃけ処理ベタ書きしちゃえるって点で安心感はある。Ansibleで細かいとこに手が届かないとき、どういうワークアラウンドがあるかはわかってないが。  しかし、とはいえやっぱ楽そう。Vagrantと組み合わせて開発環境立てるみたいな小さなことからやってみて、イケると思ったら本番展開ってのもアリかもしれない。かも。 この手のツールが出たときに「こんなこともできる！すごい！」ってなりがちなんだけど、実は再発明された車輪で成り立ってる部分もあって、それshでできるよ？ってなることは結構ある（brewfileがわりとその気配あった）ので、その点に関してはきちんと見極めがしたい。 あとやっぱり構成管理ツールはインフラエンジニアから完全にdevを奪いにかかるツールではあるので、インフラ屋はスケーリングとかネットワークとか（そういえばネットワーク周りのas codeなかなか流行りませんね）障害対策とか、本気でops特化が求められるのかもなとか思った。  </description>
     </item>
     
   </channel>
