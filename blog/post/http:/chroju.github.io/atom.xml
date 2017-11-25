@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on the world as code</title>
+    <link>http://chroju.github.io/post/</link>
+    <description>Recent content in Posts on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 18 Feb 2016 20:51:20 +0900</lastBuildDate>
+    <atom:link href="http://chroju.github.io/post/http/chroju.github.io/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ブログをHugoに移行した</title>
+      <link>http://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
+      <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
+      <description>
+
+&lt;p&gt;すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。&lt;/p&gt;
+
+&lt;p&gt;随所で語られているように移行自体は大したものではなく、Markdownでいずれも互換性があるし、Front MatterもYAML形式であれば同一。Hugoレポジトリの&lt;code&gt;content/post&lt;/code&gt;配下に記事ファイルを突っ込めば移行としてはおしまい。多少の差異については以下の記事が詳しい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した | SOTA&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名が&lt;code&gt;YYYY-MM-DD-foobar.markdown&lt;/code&gt;の形だったのに対し、今回は記事のパーマリンクを&lt;code&gt;config.toml&lt;/code&gt;で以下のように設定してしまっている。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[permalinks]
+    post = &amp;quot;/blog/:year/:month/:day/:filename/&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;従って&lt;code&gt;/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/&lt;/code&gt;という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事は&lt;code&gt;foobar.markdown&lt;/code&gt;に直したのだが、はてなブログ時代から移植した記事は&lt;code&gt;YYYY-MM-DD-post.markdown&lt;/code&gt;という適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。&lt;/p&gt;
+
+&lt;p&gt;記事を公開する流れは以下のようになる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 記事作成
+$ hugo new post/title.md
+$ vi content/post/title.md
+# ビルド
+$ hugo
+# commit
+$ cd public
+$ git add .
+$ git commit -m &amp;quot;new post&amp;quot;
+$ git push origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;hugo&lt;/code&gt;コマンドでビルドすると&lt;code&gt;public&lt;/code&gt;フォルダにサイト構成全体が吐かれるので、それをそのまま&lt;code&gt;git push&lt;/code&gt;して終わり。ただ実際にバージョン管理したいのは&lt;code&gt;public&lt;/code&gt;というより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体で&lt;code&gt;git push&lt;/code&gt;してCIでビルドさせる形に変えたいと思う。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/&#34;&gt;HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。&lt;/p&gt;
+
+&lt;h2 id=&#34;その他参考記事:f9b1285b375e2fa831a443cf9e131380&#34;&gt;その他参考記事&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://qiita.com/syui/items/869538099551f24acbbf&#34;&gt;HUGOを使ってサイトを立ち上げる方法 - Qiita&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hugo - Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ops JAWS#3に行ってきた</title>
+      <link>http://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
+      <description>&lt;p&gt;その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。&lt;/p&gt;
+
+&lt;p&gt;メインとなったのはconfig rulesのハンズオン。&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe src=&#34;//www.slideshare.net/slideshow/embed_code/key/g0o2kIUtI0yKmw&#34; width=&#34;595&#34; height=&#34;485&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&#34; allowfullscreen&gt; &lt;/iframe&gt; &lt;div style=&#34;margin-bottom:5px&#34;&gt; &lt;strong&gt; &lt;a href=&#34;//www.slideshare.net/okochang/opsjaws-20160128&#34; title=&#34;OpsJAWS 20160128&#34; target=&#34;_blank&#34;&gt;OpsJAWS 20160128&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a href=&#34;//www.slideshare.net/okochang&#34; target=&#34;_blank&#34;&gt;hideaki yanase&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;AWSリソース、使っているうちに無秩序になっていき、ルールの統一がはかれなくなったり、全体像が見えづらくなったりということはありがちですが、config rulesを使ってもうシステム的に制御しちゃいましょうというテーマ。例えばCloudTrailが有効化されていない場合にアラートを上げる、とか。監視結果が変化すると、それをトリガーにLambdaをinvokeしたりもできるので、それこそなんでもできる感じ。&lt;/p&gt;
+
+&lt;p&gt;やってみて気付いたけど、やっぱり自分は運用が好きなのかもしれない。システムによって、本来不確かであったり信用性に劣っていたりするはずの人間の動作を制御する、というのが好きなんだろうなと。SEやってた頃は運用の制御はExcel資料が元になることが多くて、それ自体は特に楽しくなかったのだけど、システム的に作りこんでいくのはわくわくする。これはいい気付きだったし、次回も是非参加してみたい。&lt;/p&gt;
+
+&lt;p&gt;問題としてはやはり、Lambda Functionを書くのにpythonかnode.jsを使う必要がある（いまさらJavaってのもなぁ）ので、次回参加するのであればそれまでにpythonをある程度やっておかねばなぁというところ。&lt;/p&gt;
+
+&lt;p&gt;その他、昨年とてもおもしろく読ませていただいたSDの特集『なぜ「運用でカバー」がダメなのか』を書かれた運用設計ラボの波多野氏がいらっしゃっていたりして、個人的にはテンション上がったりもしました。「運用でカバー」をググるとトップに出てくる、なんだか好評を得てしまった拙記事はこちら（あえて移行前ブログを貼るアレ）。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2015/02/11/164926&#34;&gt;Software Design 2015年2月号『なぜ「運用でカバー」がダメなのか』読了 - そのねこが学ぶとき&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Base</title>
+      <link>http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</link>
+      <pubDate>Sun, 24 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</guid>
+      <description>
+
+&lt;p&gt;昨年は転職のゴタゴタがあったりしてメモを取る習慣というものがどこかに消え失せてしまっていたので、年始にあたり生涯幾度目かわからないがメモ環境について再考している。本当に何度目だよ、と思うのだが、これはもう生涯模索しながらいくしかないし、最適解なんてのは時と場合によって変わるものだとは思う。&lt;/p&gt;
+
+&lt;p&gt;しかしオライリーから『エンジニアのための時間管理術』は出ているのに、『情報整理術』が出ていないのはなぜなのか。むしろそっちが職種的に重要じゃないのか。ブログやQiitaでもあまり見かけない。&lt;/p&gt;
+
+&lt;h2 id=&#34;evernoteの呪縛:75a3e4d39cced19f482a87dc88309f83&#34;&gt;Evernoteの呪縛&lt;/h2&gt;
+
+&lt;p&gt;現代においてメモ、ノートというと真っ先に挙がってくるのがEvernoteであり、自分も確かに使ってはいる。使ってはいるが、正直に言って愛憎は入り混じっている。基本的には使いたくない。でも使わずにはいられなくて、ついついいろいろとぶち込んでしまう。&lt;/p&gt;
+
+&lt;p&gt;Evernoteの肝は、ありとあらゆるフォーマットの資料を何でも入れることができて、それがsearchableになることにあると思っている。昨日読んだブログのエントリー。1年前に契約したサービスの証明書。3ヶ月前に読んだ本の感想。そういったものをすべて並列に保存することができ、検索すればすぐに出てくる。放っておけば消えて無くなるような情報が「死蔵」されなくなる。だから取りあえず「いいな」と思ったものがあればEvernoteに入れてしまう。特に開発終了が発表されたClearlyが自分にとってはクリーンヒットで、良いなと思った文章があれば迷わずClearlyを使っていた。ググればまた出ると言われればその通りだが、同じ検索キーワードをまた思い出せるとも限らないし、ページが消滅することだってままある。&lt;/p&gt;
+
+&lt;p&gt;しかし実際に突っ込んだ情報をもう一度掘り出せるのかどうか。文字情報であれば確かに検索できるのだが、画像はどうか。音声は。またpdfは。それを防ぐためか、ノートブックやタグ付けという能動的な整理手法も用意されているわけだが、次々と投げ込んだ資料を1つずつ分類していくのは骨が折れるし、メールクライアントにあるようなオートフィルタリングはいまだにできない（サードパーティーのアプリならあるけど）。また実際に検索をかけたときも、ノートの読み込み速度はそれほど速いものではなく、特にモバイルアプリに関してはどうにもストレスフルだ。&lt;/p&gt;
+
+&lt;p&gt;結果的に何でも入れられるがサルベージが難しいゴミ箱、あれば安心感があるので離れられないけど、積極的に何か活用していこうとは思えない存在と化してきている。&lt;/p&gt;
+
+&lt;h2 id=&#34;何をメモするのか:75a3e4d39cced19f482a87dc88309f83&#34;&gt;何をメモするのか&lt;/h2&gt;
+
+&lt;p&gt;そもそも何をそんなに悩むほどメモしたいのか。改めて考えるとよくわからないなぁで思考が停まりそうになったが、いくつか挙げてみる。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tech関連でも日常の中の疑問でもそうだが、ググるのは簡単だがその知識はすぐ忘れてしまう。どこからどんな情報を得て、どんな結論に至ったのかは書き留めておきたい。&lt;/li&gt;
+&lt;li&gt;スニペットやチートシート。頭悪いのでコマンドや文法をすぐ参照できるようにしておきたい。&lt;/li&gt;
+&lt;li&gt;読書メモ。簡単な本の概要、感想、それを受けて何を実践するのか。&lt;/li&gt;
+&lt;li&gt;ポエム。客観的な事実や資料より感情より、主観よりのもの。課題に関する考えとか哲学とか。&lt;/li&gt;
+&lt;li&gt;チェックリスト。日常の指針になるような。定例作業の手順もそうだし、持ち物リスト、忘れがちなポリシー的なものとか。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;こうして挙げてみると参照頻度、パブリックorプライベートといった軸で分類できそうな気がしてくる。またそれによって選ぶべきツールも変わりそうだ。例えばEvernoteは先に書いた通り遅い、分類が面倒という特徴を自分は見出しているが、逆にそれほど素早く引き出す必要のないもの、つまり参照頻度が低い「もしものためのメモ」などであればEvernoteでも構わないことになる。&lt;/p&gt;
+
+&lt;p&gt;スニペットやチートシートは本当に秒で出てきて欲しいし、シンタックスハイライトが効いてないと辛いみたいなところがあったりもするので、Evernoteには向かないことになる。この目的だと自分の中ではGistやKobitoが最近のヒットではある。&lt;/p&gt;
+
+&lt;p&gt;思うに、Evernoteや梅棹忠夫先生が掲げるような「すべてのメモを一箇所に集める」というのはちょっと厳しいのではないか。目的の違うメモであれば、適切なフォーマットも自ずと変わってくる。もちろん分散していろんなところにメモがある状況というのはわかりにくくはあるが、目的がはっきり定まっていればツールの選択に迷うことはない。自分はEvernoteにスニペットを格納したことはないし、日常生活で使うチェックリストをGistのPublicで保存したこともない。&lt;/p&gt;
+
+&lt;h2 id=&#34;personal-knowledge-base:75a3e4d39cced19f482a87dc88309f83&#34;&gt;Personal Knowledge Base&lt;/h2&gt;
+
+&lt;p&gt;ここでようやくタイトル回収するのだけど、海外ではこの手のツールをPersonal Knowledge Base(PKB)と呼ぶらしい。&lt;a href=&#34;https://en.wikipedia.org/wiki/Personal_knowledge_base&#34;&gt;Wikipediaの記述&lt;/a&gt;の細かさを見ると、国内よりはだいぶホットな話題っぽく思われる。いろいろこのワードでググッてみたのだが、今のところうなずけたのは以下のあたり。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.acuriousmix.com/2014/09/03/designing-a-personal-knowledgebase/&#34;&gt;Designing a Personal Knowledgebase – A Curious Mix&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com/item?id=8270759&#34;&gt;Designing a Personal Knowledgebase | Hacker News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://programmers.stackexchange.com/questions/729/how-do-you-manage-your-knowledge-base&#34;&gt;How do you manage your knowledge base? - Programmers Stack Exchange&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;特に一番上の記事はだいぶ熱い。俺の理想とするPKBはこんなのだ！！！ってめっちゃ細かく書いているが、わりと同意できる内容ではあった。下2つのフォーラム系の記事を見ると、案外多いのが個人Wikiを使っている人。確かにフレキシブルな編集が可能という点では、2016年現在に至ってもWikiの優位性はかなり高い気がする。でもさすがに今更感あるなーということで手を出す気にはなれない。あるいはorg-modeが結構評判よくて、Vimmerじゃなければ手を出していたようには思う。&lt;/p&gt;
+
+&lt;p&gt;PKBの定義に関してはWikipediaの記事にあるが、情報の一次ソースそのものではなくて、そこから得られた知識をまとめるものということ。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Its purpose is not simply to aggregate all the information sources one has seen, but to preserve the knowledge that one has learned from those sources.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;これについては深く同意するところで、情報そのものなら別に本自体とかウェブページを直接見たりとかすればいいんだけど、それら複数の資料から自分なりに導いた知識、学習結果というものをまとめておきたいのだ。そう考えてみると、Qiitaに特にそういう内容は多く書いているし、一次ソースに関してはウェブクリップなり、本のページを撮影したものなりをEvernoteに入れているので、やっぱりツールの棲み分けになってくるのかなぁと思えてくる。ちなみに一次ソースにあたる情報をまとめたものはPIM(Personal Information Management)と言うらしい。&lt;/p&gt;
+
+&lt;h2 id=&#34;結論:75a3e4d39cced19f482a87dc88309f83&#34;&gt;結論？&lt;/h2&gt;
+
+&lt;p&gt;書いていけば結論見えるかなと思ってここまで書いてみたが、なかなか見えてこない。結局のところ自分の中ではGistが一番近くはある。Gistboxを使えばタグ分類ができるし、&lt;a href=&#34;https://github.com/lambdalisue/vim-gista&#34;&gt;vim-gista&lt;/a&gt;を使うことでVimキーバインドでの編集もできる。コードハイライトもMarkdownのプレビューも出来て至れり尽くせり。引っかかるのは非techなメモを入れるのがGitHubである故に心理的に憚られるなぁというのと、モバイル端末からの閲覧にあまりいいツールがないこと。&lt;/p&gt;
+
+&lt;p&gt;んで一方で公開したい情報はこうやってブログにまとめたり、Qiitaにまとめたりもしているので、そこの分断も若干もどかしい。さっきツールは分けるしかないかもと言っておいてアレだが。ちなみにブログはこういう文章過多な場合、いわばポエムだとかツール、技術に関する考察をまとめる場、Qiitaはよりtechそのものに寄ったものを書く場と使い分けている。こういったところで公開共有するほどでもねーやってものはGistかなと。あんまりにも初歩的な内容とかQiitaに流すの憚られるじゃないですか。タグで追ってる人には必ず見られるわけだから。&lt;/p&gt;
+
+&lt;p&gt;Evernoteに関しては、結局一次ソースにあたる情報を端からブチ込んで安心感を得るツールとしては今後も使い続けそう。しかしClearlyがなくなるのが本当につらい。Web Clipperのあの鈍重な動きは「何も考えずとりあえずクリップ」するにはちょっと抵抗ある。仕方ないか。しかしウェブクリップというのもどこまで意味のあるものやら。。その後情報が更新されても追えなくなるわけだし。&lt;/p&gt;
+
+&lt;p&gt;何はともあれ、とりあえず「記録残せ」から始めなくてはと思う。悩んで結論出ないから記録しないみたいな状態が続くのが一番よろしくない。悩みながらも進めていくしかないんだろうな。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>東京Node学園付属小学校1限目に行ってきた</title>
+      <link>http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</link>
+      <pubDate>Wed, 20 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://connpass.com/event/23463/&#34;&gt;【増枠！】東京Node学園付属小学校 1時限目 - connpass&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;東京node学園というNode.jsのユーザーコミュニティがありますが、その入門者向けバージョンが立ち上がったので行ってきました。&lt;/p&gt;
+
+&lt;p&gt;自分がNode.jsを扱った経験はAWS Lambdaとhubotで遊ぶために既存のスクリプトを少し触ったぐらいで、おそらくは小学校というより幼稚園レベルだったと思いますが、それ以前にやはりフロントエンドの集まりにインフラのエンジニアが行くというのはちょっと自分でも場違い感を覚えずにはいられず、さすがに提供できる話もないやろなってことで懇親会は出ずに帰ってしまいました（）。しかし刺激になったのは確かというか、フロントエンドの世界にちょっとだけ触れられる良い機会ではあったかなと。&lt;/p&gt;
+
+&lt;p&gt;そもそもにして自分にとって「言語」は最近手足になってきていて、Ansible使いたいからPythonやっておこうとか、Docker理解したいからgolangかなとかそういう選択ばかりするようになっていたのだが、フロントエンドにとって新しい言語というのは可能性の広がりなのだなーと当たり前のようなことに気付いた。例えば最近Kobitoの実装などで話題のElectronはNode.jsなわけで、サーバーサイドスクリプトであるNode.jsを学ぶことで、デスクトップアプリケーションを従前よりは容易に構築できる可能性になる。作れるものの幅が増える、やれることが膨らんでいくことはエンジニアにとってとても楽しい。&lt;/p&gt;
+
+&lt;p&gt;くっだらないものでもなんでも構わんから、とりあえず手を動かして「作る」ことが楽しいって経験をもっとしてもいいのかもなと思った。インフラのデリバリー、運用の効率化、そういうのも大切ではあるけれど、我々がそもそもビジネスとして提供しているサービス、システムとはなんぞやって部分をもう一度見返してみたい気がした。言語は単なるツール、ではないはず。だからこういう勉強会もいいけど、ハンズオンとかもっと行ってみるべきかなと。具体的に今回の勉強会で見かけた中ではMEANスタックが気になるのでやっておきたい。ちょうどMongoに手を付けたかったし。&lt;/p&gt;
+
+&lt;p&gt;以上、取り留めのない感想でした。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2016年の行動規範</title>
+      <link>http://chroju.github.io/blog/2016/01/03/manifesto-2016/</link>
+      <pubDate>Sun, 03 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2016/01/03/manifesto-2016/</guid>
+      <description>
+
+&lt;p&gt;うまいことまとまらないのでつらつら。&lt;/p&gt;
+
+&lt;h2 id=&#34;問題意識:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;問題意識&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;時間、お金の使い方がいまだに下手。
+
+&lt;ul&gt;
+&lt;li&gt;きちんと考えず浪費している機会が多い。&lt;/li&gt;
+&lt;li&gt;時間ならタスクシュート、お金ならZaimを使ったりした経験はあるが結局とまったりしている。&lt;/li&gt;
+&lt;li&gt;昨年は10年以上続いていた日記すらもとめてしまった。&lt;/li&gt;
+&lt;li&gt;何か忙しい課題が仕事なりプライベートなりに鎮座すると、他に回す手が一切なくなったりしてバランス悪い。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;メモ環境の再考。
+
+&lt;ul&gt;
+&lt;li&gt;インプットが「ググって終わり」の場合が多く、次にその情報が必要になったときも結局ググってる。&lt;/li&gt;
+&lt;li&gt;読んだ本が本当に身になっている気がしない。&lt;/li&gt;
+&lt;li&gt;Evernoteがメモの死蔵場になっている。&lt;/li&gt;
+&lt;li&gt;デジタルメモはVimと&lt;a href=&#34;https://github.com/glidenote/memolist.vim&#34;&gt;memolist.vim&lt;/a&gt;を基本にしているけど、書き散らして終わってる感。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;技術探求の不足
+
+&lt;ul&gt;
+&lt;li&gt;やってるけどやりきれてないというか。&lt;/li&gt;
+&lt;li&gt;Qiitaで話題になっているのを見て、ザッと読んでなんとなく無理そうと思うと閉じちゃったり。&lt;/li&gt;
+&lt;li&gt;いつか使うかな？と思ってPocketにつっこんでそのまんまの積読があまりに多い。&lt;/li&gt;
+&lt;li&gt;流行ってる→やろうとか、こういうツールほしい→作ろうの瞬発力上げたい。&lt;/li&gt;
+&lt;li&gt;本読みたい。というか去年文化資本にあまりに触らなすぎた。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;仲間がほしい
+
+&lt;ul&gt;
+&lt;li&gt;懇親会とか行ってもその場限りの話しかできなかったりでエンジニア仲間社外にあんまいない。&lt;/li&gt;
+&lt;li&gt;社内の技術課題解決するのに社外で話すってのも大切そう。&lt;/li&gt;
+&lt;li&gt;ていうかエンジニアとしてもうちょい知名度上げてみたい。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;解消していくために:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;解消していくために&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;時間とお金の定量評価
+
+&lt;ul&gt;
+&lt;li&gt;お金は娯楽費にx万までみたいな予算持ってるので、時間も定量評価したい。コード書く時間を週に必ずx時間とか。&lt;/li&gt;
+&lt;li&gt;タイムロギングしたいけどTogglとか使うの面倒。とりあえずやってみるか。難しけりゃ1日の最後にノートに記憶から書き出すんでもいいかなと。&lt;/li&gt;
+&lt;li&gt;週ごとのノートにしたい。PDCA回すのにちょうど良いスパンだと思う。今週ダメなら来週帳尻合わせるとか出来るわけで。&lt;/li&gt;
+&lt;li&gt;そういう用途だと紙ノートよりEvernoteの方が良さそう。1ノートに対して1週間という形が取れるので。&lt;/li&gt;
+&lt;li&gt;じゃあ日記もここに載ってくる形でいっか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;メモをもっかいちゃんとする
+
+&lt;ul&gt;
+&lt;li&gt;技術テーマごとにちゃんとノート取る。ブログに上げるといった方がいいか。&lt;/li&gt;
+&lt;li&gt;ブログ記事にならないレベルのものはQiita。二番煎じ三番煎じでQiitaレベルに値しないものはGist。&lt;/li&gt;
+&lt;li&gt;でもGistあんまり使いやすくない……。&lt;/li&gt;
+&lt;li&gt;メモを見返す時間をちゃんと作る。週次レビュー的なあれ。金曜夜が第一候補。無理なら土曜。&lt;/li&gt;
+&lt;li&gt;というかそれぐらいの時間は取れるようなスケジューリングをする。去年はそれすら難しいぐらいアホほど予定入れてた。&lt;/li&gt;
+&lt;li&gt;頭のなかちゃんと棚卸するの大事。&lt;/li&gt;
+&lt;li&gt;手元のモレスキンはタイムライン的なリアルタイムメモ用にする。アナログは見返すの無理。ざざっと時系列で追う目的でしか使えない。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;散逸的な勉強をしない
+
+&lt;ul&gt;
+&lt;li&gt;とりあえずおもしろそうなもの、役に立つはずのものに片っ端から手をつけるのやめる。&lt;/li&gt;
+&lt;li&gt;Pocketに記事を置いとくのはいいけど、1週間ぐらい経ったら躊躇なく消す（自動化できないかな）。&lt;/li&gt;
+&lt;li&gt;上述の通りブログに上げることを目的としてノートを取っていく。参照する記事はノート上で繰り回す。&lt;/li&gt;
+&lt;li&gt;スーパーマンになろうとしない（選択と集中、less is more）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;技術的な瞬発力の向上
+
+&lt;ul&gt;
+&lt;li&gt;手足のように使える言語がほしい。Rubyかじったんだからちゃんとやり切る。&lt;/li&gt;
+&lt;li&gt;もう1個。デフォルトで入ってる言語だと楽なんだが。Pythonかなー。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://orangain.hatenablog.com/entry/python3-as-default&#34;&gt;LinuxディストリビューションにおけるPython 3デフォルト化の流れ - orangain flavor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;実際の開発経験を積む。API叩くとかやる。動かす。&lt;/li&gt;
+&lt;li&gt;原則としてCLIで操作する。GUIに頼らない。コマンドでなんとかならないかとまず考える。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;文化資本に触れたい
+
+&lt;ul&gt;
+&lt;li&gt;1クール3本のアニメ&lt;/li&gt;
+&lt;li&gt;1か月2冊の小説&lt;/li&gt;
+&lt;li&gt;1か月2本の映画&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;エンジニアとしての活動
+
+&lt;ul&gt;
+&lt;li&gt;なんかユーザーグループ入ってみたい。職種的に考えるとJAWS-UG？&lt;/li&gt;
+&lt;li&gt;これだけはという技術分野ほしい。Ansibleが今自分の中でキテるのでもっと。&lt;/li&gt;
+&lt;li&gt;GitHubをソーシャルにちゃんと使う。横断的な検索とかフォローとかプルリク出してみるとか。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;挑むべき技術分野:d46ca0be31fde7498833cd9b20e5a80e&#34;&gt;挑むべき技術分野&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;上述の通り武器言語としてのRuby、Python。&lt;/li&gt;
+&lt;li&gt;hubotいじる上でnode.jsを少しだけ。&lt;/li&gt;
+&lt;li&gt;DB経験がさらっさらと言っていいほどないのでMySQL（Mariaでいいか）とRedis。&lt;/li&gt;
+&lt;li&gt;インフラ関連技術は継続。Ansible、Serverspec、AWS。&lt;/li&gt;
+&lt;li&gt;最近流行ってるOSSツール類。Elasticsearch、HashiCorp周り、Docker、Sensu、Rundeck、&lt;/li&gt;
+&lt;li&gt;総合するとこれやってみるといいかも→ &lt;a href=&#34;http://syou6162.hatenablog.com/entry/2015/12/21/000843&#34;&gt;今年よかった習慣: ライフログ収集および可視化 - syou6162&amp;rsquo;s blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2015年総括</title>
+      <link>http://chroju.github.io/blog/2015/12/31/looking-back-2015/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/12/31/looking-back-2015/</guid>
+      <description>
+
+&lt;p&gt;いろいろとチャレンジングに動いてみただけに、難しい年だった。&lt;/p&gt;
+
+&lt;p&gt;今年初めの&lt;a href=&#34;http://chroju.github.io/blog/2015/01/12/post/&#34;&gt;「行動規範」&lt;/a&gt;で書いた通り、就職は、した。大手SIerからいわゆるベンチャー気質な企業に転職して、働き方はだいぶ変わった。毎日Excelとにらめっこしていた生活ではなく、業務上初めてsshを実行し、いまでは毎日実行するような生活になった。&lt;/p&gt;
+
+&lt;p&gt;承認と判子と指示が行動の軸だった状態から、個々人のスキルと瞬発力と経験が物を言うような状態になり、率直に言ってついていけてない感はある。どこまでを許可無くやっちゃっていいのかわからない（いわゆるDon’t ask for permission, beg for forgiveness的文化）し、技術検証に手をつけ始めると基礎スキルが低いのでやたら時間を食ってしまい、その間に他の人にタスクを取られたりする。&lt;/p&gt;
+
+&lt;p&gt;でもまったく手応えがないわけではなくて、個人開発で使っていたスキルで食い込んでいけるところも大きいし、自分に足りない、学ぶべきことは山のように社内に転がっているので、ひたすら旺盛に吸収していきたいと思う。というかそうしない限り、エンジニアとして生きる道がない。&lt;/p&gt;
+
+&lt;p&gt;興味領域としてはDevOps方面にかなりアンテナが伸びてきている。大企業でわりとカッチリ運用設計を認めていた自分が、創業からそれなりの年数が経ち、技術的負債の増えてきたベンチャーに入ったことによる必然とも言えるのだろうが、運用上の穴や非効率な部分がとても目についていて、ルールで縛るのではなく、システム的に運用の統括を図ろうというのが目下の課題となっている。それこそInfrastructure as Codeを使うなりDockerを使うなり、もっと低レイヤーにシェルスクリプトをガリガリ書くなり。だから技術的に磨いて実践していくことが本当に多いのだけど、一方で運用方法の改変ということは社内への浸透が必要になり、政治的な問題にもなってくるので、コミュニケーション力結局必要やんけってところで非コミュな自分は悩んでいる。社内政治ほんとやだ。&lt;/p&gt;
+
+&lt;p&gt;まぁ、総じて言えば楽しく仕事はできている。だけど大きな変化は副作用的に予期しない変化を別のところでもたらしたりするものでもあって、そのバランスを取ることがなんとも難しい。貪欲であることと、単に我欲を押し通すこととはまた違うわけで、もう少しコントールが必要だと思っている。リスクテイクしたのだからその分の負担の大きさを覚悟してはいたが、わりと想定以上なところはあってストレスは大きい。年齢も年齢なので、自分が「何をすべきか」という論調よりも、周囲、世の中にとって自分は「何であるのか」という視点で動いた方が良いのかもなという気がしてきた。もう少し、置かれた場所というものも大事にしたい。&lt;/p&gt;
+
+&lt;p&gt;抽象論についつい流れてしまったけど、具体的な技術的成果はQiitaを中心に流していこうと思っているので、ブログはポエミーにこんな感じで締めてみる。また来年。&lt;/p&gt;
+
+&lt;h2 id=&#34;おまけ-2015年定量評価:4b0e9716f5c3774ac1bd6e95779c4d66&#34;&gt;おまけ：2015年定量評価&lt;/h2&gt;
+
+&lt;h3 id=&#34;技術:4b0e9716f5c3774ac1bd6e95779c4d66&#34;&gt;技術&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Linuxのサーバー運用に従事開始。初歩的なコマンドからさらい直せてる。&lt;/li&gt;
+&lt;li&gt;CentOS7の業務利用開始。&lt;/li&gt;
+&lt;li&gt;AWSの利用を個人でも業務でも開始。ただしほぼEC2。&lt;/li&gt;
+&lt;li&gt;Ansible利用開始。&lt;/li&gt;
+&lt;li&gt;Serverspec検証開始。&lt;/li&gt;
+&lt;li&gt;Docker検証開始。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;イベント:4b0e9716f5c3774ac1bd6e95779c4d66&#34;&gt;イベント&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JAWS DAYS 2015&lt;/li&gt;
+&lt;li&gt;JAWS UG 初心者支部&lt;/li&gt;
+&lt;li&gt;デブサミ2015&lt;/li&gt;
+&lt;li&gt;Ansible入門イベント&lt;/li&gt;
+&lt;li&gt;他社の障害対応気にならNight&lt;/li&gt;
+&lt;li&gt;手羽の会（ハンズラボ）&lt;/li&gt;
+&lt;li&gt;Serverworks Sonic!&lt;/li&gt;
+&lt;li&gt;OSC東京 2015秋&lt;/li&gt;
+&lt;li&gt;Rakuten Tech 2015&lt;/li&gt;
+&lt;li&gt;RubyKaigi 2015&lt;/li&gt;
+&lt;li&gt;他&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;書籍:4b0e9716f5c3774ac1bd6e95779c4d66&#34;&gt;書籍&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;リーダブルコード&lt;/li&gt;
+&lt;li&gt;プログラマが知るべき97のこと&lt;/li&gt;
+&lt;li&gt;それがぼくには楽しかったから&lt;/li&gt;
+&lt;li&gt;ハッカーと画家&lt;/li&gt;
+&lt;li&gt;UNIXという考え方&lt;/li&gt;
+&lt;li&gt;インターネットのカタチ&lt;/li&gt;
+&lt;li&gt;Amazon Web Services パターン別構築・運用ガイド&lt;/li&gt;
+&lt;li&gt;シェルプログラミング実用テクニック&lt;/li&gt;
+&lt;li&gt;はじめてUNIXで仕事をする人が読む本&lt;/li&gt;
+&lt;li&gt;大規模サービス技術入門&lt;/li&gt;
+&lt;li&gt;Serverspec&lt;/li&gt;
+&lt;li&gt;CentOS7実践ガイド&lt;/li&gt;
+&lt;li&gt;Team Geak&lt;/li&gt;
+&lt;li&gt;オペレーティングシステムの基礎&lt;/li&gt;
+&lt;li&gt;たのしいインフラの歩き方&lt;/li&gt;
+&lt;li&gt;他&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Serverspecファーストインプレッション</title>
+      <link>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
+      <description>
+
+&lt;p&gt;秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。&lt;/p&gt;
+
+&lt;h2 id=&#34;サーバー構成の-仕様書-代わりとして:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;サーバー構成の「仕様書」代わりとして&lt;/h2&gt;
+
+&lt;p&gt;自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。&lt;/p&gt;
+
+&lt;p&gt;Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。&lt;/p&gt;
+
+&lt;p&gt;中には&lt;a href=&#34;http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/&#34;&gt;cronで監視チックに実行させている例&lt;/a&gt;もあるようだが、それもアリかなと思う。&lt;/p&gt;
+
+&lt;h2 id=&#34;導入は簡単だが探求にはrubyスキル必須:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;導入は簡単だが探求にはRubyスキル必須&lt;/h2&gt;
+
+&lt;p&gt;Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。&lt;/p&gt;
+
+&lt;p&gt;例えば私が初めて書いた&lt;code&gt;spec_helper.rb&lt;/code&gt;はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;serverspec&#39;
+require &#39;yaml&#39;
+
+properties = YAML.load_file(&#39;properties.yml&#39;)
+
+host = ENV[&#39;TARGET_HOST&#39;]
+set_property properties[host]
+
+set :backend, :exec
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。&lt;/p&gt;
+
+&lt;p&gt;自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。&lt;/p&gt;
+
+&lt;h2 id=&#34;国産ossであるアドバンテージ:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;国産OSSであるアドバンテージ&lt;/h2&gt;
+
+&lt;p&gt;Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&amp;rsquo;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rebuild.fm/75/&#34;&gt;Rebuild: 75: Book Driven Development (gosukenator)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg&#34; alt=&#34;Serverspec&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Serverspec&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.31&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;宮下 剛輔 &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 213,793&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。&lt;a href=&#34;https://github.com/ryotarai/infrataster&#34;&gt;Infrataster&lt;/a&gt;とも組み合わせられれば、よりテストの質は増しそう。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>『Team Geek』読了</title>
+      <link>http://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
+      <description>&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/41SlY0zvpKL._SL160_.jpg&#34; alt=&#34;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Team Geek ―Googleのギークたちはいかにしてチームを作るのか&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.14&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Brian W. Fitzpatrick Ben Collins-Sussman &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 18,890&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873116309/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要はあって、何かやりたいことがあればいわゆる政治的な課題に悩まされることになったりもする。本を読むときはつい技術系のものや個人のハッカーマインドに関するものを読みがちだけど、歳も歳だし組織論もかじろうかということで読んだ。元々読むつもりはあったが、紀伊國屋書店新宿本店でオライリーカレンダーのプレゼントやってたので背中押された。&lt;/p&gt;
+
+&lt;p&gt;とても元も子もないまとめ方をしてしまうと、&lt;a href=&#34;http://blog.glidenote.com/blog/2015/08/17/move-to-akamai/&#34;&gt;KAIZEN Platform, Inc. のエンジニア行動指針&lt;/a&gt;がだいぶ本書に影響を受けたと思われるものになっていて、これに全社員がコミットできている状態というのは理想的なのだろうなと思ったりした。本書の内容にはとても賛同できるのだが、「組織論」である以上は自分だけが納得していても仕方なくて、社内でこの内容を文化として定着させなくてはならない。そこのハードルがなかなかに高い。&lt;/p&gt;
+
+&lt;p&gt;本書でもそのあたりの話には「組織的操作の技法」として第5章をまるまる当てて触れられていて、例えば「道がないなら道を作る」＝草の根からツールの導入などを始めていく、「許可を求めるより寛容を求めるほうが簡単」、「安全なポジションまで昇進する」といったことが書かれている。結局はできることからやっていく、しかなくなってしまうのかもしれない。&lt;/p&gt;
+
+&lt;p&gt;個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。&lt;/p&gt;
+
+&lt;p&gt;こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerファーストインプレッション</title>
+      <link>http://chroju.github.io/blog/2015/12/04/docker-first-impression/</link>
+      <pubDate>Fri, 04 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/12/04/docker-first-impression/</guid>
+      <description>
+
+&lt;p&gt;前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。&lt;/p&gt;
+
+&lt;h2 id=&#34;仮想マシン-と考えるとdockerは理解しづらい:ccbe1575a20deb569178af4585ba95c4&#34;&gt;「仮想マシン」と考えるとDockerは理解しづらい&lt;/h2&gt;
+
+&lt;p&gt;Dockerを「仮想マシン」と称する文章も随所で見かけていたが、これを仮想マシンとして捉えると理解からは遠のく。自分自身、Dockerの概念的な理解にはかなり手こずっていて、OSがないのにどうやって「マシン」が動くのかわからなかったし、 &lt;code&gt;chroot&lt;/code&gt; のようにファイルシステム上に仮想的なディレクトリツリーを設けるものなのかと思っていた。&lt;/p&gt;
+
+&lt;p&gt;Dockerは隔絶された名前空間上で展開されるプロセスに過ぎない。確かにコンテナはOSのような振る舞いを見せるが、そこにいわゆるVMwareやXenのような仮想「マシン」はない。あくまでホストOSの一部リソースを切り出して、仮想的に扱う技術に過ぎない。&lt;/p&gt;
+
+&lt;h2 id=&#34;vagrantの代替:ccbe1575a20deb569178af4585ba95c4&#34;&gt;Vagrantの代替？&lt;/h2&gt;
+
+&lt;p&gt;一度理解して、 &lt;code&gt;docker run&lt;/code&gt; を叩けるようになると利便性は即座に理解できる。OSをブートさせるわけではないのでコンテナの起動は従来の「仮想マシン」と比べて格段に速く、CircleCIで使われている用途同様、テスト用にまっさらな環境が即席で欲しいときには大変重宝する。こういう用途にはもともとVagrantが適していたのだと思うが、本当にすぐ使い捨ててしまいたいようなOS環境であれば、Dockerを使ったほうが遥かに手軽に起動も破棄もこなせる。&lt;/p&gt;
+
+&lt;p&gt;ただあまりに簡単に起動、破棄ができるものの、作成したコンテナのイメージはコンテナ終了後も基本的に残存するので、調子に乗っているうちにいつの間にかディスクがかなり消費されていることが何度かあった。コンテナライフサイクルの把握と運用整備はマスト。&lt;/p&gt;
+
+&lt;h2 id=&#34;ポータブルなインフラストラクチャー:ccbe1575a20deb569178af4585ba95c4&#34;&gt;ポータブルなインフラストラクチャー&lt;/h2&gt;
+
+&lt;p&gt;Dockerを実用できる一例として、先日Traildashを採用する機会があった。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/AppliedTrust/traildash&#34;&gt;AppliedTrust/traildash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;CloudTrailという、AWS APIへのアクセスログをjsonで吐いてくれるAWSサービスがあるのだが、それをElasticsearchで集計してKibanaでブラウザ表示してくれるツール。このツールはDockerイメージで配布されていて、自分のサーバー上にpullしてきて、AWS APIへアクセスするための環境変数をいくつか設定するだけで使えるようになる。自分はElasticsearchの運用経験はないのだが、実質的に &lt;code&gt;docker run&lt;/code&gt; コマンド一発だけでそれが使えてしまう。（そのことの是非は置いておくとして）Dockerがアプリケーションサイドで実現することってこういうことなんだろうと。herokuが出たとき、ローカルからインターネットへのサービスのポータビリティが劇的に向上したわけだが、Dockerは稼働先を問わないわけで、ポータビリティはさらに拡大する。&lt;/p&gt;
+
+&lt;p&gt;これはインフラ側としても嬉しいところで、今までnginxやらDBやらというミドル的な部分はアプリとしての要求もあり、インフラとしての要求もあり、双方の要件がガッシリ絡んでしまっていて、設定を後から見返すと「これなにゆえにこうなったんだっけ？」ってことが少なくなかったり、構築分担が面倒だったりというのがあって。コンテナとしてアプリをデプロイするとなると、サーバーとコンテナが明確に分離される。疎結合になる。ミドルの調整はコンテナ内だけを気にして行えばよいので、サーバーはとりあえずDocker動いてくれればいいやみたいな状態になる。雑だけど楽だろうなという気がぼんやりしている。&lt;/p&gt;
+
+&lt;h2 id=&#34;dockerの運用:ccbe1575a20deb569178af4585ba95c4&#34;&gt;Dockerの運用&lt;/h2&gt;
+
+&lt;p&gt;とりあえず前述のTraildashはDockerによる本番運用（外に出すものではないので本番といえるか微妙ではあるが）の発端にはなりそうなものの、いわゆるアプリ、サービスを本番稼働させるのがどんなもんなのかってところは自分自身見えてない。これをきちんと本番で扱うには可用性やら信頼性やらを担保しなくてはならないわけで、クラスタ構成に用いる&lt;a href=&#34;https://docs.docker.com/swarm/&#34;&gt;Docker Swarm&lt;/a&gt;を導入するだとか、いわゆるインフラとしてのお仕事はやっぱり必要になる。そのへんどこかで試せればなぁとは思うので、ひとまずは自分の http;//chroju.net をDocker化しようかなどと。この前OSCでさくらのクラウド2万円クーポンもらったし、Dockerによる個人PaaS的なものでも作ってみようか。&lt;/p&gt;
+
+&lt;p&gt;テストとしての利用には申し分のないところで、先日記事で上げたが&lt;a href=&#34;http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/&#34;&gt;AnsibleとServerspecのテスト&lt;/a&gt;に使えるまっさらなOS環境としてDockerは重宝している。Infra as Codeと大変相性がよくて、よくこのタイミングで出てきてくれたなという感じがする。時代の要請なのだろうか。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI</title>
+      <link>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/&#34;&gt;CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible-ruby-devs&#34;&gt;chroju/ansible-ruby-devs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;ansibleにテストは必要か:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Ansibleにテストは必要か？&lt;/h1&gt;
+
+&lt;p&gt;AnsibleはPlaybookに書かれた設定通りにサーバーをセッティングしてくれるツールなのだから、傍証としてのテストは必要ないし、そもそもそれはAnsibleに対する信頼の問題だという話がある。（かのオライリーのServerspec本でも「Serverspecの必要性」を状況に応じて説明した章がある）が、自分は以下の理由からAnsible実行後のテストは必要と考えている。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;h2 id=&#34;playbookの書き方が間違っている:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Playbookの書き方が間違っている&lt;/h2&gt;
+
+&lt;p&gt;確かにPlaybookに書いた内容通りにサーバーは組まれるのだが、そもそもPlaybookの書き方がおかしくて、想定通りの実行結果にならない可能性はある。そのレベルであればコードレビューで気付くべきではないかという話もあるが、こういう趣味の個人開発では難しかったり、レビューで漏れがあったりというのも有り得るわけで、自動テストに任せられるならその方が確かかとは思う。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;h2 id=&#34;冪等性の問題:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;冪等性の問題&lt;/h2&gt;
+
+&lt;p&gt;特にshellモジュールを用いたときなどは冪等性が維持されない可能性があり、複数回の実行で想定外のサーバー状態になる可能性はある。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;テストツールの選定:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;テストツールの選定&lt;/h1&gt;
+
+&lt;p&gt;普通にServerspec。Ansibleで定義したインベントリファイルやrolesをServerspecと共有してくれる&lt;a href=&#34;http://qiita.com/volanja/items/5e97432d6b231dbb31c1&#34;&gt;ansible_spec&lt;/a&gt;というツールもあり、当初はこちらを使おうとしていた。が、前述した「Ansibleの書き方自体が間違っている可能性」をテストするとなると、できるだけAnsibleとテストツールは疎結合とするべきと考え、ファイルや設定は一切共有しない形でServerspecを使っている。&lt;/p&gt;
+
+&lt;h1 id=&#34;circle-ciの利用:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;Circle CIの利用&lt;/h1&gt;
+
+&lt;p&gt;繰り返しになるが初である。インフラエンジニアがCIをすることはまぁない（なかった）。そんな頻繁に設定を変えるわけでもなし。インフラCIが可能かつ必要となったのは、Infrastructure as Codeの台頭と、クラウドネイティブ化によりImmutableかつ極めて速いライフサイクルでサーバーインフラが更新されるようになったことによるもの。&lt;/p&gt;
+
+&lt;p&gt;で、Circle CIでググってもそんなに使い方みたいな初歩的な記事は出ない。どうもCIツールの使い方なんてのはJenkins登場の頃に身につけてて当然だろって感じの扱いっぽい。実際使いながら自分なりに理解したのは「レポジトリをpushすると、それを使って自動的にテストやデプロイを回してくれる」ツールということで、Circle CIについてはこんな感じに認識してるんだがあってんのかなぁ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;レポジトリの使用言語やファイル構成を見て良きに計らって勝手にテストしてくれる。&lt;/li&gt;
+&lt;li&gt;もちろん自分でテストコマンドを書いてもOKで、Circle CIにやってほしいことは &lt;code&gt;circle.yml&lt;/code&gt; というYAMLファイルに書いてレポジトリの第一階層に置いておく。&lt;/li&gt;
+&lt;li&gt;GitHub連携を前提としており、連携したレポジトリの &lt;code&gt;push&lt;/code&gt; をトリガーとして動作する。&lt;/li&gt;
+&lt;li&gt;動作としてはCircle CI上でDockerコンテナ（ubuntuベース）を起動→レポジトリを &lt;code&gt;git clone&lt;/code&gt; →circle.ymlを読んで実行&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;実装:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;実装&lt;/h1&gt;
+
+&lt;p&gt;実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stormcat.hatenablog.com/entry/2015/02/04/004227&#34;&gt;CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&amp;lt;)&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;machine:
+  timezone:
+    Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
+
+  cache_directories:
+    - &amp;quot;~/docker&amp;quot;
+
+test:
+  override:
+    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c &#39;ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;amp;&amp;amp; cd /ansible/spec &amp;amp;&amp;amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;amp;&amp;amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;この方法の肝はAnsibleとServerspecのフォルダを&lt;code&gt;docker run&lt;/code&gt;の&lt;code&gt;-v&lt;/code&gt;オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。&lt;/p&gt;
+
+&lt;p&gt;テストにおいてはインベントリファイルも&lt;code&gt;site.yml&lt;/code&gt;もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと&lt;code&gt;load&lt;/code&gt;するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。&lt;/p&gt;
+
+&lt;p&gt;実行結果はslackの個人チャンネルに流している。GtiHubに上げるだけで勝手にテストして結果も自動通知されるというのはとても楽しい。やれることの自由度が広すぎて夢が広がる。&lt;/p&gt;
+
+&lt;h1 id=&#34;つまずいた点:8898f3cea5a7bf5fef79cdda3e165592&#34;&gt;つまずいた点&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Dockerfile初挑戦につき、結構戸惑った。Ansibleでsshd_configを編集させていたのだが、コンテナにそもそもsshが入ってなくてコケたりした。&lt;/li&gt;
+&lt;li&gt;Circle CIでのカレントディレクトリの扱いがわからず、しばらく &lt;code&gt;circle.yml&lt;/code&gt; で指定するファイルパスに悩まされた。クローンしたレポジトリの中にいる状態で始まるっぽい？&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker run&lt;/code&gt; に &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; 付きでコマンド渡すときに &lt;code&gt;/bin/sh -c&lt;/code&gt; が必要だとしばらく気付かなかった。&lt;/li&gt;
+&lt;li&gt;Dockerコンテナを &lt;code&gt;save&lt;/code&gt; して &lt;code&gt;load&lt;/code&gt; してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>オープンソースカンファレンス2015 Tokyo/Fall行ってきた</title>
+      <link>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</guid>
+      <description>
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/photos/chroju/22273557670/in/dateposted-public/&#34; title=&#34;このはちゃんかわいい&#34;&gt;&lt;img src=&#34;https://farm1.staticflickr.com/630/22273557670_c7c51c391b_z.jpg&#34; width=&#34;640&#34; height=&#34;640&#34; alt=&#34;このはちゃんかわいい&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;戦利品、ConoHaちゃんかわええ。&lt;/p&gt;
+
+&lt;p&gt;オープンソースカンファレンスに初めて行ってみた。2015 Tokyo/Fallです。だいぶ奥地の方でやってるなぁという印象があってなかなか行きづらかったのだが、実際行ってみると自然に囲まれて静かで建物綺麗で過ごしやすそうないい大学ですね。ちょっぴり休憩でもくもくしたりしてみたけどだいぶ捗ったし、もう少し近所なら作業環境に使いたい感じが（）&lt;/p&gt;
+
+&lt;p&gt;ぼっち参戦かつ初参戦かつコミュ障な故、ブースがんがん回ってがんがん自分から話しかけるみたいな度胸はなく、だいたいセッション聴いてました。ので、セッションごとにちょっとまとめる。&lt;/p&gt;
+
+&lt;h1 id=&#34;はじめてのオープンソース-ライセンス:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;はじめてのオープンソース・ライセンス&lt;/h1&gt;
+
+&lt;p&gt;オープンソース自体の考え方だとかは知ってはいたのだが、ライセンスがMITとかApacheとかそういういろいろがあるのがよくわかってなかったので。話の中で教えていただいた&lt;a href=&#34;http://www.catch.jp/oss-license/2013/09/10/github/&#34;&gt;Githubによる、オープンソースライセンスの選び方 | オープンソース・ライセンスの談話室&lt;/a&gt;というページが確かに詳しそうなので後で読まなければなと思った。ギッハブ使ってるのに全然これ理解してなかった。&lt;/p&gt;
+
+&lt;h1 id=&#34;実録-hinemos導入経験者が語る-実運用でのあるある話:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;実録！Hinemos導入経験者が語る、実運用でのあるある話&lt;/h1&gt;
+
+&lt;p&gt;最近実務でHinemosを使っているもので。監視設定をグループ（スコープ）単位で作ってしまうと静観するときに設定変更がしんどいだとかっていう本当にあるあるな話と、&lt;a href=&#34;http://www.hinemos.info/option/utility&#34;&gt;Hinemos Utility&lt;/a&gt;が便利だという話など。Hinemos Utility、設定のインポートエクスポートがあるので、GUIポチポチの面倒臭さから救われそうな気はした。あるある話の方は他の監視ツールでもわりと似たところあるので、結局アーキテクチャーってどんなツールでも大して変わらんのかなぁ、そのへんどうにかしたツールないかなぁとか思った。&lt;/p&gt;
+
+&lt;p&gt;そういえばセッションはTISの主催だったのだが、同社といえば&lt;a href=&#34;http://thinkit.co.jp/author/3519&#34;&gt;Zabbixの池田氏&lt;/a&gt;の印象が強いので、Zabbixと比較して同社としてどう考えてるのかってあたりも聞きたかった。&lt;/p&gt;
+
+&lt;h1 id=&#34;飲食ok-発表者募集中-1日目-ライトニングトーク-by-oscスポンサー:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;[飲食OK]（発表者募集中！）1日目-ライトニングトーク（by OSCスポンサー）&lt;/h1&gt;
+
+&lt;p&gt;なかなかカオスにライトニングトーク。飲食OKでしたけど学食せっかくなので使いたかったので無飲食で。言及してるとキリがないので割愛。&lt;/p&gt;
+
+&lt;h1 id=&#34;ubuntuの最新情報:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;Ubuntuの最新情報&lt;/h1&gt;
+
+&lt;p&gt;Ubuntu使ってない。てかDebian系ほとんど触った経験ないんで触らなきゃなと思いました。&lt;/p&gt;
+
+&lt;h1 id=&#34;zabbixでdockerも監視してみよう:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;ZabbixでDockerも監視してみよう&lt;/h1&gt;
+
+&lt;p&gt;最後の質疑で出た話で、新陳代謝の高いコンテナの監視に既存ツールの分単位での監視感覚が役に立つのか？っていうのがあったのだけど、わりとそれに同意した。自分はコンテナを実サービスで運用した経験がないのでアレなのだが、その性質からして既存サーバーより速いスピードで起動停止を繰り返すことは有り得ると思うし、むしろアーキテクチャーの考え方がスピーディーなものに変わるためには監視ツールの在り方も変わんなきゃならないんじゃないかなぁと思った。答えは出てないけど。&lt;/p&gt;
+
+&lt;h1 id=&#34;コンテナ-docker-時代のインフラ技術-運用管理に迫る:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;コンテナ(Docker)時代のインフラ技術・運用管理に迫る！&lt;/h1&gt;
+
+&lt;p&gt;Docker最新事情という感じで、Dockerの概要もそこそこに周辺ツールや開発状況をいろいろ舐めていく感じのセッション。Docker触り始めたばかりの自分にはとてもありがたかった。Docker machine、Docker Swarm、docker-composeだとかなかなかにワクワクする話。&lt;/p&gt;
+
+&lt;h1 id=&#34;aozorahackの今までとこれから-インターネット電子図書館-青空文庫-をエンジニアリングで支える:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;aozorahackの今までとこれから ～インターネット電子図書館「青空文庫」をエンジニアリングで支える～&lt;/h1&gt;
+
+&lt;p&gt;ここから2日目。春に&lt;a href=&#34;https://atnd.org/events/66230&#34;&gt;青空文庫アイディアソン&lt;/a&gt;が開かれて話題になりましたが、そのときから興味があったので話を聞いてみた。青空文庫の誕生が1997年、オープンソースという言葉が生まれたのが1998年ということで、オープンソースより古い歴史を持つ青空文庫がOSSライクな発想をしていたはずもない！という出発点だったようなのだが、それを変えていこうという試み。もともとサードパーティ的にビューアやコンバータを作る動きは周辺にあったわけで、それをまとめて今風の開発をしていくとなると面白そうだなと思う。自分は業務エンジニア＋趣味エンジニアでしかないけど、こういうボランティアというか、自らの意志で参画していくエンジニアリング活動というのがOSSの在り方なんだとここで初めて腑に落ちた気がした。&lt;/p&gt;
+
+&lt;h1 id=&#34;solaris-zoneとpuppet-serverspecでインフラ-ci:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;Solaris ZoneとPuppet、Serverspecでインフラ CI&lt;/h1&gt;
+
+&lt;p&gt;Solarisわからないけどインフラ周りの知識手広くしたいなということで行ってはみたがやっぱりわからなかった。知識って広くて浅いか狭くて深いかの二択だと勝手に思ってたけど、実際それなりに出来るエンジニアってそこそこ手広く平均点取れる人が多い気がしていて、例えばこのセッションであればUNIX（Solaris）の知識にコンテナ（Zone）の知識、んでPuppetはRubyだし、ServerspecもRubyというかRSpecなんですよね。エンジニアとしての幅、ちょっと見直したいなと思わされたセッション。&lt;/p&gt;
+
+&lt;h1 id=&#34;パネルディスカッション-今こそ語るエンジニアの幸せな未来-osc東京編:5aa830bb24e312c9bd60c1c82594317f&#34;&gt;【パネルディスカッション】今こそ語るエンジニアの幸せな未来 ～OSC東京編～&lt;/h1&gt;
+
+&lt;p&gt;春に行ったJAWS DAYSでも同様のパネディスを聴いてはいたので実質第二回というか。こういう話題が定期的に持ち上がるようになったのって、さくらインターネットが15周年迎えたこともあるようにエンジニアの高齢化（家庭環境の変化）があるような気はする。働き方はライフステージによっても、世の中の技術動向やビジネス動向によっても変わるので、結局時間と金銭的余裕のあるうちに勉強して、常に自分が働きやすい場所にいられるようバリューを磨いておくしかないのだろうなと思う。そういう話でした。&lt;/p&gt;
+
+&lt;p&gt;以上、9セッション。知識のザッピングとしてこういうセッション形式のイベントはやはり良いなと。いわゆる勉強会だとだいたいが自分の興味関心のあることだけに集中してしまうのだが、こういう機会だとせっかくなのでってことで脇道に逸れたりしやすいので、知識の幅増やす機会にはなりやすいですね。OSS、TISのようにビジネスとして取り扱っている人たちもいれば、aozorahackのような草の根の動きもあったり、有り様はいろいろであって、んでGitHubで取りあえずソース読むところからいつでも手を付けられる時代にあるので、何かしらやってみると面白いのかもしれない。尻込みしてるのではなく。&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;テロ &lt;a href=&#34;https://twitter.com/hashtag/osc15tk?src=hash&#34;&gt;#osc15tk&lt;/a&gt; &lt;a href=&#34;https://t.co/OEa2JYMezY&#34;&gt;pic.twitter.com/OEa2JYMezY&lt;/a&gt;&lt;/p&gt;&amp;mdash; T.Kabu (@disco_v8) &lt;a href=&#34;https://twitter.com/disco_v8/status/657855359357337600&#34;&gt;2015, 10月 24&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;懇親会、&lt;a href=&#34;https://twitter.com/chroju/status/657852424502276096&#34;&gt;TRIGGER ANIMATION EXPO&lt;/a&gt;に行けるチャンスがここしかなかったのと、200人という大所帯にぼっち参戦する勇気がないのと（あと、さすがに薄い話しかできなさそうであまり意味はないかなと思った）で行かなかったんだけど、生ハム原木はうらやましかった。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>インフラエンジニアの幸福論</title>
+      <link>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</link>
+      <pubDate>Tue, 20 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</guid>
+      <description>&lt;p&gt;1年前、&lt;a href=&#34;http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4&#34;&gt;インフラエンジニアは死んだ&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。&lt;/p&gt;
+
+&lt;p&gt;どうもLambdaが出たあたりから&lt;a href=&#34;http://blog.takuros.net/entry/2015/10/19/081349&#34;&gt;サーバーレスアーキテクチャ&lt;/a&gt;という言葉が取り沙汰されてきているようで、アプリやDBを動かすための基盤としてサーバーが必要だという前提はすでに崩れている。AWSを触れる前はVPSを触っていたので、どうもAWS＝EC2というイメージから抜け出せずにいたが、実際には&lt;a href=&#34;http://i-think-it.net/how-to-aws&#34;&gt;「EC2を使ったら負け」&lt;/a&gt;なんて言葉も目にする時代にある。ここ最近Circle CIを触ってみていても、テストの実行基盤となるサーバーなんて考え方をする必要はなくて、テスト用の環境はyamlで書けてしまうし、別のインスタンスが欲しければDockerで済ませられる。まぁherokuあたりからすでにそういう風潮だったよなという気もするが、単純にアプリをデプロイしてしまって実行基盤は全部お任せという状態から、LambdaとS3とCognitoを組み合わせて云々みたいな柔軟なアーキテクチャを採用できる状態にまで変化してきている。&lt;/p&gt;
+
+&lt;p&gt;AWSを管理する人間が旧来のインフラエンジニアである必要性を当人としてはあまり感じていないし、実際に昨今のWeb企業あたりだとアプリエンジニアがAWSエンジニアを兼ねている場合も少なくないとは思う。規模が大きくなれば構成設計にインフラエンジニアの視点が必要になったりもするのかもしれないが、そこで必要とされるスキルは必ずしも旧来のインフラスキルとは直結していない。1000万円のLBとCiscoのスイッチとDELLのサーバーを買ってきて配線して起動して設定していくスキルと、ブラウザ上でELBやEC2のセキュリティグループを設定するスキルは明らかに異なるもので、故に2015年におけるインフラ＝AWSの領域においては、旧来のインフラエンジニアと非インフラエンジニアが同じ土俵で戦えなくもなかったりする（さすがに言い過ぎ感あるか）。これまで培ってきたインフラスキルというものは、必ずしも2015年に戦える武器にはなっていない。&lt;/p&gt;
+
+&lt;p&gt;もちろん一方でEC2もオンプレの環境もまだ健在ではあるし、これが10年後に撤廃されるかというと、現状のMFのように残り続けるとは思う。特に金融のような特殊領域ではどうしてもクラウド移行が難しいということもある。だから旧来のインフラエンジニアが死に絶えることはないのだろうが、それでもパイが小さくなることは事実だし、物理環境の障害だとか5年ごとのリプレースだとか、テンションの上がらない類の仕事に携わり続けることを余儀なくされる。&lt;/p&gt;
+
+&lt;p&gt;テンションの上がる仕事がしたいと言うと軽薄になってしまうが、誰だって夜中にタクシーでデータセンターに駆け付ける機会は極力少なくしたいと思うわけで、これまで注力していたいわゆる「オープン系」の需要が狭まる中で、インフラエンジニアの「幸福論」のようなものは求められつつある気がする。より少なくなる、かつ結構しんどい椅子に座り続けるのは個人的に嫌なので、Docker、ServerSpec、Ansibleあたりの領域でガッツリ存在感を示せるようになるか、あるいはそれらを生み出す側、より下のレイヤーで技術的に研ぎ澄まされていくかの二択なのかなと最近は思いつつある。とはいえ後者はどう考えても狭き門であり、現実的には前者を日常的な業務としつつ、要はRubyエンジニアがgem書くような感覚でツール作ったりOSSにイッチョカミしたりもたまにやれるぐらいの力があるといいのだろうなと思う。&lt;/p&gt;
+
+&lt;p&gt;何はともあれやはり「勉強する」以外に道がないことは今も昔も変わってないし、ある意味で過渡期にある技術として、いまインフラは面白いところにあるとは思っている。これについていけるかついていけないかっていうシンプルな問いでもあって、自分の希望としてはついていきたい。今からアプリに鞍替えする気はなく、カーネル書けるかって言えば書けないだろうし、かといって今のまま障害対応で夜に起こされるのを続けるわけにもいかない。だったら2015年におけるインフラというものを学んでいくしかないわけで、幸いなことに、学べば「物理ハードウェアからの開放」というある程度の報酬が待ち受けていることは確実になっている。どれだけ頑張ってもサーバーのファームウェアのバグで泣かされるような時代ではなく、ある意味でインフラエンジニアが「インフラを学び直す」ことは美味しい選択肢ではある。また場合によっては、インフラエンジニアとしてより良い環境へ適時シフトしていく（惰性でずっとオンプレ使う方針の会社との喧嘩は早々に諦める）こともまた必要になるのだと思っている。&lt;/p&gt;
+
+&lt;p&gt;とかなんとか書きながら考えていたら、&lt;a href=&#34;http://blog.hifumi.info/2015/02/23/wakateinfra/&#34;&gt;若手インフラエンジニア現状確認会&lt;/a&gt;とやらで似たような話が上がっていた。個人的な実感としてはITエンジニア100人の企業であれば5～9人ぐらいがインフラかなと思うので、若手インフラが少ないというよりは全体的にインフラエンジニアが少ないのだと思っているが、その分情報交換とか大切にしなきゃなと思う。エンジニア仲間増やしたい。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>個人開発環境にGithub Flowを適用する</title>
+      <link>http://chroju.github.io/blog/2015/10/04/individual-github-flow/</link>
+      <pubDate>Sun, 04 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/10/04/individual-github-flow/</guid>
+      <description>
+
+&lt;p&gt;Github、&lt;a href=&#34;https://github.com/chroju&#34;&gt;joinしたのは2013年&lt;/a&gt;で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd =&amp;gt; commit =&amp;gt; pushしているだけでちゃんと使っていなかったので、個人開発ではあるがGithub Flowを取り入れてみた。&lt;/p&gt;
+
+&lt;h1 id=&#34;what-is-github-flow:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;What is Github flow ?&lt;/h1&gt;
+
+&lt;p&gt;Githubを用いた開発作業を進めるにあたっての指針みたいなものです。基本的にはmasterブランチ上では作業せず、作業工程ごとにブランチ作って、終わったらプルリクしてmasterにマージしてもらうことでデプロイとしましょうね、というものだと理解している。至ってシンプルではあるけど、これを取り入れるだけで従来やっちゃってた「masterで作業してるのでデプロイしても動かないレポジトリがGithub上にある」みたいな状態が防げて良さそうだと思った。&lt;/p&gt;
+
+&lt;p&gt;ちなみにGit-flowというのもあるようだけど、こちらは全然別個のツールらしく理解していない。Git-flowの問題解決としてGithub Flowが提唱されたようだが、そもそも開発工程の制御のためだけにツールを追加したくはないなと思ったのでGithub Flowを採用した。&lt;/p&gt;
+
+&lt;p&gt;Github Flowの理解にはこの文章が良さそう。なお、dotfilesのような大した更新のないレポジトリにはさすがに適用していない。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/Gab-km/3705015&#34;&gt;GitHub Flow (Japanese translation)&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;実際の開発工程:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;実際の開発工程&lt;/h1&gt;
+
+&lt;p&gt;あくまでGithub Flowに沿う形という程度なので、そのままそっくり適用できてはないとは思うが。&lt;/p&gt;
+
+&lt;h2 id=&#34;開発開始:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;開発開始&lt;/h2&gt;
+
+&lt;p&gt;ブランチを切る。ブランチ名は機能追加等の開発要件であれば&lt;code&gt;dev_hoge&lt;/code&gt;、バグフィックスであれば&lt;code&gt;hotfix_hoge&lt;/code&gt;とする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout -b dev_hoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;開発中:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;開発中&lt;/h2&gt;
+
+&lt;p&gt;普通であればレビューを依頼するタイミングなど、開発の切りがついたところで&lt;code&gt;push&lt;/code&gt;していくのだろうが、分散して開発しているわけではないので、1日の開発が終わる段階で&lt;code&gt;push&lt;/code&gt;している。そもそも開発に使っている環境が複数あるので、Github上のdevelopブランチも常に最新化していつどこでも&lt;code&gt;fetch&lt;/code&gt;可能にしたいなという思いがある。従来はDropboxで各環境間の同期を取っていたが、プラグインの有無やbundleなどで度々不具合もあったので改めた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git add -A
+$ git commit -m &amp;quot;
+...
+$ git push origin dev_hoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;git add .&lt;/code&gt;ではなく&lt;code&gt;-A&lt;/code&gt;なのは、そちらじゃないと&lt;code&gt;git rm&lt;/code&gt;したファイル等が含まれないと&lt;a href=&#34;http://qiita.com/otukutun/items/9feb513c596418e94fc6&#34;&gt;こちらの記事&lt;/a&gt;に書いてあったゆえ。&lt;/p&gt;
+
+&lt;h2 id=&#34;開発終了:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;開発終了&lt;/h2&gt;
+
+&lt;p&gt;開発が終わり、masterへのマージを必要とする段階に来たらプルリクを出す。プルリクって別のコミッターからしか不可なのかと思っていたが、自分のレポジトリに自分で出すことも可能だったのでそうしている。本来であればテストツール等走らせるべきではあるのだろうが、今のところはプルリクに対して特にレビュー等なく（自分のコードだし）そのままマージしている。&lt;/p&gt;
+
+&lt;p&gt;後述するがバグや開発課題の管理にはGithub issueを用いているので、マージの際はissueのナンバーをコメントに入れている。これでGithub上のリンクとして働いてくれるので便利。&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/photos/chroju/21903884486/&#34; title=&#34;スクリーンショット 2015-10-04 14.19.25&#34;&gt;&lt;img src=&#34;https://farm1.staticflickr.com/735/21903884486_cae2057f70_z.jpg&#34; width=&#34;640&#34; height=&#34;576&#34; alt=&#34;スクリーンショット 2015-10-04 14.19.25&#34;&gt;&lt;/a&gt;&lt;script async src=&#34;//embedr.flickr.com/assets/client-code.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;http://rochefort.hatenablog.com/entry/2015/09/05/090000&#34;&gt;Gitコミットメッセージの7大原則 - rochefort&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;マージ後:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;マージ後&lt;/h2&gt;
+
+&lt;p&gt;作業ブランチを消して、ローカルのmasterを最新化する。&lt;/p&gt;
+
+&lt;p&gt;マージには&lt;code&gt;git merge&lt;/code&gt;を使用し、&lt;code&gt;git rebase&lt;/code&gt;は使わないことにしている。そもそも&lt;code&gt;rebase&lt;/code&gt;完全に理解してないというのもあるが、要するに歴史改変にあたるような操作があまり好めないというのが強い。個人の開発においては作業ブランチの変更中にmasterに更新が入ることは少ないので、このやり方でおそらく不都合はしないと思っている。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git checkout master
+$ git branch -a
+$ git branch -d dev_hoge
+$ git push --delete origin dev_hoge
+$ git fetch
+$ git marge origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考
+&lt;a href=&#34;http://dev.classmethod.jp/tool/git/development-flow-with-branch-and-rebase-by-git/&#34;&gt;GitのRebaseによるBranchの運用 ｜ Developers.IO&lt;/a&gt;
+&lt;a href=&#34;http://kray.jp/blog/git-pull-rebase/&#34;&gt;git pull と git pull –rebase の違いって？図を交えて説明します！ | KRAY Inc&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;コンフリクトした場合:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;コンフリクトした場合&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;git ls-files -u&lt;/code&gt;でコンフリクトしたファイルが一覧化されるとのことなので、確認の上で開いて直す。もしローカルかリモートのいずれかを全面採用するのであれば、&lt;code&gt;git checkout&lt;/code&gt;の&lt;code&gt;--ours&lt;/code&gt;と&lt;code&gt;--theirs&lt;/code&gt;オプションを使う。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git ls-files -u
+git checkout --ours hoge
+git checkout --theris hoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;http://d.hatena.ne.jp/sinsoku/20110831/1314720280&#34;&gt;Gitでコンフリクトした時のための備忘録 - アジャイルSEを目指すブログ&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;リモートのmasterがローカルより先に行っている場合:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;リモートのmasterがローカルより先に行っている場合&lt;/h2&gt;
+
+&lt;p&gt;ローカル環境が複数あるので、このような場合は多々ありえる。そういうときは基本的にはmergeすればいいだけではあるが。masterはリモートレポジトリの最新化が原則となるので、コンフリクトした場合は99%リモートを優先させる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git show-branch --all --color
+git fetch origin
+git diff origin/master
+git merge origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;http://qiita.com/yuyuchu3333/items/a30387bdd6a0afc1185c&#34;&gt;gitのリモートリポジトリの更新を確認する - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;バグ-開発課題の発生:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;バグ、開発課題の発生&lt;/h2&gt;
+
+&lt;p&gt;先に少し触れたが、開発すべきTODOはすべてGithub issueで管理することにした。今までどうしていたかというと特に管理はしておらず、思いつくままに開発してしまっていたのだが、これでGithubに開発に必要なものはすべて集約できるのではないかと思う。個人でのGithub issue運営には下記の記事を参考にさせてもらっているが、特に難しいことはせず、タスク管理ツールのような形で使っている。&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;http://azu.github.io/slide/udonjs/github-issue.html#3&#34;&gt;一人で使えるGithub Issue&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;覚えられない:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;覚えられない&lt;/h1&gt;
+
+&lt;p&gt;Github Flowは便利なのだが、Gitのコマンド体系がどうにも覚えづらくて仕方がない。どうにもならんのでaliasを駆使してなるべく覚える内容を少なくしようと努めているが、あとは慣れるしかないのかなぁと。Githubのコマンドは本当に多い。体系自体を学ぶのであれば&lt;a href=&#34;https://progit-ja.github.io/&#34;&gt;Pro Git&lt;/a&gt;がわかりやすく、epubの配布もあるのでKindleでいつでも読めて最高なのだが、数多あるコマンドを網羅しようとか思うとこれだけではつらい。Qiitaでまとめ記事が上がるたびに覗いてみて、今の自分のキャパで使えそうなのをつまみ食いしていく形で覚えればいいのかなと思っている。&lt;/p&gt;
+
+&lt;p&gt;今のalias設定はこんなの。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[alias]
+  a  = add
+  aa = add --all
+  br = branch
+  bra = branch -a
+  brd = branch -d
+  co = checkout
+  cob = checkout -b
+  coo = checkout --ours
+  cot = checkout --theirs
+  cl = clone
+  clr = clone --recursive
+  cm = commit
+  cmm = commit -m
+  d  = diff
+  f  = fetch
+  lg = log
+  lga = log --graph --decorate --online
+  lgp = log -p
+  mg = merge
+  mgn = merge --no-ff
+  ps = push
+  psd = push --delete origin
+  pso = push origin
+  psm = push origin master
+  pl = pull
+  s  = status -s
+  sb = status -s --branch
+  ss = status
+  sh = show
+  sba = show-branch --all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;今後:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;今後&lt;/h1&gt;
+
+&lt;p&gt;やりたいこととしてはCI。Circle CIとかと連動させて自動テストしたりというところまで組み込めたら、個人開発としてだいぶ理想的な状態かなと思う。そのままデプロイまで自動化できれば最高か。またGitの理解がやはりどうにも覚束ない部分があり、まだまだ使いこなせているとは言いがたいので、aliasをカンペ代わりに育てつつ、ガンガン覚えていきたい。特にミスったときの&lt;code&gt;reset&lt;/code&gt;系コマンドがあまりに多くてなぁ……。&lt;/p&gt;
+
+&lt;h1 id=&#34;その他参考記事:ff8afc85bcd5eb86c0ff83ef6f674cc0&#34;&gt;その他参考記事&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://keijinsonyaban.blogspot.jp/2011/05/git.html?m=1&#34;&gt;見えないチカラ: 【翻訳】Gitをボトムアップから理解する&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://postd.cc/git-command-line-shortcuts/&#34;&gt;Gitコマンドラインショートカット | プログラミング | POSTD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://yuroyoro.hatenablog.com/entry/20101008/1286531851&#34;&gt;.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://d.hatena.ne.jp/sinsoku/20111025/1319497900&#34;&gt;図で分かるgit-mergeの&amp;ndash;ff, &amp;ndash;no-ff, &amp;ndash;squashの違い - アジャイルSEを目指すブログ&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>開発環境のためのansibleを出来るだけベストプラクティスでまとめた</title>
+      <link>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</link>
+      <pubDate>Thu, 24 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</guid>
+      <description>
+
+&lt;p&gt;自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで&lt;code&gt;bundle&lt;/code&gt;とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。&lt;/p&gt;
+
+&lt;h2 id=&#34;なぜec2:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;なぜEC2？&lt;/h2&gt;
+
+&lt;p&gt;少し前に&lt;a href=&#34;http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/&#34;&gt;開発環境としてDigitalOceanを使うことを勧める記事&lt;/a&gt;を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。&lt;/p&gt;
+
+&lt;h2 id=&#34;ベストプラクティス構成の意識:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;ベストプラクティス構成の意識&lt;/h2&gt;
+
+&lt;p&gt;出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/chroju/ansible&#34;&gt;chroju/ansible&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;あらゆるサーバーで共通の&lt;code&gt;common&lt;/code&gt;というロールと、開発環境用の&lt;code&gt;develop&lt;/code&gt;というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから&lt;code&gt;git clone&lt;/code&gt;しているし。&lt;/p&gt;
+
+&lt;p&gt;ansibleには公式ドキュメントに&lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_best_practices.html&#34;&gt;ディレクトリ構成のベストプラクティス&lt;/a&gt;が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;playbooksは同時に実行すべきtaskをroleとして分割する&lt;/li&gt;
+&lt;li&gt;ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する&lt;/li&gt;
+&lt;li&gt;グループごとに実行するroleと変数（group_vars）を紐つける&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は&lt;code&gt;ansible-playbook site.yml&lt;/code&gt;でよいし、一部グループだけに適用したいなら&lt;code&gt;ansible-playbook *servers.yml&lt;/code&gt;とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。&lt;/p&gt;
+
+&lt;p&gt;なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。&lt;/p&gt;
+
+&lt;p&gt;ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。&lt;/p&gt;
+
+&lt;p&gt;ansible、ファーストインプレッションはとにかく&lt;a href=&#34;http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/&#34;&gt;「楽そう」&lt;/a&gt;だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。&lt;/p&gt;
+
+&lt;h2 id=&#34;このレポジトリでやっていること:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;このレポジトリでやっていること&lt;/h2&gt;
+
+&lt;p&gt;ソース読んでもらえればわかる話ではありますが。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;common
+
+&lt;ul&gt;
+&lt;li&gt;hostname設定&lt;/li&gt;
+&lt;li&gt;localeとtimezone設定&lt;/li&gt;
+&lt;li&gt;sshd_config設定&lt;/li&gt;
+&lt;li&gt;authorized keys設定&lt;/li&gt;
+&lt;li&gt;/etc/aliasesの設定&lt;/li&gt;
+&lt;li&gt;DenyHostsインストール&lt;/li&gt;
+&lt;li&gt;logwatchインストール&lt;/li&gt;
+&lt;li&gt;iptables設定&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;develop
+
+&lt;ul&gt;
+&lt;li&gt;development tools、zsh、git、vim、jqのインストール&lt;/li&gt;
+&lt;li&gt;dotfilesの配置&lt;/li&gt;
+&lt;li&gt;デフォルトシェルをzshに変更&lt;/li&gt;
+&lt;li&gt;rbenvの設定&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;もっとも苦労したのはrbenv周りで、&lt;code&gt;git clone&lt;/code&gt;直後はpathが通ってない&lt;code&gt;~/.rbenv/bin&lt;/code&gt;配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで&lt;code&gt;sudo: yes&lt;/code&gt;としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、&lt;code&gt;sudo:&lt;/code&gt;ないし&lt;code&gt;become:&lt;/code&gt;の設定はタスク単位で考えたほうが良いと思う。また本来であれば&lt;code&gt;~/.bash_profile&lt;/code&gt;あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。&lt;/p&gt;
+
+&lt;p&gt;もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は&lt;code&gt;ec2_user&lt;/code&gt;、その他VPSの場合は&lt;code&gt;root&lt;/code&gt;がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。&lt;/p&gt;
+
+&lt;h2 id=&#34;その他技術的な話:7ba0f4cc324d43024c16ce2414fd74c1&#34;&gt;その他技術的な話&lt;/h2&gt;
+
+&lt;p&gt;細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;変数名の命名規約。代入は&lt;code&gt;group_vars&lt;/code&gt;で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。&lt;/li&gt;
+&lt;li&gt;ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。&lt;/li&gt;
+&lt;li&gt;EC2には開発ツールがないので&lt;code&gt;Development tools&lt;/code&gt;でまとめてインストールしてしまったが、本当は個々に切り出したい。&lt;/li&gt;
+&lt;li&gt;ファイルの一部上書きではなく、追記に良い方法がないものか。下手にやると何度も追記してしまって冪等性がなくなる（現状は一度grepかけて、その内容でtaskの実施要否を分岐してるが汎用性がない）。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ハッカーマインドと3冊のエッセイ</title>
+      <link>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</link>
+      <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</guid>
+      <description>&lt;p&gt;ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊のことである。しかし『それがぼくには』は重要な一冊だと思うんだけど、なんでまた絶版なんですかね。そんな古い本でもないのに。仕方なく図書館で借りたけど。&lt;/p&gt;
+
+&lt;p&gt;いわゆるハッカーマインドを描いた本としていずれも似たような印象を抱きがちだが、実際に読んでみるとスタンスはだいぶ異なる。『ハッカーと画家』はコンピュータについてあまり詳しくない人に対して、ハッカーというのはこういう人種なのだと切々と説いた本であり、故にそれほど挑発的な印象は受けず、すらすらと読み進めていくことができる。もっともこれがハッカー以外に理解できるかというとかなり疑問ではあるが、ハッカーが比較的客観的に自らを解き明かした本として参考にはなる。著者のポール・グレアムのエッセイは&lt;a href=&#34;http://practical-scheme.net/wiliki/wiliki.cgi?naoya_t:%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%B0%E3%83%AC%E3%82%A2%E3%83%A0%E3%81%AE%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4%E3%81%A8%E5%92%8C%E8%A8%B3%E4%B8%80%E8%A6%A7&#34;&gt;naoya_t氏による和訳&lt;/a&gt;がいくらか読めるので、これを読んで興味をそそられたら読んでみるのでもいいかもしれない。あと、Lispめっちゃ推してる。&lt;/p&gt;
+
+&lt;p&gt;『UNIXという考え方』は、ハッカー向けにハッカーマインド、というかUNIX哲学を説く本なので、これは3冊の中では最も「読むべき」本だと思った。プログラムの移植性が重要であることだとか、ソフトウェアのレバレッジを効かせて効率性を最大限に高めていくべきだとか、我々がコードを書いたりシステムを作る上で重視すべきことがいくつも盛り込まれている。&lt;/p&gt;
+
+&lt;p&gt;『それがぼくには楽しかったから』はまさにエッセイ、リーナス・トーヴァルズの半生を描いたもので、ハッカーマインド云々というよりはだいぶ読み物チック。終盤で著作権やOSSといった概念に対するリーナスの考え方が少し語られるが、ほとんどはLinuxがいかにして生まれたのか？を描いた物語と言っていい。自分はリーナスというハッカーをこれまで詳しくは知らなかったのだが、案外柔軟な人物であるという印象を受けた。OSSの考え方自体は肯定しながらも、それは押し付けるべきではない、具体的に名前を挙げてリチャード・ストールマンのやり方は強引に過ぎるとしていたり、自分は聖人君子ではなく、大金が舞い込んだときには当然喜んでしまったこともあるよなんて語っていたり、彼の人間性がとても良く出ている。まぁとはいえ、自分が否とみなしたものに対しては、それなりに厳しい批判を飛ばす人物ではあると思うが。&lt;/p&gt;
+
+&lt;p&gt;こうした本に書かれた「ハッカーマインド」なるものは、我々が仕事をする上で必須のものではないと思うし、行き過ぎるとリーナスが言うような宗教戦争チックにもなりかねない。また技術に傾倒しすぎた単なるオタクが仕事の上でも重要な人物足りえるかというと、そういうわけでもない。リーナス・トーヴァルズは偉大なハッカーの1人であろうが、彼は同時にLinux開発者という立場での活動を行うにあたり、社会性を身につけたりもしてきたわけで。単にGeekであること自体が良いこととも自分は思えない。&lt;/p&gt;
+
+&lt;p&gt;とはいえ、まだ生成されてまもなく、業界標準なんてものがあるんだかないのだかもわからない、進化の速いこの業界で仕事をしていくには、多少なりともハッカー的なマインドは必要だとも思うのだ。というか、じゃないと仕事が面白くならないんでは？　惰性で同じ技術をずっと使い続けたり、効率の悪い方法を繰り返したりしていてもお金は入るのだろうけど、それが必ずしも収入に結びつかないとしても、なんかカッコイイことやってみたいとか、楽しそうな新技術にトライしてみたいだとか、そういう感覚がないとエンジニアをやっている意味がないなと思う。エンジニアが会社を選ぶにあたって重要なのは、案外このポイントなのではなかろうか。&lt;/p&gt;
+
+&lt;p&gt;残念ながら求人票からハッカーマインドは透けてこないし、転職面接の数分でそれを読み解くことも難しいだろう（自分は以前、面接でArch Linuxの話でたまたま意気投合する機会があったりして、そういう面接が出来たら話が別なのだろうけど）。その点、最近GitHubやQiitaでエンジニアたちが企業名を出して活動していることがあるが、あれは求人票やウェブサイトでは見えにくいその会社のハッカーマインドを、外部に知らしめていく良い手段だと感じる。ビジネス的に何を成して、社会をどう変えたいのかというよりも、エンジニアとしてどういったカタチで技術にコミットしていくかの方が自分には重要だ。そういう視点で仕事をしていけたらどんなにか幸せだろうし、またそれは茨の道でもあるのだろうなと思っている。&lt;/p&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/511SV9NXW2L._SL160_.jpg&#34; alt=&#34;ハッカーと画家 コンピュータ時代の創造者たち&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;ハッカーと画家 コンピュータ時代の創造者たち&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;ポール グレアム &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 6,887&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274065979/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/518ME653H3L._SL160_.jpg&#34; alt=&#34;UNIXという考え方―その設計思想と哲学&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;UNIXという考え方―その設計思想と哲学&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;Mike Gancarz &lt;br /&gt;オーム社 &lt;br /&gt;売り上げランキング: 44,838&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51WZM2W6ZBL._SL160_.jpg&#34; alt=&#34;それがぼくには楽しかったから (小プロ・ブックス)&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;それがぼくには楽しかったから (小プロ・ブックス)&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.08.16&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;リーナス トーバルズ デビッド ダイヤモンド &lt;br /&gt;小学館プロダクション &lt;br /&gt;売り上げランキング: 71,563&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4796880011/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

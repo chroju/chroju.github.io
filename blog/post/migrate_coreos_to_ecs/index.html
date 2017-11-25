@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Arthur Dent">
+<meta name="description" content="CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。
+従来の環境 従来は以下のような環境を使っていました。
+ さくらクラウドでCoreOSを起動（イメージがデフォルトで用意されていて嬉しい） コンテナは個人的なログ用influxDB、Grafana、個人slack用hubotの3つ。 オーケストレーションツールは使っていない（docker composeで管理、systemdで自動起動） それ以外に運用っぽいことも特にしてない。  プライベートかつ、とりあえずDocker触って動かしたいという理由だけで作った環境だったので、正直扱いは雑でして、たまにコンテナ落ちてて、hubotに呼びかけてから気付くみたいなこともままありました。
+それが地味にストレスだったのと、せっかくDocker使うならもうちょいオーケストレーションとかちゃんとしたいってことで移行を決断しました。
+移行先の検討 CoreOSは従来であればfleetという独自のオーケストレーションツールを持っていましたが（今も正確には現役ですが）、このリンク先にもある通り、現状はk8s使えってことになってます。
+なのでさくらクラウド続投してk8sで頑張るというのも手ではあったのですが、仕事ではAWS使うことが多いというのと、個人的にここ最近聴いたDockerのproduction利用の話がだいたいECSだったのとで、管理も楽そうだしECSでいいかなという感じでした。
+ただ、k8sであればオンプレやら何やらといった環境を問わずに運用が可能だし、クラウドに載せたければGKEでそのノウハウ活かせるしという利点があり、長期視点で汎用性の高い技術選択、という視点だとk8sの方がいいのではと思ったりしてます。
+ECSの概念 簡単に触れておきます。
+cluster コンテナをホストするEC2インスタンス群。
+task definition cluster上でコンテナをどう配置するかという定義。
+task task definitionに基いて稼働するコンテナ群。
+service taskを永続的なプロセスとして稼働させるECSの機能。
+taskは「service」として動かすことで、コンテナが落ちても勝手に上げ直してくれるようなイイ感じのやつになります。serviceの定義の中でAuto Scalingの設定したりとかもできるらしいですが、今回そこまでやってないです。要らないし。
+移行作業 ぶっちゃけ、すごく簡単でそんなにやったことはないです。
+はじめはTerraformで環境作るかとか思ってたんですが、tfファイルをゼロから書くのがだるくなったので他にも手段があるんじゃないかと調べていたところ、ECS CLIというAWS提供のコマンドツールがありました。
+で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。
+# clusterを起動 $ ecs-cli up --keypair hoge --size 1 --instance-type t2.micro --capability-iam --port 8080 3000 8086 # docker-compose.ymlからserviceを起動 $ ecs-cli compose --file docker-compose.yml service up  これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。
+ただ、ecs-cli upで賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。
+まぁ自分の場合はプライベート用途で複雑な要件もなかったので、ECS CLIで十分です。構成管理という面でも、先のコマンドを書いたシェルスクリプトとdocker-compose.ymlさえあれば環境再現はすぐできるので、拍子抜けするほど楽でした。">
+
+<meta property="og:title" content="CoreOSからECSへDockerを移行した" />
+<meta property="og:description" content="CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。
+従来の環境 従来は以下のような環境を使っていました。
+ さくらクラウドでCoreOSを起動（イメージがデフォルトで用意されていて嬉しい） コンテナは個人的なログ用influxDB、Grafana、個人slack用hubotの3つ。 オーケストレーションツールは使っていない（docker composeで管理、systemdで自動起動） それ以外に運用っぽいことも特にしてない。  プライベートかつ、とりあえずDocker触って動かしたいという理由だけで作った環境だったので、正直扱いは雑でして、たまにコンテナ落ちてて、hubotに呼びかけてから気付くみたいなこともままありました。
+それが地味にストレスだったのと、せっかくDocker使うならもうちょいオーケストレーションとかちゃんとしたいってことで移行を決断しました。
+移行先の検討 CoreOSは従来であればfleetという独自のオーケストレーションツールを持っていましたが（今も正確には現役ですが）、このリンク先にもある通り、現状はk8s使えってことになってます。
+なのでさくらクラウド続投してk8sで頑張るというのも手ではあったのですが、仕事ではAWS使うことが多いというのと、個人的にここ最近聴いたDockerのproduction利用の話がだいたいECSだったのとで、管理も楽そうだしECSでいいかなという感じでした。
+ただ、k8sであればオンプレやら何やらといった環境を問わずに運用が可能だし、クラウドに載せたければGKEでそのノウハウ活かせるしという利点があり、長期視点で汎用性の高い技術選択、という視点だとk8sの方がいいのではと思ったりしてます。
+ECSの概念 簡単に触れておきます。
+cluster コンテナをホストするEC2インスタンス群。
+task definition cluster上でコンテナをどう配置するかという定義。
+task task definitionに基いて稼働するコンテナ群。
+service taskを永続的なプロセスとして稼働させるECSの機能。
+taskは「service」として動かすことで、コンテナが落ちても勝手に上げ直してくれるようなイイ感じのやつになります。serviceの定義の中でAuto Scalingの設定したりとかもできるらしいですが、今回そこまでやってないです。要らないし。
+移行作業 ぶっちゃけ、すごく簡単でそんなにやったことはないです。
+はじめはTerraformで環境作るかとか思ってたんですが、tfファイルをゼロから書くのがだるくなったので他にも手段があるんじゃないかと調べていたところ、ECS CLIというAWS提供のコマンドツールがありました。
+で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。
+# clusterを起動 $ ecs-cli up --keypair hoge --size 1 --instance-type t2.micro --capability-iam --port 8080 3000 8086 # docker-compose.ymlからserviceを起動 $ ecs-cli compose --file docker-compose.yml service up  これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。
+ただ、ecs-cli upで賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。
+まぁ自分の場合はプライベート用途で複雑な要件もなかったので、ECS CLIで十分です。構成管理という面でも、先のコマンドを書いたシェルスクリプトとdocker-compose.ymlさえあれば環境再現はすぐできるので、拍子抜けするほど楽でした。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://you.github.io/post/migrate_coreos_to_ecs/" />
+
+
+
+<meta property="article:published_time" content="2017-09-26T08:36:00&#43;09:00"/>
+<meta property="article:modified_time" content="2017-09-26T08:36:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     CoreOSからECSへDockerを移行した 
+
+</title>
+<link rel="canonical" href="https://you.github.io/post/migrate_coreos_to_ecs/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://you.github.io/css/reset.css?t=2017-11-25%2012%3a27%3a25.521716539%20%2b0900%20JST%20m%3d%2b0.124962418">
+    <link rel="stylesheet" href="https://you.github.io/css/pygments.css?t=2017-11-25%2012%3a27%3a25.521716539%20%2b0900%20JST%20m%3d%2b0.124962418">
+    <link rel="stylesheet" href="https://you.github.io/css/main.css?t=2017-11-25%2012%3a27%3a25.521716539%20%2b0900%20JST%20m%3d%2b0.124962418">
+    
+        <link rel="stylesheet" href="https://you.github.io/css/override.css?t=2017-11-25%2012%3a27%3a25.521716539%20%2b0900%20JST%20m%3d%2b0.124962418">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://you.github.io/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                
+                <a href="https://you.github.io/"><img class="avatar" src="https://you.github.io/img/profile.png" srcset="https://you.github.io/img/profile.png 1x"></a>
+            
+            <a href="https://you.github.io/"><div class="name">Arthur Dent</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://you.github.io/blog/"><span>Blog</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://you.github.io/about/"><span>About</span></a></li>
+                    
+                        <li class="nav-code"><a href="https://you.github.io/code/"><span>Code</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+            <a href="//example.com/@you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/mastodon.svg" alt="mastodon" /></a>
+        
+
+        
+            <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+            <a href="//instagram.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+            
+        
+            <a href="//500px.com/username" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/500px.svg" alt="500px" /></a>
+        
+
+        
+
+        
+            <a href="mailto:you@example.space"><img class="icon" src="https://you.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://you.github.io/index.xml"><img class="icon" src="https://you.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    CoreOSからECSへDockerを移行した
+
+</div>
+
+            <div class="markdown">
+                
+
+<p>CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。</p>
+
+<h2 id="従来の環境">従来の環境</h2>
+
+<p>従来は以下のような環境を使っていました。</p>
+
+<ul>
+<li>さくらクラウドでCoreOSを起動（イメージがデフォルトで用意されていて嬉しい）</li>
+<li>コンテナは個人的なログ用influxDB、Grafana、個人slack用hubotの3つ。</li>
+<li>オーケストレーションツールは使っていない（docker composeで管理、systemdで自動起動）</li>
+<li>それ以外に運用っぽいことも特にしてない。</li>
+</ul>
+
+<p>プライベートかつ、とりあえずDocker触って動かしたいという理由だけで作った環境だったので、正直扱いは雑でして、たまにコンテナ落ちてて、hubotに呼びかけてから気付くみたいなこともままありました。</p>
+
+<p>それが地味にストレスだったのと、せっかくDocker使うならもうちょいオーケストレーションとかちゃんとしたいってことで移行を決断しました。</p>
+
+<h2 id="移行先の検討">移行先の検討</h2>
+
+<p>CoreOSは従来であれば<a href="https://coreos.com/fleet/docs/latest/launching-containers-fleet.html">fleet</a>という独自のオーケストレーションツールを持っていましたが（今も正確には現役ですが）、このリンク先にもある通り、現状はk8s使えってことになってます。</p>
+
+<p>なのでさくらクラウド続投してk8sで頑張るというのも手ではあったのですが、仕事ではAWS使うことが多いというのと、個人的にここ最近聴いたDockerのproduction利用の話がだいたいECSだったのとで、管理も楽そうだしECSでいいかなという感じでした。</p>
+
+<p>ただ、k8sであればオンプレやら何やらといった環境を問わずに運用が可能だし、クラウドに載せたければGKEでそのノウハウ活かせるしという利点があり、長期視点で汎用性の高い技術選択、という視点だとk8sの方がいいのではと思ったりしてます。</p>
+
+<h2 id="ecsの概念">ECSの概念</h2>
+
+<p>簡単に触れておきます。</p>
+
+<h3 id="cluster">cluster</h3>
+
+<p>コンテナをホストするEC2インスタンス群。</p>
+
+<h3 id="task-definition">task definition</h3>
+
+<p>cluster上でコンテナをどう配置するかという定義。</p>
+
+<h3 id="task">task</h3>
+
+<p>task definitionに基いて稼働するコンテナ群。</p>
+
+<h3 id="service">service</h3>
+
+<p>taskを永続的なプロセスとして稼働させるECSの機能。</p>
+
+<p>taskは「service」として動かすことで、コンテナが落ちても勝手に上げ直してくれるようなイイ感じのやつになります。serviceの定義の中でAuto Scalingの設定したりとかもできるらしいですが、今回そこまでやってないです。要らないし。</p>
+
+<h2 id="移行作業">移行作業</h2>
+
+<p>ぶっちゃけ、すごく簡単でそんなにやったことはないです。</p>
+
+<p>はじめはTerraformで環境作るかとか思ってたんですが、<del>tfファイルをゼロから書くのがだるくなったので</del>他にも手段があるんじゃないかと調べていたところ、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI.html">ECS CLI</a>というAWS提供のコマンドツールがありました。</p>
+
+<p>で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。</p>
+
+<pre><code class="language-bash"># clusterを起動
+$ ecs-cli up --keypair hoge --size 1 --instance-type t2.micro --capability-iam --port 8080 3000 8086
+# docker-compose.ymlからserviceを起動
+$ ecs-cli compose --file docker-compose.yml service up
+</code></pre>
+
+<p>これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。</p>
+
+<p>ただ、<code>ecs-cli up</code>で賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。</p>
+
+<p>まぁ自分の場合はプライベート用途で複雑な要件もなかったので、ECS CLIで十分です。構成管理という面でも、先のコマンドを書いたシェルスクリプトとdocker-compose.ymlさえあれば環境再現はすぐできるので、拍子抜けするほど楽でした。</p>
+
+<h2 id="運用">運用</h2>
+
+<p>当初の動機が「コンテナがバンバン落ちる不健全な環境を抜け出したい」でもあったので、多少なり運用も組み立てています。</p>
+
+<h3 id="監視">監視</h3>
+
+<p>自分がproduction環境でのDocker運用経験がほとんどないこともあり、正直ベストな監視の仕方がよくわかっていません。例えば最低10台以上のコンテナを動かしてガリガリ処理させたいような環境を動かしたいとして、稼働台数10台を下回ったらアラート上げたいと個人的には思うんですが、そういう運用でいいんですかね。それともオーケストレーションでコンテナ数確保されるから監視しなくてよい、のかどうなのか。</p>
+
+<p>と言うのも、意外というかなんというか、Amazon CloudWatchではコンテナの稼働状態に関するメトリクスはほとんど取れません。CPUとメモリの使用率だけです。稼働台数ぐらいありそうなものなんですけどね。ECSの監視はどうしてんだろうみなさんというのは改めて調べておきたいところ。</p>
+
+<p>結局のところ、自分は2方面で監視してます。</p>
+
+<p>1つはCloudWatch Eventsで、serviceの稼動状態に変化が起きたことをトリガーとしてLambdaなどを発火できる機能があります。これを使ってコンテナが落ちたりしたときにはslackに通知されるようにしました（鏡音リンちゃんが教えてくれます）。ただ、先述の通り「落ちてもすぐ自動で上がる」ようにはなってるので、なんか頻繁に落ちてるなとか、落ちたまま上がらないなとかを気付くためだけの用途です。</p>
+
+<p><a href="https://gyazo.com/589d57ff847e6d90239b9f2856a25620"><img src="https://i.gyazo.com/589d57ff847e6d90239b9f2856a25620.png" alt="https://gyazo.com/589d57ff847e6d90239b9f2856a25620" /></a></p>
+
+<p>2つ目はMackerelのDockerプラグイン。</p>
+
+<p><a href="https://mackerel.io/ja/docs/entry/advanced/docker">Dockerをモニタリングする - Mackerel ヘルプ</a></p>
+
+<p>これも1インスタンス上で動いているコンテナごとのメトリクスをグラフ表示するだけなので、コンテナ個別の死活などは取れないです。あくまでメトリクスグラフの描画のために使ってます。</p>
+
+<p>聴くところだとDataDogはコンテナの稼働台数とか取れるみたいですね？</p>
+
+<h3 id="バックアップ">バックアップ</h3>
+
+<p>ECSのインスタンスを落としたらそのままデータ死ぬという状況はさすがに怖いのでバックアップ。これも悩みましたけど、ズボラにCloudWatch Eventsで日に1回EBSスナップショット取らせてます。</p>
+
+<h2 id="罠っぽいところ">罠っぽいところ</h2>
+
+<p>最後にハマリポイントをいくつか。</p>
+
+<h3 id="docker-compose-ymlが必ずしも直接使えない">docker-compose.ymlが必ずしも直接使えない</h3>
+
+<p>docker-compose.ymlがほぼそのまま使えるのは使えるのですが、具体的にはmemlimitを各コンテナで設定しておかないと、メモリ足りないと言って落ちたりします。CoreOSだとリソースなど見ずに上げろと言えば上げてくれるんですが、ECSはそのあたりシビアに見てます。</p>
+
+<h3 id="ecs-cli-service-upが無限ループする">ecs-cli service upが無限ループする</h3>
+
+<p>コンテナのserviceを起動する<code>ecs-cli service up</code>コマンドですが、どうも一度起動命令を送った後、全コンテナがRUNNING状態になるのをひたすら待っているようで。</p>
+
+<p>何かタスク定義に不備（先のメモリ不足とか）があるとserviceは一度落ち、そしてserviceは永続稼働前提なので再度コンテナを起動し、そしてまた落ちるという無限ループに陥るのですが、ECS CLIはそれを拾ってくれないです。なのでupしてからしばらく応答がなければ、無限ループに陥ったと判断し、コマンドキャンセルしてGUIからログとか見に行った方がいいです。</p>
+
+<h3 id="docker-hub-privateとの連携が面倒">Docker Hub Privateとの連携が面倒</h3>
+
+<p>ECS上でDocker Hubのプライベートレジストリに置いたイメージを動かしたい場合、cluster上のインスタンスに一旦ログインして、設定ファイルにログイン情報を書き込む必要があります。ちょっと面倒だし、手段としてもあんまりイケていない感じがするので、もう少しなんとかならないかなと。まぁECR使ってくれってことなんでしょうけど。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>単純に「コンテナを動かす」だけであれば非常にシンプルに出来ており、docker-compose.ymlという既存の資産も使えるので、ECSが使われる理由はちょっとわかった気がします。特にECS CLIがあることで、Dockerイメージを更新したときなど、CIで自動的にデプロイをトリガーできたりするのはいいですね。</p>
+
+<p>機会があればk8sも使ってみて、使い勝手とか比較したいところ。</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

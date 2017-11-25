@@ -2,84 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Security Summary on the world as code</title>
-    <link>http://chroju.github.io/categories/security-summary/</link>
+    <link>http://localhost:1313/categories/security-summary/</link>
     <description>Recent content in Security Summary on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
+    <language>ja-jp</language>
+    <copyright>&amp;copy; Copyright notice</copyright>
     <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/security-summary/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://localhost:1313/categories/security-summary/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>暗号化とハッシュ化に関する基本的な事柄まとめ</title>
-      <link>http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</link>
+      <link>http://localhost:1313/post/encryption-hash-at-first/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</guid>
-      <description>
-
-&lt;p&gt;セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;暗号化とハッシュ化は違う。暗号化はデータの秘匿を目的としており、適切な鍵を用いることで復号が可能。ハッシュ化はデータの置換がそもそもの目的であり、ハッシュ関数により一定のフォーマットへ不可逆の変換を行う。&lt;/li&gt;
-&lt;li&gt;ただし、衝突耐性を持つことなどにより、セキュリティ用途に適する「暗号学的ハッシュ関数」というものもあるらしい。デジタル署名やメッセージ認証符号への使用を目的とされており、逆にチェックサム等に使用するには計算が「重い」。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;暗号:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;暗号&lt;/h1&gt;
-
-&lt;p&gt;主なアルゴリズムをざっと。&lt;/p&gt;
-
-&lt;h2 id=&#34;rsa:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;RSA&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;公開鍵暗号。素因数分解の計算難度を根拠としたもの。サマウォで解いてたアレもたぶん素因数分解暗号だが、暗算で解かれたらたまったものではない。&lt;/li&gt;
-&lt;li&gt;SSHログイン時の鍵認証やSSL認証など、広く使われる。&lt;/li&gt;
-&lt;li&gt;秘密鍵生成コマンドとして&lt;code&gt;openssl genrsa&lt;/code&gt;がある。SSH鍵認証では&lt;code&gt;ssh-keygen&lt;/code&gt;を用いる。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;des:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;DES&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;共通鍵暗号。鍵長54bitのブロック暗号。&lt;/li&gt;
-&lt;li&gt;鍵長が短すぎるため、現在では安全ではないとされるが、暗号化復号化処理を3回実行するトリプルDESという形で主に実用されている。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;openssl genrsa&lt;/code&gt;での秘密鍵生成時に、パスフレーズによるトリプルDESでの暗号化を施すため、&lt;code&gt;-des3&lt;/code&gt;オプションが用いられる。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;aes:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;AES&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;共通鍵暗号。DESの安全性低下に伴い開発された、鍵長128bit超のブロック暗号。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;ハッシュ:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;ハッシュ&lt;/h1&gt;
-
-&lt;h2 id=&#34;ソルト:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;ソルト&lt;/h2&gt;
-
-&lt;p&gt;ハッシュ化前に対象文字列に付加するランダムな文字列。同一文字列のハッシュ化時に衝突が防げる、レインボーテーブルによる探索に対する妨害になる、といった利点がある。&lt;/p&gt;
-
-&lt;h2 id=&#34;フィンガープリント:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;フィンガープリント&lt;/h2&gt;
-
-&lt;p&gt;SSH初回ログインで表示されるやつ。公開鍵のハッシュ値。&lt;code&gt;~/.ssh/known_hosts&lt;/code&gt;に記述され、次回以降のログインで公開鍵の変更有無の確認に使われる。変更があると、サーバーなりすましの危険性もあるため警告が表示される。&lt;code&gt;ssh-keygen -lf&lt;/code&gt;でも表示可能。&lt;/p&gt;
-
-&lt;h2 id=&#34;md5:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;md5&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;出力128bitのハッシュアルゴリズム。ファイル配布時のチェックサムなどに用いられる。&lt;/li&gt;
-&lt;li&gt;安全性は高くないことが判明しているため、日米ともにSHAの使用が推奨されている。&lt;/li&gt;
-&lt;li&gt;コマンドは&lt;code&gt;md5sum&lt;/code&gt;あるいは&lt;code&gt;openssl md5&lt;/code&gt;を使用する。&lt;/li&gt;
-&lt;li&gt;なおパスワードハッシュ化でよく用いられる&lt;code&gt;openssl passwd&lt;/code&gt;はmd5による実装。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;sha:7f0cad21a5c53ce97f9a7777c6f2c4ef&#34;&gt;sha&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Secure Hash Algorithm。暗号学的ハッシュ関数の一つ。&lt;/li&gt;
-&lt;li&gt;SSL、SSH等で用いられる暗号化アルゴリズム。&lt;/li&gt;
-&lt;li&gt;SHA-0,1,2,3が存在しており、SHA-1には脆弱性が存在するため、SSL証明書はSHA-2への全面移行が進められている。すでにGoogle ChromeではSHA-1による証明書に対して警告が表示される。&lt;/li&gt;
-&lt;li&gt;SHA-2は鍵長によりSHA-224、SHA-256、SHA-384、SHA-512といったバリエーションが存在する。&lt;/li&gt;
-&lt;li&gt;上述の通り&lt;code&gt;openssl passwd&lt;/code&gt;はSHA非対応だが、&lt;code&gt;grub-crypt&lt;/code&gt;がSHA-2によるハッシュ化に使える模様。
-参考: &lt;a href=&#34;http://heroween.hateblo.jp/entry/2014/07/28/133713&#34;&gt;CentOS6.5でランダムSalt付きSHA-512のシャドウパスワードを生成する - ひろうぃんの雑記&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:1313/post/encryption-hash-at-first/</guid>
+      <description> セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。
+ 暗号化とハッシュ化は違う。暗号化はデータの秘匿を目的としており、適切な鍵を用いることで復号が可能。ハッシュ化はデータの置換がそもそもの目的であり、ハッシュ関数により一定のフォーマットへ不可逆の変換を行う。 ただし、衝突耐性を持つことなどにより、セキュリティ用途に適する「暗号学的ハッシュ関数」というものもあるらしい。デジタル署名やメッセージ認証符号への使用を目的とされており、逆にチェックサム等に使用するには計算が「重い」。  暗号 主なアルゴリズムをざっと。
+RSA  公開鍵暗号。素因数分解の計算難度を根拠としたもの。サマウォで解いてたアレもたぶん素因数分解暗号だが、暗算で解かれたらたまったものではない。 SSHログイン時の鍵認証やSSL認証など、広く使われる。 秘密鍵生成コマンドとしてopenssl genrsaがある。SSH鍵認証ではssh-keygenを用いる。  DES  共通鍵暗号。鍵長54bitのブロック暗号。 鍵長が短すぎるため、現在では安全ではないとされるが、暗号化復号化処理を3回実行するトリプルDESという形で主に実用されている。 openssl genrsaでの秘密鍵生成時に、パスフレーズによるトリプルDESでの暗号化を施すため、-des3オプションが用いられる。  AES  共通鍵暗号。DESの安全性低下に伴い開発された、鍵長128bit超のブロック暗号。  ハッシュ ソルト ハッシュ化前に対象文字列に付加するランダムな文字列。同一文字列のハッシュ化時に衝突が防げる、レインボーテーブルによる探索に対する妨害になる、といった利点がある。
+フィンガープリント SSH初回ログインで表示されるやつ。公開鍵のハッシュ値。~/.ssh/known_hostsに記述され、次回以降のログインで公開鍵の変更有無の確認に使われる。変更があると、サーバーなりすましの危険性もあるため警告が表示される。ssh-keygen -lfでも表示可能。
+md5  出力128bitのハッシュアルゴリズム。ファイル配布時のチェックサムなどに用いられる。 安全性は高くないことが判明しているため、日米ともにSHAの使用が推奨されている。 コマンドはmd5sumあるいはopenssl md5を使用する。 なおパスワードハッシュ化でよく用いられるopenssl passwdはmd5による実装。  sha  Secure Hash Algorithm。暗号学的ハッシュ関数の一つ。 SSL、SSH等で用いられる暗号化アルゴリズム。 SHA-0,1,2,3が存在しており、SHA-1には脆弱性が存在するため、SSL証明書はSHA-2への全面移行が進められている。すでにGoogle ChromeではSHA-1による証明書に対して警告が表示される。 SHA-2は鍵長によりSHA-224、SHA-256、SHA-384、SHA-512といったバリエーションが存在する。 上述の通りopenssl passwdはSHA非対応だが、grub-cryptがSHA-2によるハッシュ化に使える模様。 参考: CentOS6.5でランダムSalt付きSHA-512のシャドウパスワードを生成する - ひろうぃんの雑記  </description>
     </item>
     
   </channel>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Arthur Dent">
+<meta name="description" content="100行合ったmod_rewirteっをngx_mrubyで書き換えた話 @buty4649 mod_rewriteがかなり複雑になっていてルーティング追加時のデバッグが困難だった nginxとapache2とapache1が役割違うけど同居、apache2がc10kでボトルネックに nginxに等号しようとしたけどifのネストができないしconfigが長くなる。。。 ngx_mruby nginx.conf内でmrubyによる拡張が出来る Middleware as code テストが出来る
+Nyah ペパボのプライベートクラウド OpenStack 4象限のペパボの技術的なロードマップええなあ 86%のサービスで使っている 558インスタンス（うおー） 開発メンバーがインスタンス起動やプロビジョニングをポチポチ行える Mackerelでモニタリング コストダウン（イニシャル、ランニングとも）にもつながっている =&gt;移行前後で測っておいて比較したい アラート等の障害も減った but バージョンアップが半年ごとにあるので追随大変（できてない） 機能を有効に使い切れていない部分がある。 nyah-cli DVR バージョンアップテストは？ Terraformが通ればOKでは
+高集積ホスティングによる略 ロリポ 高集積にこだわる リソース制御の自動化 mod_mruby mod_cgroup
+インフラCI alotofwe アプリのCI =&gt; drone.io（コンテナ利用のCI puppet serverspec docker-in-docker
+linuxユーザー管理 pyama ldap? /etc/passwdの構成管理ツールによる配布？ rpm? deb? ldap中身が複雑に成る 連携の複雑化 アプリケーションデプロイもsshでやるからユーザーが増えていく stns simple toml name service Golangだ 名前解決、更改鍵取得、sudo認証だけやる deploy用ユーザーの運用「deploy」 公開鍵を並べる運用、面倒では =&gt; link_usersで解決できる 組織構造の表現も出来る =&gt; link_groups GH:Eからデータ取ってtomlのユーザー情報つくる GitHub Flowでユーザー管理 APIでいろんなDBとかから直接ユーザー取ってくるようにしたい passwdバックエンドを用意したい">
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="100行合ったmod_rewirteっをngx_mrubyで書き換えた話 @buty4649 mod_rewriteがかなり複雑になっていてルーティング追加時のデバッグが困難だった nginxとapache2とapache1が役割違うけど同居、apache2がc10kでボトルネックに nginxに等号しようとしたけどifのネストができないしconfigが長くなる。。。 ngx_mruby nginx.conf内でmrubyによる拡張が出来る Middleware as code テストが出来る
+Nyah ペパボのプライベートクラウド OpenStack 4象限のペパボの技術的なロードマップええなあ 86%のサービスで使っている 558インスタンス（うおー） 開発メンバーがインスタンス起動やプロビジョニングをポチポチ行える Mackerelでモニタリング コストダウン（イニシャル、ランニングとも）にもつながっている =&gt;移行前後で測っておいて比較したい アラート等の障害も減った but バージョンアップが半年ごとにあるので追随大変（できてない） 機能を有効に使い切れていない部分がある。 nyah-cli DVR バージョンアップテストは？ Terraformが通ればOKでは
+高集積ホスティングによる略 ロリポ 高集積にこだわる リソース制御の自動化 mod_mruby mod_cgroup
+インフラCI alotofwe アプリのCI =&gt; drone.io（コンテナ利用のCI puppet serverspec docker-in-docker
+linuxユーザー管理 pyama ldap? /etc/passwdの構成管理ツールによる配布？ rpm? deb? ldap中身が複雑に成る 連携の複雑化 アプリケーションデプロイもsshでやるからユーザーが増えていく stns simple toml name service Golangだ 名前解決、更改鍵取得、sudo認証だけやる deploy用ユーザーの運用「deploy」 公開鍵を並べる運用、面倒では =&gt; link_usersで解決できる 組織構造の表現も出来る =&gt; link_groups GH:Eからデータ取ってtomlのユーザー情報つくる GitHub Flowでユーザー管理 APIでいろんなDBとかから直接ユーザー取ってくるようにしたい passwdバックエンドを用意したい" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://you.github.io/post/2016-05-14-pepabo/" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+      
+
+</title>
+<link rel="canonical" href="https://you.github.io/post/2016-05-14-pepabo/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://you.github.io/css/reset.css?t=2017-11-25%2012%3a27%3a25.543778733%20%2b0900%20JST%20m%3d%2b0.147024612">
+    <link rel="stylesheet" href="https://you.github.io/css/pygments.css?t=2017-11-25%2012%3a27%3a25.543778733%20%2b0900%20JST%20m%3d%2b0.147024612">
+    <link rel="stylesheet" href="https://you.github.io/css/main.css?t=2017-11-25%2012%3a27%3a25.543778733%20%2b0900%20JST%20m%3d%2b0.147024612">
+    
+        <link rel="stylesheet" href="https://you.github.io/css/override.css?t=2017-11-25%2012%3a27%3a25.543778733%20%2b0900%20JST%20m%3d%2b0.147024612">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://you.github.io/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                
+                <a href="https://you.github.io/"><img class="avatar" src="https://you.github.io/img/profile.png" srcset="https://you.github.io/img/profile.png 1x"></a>
+            
+            <a href="https://you.github.io/"><div class="name">Arthur Dent</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://you.github.io/blog/"><span>Blog</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://you.github.io/about/"><span>About</span></a></li>
+                    
+                        <li class="nav-code"><a href="https://you.github.io/code/"><span>Code</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+            <a href="//example.com/@you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/mastodon.svg" alt="mastodon" /></a>
+        
+
+        
+            <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+            <a href="//instagram.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+            
+        
+            <a href="//500px.com/username" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/500px.svg" alt="500px" /></a>
+        
+
+        
+
+        
+            <a href="mailto:you@example.space"><img class="icon" src="https://you.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://you.github.io/index.xml"><img class="icon" src="https://you.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    
+
+</div>
+
+            <div class="markdown">
+                
+
+<h1 id="100行合ったmod-rewirteっをngx-mrubyで書き換えた話">100行合ったmod_rewirteっをngx_mrubyで書き換えた話</h1>
+
+<p>@buty4649
+mod_rewriteがかなり複雑になっていてルーティング追加時のデバッグが困難だった
+nginxとapache2とapache1が役割違うけど同居、apache2がc10kでボトルネックに
+nginxに等号しようとしたけどifのネストができないしconfigが長くなる。。。
+ngx_mruby nginx.conf内でmrubyによる拡張が出来る
+Middleware as code テストが出来る</p>
+
+<h1 id="nyah">Nyah</h1>
+
+<p>ペパボのプライベートクラウド OpenStack
+4象限のペパボの技術的なロードマップええなあ
+86%のサービスで使っている 558インスタンス（うおー）
+開発メンバーがインスタンス起動やプロビジョニングをポチポチ行える
+Mackerelでモニタリング
+コストダウン（イニシャル、ランニングとも）にもつながっている
+=&gt;移行前後で測っておいて比較したい
+アラート等の障害も減った
+but バージョンアップが半年ごとにあるので追随大変（できてない）
+機能を有効に使い切れていない部分がある。
+nyah-cli
+DVR
+バージョンアップテストは？ Terraformが通ればOKでは</p>
+
+<h1 id="高集積ホスティングによる略">高集積ホスティングによる略</h1>
+
+<p>ロリポ
+高集積にこだわる
+リソース制御の自動化
+mod_mruby mod_cgroup</p>
+
+<h1 id="インフラci">インフラCI</h1>
+
+<p>alotofwe
+アプリのCI =&gt; drone.io（コンテナ利用のCI
+puppet serverspec
+docker-in-docker</p>
+
+<h1 id="linuxユーザー管理">linuxユーザー管理</h1>
+
+<p>pyama
+ldap? /etc/passwdの構成管理ツールによる配布？ rpm? deb?
+ldap中身が複雑に成る 連携の複雑化
+アプリケーションデプロイもsshでやるからユーザーが増えていく
+stns simple toml name service Golangだ
+名前解決、更改鍵取得、sudo認証だけやる
+deploy用ユーザーの運用「deploy」
+公開鍵を並べる運用、面倒では
+=&gt; link_usersで解決できる
+組織構造の表現も出来る =&gt; link_groups
+GH:Eからデータ取ってtomlのユーザー情報つくる
+GitHub Flowでユーザー管理
+APIでいろんなDBとかから直接ユーザー取ってくるようにしたい
+passwdバックエンドを用意したい</p>
+
+<h1 id="ベンチマーク">ベンチマーク</h1>
+
+<p>fio</p>
+
+<h1 id="構成管理ツールを用いたインフラ開発フローの改善">構成管理ツールを用いたインフラ開発フローの改善</h1>
+
+<p>構成管理してたつもりだけどサーバーがおかしい挙動する？
+変更のコード化を忘れる、PRのマージ忘れる
+CIだと一からイメージ立てるけど本番は差異の反映だから差異あるやん
+=&gt; puppet, serverspec最新版と本番の差分可視化
+<a href="https://github.com/hanazuki/puppet-theatre">https://github.com/hanazuki/puppet-theatre</a></p>
+
+<h1 id="talk">talk</h1>
+
+<p>,,</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

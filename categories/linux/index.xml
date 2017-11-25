@@ -2,677 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on the world as code</title>
-    <link>http://chroju.github.io/categories/linux/</link>
+    <link>http://localhost:1313/categories/linux/</link>
     <description>Recent content in Linux on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
+    <language>ja-jp</language>
+    <copyright>&amp;copy; Copyright notice</copyright>
     <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://localhost:1313/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>awesomeウィンドウマネージャーの見栄えを良くする</title>
-      <link>http://chroju.github.io/blog/2014/09/28/2014-09-28-post/</link>
+      <link>http://localhost:1313/post/2014-09-28-post/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/09/28/2014-09-28-post/</guid>
-      <description>
-
-&lt;p&gt;Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。&lt;/p&gt;
-
-&lt;h1 id=&#34;テーマファイルの構成:0f9e51d768c1f3c9942ee70db57f3480&#34;&gt;テーマファイルの構成&lt;/h1&gt;
-
-&lt;p&gt;awesomeの設定はいくつかのLuaファイルを使って書き換えていく。基本的には全体設定を司る&lt;code&gt;~/.config/awesome/rc.lua&lt;/code&gt;と、外観やテーマを司るライブラリである、Beautifulの設定ファイル&lt;code&gt;~/.config/awesome/themes/default/theme.lua&lt;/code&gt;の2つを覚えておけばいいのかなと。いずれも初期状態では配置されてないので、デフォルトファイルをコピーしてきて使う。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua
-# cp -r /usr/share/awesome/themes/default ~/.config/awesome/themes/default
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Beautifulについてはrc.luaの中で設定ファイルのパスが指定できるので、&lt;code&gt;default&lt;/code&gt;という名前が嫌だったら任意で変えてもOK。あとは正直&lt;a href=&#34;http://awesome.naquadah.org/wiki/Awesome_3_configuration&#34;&gt;awesomeのWiki&lt;/a&gt;見るのが手っ取り早いとは思うのだが、設定したところだけ書いておく。ちなみに&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/09/23/190304&#34;&gt;前回記事&lt;/a&gt;で書いたが、awesomeのデフォルトターミナルの設定も&lt;code&gt;rc.lua&lt;/code&gt;を使うので、外観変える必要なくても&lt;code&gt;rc.lua&lt;/code&gt;だけは確実に要ると思う。&lt;/p&gt;
-
-&lt;h1 id=&#34;タグリストの書き換え:0f9e51d768c1f3c9942ee70db57f3480&#34;&gt;タグリストの書き換え&lt;/h1&gt;
-
-&lt;p&gt;awesomeでは仮想デスクトップを&amp;rdquo;tag&amp;rdquo;と呼んで扱っていて、デフォルトの状態だと左上に1から8まで（だったかな？）の数字がタグの番号として並んでいる。あまりわかりやすいものではないし、そんなに多くタグも使わないので書き換える。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lua&#34;&gt;tags = &amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;{}&amp;lt;/span&amp;gt;
-&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;for&amp;lt;/span&amp;gt; s = &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;, screen.count() &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;do&amp;lt;/span&amp;gt;
-    &amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- Each screen has its own tag table.&amp;lt;/span&amp;gt;
-    tags[s] = awful.tag(&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;{&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Firefox&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Terminal&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Vim&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;other&amp;quot;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;}&amp;lt;/span&amp;gt;, s, layouts[&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;])
-&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;end&amp;lt;/span&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとウィンドウを開いているタグは小さな正方形が表示されたりしていて鬱陶しかったのと、あまり見栄えも良くなかったので、正方形を表示されないようにした上で、フォーカスしているタグは文字色を変えることにした。これはbeautifulの方で設定する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lua&#34;&gt;theme.taglist_fg_focus = &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;#f15c22&amp;quot;&amp;lt;/span&amp;gt;
-&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- theme.taglist_squares_sel   = &amp;quot;/usr/share/awesome/themes/default/taglist/squarefw.png&amp;quot;&amp;lt;/span&amp;gt;
-&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- theme.taglist_squares_unsel = &amp;quot;/usr/share/awesome/themes/default/taglist/squarew.png&amp;quot;&amp;lt;/span&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;1行目がフォーカスされているときのfg、フォアグラウンドカラーの設定。2、3行目はデフォルトで入ってる設定だったのでコメントアウトしておいた。&lt;/p&gt;
-
-&lt;h1 id=&#34;ウィジェットの表示:0f9e51d768c1f3c9942ee70db57f3480&#34;&gt;ウィジェットの表示&lt;/h1&gt;
-
-&lt;p&gt;画面上の情報表示はウィジェットとして扱う。ウィジェットを管理するライブラリはいくつかあるみたいなんだが、取っつきやすそうなので自分は&lt;code&gt;vicious&lt;/code&gt;を&lt;code&gt;rc.lua&lt;/code&gt;の中で&lt;code&gt;require&lt;/code&gt;して使っている。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ yaourt -S vicious
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;インストールした上で、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lua&#34;&gt;&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;local&amp;lt;/span&amp;gt; vicious = &amp;lt;span class=&amp;quot;synIdentifier&amp;quot;&amp;gt;require&amp;lt;/span&amp;gt;(&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;vicious&amp;quot;&amp;lt;/span&amp;gt;)
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;設定の順序としては、awesomeがもともと備えているウィジェット生成用のAPIである&lt;code&gt;wibox&lt;/code&gt;を使ってウィジェットのの原型をセットし、これに&lt;code&gt;vicious&lt;/code&gt;を使って表示させたい情報をセットする。ここではバッテリー状態と音量、Wi-Fiの状態を表示させる。どんな情報を表示させられるのか、詳細は&lt;a href=&#34;http://git.sysphere.org/vicious/tree/README&#34;&gt;ここ&lt;/a&gt;。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lua&#34;&gt;&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;--&amp;lt;/span&amp;gt;
-battxtwidget = wibox.widget.textbox()
-vicious.register(battxtwidget, vicious.widgets.bat, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot; Battery: &amp;lt;span color=&#39;#ffffff&#39;&amp;gt;$2%&amp;lt;/span&amp;gt; &amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;60&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;BAT0&amp;quot;&amp;lt;/span&amp;gt;)
-&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;--&amp;lt;/span&amp;gt;
-soundwidget = wibox.widget.textbox()
-vicious.register(soundwidget, vicious.widgets.volume, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot; Vol: &amp;lt;span color=&#39;#ffffff&#39;&amp;gt;$1&amp;lt;/span&amp;gt; &amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;2&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Master&amp;quot;&amp;lt;/span&amp;gt;)
-&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;--&amp;lt;/span&amp;gt;
-wifiwidget = wibox.widget.textbox()
-vicious.register(wifiwidget, vicious.widgets.wifi, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot; Wi-Fi: &amp;lt;span color=&#39;#ffffff&#39;&amp;gt;${ssid}&amp;lt;/span&amp;gt; &amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;60&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;wlp1s0&amp;quot;&amp;lt;/span&amp;gt;)
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ウィジェットを作ったら、画面上のレイアウトにウィジェットをセットする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-lua&#34;&gt;&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- Widgets that are aligned to the right&amp;lt;/span&amp;gt;
-&amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;local&amp;lt;/span&amp;gt; right_layout = wibox.layout.fixed.horizontal()
-&amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- if s == 1 then right_layout:add(wibox.widget.systray()) end&amp;lt;/span&amp;gt;
-right_layout:add(soundwidget)
-right_layout:add(battxtwidget)
-right_layout:add(wifiwidget)
-right_layout:add(mytextclock)
-right_layout:add(mylayoutbox[s])
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自分がした設定はこの程度。あとはbeautifulで&lt;code&gt;theme.font = &amp;quot;sans 10&amp;quot;&lt;/code&gt;の設定でフォントサイズを少し大きくしたぐらいだが、beautifulの設定ファイルを見ればわかる通り、かなり細かく色やら何やら設定ができる。このへんに凝り始めるとキリがないので自分はやめることにしたが、好きな人はやってみたらいいんじゃないですかね。1つ、GitHubですげーカッコイイテーマ配ってるの見つけたんで貼っときます。Samuraizuとか思い出すなー。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/copycat-killer/awesome-copycats&#34;&gt;copycat-killer/awesome-copycats · GitHub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:1313/post/2014-09-28-post/</guid>
+      <description>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、このあたりのカスタマイズしんどかったです。
+テーマファイルの構成 awesomeの設定はいくつかのLuaファイルを使って書き換えていく。基本的には全体設定を司る~/.config/awesome/rc.luaと、外観やテーマを司るライブラリである、Beautifulの設定ファイル~/.config/awesome/themes/default/theme.luaの2つを覚えておけばいいのかなと。いずれも初期状態では配置されてないので、デフォルトファイルをコピーしてきて使う。
+# cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua # cp -r /usr/share/awesome/themes/default ~/.config/awesome/themes/default  Beautifulについてはrc.luaの中で設定ファイルのパスが指定できるので、defaultという名前が嫌だったら任意で変えてもOK。あとは正直awesomeのWiki見るのが手っ取り早いとは思うのだが、設定したところだけ書いておく。ちなみに前回記事で書いたが、awesomeのデフォルトターミナルの設定もrc.luaを使うので、外観変える必要なくてもrc.luaだけは確実に要ると思う。
+タグリストの書き換え awesomeでは仮想デスクトップを&amp;rdquo;tag&amp;rdquo;と呼んで扱っていて、デフォルトの状態だと左上に1から8まで（だったかな？）の数字がタグの番号として並んでいる。あまりわかりやすいものではないし、そんなに多くタグも使わないので書き換える。
+tags = &amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;{}&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;for&amp;lt;/span&amp;gt; s = &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;, screen.count() &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;do&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- Each screen has its own tag table.&amp;lt;/span&amp;gt; tags[s] = awful.tag(&amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;{&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Firefox&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Terminal&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;Vim&amp;quot;&amp;lt;/span&amp;gt;, &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;other&amp;quot;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synType&amp;quot;&amp;gt;}&amp;lt;/span&amp;gt;, s, layouts[&amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;1&amp;lt;/span&amp;gt;]) &amp;lt;span class=&amp;quot;synStatement&amp;quot;&amp;gt;end&amp;lt;/span&amp;gt;  あとウィンドウを開いているタグは小さな正方形が表示されたりしていて鬱陶しかったのと、あまり見栄えも良くなかったので、正方形を表示されないようにした上で、フォーカスしているタグは文字色を変えることにした。これはbeautifulの方で設定する。
+theme.taglist_fg_focus = &amp;lt;span class=&amp;quot;synConstant&amp;quot;&amp;gt;&amp;quot;#f15c22&amp;quot;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- theme.taglist_squares_sel = &amp;quot;/usr/share/awesome/themes/default/taglist/squarefw.png&amp;quot;&amp;lt;/span&amp;gt; &amp;lt;span class=&amp;quot;synComment&amp;quot;&amp;gt;-- theme.</description>
     </item>
     
     <item>
       <title>Arch Linux &#43; awesome with Windows 8.1 in VAIO Pro</title>
-      <link>http://chroju.github.io/blog/2014/09/23/2014-09-23-post/</link>
+      <link>http://localhost:1313/post/2014-09-23-post/</link>
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/09/23/2014-09-23-post/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://www.flickr.com/photos/chroju/15143254940&#34;&gt;&lt;img src=&#34;https://farm4.staticflickr.com/3842/15143254940_70774bd603.jpg&#34; width=&#34;500&#34; height=&#34;281&#34; alt=&#34;snapshot1_1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;先日&lt;a href=&#34;http://chroju89.hatenablog.jp/entry/2014/09/07/232727&#34;&gt;VirtualBoxでArch Linux入れてみた&lt;/a&gt;ところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお、Window8.1とのデュアルブートです。上のスクリーンショットが完成形。&lt;/p&gt;
-
-&lt;h1 id=&#34;事前準備:74b54906b983a55212548750cba9a50e&#34;&gt;事前準備&lt;/h1&gt;
-
-&lt;p&gt;まず起動前の状態でASSISキーを押してBIOS設定を呼び出し、Secure Bootを&lt;code&gt;disabled&lt;/code&gt;にしておきます。Arch LinuxではSecure Bootをサポートしてないです。あとここではExternal MediaでのBootを許可したりとかしておくべきなんですけど、怠惰なんでASSISTメニューからUSBメモリでの起動を選ぶことでインストール作業を済ませてしまいました。Arch Wikiには「External MediaいじってUSBブートしろ」って書いてあるんで、そっちに従った方がいいと思います。&lt;/p&gt;
-
-&lt;p&gt;続いてWindows側での設定。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;コントロールパネル &amp;gt; 電源オプション &amp;gt; 電源ボタンの動作の選択 &amp;gt; 高速スタートアップを有効にする をオフ&lt;/li&gt;
-&lt;li&gt;スタートボタン右クリック &amp;gt; ディスクの管理 &amp;gt; パーティションを縮小&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;既存パーティションを縮めることでLinuxインストール用の領域を作るのが通例ですけど、自分の場合これだ空き容量が小さすぎたので、回復パーティションを削除することにしました。そのために16GBのUSBメモリを買ってきて、回復ドライブを作ります。&lt;/p&gt;
-
-&lt;blockquote&gt;VAIO Care &gt; その他の機能 &gt; リカバリーメディアの作成&lt;/blockquote&gt;
-
-&lt;p&gt;作成が無事に終わったら、その後一度シャットダウンしてASSISTキー押して起動。以下の手順でリカバリーパーティションが消せます。&lt;/p&gt;
-
-&lt;blockquote&gt;トラブルシューティングを開始 &gt; Microsoft IME &gt; トラブルシューティング &gt; VAIOのリカバリー機能 &gt; Windows 8.1 &gt; ツール &gt; リカバリーパーティションを削除&lt;/blockquote&gt;
-
-&lt;p&gt;が、自分の場合これだとエラーが出て結局ダメだったんでdiskpartで削除しました。これもあまり褒められたやり方ではないと思うので推奨はしません。256GBモデルをケチらず買っときゃよかったなと初めて思った次第。&lt;/p&gt;
-
-&lt;h1 id=&#34;インストール:74b54906b983a55212548750cba9a50e&#34;&gt;インストール&lt;/h1&gt;
-
-&lt;p&gt;インストール用のUSB指して再度ASSISTキーを押し、USBメディアから起動。そこからは前回のエントリーを参考に、通常通りインストール進めていきます。ポイントは以下の点かなと。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ディスクパーティション、ESPはWindowsのものを使うので新たな切り出し不要。自分は/mnt/boot(200MB)と/mnt(残り全部)だけ切りました。&lt;/li&gt;
-&lt;li&gt;実際にインストールしていく段階ではネット接続が必要だが、&lt;code&gt;wifi-menu&lt;/code&gt;でWi-Fi接続できる。意外に簡単。&lt;/li&gt;
-&lt;li&gt;インストール後の設定作業でもwifi-menuを使えるようにするため、&lt;code&gt;pacstrap&lt;/code&gt;するときにdialogとwpa_supplicantも入れておく。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;だいたいブートローダーの設定前までは特にハマるポイントはないはず。&lt;/p&gt;
-
-&lt;h1 id=&#34;ブートローダーの設定:74b54906b983a55212548750cba9a50e&#34;&gt;ブートローダーの設定&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;grub-install&lt;/code&gt;まで完了すると、/boot内は次のような感じになりました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/boot/efi/EFI/Microsoft/Boot/bootmgfw.efi
-/boot/efi/EFI/grub/grubx64.efi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;……efiがダブったパスになったのあれなんですけど、とりあえずここで言いたいのはもともとのWindowsのブートローダーとgrubがダブりますねという話で、勝手にgrubの方を上げてくれればいいんですけど、このPCの場合なのかWindows8の場合なのかわかりませんが、bootmgfw.efiの方がどうしても呼ばれてしまうので、パスを変える必要があります。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd /boot/efi/EFI/Microsoft/Boot/
-$ mv bootmgfw.efi bootmgfw.efi.original  #あとで使うので必ず残すこと
-$ cp /boot/efi/EFI/grub/grubx64.efi bootmgfw.efi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとはGRUBのメニューエントリにWindows8のブートローダーを追加してやればよいのですが、この辺はArch Wikiに記述があるので&lt;a href=&#34;https://wiki.archlinux.org/index.php/GRUB_(%E6%97%A5%E6%9C%AC%E8%AA%9E)#UEFI-GPT_.E3.83.A2.E3.83.BC.E3.83.89.E3.81.A7.E3.82.A4.E3.83.B3.E3.82.B9.E3.83.88.E3.83.BC.E3.83.AB.E3.81.95.E3.82.8C.E3.81.9F_Windows_.E3.81.AE.E3.83.A1.E3.83.8B.E3.83.A5.E3.83.BC.E3.82.A8.E3.83.B3.E3.83.88.E3.83.AA&#34;&gt;そちら&lt;/a&gt;を見ながらやった方が確実です。で、当然ながらここで&lt;code&gt;chainloader&lt;/code&gt;で呼び出すのがさっき&lt;code&gt;.original&lt;/code&gt;付けて退避した元のブートローダーってことになります。&lt;/p&gt;
-
-&lt;p&gt;なお、ここでbootmgfw.efiを上書きしてやっても、&lt;a href=&#34;http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/&#34;&gt;Windows Updateをかけることで元に戻ってしまう&lt;/a&gt;なんて話がありまして、自分も実際その現象には遭遇しました。面倒だけど遭遇したらもっかいUSBブートしてブートローダー移し替えてやるしかないです。&lt;/p&gt;
-
-&lt;h1 id=&#34;起動後の各種設定:74b54906b983a55212548750cba9a50e&#34;&gt;起動後の各種設定&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;reboot&lt;/code&gt;をかければGRUBのメニューが起動して、Arch Linuxをブートできるはず。あとは&lt;code&gt;wifi-menu&lt;/code&gt;につないで前回同様にslimとawesomeを導入、その他もろもろ設定します。まずは&lt;code&gt;yaourt&lt;/code&gt;入れとくと何かと便利です。前エントリーに書いたのでやり方省略しますが、&lt;code&gt;yaourt -Syua&lt;/code&gt;は最初にかけておくのが無難。具体的に言うとDropbox落としてみたらバージョン古くて使えなくてハマった。&lt;/p&gt;
-
-&lt;p&gt;ドライバ系の設定はだいたいArch Wikiに&lt;a href=&#34;https://wiki.archlinux.org/index.php/Sony_Vaio_Pro_SVP-1x21_(%E6%97%A5%E6%9C%AC%E8%AA%9E)&#34;&gt;VAIO Pro&lt;/a&gt;の項があるので見ればOK。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;今回はVirtualBoxなので、当然ながらビデオドライバ（xf86-video-intel）が必要。&lt;/li&gt;
-&lt;li&gt;タッチパッドのドライバは&lt;code&gt;xf86-input-synaptics&lt;/code&gt;を入れる。&lt;/li&gt;
-&lt;li&gt;音は&lt;code&gt;alsa-utils&lt;/code&gt;入れたら普通に流れた。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ラップトップだと折りたたんだときの電源の扱いがいろいろあるかと思いますが、デフォルトだとサスペンドになってるので、&lt;code&gt;/etc/systemd/logind.conf&lt;/code&gt;を編集してハイバネートに変更しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;HandleLidSwitch=hibernate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Fn+Functionキーでの各種操作は当然ながらできなくなったので、&lt;code&gt;xbindkeys&lt;/code&gt;を使って設定します。&lt;code&gt;xbindkeys -k&lt;/code&gt;を打つと入力待ちの小窓が現れるので、そこで設定したいキーバインドを押すとキーコードが取れます。あとは取得したキーコードを使って、&lt;code&gt;~/.xbindkeysrc&lt;/code&gt;にキーバインドを設定。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;xbacklight -inc 10&amp;quot;
-  m:0x0 + c:233
-&amp;quot;xbacklight -dec 10&amp;quot;
-  m:0x0 + c:232
-&amp;quot;amixer set Master 3%+&amp;quot;
-  m:0x0 + c:123
-&amp;quot;amixer set Master 3%-&amp;quot;
-  m:0x0 + c:122
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;alsamixer&lt;/code&gt;でいちいち音量調節するのが面倒なので、音量の増減もキーバインドしときました。&lt;code&gt;~/.xbindkeysrc&lt;/code&gt;を設けた状態で&lt;code&gt;xbindkeys&lt;/code&gt;コマンド打てばキーバインドが設定されるので、&lt;code&gt;~/.xinitrc&lt;/code&gt;に書き込んで自動起動するようにしておくと捗ります。&lt;/p&gt;
-
-&lt;p&gt;フォントは&lt;code&gt;ttf-ricty&lt;/code&gt;と&lt;code&gt;otf-takao&lt;/code&gt;ぶち込みました。ターミナルはRictyが好きだけどFirefoxとかGUIアプリで使うにはTakaoが見やすいので使い分け。パッチ当てたりとかは面倒なのでまだしてないけど、もうなんかいっかなって気がする。vim-airlineのためだけにパッチ当てるってのも手間かなと。フォント綺麗に表示するために&lt;a href=&#34;http://archlinux-blogger.blogspot.jp/2013/08/arch-linux.html&#34;&gt;ここ&lt;/a&gt;の設定はしとくべきだと思います。&lt;/p&gt;
-
-&lt;p&gt;ターミナルは&lt;code&gt;terminator&lt;/code&gt;です。機能豊富なのとノウハウ多くて安定してそうなので。設定は画面右クリック→設定で呼べます。一度何か設定を入れると&lt;code&gt;~/.config/terminator/config&lt;/code&gt;が作られるので、これを編集しても設定可能になる。今こんなとこです。透過はやっぱ素敵。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[global_config]
-  title_transmit_bg_color = &amp;quot;#490001&amp;quot;
-  inactive_color_offset = 0.4
-[keybindings]
-[profiles]
-  [[default]]
-    scrollbar_position = hidden
-    background_image = None
-    background_darkness = 0.66
-    background_type = transparent
-    use_system_font = False
-    font = Ricty 14
-  [[mysetting]]
-    background_image = None
-    background_type = transparent
-    scrollbar_position = hidden
-[layouts]
-  [[default]]
-    [[[child1]]]
-      type = Terminal
-      parent = window0
-      profile = default
-    [[[window0]]]
-      type = Window
-      parent = &amp;quot;&amp;quot;
-[plugins]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ターミナル決めたら忘れずにデフォルトターミナルも変更します。&lt;code&gt;rc.lua&lt;/code&gt;をコピーしてきて編集します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cp /etc/xdg/awesome/rc.lua ~/.config/awesome/rc.lua
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ターミナルに関する記述の行を探して変更。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;terminal = &amp;quot;terminator&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは欲しいソフト適当に入れます。コードとブログ書くのに特化したマシンなので、大したのは入れてないです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Dropboxは開発中のコードやdotfilesやメモやタスク全部入りなので自分的には必須。容量の余裕そんなないのでテキスト関連だけ部分同期です。&lt;code&gt;yaourt&lt;/code&gt;で入れて&lt;code&gt;dropboxd&lt;/code&gt;叩けばGUIで楽々設定できます。あとは&lt;code&gt;~/.xinitrc&lt;/code&gt;にも忘れず書き込むこと。&lt;/li&gt;
-&lt;li&gt;ブラウザはVimperatorに慣れてるのでFirefox。以降には昔FEBE使ったりしてた時期もありましたが、今時だとFirefox Sync使えばだいたいいい感じになる。&lt;/li&gt;
-&lt;li&gt;バッテリー状態見たいので&lt;code&gt;ACPI&lt;/code&gt;入れる。本当はawesomeのウィジェットで常時表示させたいけどまだやってない。&lt;/li&gt;
-&lt;li&gt;エディタは前回記事でVim入れましたが、その後Wiki読んだらRuntimeもろもろ入ってるのがGVimだけだとわかったんでGVim入れ直しました。colorscheme適用するとターミナルの透過背景塗りつぶされるんで、背景設定の部分だけコメントアウトするとかアレなことしてます。対策求む。&lt;/li&gt;
-&lt;li&gt;開発用にrbenv。&lt;/li&gt;
-&lt;li&gt;スクリーンショットはKSnapshot使ってます。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;だいたいこんなとこですかねー。骨は折れましたがそこそこ快適に使えてます。まだやりたいことはあって、テーマ変えたりとかウィジェット置いたりとかそのへんが今後の課題です。&lt;/p&gt;
-
-&lt;p&gt;あー、あとそういえば&lt;a href=&#34;http://exlight.net/linux/vaio_pro_13/index.html&#34;&gt;libata.force=noncqを設定しないとSSDの場合は遅くなる&lt;/a&gt;ていう話を見かけましたけど、今のとこうちの環境は普通に動けてます。一応やっといた方がいいのかね。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考:74b54906b983a55212548750cba9a50e&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://ac-mopp.blogspot.jp/2014/04/2014-vaio-pro-svp1322a1j-arch-linux.html&#34;&gt;もぷろぐ: 2014版 VAIO Pro (SVP1322A1J) で Arch Linux と Windows 8.1 を デュアルブートする&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Windows_and_Arch_Dual_Boot_(%E6%97%A5%E6%9C%AC%E8%AA%9E)&#34;&gt;Windows and Arch Dual Boot (日本語) - ArchWiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Laptop_(%E6%97%A5%E6%9C%AC%E8%AA%9E)&#34;&gt;Laptop (日本語) - ArchWiki&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:1313/post/2014-09-23-post/</guid>
+      <description>先日VirtualBoxでArch Linux入れてみたところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお、Window8.1とのデュアルブートです。上のスクリーンショットが完成形。
+事前準備 まず起動前の状態でASSISキーを押してBIOS設定を呼び出し、Secure Bootをdisabledにしておきます。Arch LinuxではSecure Bootをサポートしてないです。あとここではExternal MediaでのBootを許可したりとかしておくべきなんですけど、怠惰なんでASSISTメニューからUSBメモリでの起動を選ぶことでインストール作業を済ませてしまいました。Arch Wikiには「External MediaいじってUSBブートしろ」って書いてあるんで、そっちに従った方がいいと思います。
+続いてWindows側での設定。
+ コントロールパネル &amp;gt; 電源オプション &amp;gt; 電源ボタンの動作の選択 &amp;gt; 高速スタートアップを有効にする をオフ スタートボタン右クリック &amp;gt; ディスクの管理 &amp;gt; パーティションを縮小  既存パーティションを縮めることでLinuxインストール用の領域を作るのが通例ですけど、自分の場合これだ空き容量が小さすぎたので、回復パーティションを削除することにしました。そのために16GBのUSBメモリを買ってきて、回復ドライブを作ります。
+VAIO Care  その他の機能  リカバリーメディアの作成 作成が無事に終わったら、その後一度シャットダウンしてASSISTキー押して起動。以下の手順でリカバリーパーティションが消せます。
+トラブルシューティングを開始  Microsoft IME  トラブルシューティング  VAIOのリカバリー機能  Windows 8.1  ツール  リカバリーパーティションを削除 が、自分の場合これだとエラーが出て結局ダメだったんでdiskpartで削除しました。これもあまり褒められたやり方ではないと思うので推奨はしません。256GBモデルをケチらず買っときゃよかったなと初めて思った次第。
+インストール インストール用のUSB指して再度ASSISTキーを押し、USBメディアから起動。そこからは前回のエントリーを参考に、通常通りインストール進めていきます。ポイントは以下の点かなと。
+ ディスクパーティション、ESPはWindowsのものを使うので新たな切り出し不要。自分は/mnt/boot(200MB)と/mnt(残り全部)だけ切りました。 実際にインストールしていく段階ではネット接続が必要だが、wifi-menuでWi-Fi接続できる。意外に簡単。 インストール後の設定作業でもwifi-menuを使えるようにするため、pacstrapするときにdialogとwpa_supplicantも入れておく。  だいたいブートローダーの設定前までは特にハマるポイントはないはず。
+ブートローダーの設定 grub-installまで完了すると、/boot内は次のような感じになりました。
+/boot/efi/EFI/Microsoft/Boot/bootmgfw.efi /boot/efi/EFI/grub/grubx64.efi  ……efiがダブったパスになったのあれなんですけど、とりあえずここで言いたいのはもともとのWindowsのブートローダーとgrubがダブりますねという話で、勝手にgrubの方を上げてくれればいいんですけど、このPCの場合なのかWindows8の場合なのかわかりませんが、bootmgfw.efiの方がどうしても呼ばれてしまうので、パスを変える必要があります。
+$ cd /boot/efi/EFI/Microsoft/Boot/ $ mv bootmgfw.</description>
     </item>
     
     <item>
       <title>VirtualBoxでArch Linuxのインストール練習</title>
-      <link>http://chroju.github.io/blog/2014/09/07/2014-09-07-post/</link>
+      <link>http://localhost:1313/post/2014-09-07-post/</link>
       <pubDate>Sun, 07 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2014/09/07/2014-09-07-post/</guid>
-      <description>
-
-&lt;p&gt;VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブートを試みることに。デュアルじゃなくてOS丸ごと入れ替えたら？という話もありそうだが、仕事で使うのでWindowsを潰せない。かと言って仮想マシンだとこのPCのスペックでは心許ない。。ってことでデュアル。&lt;/p&gt;
-
-&lt;p&gt;ではディストリは何を使うか？だが、以前Ubuntuを使ったデュアルブートは構築した経験があるし、GUIでポチポチインストールするんじゃあんまり勉強にはならなさそうだなーということで、思い切ってArch Linuxを選んだ。ミニマルを是とするディストリだが、ミニマルどころか最初はsudoすら入っていないという徹底っぷり。使うものだけ入れろ！というポリシーは大変に共感できるものではあるが、それは当然難易度の高さと引き換えなわけで。。&lt;/p&gt;
-
-&lt;p&gt;さすがにぶっつけ本番は怖すぎるので、まずはiMac(OS X Marverics)上のVirtualboxでデスクトップ環境が立ち上がるとこまでやってみた。難易度が確かに高いOSではあるが、&lt;a href=&#34;https://wiki.archlinux.org/&#34;&gt;Wiki&lt;/a&gt;が非常に充実しているので、案外迷うこともないとは思う。逆に言えば、ここのInstallation GuideとBeginner&amp;rsquo;s Guideにきちんと目を通した上でやるべき。こんなブログ記事だけに頼らずに。&lt;/p&gt;
-
-&lt;p&gt;なお、えっらい長い記事になった模様。&lt;/p&gt;
-
-&lt;h1 id=&#34;事前チェック:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;事前チェック&lt;/h1&gt;
-
-&lt;p&gt;VAIO ProがUEFI環境なんで、今回の練習でもUEFIを用いることにした。Virtualboxの場合は仮想マシンの設定から「UEFI」を有効化できる。他にも初期設定ではインストールメディアをつないだり、外部メディアからの起動準備を優先させたりして、準備完了。&lt;/p&gt;
-
-&lt;p&gt;起動するといきなりシェルが現れる。ここから全部自力でコマンド打って入れてけというストイックさ。ひとまずはUEFIで起動しているか確認するため、UEFI変数を表示。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# mount -t efivarfs efivarfs /sys/firmware/efi/efivars
-# efivar -l
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いてキーボードマッピング変更。 jp106とかusとか適宜。やらなくてもインストールぐらいはなんとかなるかもしれんが、viでコロンの位置違ったりすると不便。地味に。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# loadkeys hoge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;事前チェックはこれぐらい。&lt;/p&gt;
-
-&lt;h1 id=&#34;パーティション:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;パーティション&lt;/h1&gt;
-
-&lt;p&gt;続いてパーティション分割。まずは&lt;code&gt;fdisk -l&lt;/code&gt;によりハードディスクのデバイス名を確認し、そのデバイス名に対して&lt;code&gt;cgdisk&lt;/code&gt;コマンドを実行。今回はGPTを用いるので&lt;code&gt;cgdisk&lt;/code&gt;だが、MBRなら&lt;code&gt;cfdisk&lt;/code&gt;でよい。あるいは&lt;code&gt;gdisk&lt;/code&gt;や&lt;code&gt;fdisk&lt;/code&gt;もあるけど、やりづらいので自分はcを頭に付ける。&lt;/p&gt;
-
-&lt;p&gt;なおMBRとGPTの選択に関してはwiki内に記述がある。&lt;/p&gt;
-
-&lt;blockquote&gt;ブートローダに GRUB Legacy を使う場合、MBR を使うべきです。
-古い BIOS を使う Windows (32ビット、64ビット両方) とのデュアルブートをするなら、MBR を使うべきです。
-BIOS の代わりに UEFI を使う64ビットの Windows とデュアルブートをするなら、GPT を使うべきです。
-[https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E)](https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E))&lt;/blockquote&gt;
-
-&lt;p&gt;分け方はわりと適当。swapはまぁ、なくてもいいかなと。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;ESP(EFI System Partition)用に512MB&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;タイプコードはef00&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;FAT32でフォーマットする
-(&lt;a href=&#34;https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)&#34;&gt;https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware&lt;em&gt;Interface&lt;/em&gt;(%E6%97%A5%E6%9C%AC%E8%AA%9E))&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;デュアルブートの場合はすでにWindows側で作られているので要らないはず。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;/bootに200MBぐらい&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;残り全部が/。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;フォーマット-マウント:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;フォーマット、マウント&lt;/h1&gt;
-
-&lt;p&gt;切り分けが終わったらそれぞれ&lt;code&gt;mkfs&lt;/code&gt;コマンド使ってフォーマットする。基本的にはext4でフォーマットするが、ESP用の領域はさっき書いた通りFAT32でフォーマットしておく必要がある。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mkfs.ext4 /dev/sda1&lt;/code&gt;でフォーマット&lt;/li&gt;
-&lt;li&gt;FAT32の場合は&lt;code&gt;mkfs.vfat -F32&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;-vオプションで詳細表示、-cで不良ブロックのチェック&lt;/li&gt;
-&lt;li&gt;Windowsデュアルブートの場合、WinのEPSがある領域を/bootに指定する&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;そしてマウント。こんな感じで。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# mount /dev/sda1 /mnt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なお、&lt;a href=&#34;https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)#EFI_System_Partition&#34;&gt;EFISTUBの場合はESPと/mnt/bootを兼ねさせることも可能&lt;/a&gt;らしいいのだが、EFISTUBってなに。。。？　とりあえずgrub使う場合にEFISTUBのことは考えなくていいらしいので一旦無視した。&lt;/p&gt;
-
-&lt;p&gt;マウントが終わったら&lt;code&gt;lsblk -f&lt;/code&gt;でパーティションレイアウトの確認をしておく。念のため。&lt;/p&gt;
-
-&lt;h1 id=&#34;インストール:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;インストール&lt;/h1&gt;
-
-&lt;p&gt;いよいよインストールである。本来ならその前にインターネット接続の設定が必要だが、Virtualboxの場合は特に何もせずつながってしまったので何もしていない。システムファイルのインストールでは、&lt;code&gt;/etc/pacman.d/mirrorlist&lt;/code&gt;の上から優先的にミラーサイトが使われるので、好みのがあるなら予め編集して並び替えておく。基本的には日本（筑波大だが）を一番上にしとけば良いかと。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# pacstrap /mnt base base-devel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;vimとかgrubとか必要なものがあれば、このコマンドの後にスペース空けて続けることで一緒に落とせる。この後の作業をある程度楽にできるかなということで、自分はvimとbashを、あとsudo（このディストリsudoすら入ってない！！）を落としておいた。&lt;/p&gt;
-
-&lt;p&gt;インストールがつつがなく終わったら、fstabを生成。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# genfstab -U -p /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そしてchroot。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# arch-chroot /mnt /bin/bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;インストール後の処理:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;インストール後の処理&lt;/h1&gt;
-
-&lt;p&gt;ここからインストール後の諸設定をば。&lt;/p&gt;
-
-&lt;h3 id=&#34;localeの変更:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;localeの変更&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;# vim /etc/locale.gen
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使う言語をコメント解除。基本はen_USとja_JPあたりでOKのはず。で、以下を打つ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# locale-gen
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;# vim /etc/locale.conf`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;さっきコメント解除した言語をLANG=で指定。LANG=ja_jp.UTF-8とか。ただしGUI環境入れずに日本語使おうとすると化けるので、この時点ではen_usが無難。&lt;/p&gt;
-
-&lt;h3 id=&#34;timezone:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;Timezone&lt;/h3&gt;
-
-&lt;p&gt;/etc/localtimeを置き換える。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;デフォルトのコンソールフォントとキーマップ変更:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;デフォルトのコンソールフォントとキーマップ変更&lt;/h3&gt;
-
-&lt;p&gt;/etc/vconsole.confを編集して、デフォルトのキーマップとコンソールフォントを設定する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# vim /etc/vconsole.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;KEYMAP=jp106
-FONT=Lat2-Terminus16
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;ハードウェアクロック:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;ハードウェアクロック&lt;/h3&gt;
-
-&lt;p&gt;自分はよく知らんかったのだが、ハードウェアクロックとシステムクロックってのがあるらしい。で、ハードウェアクロックにUTCを設定しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# hwclock --systohc --utc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参考：&lt;a href=&#34;http://www.atmarkit.co.jp/ait/articles/0812/26/news120.html&#34;&gt;実践でも役立つLPICドリル（8）：Linux時刻管理の仕組みと設定 (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt;) - ＠IT&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;hostname:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;hostname&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;# echo hostname &amp;gt; /etc/hostname
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;rootパスワード変更:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;rootパスワード変更&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;# passwd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;ブートローダー設定:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;ブートローダー設定&lt;/h1&gt;
-
-&lt;p&gt;Gummibootとか使ってみようかなとも思ったけど、初めてだし一般的によく使われているであろう、GRUB2を使うことに。どうでもいいけどパッケージマネージャの名前が「pacman」って面白いでふね。オプションなしで打つとAAも出てくるけど、権利関係とかどうしてんだろ。。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# pacman -S grub efibootmgr
-# mkdir -p /boot/efi/EFI
-# grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-direcotory=/boot/efi/EFI --bootloader-id=grub --recheck
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;GRUB設定ファイルの自動生成。当たり前だがここで指定のディレクトリを誤ると立ち上がらない。自分は何度かハマったんだが、&lt;code&gt;grub-install&lt;/code&gt;したときに&lt;code&gt;--boot-direcotory&lt;/code&gt;オプションで指定した場所で良い、はず。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そして再起動！&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# exit
-# umount -R /mnt
-# reboot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;デスクトップ環境:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;デスクトップ環境&lt;/h1&gt;
-
-&lt;p&gt;ここからはデスクトップ環境を構築していく。要らないならすっ飛ばしでも。&lt;/p&gt;
-
-&lt;p&gt;まずは作業用のユーザーを作成。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# useradd -m hoge
-# passwd hoge
-# visudo  #sudo実行可能にしておく
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;続いてVirtualBox特有のものとして、ゲストユーティリティをpacmanを使って入れる。普通ならVirtualbox側のメニューから仮想CD-ROMをマウントさせるところだが、Arch Linuxの場合はこの方法だとインストールができない（エラーが表示される）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S virtualbox-guest-utils
-$ sudo vim /etc/modules-load.d/virtualbox.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;virtualbox.confを開いたら、下記の通り書き入れておく。これでVirtualbox関連のモジュールが起動した時に自動でロードされるようになる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vboxguest
-vboxsf
-vboxvideo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そしてデスクトップ環境に必要なもろもろのインストール。これまでGNOMEぐらいしか使ったことがなくてよくわかってなかったのだが、LinuxのGUI環境を提供するツールは大きくこんな感じで分けられる、みたい。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;ディスプレイマネージャー&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;グラフィカルなログイン環境を提供する&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Slim、GDM、KDMなど&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;ウィンドウマネージャー&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;ウィンドウ周りの機能を提供する&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;スタック型＝Windowsっぽいウィンドウを重ねるタイプ（Xfwmなど）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;タイル型＝ウィンドウがオーバーラップしないタイプ（Bspwmなど）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;動的＝どちらもいける（awesomeなど）&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;デスクトップ環境&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;様々なツールを一括提供するGUIキット&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;GNOME、KDE、Xfceなど&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;したがってGNOMEあたりを入れてしまうのが一番簡単なようなのだが、ここまで来たらきちんとやっておきたいし、せっかく最小ディストリなのに重いツールを入れてしまうのももったいないので、Slimとawesomeを使うことにした。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S xorg-server xorg-server-utils xorg-xinit xterm
-$ sudo pacman -S slim archlinux-themes-slim slim-themes
-$ sudo pacman -S awesome
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;X Window Systemの起動には&lt;code&gt;startx&lt;/code&gt;コマンドを打つことになるが、このときのシーケンスとしては、まずxorg-xinitやSLiMなどでXを起動 =&amp;gt; .xinitrcを見てウィンドウマネージャー等を起動という順序になる。.xinitrcに対して、どのウィンドウマネージャーを使うのかを教えてやらなくてはならない。またVirtuarlBox関連のドライバを同時に読みこませておかないとうまく起動しない。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cp /etc/skel/.xinitrc ~/
-$ vim ~/.xinitrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;/usr/bin/VBoxClient-all
-exec awesome
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そして&lt;code&gt;startx&lt;/code&gt;を使えばawesomeが立ち上がるはず。OSを起動した時に自動でGUIを立ち上げるには、slim.confを編集した上で、&lt;code&gt;systemctl&lt;/code&gt;コマンドを使って有効化しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo vim /etc/slim.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;daemon yes
-current_theme archlinux-simplyblack
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ systemctl enable slim.service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ためしに&lt;code&gt;reboot&lt;/code&gt;してみて、ログイン画面が表示されればOK。&lt;/p&gt;
-
-&lt;h1 id=&#34;日本語環境:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;日本語環境&lt;/h1&gt;
-
-&lt;p&gt;GUIを使えるようにしたら日本語環境も整えたい。で、まずまずは&lt;code&gt;/etc/locale.conf&lt;/code&gt;を編集し、さっきやめておいた言語設定の変更を。。他にやることとしてはフォントの導入、IMEの導入、キーボードの設定。まずフォントからだが、pacmanではなくyaourtを使って入れることになる。&lt;/p&gt;
-
-&lt;h3 id=&#34;yaourt導入:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;yaourt導入&lt;/h3&gt;
-
-&lt;p&gt;pacmanにレポジトリを追加。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ vim /etc/pacman.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そしてyaourtを導入。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pacman -Sy yaourt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;フォント導入:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;フォント導入&lt;/h3&gt;
-
-&lt;p&gt;フォントの導入。yaourtを使ってインストールすると、そのままデフォルトとして設定されるみたい。複数入れておいて選択したい時とかどーすんの？って思うけど調べてない。とりあえず無難にRictyを。。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ yaourt -S ttf-ricty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;ime導入:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;IME導入&lt;/h3&gt;
-
-&lt;p&gt;ibus-mozcを使ってる例が多かったのでそうします。さっきと同じくpacman.confにレポジトリを追加した上でインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[pnsft-pur]
-SigLevel = Optional TrustAll
-Server = http://downloads.sourceforge.net/project/pnsft-aur/pur/$arch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pacman -Sy mozc ibus-mozc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そしてibusをセットアップする。下記コマンドを実行するとグラフィカルな設定用ウィザードが表示されるので、ホットキーを使用可能とし、mozcをインプットメソッドとして指定する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ibus-setup
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ibusを起動時に自動で上げるための設定を入れる。.xinitrcを立ち上げて、&lt;code&gt;exec awesome&lt;/code&gt;よりも前に以下のように書き入れる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-ibus-daemon -drx
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;今のところ設定したのはここまで。残ってる問題としてはキーマップの設定がおかしい。vconsole.confはコンソール上でのキーボード設定だから、たぶんawesome上では別の設定をしなくてはいけないはず。探さねば。&lt;/p&gt;
-
-&lt;h1 id=&#34;参考:52c160ce192dac5ee7bef4c4a630f0ee&#34;&gt;参考&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/co-me@github/items/12f21126c5117e07decd&#34;&gt;Arch Linux インストールから awesome 導入まで - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://opamp.hatenablog.jp/entry/2013/10/30/233548&#34;&gt;UEFIでArchLinuxをインストールする - opamp_sando&amp;rsquo;s blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://masawada.hatenablog.jp/entry/2013/06/10/225748&#34;&gt;Arch Linux インストールメモ 3 - あんパン&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://qiita.com/xorphitus/items/3711895eb5d9f946c782&#34;&gt;Arch Linux快適デスクトップ環境の構築 - Qiita&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://opamp.hatenablog.jp/entry/2013/08/13/201544&#34;&gt;ArchLinuxでibus+mozcな環境を構築 - opamp_sando&amp;rsquo;s blog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <guid>http://localhost:1313/post/2014-09-07-post/</guid>
+      <description>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブートを試みることに。デュアルじゃなくてOS丸ごと入れ替えたら？という話もありそうだが、仕事で使うのでWindowsを潰せない。かと言って仮想マシンだとこのPCのスペックでは心許ない。。ってことでデュアル。
+ではディストリは何を使うか？だが、以前Ubuntuを使ったデュアルブートは構築した経験があるし、GUIでポチポチインストールするんじゃあんまり勉強にはならなさそうだなーということで、思い切ってArch Linuxを選んだ。ミニマルを是とするディストリだが、ミニマルどころか最初はsudoすら入っていないという徹底っぷり。使うものだけ入れろ！というポリシーは大変に共感できるものではあるが、それは当然難易度の高さと引き換えなわけで。。
+さすがにぶっつけ本番は怖すぎるので、まずはiMac(OS X Marverics)上のVirtualboxでデスクトップ環境が立ち上がるとこまでやってみた。難易度が確かに高いOSではあるが、Wikiが非常に充実しているので、案外迷うこともないとは思う。逆に言えば、ここのInstallation GuideとBeginner&amp;rsquo;s Guideにきちんと目を通した上でやるべき。こんなブログ記事だけに頼らずに。
+なお、えっらい長い記事になった模様。
+事前チェック VAIO ProがUEFI環境なんで、今回の練習でもUEFIを用いることにした。Virtualboxの場合は仮想マシンの設定から「UEFI」を有効化できる。他にも初期設定ではインストールメディアをつないだり、外部メディアからの起動準備を優先させたりして、準備完了。
+起動するといきなりシェルが現れる。ここから全部自力でコマンド打って入れてけというストイックさ。ひとまずはUEFIで起動しているか確認するため、UEFI変数を表示。
+# mount -t efivarfs efivarfs /sys/firmware/efi/efivars # efivar -l  続いてキーボードマッピング変更。 jp106とかusとか適宜。やらなくてもインストールぐらいはなんとかなるかもしれんが、viでコロンの位置違ったりすると不便。地味に。
+# loadkeys hoge  事前チェックはこれぐらい。
+パーティション 続いてパーティション分割。まずはfdisk -lによりハードディスクのデバイス名を確認し、そのデバイス名に対してcgdiskコマンドを実行。今回はGPTを用いるのでcgdiskだが、MBRならcfdiskでよい。あるいはgdiskやfdiskもあるけど、やりづらいので自分はcを頭に付ける。
+なおMBRとGPTの選択に関してはwiki内に記述がある。
+ブートローダに GRUB Legacy を使う場合、MBR を使うべきです。 古い BIOS を使う Windows (32ビット、64ビット両方) とのデュアルブートをするなら、MBR を使うべきです。 BIOS の代わりに UEFI を使う64ビットの Windows とデュアルブートをするなら、GPT を使うべきです。 [https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E)](https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E)) 分け方はわりと適当。swapはまぁ、なくてもいいかなと。
+ ESP(EFI System Partition)用に512MB
+ タイプコードはef00
+ FAT32でフォーマットする (https://wiki.archlinux.org/index.php/Unified_Extensible_FirmwareInterface(%E6%97%A5%E6%9C%AC%E8%AA%9E)))
+ デュアルブートの場合はすでにWindows側で作られているので要らないはず。
+ /bootに200MBぐらい</description>
     </item>
     
     <item>
       <title>SSHでサーバーリモートログインする際のあれこれまとめ</title>
-      <link>http://chroju.github.io/blog/2013/12/08/2013-12-08-post/</link>
+      <link>http://localhost:1313/post/2013-12-08-post/</link>
       <pubDate>Sun, 08 Dec 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2013/12/08/2013-12-08-post/</guid>
-      <description>
-
-&lt;p&gt;うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。&lt;/p&gt;
-
-&lt;h2 id=&#34;環境:449846545d539df0fae4d22bf3bf34e4&#34;&gt;環境&lt;/h2&gt;
-
-&lt;p&gt;今回はいわゆる「リモートのサーバーにSSHを使ってログインする」場合と「GithubにSSHでpushする」場合を想定する。使用するクライアントはMac OS X、サーバーはCent OS。ちなみにシェルはbash。&lt;/p&gt;
-
-&lt;h2 id=&#34;そもそもsshってなんぞや:449846545d539df0fae4d22bf3bf34e4&#34;&gt;そもそもSSHってなんぞや&lt;/h2&gt;
-
-&lt;p&gt;セキュアなリモート通信用プロトコル。セキュアな、と言っているのはTelnetあたりが平文でパスワード贈っちゃうのに対して、SSHが暗号化に対応している点を指す。で、暗号化には今多くの場合RSA（公開鍵暗号方式）を用いているらしい。だから秘密鍵と公開鍵を作ってローカルとリモートにそれぞれ配置して云々という設定が必要になる。あとGitHubもリモートレポジトリにつなぐ時にSSHが使える。&lt;/p&gt;
-
-&lt;h2 id=&#34;リモートサーバー接続手順:449846545d539df0fae4d22bf3bf34e4&#34;&gt;リモートサーバー接続手順&lt;/h2&gt;
-
-&lt;p&gt;まずリモートサーバーにSSHでつなぐときの手順。&lt;/p&gt;
-
-&lt;h3 id=&#34;1-認証鍵の生成:449846545d539df0fae4d22bf3bf34e4&#34;&gt;1. 認証鍵の生成&lt;/h3&gt;
-
-&lt;p&gt;Linuxには鍵生成のコマンドがあるので、それを使う。&lt;/p&gt;
-
-&lt;blockquote&gt;ssh-keygen -t rsa&lt;/blockquote&gt;
-
-&lt;p&gt;-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。&lt;strong&gt;絶対控える。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。&lt;/p&gt;
-
-&lt;h3 id=&#34;2-公開鍵の転送:449846545d539df0fae4d22bf3bf34e4&#34;&gt;2. 公開鍵の転送&lt;/h3&gt;
-
-&lt;p&gt;鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。&lt;/p&gt;
-
-&lt;blockquote&gt;scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/&lt;/blockquote&gt;
-
-&lt;p&gt;SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。&lt;/p&gt;
-
-&lt;p&gt;ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(&lt;em&gt;ﾉω・&lt;/em&gt;)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。&lt;/p&gt;
-
-&lt;p&gt;例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。&lt;/p&gt;
-
-&lt;h3 id=&#34;3-公開鍵の登録:449846545d539df0fae4d22bf3bf34e4&#34;&gt;3. 公開鍵の登録&lt;/h3&gt;
-
-&lt;p&gt;今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。&lt;/p&gt;
-
-&lt;blockquote&gt;mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys&lt;/blockquote&gt;
-
-&lt;p&gt;authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。&lt;/p&gt;
-
-&lt;p&gt;あとアクセス権も変える。&lt;/p&gt;
-
-&lt;blockquote&gt;chmod 600 ~/.ssh/authorized_keys&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;4-sshd-configの設定:449846545d539df0fae4d22bf3bf34e4&#34;&gt;4. sshd_configの設定&lt;/h3&gt;
-
-&lt;p&gt;リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。&lt;/p&gt;
-
-&lt;blockquote&gt;RSAAuthentication yes
-PubkeyAuthentication yes
-AuthorizedKeysFile .ssh/authorized_keys&lt;/blockquote&gt;
-
-&lt;p&gt;読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。&lt;/p&gt;
-
-&lt;p&gt;逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。&lt;/p&gt;
-
-&lt;blockquote&gt;PasswordAuthentication no
-ChallengeResponseAuthentication no&lt;/blockquote&gt;
-
-&lt;p&gt;上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。&lt;/p&gt;
-
-&lt;p&gt;あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。&lt;/p&gt;
-
-&lt;p&gt;書き換えたらsshサービスを再起動してフィニッシュ。&lt;/p&gt;
-
-&lt;blockquote&gt;/etc/init.d/sshd restart&lt;/blockquote&gt;
-
-&lt;p&gt;これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。&lt;/p&gt;
-
-&lt;h3 id=&#34;5-githubにつなぐ場合:449846545d539df0fae4d22bf3bf34e4&#34;&gt;5. Githubにつなぐ場合&lt;/h3&gt;
-
-&lt;p&gt;Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings &amp;gt; SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。&lt;/p&gt;
-
-&lt;p&gt;リモート側のサーバーで環境共有したい場合はgit cloneで持ってくる。&lt;/p&gt;
-</description>
+      <guid>http://localhost:1313/post/2013-12-08-post/</guid>
+      <description>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらGithubで登録してるRSA認証のキーフレーズ忘れてて軽く詰んだ。で、仕方ないのでもっかい鍵作ってやり直そうと思ったら、SSHの鍵認証のやり方とかそのへんも全部吹っ飛んでたので改めてまとめ直しとくことにする。やったことまとめないのダメ、絶対。
+環境 今回はいわゆる「リモートのサーバーにSSHを使ってログインする」場合と「GithubにSSHでpushする」場合を想定する。使用するクライアントはMac OS X、サーバーはCent OS。ちなみにシェルはbash。
+そもそもSSHってなんぞや セキュアなリモート通信用プロトコル。セキュアな、と言っているのはTelnetあたりが平文でパスワード贈っちゃうのに対して、SSHが暗号化に対応している点を指す。で、暗号化には今多くの場合RSA（公開鍵暗号方式）を用いているらしい。だから秘密鍵と公開鍵を作ってローカルとリモートにそれぞれ配置して云々という設定が必要になる。あとGitHubもリモートレポジトリにつなぐ時にSSHが使える。
+リモートサーバー接続手順 まずリモートサーバーにSSHでつなぐときの手順。
+1. 認証鍵の生成 Linuxには鍵生成のコマンドがあるので、それを使う。
+ssh-keygen -t rsa -tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。絶対控える。
+作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。
+2. 公開鍵の転送 鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。
+scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/ SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。
+ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(ﾉω・)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。
+例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。
+3. 公開鍵の登録 今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。
+mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。
+あとアクセス権も変える。
+chmod 600 ~/.ssh/authorized_keys 4. sshd_configの設定 リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。
+RSAAuthentication yes PubkeyAuthentication yes AuthorizedKeysFile .ssh/authorized_keys 読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。
+逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。
+PasswordAuthentication no ChallengeResponseAuthentication no 上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。
+あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。
+書き換えたらsshサービスを再起動してフィニッシュ。
+/etc/init.d/sshd restart これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。
+5. Githubにつなぐ場合 Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings &amp;gt; SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。
+リモート側のサーバーで環境共有したい場合はgit cloneで持ってくる。</description>
     </item>
     
   </channel>

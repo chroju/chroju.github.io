@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Arthur Dent">
+<meta name="description" content=" O&rsquo;Reillyの『Infrastructure as Code』を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い方にフォーカスした本はいくらか出ていたけれど、おそらく「Infrastructure as Code」の考え方や、システム運用への採用方法を包括してまとめた本は初めてということになるのかな。
+ツールとプロセス 端的に内容を説明してしまうと、Infrastructure as Codeで使用するツールを
+ ダイナミックインフラストラクチャプラットフォーム（AWS等パブリック、プライベート問わずプログラマブルな操作が可能なインフラプラットフォーム） インフラストラクチャ定義ツール（Terraformのような、構築するインフラ環境を定義するツール） サーバー構成ツール（Ansible、Chef等のサーバー内部の設定を定義するツール） インフラストラクチャサービス（モニタリング、サービスディスカバリ等の環境管理用のツール）  の4つに大きく分類して、
+ インフラのプロビジョニング サーバーテンプレートの管理 サーバーのアップデート、更新 サーバーの破棄  といったライフサイクルを、各ツールを使ってどう管理するかを説いた本。後半で第10章をまるごと「インフラストラクチャのためのソフトウェア工学プラクティス」の説明に充てて、継続的インテグレーションやVCSの方法論を書いていたりして、DevOpsの名のもとにソフトウェア管理に対して導入されてきた手法を、インフラへも適用していくための本になっている。なのでサーバーを構築したらそれでおしまいではなくて、ダイナミックにサーバーが生成／廃棄される環境であれば、自動的にログは退避できるようにしておく必要があるだとか、システムマネジメント全体に焦点が当てられている。
+ツールの使い方自体はドキュメントを読むなり、Qiitaを探るなりすればだいたいわかるんだけど、それをどう運用すれば効率的になるのか、より効果が得られるかという、プラクティスを知りたい思いが強かったので、大いに参考になった。
+徹底的な自動化アプローチ 例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。
+Terraformであれば、EC2を立てた後に自動的にAnsibleを呼ぶようなことも機能でできるらしいけど、そういった連携の仕組みがツール自体に存在しなければ、構築したサーバーのIPアドレスやユーザーの情報を「サーバー構成ツール」へ渡す必要がある。1例として挙がっていたのが「構成レジストリ」と呼ばれる、サーバー情報を中央集権的に管理するツール。インフラストラクチャ定義ツールは立てたサーバーの情報をここに登録し、サーバー構成ツールが情報を引き出して、サーバー設定のデプロイを行う。具体的に「構成レジストリ」として使えるツールについてはそれほど言及がなかったけど、CygamesだとElasticsearchを使ってサーバー情報を管理しているという話を聞いたことがあって、実装としてはこれに近いのだと思う。
+ あるいはAnsibleなどを導入したときによく聞かれるのが、結局手動でサーバー構成を変更してしまって、Playbookと実情に乖離が出てしまうという問題（本書ではこれによる構成差異の発生を「構成ドリフト」と呼んでいる）。これに対してはイミュータブルなサーバー管理をするのが最も良いとされる。なぜなら構成ドリフトを起こしても、定期的にイチから生成したサーバーに置き換えられていれば、そのたびに構成ドリフトもリセットされるから。
+この本全体で貫かれているのは、とかく徹底的な自動化と、ワークフローのパイプライン化を行なって、各タスクからシステム管理者の手動オペレーションをなくすということ。これによりシステム管理者はインフラ構築、変更の「門番」としての役割から解放され、問題への対応といったより生産的なタスクへ移ることができるし、システムの変更によりサービスに対して発生する影響も低減できるとしている。
+ 自律的なオートメーションこそ、Infrastructure as Codeが確実に機能する秘訣である。チームがセキュリティを向上させる新しいウェブサーバーの設定オプションを見つけたら、それをオートメーションツールのなかに組み込む。チームは、もう1度そのことについて考えようとしなくても、現在及び将来のすべての関連サーバーにそれが適用されることを知っている。 (p.254)
+ 共通言語として利用したい 先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は『Fearless Change』でも使われていた。
+で、結論としてとても良い本だとは思うのだけど、これを全部導入するとなるとなかなかにパワーが必要になる。特に、すでに手動でのサーバー管理を絶賛実施中の環境に対して導入する場合には、インフラに対する考え方自体を、秘伝のタレのように継ぎ足して使うものから、外部で管理している設定と常に同期して使うもの、すぐに破棄と生成のサイクルを回せるものへと変えていかなくてはならないので、組織的な協力が必要になってくる。しかも必要なのは一部ワークフローの自動化ではなく、徹底的な自動化、インフラ環境の自律的な動作。
+まぁ、とはいえインフラパイプライン全体をいきなり用意して導入するのも難しいのは確かなので、まずは頻繁に変更が入る設定など、Infrastructure as Codeの恩恵が大きそうなところから始めてみるべきかと思う。少しずつでも確実にこれは実現していきたいなと思える本だった。
+Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティスposted with amazlet at 17.05.05Kief Morris オライリージャパン 売り上げランキング: 25,983
+Amazon.co.jpで詳細を見る ">
+
+<meta property="og:title" content="O&#39;Reilly『Infrastructure as Code』読了" />
+<meta property="og:description" content=" O&rsquo;Reillyの『Infrastructure as Code』を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い方にフォーカスした本はいくらか出ていたけれど、おそらく「Infrastructure as Code」の考え方や、システム運用への採用方法を包括してまとめた本は初めてということになるのかな。
+ツールとプロセス 端的に内容を説明してしまうと、Infrastructure as Codeで使用するツールを
+ ダイナミックインフラストラクチャプラットフォーム（AWS等パブリック、プライベート問わずプログラマブルな操作が可能なインフラプラットフォーム） インフラストラクチャ定義ツール（Terraformのような、構築するインフラ環境を定義するツール） サーバー構成ツール（Ansible、Chef等のサーバー内部の設定を定義するツール） インフラストラクチャサービス（モニタリング、サービスディスカバリ等の環境管理用のツール）  の4つに大きく分類して、
+ インフラのプロビジョニング サーバーテンプレートの管理 サーバーのアップデート、更新 サーバーの破棄  といったライフサイクルを、各ツールを使ってどう管理するかを説いた本。後半で第10章をまるごと「インフラストラクチャのためのソフトウェア工学プラクティス」の説明に充てて、継続的インテグレーションやVCSの方法論を書いていたりして、DevOpsの名のもとにソフトウェア管理に対して導入されてきた手法を、インフラへも適用していくための本になっている。なのでサーバーを構築したらそれでおしまいではなくて、ダイナミックにサーバーが生成／廃棄される環境であれば、自動的にログは退避できるようにしておく必要があるだとか、システムマネジメント全体に焦点が当てられている。
+ツールの使い方自体はドキュメントを読むなり、Qiitaを探るなりすればだいたいわかるんだけど、それをどう運用すれば効率的になるのか、より効果が得られるかという、プラクティスを知りたい思いが強かったので、大いに参考になった。
+徹底的な自動化アプローチ 例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。
+Terraformであれば、EC2を立てた後に自動的にAnsibleを呼ぶようなことも機能でできるらしいけど、そういった連携の仕組みがツール自体に存在しなければ、構築したサーバーのIPアドレスやユーザーの情報を「サーバー構成ツール」へ渡す必要がある。1例として挙がっていたのが「構成レジストリ」と呼ばれる、サーバー情報を中央集権的に管理するツール。インフラストラクチャ定義ツールは立てたサーバーの情報をここに登録し、サーバー構成ツールが情報を引き出して、サーバー設定のデプロイを行う。具体的に「構成レジストリ」として使えるツールについてはそれほど言及がなかったけど、CygamesだとElasticsearchを使ってサーバー情報を管理しているという話を聞いたことがあって、実装としてはこれに近いのだと思う。
+ あるいはAnsibleなどを導入したときによく聞かれるのが、結局手動でサーバー構成を変更してしまって、Playbookと実情に乖離が出てしまうという問題（本書ではこれによる構成差異の発生を「構成ドリフト」と呼んでいる）。これに対してはイミュータブルなサーバー管理をするのが最も良いとされる。なぜなら構成ドリフトを起こしても、定期的にイチから生成したサーバーに置き換えられていれば、そのたびに構成ドリフトもリセットされるから。
+この本全体で貫かれているのは、とかく徹底的な自動化と、ワークフローのパイプライン化を行なって、各タスクからシステム管理者の手動オペレーションをなくすということ。これによりシステム管理者はインフラ構築、変更の「門番」としての役割から解放され、問題への対応といったより生産的なタスクへ移ることができるし、システムの変更によりサービスに対して発生する影響も低減できるとしている。
+ 自律的なオートメーションこそ、Infrastructure as Codeが確実に機能する秘訣である。チームがセキュリティを向上させる新しいウェブサーバーの設定オプションを見つけたら、それをオートメーションツールのなかに組み込む。チームは、もう1度そのことについて考えようとしなくても、現在及び将来のすべての関連サーバーにそれが適用されることを知っている。 (p.254)
+ 共通言語として利用したい 先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は『Fearless Change』でも使われていた。
+で、結論としてとても良い本だとは思うのだけど、これを全部導入するとなるとなかなかにパワーが必要になる。特に、すでに手動でのサーバー管理を絶賛実施中の環境に対して導入する場合には、インフラに対する考え方自体を、秘伝のタレのように継ぎ足して使うものから、外部で管理している設定と常に同期して使うもの、すぐに破棄と生成のサイクルを回せるものへと変えていかなくてはならないので、組織的な協力が必要になってくる。しかも必要なのは一部ワークフローの自動化ではなく、徹底的な自動化、インフラ環境の自律的な動作。
+まぁ、とはいえインフラパイプライン全体をいきなり用意して導入するのも難しいのは確かなので、まずは頻繁に変更が入る設定など、Infrastructure as Codeの恩恵が大きそうなところから始めてみるべきかと思う。少しずつでも確実にこれは実現していきたいなと思える本だった。
+Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティスposted with amazlet at 17.05.05Kief Morris オライリージャパン 売り上げランキング: 25,983
+Amazon.co.jpで詳細を見る " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://you.github.io/post/infrastructure_as_code_book/" />
+
+
+
+<meta property="article:published_time" content="2017-05-05T17:53:22&#43;09:00"/>
+<meta property="article:modified_time" content="2017-05-05T17:53:22&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     O&#39;Reilly『Infrastructure as Code』読了 
+
+</title>
+<link rel="canonical" href="https://you.github.io/post/infrastructure_as_code_book/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://you.github.io/css/reset.css?t=2017-11-25%2012%3a27%3a25.527287091%20%2b0900%20JST%20m%3d%2b0.130532970">
+    <link rel="stylesheet" href="https://you.github.io/css/pygments.css?t=2017-11-25%2012%3a27%3a25.527287091%20%2b0900%20JST%20m%3d%2b0.130532970">
+    <link rel="stylesheet" href="https://you.github.io/css/main.css?t=2017-11-25%2012%3a27%3a25.527287091%20%2b0900%20JST%20m%3d%2b0.130532970">
+    
+        <link rel="stylesheet" href="https://you.github.io/css/override.css?t=2017-11-25%2012%3a27%3a25.527287091%20%2b0900%20JST%20m%3d%2b0.130532970">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://you.github.io/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                
+                <a href="https://you.github.io/"><img class="avatar" src="https://you.github.io/img/profile.png" srcset="https://you.github.io/img/profile.png 1x"></a>
+            
+            <a href="https://you.github.io/"><div class="name">Arthur Dent</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://you.github.io/blog/"><span>Blog</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://you.github.io/about/"><span>About</span></a></li>
+                    
+                        <li class="nav-code"><a href="https://you.github.io/code/"><span>Code</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+            <a href="//example.com/@you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/mastodon.svg" alt="mastodon" /></a>
+        
+
+        
+            <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+            <a href="//instagram.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+            
+        
+            <a href="//500px.com/username" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/500px.svg" alt="500px" /></a>
+        
+
+        
+
+        
+            <a href="mailto:you@example.space"><img class="icon" src="https://you.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://you.github.io/index.xml"><img class="icon" src="https://you.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    O&#39;Reilly『Infrastructure as Code』読了
+
+</div>
+
+            <div class="markdown">
+                
+
+<p><a href="https://www.oreilly.co.jp/books/9784873117966/">O&rsquo;Reillyの『Infrastructure as Code』</a>を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い方にフォーカスした本はいくらか出ていたけれど、おそらく「Infrastructure as Code」の考え方や、システム運用への採用方法を包括してまとめた本は初めてということになるのかな。</p>
+
+<h2 id="ツールとプロセス">ツールとプロセス</h2>
+
+<p>端的に内容を説明してしまうと、Infrastructure as Codeで使用するツールを</p>
+
+<ul>
+<li>ダイナミックインフラストラクチャプラットフォーム（AWS等パブリック、プライベート問わずプログラマブルな操作が可能なインフラプラットフォーム）</li>
+<li>インフラストラクチャ定義ツール（Terraformのような、構築するインフラ環境を定義するツール）</li>
+<li>サーバー構成ツール（Ansible、Chef等のサーバー内部の設定を定義するツール）</li>
+<li>インフラストラクチャサービス（モニタリング、サービスディスカバリ等の環境管理用のツール）</li>
+</ul>
+
+<p>の4つに大きく分類して、</p>
+
+<ul>
+<li>インフラのプロビジョニング</li>
+<li>サーバーテンプレートの管理</li>
+<li>サーバーのアップデート、更新</li>
+<li>サーバーの破棄</li>
+</ul>
+
+<p>といったライフサイクルを、各ツールを使ってどう管理するかを説いた本。後半で第10章をまるごと「インフラストラクチャのためのソフトウェア工学プラクティス」の説明に充てて、継続的インテグレーションやVCSの方法論を書いていたりして、DevOpsの名のもとにソフトウェア管理に対して導入されてきた手法を、インフラへも適用していくための本になっている。なのでサーバーを構築したらそれでおしまいではなくて、ダイナミックにサーバーが生成／廃棄される環境であれば、自動的にログは退避できるようにしておく必要があるだとか、システムマネジメント全体に焦点が当てられている。</p>
+
+<p>ツールの使い方自体はドキュメントを読むなり、Qiitaを探るなりすればだいたいわかるんだけど、それをどう運用すれば効率的になるのか、より効果が得られるかという、プラクティスを知りたい思いが強かったので、大いに参考になった。</p>
+
+<h2 id="徹底的な自動化アプローチ">徹底的な自動化アプローチ</h2>
+
+<p>例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。</p>
+
+<p>Terraformであれば、EC2を立てた後に自動的にAnsibleを呼ぶようなことも機能でできるらしいけど、そういった連携の仕組みがツール自体に存在しなければ、構築したサーバーのIPアドレスやユーザーの情報を「サーバー構成ツール」へ渡す必要がある。1例として挙がっていたのが「構成レジストリ」と呼ばれる、サーバー情報を中央集権的に管理するツール。インフラストラクチャ定義ツールは立てたサーバーの情報をここに登録し、サーバー構成ツールが情報を引き出して、サーバー設定のデプロイを行う。具体的に「構成レジストリ」として使えるツールについてはそれほど言及がなかったけど、CygamesだとElasticsearchを使ってサーバー情報を管理しているという話を聞いたことがあって、実装としてはこれに近いのだと思う。</p>
+
+<script async class="speakerdeck-embed" data-slide="46" data-id="c6f07c336b90417f9a1361c9afb5eb07" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p>あるいはAnsibleなどを導入したときによく聞かれるのが、結局手動でサーバー構成を変更してしまって、Playbookと実情に乖離が出てしまうという問題（本書ではこれによる構成差異の発生を「構成ドリフト」と呼んでいる）。これに対してはイミュータブルなサーバー管理をするのが最も良いとされる。なぜなら構成ドリフトを起こしても、定期的にイチから生成したサーバーに置き換えられていれば、そのたびに構成ドリフトもリセットされるから。</p>
+
+<p>この本全体で貫かれているのは、とかく徹底的な自動化と、ワークフローのパイプライン化を行なって、各タスクからシステム管理者の手動オペレーションをなくすということ。これによりシステム管理者はインフラ構築、変更の「門番」としての役割から解放され、問題への対応といったより生産的なタスクへ移ることができるし、システムの変更によりサービスに対して発生する影響も低減できるとしている。</p>
+
+<blockquote>
+<p>自律的なオートメーションこそ、Infrastructure as Codeが確実に機能する秘訣である。チームがセキュリティを向上させる新しいウェブサーバーの設定オプションを見つけたら、それをオートメーションツールのなかに組み込む。チームは、もう1度そのことについて考えようとしなくても、現在及び将来のすべての関連サーバーにそれが適用されることを知っている。 (p.254)</p>
+</blockquote>
+
+<h2 id="共通言語として利用したい">共通言語として利用したい</h2>
+
+<p>先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は<a href="https://www.amazon.co.jp/dp/462108786X">『Fearless Change』</a>でも使われていた。</p>
+
+<p>で、結論としてとても良い本だとは思うのだけど、これを全部導入するとなるとなかなかにパワーが必要になる。特に、すでに手動でのサーバー管理を絶賛実施中の環境に対して導入する場合には、インフラに対する考え方自体を、秘伝のタレのように継ぎ足して使うものから、外部で管理している設定と常に同期して使うもの、すぐに破棄と生成のサイクルを回せるものへと変えていかなくてはならないので、組織的な協力が必要になってくる。しかも必要なのは一部ワークフローの自動化ではなく、徹底的な自動化、インフラ環境の自律的な動作。</p>
+
+<p>まぁ、とはいえインフラパイプライン全体をいきなり用意して導入するのも難しいのは確かなので、まずは頻繁に変更が入る設定など、Infrastructure as Codeの恩恵が大きそうなところから始めてみるべきかと思う。少しずつでも確実にこれは実現していきたいなと思える本だった。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/51YYyQ6-t6L._SL160_.jpg" alt="Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 17.05.05</div></div><div class="amazlet-detail">Kief Morris <br />オライリージャパン <br />売り上げランキング: 25,983<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

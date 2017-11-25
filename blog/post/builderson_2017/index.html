@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Arthur Dent">
+<meta name="description" content="builderscon Tokyo 2017に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しいですね。
+ 会場になっていた協生館は大学施設というよりは少し街に開かれているのか、コンビニがあるのはもちろん、驚いたことにHUB（スイッチングじゃなくて酒飲めるアレ）があったり、ホールには全席電源とLANポートが完備されていたり、IT系カンファレンスには最適の場所じゃないかという声をTwitterで見かけたりしました。とてもいいとこでした。
+ビルコン初めてでしたけど、名前通りにと言うのか、まさに何かを「build」しましたという発表が多かったり、テーマでもある「知らなかったを聞く」機会に多く恵まれてよかったです。自分はOps側の人間なので、それほどbuildするという機会が多くはないんですけど、あんまりそこにハードル高く考えず、なんかやってみたいなと思ったら稚拙でもいいから作ればいいんだなという感覚が強くなった気がします。
+あと完全に私事ですが元同僚と遭遇したりして、前職と今とで全然やってること違うのにこういう機会があるってこと、ジャンルの壁を設けない横断的なカンファレンスってやっぱいいなと思いましたね。会社という枠が良い意味でそれほど強い意味を持たない、というのはこの業界の好きなとこです。
+今回は以下のセッションを聴きました。いずれもbuildersconのページからスライド資料に飛べるはずです。
+ 横山三国志に「うむ」は何コマある？〜マンガ全文検索システムの構築  この週末だいぶバズったアレです。 コマの切り取り、OCR、全文検索、ウェブページのフロント、それぞれにOSSを的確に使っていて、発表自体もすごく参考になりました。 個人利用できて楽しいことできるAPIとか結構あるんやんと思った。APIに自分でも触ってみたくなるセッション。  Anatomy of DDoS  CloudFlareの中の人によるゲストセッション。 DDoSと一口に言ってもOSI7層それぞれに手法と対応があるとか、IoTでデバイスばらまかれるとそれだけセキュリティの穴も増えるよねみたいな基礎から丁寧な話。  RDBアンチパターンリファクタリング  今回のベストトーク賞。 RDBに限らずリファクタリング全般に言えるYAGNIの話、技術的負債のうちどれを優先して返済するのかみたいな視点が参考になった。  LT  QRコードは分割できるという話がマニアックながら何かに使えそう。 もうマジで何でもいいから作ればいいじゃんという感を覚えた。作るは正義。  サーバーサイドKotlin  Kotlinのnullable型がよいという話。  OSSで始めるセキュリティログ収集  osqueryの話 OSからログ、メトリクス情報を吸い出す手段って対象ごとにバラけてて面倒だなと思ってたんだけど、それに対する1つの回答になりそう。  OSS貢献超入門  がんばりましょう。。。時間つくりましょう。。。  Serverless Server Side Swift  Swiftはバイナリで動いてランタイム要らないのでAWS Lambdaで使えるって話。 Lambdaのランタイム制約しんどいって話はよく聞くけど、正直バイナリそのまま突っ込んでまで別言語使いたいという気持ちはいまいちわからない。  ここが辛いよサーバーレス。だが私は乗り越えた  サーバーレス実運用した上でのノウハウの話。 フェイルオーバーの実装とか、テストのときの環境エミュレートとか。つらいのとてもわかる。   ">
+
+<meta property="og:title" content="builderson2017に行ってきた" />
+<meta property="og:description" content="builderscon Tokyo 2017に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しいですね。
+ 会場になっていた協生館は大学施設というよりは少し街に開かれているのか、コンビニがあるのはもちろん、驚いたことにHUB（スイッチングじゃなくて酒飲めるアレ）があったり、ホールには全席電源とLANポートが完備されていたり、IT系カンファレンスには最適の場所じゃないかという声をTwitterで見かけたりしました。とてもいいとこでした。
+ビルコン初めてでしたけど、名前通りにと言うのか、まさに何かを「build」しましたという発表が多かったり、テーマでもある「知らなかったを聞く」機会に多く恵まれてよかったです。自分はOps側の人間なので、それほどbuildするという機会が多くはないんですけど、あんまりそこにハードル高く考えず、なんかやってみたいなと思ったら稚拙でもいいから作ればいいんだなという感覚が強くなった気がします。
+あと完全に私事ですが元同僚と遭遇したりして、前職と今とで全然やってること違うのにこういう機会があるってこと、ジャンルの壁を設けない横断的なカンファレンスってやっぱいいなと思いましたね。会社という枠が良い意味でそれほど強い意味を持たない、というのはこの業界の好きなとこです。
+今回は以下のセッションを聴きました。いずれもbuildersconのページからスライド資料に飛べるはずです。
+ 横山三国志に「うむ」は何コマある？〜マンガ全文検索システムの構築  この週末だいぶバズったアレです。 コマの切り取り、OCR、全文検索、ウェブページのフロント、それぞれにOSSを的確に使っていて、発表自体もすごく参考になりました。 個人利用できて楽しいことできるAPIとか結構あるんやんと思った。APIに自分でも触ってみたくなるセッション。  Anatomy of DDoS  CloudFlareの中の人によるゲストセッション。 DDoSと一口に言ってもOSI7層それぞれに手法と対応があるとか、IoTでデバイスばらまかれるとそれだけセキュリティの穴も増えるよねみたいな基礎から丁寧な話。  RDBアンチパターンリファクタリング  今回のベストトーク賞。 RDBに限らずリファクタリング全般に言えるYAGNIの話、技術的負債のうちどれを優先して返済するのかみたいな視点が参考になった。  LT  QRコードは分割できるという話がマニアックながら何かに使えそう。 もうマジで何でもいいから作ればいいじゃんという感を覚えた。作るは正義。  サーバーサイドKotlin  Kotlinのnullable型がよいという話。  OSSで始めるセキュリティログ収集  osqueryの話 OSからログ、メトリクス情報を吸い出す手段って対象ごとにバラけてて面倒だなと思ってたんだけど、それに対する1つの回答になりそう。  OSS貢献超入門  がんばりましょう。。。時間つくりましょう。。。  Serverless Server Side Swift  Swiftはバイナリで動いてランタイム要らないのでAWS Lambdaで使えるって話。 Lambdaのランタイム制約しんどいって話はよく聞くけど、正直バイナリそのまま突っ込んでまで別言語使いたいという気持ちはいまいちわからない。  ここが辛いよサーバーレス。だが私は乗り越えた  サーバーレス実運用した上でのノウハウの話。 フェイルオーバーの実装とか、テストのときの環境エミュレートとか。つらいのとてもわかる。   " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://you.github.io/post/builderson_2017/" />
+
+
+
+<meta property="article:published_time" content="2017-08-06T21:25:43&#43;09:00"/>
+<meta property="article:modified_time" content="2017-08-06T21:25:43&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     builderson2017に行ってきた 
+
+</title>
+<link rel="canonical" href="https://you.github.io/post/builderson_2017/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://you.github.io/css/reset.css?t=2017-11-25%2012%3a27%3a25.528779168%20%2b0900%20JST%20m%3d%2b0.132025047">
+    <link rel="stylesheet" href="https://you.github.io/css/pygments.css?t=2017-11-25%2012%3a27%3a25.528779168%20%2b0900%20JST%20m%3d%2b0.132025047">
+    <link rel="stylesheet" href="https://you.github.io/css/main.css?t=2017-11-25%2012%3a27%3a25.528779168%20%2b0900%20JST%20m%3d%2b0.132025047">
+    
+        <link rel="stylesheet" href="https://you.github.io/css/override.css?t=2017-11-25%2012%3a27%3a25.528779168%20%2b0900%20JST%20m%3d%2b0.132025047">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://you.github.io/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                
+                <a href="https://you.github.io/"><img class="avatar" src="https://you.github.io/img/profile.png" srcset="https://you.github.io/img/profile.png 1x"></a>
+            
+            <a href="https://you.github.io/"><div class="name">Arthur Dent</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://you.github.io/blog/"><span>Blog</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://you.github.io/about/"><span>About</span></a></li>
+                    
+                        <li class="nav-code"><a href="https://you.github.io/code/"><span>Code</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+            <a href="//example.com/@you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/mastodon.svg" alt="mastodon" /></a>
+        
+
+        
+            <a href="//linkedin.com/in/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+            <a href="//instagram.com/you" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/instagram.svg" alt="instagram" /></a>
+        
+            
+        
+            <a href="//500px.com/username" target="_blank" rel="noopener"><img class="icon" src="https://you.github.io/img/500px.svg" alt="500px" /></a>
+        
+
+        
+
+        
+            <a href="mailto:you@example.space"><img class="icon" src="https://you.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://you.github.io/index.xml"><img class="icon" src="https://you.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    builderson2017に行ってきた
+
+</div>
+
+            <div class="markdown">
+                <p><a href="https://builderscon.io/tokyo/2017">builderscon Tokyo 2017</a>に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しいですね。</p>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3246.0166435539!2d139.64466915084074!3d35.55329114448822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185f76e18c9d4d%3A0xc4a6f4b87d35fcb0!2z5pel5ZCJ6aeF!5e0!3m2!1sja!2sjp!4v1501994501383" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<p>会場になっていた<a href="http://www.kcc.keio.ac.jp">協生館</a>は大学施設というよりは少し街に開かれているのか、コンビニがあるのはもちろん、驚いたことにHUB（スイッチングじゃなくて酒飲めるアレ）があったり、ホールには全席電源とLANポートが完備されていたり、IT系カンファレンスには最適の場所じゃないかという声をTwitterで見かけたりしました。とてもいいとこでした。</p>
+
+<p>ビルコン初めてでしたけど、名前通りにと言うのか、まさに何かを「build」しましたという発表が多かったり、テーマでもある「知らなかったを聞く」機会に多く恵まれてよかったです。自分はOps側の人間なので、それほどbuildするという機会が多くはないんですけど、あんまりそこにハードル高く考えず、なんかやってみたいなと思ったら稚拙でもいいから作ればいいんだなという感覚が強くなった気がします。</p>
+
+<p>あと完全に私事ですが元同僚と遭遇したりして、前職と今とで全然やってること違うのにこういう機会があるってこと、ジャンルの壁を設けない横断的なカンファレンスってやっぱいいなと思いましたね。会社という枠が良い意味でそれほど強い意味を持たない、というのはこの業界の好きなとこです。</p>
+
+<p>今回は以下のセッションを聴きました。いずれもbuildersconのページからスライド資料に飛べるはずです。</p>
+
+<ul>
+<li>横山三国志に「うむ」は何コマある？〜マンガ全文検索システムの構築
+
+<ul>
+<li>この週末だいぶバズったアレです。</li>
+<li>コマの切り取り、OCR、全文検索、ウェブページのフロント、それぞれにOSSを的確に使っていて、発表自体もすごく参考になりました。</li>
+<li>個人利用できて楽しいことできるAPIとか結構あるんやんと思った。APIに自分でも触ってみたくなるセッション。</li>
+</ul></li>
+<li>Anatomy of DDoS
+
+<ul>
+<li>CloudFlareの中の人によるゲストセッション。</li>
+<li>DDoSと一口に言ってもOSI7層それぞれに手法と対応があるとか、IoTでデバイスばらまかれるとそれだけセキュリティの穴も増えるよねみたいな基礎から丁寧な話。</li>
+</ul></li>
+<li>RDBアンチパターンリファクタリング
+
+<ul>
+<li>今回のベストトーク賞。</li>
+<li>RDBに限らずリファクタリング全般に言えるYAGNIの話、技術的負債のうちどれを優先して返済するのかみたいな視点が参考になった。</li>
+</ul></li>
+<li>LT
+
+<ul>
+<li>QRコードは分割できるという話がマニアックながら何かに使えそう。</li>
+<li>もうマジで何でもいいから作ればいいじゃんという感を覚えた。作るは正義。</li>
+</ul></li>
+<li>サーバーサイドKotlin
+
+<ul>
+<li>Kotlinのnullable型がよいという話。</li>
+</ul></li>
+<li>OSSで始めるセキュリティログ収集
+
+<ul>
+<li>osqueryの話</li>
+<li>OSからログ、メトリクス情報を吸い出す手段って対象ごとにバラけてて面倒だなと思ってたんだけど、それに対する1つの回答になりそう。</li>
+</ul></li>
+<li>OSS貢献超入門
+
+<ul>
+<li>がんばりましょう。。。時間つくりましょう。。。</li>
+</ul></li>
+<li>Serverless Server Side Swift
+
+<ul>
+<li>Swiftはバイナリで動いてランタイム要らないのでAWS Lambdaで使えるって話。</li>
+<li>Lambdaのランタイム制約しんどいって話はよく聞くけど、正直バイナリそのまま突っ込んでまで別言語使いたいという気持ちはいまいちわからない。</li>
+</ul></li>
+<li>ここが辛いよサーバーレス。だが私は乗り越えた
+
+<ul>
+<li>サーバーレス実運用した上でのノウハウの話。</li>
+<li>フェイルオーバーの実装とか、テストのときの環境エミュレートとか。つらいのとてもわかる。</li>
+</ul></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

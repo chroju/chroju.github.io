@@ -2,62 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Serverspec on the world as code</title>
-    <link>http://chroju.github.io/categories/serverspec/</link>
+    <link>http://localhost:1313/categories/serverspec/</link>
     <description>Recent content in Serverspec on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
+    <language>ja-jp</language>
+    <copyright>&amp;copy; Copyright notice</copyright>
     <lastBuildDate>Thu, 31 Dec 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://chroju.github.io/categories/serverspec/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://localhost:1313/categories/serverspec/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Serverspecファーストインプレッション</title>
-      <link>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
+      <link>http://localhost:1313/post/serverspec-first-impression/</link>
       <pubDate>Thu, 31 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
-      <description>
-
-&lt;p&gt;秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。&lt;/p&gt;
-
-&lt;h2 id=&#34;サーバー構成の-仕様書-代わりとして:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;サーバー構成の「仕様書」代わりとして&lt;/h2&gt;
-
-&lt;p&gt;自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。&lt;/p&gt;
-
-&lt;p&gt;Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。&lt;/p&gt;
-
-&lt;p&gt;中には&lt;a href=&#34;http://blog.kenjiskywalker.org/blog/2013/09/20/serverspec-with-cron/&#34;&gt;cronで監視チックに実行させている例&lt;/a&gt;もあるようだが、それもアリかなと思う。&lt;/p&gt;
-
-&lt;h2 id=&#34;導入は簡単だが探求にはrubyスキル必須:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;導入は簡単だが探求にはRubyスキル必須&lt;/h2&gt;
-
-&lt;p&gt;Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。&lt;/p&gt;
-
-&lt;p&gt;例えば私が初めて書いた&lt;code&gt;spec_helper.rb&lt;/code&gt;はこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;serverspec&#39;
-require &#39;yaml&#39;
-
-properties = YAML.load_file(&#39;properties.yml&#39;)
-
-host = ENV[&#39;TARGET_HOST&#39;]
-set_property properties[host]
-
-set :backend, :exec
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。&lt;/p&gt;
-
-&lt;p&gt;自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。&lt;/p&gt;
-
-&lt;h2 id=&#34;国産ossであるアドバンテージ:2f71ca6ad43585246ea937c7a0e168d3&#34;&gt;国産OSSであるアドバンテージ&lt;/h2&gt;
-
-&lt;p&gt;Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&amp;rsquo;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rebuild.fm/75/&#34;&gt;Rebuild: 75: Book Driven Development (gosukenator)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&#34;amazlet-box&#34; style=&#34;margin-bottom:0px;&#34;&gt;&lt;div class=&#34;amazlet-image&#34; style=&#34;float:left;margin:0px 12px 1px 0px;&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;http://ecx.images-amazon.com/images/I/51P6qVOPALL._SL160_.jpg&#34; alt=&#34;Serverspec&#34; style=&#34;border: none;&#34; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-info&#34; style=&#34;line-height:120%; margin-bottom: 10px&#34;&gt;&lt;div class=&#34;amazlet-name&#34; style=&#34;margin-bottom:10px;line-height:120%&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Serverspec&lt;/a&gt;&lt;div class=&#34;amazlet-powered-date&#34; style=&#34;font-size:80%;margin-top:5px;line-height:120%&#34;&gt;posted with &lt;a href=&#34;http://www.amazlet.com/&#34; title=&#34;amazlet&#34; target=&#34;_blank&#34;&gt;amazlet&lt;/a&gt; at 15.12.31&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-detail&#34;&gt;宮下 剛輔 &lt;br /&gt;オライリージャパン &lt;br /&gt;売り上げランキング: 213,793&lt;br /&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-sub-info&#34; style=&#34;float: left;&#34;&gt;&lt;div class=&#34;amazlet-link&#34; style=&#34;margin-top: 5px&#34;&gt;&lt;a href=&#34;http://www.amazon.co.jp/exec/obidos/ASIN/4873117097/diary081213-22/ref=nosim/&#34; name=&#34;amazletlink&#34; target=&#34;_blank&#34;&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;amazlet-footer&#34; style=&#34;clear: left&#34;&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。&lt;a href=&#34;https://github.com/ryotarai/infrataster&#34;&gt;Infrataster&lt;/a&gt;とも組み合わせられれば、よりテストの質は増しそう。&lt;/p&gt;
-</description>
+      <guid>http://localhost:1313/post/serverspec-first-impression/</guid>
+      <description>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもとてもしっくりきていて満足している一方で、技術的なハードルはAnsible等より上かもなと思っている。
+サーバー構成の「仕様書」代わりとして 自分は当初Ansibleで構築したサーバーのあくまでテストツールとして使っていて、「こういう設定にしたい」という頭の中の設計書をAnsible playbooksとServerspecに同時に落とし込み、テストが通ることを確認していた。が、実際にじゃあこれを業務内でどう使おうかとワークフローを考えてみると、仕様書的な使い方がメインになりそうな気がしている。
+Serverspecによるテストを実行するのはどういったタイミングか。構築完了時点での確認に用いるのは然り。その後サーバー設定を変更したときには、その内容をServerspecにも反映して再度テストを行うはず。つまりサーバーの仕様、設定の変更にServerspecは追従していく。逆に言えば任意のタイミングで仕掛けたServerspecがエラーを吐くことで、不意のサーバー設定変更を検知できる。サーバーの「正」とされる状態を管理する仕様書の代替として、Serverspecが活用できる気がしている。
+中にはcronで監視チックに実行させている例もあるようだが、それもアリかなと思う。
+導入は簡単だが探求にはRubyスキル必須 Ansibleが実質的にはYAMLを書くだけで使えてしまい、内部実装に用いられているPythonの知識をほとんど必要としないのに対し、Serverspecは徐ろにRubyスキルを必要とする。
+例えば私が初めて書いたspec_helper.rbはこんな感じで、公式のtipsを反映したものとはいえ、デフォルト通りでは使っていない。
+require &#39;serverspec&#39; require &#39;yaml&#39; properties = YAML.load_file(&#39;properties.yml&#39;) host = ENV[&#39;TARGET_HOST&#39;] set_property properties[host] set :backend, :exec  実際のテスト用のタスクを生成するのもRakefileである。もちろんデフォルトのままでも使えるには使えるのだが、ちょっと凝ったことをしようと思うとRubyが読み書きできていなくては難しい。これは「Rubyにより実装されたインフラテストツール」と理解するより、「RSpecをインフラテストに使えるよう拡張したもの」と捉えた方が正しいように思う。
+自分は元々Rubyがある程度書けるものの、RSpecが理解しきれていないので、もう少し勉強しなくてはならなさそう。
+国産OSSであるアドバンテージ Serverspecの何より大きなアドバンテージはここではないのか。開発者も国内にいらっしゃるので、Rebuild.fmで直接声が聴けるし、解説本もいち早くO&amp;rsquo;Reilly Japanから発行されている。特にオライリー本発刊時のRebuild.fmは本自体の補完にもなる内容で、開発コンセプトなどがよく理解できるので聴いておきたい。
+Rebuild: 75: Book Driven Development (gosukenator)
+Serverspecposted with amazlet at 15.12.31宮下 剛輔 オライリージャパン 売り上げランキング: 213,793
+Amazon.co.jpで詳細を見る 結論として先述のようにRSpecの拡張的な位置付けであり、その他Infra as Code関連のツールと比べても実装が薄いことから、取り回しがしやすく、今後も継続して使いやすいのではないかと思う。Infratasterとも組み合わせられれば、よりテストの質は増しそう。</description>
     </item>
     
   </channel>
