@@ -2,28 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows 情報タスク管理 on the world as code</title>
-    <link>http://localhost:1313/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
+    <link>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
     <description>Recent content in Windows 情報タスク管理 on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sat, 04 Jul 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</title>
-      <link>http://localhost:1313/post/development-environment-for-windows/</link>
+      <link>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</link>
       <pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/development-environment-for-windows/</guid>
-      <description>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。
-Chocolatey Windowsでのパッケージ管理。不可欠かというとそうでもないとは思うのだが、アップデート含め一括管理が可能なので、精神衛生上良さそうだという意味で使ってみている。どうでもいいが名前がかわいい。
-インストール自体はPowershellからワンライナーを叩くだけなので難しくはないのだが、よくわからないエラーで止まることが多くて、現状使い切れてない。Proxyの設定はしたし、powershellの権限もRemoteSignedにしたのだけど、何がいけないのか。。。
- Unable to index into an object of type System.IO.FileInfo. 発生場所 C:\ProgramData\chocolatey\helpers\functions\Write-ChocolateyFailure.ps 1:24 文字:8 + throw &amp;lt;&amp;lt;&amp;lt;&amp;lt; &amp;quot;$failureMessage&amp;quot; + CategoryInfo : OperationStopped: (Unable to index...em.IO.FileI nfo.:String) []、RuntimeException + FullyQualifiedErrorId : Unable to index into an object of type System.IO .FileInfo. The install of clover was NOT successful. Error while running &#39;C:\ProgramData\chocolatey\lib\Clover\tools\chocolateyInstall.ps1&#39;. See log for details.  参考 windowsの開発環境は一瞬で整うwith chocolatey - Qiita
-コンソール cmdだと貧弱貧弱ゥ！なので、とか、bashコマンド試し打ちしたい場合が多いとか、そういう理由でコンソールは入れ直す。
-Gitを入れると自動的にGit bashが入るので、コマンド環境としてはこれを使っている。ターミナルアプリは最近ちょっと話題になっていたのでConEmuを入れてみた。もちろんChocolateyで。</description>
+      <guid>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</guid>
+      <description>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。 Chocolatey Windowsでのパッケージ管理。不可欠かというとそうでもないとは思うのだが、アップデート含め一括管理が可能なので、精神衛生上良さそうだという意味で使ってみている。どうでもいい</description>
     </item>
     
   </channel>

@@ -2,33 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on the world as code</title>
-    <link>http://localhost:1313/tags/blog/</link>
+    <link>https://chroju.github.io/tags/blog/</link>
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Thu, 18 Feb 2016 20:51:20 +0900</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ブログをHugoに移行した</title>
-      <link>http://localhost:1313/post/convert-to-hugo/</link>
+      <link>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
       <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
       
-      <guid>http://localhost:1313/post/convert-to-hugo/</guid>
-      <description>すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。
-随所で語られているように移行自体は大したものではなく、Markdownでいずれも互換性があるし、Front MatterもYAML形式であれば同一。Hugoレポジトリのcontent/post配下に記事ファイルを突っ込めば移行としてはおしまい。多少の差異については以下の記事が詳しい。
-OctopressからHugoへ移行した | SOTA
-ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名がYYYY-MM-DD-foobar.markdownの形だったのに対し、今回は記事のパーマリンクをconfig.tomlで以下のように設定してしまっている。
-[permalinks] post = &amp;quot;/blog/:year/:month/:day/:filename/&amp;quot;  従って/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事はfoobar.markdownに直したのだが、はてなブログ時代から移植した記事はYYYY-MM-DD-post.markdownという適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。
-記事を公開する流れは以下のようになる。
-# 記事作成 $ hugo new post/title.md $ vi content/post/title.md # ビルド $ hugo # commit $ cd public $ git add . $ git commit -m &amp;quot;new post&amp;quot; $ git push origin master  hugoコマンドでビルドするとpublicフォルダにサイト構成全体が吐かれるので、それをそのままgit pushして終わり。ただ実際にバージョン管理したいのはpublicというより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体でgit pushしてCIでビルドさせる形に変えたいと思う。
-HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog
-なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。
-（追記 2016-02-22 23:50） フィードのファイルパスがデフォルトだとindex.xmlになってしまうので、Octopressから変更がないようatom.xmlに直した。config.tomlで指定ができる。
-rssuri = &amp;quot;atom.xml&amp;quot;  参考：What is {{ .RSSlink }}, exactly?</description>
+      <guid>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
+      <description>すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行</description>
     </item>
     
   </channel>

@@ -2,28 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Book on the world as code</title>
-    <link>http://localhost:1313/categories/book/</link>
+    <link>https://chroju.github.io/categories/book/</link>
     <description>Recent content in Book on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Mon, 14 Dec 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/book/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/book/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>『Team Geek』読了</title>
-      <link>http://localhost:1313/post/review-team-geek/</link>
+      <link>https://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
       <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/review-team-geek/</guid>
-      <description>Team Geek ―Googleのギークたちはいかにしてチームを作るのかposted with amazlet at 15.12.14Brian W. Fitzpatrick Ben Collins-Sussman オライリージャパン 売り上げランキング: 18,890
-Amazon.co.jpで詳細を見る ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要はあって、何かやりたいことがあればいわゆる政治的な課題に悩まされることになったりもする。本を読むときはつい技術系のものや個人のハッカーマインドに関するものを読みがちだけど、歳も歳だし組織論もかじろうかということで読んだ。元々読むつもりはあったが、紀伊國屋書店新宿本店でオライリーカレンダーのプレゼントやってたので背中押された。
-とても元も子もないまとめ方をしてしまうと、KAIZEN Platform, Inc. のエンジニア行動指針がだいぶ本書に影響を受けたと思われるものになっていて、これに全社員がコミットできている状態というのは理想的なのだろうなと思ったりした。本書の内容にはとても賛同できるのだが、「組織論」である以上は自分だけが納得していても仕方なくて、社内でこの内容を文化として定着させなくてはならない。そこのハードルがなかなかに高い。
-本書でもそのあたりの話には「組織的操作の技法」として第5章をまるまる当てて触れられていて、例えば「道がないなら道を作る」＝草の根からツールの導入などを始めていく、「許可を求めるより寛容を求めるほうが簡単」、「安全なポジションまで昇進する」といったことが書かれている。結局はできることからやっていく、しかなくなってしまうのかもしれない。
-個人のマインドに関する話は大変参考になって、HRT（謙虚、尊敬、信頼）を軸として、「コードの価値を自分の価値と同一視するな」というあたりもだいぶクるものがあった。技術職としては技術的価値の優劣が極めて大きな価値をもっていて、ともすれば「モヒカン」だとか「マサカリ」といった言葉が表すような事態になりかねないのだが、チームが円滑に動くためにはそういったものは障壁となりかねない。技術的に未熟であるメンバーについても、謙虚に対応していくべきだし、また自分の技術は粛々と磨いていくことが必要なんだろうなと。
-こういう本は一人で読んでもやっぱり仕方がないところがあるので、チームで買ってシェアしたりもアリかもしれません。</description>
+      <guid>https://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
+      <description>Team Geek ―Googleのギークたちはいかにしてチームを作るのかposted with amazlet at 15.12.14Brian W. Fitzpatrick Ben Collins-Sussman オライリージャパン 売り上げランキング: 18,890 Amazon.co.jpで詳細を見る ひたすら技術ドリブンに仕事できるのであればそれはそれで良いような気はするが、現実にはちゃんとコミュニケーション取る必要</description>
     </item>
     
   </channel>

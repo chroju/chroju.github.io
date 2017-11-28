@@ -2,25 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Misc on the world as code</title>
-    <link>http://localhost:1313/categories/misc/</link>
+    <link>https://chroju.github.io/categories/misc/</link>
     <description>Recent content in Misc on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Thu, 05 Jun 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/misc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>chroju.netを開設してみた</title>
-      <link>http://localhost:1313/post/2014-06-05-post/</link>
+      <link>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</link>
       <pubDate>Thu, 05 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-06-05-post/</guid>
-      <description>前回の記事でchefでVPS構築したと書きましたが、そのサーバーに静的なHTML置いてドメインも取得してみました。
-まだ何もないですけど、ここをハブにしていろいろやってみたい。
-http://www.chroju.net/</description>
+      <guid>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</guid>
+      <description>前回の記事でchefでVPS構築したと書きましたが、そのサーバーに静的なHTML置いてドメインも取得してみました。 まだ何もないですけど、ここをハブにしていろいろやってみたい。 http://www.chroju.net/</description>
     </item>
     
   </channel>

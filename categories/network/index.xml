@@ -2,26 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Network on the world as code</title>
-    <link>http://localhost:1313/categories/network/</link>
+    <link>https://chroju.github.io/categories/network/</link>
     <description>Recent content in Network on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Mon, 01 Dec 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/network/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/network/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>『インフラ/ネットワークエンジニアのためのネットワーク技術&amp;amp;amp;設計入門』読了</title>
-      <link>http://localhost:1313/post/2014-12-01-post/</link>
+      <link>https://chroju.github.io/blog/2014/12/01/2014-12-01-post/</link>
       <pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-12-01-post/</guid>
-      <description>インフラ/ネットワークエンジニアのためのネットワーク技術&amp;設計入門posted with amazlet at 15.03.01みやた ひろし SBクリエイティブ 売り上げランキング: 8,231
-Amazon.co.jpで詳細を見る 去年の末ぐらいに話題になってた本だと思うけど、読み終えた。よかった。
-自分はネットワークスペシャリストを持っているんだけど、IPAの資格って基礎を満遍なくさらっておくには良いんだが、じゃあその知識の中で今現場で必要なのどれよ？ってのがなかなかわかりにくい面がある。この本はその「現場で実際どうネットワークは組まれるのか？」という部分に大きく焦点が当たっていて、知識を実践的なものに洗練できる。L3をコアスイッチにして構成していくのが主流ですみたいな話から、ケーブルにタグ付けてこういう情報書いておきましょうなんていう細かいことまで載っていて隙がない。
-こういうことができる／できないという知識があったところで、じゃあそれがネットワークを組む上でどう活きるかというのはまた別の話であって、そこを弁えてないと車輪の再発明に手を煩わせてしまったり、組んだ構成が主流から外れてたりということはままある。自分がまさにそういう状態で、ベストプラクティスをきちんと押さえていないことがずっと気がかりだったので、今ネットワークを触る上でベターなやり方、注意点を体系的に学べたのはとても良かった。知識レベルとしては応用情報技術者があれば読めるレベルだと思う。1〜2年目ぐらいでネットワークに携わり始めたぐらいの社員が読むには本当に優れた1冊です。</description>
+      <guid>https://chroju.github.io/blog/2014/12/01/2014-12-01-post/</guid>
+      <description>インフラ/ネットワークエンジニアのためのネットワーク技術&amp;設計入門posted with amazlet at 15.03.01みやた ひろし SBクリエイティブ 売り上げランキング: 8,231 Amazon.co.jpで詳細を見る 去年の末ぐらいに話題になってた本だと思うけど、読み終えた。よかった。 自分はネットワークスペシ</description>
     </item>
     
   </channel>

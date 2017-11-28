@@ -2,85 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>環境構築 on the world as code</title>
-    <link>http://localhost:1313/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link>
+    <link>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link>
     <description>Recent content in 環境構築 on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 02 Feb 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rails環境構築（4）nginx導入</title>
-      <link>http://localhost:1313/post/2014-02-02-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</link>
       <pubDate>Sun, 02 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-02-02-post/</guid>
-      <description>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。
-$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm  リポジトリが正しく登録されているか確認。
-$ yum list nginx --disablerepo=* --enablerepo=nginx （中略） Installed Packages nginx.x86_64 1.4.4-1.e16.ngx @nginx  yum install
-$ sudo yum install nginx  インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作っておくという作業を入れる。
-$ sudo mkdir /etc/nginx/sites-available $ sudo mkdir /etc/nginx/sites-enabled $ sudo rm -f conf.d/*.conf  nginx.confを開いて、sites-enabledを読み込ませるための設定を追加する。具体的には以下の1行。
-include /etc/nginx/sites-enabled/*;  以上、終わり。最後にサービスを立ち上げて、自動起動を設定。
-$ sudo service nginx start $ sudo chkconfig nginx on  </description>
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</guid>
+      <description>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm リポジトリが正しく登録されているか確認。 $ yum list nginx --disablerepo=* --enablerepo=nginx （中略） Installed Packages nginx.x86_64 1.4.4-1.e16.ngx @nginx yum install $ sudo yum install nginx インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作って</description>
     </item>
     
     <item>
       <title>Rails環境構築（3）PostgreSQLインストール</title>
-      <link>http://localhost:1313/post/2014-01-26-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</link>
       <pubDate>Sun, 26 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-01-26-post/</guid>
-      <description>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。
-$ yum list | grep postgresql （中略） postgresql.i686 8.4.18-1.el6_4 base postgresql.x86_64 8.4.18-1.el6_4 base postgresql-contrib.x86_64 8.4.18-1.el6_4 base postgresql-devel.i686 8.4.18-1.el6_4 base postgresql-devel.x86_64 8.4.18-1.el6_4 base postgresql-docs.x86_64 8.4.18-1.el6_4 base postgresql-ip4r.x86_64 1.05-1.el6 epel  うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4である。最新を入れればいいというわけでもないが、さすがにちょっと古いような気が。（ところでyumに入ってるパッケージの調べ方、これであってんのかな？）
-てわけで新しいバージョンをWebから持ってくる。PostgreSQL RPM Repository (with Yum)にいろいろあるので適切なリンクURLをコピー。1コ前のバージョンでPostgresql 9.2にしときましょか。自分のOSがなんだかわかんなくなったらunameコマンドで確認。
-$ uname -a Linux xxx 2.6.32-358.23.2.el6.x86_64 #1 SMP Wed Oct 16 18:37:12 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux  CentOS 6 x86_64であることがわかったので、wgetでダウンロード。
-$ wget -P /tmp http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm  続いてRPMにインストール。
-$ sudo rpm -ih /tmp/pgdg-centos92-9.</description>
+      <guid>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</guid>
+      <description>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。 $ yum list | grep postgresql （中略） postgresql.i686 8.4.18-1.el6_4 base postgresql.x86_64 8.4.18-1.el6_4 base postgresql-contrib.x86_64 8.4.18-1.el6_4 base postgresql-devel.i686 8.4.18-1.el6_4 base postgresql-devel.x86_64 8.4.18-1.el6_4 base postgresql-docs.x86_64 8.4.18-1.el6_4 base postgresql-ip4r.x86_64 1.05-1.el6 epel うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4</description>
     </item>
     
     <item>
       <title>Rails環境構築（2）Rubyのインストール &#43; α</title>
-      <link>http://localhost:1313/post/2014-01-23-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</link>
       <pubDate>Thu, 23 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-01-23-post/</guid>
-      <description>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。
-まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、postgresqlなんかもまぁ必要だろう。gccとかは要る……のか？
-$ sudo yum -y install gcc gcc-c++ make autoconf openssl-devel readline-devel libyaml-devel postgresql9.1-devel wget git  続いて意気揚々とRubyを入れたいとこだが、その前にrbenvを入れる。以前にエントリーで書いたこともあったけど、rbenvを使ってRubyをインストールすると、複数のバージョンのRubyを切り替えて使えるようになるので大変便利。インストールもwgetでダウンロードしてビルドしてなんてやり方をせず、rbenv installコマンドで簡単にできるようになる。
-$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv $ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build  rbenv自体のインストールもgithubからのクローンで済むのでスマートですね。ついでにもう1個git cloneしているのはruby-buildって奴で、これがないとrbenv install（rbenv使ってRubyをインストールするためのコマンド）が使えないらしい。で、入れたらPATHを通します。
-$ echo &#39;export PATH=&amp;quot;$HOME/.rbenv/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile $ echo &#39;eval &amp;quot;$(rbenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile  PATHを通したらbash_profileを再読み込みして、それからtype rbenvコマンドを打ってインストールの正常完了を確認する。ちなみに自分は最初、bash_profileの再読み込み忘れて慌てました。
-$ source ~/.bash_profile $ type rbenv # rbenv is a functionと表示されればOK  ここまでの手順はGitHubでrbenvのREADMEにも書かれてるから一読を推奨。
-rbenvが入ったので、早速Rubyをインストール。
-$ rbenv install --list #インストール可能なバージョンが一覧表示される $ rbenv install 1.</description>
+      <guid>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</guid>
+      <description>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。 まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだけなので、どこまで必要なのかはよくわかってない。wgetとgitが必須であるのは言わずもがなだし、openssl-devel、make、po</description>
     </item>
     
     <item>
       <title>Ruby on Rails環境構築はじめます</title>
-      <link>http://localhost:1313/post/2014-01-18-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</link>
       <pubDate>Sat, 18 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-01-18-post/</guid>
-      <description>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。
-Ruby on Rails環境構築ガイドposted with amazlet at 15.03.01黒田 努 インプレスジャパン 売り上げランキング: 44,343
-Amazon.co.jpで詳細を見る これまで環境としてはMax OS X 10.8にVMware FusionでCentOS浮かべて、その上でコード書いてWEBlick立ち上げてってやってたんだけど、考えてみればWEBlickでやるなら手元のMacで良かったわけで。いちいちコード書くのにSSHつなぐとかまぁ無駄なわけで。ということで、環境は次のように変えていく。
- 開発環境：Mac OS X 10.8（物理）
- Ruby 2.0.0
- Rails 4.0
- MySQL
- ステージング：CentOS 6.4（Virtual Box）
- Ruby 2.0.0
- Rails 4.0
- MySQL
- nginx
- unicorn
- vagrant + chef soloで構築予定
- 本番環境：CentOS 6.4（VPS）
- 構成はステージングと同様
-  Apacheは仕事でも使ったことがあるんで、流行りに乗ってnginx + unicornでやってみます。んでさらに流行りに乗ってvagrantとchef solo使おうかと。vagrantはちなみにもう試してみたけど、さっくり仮想マシンが立ってしまってビビる。あとでブログにまとめる予定。ただしchefはちょっとしっかりやんないと使えなさそう。
-もともと自分はインフラをメインで飯食ってるんで、こころへんはあまり迷わずにいきたいところ。</description>
+      <guid>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</guid>
+      <description>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。 Ruby on Rails環境構築ガイドposted with amazlet at 15.03.01黒田 努 インプレスジャパン 売り上げランキング: 44,343 Amazo</description>
     </item>
     
   </channel>

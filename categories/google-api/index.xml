@@ -2,26 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Google Api on the world as code</title>
-    <link>http://localhost:1313/categories/google-api/</link>
+    <link>https://chroju.github.io/categories/google-api/</link>
     <description>Recent content in Google Api on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 03 May 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/google-api/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/google-api/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</title>
-      <link>http://localhost:1313/post/google-spread-sheet-update-via-ruby/</link>
+      <link>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
       <pubDate>Sun, 03 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/google-spread-sheet-update-via-ruby/</guid>
-      <description>  つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。
-用途としては非常に個人的なもので、各種オンラインバンクの残高をスクレイピングしてハッシュで返してくれるスクリプトをいくつか作ってあったので、その戻り値を使ってオートで家計簿作れたらいいなーという思いによるものです。ハッシュのキーをそのままスプレッドシート内の項目名として使っているので、シンボルではなく文字列をキーとして使ってしまっているのがあまりよろしくないのかなぁとは思うのだが、いつか改善するってーことで、とりあえず動くものを作ることを優先させた。んで、これって結構汎用的に使えそうなスクリプトかもなと思って公開した次第。
-Googleスプレッドシートをいじるのにはgoogle-drive-rubyというGemを使ってます。Githubはここ。def initialize内の処理は、このGemの初期設定によるものなので、Gemの方のReadme読んでもらえればよいかと。単純な話、GoogleのOAuth API使っているだけの話です。ただ、このコードだと叩くたびにブラウザからAPI使用許可を与えてやって、success codeをコピーしてコマンドラインで入力してやらなくちゃならないっていう手間があって、そこまで省く方法なにかありそうだけどまだ調べてない。あと気になっている点としては、このGemでセルの値を取ると、表示値しか取れないこと。式を入れているセルについては、式を取るか表示値を取るか選べるといいなぁと思ったんだけど、そこまではできないらしい。しかしまぁ、とにかくGoogleスプレッドシートという、APIで叩けるクラウドの表計算ソフトがあるというのは本当に便利なことですね、って感じ。
-参考  RubyからGoogle SpreadSheet をいじるメモ - Qiita Google DriveのスプレッドシートにRubyでアクセスする方法 - Qiita  </description>
+      <guid>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
+      <description>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。 用途としては非常に個人的な</description>
     </item>
     
   </channel>

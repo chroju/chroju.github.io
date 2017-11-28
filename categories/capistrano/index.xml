@@ -2,76 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Capistrano on the world as code</title>
-    <link>http://localhost:1313/categories/capistrano/</link>
+    <link>https://chroju.github.io/categories/capistrano/</link>
     <description>Recent content in Capistrano on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sat, 12 Apr 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/capistrano/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/capistrano/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</title>
-      <link>http://localhost:1313/post/2014-04-12-post/</link>
+      <link>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</link>
       <pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-04-12-post/</guid>
-      <description>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでにこちらのエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。
-今回作成したファイル 以下4ファイルを作成した。
- Capfile config/deploy.rb config/deploy/staging.rb lib/capistrano/tasks/unicorn.cap  基本的にCapistranoを使う場合「必須」なのは上2つのファイル。deploy/hoge.rbも確実に必要にはなるが、デプロイ先の環境が本番なのかステージングなのかでproduction.rbとstaging.rbを使い分けることになる。もちろん、ステージング環境を用意していない場合はstaging.rbは不要。また4つ目のファイルだが、自分の場合はunicornをデプロイ先で使っているので、デプロイ後にunicornを再起動する目的で独自タスクを作成している。説明が遅れたが、今回デプロイ先となる環境は大雑把に以下の通り。
- Vagrant 1.4.3 CentOS 6.4 Postgresql 9.1 Ruby 1.9.3(rbenv) Nginx + unicorn 位置付けはステージング環境  Capfile  ここはだいたい環境を問わず同じになってくる箇所。まずcapistrano/setupとcapistrano/deployはrequireが必須。RailsをCapistranoで扱う場合は、capistrano/bundlerからcapistrano/rails/assetsまでも必須となる。rbenvを使っている場合はcapistrano/rbenvが必要。rbenvをどこにインストールしたのかにより、set :rbenv_typeを指定する。あとはデプロイするアプリケーションで使うRubyのバージョンも指定してやる。rvmを使う場合も似たようなcapistrano/rvmを使うみたいだが、そちらはよくわからんので割愛。
-で、ここまでがrequireということなので、デプロイ元サーバーにGemfile書いてインストールしておくことを忘れずに。
-group :development do gem &#39;capistrano&#39;, &#39;~&amp;gt; 3.1.0&#39;, :require =&amp;gt; false gem &#39;capistrano-rails&#39;, &#39;~&amp;gt; 1.0.0&#39;, :require =&amp;gt; false gem &#39;capistrano-rbenv&#39;, &#39;~&amp;gt; 2.0&#39;, :require =&amp;gt; false gem &#39;capistrano-bundler&#39;, &#39;~&amp;gt; 1.1.2&#39;, :require =&amp;gt; false end  最終行は独自カスタムタスクを読み込むための行。デフォルトで入っているのでそのままにしておけばよい。先のunicorn.capのように、何か独自タスクを作った場合はこのパスに入れれば読み込むよーということでもある。
-なお、以前書いたエントリーではcapistrano3/unicornもrequireしていたのだが、これは撤回した。詳細はunicorn.capについて説明するときに後述。
-staging.rb  ステージング環境、というかデプロイ先環境の設定を書く。vagrantを使う場合はだいたいこれと同じように書いておけば通るんじゃないかと思う。Vagrantはデフォルトではvagrantユーザーによるsshが可能になっているので、それをそのまま使わせてもらっている。何か他のユーザーで入りたい場合などは頑張るしかない。
-一点だけ注意すべきは、RAILS_ENVがstagingに設定されるということ。Capistrano3ではcap installを叩くとデフォルトでstaging.rbとproduction.rbが作られ、RAILS_ENVもこのファイル名に倣うことになるのだが、Railsの動作環境は通常test, development, productionの3種類であり、stagingは存在していない。従ってこのままデプロイを始めてもうまくはいかない。面倒であればstaging.</description>
+      <guid>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</guid>
+      <description>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Capistranoの基本とかはすでにこちらのエントリーで書いたので、今回は各設定ファイルの書き方とか、その他ハマったポイントを中心に。 今回作成し</description>
     </item>
     
     <item>
       <title>Capistrano3がわからんので今一度イチから考えなおしてみる</title>
-      <link>http://localhost:1313/post/2014-04-06-post/</link>
+      <link>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</link>
       <pubDate>Sun, 06 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-04-06-post/</guid>
-      <description>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。
-Capistranoは何をしてくれるのか そもそもCapistranoとは何をしてくれるツールなのか？
-Capistrano3のデプロイフレームワークの使い方 - Qiita
-Capistranoは2まではRailsのデプロイツールだったけど、3は汎用的なデプロイツールに変わっている。したがってデフォルトの状態ではRails用のデプロイタスクは特に含まれていない。このあたりが上の方のリンク先で語られている内容になる。
-ではデフォルトでのデプロイタスクは何をするのかと言えば、およそサーバーへのデプロイとして一般的に行われるようなものが組み込まれている。capistrano/lib/capistrano/tasksあたりを探るとデフォルトタスクがよくわかる。
- releases、sharedなどディレクトリの作成 レポジトリからgit clone linked_files、linked_dirsの存在確認とシンボリックリンク作成 currentディレクトリへのシンボリックリンク作成 最古世代の削除、クリーンナップ  ざっくり見てしまうと、単純にサーバーへファイルを上げて自動的に世代管理をさせるだけであればこれだけでもなんとかなりそうなところではある。逆にこれらが煩わしいのであれば、デフォルトタスクを無効化して使う手もある。デフォルトタスクの内容がよくわからないのであれば、一旦無効化してすべて自分でタスクを書くというのも手だと思う。
-Railsをデプロイする場合はこれだけでは足りないので、capistrano/railsやcapistrano/bundleを追加で読み込むことになる。
-Capistranoのディレクトリ構成 Capistranoでデフォルトのデプロイを行った時、デプロイ先サーバーに作成されるディレクトリについてもよくわかってないのでまとめておく。deploy.rbのdeploy_toで指定したディレクトリ内に、次の3つのディレクトリが作られる。
- releases : デプロイした内容を世代管理する shared : bundleとかdatabase.ymlとかGitで管理してないファイル置き場（多分） current : releasesの最新世代とsharedのシンボリックリンクが置かれる  基本的に「デプロイ」される先はreleasesだ。releases配下にはデプロイ時のタイムスタンプから生成された名前のフォルダが作られ、その中にごっそりデプロイしたファイルが入っている。タイムスタンプが付くということは当然世代管理されているわけだが、保持される世代数はdeploy.rbのset :keep_releasesで好きに指定できる。で、最新世代についてはcurrent配下にシンボリックリンクが自動的に貼られる。
-sharedは正直よくわからない。デプロイのたびに更新するわけではない、すなわちGitで管理をしていないファイルやディレクトリを置いておくみたいなのだが、ではどうやって配置すれば良いのか？がわからない。配置したファイルのうち、必要なものについてはlinked_dirsとlinked_filesで指定すればcurrent配下にこれもまたシンボリックリンクが貼られる。しかし、どうやって配置すれば良いのかわからない。
-関連：[自分用メモ]Capistrano3のlinked_filesって自分でuploadしなきゃダメですか？ - Qiita
-で、これを書いていて気付いたのだが、アプリの中身がcurrent配下に展開されるということは、ウェブサーバーの設定もdeploy_toではなくてcurrentに飛ばすようにしておかないといけないわけだ。俺だけかも知れんが、案外罠ではないかという気がする。
-capistrano/rails 取りあえずsharedの話はほっといて、Railsをデプロイする話に戻る。冒頭でデフォルトタスクにはRailsに対するものは何もないと書いたが、それではRails用のデプロイタスクはどこで生成されているのか？ 答えから書けば、capistrano-railsを読み込むことによって初めて生成される。
-Capistrano3におけるRailsのデプロイタスクの内部実装 - Qiita いわく、追加されるタスクは主に3つ。
- assets compile(deploy:compile_assets) assetsのタイムスタンプ更新(deploy:normalize_assets) db:migrate(deploy:migrate)  逆に言えば、ここで追加される以外のタスクはデフォルトでは行われないということになる。その点を配慮せずにただググって適当なdeploy.rbをコピーしたりしただけでは、思ったとおりのデプロイは出来ない。
-一例として自分がハマったのが、db:createは行われないということ。schema.rbを使って初回デプロイのときに上手いこと云々なんてことは一切してくれないので、このあたりは自分で書くか、サーバーを作ったときに予めDBをこしらえておく必要がある。
-capistrano/bundle もうひとつ、RailsをCapistranoでデプロイする場合に必要なのがcapistrano/bundler。Rails使っててGemfileがないなんてことはないだろうし、というかcapistrano/railsの中で明示的にrequireされている。何をやっているのかと言えば、簡単な話しである。
- before &#39;deploy:updated&#39;, &#39;bundler:install&#39;  デフォルトではshared配下にbundleディレクトリを作ってbundle installをかけてくれる。パスについてはset :bundle_pathオプションで自由に指定ができる。
-capistrano/rbenv あとよく使われるものとして、capistrano/rbenvがある。デプロイ先のサーバーで、Rubyをrbenvを使って入れてる場合には必須になるもの。中身はよく知らないが、そこまで気にしなくても良いのではないかという感覚がある。入れたらdeploy.rbにset :rbenv_ruby_versionで使うRubyのバージョンを指定すればOK。
-同じ類のものとして、capistrano/rvmももちろんあります。
-ソースにあたることの必要性 以上がCapistrano3でRailsをデプロイする場合の主なデフォルトタスクの内容になる。繰り返しになるが、これ以外に何をやりたいのならタスクは書く必要がある。よく言われるのがデプロイ後のウェブサーバーの再起動で、unicornを再起動するタスクを追加している例はよく見かける。ただ、これもcapistrano3-unicornという便利なものがすでに作られていたりはする。</description>
+      <guid>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</guid>
+      <description>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、というほどではないのだが、なんというか、雲を掴んでいるような状態ではある。一旦Capistranoについて整理してみるべきなんだろう。 Cap</description>
     </item>
     
     <item>
       <title>Rails環境構築（5）Capistranoによるデプロイ ※未完</title>
-      <link>http://localhost:1313/post/2014-02-20-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</link>
       <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-02-20-post/</guid>
-      <description>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてRailsのデプロイといえばCapistranoだ！と、いきたいところだったのだが。
-Capistrano 3.0を試しているのだが、どうにもハマっている。ハマっているというのはのめり込んで楽しくなっちゃった的な意味ではなく、上手くいかずにっちもさっちもいかない的な意味である。とりあえず頭からやり方おさらいしつつ、ハマった箇所をまとめてみたい。
-3.0についてはまだ登場してから時間も経ってないためか、日本語で有益な記事は少ない。が、まずは本家をよく読むこと推奨。一応これに則れば出来るようになっているはずではある。他に個人の方がまとめたハウツーで参考になったのは以下の記事。すでに2.0を使っている人ならよりわかりやすいのだろうが、これがCapistrano初体験となる自分にはちょっとわかりにくかったりも、した。特に3番目の記事は完全に2.0からの移行組に向けて書かれた内容。
- capistrano 3.x系を使ってrailsをデプロイ | iii ThreeTreesLight 入門 Capistrano 3 ~ 全ての手作業を生まれる前に消し去りたい | GREE Engineers&amp;rsquo; Blog Capistrano 3への手引き - 今日のごはんは素麺です capistranoでステージングとか本番環境とか使い分ける - リア充爆発日記 Capistrano3 で Vagrant で構築したVMにデプロイする - kakakakakku blog  Capistranoとは？ そもそも論。開発完了したアプリをサーバーにデプロイするときの手順をRubyで書いて自動化しておくためのもの。デプロイ先はステージング環境とか本番環境とか何種類か存在する場合もあるが、環境ごとにデプロイ手順は別々に設定したりできる。なお、Rails用のツールだと思われがちだが、3.0からRails以外でも使える汎用的なツールになったらしい。自分の場合はRailsで使っているのであしからず。あと、SCMはGitを使っている必要がある。
-インストール インストールはGemで行う。デプロイ予定のRailsアプリで、Gemfileに以下追記してbundle install。
-group :development do gem &#39;capistrano&#39;, &#39;~&amp;gt; 3.1.0&#39; gem &#39;capistrano-rails&#39;, &#39;~&amp;gt; 1.0.0&#39; gem &#39;capistrano-bundler&#39;, &#39;~&amp;gt; 1.1.2&#39; end  capistranoが本体。先の本家によれば、Railsで使う場合はcapistrano-railsも必要になるとのこと。他にもいろいろ便利なプラギンがあったりするっぽいけど、わかんないので今はここまで。
-初期作業 $ bundle exec cap install  初期ファイルの生成。手元の本にはcapify .コマンドだと載っていたのだが、capistrano 3.0から変わったらしい。ほあ。これによりCapfileと、config配下にdeploy.rb、さらにconfig/deploy配下にproduction.rbとstaging.rbが作成される。それぞれの役割は次の通り。
- Capfile : 他のGem（capistrano-railsとか）の読み込みなどを記述 config/deploy.</description>
+      <guid>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</guid>
+      <description>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば終わりなのだが、いずれもアプリ側のGemfileを使ってローカルにインストールするつもりなので、まずはアプリのデプロイが必要となる。そしてR</description>
     </item>
     
   </channel>

@@ -3,850 +3,850 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/post/test/</loc>
+    <loc>https://chroju.github.io/blog/2017/11/20/test/</loc>
     <lastmod>2017-11-20T21:51:51+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hello_alexa/</loc>
+    <loc>https://chroju.github.io/blog/2017/11/18/hello_alexa/</loc>
     <lastmod>2017-11-18T23:23:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/i_love_scrapbox/</loc>
+    <loc>https://chroju.github.io/blog/2017/10/08/i_love_scrapbox/</loc>
     <lastmod>2017-10-08T22:31:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/migrate_coreos_to_ecs/</loc>
+    <loc>https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/</loc>
     <lastmod>2017-09-26T08:36:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/aws_sysops_administrator/</loc>
+    <loc>https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/</loc>
     <lastmod>2017-08-26T12:04:57+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/builderson_2017/</loc>
+    <loc>https://chroju.github.io/blog/2017/08/06/builderson_2017/</loc>
     <lastmod>2017-08-06T21:25:43+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/very_exhausted_because_of_toil/</loc>
+    <loc>https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/</loc>
     <lastmod>2017-06-12T23:35:55+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/infrastructure_as_code_book/</loc>
+    <loc>https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/</loc>
     <lastmod>2017-05-05T17:53:22+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/vimperator_to_vivaldi/</loc>
+    <loc>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</loc>
     <lastmod>2017-02-15T23:30:43+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/try_on_serverless_architecture/</loc>
+    <loc>https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/</loc>
     <lastmod>2017-02-07T15:37:51+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/barocco_review/</loc>
+    <loc>https://chroju.github.io/blog/2017/02/05/barocco_review/</loc>
     <lastmod>2017-02-05T23:34:24+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/looking_back_2016/</loc>
+    <loc>https://chroju.github.io/blog/2016/12/28/looking_back_2016/</loc>
     <lastmod>2016-12-28T18:05:19+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/esa_io_personal_use/</loc>
+    <loc>https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/</loc>
     <lastmod>2016-12-27T00:46:39+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/engineering_problem_solving/</loc>
+    <loc>https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/</loc>
     <lastmod>2016-12-17T12:43:17+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/what_is_ops/</loc>
+    <loc>https://chroju.github.io/blog/2016/10/25/what_is_ops/</loc>
     <lastmod>2016-10-25T00:20:02+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/serverless-conf-tokyo/</loc>
+    <loc>https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</loc>
     <lastmod>2016-10-03T23:52:14+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/soft_skills_and_our_productivity/</loc>
+    <loc>https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</loc>
     <lastmod>2016-08-01T22:30:41+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/yapc8oji_2016/</loc>
+    <loc>https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</loc>
     <lastmod>2016-07-02T22:11:59+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/aws_summit_ansible_meetup_2016/</loc>
+    <loc>https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</loc>
     <lastmod>2016-06-05T23:46:12+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/pbtech_infra_engineers/</loc>
+    <loc>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</loc>
     <lastmod>2016-05-14T21:58:32+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/qpstudy_alert_call/</loc>
+    <loc>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</loc>
     <lastmod>2016-04-24T22:28:32+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/entry-python/</loc>
+    <loc>https://chroju.github.io/blog/2016/03/28/entry-python/</loc>
     <lastmod>2016-03-28T22:29:39+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/personal-knowledge-base-2/</loc>
+    <loc>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</loc>
     <lastmod>2016-03-17T22:09:45+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://chroju.github.io/about/</loc>
     <lastmod>2016-03-13T11:45:24+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/jaws_days_2016/</loc>
+    <loc>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</loc>
     <lastmod>2016-03-13T11:03:24+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/convert-to-hugo/</loc>
+    <loc>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</loc>
     <lastmod>2016-02-18T20:51:20+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/ops-jaws-3/</loc>
+    <loc>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</loc>
     <lastmod>2016-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/personal-knowledge-base/</loc>
+    <loc>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</loc>
     <lastmod>2016-01-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/node-js-elementary-school-1/</loc>
+    <loc>https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</loc>
     <lastmod>2016-01-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/manifesto-2016/</loc>
+    <loc>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</loc>
     <lastmod>2016-01-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/looking-back-2015/</loc>
+    <loc>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</loc>
     <lastmod>2015-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/serverspec-first-impression/</loc>
+    <loc>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</loc>
     <lastmod>2015-12-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/review-team-geek/</loc>
+    <loc>https://chroju.github.io/blog/2015/12/14/review-team-geek/</loc>
     <lastmod>2015-12-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/docker-first-impression/</loc>
+    <loc>https://chroju.github.io/blog/2015/12/04/docker-first-impression/</loc>
     <lastmod>2015-12-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/ansible-serverspec-circle-ci/</loc>
+    <loc>https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</loc>
     <lastmod>2015-11-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/osc-2015-tokyo-fall/</loc>
+    <loc>https://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</loc>
     <lastmod>2015-10-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/eudaemonics-of-infrastructure-engineer/</loc>
+    <loc>https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</loc>
     <lastmod>2015-10-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/individual-github-flow/</loc>
+    <loc>https://chroju.github.io/blog/2015/10/04/individual-github-flow/</loc>
     <lastmod>2015-10-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/ansible-in-nearly-best-practice/</loc>
+    <loc>https://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</loc>
     <lastmod>2015-09-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hackers-mind-and-their-essay/</loc>
+    <loc>https://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</loc>
     <lastmod>2015-08-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/qiita-commoditization-of-engineer/</loc>
+    <loc>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</loc>
     <lastmod>2015-08-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/exhibi-update/</loc>
+    <loc>https://chroju.github.io/blog/2015/08/08/exhibi-update/</loc>
     <lastmod>2015-08-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/start-qiita/</loc>
+    <loc>https://chroju.github.io/blog/2015/07/25/start-qiita/</loc>
     <lastmod>2015-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/ansible-digitalocean-vps-dev-env/</loc>
+    <loc>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/encryption-hash-at-first/</loc>
+    <loc>https://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/development-environment-for-windows/</loc>
+    <loc>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</loc>
     <lastmod>2015-07-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/how-about-your-troubleshooting/</loc>
+    <loc>https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/</loc>
     <lastmod>2015-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/one-month-from-job-changing/</loc>
+    <loc>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</loc>
     <lastmod>2015-06-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hika-labo-ansible/</loc>
+    <loc>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</loc>
     <lastmod>2015-06-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/i-am-neet-now/</loc>
+    <loc>https://chroju.github.io/blog/2015/05/16/i-am-neet-now/</loc>
     <lastmod>2015-05-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/jaws-ug-for-beginners-at-first/</loc>
+    <loc>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</loc>
     <lastmod>2015-05-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/google-spread-sheet-update-via-ruby/</loc>
+    <loc>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</loc>
     <lastmod>2015-05-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/gtd-2015-workflowy/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</loc>
     <lastmod>2015-04-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/ruby-study-mix-in/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</loc>
     <lastmod>2015-04-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-dir/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</loc>
     <lastmod>2015-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-file-i-o/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</loc>
     <lastmod>2015-04-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-time/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</loc>
     <lastmod>2015-04-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-hash/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</loc>
     <lastmod>2015-04-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/the-world-as-code/</loc>
+    <loc>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</loc>
     <lastmod>2015-04-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/jaws-days-2015/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/22/jaws-days-2015/</loc>
     <lastmod>2015-03-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-array/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</loc>
     <lastmod>2015-03-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-enumerable-comparable/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</loc>
     <lastmod>2015-03-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-numeric/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</loc>
     <lastmod>2015-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-string/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</loc>
     <lastmod>2015-03-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/study-ruby-grammer/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</loc>
     <lastmod>2015-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/book-review-time-management-for-engineer/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</loc>
     <lastmod>2015-03-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/move-from-hatena-blog-to-octopress/</loc>
+    <loc>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</loc>
     <lastmod>2015-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/developer-summit-2015/</loc>
+    <loc>https://chroju.github.io/blog/2015/02/21/developer-summit-2015/</loc>
     <lastmod>2015-02-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-12-29-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/12/29/2014-12-29-post/</loc>
     <lastmod>2014-12-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-12-01-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/12/01/2014-12-01-post/</loc>
     <lastmod>2014-12-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-11-10-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/11/10/2014-11-10-post/</loc>
     <lastmod>2014-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-11-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/11/02/2014-11-02-post/</loc>
     <lastmod>2014-11-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-10-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/10/02/2014-10-02-post/</loc>
     <lastmod>2014-10-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-09-28-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/09/28/2014-09-28-post/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-09-23-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/09/23/2014-09-23-post/</loc>
     <lastmod>2014-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-09-22-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/09/22/2014-09-22-post/</loc>
     <lastmod>2014-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-09-07-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/09/07/2014-09-07-post/</loc>
     <lastmod>2014-09-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-08-24-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</loc>
     <lastmod>2014-08-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-08-10-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/08/10/2014-08-10-post/</loc>
     <lastmod>2014-08-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-07-20-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</loc>
     <lastmod>2014-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-06-05-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</loc>
     <lastmod>2014-06-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-05-30-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/05/30/2014-05-30-post/</loc>
     <lastmod>2014-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-05-06-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</loc>
     <lastmod>2014-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-05-06-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/05/06/2014-05-06-post/</loc>
     <lastmod>2014-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-05-01-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/05/01/2014-05-01-post/</loc>
     <lastmod>2014-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-04-12-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</loc>
     <lastmod>2014-04-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-04-06-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</loc>
     <lastmod>2014-04-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-02-20-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</loc>
     <lastmod>2014-02-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-02-09-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</loc>
     <lastmod>2014-02-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-02-02-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</loc>
     <lastmod>2014-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-02-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</loc>
     <lastmod>2014-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-26-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</loc>
     <lastmod>2014-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-23-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</loc>
     <lastmod>2014-01-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-19-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</loc>
     <lastmod>2014-01-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-18-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</loc>
     <lastmod>2014-01-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-14-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/14/2014-01-14-post/</loc>
     <lastmod>2014-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-09-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/09/2014-01-09-post/</loc>
     <lastmod>2014-01-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2014-01-05-post/</loc>
+    <loc>https://chroju.github.io/blog/2014/01/05/2014-01-05-post/</loc>
     <lastmod>2014-01-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-12-28-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/12/28/2013-12-28-post/</loc>
     <lastmod>2013-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-12-22-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/12/22/2013-12-22-post/</loc>
     <lastmod>2013-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-12-08-02-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</loc>
     <lastmod>2013-12-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-12-08-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/12/08/2013-12-08-post/</loc>
     <lastmod>2013-12-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-11-10-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/11/10/2013-11-10-post/</loc>
     <lastmod>2013-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-11-04-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</loc>
     <lastmod>2013-11-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-10-20-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</loc>
     <lastmod>2013-10-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-10-14-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/10/14/2013-10-14-post/</loc>
     <lastmod>2013-10-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-10-06-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/10/06/2013-10-06-post/</loc>
     <lastmod>2013-10-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-09-21-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/09/21/2013-09-21-post/</loc>
     <lastmod>2013-09-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-09-16-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/09/16/2013-09-16-post/</loc>
     <lastmod>2013-09-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-09-04-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/09/04/2013-09-04-post/</loc>
     <lastmod>2013-09-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-08-03-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</loc>
     <lastmod>2013-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-07-25-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/07/25/2013-07-25-post/</loc>
     <lastmod>2013-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-07-23-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/07/23/2013-07-23-post/</loc>
     <lastmod>2013-07-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-07-21-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/07/21/2013-07-21-post/</loc>
     <lastmod>2013-07-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2013-07-20-post/</loc>
+    <loc>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</loc>
     <lastmod>2013-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://chroju.github.io/tags/</loc>
     <lastmod>2017-11-20T21:51:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/2016-05-14-pepabo/</loc>
+    <loc>https://chroju.github.io/blog/1/01/01/2016-05-14-pepabo/</loc>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://chroju.github.io/about/</loc>
     <lastmod>2016-03-13T11:45:24+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ansible/</loc>
+    <loc>https://chroju.github.io/categories/ansible/</loc>
     <lastmod>2015-09-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ansible-event/</loc>
+    <loc>https://chroju.github.io/categories/ansible-event/</loc>
     <lastmod>2015-06-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ansible-serverspec-docker-circle-ci/</loc>
+    <loc>https://chroju.github.io/categories/ansible-serverspec-docker-circle-ci/</loc>
     <lastmod>2015-11-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ansible-vps-linux/</loc>
+    <loc>https://chroju.github.io/categories/ansible-vps-linux/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/aws/</loc>
+    <loc>https://chroju.github.io/categories/aws/</loc>
     <lastmod>2015-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/blog/</loc>
-    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/categories/blog/</loc>
+    <loc>https://chroju.github.io/categories/blog/</loc>
     <lastmod>2015-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/book/</loc>
+    <loc>https://chroju.github.io/tags/blog/</loc>
+    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/book/</loc>
     <lastmod>2015-12-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/capistrano/</loc>
+    <loc>https://chroju.github.io/categories/capistrano/</loc>
     <lastmod>2014-04-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://chroju.github.io/categories/</loc>
     <lastmod>2015-09-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/chef-solo/</loc>
+    <loc>https://chroju.github.io/categories/chef-solo/</loc>
     <lastmod>2014-05-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/docker/</loc>
+    <loc>https://chroju.github.io/categories/docker/</loc>
     <lastmod>2015-12-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/event/</loc>
+    <loc>https://chroju.github.io/categories/event/</loc>
     <lastmod>2015-10-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/event-aws/</loc>
+    <loc>https://chroju.github.io/categories/event-aws/</loc>
     <lastmod>2016-01-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/event-nodejs/</loc>
+    <loc>https://chroju.github.io/categories/event-nodejs/</loc>
     <lastmod>2016-01-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/event-ops/</loc>
+    <loc>https://chroju.github.io/categories/event-ops/</loc>
     <lastmod>2015-07-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/exhibi/</loc>
+    <loc>https://chroju.github.io/categories/exhibi/</loc>
     <lastmod>2015-08-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</loc>
+    <loc>https://chroju.github.io/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</loc>
     <lastmod>2015-10-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/google-api/</loc>
+    <loc>https://chroju.github.io/categories/google-api/</loc>
     <lastmod>2015-05-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/lifehack/</loc>
+    <loc>https://chroju.github.io/categories/lifehack/</loc>
     <lastmod>2016-01-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/linux/</loc>
+    <loc>https://chroju.github.io/categories/linux/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/misc/</loc>
+    <loc>https://chroju.github.io/categories/misc/</loc>
     <lastmod>2014-06-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/network/</loc>
+    <loc>https://chroju.github.io/categories/network/</loc>
     <lastmod>2014-12-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/octopress/</loc>
+    <loc>https://chroju.github.io/categories/octopress/</loc>
     <lastmod>2015-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/poem/</loc>
+    <loc>https://chroju.github.io/categories/poem/</loc>
     <lastmod>2016-01-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://chroju.github.io/post/</loc>
     <lastmod>2017-11-20T21:51:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ruby/</loc>
+    <loc>https://chroju.github.io/categories/ruby/</loc>
     <lastmod>2015-05-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/ruby-on-rails/</loc>
+    <loc>https://chroju.github.io/categories/ruby-on-rails/</loc>
     <lastmod>2015-08-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/security-summary/</loc>
+    <loc>https://chroju.github.io/categories/security-summary/</loc>
     <lastmod>2015-07-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/serverspec/</loc>
+    <loc>https://chroju.github.io/categories/serverspec/</loc>
     <lastmod>2015-12-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://chroju.github.io/tags/</loc>
     <lastmod>2017-11-20T21:51:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/terminal/</loc>
+    <loc>https://chroju.github.io/categories/terminal/</loc>
     <lastmod>2014-07-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/vagrant/</loc>
+    <loc>https://chroju.github.io/categories/vagrant/</loc>
     <lastmod>2014-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/vim/</loc>
+    <loc>https://chroju.github.io/categories/vim/</loc>
     <lastmod>2015-03-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/vimperator/</loc>
+    <loc>https://chroju.github.io/categories/vimperator/</loc>
     <lastmod>2014-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/windows/</loc>
+    <loc>https://chroju.github.io/categories/windows/</loc>
     <lastmod>2013-12-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
+    <loc>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2015-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://chroju.github.io/</loc>
     <lastmod>2017-11-20T21:51:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</loc>
+    <loc>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</loc>
     <lastmod>2015-06-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
+    <loc>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2015-04-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</loc>
+    <loc>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</loc>
     <lastmod>2013-10-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%9B%B8%E8%A9%95/</loc>
+    <loc>https://chroju.github.io/categories/%E6%9B%B8%E8%A9%95/</loc>
     <lastmod>2015-08-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</loc>
+    <loc>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</loc>
     <lastmod>2014-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

@@ -2,37 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ansible Vps Linux on the world as code</title>
-    <link>http://localhost:1313/categories/ansible-vps-linux/</link>
+    <link>https://chroju.github.io/categories/ansible-vps-linux/</link>
     <description>Recent content in Ansible Vps Linux on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/ansible-vps-linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/ansible-vps-linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>AnsibleとDigitalOceanでどこでも使える開発環境を作る</title>
-      <link>http://localhost:1313/post/ansible-digitalocean-vps-dev-env/</link>
+      <link>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/ansible-digitalocean-vps-dev-env/</guid>
-      <description>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC（なぜかこちらもVAIO Pro 11）と二重になってしまうので始終持ち歩きたくはなく、平日フラフラしてるときにサッとbash入りたいなみたいのが出来ずにいた。
-結論としてVPSを開発環境として扱い、最悪iPad miniからいつでもSSH接続してbash叩けるだけでも幸せかなというところに至った。これまでhttp://chroju.netをさくらVPSで運営していたので、特に考えずさくらをもう1台追加したりもしたのだが、ちょっと調べてみるとDigitalOceanが最近流行りつつあるようだったので、他社サービスも使ってみると面白そうだってことで新規契約してみた。
-DigitalOcean すでに他所で言われてはいるが、利点としてはこんなところかと思う。
- 月額課金ではなく時間課金なので、使いたいだけ払えばOK 安い アプリケーションやSSH鍵が最初から組み込まれたイメージを作れる REST APIでだいたいのVPS操作ができる  要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。
-REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。
-DigitalOcean Swimmer Android制作: Hannoun Yassir評価: 4.4 / 5段階中価格: 無料 (2015/7/11 時点)
-posted by: AndroidHTML v3.1 このアプリさえあればGUI操作はほぼ全部できる。
-ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとしてauthorized_keysの件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初はroot以外のユーザーがいないため、当然ながらauthorized_keysのパスも/root/.ssh/配下となる。構築用には別のユーザーを設けることになると思うが、その際にはauthorized_keysを/home/user配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。
-Ansibleによる初期構築 巷ではVagrantと連携して、vagrant upでDigitalOceanにマシンを上げるのが流行ってるらしい。
- vagrantではじめるクラウド開発環境（DigitalOcean編） - Qiita VagrantとSSDなVPS(Digital Ocean)で1時間1円の使い捨て高速サーバ環境を構築する - Glide Note - グライドノート  とはいえ自分は冒頭に書いた通り、最悪iPad miniでもいいので外から繋ぐという運用をしたかったので、Vagrantからの起動は使えない。なので初期構築には最近学び始めたAnsibleを使ってみた。
-インフラ管理系のツール、使ったことがあるのはChefぐらいで、Puppetは概念だけ知ってはいるが、Ansibleの特色はやはりハードルの低さ、学習コストの低さだと思う。エージェントレス、knifeのような特殊なコマンドもほとんど覚える必要がなく、ansible-playbookコマンドさえ覚えておけばとりあえずなんとかなってしまう。
- エージェントレスなのでpipで手元のマシンにansibleを入れればすぐ使える。 設定はyamlによるplaybookに書き出すので、文法も比較的容易。 1個1個のタスクは定められたモジュールを用いて書くことになるが、やりたいことを公式DocsのModule Indexで探ればわりとなんとかなる。 ディレクトリ掘ったりknifeみたいなコマンドいっぱい覚えなくても、とりあえずyaml1つとコマンド1つあれば始められる。  pip経由でのインストールが必要なので非pythonista的には若干戸惑いもありましたが、学習コストの低さはハンパないのでインストールから1時間もあれば一旦サーバー建てられました。ノウハウもQiitaはじめ随所に落ちてはいるけれど、正直公式ドキュメントがかなり充実していて、YAMLのシンタックスガイドまで付いていたりするので、下手にググってやるよりもドキュメントちゃんと読んだ方がいいと思う。まぁ、Ansibleにかぎらずなんだってそうではあるが。ただ、複数台管理だとかアプリのデプロイだとかをやろうとすると当然ディレクトリ構成も複雑になって、既存のプラクティスが必要になってくるので、あくまで「導入の学習コストが低い」という感じだが。
-書いたPlaybookはとりあえずGitHubに上げた。こちらを参考に、いわゆるVPS作るときの初期設定だけまとめている。ただしわりと俺用（dotfiles引っ張ってきたりとか）。Ansibleについてはまた別の記事でまとめようと思う。
-chroju/ansible
-iPadからのSSH接続 クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのがPrompt2。</description>
+      <guid>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</guid>
+      <description>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMacの方を利用していて、デプロイしたりなんだりは自宅からしか出来ない状態にある。じゃあVAIOに移せばいいやんとも思うのだが、こちらも会社PC</description>
     </item>
     
   </channel>

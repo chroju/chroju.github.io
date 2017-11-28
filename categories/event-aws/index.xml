@@ -2,30 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Event Aws on the world as code</title>
-    <link>http://localhost:1313/categories/event-aws/</link>
+    <link>https://chroju.github.io/categories/event-aws/</link>
     <description>Recent content in Event Aws on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sat, 30 Jan 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/event-aws/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/event-aws/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ops JAWS#3に行ってきた</title>
-      <link>http://localhost:1313/post/ops-jaws-3/</link>
+      <link>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
       <pubDate>Sat, 30 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/ops-jaws-3/</guid>
-      <description>その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。
-メインとなったのはconfig rulesのハンズオン。
-  OpsJAWS 20160128  from hideaki yanase 
-AWSリソース、使っているうちに無秩序になっていき、ルールの統一がはかれなくなったり、全体像が見えづらくなったりということはありがちですが、config rulesを使ってもうシステム的に制御しちゃいましょうというテーマ。例えばCloudTrailが有効化されていない場合にアラートを上げる、とか。監視結果が変化すると、それをトリガーにLambdaをinvokeしたりもできるので、それこそなんでもできる感じ。
-やってみて気付いたけど、やっぱり自分は運用が好きなのかもしれない。システムによって、本来不確かであったり信用性に劣っていたりするはずの人間の動作を制御する、というのが好きなんだろうなと。SEやってた頃は運用の制御はExcel資料が元になることが多くて、それ自体は特に楽しくなかったのだけど、システム的に作りこんでいくのはわくわくする。これはいい気付きだったし、次回も是非参加してみたい。
-問題としてはやはり、Lambda Functionを書くのにpythonかnode.jsを使う必要がある（いまさらJavaってのもなぁ）ので、次回参加するのであればそれまでにpythonをある程度やっておかねばなぁというところ。
-その他、昨年とてもおもしろく読ませていただいたSDの特集『なぜ「運用でカバー」がダメなのか』を書かれた運用設計ラボの波多野氏がいらっしゃっていたりして、個人的にはテンション上がったりもしました。「運用でカバー」をググるとトップに出てくる、なんだか好評を得てしまった拙記事はこちら（あえて移行前ブログを貼るアレ）。
-Software Design 2015年2月号『なぜ「運用でカバー」がダメなのか』読了 - そのねこが学ぶとき</description>
+      <guid>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
+      <description>その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。 メインとなったのはconfig rulesのハンズオン。 OpsJAWS 20160128 from hideaki yanase AWSリソース、使っているうちに無秩序になっていき、ルールの統一がはかれなくなったり、全体像が見えづらくなっ</description>
     </item>
     
   </channel>

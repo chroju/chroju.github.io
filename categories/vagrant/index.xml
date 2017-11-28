@@ -2,49 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vagrant on the world as code</title>
-    <link>http://localhost:1313/categories/vagrant/</link>
+    <link>https://chroju.github.io/categories/vagrant/</link>
     <description>Recent content in Vagrant on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 02 Feb 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/vagrant/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/categories/vagrant/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>$ vagrant sshで仮想マシンに入れなくなった場合の対処法</title>
-      <link>http://localhost:1313/post/2014-02-02-02-post/</link>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</link>
       <pubDate>Sun, 02 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-02-02-02-post/</guid>
-      <description> やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃねと思ったんだけど、なんとか元に戻せたので対処法まとめとく。
-といっても簡単な話です。
- Virtual BoxをGUIで開く 該当仮想マシンがリストに入ってるので強制終了し、Virtual Box上で起動し直す rootでログイン（パスワードはデフォルトでvagrant） おかしい箇所を直す  コマンド叩いて操作してるので忘れがちだけど、vagrantはVirtual Box上（有料版ならVMware上も有り得るが）に仮想マシンを立ててるので、普通にGUIから入ればいい話です。rootで入ってぐいぐいヤバそうなとこ直して、直したらターミナルからssh試してみてってのを交互に繰り返して直しませう。
-rootで入り直す前に一度VM落とす手順を入れましたが、こうしないとGUIから入れないみたいです。僕の場合だとターミナルでiptablesとかいじって、よしじゃあsshログインできるか試してみようってことで一旦ログアウトしたら入れなくなった（アホだ）のでVMが立ち上がりっぱなしになっちゃったわけなんだけど、この状態で取りあえずVirtual Box開いてみたらコンソールを表示するボタンがグレーアウトされてました。なので一旦強制終了するしかないです。
-余談 ちなみに今回何をやらかしたのかだけど、ポイントとしてはsshのポート番号を変えた（/.ssh/configをいじった）のと、iptablesをいじったのの二点。これを普通のVMの感覚でやっちゃったのがマズかったみたい。
-まず、vagrant sshで使われているポート番号はデフォルトで22ではなく、2222なのです。これはホスト側で$ vagrant ssh-configコマンドを打ってみるとわかる。
-Host default Hostname 127.0.0.1 User vagrant Port 2222  一方、ssh以外の各vagrantコマンドについても、いずれもsshを使っている模様。vagrant upもvagrant haltもssh経由で命令しているみたいです。ただ、こちらは通常通りPort 22を使っているのでややこしい。このあたりの事情を踏まえた上でポート番号あれこれしないと、必要なはずのポート塞いじゃってうああああああってなっちゃうっぽい。
-まぁvagrantで作ったサーバーを表に公開することはあんまりないと思うんで、このへん触らないのが吉かも。練習でやりたいのであれば、vagrant以外でサーバー用意してやった方が良さそうな気がします。
-参考
- Vagrant で SSH の接続ポート番号を変えると、けっこう複雑になるという話 | girigiribauer.com Vagrant のベースBOX作成手順 (Scientific Linux 6.1) - エンジニアきまぐれTips  </description>
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</guid>
+      <description>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshのポート番号変えたりしてたんだけど、なんか設定しくじったっぽくてvagrant sshできなくなった。やべえ、仮想マシンだしこれもう詰んだんじゃ</description>
     </item>
     
     <item>
       <title>Rails環境構築（1） Vagrantで仮想マシン構築</title>
-      <link>http://localhost:1313/post/2014-01-19-post/</link>
+      <link>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</link>
       <pubDate>Sun, 19 Jan 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/2014-01-19-post/</guid>
-      <description>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。
-インストール まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET STARTED」からいろいろ読んどくといいと思う。公式のRead meに勝るものはないです。
-http://www.vagrantup.com/
-インストールしたらバージョン確認。
-$ vagrant -v  boxの追加 まずはboxと呼ばれる仮想マシンイメージをvagrantに追加する。
-$ vagrant box add hoge url  hogeは適当なイメージ名、urlはウェブで公開されているboxのurl。イメージはココに大量にあるので、任意のサーバーのURLをコピってくればOK。ほとんどがLinux、ちょこっとだけBSD。
-vagrantの初期化 $ mkdir vagrant $ cd vagrant $ vagrant init hoge  vagrant initでカレントディレクトリをvagrant用に初期化する。なのでmkdirは好きなとこに好きなフォルダ作ればよい。そこに仮想マシンの設定ファイルが作られるので。vagrant initの引数にはさっきvagrant box addで追加した仮想マシンイメージの名前を渡してやる。渡さないとデフォルト値で設定ファイルが作られてしまう。これで最初ハマった。ちなみにどうハマるかというと、vagrant upしたときにこんなエラーが出る。
-There are errors in the configuration of this machine. Please fix the following errors and try again: vm: * The box &#39;base&#39; could not be found.  「base」という名前のboxがないというエラー。どうもデフォルトでbaseという名前が使われるらしいのだが、さっきbox addした名前と異なるので、そんなboxはないから立ち上げられませんよということ。もしこの状態になってしまった場合の対処としては、vagrantfileのconfig.vm.boxの値を該当の仮想マシンイメージ名に替えてやれば上がるようになる。
-話が飛んでしまったが、Vagrantfileはvagrant initしたディレクトリの中に出力されている。で、仮想マシンを上げる前にちょっとコイツの編集が必要。</description>
+      <guid>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</guid>
+      <description>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。 インストール まずはGemでインストールしてみたけど、バージョン古いっぽくてダメだった。なので、ふつうにウェブからダウンロードしてインストールします。URLは以下。ついでに「GET ST</description>
     </item>
     
   </channel>

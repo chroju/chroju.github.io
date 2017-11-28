@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Abouts on the world as code</title>
-    <link>http://localhost:1313/about/</link>
+    <link>https://chroju.github.io/about/</link>
     <description>Recent content in Abouts on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja-jp</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
+    <language>ja</language>
+    <copyright>written by chroju</copyright>
     <lastBuildDate>Sun, 13 Mar 2016 11:45:24 +0900</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chroju.github.io/about/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://chroju.github.io/about/</link>
       <pubDate>Sun, 13 Mar 2016 11:45:24 +0900</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://chroju.github.io/about/</guid>
       <description> chroju  Profile: https://chroju.net Contact: chor.chroju@gmail.com  </description>
     </item>
     
