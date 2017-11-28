@@ -1,3 +1,11 @@
-#wrapper {
-  max-width: 740px;
+section.main .content .markdown p {
+    line-height: 1.8em;
+}
+
+section.main .content .page-heading {
+    text-transform: none;
+}
+
+.markdown pre {
+    background-color: rgb(40, 43, 46);
 }

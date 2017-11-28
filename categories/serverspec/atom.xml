@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Serverspec on the world as code</title>
+    <link>https://chroju.github.io/categories/serverspec/</link>
+    <description>Recent content in Serverspec on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 31 Dec 2015 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/serverspec/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Serverspecファーストインプレッション</title>
+      <link>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
+      <description>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもと</description>
+    </item>
+    
+  </channel>
+</rss>

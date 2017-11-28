@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 now.zone # =&gt; &quot;JST&quot; now.getutc #">
+
+<meta property="og:title" content="Ruby基礎復習(7) Timeクラス" />
+<meta property="og:description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 now.zone # =&gt; &quot;JST&quot; now.getutc #" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/04/06/study-ruby-time/" />
+
+
+
+<meta property="article:published_time" content="2015-04-06T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2015-04-06T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ruby基礎復習(7) Timeクラス 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/04/06/study-ruby-time/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.053612078%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.053612078%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.053612078%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.053612078%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby基礎復習(7) Timeクラス
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Apr 6 2015 00:00:00 JST'>Apr 6, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>『パーフェクトRuby』p.190より。</p>
+
+<p><code>Time#now</code>か<code>Time#new</code>で現在時刻が取得可能。</p>
+
+<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
+new = Time.new # =&gt; 2015-03-16 23:25:32 +0900
+
+now.zone # =&gt; &quot;JST&quot;
+now.getutc # =&gt; 2015-03-16 14:25:32 UTC
+now.utc
+now.zone # =&gt; &quot;UTC&quot;
+</code></pre>
+
+<p>現在時刻以外のTimeオブジェクトを生成するには<code>Time#at</code>でUNIX秒を引数に指定するか、<code>Time#utc</code>か<code>Time#local</code>で直接時刻を指定する。</p>
+
+<pre><code class="language-ruby">Time.at(0) # =&gt; 1970-01-01 09:00:00 +0900
+Time.utc(2015, 1, 1, 2, 30, 40, 100) # =&gt; 2015-01-01 02:30:40 UTC (最後の100はマイクロ秒)
+Time.local(2015, 1, 1, 2, 30, 40, 100) # =&gt; 2015-01-01 02:30:40 +0900
+</code></pre>
+
+<p><code>#to_i</code>、<code>#to_f</code>、<code>#to_r</code>の戻り値はUNIX秒。<code>#to_s</code>で文字列表現が返る。<code>#to_a</code>は秒、分、時、日、月、年、曜日、その年の通算日数、夏時間の真偽判定、タイムゾーンの配列を返す。なお、この配列フォーマットを展開して<code>Time#utc</code>や<code>Time#local</code>の引数として与えることもできる。</p>
+
+<pre><code class="language-ruby">now.to_i # =&gt; 1426515932
+now.to_f # =&gt; 1426515932.978824
+now.to_r # =&gt; (178314491622353/125000)
+now.to_s # =&gt; &quot;2015-03-16 23:25:32 +0900&quot;
+now.to_a # =&gt; [32, 25, 23, 16, 3, 2015, 1, 75, false, &quot;JST&quot;]
+</code></pre>
+
+<p><code>#to_s</code>の戻り値は上記フォーマットの固定だが、任意のフォーマットで文字列表現を得たい場合は<code>#strftime</code>を使う。使えるフォーマット文字列は<a href="http://docs.ruby-lang.org/ja/1.9.3/class/Time.html">公式ドキュメント</a>参照で。</p>
+
+<pre><code class="language-ruby">now.strftime(&quot;今日は%Y年%m月%d日、今は%H時%M分を%S秒過ぎたところです。&quot;) # =&gt; &quot;今日は2015年3月16日、今は23時25分を32秒過ぎたところです。&quot;
+</code></pre>
+
+<p>逆に文字列表現からTimeオブジェクトを得たい場合は<code>#strptime</code>が使える。</p>
+
+<h2 id="参照">参照</h2>
+
+<ul>
+<li><a href="http://qiita.com/riocampos/items/de59263ac4e991a98f49">Ruby - 日本語表記の日時をTimeオブジェクトに変換（Time.strptimeメソッド） - Qiita</a></li>
+</ul>
+
+<p>その他もろもろの出力。</p>
+
+<pre><code class="language-ruby">now.year # =&gt; 2015
+now.month # =&gt; 3
+now.day # =&gt; 16
+now.hour # =&gt; 23
+now.min # =&gt; 25
+now.sec # =&gt; 32
+now.nsec # =&gt; 978824000 (ナノ秒)
+now.wday # =&gt; 1 (曜日は日曜を0としてカウント)
+now.yday # =&gt; 75 (年初からの日数)
+</code></pre>
+
+<p>曜日やサマータイム(DST)については疑問符のメソッドで真偽判定できる。</p>
+
+<pre><code class="language-ruby">now.dst? # =&gt; false
+now.sunday? # =&gt; false
+now.monday? # =&gt; true
+</code></pre>
+
+<p>Timeオブジェクト同士の比較についてはナノ秒まで判定されるので、そのあたりに注意とのこと。以下のようなことがあり得る。</p>
+
+<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
+new = Time.new # =&gt; 2015-03-16 23:25:32 +0900
+
+now == new # =&gt; false
+</code></pre>
+
+<p>整数を与えることによる加算減算は秒として取り扱われる。Timeオブジェクト同士の減算も可能。その場合は差分の秒数が浮動小数点数で返る。</p>
+
+<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
+
+now + 1 # =&gt; 2015-03-16 23:25:33 +0900
+now - 1 # =&gt; 2015-03-16 23:25:31 +0900
+</code></pre>
+
+<p>なお時間や日時を扱うクラスには他に<code>Date</code>や<code>DateTime</code>もあるが、組み込みのライブラリはこの<code>Time</code>だけ。どれを使えばええんや？ってのは、探してみたら大変詳しいQiitaを見つけたんでそっちに譲ります。</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="http://qiita.com/jnchito/items/cae89ee43c30f5d6fa2c">RubyとRailsにおけるTime, Date, DateTime, TimeWithZoneの違い - Qiita</a></li>
+</ul>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

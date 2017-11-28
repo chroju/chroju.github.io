@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vagrant on the world as code</title>
+    <link>https://chroju.github.io/categories/vagrant/</link>
+    <description>Recent content in Vagrant on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 02 Feb 2014 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/vagrant/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>$ vagrant sshで仮想マシンに入れなくなった場合の対処法</title>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</guid>
+      <description>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshの</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（1） Vagrantで仮想マシン構築</title>
+      <link>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</link>
+      <pubDate>Sun, 19 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</guid>
+      <description>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。 インストール まずはGemでインストールして</description>
+    </item>
+    
+  </channel>
+</rss>

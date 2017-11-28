@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていた">
+
+<meta property="og:title" content="Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか" />
+<meta property="og:description" content="VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていた" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2013/07/21/2013-07-21-post/" />
+
+
+
+<meta property="article:published_time" content="2013-07-21T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2013-07-21T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2013/07/21/2013-07-21-post/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.086473136%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.086473136%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.086473136%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.086473136%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Jul 21 2013 00:00:00 JST'>Jul 21, 2013</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていたんだけど、「むしろ取りあえずアプリ動かしてみた方が良いのではないか」と思い立ち、方針を転換。Linux→DB→Railsなんてゆっくりやるより、まずは動かしてみることにした。購入したのは以下の本。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL160_.jpg" alt="RailsによるアジャイルWebアプリケーション開発 第4版" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">RailsによるアジャイルWebアプリケーション開発 第4版</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">Sam Ruby Dave Thomas David Heinemeier Hansson <br />オーム社 <br />売り上げランキング: 138,293<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274068668/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>各所で絶賛されているのを見かけた上、立ち読みしてみた感じでもRubyのインストールという初歩から始まっていてわかりやすそうだった。候補としてはもうひとつ、インプレスの『基礎 Ruby on Rails』もあったんだけど、ザッと見た感じでは『Railsによる〜』の方が記載が細かそうだったのでこっちを選んだ。</p>
+
+<p>さて、VPSでRuby on Railsを作るにあたり、どこまでの範囲を学べば良いのだろう。今回買った本だとおそらくはRailsとRuby、DBあたりのコーディングが内容の主なようで、インフラ側のチューニングの話なんぞは載っていなさそうだった。自分が想像するとこだとLinuxというかOSの準備、VPSであるならばOSに接続するためのSSHの使い方、ウェブに公開するのでそのあたりのセキュリティ、DBやApacheなどのアプリインストールなどなど、やることはかなりありそう。あとView側の問題として、Coffe ScriptやSCSSあたりもやんなくちゃいけないんだろうな。JavaScriptとCSSはそれなりに書いたことあるけど、せっかくだし挑戦してみたい。</p>
+
+<p>……という感じのビジョンを描いているのだが、やはり全部まともにイチからやっていたらかなりの時間が必要だと思う。とりあえず作ってみて、あとは気になったところを徐々に手をつけていく感じでやっていきたい。あと、環境構築系だとこの本が良さそうだなーと目をつけている。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>……で、『Railsによる〜』はとりあえず1章読破したのだが、まさかのここでつまずくという事件発生。つまずくのはえーよｗｗｗ</p>
+
+<p>CentOSにRVMを入れようとしたのだが、以下のコマンドが通らなかった。curlのエラーっぽいんだけど、今をもって解消できてない。一応他の方法でRVMは入ったので、しばらく保留にしとこうかと思っている。</p>
+
+<blockquote>   bash < <(curl -s [https://rvm.beginrescueend.com/install/rvm)](https://rvm.beginrescueend.com/install/rvm))</blockquote>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

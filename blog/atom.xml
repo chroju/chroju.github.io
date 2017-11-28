@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on the world as code</title>
+    <link>https://chroju.github.io/blog/</link>
+    <description>Recent content in Blog on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 18 Nov 2017 23:23:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AlexaにAWSの請求額を教えてもらう</title>
+      <link>https://chroju.github.io/blog/2017/11/18/hello_alexa/</link>
+      <pubDate>Sat, 18 Nov 2017 23:23:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/11/18/hello_alexa/</guid>
+      <description>Amazon Echo Dotを書いたのでさっそくオリジナルスキルを作ったのだけど、アイディアに乏しいマンなので、「自分が使っているAWSアカウントの請求額を教</description>
+    </item>
+    
+    <item>
+      <title>Scrapbox.ioで思考を気持ちよく繋げる</title>
+      <link>https://chroju.github.io/blog/2017/10/08/i_love_scrapbox/</link>
+      <pubDate>Sun, 08 Oct 2017 22:31:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/10/08/i_love_scrapbox/</guid>
+      <description>Scrapbox.ioを最近使っていますが本当にいいのでいいという話をします。 そもそもScrapboxって何かという話から言えば、いわゆるオ</description>
+    </item>
+    
+    <item>
+      <title>CoreOSからECSへDockerを移行した</title>
+      <link>https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/</link>
+      <pubDate>Tue, 26 Sep 2017 08:36:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/</guid>
+      <description>CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたの</description>
+    </item>
+    
+    <item>
+      <title>AWS Certified Sysops Administratorを取得した</title>
+      <link>https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/</link>
+      <pubDate>Sat, 26 Aug 2017 12:04:57 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/</guid>
+      <description>AWS認定Sysopsアドミニストレータという資格を取得しました。AWSには5種類の認定資格がありまして、レベル的には「アソシエイト」と「プ</description>
+    </item>
+    
+    <item>
+      <title>builderson2017に行ってきた</title>
+      <link>https://chroju.github.io/blog/2017/08/06/builderson_2017/</link>
+      <pubDate>Sun, 06 Aug 2017 21:25:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/08/06/builderson_2017/</guid>
+      <description>builderscon Tokyo 2017に行ってきた。最初会場をSFCと勘違いしてましたが、慶應の日吉の方でした。日吉駅周辺、大学を前提に作られている放射状の道が美しい</description>
+    </item>
+    
+    <item>
+      <title>Toilの地獄から抜け出す術を知りたい</title>
+      <link>https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/</link>
+      <pubDate>Mon, 12 Jun 2017 23:35:55 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/</guid>
+      <description>最近とても停滞感があってよろしくないので一度ブログに吐き出すなどします。 Toilが多すぎる 現状、自分はオペレーションエンジニア（決まった手順</description>
+    </item>
+    
+    <item>
+      <title>O&#39;Reilly『Infrastructure as Code』読了</title>
+      <link>https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/</link>
+      <pubDate>Fri, 05 May 2017 17:53:22 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/</guid>
+      <description>O&amp;rsquo;Reillyの『Infrastructure as Code』を読んだ。従来Ansibleの本、Chefの本といった各ツールの使い</description>
+    </item>
+    
+    <item>
+      <title>VimperatorからVivaldi &#43; Vimiumへ乗り換える</title>
+      <link>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</link>
+      <pubDate>Wed, 15 Feb 2017 23:30:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/</guid>
+      <description>Firefox 51から、Vimperatorの一部機能が使用できなくなる状態が発生した。これについてはGitHub上でFixが進んでいるが、2017-0</description>
+    </item>
+    
+    <item>
+      <title>サーバーレスっぽいインフラをどう管理していくか</title>
+      <link>https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/</link>
+      <pubDate>Tue, 07 Feb 2017 15:37:51 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/</guid>
+      <description>きっかけ VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。 とはいえ完</description>
+    </item>
+    
+    <item>
+      <title>Baroccoで分割キーボードデビューした</title>
+      <link>https://chroju.github.io/blog/2017/02/05/barocco_review/</link>
+      <pubDate>Sun, 05 Feb 2017 23:34:24 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2017/02/05/barocco_review/</guid>
+      <description>20代がまもなく終わってしまうということもあり、今年はある程度健康維持、環境維持というところに注力して、快適かつ健全な肉体と精神を保とうと一</description>
+    </item>
+    
+    <item>
+      <title>2016年総括 - 技術者って何なのかやっと理解した</title>
+      <link>https://chroju.github.io/blog/2016/12/28/looking_back_2016/</link>
+      <pubDate>Wed, 28 Dec 2016 18:05:19 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/12/28/looking_back_2016/</guid>
+      <description>2016年も終わるので振り返ります。ポエムです。今年はなんというか、技術者として自分が何をすべきなんだろっていうのがやっとなんとなくわかって</description>
+    </item>
+    
+    <item>
+      <title>esa.ioを個人利用している話</title>
+      <link>https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/</link>
+      <pubDate>Tue, 27 Dec 2016 00:46:39 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/</guid>
+      <description>3か月ぐらい前からesa.ioを個人利用している。 esa.ioにした理由 何分調べること、考えることが多い職業ということで、メモをする環境とい</description>
+    </item>
+    
+    <item>
+      <title>エンジニアの問題解決力とは何か</title>
+      <link>https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/</link>
+      <pubDate>Sat, 17 Dec 2016 12:43:17 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/</guid>
+      <description>今年度、特に下半期からいわゆる技術的負債の返済、特にDevOps方面におけるプロセス改善に深く携わるようになった。これまで依頼ベースの対応や</description>
+    </item>
+    
+    <item>
+      <title>多義化するOpsのミッションについて</title>
+      <link>https://chroju.github.io/blog/2016/10/25/what_is_ops/</link>
+      <pubDate>Tue, 25 Oct 2016 00:20:02 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/10/25/what_is_ops/</guid>
+      <description>今年度から運用の担当になったんですけど、最近消化不良を起こしつつあります。立場としては言われたことだけやるオペレーターという形じゃなくて、い</description>
+    </item>
+    
+    <item>
+      <title>ServerlessConfとエンジニアの職掌に関して</title>
+      <link>https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</link>
+      <pubDate>Mon, 03 Oct 2016 23:52:14 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/</guid>
+      <description>ServerlessConf Tokyo 10月1日に開かれたServerlessConf Tokyoに行ってきました。会場で一度「サーバーエンジニアの方ってどれぐらいいますか？」</description>
+    </item>
+    
+    <item>
+      <title>『SOFT SKILLS』と「やっていく気持ち」</title>
+      <link>https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</link>
+      <pubDate>Mon, 01 Aug 2016 22:30:41 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/</guid>
+      <description>SOFT SKILLS ソフトウェア開発者の人生マニュアルposted with amazlet at 16.08.01日経BP社 (2016-06-02) 売り上げランキング: 223 Amazon.co.jpで詳細を見</description>
+    </item>
+    
+    <item>
+      <title>YAPC経験ないけどパチモンの方に行った</title>
+      <link>https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</link>
+      <pubDate>Sat, 02 Jul 2016 22:11:59 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/</guid>
+      <description>イベントレポートに見せかけたポエムです。 技術ブログとかQiitaとかやってると、更新してない間はあんまり成果出てないってことでバロメーターに</description>
+    </item>
+    
+    <item>
+      <title>Serverlessの時代とas code</title>
+      <link>https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</link>
+      <pubDate>Sun, 05 Jun 2016 23:46:12 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/</guid>
+      <description>先週Ansible Meetup in Tokyo 2016.06と、AWS Summit Tokyo 2016に行ってきたので軽めのレポートにします。 AWS Summit AWS Summitは初参加でしたが、会場</description>
+    </item>
+    
+    <item>
+      <title>インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</link>
+      <pubDate>Sat, 14 May 2016 21:58:32 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/</guid>
+      <description>第5回ペパボテックカンファレンス〜インフラエンジニア大特集〜 - connpass そもそもインフラ向けのイベントって相対的にはやっぱ少ない気がするし、かのペパ</description>
+    </item>
+    
+    <item>
+      <title>#qpstudy 響け！アラートコール！行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</link>
+      <pubDate>Sun, 24 Apr 2016 22:28:32 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/</guid>
+      <description>#qpstudy 2016.04 響け！アラートコール！ 本編 一般枠 on Zusaar こちら参加してきました。アラートコール、というか監視運用をテーマとした勉強会。qpstudyことキュ</description>
+    </item>
+    
+    <item>
+      <title>Pythonに入門している</title>
+      <link>https://chroju.github.io/blog/2016/03/28/entry-python/</link>
+      <pubDate>Mon, 28 Mar 2016 22:29:39 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/03/28/entry-python/</guid>
+      <description>Pythonを学び始める 今年の 行動規範 でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、ま</description>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Base 2</title>
+      <link>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</link>
+      <pubDate>Thu, 17 Mar 2016 22:09:45 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</guid>
+      <description>年初にPersonal Knowledge Base · the world as codeという記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。</description>
+    </item>
+    
+    <item>
+      <title>JAWS DAYS 2016に行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</link>
+      <pubDate>Sun, 13 Mar 2016 11:03:24 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/03/13/jaws_days_2016/</guid>
+      <description>昨年に続き。 JAWS DAYS 2015でAWS童貞捨ててきた · the world as code 昨年JAWS DAYSのハンズオンでAWSアカウント作ったので、これでAWS歴丸1年。</description>
+    </item>
+    
+    <item>
+      <title>ブログをHugoに移行した</title>
+      <link>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</link>
+      <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</guid>
+      <description>すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだ</description>
+    </item>
+    
+    <item>
+      <title>Ops JAWS#3に行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</link>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/30/ops-jaws-3/</guid>
+      <description>その名の通り運用管理系の話題を中心としたAWSユーザーグループです。ハンズオンもあるということで行ってきた。 メインとなったのはconfig r</description>
+    </item>
+    
+    <item>
+      <title>Personal Knowledge Base</title>
+      <link>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</link>
+      <pubDate>Sun, 24 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</guid>
+      <description>昨年は転職のゴタゴタがあったりしてメモを取る習慣というものがどこかに消え失せてしまっていたので、年始にあたり生涯幾度目かわからないがメモ環境</description>
+    </item>
+    
+    <item>
+      <title>東京Node学園付属小学校1限目に行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</link>
+      <pubDate>Wed, 20 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</guid>
+      <description>【増枠！】東京Node学園付属小学校 1時限目 - connpass 東京node学園というNode.jsのユーザーコミュニティがありますが、その入門者向けバージ</description>
+    </item>
+    
+    <item>
+      <title>2016年の行動規範</title>
+      <link>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</link>
+      <pubDate>Sun, 03 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/03/manifesto-2016/</guid>
+      <description>うまいことまとまらないのでつらつら。 問題意識 時間、お金の使い方がいまだに下手。 きちんと考えず浪費している機会が多い。 時間ならタスクシュート、</description>
+    </item>
+    
+    <item>
+      <title>2015年総括</title>
+      <link>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</guid>
+      <description>いろいろとチャレンジングに動いてみただけに、難しい年だった。 今年初めの「行動規範」で書いた通り、就職は、した。大手SIerからいわゆるベンチ</description>
+    </item>
+    
+    <item>
+      <title>Serverspecファーストインプレッション</title>
+      <link>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</guid>
+      <description>秋ぐらいから個人開発で試してみて、最近業務でも使えないかとServerspecで試行錯誤している。はじめに言っておくと使用感もコンセプトもと</description>
+    </item>
+    
+    <item>
+      <title>『Team Geek』読了</title>
+      <link>https://chroju.github.io/blog/2015/12/14/review-team-geek/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/12/14/review-team-geek/</guid>
+      <description>Team Geek ―Googleのギークたちはいかにしてチームを作るのかposted with amazlet at 15.12.14Brian W. Fitzpatrick Ben Collins-Sussman オライリージャパン 売り上げランキング: 18,890 Amazon.</description>
+    </item>
+    
+    <item>
+      <title>Dockerファーストインプレッション</title>
+      <link>https://chroju.github.io/blog/2015/12/04/docker-first-impression/</link>
+      <pubDate>Fri, 04 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/12/04/docker-first-impression/</guid>
+      <description>前回上げたインフラCIを試みた際、CircleCIを利用する中で初めてDockerに触れたので、今更ながらのファーストインプレッション。 「仮</description>
+    </item>
+    
+    <item>
+      <title>Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI</title>
+      <link>https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</guid>
+      <description>CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット この記事に書か</description>
+    </item>
+    
+    <item>
+      <title>オープンソースカンファレンス2015 Tokyo/Fall行ってきた</title>
+      <link>https://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/</guid>
+      <description>戦利品、ConoHaちゃんかわええ。 オープンソースカンファレンスに初めて行ってみた。2015 Tokyo/Fallです。だいぶ奥地の方でやって</description>
+    </item>
+    
+    <item>
+      <title>インフラエンジニアの幸福論</title>
+      <link>https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</link>
+      <pubDate>Tue, 20 Oct 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/</guid>
+      <description>1年前、インフラエンジニアは死んだ。 遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自</description>
+    </item>
+    
+    <item>
+      <title>個人開発環境にGithub Flowを適用する</title>
+      <link>https://chroju.github.io/blog/2015/10/04/individual-github-flow/</link>
+      <pubDate>Sun, 04 Oct 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/10/04/individual-github-flow/</guid>
+      <description>Github、joinしたのは2013年で作ったものは軒並みちゃんと突っ込んではいるんだけど、単に一区切りついたらadd =&amp;gt; commit =&amp;gt; pushしてい</description>
+    </item>
+    
+    <item>
+      <title>開発環境のためのansibleを出来るだけベストプラクティスでまとめた</title>
+      <link>https://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</link>
+      <pubDate>Thu, 24 Sep 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/</guid>
+      <description>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて</description>
+    </item>
+    
+    <item>
+      <title>ハッカーマインドと3冊のエッセイ</title>
+      <link>https://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</link>
+      <pubDate>Sun, 16 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/</guid>
+      <description>ハッカー3大エッセイとは自分が勝手に呼んでいるだけなのだが、『ハッカーと画家』『UNIXという考え方』『それが僕には楽しかったから』の3冊の</description>
+    </item>
+    
+    <item>
+      <title>Qiitaを使うということの意義</title>
+      <link>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</link>
+      <pubDate>Sun, 09 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</guid>
+      <description>Qiitaにいくつか記事を上げてみて思ったことを。 承認欲求が満たしやすい ブログのような個人の場ではないのに承認欲求がってのもどうなんだという</description>
+    </item>
+    
+    <item>
+      <title>Kaminariの実装をしてみた</title>
+      <link>https://chroju.github.io/blog/2015/08/08/exhibi-update/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/08/08/exhibi-update/</guid>
+      <description>久しぶりに稼働させているExhiBiというサービスの機能を少し更新した。といってもそれほど大した話ではないですが、一応書き留め。 kaminari ページネー</description>
+    </item>
+    
+    <item>
+      <title>Qiitaはじめました</title>
+      <link>https://chroju.github.io/blog/2015/07/25/start-qiita/</link>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/07/25/start-qiita/</guid>
+      <description>chroju - Qiita 気分でQiitaはじめてみた。Kobitoをちらちら使って簡単なメモを残していたりしたのだけど、そこから一発で上げられるのはやっぱ楽か</description>
+    </item>
+    
+    <item>
+      <title>AnsibleとDigitalOceanでどこでも使える開発環境を作る</title>
+      <link>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/</guid>
+      <description>個人開発環境としては自宅にiMac 2010Mid、モバイルでVAIO Pro 11に入れたArch Linuxを使っているのだが、メインとしてはiMa</description>
+    </item>
+    
+    <item>
+      <title>暗号化とハッシュ化に関する基本的な事柄まとめ</title>
+      <link>https://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</guid>
+      <description>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくような</description>
+    </item>
+    
+    <item>
+      <title>Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</title>
+      <link>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</link>
+      <pubDate>Sat, 04 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</guid>
+      <description>職場のWindows PC、いろいろと開発用に整備を進めてはいるが、やはりWindowsだとツラミある。 Chocolatey Windowsでのパッケージ管理。不</description>
+    </item>
+    
+    <item>
+      <title>すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</title>
+      <link>https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/</link>
+      <pubDate>Fri, 03 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/</guid>
+      <description>エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar 改めて見るとすげー名前のイベント……行ってきた。 障害対応は嫌いです。ていうか好きな</description>
+    </item>
+    
+    <item>
+      <title>SIerからサービス系の会社に転職して1か月</title>
+      <link>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</link>
+      <pubDate>Sun, 28 Jun 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</guid>
+      <description>SIerからサービス提供型の会社に転職して1か月ぐらい経ったので、感想とか今後のこととかまとめておく。立ち位置としてはインフラエンジニア、ま</description>
+    </item>
+    
+    <item>
+      <title>Ansibleの入門イベント聞いてきた話</title>
+      <link>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</link>
+      <pubDate>Thu, 25 Jun 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/</guid>
+      <description>これ行ってきた。ざくっと感想を箇条書きで。 ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれ</description>
+    </item>
+    
+    <item>
+      <title>ファッション無職になった</title>
+      <link>https://chroju.github.io/blog/2015/05/16/i-am-neet-now/</link>
+      <pubDate>Sat, 16 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/05/16/i-am-neet-now/</guid>
+      <description>退職エントリーに対して「で、誰？」っていうレスが付くのがもはや定番化しているような気もするけど、ブログなんてだいたいはチラ裏なんだから「誰？</description>
+    </item>
+    
+    <item>
+      <title>JAWS-UG初心者支部の立ち上げに行ってきた #jawsug_bgnr</title>
+      <link>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</link>
+      <pubDate>Fri, 15 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</guid>
+      <description>JAWS-UG初心者支部【第1回】2015年5月14日(木) - JAWS-UG初心者支部 | Doorkeeper AWS初心者具合がどれぐらいかと言うと、先日のJA</description>
+    </item>
+    
+    <item>
+      <title>Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</title>
+      <link>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
+      <pubDate>Sun, 03 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
+      <description>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値</description>
+    </item>
+    
+    <item>
+      <title>GTD環境 2015年春版（Workflowy最強説）</title>
+      <link>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</link>
+      <pubDate>Wed, 29 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</guid>
+      <description>GTDという言葉もなんだか多義的に使われているような気がするが、自分の場合は「今あるタスクを『高度』の概念から見直して、きちんと前に進むこと</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎学習(10) Mix-in</title>
+      <link>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</guid>
+      <description>Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。 参考 requireとincludeと</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(9) Dirクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</guid>
+      <description>『パーフェクトRuby』p.208より。 Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(8) Fileクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</link>
+      <pubDate>Fri, 10 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</guid>
+      <description>『パーフェクトRuby』p.196より。わりと苦手な分野。 まずはファイルをひらく。#openして変数に格納してもいいし、ブロックを引き渡して</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(7) Timeクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</link>
+      <pubDate>Mon, 06 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</guid>
+      <description>『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&amp;gt; 2015-03-16 23:25:32 +0900 new = Time.new # =&amp;gt; 2015-03-16 23:25:32 +0900 now.zone # =&amp;gt; &amp;quot;JST&amp;quot; now.getutc #</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(6) Hash</title>
+      <link>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</link>
+      <pubDate>Sun, 05 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</guid>
+      <description>『パーフェクトRuby』p.179より。 まず基本的なとこで。 hash = {hoge: 1, fuga: 2} hash.each do |key, val| p &amp;quot;#{key}: #{val}&amp;quot; end # =&amp;gt; &amp;quot;hoge: 1&amp;quot;, &amp;quot;fuga: 2&amp;quot; hash.each_key do |key| p key end # =&amp;gt; &amp;quot;hoge&amp;quot;, &amp;quot;fuga&amp;quot; hash.each_value do |val| p val end # =&amp;gt; &amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>the world as code</title>
+      <link>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/04/the-world-as-code/</guid>
+      <description>世界を構成するのはテクストである、という考え方が好きだ。より正確な言い方をするならば記号論やミーム的な考え方になるのだと思うが、記述されたも</description>
+    </item>
+    
+    <item>
+      <title>JAWS DAYS 2015でAWS童貞捨ててきた</title>
+      <link>https://chroju.github.io/blog/2015/03/22/jaws-days-2015/</link>
+      <pubDate>Sun, 22 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/22/jaws-days-2015/</guid>
+      <description>JAWS DAYS、前々からやってるのは知ってたんですけど、自分はAWS経験ないし行ってもわかんねーかなと思ってなんとなく行かずにいたんですが、今回</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(5) 配列(Array)</title>
+      <link>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</link>
+      <pubDate>Wed, 18 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</guid>
+      <description>『パーフェクトRuby』p.171より。 まずは配列の生成をいくつか。#new(a,b)で生成したとき、各要素は同じオブジェクトとなるので注意</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(4) EnumerableとComparable</title>
+      <link>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</link>
+      <pubDate>Tue, 17 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</guid>
+      <description>『パーフェクトRuby』p.164より。 一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされ</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(3) Numericクラス</title>
+      <link>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</link>
+      <pubDate>Mon, 16 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</guid>
+      <description>パーフェクトRuby p.144より。 判定系メソッド、#nonzeroが#zeroの真逆の動きではなくてちょっと混乱しそう。あと#intege</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(2) Stringクラス</title>
+      <link>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</link>
+      <pubDate>Sun, 15 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</guid>
+      <description>パーフェクトRuby p.148から学習。文字列ことStringクラス。 まずは基本操作系。 s = &amp;quot;hoge&amp;quot; s.empty? # =&amp;gt; false s.length # =&amp;gt; 4 s.size # =&amp;gt; 4 s.bitesize # =&amp;gt; 8 s.include?(&amp;quot;og&amp;quot;) =&amp;gt; true 演算子で</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(1) 基礎文法</title>
+      <link>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</link>
+      <pubDate>Sun, 08 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</guid>
+      <description>去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあ</description>
+    </item>
+    
+    <item>
+      <title>『エンジニアのための時間管理術』読了</title>
+      <link>https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</link>
+      <pubDate>Sat, 07 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</guid>
+      <description>エンジニアのための時間管理術posted with amazlet at 15.03.07Thomas A. Limoncelli オライリー・ジャパン 売り上げランキング: 12,858 Amazon.co.jpで詳細を見る 先日のデブ</description>
+    </item>
+    
+    <item>
+      <title>はてなブログからの記事移行を完了した</title>
+      <link>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</guid>
+      <description>旧ブログから全記事移行完了しました。ちょっとだけ疲れた。 もともとはてなブログで記事を書いてたわけですが、こちらは記事のエクスポート形式がMo</description>
+    </item>
+    
+    <item>
+      <title>Developers Summit 2015に行ってきた</title>
+      <link>https://chroju.github.io/blog/2015/02/21/developer-summit-2015/</link>
+      <pubDate>Sat, 21 Feb 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/02/21/developer-summit-2015/</guid>
+      <description>Developers Summit 2015の2日目に行ってきました。うちの会社とは少し毛色が違うイベントということもあり、これまで業務時間を利用して行くということはなかな</description>
+    </item>
+    
+    <item>
+      <title>美術展検索サービスExhiBiを見切り発車しました</title>
+      <link>https://chroju.github.io/blog/2014/12/29/2014-12-29-post/</link>
+      <pubDate>Mon, 29 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/12/29/2014-12-29-post/</guid>
+      <description>ExhiBi 初めてウェブサービスをローンチしました。ネタとしてはすでにゴマンとある美術展の検索サービスです。既存のものがあんまりしっくりこなかったので</description>
+    </item>
+    
+    <item>
+      <title>『インフラ/ネットワークエンジニアのためのネットワーク技術&amp;amp;amp;設計入門』読了</title>
+      <link>https://chroju.github.io/blog/2014/12/01/2014-12-01-post/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/12/01/2014-12-01-post/</guid>
+      <description>インフラ/ネットワークエンジニアのためのネットワーク技術&amp;設計入門posted with amazlet at 15.03.01みやた ひろし SBクリエイティブ 売り上げラ</description>
+    </item>
+    
+    <item>
+      <title>ブログ書けてない不安</title>
+      <link>https://chroju.github.io/blog/2014/11/10/2014-11-10-post/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/11/10/2014-11-10-post/</guid>
+      <description>インプットに対してアウトプットの量が少ないなと前から思っている。ブログを書いてるとアウトプットの履歴が残るから「アウトプットしてない」時期が</description>
+    </item>
+    
+    <item>
+      <title>Rakuten Technology Conference 2014に行ってきた</title>
+      <link>https://chroju.github.io/blog/2014/11/02/2014-11-02-post/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/11/02/2014-11-02-post/</guid>
+      <description>イベント終了から1週間後にレポートとか遅すぎますね。これの前の週のオープンソースカンファレンスがせっかく土日開催だし行こうかなと思っていたん</description>
+    </item>
+    
+    <item>
+      <title>『実践Vim』でVimの思想を身につける</title>
+      <link>https://chroju.github.io/blog/2014/10/02/2014-10-02-post/</link>
+      <pubDate>Thu, 02 Oct 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/10/02/2014-10-02-post/</guid>
+      <description>実践Vim 思考のスピードで編集しよう!posted with amazlet at 15.03.01Drew Neil アスキー・メディアワークス 売り上げランキング: 15,673 Amazon.co.jpで詳細を</description>
+    </item>
+    
+    <item>
+      <title>awesomeウィンドウマネージャーの見栄えを良くする</title>
+      <link>https://chroju.github.io/blog/2014/09/28/2014-09-28-post/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/28/2014-09-28-post/</guid>
+      <description>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、こ</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux &#43; awesome with Windows 8.1 in VAIO Pro</title>
+      <link>https://chroju.github.io/blog/2014/09/23/2014-09-23-post/</link>
+      <pubDate>Tue, 23 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/23/2014-09-23-post/</guid>
+      <description>先日VirtualBoxでArch Linux入れてみたところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお</description>
+    </item>
+    
+    <item>
+      <title>RubyHiroba 2014に（少しだけ）行ってきた</title>
+      <link>https://chroju.github.io/blog/2014/09/22/2014-09-22-post/</link>
+      <pubDate>Mon, 22 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/22/2014-09-22-post/</guid>
+      <description>本当に少しだけというか2時間だけ居られました。LTほぼずっと聴いてて永和システムマネジメントさんの生活発表会を聴いて帰ってきました。 アンテナ</description>
+    </item>
+    
+    <item>
+      <title>VirtualBoxでArch Linuxのインストール練習</title>
+      <link>https://chroju.github.io/blog/2014/09/07/2014-09-07-post/</link>
+      <pubDate>Sun, 07 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/07/2014-09-07-post/</guid>
+      <description>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブー</description>
+    </item>
+    
+    <item>
+      <title>Webスクレイピング手法は何かしら身に付けると便利そう</title>
+      <link>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</link>
+      <pubDate>Sun, 24 Aug 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</guid>
+      <description>最近Webスクレイピング勉強会が開かれましたが、自分これは「補欠」になってしまった上に別の予定が入ってしまって行けなくなり、なので自分なりに</description>
+    </item>
+    
+    <item>
+      <title>何を勉強したらいいのかわからなくなってきた</title>
+      <link>https://chroju.github.io/blog/2014/08/10/2014-08-10-post/</link>
+      <pubDate>Sun, 10 Aug 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/08/10/2014-08-10-post/</guid>
+      <description>このブログ始めて1年経ったけど、まー振り返ってみるとだいぶ話題の幅が広いっつーかまとまりがないっつーか、俺はいったい何エンジニアなんだって感</description>
+    </item>
+    
+    <item>
+      <title>tmuxをなんとなく使ってたのできちんと使うようにしてみた</title>
+      <link>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</link>
+      <pubDate>Sun, 20 Jul 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</guid>
+      <description>tmux、なんとなく入れてなんとなく使ってたけど、改めてそれなりに形にしてみたのでメモ。 tmuxとは たーみなるまるちぷれくさー。ターミナル操</description>
+    </item>
+    
+    <item>
+      <title>chroju.netを開設してみた</title>
+      <link>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</link>
+      <pubDate>Thu, 05 Jun 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</guid>
+      <description>前回の記事でchefでVPS構築したと書きましたが、そのサーバーに静的なHTML置いてドメインも取得してみました。 まだ何もないですけど、ここ</description>
+    </item>
+    
+    <item>
+      <title>chefでさくらVPSの初期構築を全部自動化してみた</title>
+      <link>https://chroju.github.io/blog/2014/05/30/2014-05-30-post/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/30/2014-05-30-post/</guid>
+      <description>Chefでサーバー構築を全部自動化して、借りているさくらVPSに当ててみた。意地でも手作業はまったく入れない完全自動構築設定。これはよい。毎</description>
+    </item>
+    
+    <item>
+      <title>Chef soloはじめの一歩</title>
+      <link>https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</guid>
+      <description>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_co</description>
+    </item>
+    
+    <item>
+      <title>自分のことを「ペルソナ」から見返してみる</title>
+      <link>https://chroju.github.io/blog/2014/05/06/2014-05-06-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/06/2014-05-06-post/</guid>
+      <description>自分の状況を客観的に評価する（タスク、財務管理、スケジュール管理など）とき、「ペルソナ」を考え方として導入するとわりと捗ることに最近気付いた</description>
+    </item>
+    
+    <item>
+      <title>エンジニアの転職において「技術」とは目的か手段か</title>
+      <link>https://chroju.github.io/blog/2014/05/01/2014-05-01-post/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/01/2014-05-01-post/</guid>
+      <description>ヒカリエ綺麗すぎる。。。 えー。こちらのイベントに参加してきました。こういう社外での勉強会チックなものに参加するって初めてですげービビってたけ</description>
+    </item>
+    
+    <item>
+      <title>Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</title>
+      <link>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</guid>
+      <description>いろいろエントリーを上げながら苦しんでいたCapistranoだが、ようやっとそこそこ落ち着いてきた気がするのでそろそろ完結編といく。Cap</description>
+    </item>
+    
+    <item>
+      <title>Capistrano3がわからんので今一度イチから考えなおしてみる</title>
+      <link>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</link>
+      <pubDate>Sun, 06 Apr 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/04/06/2014-04-06-post/</guid>
+      <description>前回Capistranoが上手くいかないというエントリーを上げてから1か月。いまだにハマってしまっている……。何が悪いの皆目検討もつかない、</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（5）Capistranoによるデプロイ ※未完</title>
+      <link>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</link>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/02/20/2014-02-20-post/</guid>
+      <description>だいぶ間が空いてしまった……。Rails環境構築シリーズ、あとサーバーにはDB（postgresql）、unicorn、Railsを入れれば</description>
+    </item>
+    
+    <item>
+      <title>突然だけどVimperatorrcを晒してみる</title>
+      <link>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</link>
+      <pubDate>Sun, 09 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</guid>
+      <description>非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけ</description>
+    </item>
+    
+    <item>
+      <title>$ vagrant sshで仮想マシンに入れなくなった場合の対処法</title>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/</guid>
+      <description>やらかしました。Rails環境構築シリーズ、次回でセキュリティ周りの設定をまとめようと思い、普段の要領でiptablesをいじったりsshの</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（4）nginx導入</title>
+      <link>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</guid>
+      <description>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm リポジトリが正しく登録されて</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（3）PostgreSQLインストール</title>
+      <link>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</link>
+      <pubDate>Sun, 26 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/26/2014-01-26-post/</guid>
+      <description>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。 $ yum list | grep postgresql （中略） postgresql.i686 8.4.18-1.el6_4</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（2）Rubyのインストール &#43; α</title>
+      <link>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</link>
+      <pubDate>Thu, 23 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/23/2014-01-23-post/</guid>
+      <description>環境構築エントリーその2。まっさらなOSにRubyを入れていきます。 まずはいろいろパッケージのインストール。ぶっちゃけ参考書通りにやってるだ</description>
+    </item>
+    
+    <item>
+      <title>Rails環境構築（1） Vagrantで仮想マシン構築</title>
+      <link>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</link>
+      <pubDate>Sun, 19 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/19/2014-01-19-post/</guid>
+      <description>Vagrantで仮想サーバー構築してみたのでメモ。構築するだけなら、楽。大してコマンドも要らない。 インストール まずはGemでインストールして</description>
+    </item>
+    
+    <item>
+      <title>Ruby on Rails環境構築はじめます</title>
+      <link>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</link>
+      <pubDate>Sat, 18 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/18/2014-01-18-post/</guid>
+      <description>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけ</description>
+    </item>
+    
+    <item>
+      <title>bundle installはどのパスに対してすべきなのか問題</title>
+      <link>https://chroju.github.io/blog/2014/01/14/2014-01-14-post/</link>
+      <pubDate>Tue, 14 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/14/2014-01-14-post/</guid>
+      <description>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある</description>
+    </item>
+    
+    <item>
+      <title>twitter-bootstrap-railsでundefined methodのエラーに嵌る</title>
+      <link>https://chroju.github.io/blog/2014/01/09/2014-01-09-post/</link>
+      <pubDate>Thu, 09 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/09/2014-01-09-post/</guid>
+      <description>完全に嵌った。さっぱりわからん。 undefined method `to_css&#39; for nil:NilClass twitter-bootstrap-railsを試してみているのだが、インストールしていざブラウザ</description>
+    </item>
+    
+    <item>
+      <title>今年はほぼ日からEDITに浮気しました</title>
+      <link>https://chroju.github.io/blog/2014/01/05/2014-01-05-post/</link>
+      <pubDate>Sun, 05 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/05/2014-01-05-post/</guid>
+      <description>title=&amp;ldquo;ほぼ日→EDIT by chroju, on Flickr&amp;rdquo;&amp;gt; 浮気しました。 就職2年目から2年間ほぼ日手帳を使い続けたけど、今年はEDIT。ライバル側に</description>
+    </item>
+    
+    <item>
+      <title>『Webを支える技術』読了</title>
+      <link>https://chroju.github.io/blog/2013/12/28/2013-12-28-post/</link>
+      <pubDate>Sat, 28 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/12/28/2013-12-28-post/</guid>
+      <description>Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)posted with amazlet at 15.03.01山本 陽平 技術評論社 売り上げランキング: 13,031 Amazo</description>
+    </item>
+    
+    <item>
+      <title>Windows 8(VAIO Pro)買って最初にやったことと注意点</title>
+      <link>https://chroju.github.io/blog/2013/12/22/2013-12-22-post/</link>
+      <pubDate>Sun, 22 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/12/22/2013-12-22-post/</guid>
+      <description>本家ブログの方に書いたけどVAIO Pro買った。1週間ちょいほど、主に仕事で使ってるが、やっぱ軽いは正義。持ち歩いてもあんまり負担にならない</description>
+    </item>
+    
+    <item>
+      <title>Bundle execサボってエライ目にあった</title>
+      <link>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</link>
+      <pubDate>Sun, 08 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</guid>
+      <description>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… bundle exec rails g devise:install Railsのログイン機構作るためにDevise入れてみてたんだけ</description>
+    </item>
+    
+    <item>
+      <title>SSHでサーバーリモートログインする際のあれこれまとめ</title>
+      <link>https://chroju.github.io/blog/2013/12/08/2013-12-08-post/</link>
+      <pubDate>Sun, 08 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/12/08/2013-12-08-post/</guid>
+      <description>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらG</description>
+    </item>
+    
+    <item>
+      <title>GTD環境 2013年秋版</title>
+      <link>https://chroju.github.io/blog/2013/11/10/2013-11-10-post/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/11/10/2013-11-10-post/</guid>
+      <description>先日GTDの聖典を読み込み、ちょっと久しぶりにGTD環境を再構築した。今年に入ってからCatch Notesを使ったGTDを試すも、PCを使っ</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい</title>
+      <link>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</link>
+      <pubDate>Mon, 04 Nov 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</guid>
+      <description>RailsによるアジャイルWebアプリケーション開発 第4版posted with amazlet at 15.03.01Sam Ruby Dave Thomas David Heinemeier Hansson オーム社 売り上げランキング: 138,293 Amazon.co.</description>
+    </item>
+    
+    <item>
+      <title>短時間に限定して図書館で情報をザッピングするという勉強法</title>
+      <link>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</link>
+      <pubDate>Sun, 20 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</guid>
+      <description>新しい分野の勉強をするときって、ネットの情報だけでは不十分だったり信頼性に欠けたりするし、だから書籍に頼ろうと思うんだけど、どんな本 を選べば</description>
+    </item>
+    
+    <item>
+      <title>GTDの原典読んでみたら意外にいろいろ勘違いしてたという話</title>
+      <link>https://chroju.github.io/blog/2013/10/14/2013-10-14-post/</link>
+      <pubDate>Mon, 14 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/10/14/2013-10-14-post/</guid>
+      <description>GTDというかタスク管理についてはもうだいぶ長いこと悩んできたのだが、もうなんともにっちもさっちもいかなくなってきたので、ついに原典を紐解い</description>
+    </item>
+    
+    <item>
+      <title>RoRでログイン機能を実装する</title>
+      <link>https://chroju.github.io/blog/2013/10/06/2013-10-06-post/</link>
+      <pubDate>Sun, 06 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/10/06/2013-10-06-post/</guid>
+      <description>sessionに情報を保存することで「ログイン」状態を実現する 逆に言えばsession破棄で「ログアウト」扱いになる Railsにはsessi</description>
+    </item>
+    
+    <item>
+      <title>RoRでScaffold作成を間違えたときの対処法が知りたい</title>
+      <link>https://chroju.github.io/blog/2013/09/21/2013-09-21-post/</link>
+      <pubDate>Sat, 21 Sep 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/09/21/2013-09-21-post/</guid>
+      <description>generate scaffoldはMVC全部作ってくれて便利なんだけど、うっかりカラム名間違えたりしたときの対処法ってあるのかしら。後から変更したい場合は</description>
+    </item>
+    
+    <item>
+      <title>バージョン管理に注意しながら、Ruby on Railsの動作環境を構築する</title>
+      <link>https://chroju.github.io/blog/2013/09/16/2013-09-16-post/</link>
+      <pubDate>Mon, 16 Sep 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/09/16/2013-09-16-post/</guid>
+      <description>資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』第II部読了</title>
+      <link>https://chroju.github.io/blog/2013/09/04/2013-09-04-post/</link>
+      <pubDate>Wed, 04 Sep 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/09/04/2013-09-04-post/</guid>
+      <description>「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。 基本的に rails generate hoge コマンドで色々作れ</description>
+    </item>
+    
+    <item>
+      <title>技術書のサンプル試す場合はバージョンを揃えるべきなのか</title>
+      <link>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</link>
+      <pubDate>Sat, 03 Aug 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</guid>
+      <description>『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進</description>
+    </item>
+    
+    <item>
+      <title>『RailsによるアジャイルWebアプリケーション開発』第I部 読了</title>
+      <link>https://chroju.github.io/blog/2013/07/25/2013-07-25-post/</link>
+      <pubDate>Thu, 25 Jul 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/07/25/2013-07-25-post/</guid>
+      <description>第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Ruby</description>
+    </item>
+    
+    <item>
+      <title>Kaoriya版Vimでtxtファイルの自動改行が解除できない件</title>
+      <link>https://chroju.github.io/blog/2013/07/23/2013-07-23-post/</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/07/23/2013-07-23-post/</guid>
+      <description>2週間ぐらいハマってた。 プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset t</description>
+    </item>
+    
+    <item>
+      <title>Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</title>
+      <link>https://chroju.github.io/blog/2013/07/21/2013-07-21-post/</link>
+      <pubDate>Sun, 21 Jul 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/07/21/2013-07-21-post/</guid>
+      <description>VPSを使ってRuby on Railsでウェブサービスを作るにあたり、「まずは足元から」ということでLinuxの勉強から始めてボチボチやっていた</description>
+    </item>
+    
+    <item>
+      <title>お勉強ブログ、はじめます</title>
+      <link>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</link>
+      <pubDate>Sat, 20 Jul 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</guid>
+      <description>SEという職に就いて2年ちょい経ったわけだが、最近はPJリーダーとか顧客との調整とかその手の仕事ばかりを回されるようになってきて、実機を触る</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://chroju.github.io/blog/1/01/01/2016-05-14-pepabo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chroju.github.io/blog/1/01/01/2016-05-14-pepabo/</guid>
+      <description>100行合ったmod_rewirteっをngx_mrubyで書き換えた話 @buty4649 mod_rewriteがかなり複雑になっていてルーティング追加時の</description>
+    </item>
+    
+  </channel>
+</rss>

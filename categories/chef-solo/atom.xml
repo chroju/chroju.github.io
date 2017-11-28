@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chef Solo on the world as code</title>
+    <link>https://chroju.github.io/categories/chef-solo/</link>
+    <description>Recent content in Chef Solo on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 30 May 2014 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/chef-solo/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>chefでさくらVPSの初期構築を全部自動化してみた</title>
+      <link>https://chroju.github.io/blog/2014/05/30/2014-05-30-post/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/30/2014-05-30-post/</guid>
+      <description>Chefでサーバー構築を全部自動化して、借りているさくらVPSに当ててみた。意地でも手作業はまったく入れない完全自動構築設定。これはよい。毎</description>
+    </item>
+    
+    <item>
+      <title>Chef soloはじめの一歩</title>
+      <link>https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/</guid>
+      <description>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_co</description>
+    </item>
+    
+  </channel>
+</rss>

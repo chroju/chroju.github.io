@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on the world as code</title>
+    <link>https://chroju.github.io/categories/linux/</link>
+    <description>Recent content in Linux on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/linux/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>awesomeウィンドウマネージャーの見栄えを良くする</title>
+      <link>https://chroju.github.io/blog/2014/09/28/2014-09-28-post/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/28/2014-09-28-post/</guid>
+      <description>Arch Linuxで使っているデスクトップマネージャ、awesomeのテーマに若干手を入れてみたので備忘録。あんまり日本語ドキュメントないので、こ</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux &#43; awesome with Windows 8.1 in VAIO Pro</title>
+      <link>https://chroju.github.io/blog/2014/09/23/2014-09-23-post/</link>
+      <pubDate>Tue, 23 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/23/2014-09-23-post/</guid>
+      <description>先日VirtualBoxでArch Linux入れてみたところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお</description>
+    </item>
+    
+    <item>
+      <title>VirtualBoxでArch Linuxのインストール練習</title>
+      <link>https://chroju.github.io/blog/2014/09/07/2014-09-07-post/</link>
+      <pubDate>Sun, 07 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/09/07/2014-09-07-post/</guid>
+      <description>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブー</description>
+    </item>
+    
+    <item>
+      <title>SSHでサーバーリモートログインする際のあれこれまとめ</title>
+      <link>https://chroju.github.io/blog/2013/12/08/2013-12-08-post/</link>
+      <pubDate>Sun, 08 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/12/08/2013-12-08-post/</guid>
+      <description>うちのには仮想開発環境としてCent OSが立っているんだけど、この前コイツの中で作っているプロジェクトをGithubに突っ込もうと思ったらG</description>
+    </item>
+    
+  </channel>
+</rss>

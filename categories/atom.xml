@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on the world as code</title>
+    <link>https://chroju.github.io/categories/</link>
+    <description>Recent content in Categories on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 24 Sep 2015 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ansible</title>
+      <link>https://chroju.github.io/categories/ansible/</link>
+      <pubDate>Thu, 24 Sep 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ansible Event</title>
+      <link>https://chroju.github.io/categories/ansible-event/</link>
+      <pubDate>Thu, 25 Jun 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ansible-event/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ansible Serverspec Docker Circle Ci</title>
+      <link>https://chroju.github.io/categories/ansible-serverspec-docker-circle-ci/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ansible-serverspec-docker-circle-ci/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ansible Vps Linux</title>
+      <link>https://chroju.github.io/categories/ansible-vps-linux/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ansible-vps-linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aws</title>
+      <link>https://chroju.github.io/categories/aws/</link>
+      <pubDate>Fri, 15 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>https://chroju.github.io/categories/blog/</link>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Book</title>
+      <link>https://chroju.github.io/categories/book/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Capistrano</title>
+      <link>https://chroju.github.io/categories/capistrano/</link>
+      <pubDate>Sat, 12 Apr 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/capistrano/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chef Solo</title>
+      <link>https://chroju.github.io/categories/chef-solo/</link>
+      <pubDate>Fri, 30 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/chef-solo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://chroju.github.io/categories/docker/</link>
+      <pubDate>Fri, 04 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event</title>
+      <link>https://chroju.github.io/categories/event/</link>
+      <pubDate>Sun, 25 Oct 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/event/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Aws</title>
+      <link>https://chroju.github.io/categories/event-aws/</link>
+      <pubDate>Sat, 30 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/event-aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Nodejs</title>
+      <link>https://chroju.github.io/categories/event-nodejs/</link>
+      <pubDate>Wed, 20 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/event-nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Ops</title>
+      <link>https://chroju.github.io/categories/event-ops/</link>
+      <pubDate>Fri, 03 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/event-ops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exhibi</title>
+      <link>https://chroju.github.io/categories/exhibi/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/exhibi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git Github 開発環境</title>
+      <link>https://chroju.github.io/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</link>
+      <pubDate>Sun, 04 Oct 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Api</title>
+      <link>https://chroju.github.io/categories/google-api/</link>
+      <pubDate>Sun, 03 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/google-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lifehack</title>
+      <link>https://chroju.github.io/categories/lifehack/</link>
+      <pubDate>Sun, 24 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/lifehack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://chroju.github.io/categories/linux/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Misc</title>
+      <link>https://chroju.github.io/categories/misc/</link>
+      <pubDate>Thu, 05 Jun 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/misc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network</title>
+      <link>https://chroju.github.io/categories/network/</link>
+      <pubDate>Mon, 01 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Octopress</title>
+      <link>https://chroju.github.io/categories/octopress/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Poem</title>
+      <link>https://chroju.github.io/categories/poem/</link>
+      <pubDate>Sun, 03 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/poem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby</title>
+      <link>https://chroju.github.io/categories/ruby/</link>
+      <pubDate>Sun, 03 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby on Rails</title>
+      <link>https://chroju.github.io/categories/ruby-on-rails/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/ruby-on-rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Security Summary</title>
+      <link>https://chroju.github.io/categories/security-summary/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/security-summary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Serverspec</title>
+      <link>https://chroju.github.io/categories/serverspec/</link>
+      <pubDate>Thu, 31 Dec 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/serverspec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terminal</title>
+      <link>https://chroju.github.io/categories/terminal/</link>
+      <pubDate>Sun, 20 Jul 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vagrant</title>
+      <link>https://chroju.github.io/categories/vagrant/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/vagrant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://chroju.github.io/categories/vim/</link>
+      <pubDate>Sun, 01 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vimperator</title>
+      <link>https://chroju.github.io/categories/vimperator/</link>
+      <pubDate>Sun, 09 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/vimperator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://chroju.github.io/categories/windows/</link>
+      <pubDate>Sun, 22 Dec 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows 情報タスク管理</title>
+      <link>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sat, 04 Jul 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>キャリアプラン</title>
+      <link>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</link>
+      <pubDate>Sun, 28 Jun 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>情報タスク管理</title>
+      <link>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 29 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技術勉強全般</title>
+      <link>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</link>
+      <pubDate>Sun, 20 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>書評</title>
+      <link>https://chroju.github.io/categories/%E6%9B%B8%E8%A9%95/</link>
+      <pubDate>Sun, 16 Aug 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/%E6%9B%B8%E8%A9%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>環境構築</title>
+      <link>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

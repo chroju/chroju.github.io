@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="『パーフェクトRuby』p.196より。わりと苦手な分野。 まずはファイルをひらく。#openして変数に格納してもいいし、ブロックを引き渡して">
+
+<meta property="og:title" content="Ruby基礎復習(8) Fileクラス" />
+<meta property="og:description" content="『パーフェクトRuby』p.196より。わりと苦手な分野。 まずはファイルをひらく。#openして変数に格納してもいいし、ブロックを引き渡して" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/" />
+
+
+
+<meta property="article:published_time" content="2015-04-10T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2015-04-10T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ruby基礎復習(8) Fileクラス 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.053275461%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.053275461%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.053275461%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.053275461%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby基礎復習(8) Fileクラス
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Fri Apr 10 2015 00:00:00 JST'>Apr 10, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>『パーフェクトRuby』p.196より。わりと苦手な分野。</p>
+
+<p>まずはファイルをひらく。<code>#open</code>して変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。<code>#read</code>はファイルの内容全体を読み込む一方、<code>#gets</code>を使うと1行ずつ読み込むことができる。あるいは<code>#each_line</code>や<code>#each_char</code>といったメソッドも。</p>
+
+<pre><code class="language-ruby">file = File.open('example.txt')
+p file.read # example.txtの内容を表示
+file.close
+
+File.open 'example.txt' do |file|
+  p file.read
+end
+
+File.read('example.txt')
+
+File.open 'example.txt' do |file|
+  while line = file.gets
+    p line
+  end
+end
+
+File.open 'example.txt' do |file|
+  f.each_line do |line|
+    p line
+  end
+end
+</code></pre>
+
+<p>書き込むときは<code>#open</code>の第二引数にファイルを開くモードを指定する。デフォルトは<code>'r'</code>、すなわち読み込みモードで、他は以下の通り。基本は<code>r</code>が読み込み、<code>w</code>が書き込み、<code>a</code>が追記で、<code>+</code>を付けると読み書き両用モードになる。また<code>b</code>を後置するとバイナリモードで開かれる。</p>
+
+<p>| r  | 読み込みモード         |
+| r+ | 読み書き両用モード（読み書き位置は先頭から）       |
+| w  | 上書き書き込みモード   |
+| w+ | 新規作成して読み書き両用モード |
+| a  | 追記書き込みモード       |
+| a+ | 追記読み書き両用モード（読み込み位置は先頭から、書き込みは追記形式）  |</p>
+
+<pre><code class="language-ruby">File.open 'example.txt', 'w' do |f|
+  f.write 'hoge'
+end
+</code></pre>
+
+<p>もっと単純に<code>#write</code>メソッドだけでも書き込み可能。</p>
+
+<pre><code class="language-ruby">File.write 'example.txt', 'fuga'
+</code></pre>
+
+<p>先のファイルを開くモードの話の中で「読み込み位置は先頭から」という表現があったが、IOオブジェクトではファイル内の今どこを読み／書きしているかというアクセス位置が存在する。<code>#gets</code>では1行ずつ読み込みを行ったように、読み／書きを行うことでアクセス位置は進んでいく。先頭まで戻りたい場合は<code>#rewind</code>を使う。また<code>#seek</code>メソッドは第二引数に定数で指定した基準位置より、第一引数の整数分アクセス位置を移動させることができる。<code>#pos</code>は絶対的にアクセス位置を指定して動かせる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.puts
+  f.rewind # 先頭位置まで戻る
+
+  f.seek 10 # 先頭から10進む
+  f.seek -10, IO::SEEK_END # 末尾（SEEK_END）から10戻った位置に移動
+
+  f.pos = 25 # 先頭から25バイト目に移動
+  f.pos # =&gt; 25
+end
+</code></pre>
+
+<p>文字のエンコーディングについては、「外部」と「内部」という概念を持つ。外部はファイルのエンコーディング情報であり、内部はRuby上で処理する際のエンコーディング情報。例えばEUC-JPのファイルをutf-8で変換して取り扱い、書き込みはEUC-JPで、といったことができる。エンコーディングの設定には<code>#set_encoding</code>メソッドを使う。引数を1つだけ取る場合は外部エンコーディングを設定し、2つ取る場合は第一引数が外部、第二引数が内部を設定する。あるいは<code>File#open</code>するときに、読み書きモードと一緒にエンコーディングも指定することができる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.set_encoding('utf-8') # 外部エンコーディングをutf-8に設定
+
+  f.set_encoding('utf-8', 'EUC-JP') # 外部エンコーディングをutf-8、内部エンコーディングをEUC-JPに設定
+  f.set_encoding('utf-8:EUC-JP') # 外部エンコーディングをutf-8、内部エンコーディングをEUC-JPに設定
+end
+
+File.open 'example.txt', 'r:utf-8:EUC-JP' do |f|
+  p f.external_encoding # =&gt; &quot;utf-8&quot;
+  p f.internal_encoding # =&gt; &quot;EUC-JP&quot;
+end
+</code></pre>
+
+<p>ファイルのロックには<code>#flock</code>メソッドを利用する。ロックのモードは<a href="http://docs.ruby-lang.org/ja/1.9.3/method/File/i/flock.html">ここに記載の定数</a>を使って指定するのだが、主に<code>File::LOCK_EX</code>が排他ロックであることを覚えとけばいいような気も。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt', 'w' do |f|
+  f.flock File::LOCK_EX
+end
+</code></pre>
+
+<p>その他、ファイル情報取得系のメソッドをつらつらと。これらはファイルオブジェクトから取得するだけではなく、<code>File.atime(filename)</code>の形で<code>File</code>クラスのクラスメソッドでも呼び出すことができる。</p>
+
+<pre><code class="language-ruby">File.open 'example.txt' do |f|
+  f.atime # 最終アクセス日時
+  f.ctime # 最終変更日時
+  f.mtime # 最終更新日時
+
+  f.size # ファイルサイズ
+
+  f.ftype # ファイルタイプ 以下真偽判定メソッドも有り
+  f.file?
+  f.directory?
+  f.symlink?
+
+  f.writable? # =&gt; false
+  f.readable? # =&gt; true
+  f.executable? # =&gt; false
+
+  f.owned? # =&gt; false (自身がファイル所有者か？)
+  f.gid # ファイル所有者のGID
+  f.uid # ファイル所有者のUID
+end
+</code></pre>
+
+<p>ファイル操作系。</p>
+
+<pre><code class="language-ruby"># ファイル名変更、ファイル移動
+File.rename 'hoge', 'fuga'
+File.rename 'hoge', 'dir/hoge'
+
+# ファイル削除
+File.unlink 'hoge'
+
+# シンボリックリンク作成
+File.symlink 'target', 'link'
+
+# ハードリンク作成
+File.link 'target', 'link'
+
+# ファイルモード変更
+File.chmod 0600, 'filename'
+
+# 所有者、グループの変更
+File.chown 100, 100, 'filename'
+</code></pre>
+
+<p>ファイルパスに関するもろもろ。</p>
+
+<pre><code class="language-ruby"># ファイルのあるディレクトリパスの取得
+File.dirname(&quot;etc/sample.txt&quot;) # =&gt; &quot;/etc&quot;
+
+# 第一引数に与えたファイルパスに対する、ファイル名の取得。第二引数でsuffix指定。
+File.basename(&quot;etc/sample.txt&quot;) # =&gt; &quot;sample.txt&quot;
+File.basename(&quot;etc/sample.txt&quot;, &quot;.txt&quot;) # =&gt; &quot;sample&quot;
+
+# 拡張子の取得
+File.extname(&quot;etc/sample.txt&quot;) # =&gt; &quot;.txt&quot;
+
+# ファイルパスの連結（引数は可変長）
+File.join(&quot;/usr/local&quot;, &quot;bin/ruby&quot;) # =&gt; &quot;/usr/local/bin/ruby&quot;
+
+# ファイルパスからdirnameとbasenameを取得し配列生成
+File.split(&quot;/usr/local/bin/ruby&quot;) # =&gt; [&quot;/usr/local/bin&quot;, &quot;ruby&quot;]
+
+# 絶対パスの展開
+File.expand_path(&quot;~&quot;) # =&gt; &quot;/home/chroju&quot;
+File.expand_path(&quot;filename&quot;, &quot;~&quot;) # =&gt; &quot;/home/chroju/filename&quot;
+
+# absolute_pathでは~を展開しない
+File.absolute_path(&quot;~&quot;) # =&gt; &quot;/home/chroju/~&quot;
+</code></pre>
+
+<p>Dirクラスも触れたいのだが、長くなるので一旦ここまで。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

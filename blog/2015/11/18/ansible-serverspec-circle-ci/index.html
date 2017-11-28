@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット この記事に書か">
+
+<meta property="og:title" content="Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI" />
+<meta property="og:description" content="CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット この記事に書か" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/" />
+
+
+
+<meta property="article:published_time" content="2015-11-18T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2015-11-18T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.043882048%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.043882048%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.043882048%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.043882048%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Wed Nov 18 2015 00:00:00 JST'>Nov 18, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><a href="http://blog.kenjiskywalker.org/blog/2014/11/13/circleci-docker-ansible-serverspec/">CircleCIでDockerコンテナに対してansibleを実行しserverspecでテストをする - さよならインターネット</a></p>
+
+<p>この記事に書かれている内容を実際にやってみた。Ansibleを一旦は触ってみたところから、Circle.CIどころかCI経験が一切ない、ServerspecとDockerも使ったことがないという出発点だったので、得られるものはだいぶ大きい経験だった。完了したレポジトリは以下。</p>
+
+<p><a href="https://github.com/chroju/ansible-ruby-devs">chroju/ansible-ruby-devs</a></p>
+
+<h1 id="ansibleにテストは必要か">Ansibleにテストは必要か？</h1>
+
+<p>AnsibleはPlaybookに書かれた設定通りにサーバーをセッティングしてくれるツールなのだから、傍証としてのテストは必要ないし、そもそもそれはAnsibleに対する信頼の問題だという話がある。（かのオライリーのServerspec本でも「Serverspecの必要性」を状況に応じて説明した章がある）が、自分は以下の理由からAnsible実行後のテストは必要と考えている。</p>
+
+<ol>
+<li><h2 id="playbookの書き方が間違っている">Playbookの書き方が間違っている</h2>
+
+<p>確かにPlaybookに書いた内容通りにサーバーは組まれるのだが、そもそもPlaybookの書き方がおかしくて、想定通りの実行結果にならない可能性はある。そのレベルであればコードレビューで気付くべきではないかという話もあるが、こういう趣味の個人開発では難しかったり、レビューで漏れがあったりというのも有り得るわけで、自動テストに任せられるならその方が確かかとは思う。</p></li>
+
+<li><h2 id="冪等性の問題">冪等性の問題</h2>
+
+<p>特にshellモジュールを用いたときなどは冪等性が維持されない可能性があり、複数回の実行で想定外のサーバー状態になる可能性はある。</p></li>
+</ol>
+
+<h1 id="テストツールの選定">テストツールの選定</h1>
+
+<p>普通にServerspec。Ansibleで定義したインベントリファイルやrolesをServerspecと共有してくれる<a href="http://qiita.com/volanja/items/5e97432d6b231dbb31c1">ansible_spec</a>というツールもあり、当初はこちらを使おうとしていた。が、前述した「Ansibleの書き方自体が間違っている可能性」をテストするとなると、できるだけAnsibleとテストツールは疎結合とするべきと考え、ファイルや設定は一切共有しない形でServerspecを使っている。</p>
+
+<h1 id="circle-ciの利用">Circle CIの利用</h1>
+
+<p>繰り返しになるが初である。インフラエンジニアがCIをすることはまぁない（なかった）。そんな頻繁に設定を変えるわけでもなし。インフラCIが可能かつ必要となったのは、Infrastructure as Codeの台頭と、クラウドネイティブ化によりImmutableかつ極めて速いライフサイクルでサーバーインフラが更新されるようになったことによるもの。</p>
+
+<p>で、Circle CIでググってもそんなに使い方みたいな初歩的な記事は出ない。どうもCIツールの使い方なんてのはJenkins登場の頃に身につけてて当然だろって感じの扱いっぽい。実際使いながら自分なりに理解したのは「レポジトリをpushすると、それを使って自動的にテストやデプロイを回してくれる」ツールということで、Circle CIについてはこんな感じに認識してるんだがあってんのかなぁ。</p>
+
+<ul>
+<li>レポジトリの使用言語やファイル構成を見て良きに計らって勝手にテストしてくれる。</li>
+<li>もちろん自分でテストコマンドを書いてもOKで、Circle CIにやってほしいことは <code>circle.yml</code> というYAMLファイルに書いてレポジトリの第一階層に置いておく。</li>
+<li>GitHub連携を前提としており、連携したレポジトリの <code>push</code> をトリガーとして動作する。</li>
+<li>動作としてはCircle CI上でDockerコンテナ（ubuntuベース）を起動→レポジトリを <code>git clone</code> →circle.ymlを読んで実行</li>
+</ul>
+
+<h1 id="実装">実装</h1>
+
+<p>実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。</p>
+
+<p><a href="http://stormcat.hatenablog.com/entry/2015/02/04/004227">CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&lt;)</a></p>
+
+<pre><code class="language-yaml">machine:
+  timezone:
+    Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
+
+  cache_directories:
+    - &quot;~/docker&quot;
+
+test:
+  override:
+    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c 'ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;&amp; cd /ansible/spec &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec'
+</code></pre>
+
+<p>この方法の肝はAnsibleとServerspecのフォルダを<code>docker run</code>の<code>-v</code>オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。</p>
+
+<p>テストにおいてはインベントリファイルも<code>site.yml</code>もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと<code>load</code>するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。</p>
+
+<p>実行結果はslackの個人チャンネルに流している。GtiHubに上げるだけで勝手にテストして結果も自動通知されるというのはとても楽しい。やれることの自由度が広すぎて夢が広がる。</p>
+
+<h1 id="つまずいた点">つまずいた点</h1>
+
+<ul>
+<li>Dockerfile初挑戦につき、結構戸惑った。Ansibleでsshd_configを編集させていたのだが、コンテナにそもそもsshが入ってなくてコケたりした。</li>
+<li>Circle CIでのカレントディレクトリの扱いがわからず、しばらく <code>circle.yml</code> で指定するファイルパスに悩まされた。クローンしたレポジトリの中にいる状態で始まるっぽい？</li>
+<li><code>docker run</code> に <code>&amp;&amp;</code> 付きでコマンド渡すときに <code>/bin/sh -c</code> が必要だとしばらく気付かなかった。</li>
+<li>Dockerコンテナを <code>save</code> して <code>load</code> してるので、Dockerfile書き換えたら当然ながらCircle CIを「without cache」で実行しないとダメです。</li>
+</ul>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

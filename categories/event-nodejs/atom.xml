@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event Nodejs on the world as code</title>
+    <link>https://chroju.github.io/categories/event-nodejs/</link>
+    <description>Recent content in Event Nodejs on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 20 Jan 2016 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/event-nodejs/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>東京Node学園付属小学校1限目に行ってきた</title>
+      <link>https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</link>
+      <pubDate>Wed, 20 Jan 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/</guid>
+      <description>【増枠！】東京Node学園付属小学校 1時限目 - connpass 東京node学園というNode.jsのユーザーコミュニティがありますが、その入門者向けバージ</description>
+    </item>
+    
+  </channel>
+</rss>

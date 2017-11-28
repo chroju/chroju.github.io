@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技術勉強全般 on the world as code</title>
+    <link>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</link>
+    <description>Recent content in 技術勉強全般 on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 20 Oct 2013 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>短時間に限定して図書館で情報をザッピングするという勉強法</title>
+      <link>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</link>
+      <pubDate>Sun, 20 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/10/20/2013-10-20-post/</guid>
+      <description>新しい分野の勉強をするときって、ネットの情報だけでは不十分だったり信頼性に欠けたりするし、だから書籍に頼ろうと思うんだけど、どんな本 を選べば</description>
+    </item>
+    
+    <item>
+      <title>技術書のサンプル試す場合はバージョンを揃えるべきなのか</title>
+      <link>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</link>
+      <pubDate>Sat, 03 Aug 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/08/03/2013-08-03-post/</guid>
+      <description>『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>情報タスク管理 on the world as code</title>
+    <link>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 情報タスク管理 on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 29 Apr 2015 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GTD環境 2015年春版（Workflowy最強説）</title>
+      <link>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</link>
+      <pubDate>Wed, 29 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</guid>
+      <description>GTDという言葉もなんだか多義的に使われているような気がするが、自分の場合は「今あるタスクを『高度』の概念から見直して、きちんと前に進むこと</description>
+    </item>
+    
+    <item>
+      <title>『エンジニアのための時間管理術』読了</title>
+      <link>https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</link>
+      <pubDate>Sat, 07 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/</guid>
+      <description>エンジニアのための時間管理術posted with amazlet at 15.03.07Thomas A. Limoncelli オライリー・ジャパン 売り上げランキング: 12,858 Amazon.co.jpで詳細を見る 先日のデブ</description>
+    </item>
+    
+    <item>
+      <title>ブログ書けてない不安</title>
+      <link>https://chroju.github.io/blog/2014/11/10/2014-11-10-post/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/11/10/2014-11-10-post/</guid>
+      <description>インプットに対してアウトプットの量が少ないなと前から思っている。ブログを書いてるとアウトプットの履歴が残るから「アウトプットしてない」時期が</description>
+    </item>
+    
+    <item>
+      <title>自分のことを「ペルソナ」から見返してみる</title>
+      <link>https://chroju.github.io/blog/2014/05/06/2014-05-06-post/</link>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/05/06/2014-05-06-post/</guid>
+      <description>自分の状況を客観的に評価する（タスク、財務管理、スケジュール管理など）とき、「ペルソナ」を考え方として導入するとわりと捗ることに最近気付いた</description>
+    </item>
+    
+    <item>
+      <title>今年はほぼ日からEDITに浮気しました</title>
+      <link>https://chroju.github.io/blog/2014/01/05/2014-01-05-post/</link>
+      <pubDate>Sun, 05 Jan 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/01/05/2014-01-05-post/</guid>
+      <description>title=&amp;ldquo;ほぼ日→EDIT by chroju, on Flickr&amp;rdquo;&amp;gt; 浮気しました。 就職2年目から2年間ほぼ日手帳を使い続けたけど、今年はEDIT。ライバル側に</description>
+    </item>
+    
+    <item>
+      <title>GTD環境 2013年秋版</title>
+      <link>https://chroju.github.io/blog/2013/11/10/2013-11-10-post/</link>
+      <pubDate>Sun, 10 Nov 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/11/10/2013-11-10-post/</guid>
+      <description>先日GTDの聖典を読み込み、ちょっと久しぶりにGTD環境を再構築した。今年に入ってからCatch Notesを使ったGTDを試すも、PCを使っ</description>
+    </item>
+    
+    <item>
+      <title>GTDの原典読んでみたら意外にいろいろ勘違いしてたという話</title>
+      <link>https://chroju.github.io/blog/2013/10/14/2013-10-14-post/</link>
+      <pubDate>Mon, 14 Oct 2013 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2013/10/14/2013-10-14-post/</guid>
+      <description>GTDというかタスク管理についてはもうだいぶ長いこと悩んできたのだが、もうなんともにっちもさっちもいかなくなってきたので、ついに原典を紐解い</description>
+    </item>
+    
+  </channel>
+</rss>

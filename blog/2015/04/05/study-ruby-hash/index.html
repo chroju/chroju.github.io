@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="『パーフェクトRuby』p.179より。 まず基本的なとこで。 hash = {hoge: 1, fuga: 2} hash.each do |key, val| p &quot;#{key}: #{val}&quot; end # =&gt; &quot;hoge: 1&quot;, &quot;fuga: 2&quot; hash.each_key do |key| p key end # =&gt; &quot;hoge&quot;, &quot;fuga&quot; hash.each_value do |val| p val end # =&gt; &quot;1&quot;, &quot;2&quot;">
+
+<meta property="og:title" content="Ruby基礎復習(6) Hash" />
+<meta property="og:description" content="『パーフェクトRuby』p.179より。 まず基本的なとこで。 hash = {hoge: 1, fuga: 2} hash.each do |key, val| p &quot;#{key}: #{val}&quot; end # =&gt; &quot;hoge: 1&quot;, &quot;fuga: 2&quot; hash.each_key do |key| p key end # =&gt; &quot;hoge&quot;, &quot;fuga&quot; hash.each_value do |val| p val end # =&gt; &quot;1&quot;, &quot;2&quot;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/04/05/study-ruby-hash/" />
+
+
+
+<meta property="article:published_time" content="2015-04-05T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2015-04-05T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ruby基礎復習(6) Hash 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/04/05/study-ruby-hash/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.054991736%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.054991736%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.054991736%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.054991736%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby基礎復習(6) Hash
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Apr 5 2015 00:00:00 JST'>Apr 5, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>『パーフェクトRuby』p.179より。</p>
+
+<p>まず基本的なとこで。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2}
+
+hash.each do |key, val|
+  p &quot;#{key}: #{val}&quot;
+end # =&gt; &quot;hoge: 1&quot;, &quot;fuga: 2&quot;
+
+hash.each_key do |key|
+  p key
+end # =&gt; &quot;hoge&quot;, &quot;fuga&quot;
+
+hash.each_value do |val|
+  p val
+end # =&gt; &quot;1&quot;, &quot;2&quot;
+
+hash[:hoge] = 3
+p hash # =&gt; {hoge: 3, fuga: 2}
+hash[:piyo] = 4
+p hash # =&gt; {hoge: 3, fuga: 2, piyo: 4}
+
+hash.delete(:piyo)
+hash # =&gt; {hoge: 3, fuga: 2}
+
+hash.empty? # =&gt; false
+hash.length # =&gt; 2
+</code></pre>
+
+<p>ハッシュの生成は<code>Hash[]</code>により偶数個の引数から行うこともできる。</p>
+
+<pre><code class="language-ruby">ary = [&quot;hoge&quot;, 1, &quot;fuga&quot;, 2]
+Hash[*ary] # =&gt; {hoge: 1, fuga: 2}
+
+ary = [[&quot;hoge&quot;, 1], [&quot;fuga&quot;, 2]]
+Hash[ary] # =&gt; {hoge: 1, fuga: 2}
+</code></pre>
+
+<p>Arrayクラスと同様の<code>#select</code>、<code>#reject</code>、<code>#keep_if</code>、<code>#delete_if</code>操作が可能。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2, piyo: 3}
+
+hash.select {|key, val| val.even? } # =&gt; {fuga: 2}
+p hash # =&gt; {hoge: 1, fuga: 2, piyo: 3}
+hash.select! {|key, val| val.even? } # =&gt; {fuga: 2}
+p hash # =&gt; {fuga: 2}
+
+hash = {hoge: 1, fuga: 2, piyo: 3}
+
+hash.reject {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+p hash # =&gt; {hoge: 1, fuga: 2, piyo: 3}
+hash.reject! {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+p hash # =&gt; {hoge: 1, piyo: 3}
+
+hash.select! {|key, val| val.even? } # =&gt; nil
+hash.keep_if {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+hash.reject! {|key, val| val.even? } # =&gt; nil
+hash.delete_if {|key, val| val.even? } # =&gt; {hoge: 1, piyo: 3}
+</code></pre>
+
+<p>Hashの統合は<code>Hash#merge</code>を用いる。キーが重複する場合は、引数で渡されたハッシュの値で上書きされる。ブロックを引き渡している場合は、キー重複時の処理をブロックの中で定義できる。破壊的操作である<code>Hash#merge!</code>は<code>Hash#update</code>とも書くことが出来る。</p>
+
+<pre><code class="language-ruby">a = {hoge: 1, fuga: 2}
+b = {hoge: 3, piyo: 4}
+a.merge(b) # =&gt; {hoge: 3, fuga: 2, piyo: 4}
+p a # =&gt; {hoge: 1, fuga: 2}
+
+a.merge!(b) {|key, a_val, b_val|
+  a_val + b_val
+} # =&gt; {hoge: 4, fuga: 2, piyo: 4}
+p a # =&gt; {hoge: 4, fuga: 2, piyo: 4}
+</code></pre>
+
+<p>キーと値の取得に関して。特に特定キーの存在確認については、<code>Hash#has_key?</code>を用いる。通常の<code>Hash[]</code>による呼び出しだと、値が存在しない場合でもnilが返ってきてしまい、値がnilなのか、それとも存在していないのか区別がつかないため。あるいは<code>Hash#fetch</code>を用いれば、値が存在しない場合の返り値を指定できる。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2, piyo: 3, hogehoge: nil}
+
+hash.keys # =&gt; [:hoge, :fuga, :piyo]
+hash.key(2) # =&gt; :fuga
+
+hash.values # =&gt; [1, 2, 3]
+hash.values_at(:fuga) # =&gt; [2]
+hash.values_at(:fuga, :piyo) # =&gt; [2, 3]
+
+hash[:hogehoge] # =&gt; nil
+hash[:foo] # =&gt; nil
+hash.has_key?(:foo) # =&gt; false
+# 以下すべてhas_key?と同義
+hash.member?(:foo)
+hash.include?(:foo)
+hash.key?(:foo)
+
+hash.fetch(:foo) # =&gt; nil
+hash.fetch(:foo, &quot;error&quot;) # =&gt; &quot;error&quot;
+hash.fetch(:foo){|key| &quot;#{key} not exists&quot;} # =&gt; &quot;foo not exists&quot;
+
+hash.has_value?(3) # =&gt; true
+hash.value?(3) # =&gt; true
+</code></pre>
+
+<p>Hashにはデフォルト値の概念があり、<code>Hash#new</code>の引数に与えた値が、存在しないキーを参照したときの返り値となる（デフォルトはnil）。ここで指定した値はすべて同一オブジェクトであり、破壊的操作をする場合などは注意が必要。また<code>Hash#default=</code>や<code>Hash#default_proc=</code>により、既存のHashオブジェクトに対してもデフォルト値の変更が可能。</p>
+
+<pre><code class="language-ruby">hash = Hash.new(&quot;null&quot;)
+hash[:foo] # =&gt; &quot;null&quot;
+
+hash.default = &quot;undefined&quot;
+hash[:foo] # =&gt; &quot;undefined&quot;
+default = hash.default
+default.reverse!
+hash[:foo] # =&gt; &quot;denifednu&quot;
+
+hash.default_proc = -&gt;(hash, key) {&quot;Key: #{key} not exists&quot;}
+hash[:foo] # =&gt; &quot;Key: foo not exists&quot;
+</code></pre>
+
+<p>ハッシュ変換系のメソッド。</p>
+
+<pre><code class="language-ruby">hash = {hoge: 1, fuga: 2}
+
+hash.invert # =&gt; {1: hoge, 2: fuga}
+hash.to_a # =&gt; [[:hoge, 1], [:fuga, 2]]
+hash.sort # =&gt; [[:fuga, 2], [:hoge, 1]]
+</code></pre>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

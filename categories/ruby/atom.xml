@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on the world as code</title>
+    <link>https://chroju.github.io/categories/ruby/</link>
+    <description>Recent content in Ruby on the world as code</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 03 May 2015 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://chroju.github.io/categories/ruby/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</title>
+      <link>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</link>
+      <pubDate>Sun, 03 May 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</guid>
+      <description>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎学習(10) Mix-in</title>
+      <link>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</link>
+      <pubDate>Fri, 24 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/</guid>
+      <description>Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。 参考 requireとincludeと</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(9) Dirクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</link>
+      <pubDate>Tue, 14 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/14/study-ruby-dir/</guid>
+      <description>『パーフェクトRuby』p.208より。 Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(8) Fileクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</link>
+      <pubDate>Fri, 10 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/</guid>
+      <description>『パーフェクトRuby』p.196より。わりと苦手な分野。 まずはファイルをひらく。#openして変数に格納してもいいし、ブロックを引き渡して</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(7) Timeクラス</title>
+      <link>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</link>
+      <pubDate>Mon, 06 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</guid>
+      <description>『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&amp;gt; 2015-03-16 23:25:32 +0900 new = Time.new # =&amp;gt; 2015-03-16 23:25:32 +0900 now.zone # =&amp;gt; &amp;quot;JST&amp;quot; now.getutc #</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(6) Hash</title>
+      <link>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</link>
+      <pubDate>Sun, 05 Apr 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</guid>
+      <description>『パーフェクトRuby』p.179より。 まず基本的なとこで。 hash = {hoge: 1, fuga: 2} hash.each do |key, val| p &amp;quot;#{key}: #{val}&amp;quot; end # =&amp;gt; &amp;quot;hoge: 1&amp;quot;, &amp;quot;fuga: 2&amp;quot; hash.each_key do |key| p key end # =&amp;gt; &amp;quot;hoge&amp;quot;, &amp;quot;fuga&amp;quot; hash.each_value do |val| p val end # =&amp;gt; &amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(5) 配列(Array)</title>
+      <link>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</link>
+      <pubDate>Wed, 18 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/18/study-ruby-array/</guid>
+      <description>『パーフェクトRuby』p.171より。 まずは配列の生成をいくつか。#new(a,b)で生成したとき、各要素は同じオブジェクトとなるので注意</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(4) EnumerableとComparable</title>
+      <link>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</link>
+      <pubDate>Tue, 17 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/</guid>
+      <description>『パーフェクトRuby』p.164より。 一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされ</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(3) Numericクラス</title>
+      <link>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</link>
+      <pubDate>Mon, 16 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/</guid>
+      <description>パーフェクトRuby p.144より。 判定系メソッド、#nonzeroが#zeroの真逆の動きではなくてちょっと混乱しそう。あと#intege</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(2) Stringクラス</title>
+      <link>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</link>
+      <pubDate>Sun, 15 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</guid>
+      <description>パーフェクトRuby p.148から学習。文字列ことStringクラス。 まずは基本操作系。 s = &amp;quot;hoge&amp;quot; s.empty? # =&amp;gt; false s.length # =&amp;gt; 4 s.size # =&amp;gt; 4 s.bitesize # =&amp;gt; 8 s.include?(&amp;quot;og&amp;quot;) =&amp;gt; true 演算子で</description>
+    </item>
+    
+    <item>
+      <title>Ruby基礎復習(1) 基礎文法</title>
+      <link>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</link>
+      <pubDate>Sun, 08 Mar 2015 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/</guid>
+      <description>去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあ</description>
+    </item>
+    
+    <item>
+      <title>Webスクレイピング手法は何かしら身に付けると便利そう</title>
+      <link>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</link>
+      <pubDate>Sun, 24 Aug 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2014/08/24/2014-08-24-post/</guid>
+      <description>最近Webスクレイピング勉強会が開かれましたが、自分これは「補欠」になってしまった上に別の予定が入ってしまって行けなくなり、なので自分なりに</description>
+    </item>
+    
+  </channel>
+</rss>

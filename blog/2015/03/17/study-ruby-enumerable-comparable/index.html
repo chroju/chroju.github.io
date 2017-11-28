@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="『パーフェクトRuby』p.164より。 一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされ">
+
+<meta property="og:title" content="Ruby基礎復習(4) EnumerableとComparable" />
+<meta property="og:description" content="『パーフェクトRuby』p.164より。 一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/" />
+
+
+
+<meta property="article:published_time" content="2015-03-17T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2015-03-17T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ruby基礎復習(4) EnumerableとComparable 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.056504362%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.056504362%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.056504362%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.056504362%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby基礎復習(4) EnumerableとComparable
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Mar 17 2015 00:00:00 JST'>Mar 17, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>『パーフェクトRuby』p.164より。</p>
+
+<p>一部組み込みクラスは、EnumerableやComparableというモジュールがincludeされている。前者は聞き慣れない英単語だが、&rdquo;can be counted&rdquo;の意味らしく、HashやArrayといった一定の集合を表すクラスにincludeされていて、繰り返し処理や要素抽出に関するメソッドを実装する。Comparableはその名の通り比較演算、具体的には<code>#&lt;=&gt;</code>の実装であり、NumericやStringにincludeされているらしい。</p>
+
+<p>特に実装されるメソッド数が多いので、Enumerableについてじっくり見てみたい。</p>
+
+<h2 id="enumerable">Enumerable</h2>
+
+<p>まず繰り返し系。これだけでもかなり。。<code>#each_cons</code>のconsって何の意味ですかね。他はだいたい字義からイメージできる動作をしてくれる。あと<code>#each_with_object</code>がいまいち飲み込めてない。</p>
+
+<pre><code class="language-ruby">(1..4).each_cons 2 do |a,b|
+  p [a,b]
+end # =&gt; [1,2] [2,3] [3,4]
+
+(1..4).each_slice 2 do |a,b|
+  p [a,b]
+end # =&gt; [1,2] [3,4]
+
+%(hoge fuga piyo).each_with_index do |value, index|
+  p &quot;#{index}: #{value}&quot;
+end # =&gt; 0: hoge 1: fuga 2: piyo
+
+(1..4).each_with_object([]) {|i, result| result &lt;&lt; i*2} # =&gt; [2,4,6,8]
+
+(1..4).reverse_each do |i|
+  p i
+end # =&gt; 4,3,2,1
+
+(1..4).cycle {|i| p i} # =&gt; 1,2,3,4,1,2... 以下、無限ループ
+</code></pre>
+
+<p>各要素の評価には<code>#map</code>と<code>#collect</code>。いずれも同じ動作。</p>
+
+<pre><code class="language-ruby">(1..4).map {|i| i * 3} # =&gt; [3, 6, 9, 12]
+(1..4).collect {|i| i * 3} # =&gt; [3, 6, 9, 12]
+</code></pre>
+
+<p>判定系。<code>#member?</code>と<code>include?</code>は同義。</p>
+
+<pre><code class="language-ruby">[1,2,3].all? {|i| i &gt; 1} # =&gt; false
+[1,2,3].any? {|i| i &gt; 1} # =&gt; true
+[1,2,3].none? {|i| i &gt; 3} # =&gt; true
+[1,2,3].one? {|i| i &gt; 1} # =&gt; false
+
+%w(hoge fuga piyo).member? &quot;fuga&quot; # =&gt; true
+%w(hoge fuga piyo).include? &quot;fuga&quot; # =&gt; true
+</code></pre>
+
+<p>抽出系。覚えやすいことにgrepがある。<code>#detect</code>は条件に当てはまる最初の要素だけ、<code>#select</code>はすべてを抽出する。<code>#find_all</code>は<code>#select</code>と同義。<code>#reject</code>は<code>#select</code>といわば「逆」の動きをする。<code>#take</code>と<code>#drop</code>は要素数を指定して先頭から要素抽出orスキップする。あとは語義通りのメソッドがいくつか。</p>
+
+<pre><code class="language-ruby">%w(hoge fuga piyo).grep(/o/i) # =&gt; &quot;hoge&quot;, &quot;piyo&quot;
+[1,2,&quot;hoge&quot;].grep(String) # =&gt; &quot;hoge&quot;
+
+[1,2,3,4].detect {|i| i.even?} # =&gt; 2
+[1,2,3,4].select {|i| i.even?} # =&gt; 2, 4
+[1,2,3,4].find_all {|i| i.even?} # =&gt; 2, 4
+[1,2,3,4].reject {|i| i.even?} # =&gt; 1, 3
+[1,2,3,4].find_index {|i| i.even?} # =&gt; 1
+
+(1..10).take 3 # =&gt; [1,2,3]
+(1..10).drop 3 # =&gt; [4,5,6,7,8,9,10]
+
+(1..10).take_while {|i| i &lt; 3} # =&gt; [1,2]
+(1..10).drop_while {|i| i &lt; 3} # =&gt; [3,4,5,6,7,8,9,10]
+
+(1..10).max # =&gt; 10
+%(aaa bbbb ccccc).max_by {|s| s.length} # =&gt; &quot;ccccc&quot;
+(1..10).min # =&gt; 1
+%(aaa bbbb ccccc).min_by {|s| s.length} # =&gt; &quot;aaa&quot;
+(1..10).minmax # =&gt; [1,10]
+%(aaa bbbb ccccc).minmax_by {|s| s.length} # =&gt; [&quot;aaa&quot;, &quot;ccccc&quot;]
+
+(1..10).first # =&gt; 1
+(1..10).count # =&gt; 10
+(1..10).count(2) # =&gt; 1
+</code></pre>
+
+<p><code>#inject</code>を使うと全要素を総計するような処理ができる。これを「畳み込み演算」と呼ぶらしい。引数2つを必要とするブロックを受け取り、第一引数が直前のループでの演算結果を持ち、第二引数がその回のループでの要素を取る。あるいはブロックを取らず、<code>#inject</code>の引数にシンボルでメソッド名を渡すことで、全要素に対してそのメソッドを適用した結果を得られる。</p>
+
+<pre><code class="language-ruby">(1..5).inject {|result, i| result + i} # =&gt; 15
+(1..5).inject(10) {|result, i| result + i} # =&gt; 25
+(1..5).inject(:+) # =&gt; 15
+(1..5).inject(:*) # =&gt; 120
+</code></pre>
+
+<p>グルーピング。<code>#group_by</code>はブロックで評価した戻り値をキーとしたハッシュに要素をグルーピングしてくれる。<code>#partition</code>はブロックで評価した真偽値を元に配列でグルーピング。後者の方が使い勝手は良さそうではある。</p>
+
+<pre><code class="language-ruby">(1..6).group_by {|i| i % 3 } # =&gt; {0=&gt;[3,6], 1=&gt;[1,4], 2=&gt;[2,5]}
+(1..6).partition {|i| i.even?} # =&gt; [[1,3,5], [2,4,6]]
+</code></pre>
+
+<p>一番意味がわからない<code>#zip</code>。selfと引数の配列で、同じ添字にあたる要素を使って新しい配列を生成する。どう使うんだろうこれ。。</p>
+
+<pre><code class="language-ruby">(1..3).zip([4,5,6], [7,8,9]) # =&gt; [1,4,7], [2,5,8], [3,6,9]
+</code></pre>
+
+<h2 id="comparableとソート">Comparableとソート</h2>
+
+<p>個人的に苦手なのがこの宇宙船演算子とソート周り。まず大前提として、宇宙船演算子はレシーバと引数を比較し、レシーバが大きければ1、小さければ-1、同値であれば0を返す。</p>
+
+<pre><code class="language-ruby">1 &lt;=&gt; 2 # =&gt; -1
+1 &lt;=&gt; 0 # =&gt; 1
+1 &lt;=&gt; 1 # =&gt; 0
+</code></pre>
+
+<p>Comparableモジュールをincludeしたクラスで<code>#&lt;=&gt;</code>を定義すると、各種演算子による比較のルールを定めることができる。</p>
+
+<pre><code class="language-ruby">class Person
+  include Comparable
+  attr_accessor :age
+
+  def initialize(age)
+    self.age = age
+  end
+
+  def &lt;=&gt;(other)
+    age &lt;=&gt; other.age
+  end
+end
+
+taro = Person.new(21)
+hanako = Person.new(32)
+
+taro &gt; hanako # =&gt; true
+taro == hanako # =&gt; false
+</code></pre>
+
+<p>で、Enumerableの<code>#sort</code>は要素を宇宙船演算子で比較して結果が正になるよう並び替えていく。要は昇順がデフォルト。ブロックに引き渡すこともでき、ここで任意の比較方法を定義してソートすることもできる。<code>#sort_by</code>を使えば宇宙船演算子を使わず、指定のメソッドを使って昇順に並び替えてくれる。メソッド呼び出し回数が<code>#sort_by</code>だと1回で済むので、実行速度の面で差が出る可能性がある。</p>
+
+<pre><code class="language-ruby">takeshi = Person.new(25)
+people = [hanako, taro, takeshi]
+people.sort # =&gt; [taro, takeshi, hanako]
+people.sort {|a,b| b &lt;=&gt; a} # =&gt; [hanako, takeshi, taro]
+people.sort_by {|person| person.age} # =&gt; [taro, takeshi, hanako]
+</code></pre>
+
+<hr />
+
+<p>なお、意図的に飛ばしてしまったのだが、あと触れてないEnumerableのメソッドとして<code>#chunk</code>周りがある。ちょっと飲み込みきれてないのでまた次回。</p>
+
+<h2 id="参考">参考</h2>
+
+<p><a href="http://jutememo.blogspot.jp/2008/03/ruby-2-enumerable.html">Ruby のイテレータ (2) – Enumerable と Comparable モジュール | すぐに忘れる脳みそのためのメモ</a></p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけ">
+
+<meta property="og:title" content="突然だけどVimperatorrcを晒してみる" />
+<meta property="og:description" content="非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2014/02/09/2014-02-09-post/" />
+
+
+
+<meta property="article:published_time" content="2014-02-09T00:00:00&#43;09:00"/>
+
+<meta property="article:modified_time" content="2014-02-09T00:00:00&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     突然だけどVimperatorrcを晒してみる 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2014/02/09/2014-02-09-post/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2017-11-28%2015%3a24%3a32.074962464%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2017-11-28%2015%3a24%3a32.074962464%20%2b0000%20UTC">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2017-11-28%2015%3a24%3a32.074962464%20%2b0000%20UTC">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2017-11-28%2015%3a24%3a32.074962464%20%2b0000%20UTC">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    突然だけどVimperatorrcを晒してみる
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Feb 9 2014 00:00:00 JST'>Feb 9, 2014</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>7 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>非常に唐突ではあるけどvimperatorrcを晒してみようと思う。2014年の今日、あんまりvimperator関連の日本語記事って見かけない気がしていて、少しでもそのへん貢献できればなぁという思い。</p>
+
+<p>vimperator自体は何年か前から使っていたのだが、カスタマイズはあまりせずにデフォルトの状態で使っていた。が、操作によってはマウス使った方が便利だったり、ちょっと中途半端な状態にあったので、一念発起してちょこちょこいじってみた。まだいじれる余地はありそうなんだけど。</p>
+
+<pre><code>&quot; vim: set filetype=vim :
+</code></pre>
+
+<p>Vimで編集するとき、vimperatorrc用のハイライトがないので、似たところでfiletypeをvimとして認識させてます。</p>
+
+<pre><code>&quot;============================
+&quot; General
+&quot;============================
+
+&quot; 入力欄に自動フォーカスしない
+set focuscontent
+&quot; ビジュアルベルを表示しない
+set visualbell
+highlight Bell display:none
+&quot; :oなどでの補完候補をサーチエンジン、履歴に限定
+set complete=sl
+&quot; Hintモードでアルファベット使用
+set hintchars=jfnvurhgytbkdmcielsxoe
+&quot; ツールバーはアドオンとタブのみ表示
+set gui=addons,nobookmarks,nomenu,nonavigation,tas
+&quot; commandモードでIMEオフ
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+</code></pre>
+
+<p>ここまでは基本、一般的な設定しかないかと。set complete=slは地味に効く。で、なぜか現状set hintcharsが動いてないれす。。。何がいけないのかわからん。</p>
+
+<pre><code>&quot;============================
+&quot; Key mapping
+&quot;============================
+
+&quot; google検索を手早くする
+noremap s :open&lt;Space&gt;google&lt;Space&gt;
+noremap ,s :tabopen&lt;Space&gt;google&lt;Space&gt;
+</code></pre>
+
+<p>ここからキーマッピング。:openで検索もURL開くのも両方いけるのはいけるんだが、vimperatorでの自動判別がうまいこといかない（例えば「twitter おすすめ」とかで:openすると、Twitter検索で「おすすめ」を探した結果が表示されるとか）ときがあるので、明示的に:open googleを一発で開けるようにしてます。</p>
+
+<pre><code>&quot; OS分岐
+&quot; dをブラウザ標準の「タブを閉じる」にマッピング
+&quot; vimperatorrcのリロード
+js&lt;&lt;EOM
+if(liberator.has(&quot;MacUnix&quot;)) {
+  liberator.execute(&quot;map d &lt;M-w&gt;&quot;);
+  liberator.execute(&quot;map ,r :source&lt;Space&gt;~/.vimperatorrc&lt;CR&gt;&quot;);
+} else {
+  liberator.execute(&quot;map d &lt;C-w&gt;&quot;);
+  liberator.execute(&quot;map ,r :source&lt;Space&gt;~/_vimperatorrc&lt;CR&gt;&quot;);
+}
+EOM
+</code></pre>
+
+<p>dを打ったときに左隣のタブにフォーカスが移るのが気に入らないので、OSデフォルトの「タブを閉じる」ショートカットにdをリンクさせて、タブを閉じたときの挙動はTab Mix Plusで「直前のアクティブタブに移る」ように設定してる。このへん、vimperatorrcだけでなんとか設定できないものか。</p>
+
+<p>あと、,rでvimperatorrcの再読み込みさせてます。この2つの設定はOSによって微妙に異なるので、分岐させますた。MacとWindowsでしか使ってないのでかなり適当な分岐。</p>
+
+<pre><code>&quot; 移動幅
+noremap j 5j
+noremap k 5k
+&quot; タブ移動
+nnoremap h &lt;C-p&gt;
+nnoremap l &lt;C-n&gt;
+&quot; タブの位置変更
+map &lt;C-l&gt; :tabmove! +1&lt;CR&gt;
+map &lt;C-h&gt; :tabmove! -1&lt;CR&gt;
+&quot; undo一覧から開く
+nnoremap U :undo&lt;Space&gt;
+let g:hint_tombloo_key = 'r'
+&quot; ブラウザ再起動
+nnoremap &lt;C-r&gt; :restart&lt;CR&gt;
+</code></pre>
+
+<p>わりと良くある感じのキーマッピング。</p>
+
+<pre><code>&quot; VisualモードでC-gで選択しているテキストでGoogle検索
+vmap &lt;silent&gt; &lt;C-g&gt; y&lt;Esc&gt;&lt;Esc&gt;P
+</code></pre>
+
+<p>コメントの通り。Visualモードで文字列選択した状態でC-g押すと、選択文字列でGoogle検索します。URLの場合はそのまま開いてくれるはずだけど、やったことなし。</p>
+
+<pre><code>&quot; タブのピン止めを@でトグル
+&quot; http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e
+javascript &lt;&lt;EOM
+liberator.modules.commands.addUserCommand([&quot;togglepin&quot;], &quot;add pin to current tab&quot;,
+function(){
+    var currentTab = gBrowser.mCurrentTab
+    if(currentTab.pinned){
+        gBrowser.unpinTab(currentTab)
+    }
+    else{
+        gBrowser.pinTab(currentTab)
+    }
+});
+EOM
+nnoremap @ :togglepin&lt;CR&gt;
+</code></pre>
+
+<p>地味にピン止め使うのでキーマッピングしました。Firefoxのこの全部Javascriptでなんとかなる感じ好きよ。大好き。ちなみに以下エントリーから丸コピーしてます。</p>
+
+<p><a href="http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e">Vimperator - タブのピン留めをトグルする - Qiita</a></p>
+
+<pre><code>&quot;============================
+&quot; colorscheme
+&quot;============================
+&quot; デフォルトのヒント派手すぎ＞＜
+hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+hi HintElem color: gray; background-color: #a1e4e6;
+hi HintActive color: black; background-color: #ff8700;
+
+&quot; デフォルトのエラー赤くてこわい＞＜
+hi ErrorMsg color:white; background-color: #ec6aa1;
+</code></pre>
+
+<p>デフォルトのヒントモードが色彩的に大変ウザいので……。色はもうちょい改善の余地あるかなと思ってる。</p>
+
+<p><a href="http://www.flickr.com/photos/chroju/12396935955/"> title=&ldquo;スクリーンショット 2014-02-09 10.09.25 by chroju, on Flickr&rdquo;&gt;<img src="http://farm6.staticflickr.com/5548/12396935955_dae9869fd9.jpg" width="500" height="257" alt="スクリーンショット 2014-02-09 10.09.25"></a></p>
+
+<pre><code>&quot;============================
+&quot; qmarks
+&quot;============================
+qmark m https://mail.google.com/
+qmark b http://b.hatena.ne.jp/chroju
+qmark t http://chroju.tumblr.com/
+qmark f http://cloud.feedly.com/#latest
+qmark p http://getpocket.com/a/queue
+qmark B http://chroju.hatenablog.jp/
+</code></pre>
+
+<p>QuickMarks設定。これ入れておくと、例えばgomでアクティブタブにGmailが開きます。gnmで新規タブで開ける。あんまり使ってない。</p>
+
+<pre><code>&quot;============================
+&quot; plugin
+&quot;============================
+
+&quot; plugin_loader
+let g:plugin_loader_roots = &quot;~\vimperator\vimperator-plugins\ ~/.vimperator/vimperator-plugins/&quot;
+let g:plugin_loader_plugins = &quot;_libly,direct_bookmark,sbmcommentsviewer,caret-hint,appendAnchor,stella,feedSomeKeys_3,commandBookmarklet,copy&quot;
+</code></pre>
+
+<p>ここからプラグイン。プラグイン管理は<a href="https://github.com/vimpr/vimperator-plugins/blob/master/plugin_loader.js">plugin_loader</a>を使うとアホみたいに便利です。</p>
+
+<p>普通、プラグインって~/.vimperator/plugin/フォルダに入れて（あるいはシンボリックリンク貼って）読み込ませると思うのだが、このplugin_loaderを~/.vimperator/pluginフォルダに入れれば、以下設定が適用可能に。</p>
+
+<ul>
+<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_roots =&gt; 読み込むプラグインが配置されたフォルダを指定（複数可）</li>
+<li>let <a href="http://plugin.g.hatena.ne.jp/">g:plugin</a>_loader_plugins =&gt; 読み込むプラグイン名を指定（.jsは除外でOK）</li>
+</ul>
+
+<p>つまり<a href="https://github.com/vimpr/vimperator-plugins.git">https://github.com/vimpr/vimperator-plugins.git</a>をどっかにgit cloneしておいて、そのフォルダに対してg:plugin_loader_rootsを指定しておけばどのプラギンもシンボリックリンクとか貼らずに好きに使えるってわけです。便利過ぎ。</p>
+
+<pre><code>&quot; Evernote Clearly
+nnoremap e :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(false)&lt;CR&gt;
+nnoremap E :&lt;C-u&gt;js __readable_by_evernote.__readable_by_evernote__launch(true)&lt;CR&gt;
+</code></pre>
+
+<p>プラグインじゃないけど。。。アドオンのEvernote Clearyの操作をeとEにマッピングさせてる。これもどっかで拾ったコードです。</p>
+
+<pre><code>&quot; direct_bookmark
+let g:direct_sbm_use_services_by_tag = &quot;h&quot;
+let g:direct_sbm_use_services_by_post = &quot;h&quot;
+source! $HOME/.vimperatorrc.local
+</code></pre>
+
+<p>direct_bookmarkの設定。コマンドからdeliciousとかはてブとかソシアルブックマアクに投稿できるヤツです。はてブしか使ってないので、はてブだけで使えるように。</p>
+
+<pre><code>&quot; vのみではてブコメント表示
+map v :viewSBMComments&lt;Space&gt;-t&lt;Space&gt;h&lt;Space&gt;-f&lt;Space&gt;id,comment&lt;CR&gt;
+</code></pre>
+
+<p>sbmcommentsviewerの設定。ソシアルブックマアクのコメントがコマンドで見られるようになるヤツ。これもはてブだけに設定。</p>
+
+<pre><code>&quot; feedSomeKeys
+command! -nargs=+ lazy autocmd VimperatorEnter .* &lt;args&gt;
+lazy fmaps -u='mail\.google\.com/mail' c / j k n p o u e x s r &lt;S-i&gt;  a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' c / j,n k,p n,j p,k o u e x s r a # [ ] ? gi gs gt gd ga gc
+lazy fmaps -u='feedly\.com' j k n p o v gm ga gg gl / r m x s t l f b
+lazy fmaps -e=vkeydown -u='www\.tumblr\.com/' j k r t q p n L l&lt;CR&gt;
+lazy fmaps -u='www\.pixiv\.net/member_illust\.php\?mode=manga&amp;amp;illust_id=[0-9]+' j k
+</code></pre>
+
+<p>feedSomeKeysの設定。特定URL下で特定キーを無効化するプラギン。:ignorekeysより細かく設定ができるから好き。ただ、いまいち設定方法が飲み込めてなかったりもする。現状はGmail、feedly、Tumblr、pixivの漫画モード（？）で設定させてる。Gmailの設定が被ってるとこなんとかしたい。。</p>
+
+<pre><code>&quot; copy.js
+javascript &lt;&lt;EOM
+(function () {
+  liberator.globalVariables.copy_templates = [
+    { label: 'titleAndURL',    value: '%TITLE%\n%URL%' },
+    { label: 'markdown',       value: '[%TITLE%](%URL%)' },
+    { label: 'title',          value: '%TITLE%' },
+    { label: 'anchor',         value: '[%TITLE%](%URL%)' },
+    { label: 'selanchor',      value: '[ title=&quot;%TITLE%&quot;&gt;%SEL%](%URL%)' },
+
+    { label: 'amazon',   value: 'copy clean amazon url from current page',
+      custom: function() {
+        var m = content.document.location.pathname.match(/dp\/(\d+)/);
+        return m ? ('http://amazon.jp/dp/' + m[1]) : null;
+      }
+    },
+  ];
+})();
+EOM
+
+&quot; 特によく使う機能をキーマッピング
+map ,y :copy&lt;Space&gt;titleAndURL&lt;CR&gt;
+map ,my :copy&lt;Space&gt;markdown&lt;CR&gt;
+</code></pre>
+
+<p>copy.jsの設定。いろいろと好きな形式でコピーが出来るようになる。{ label〜のとこの設定がそれに当たりまして、例えば:copy markdownコマンドでマークダウン記法用にタイトルとURLがコピーできる。ブログ書いてるとこれホント便利。</p>
+
+<p>基本的には%TITLE%や%URL%といった変数を使って設定するんだけど、javascriptも欠けます。label: amazonではAmazonのURLを短い（アフィ用のパラメータとか除外した）状態でコピれるようjavascriptで書かれてる。詳しくは以下エントリー。</p>
+
+<p><a href="http://qiita.com/hadashiA/items/83e2fef39bac531577e2">JavaScript - vimperatorプラグインcopy.jsで、いま開いてるamazonの本のページの短いURLをクリップボードにコピる。あと正規表現で好きなとこコピる - Qiita</a></p>
+
+<pre><code>&quot;============================
+&quot; about:config
+&quot;============================
+
+set! network.dns.disableIPv6=true
+set! network.http.pipelining=true
+set! network.http.proxy.pipelining=true
+set! network.http.pipelining.maxrequests=8
+set! network.http.max-connections-per-server=32
+set! security.dialog_enable_delay=0
+set! browser.tabs.closeWindowWithLastTab=false
+set! browser.cache.memory.capacity=16384
+set! browser.sessionstore.interval=500000
+set! dom.popup_maximum=50
+set! browser.cache.disk.enable=false
+set! browser.cache.memory.capacity=-1
+set! layout.spellcheckDefault=0
+set! javascript.options.mem.high_water_mark=32
+</code></pre>
+
+<p>Vimperatorはset!でabout:configの設定ができます！　便利！　これでabout:configの内容も共有できるよ！　設定内容はウン年前にやったままなので、具体的に何やってんのか覚えてないれす。メモリ周りの設定が主だったと思うので、最近の比較的軽くなったFxなら要らない設定もあるかも。</p>
+
+<pre><code>&quot;読み込み完了メッセージ
+echo &quot;vimperatorrc loaded.&quot;
+
+&quot; [EOF]
+</code></pre>
+
+<p>最後に、vimperatorrcが読み込まれたとき用のechoを入れる。これがないと,r押しても読み込まれたのかわかんないので。</p>
+
+<p>vimperator、Vimmerじゃなくても便利なのでじゃんじゃん使いましょう晒しましょう。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+
