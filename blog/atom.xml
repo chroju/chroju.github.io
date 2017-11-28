@@ -1028,14 +1028,5 @@
       <description>SEという職に就いて2年ちょい経ったわけだが、最近はPJリーダーとか顧客との調整とかその手の仕事ばかりを回されるようになってきて、実機を触る</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://chroju.github.io/blog/1/01/01/2016-05-14-pepabo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://chroju.github.io/blog/1/01/01/2016-05-14-pepabo/</guid>
-      <description>100行合ったmod_rewirteっをngx_mrubyで書き換えた話 @buty4649 mod_rewriteがかなり複雑になっていてルーティング追加時の</description>
-    </item>
-    
   </channel>
 </rss>
