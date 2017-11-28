@@ -9,3 +9,7 @@ section.main .content .page-heading {
 .markdown pre {
     background-color: rgb(40, 43, 46);
 }
+
+.container {
+    margin: 0
+}
