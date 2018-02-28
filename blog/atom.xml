@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 29 Dec 2017 21:43:07 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 28 Feb 2018 23:03:59 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>裁量労働制の恩恵、個々の裁量で働くということ</title>
+      <link>https://chroju.github.io/blog/2018/02/28/flexible_work_or_not/</link>
+      <pubDate>Wed, 28 Feb 2018 23:03:59 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/02/28/flexible_work_or_not/</guid>
+      <description>別に法律とか労働法とか詳しくないのでそういう話はしないけど、昨今の裁量労働制の話において、「恩恵を受けている人を見たことがない」みたいな話も</description>
+    </item>
     
     <item>
       <title>2017年総括 - 計算機科学と向き合う</title>
