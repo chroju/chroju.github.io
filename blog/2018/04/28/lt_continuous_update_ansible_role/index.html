@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="5分間のLTしてこんなクールなタンブラーが貰えるなんて、RedHat社は素晴らしい会社だと思います。ちょっとびっくりした。 Ansible Night in Tokyo 2018.">
+
+<meta property="og:title" content="Ansible Roleの継続的自動UpdateについてLTした" />
+<meta property="og:description" content="5分間のLTしてこんなクールなタンブラーが貰えるなんて、RedHat社は素晴らしい会社だと思います。ちょっとびっくりした。 Ansible Night in Tokyo 2018." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2018/04/28/lt_continuous_update_ansible_role/" />
+
+
+
+<meta property="article:published_time" content="2018-04-28T10:32:32&#43;09:00"/>
+
+<meta property="article:modified_time" content="2018-04-28T10:32:32&#43;09:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Ansible Roleの継続的自動UpdateについてLTした &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2018/04/28/lt_continuous_update_ansible_role/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2018-04-28%2010%3a38%3a21.649624465%20%2b0900%20JST">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2018-04-28%2010%3a38%3a21.649624465%20%2b0900%20JST">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2018-04-28%2010%3a38%3a21.649624465%20%2b0900%20JST">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2018-04-28%2010%3a38%3a21.649624465%20%2b0900%20JST">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ansible Roleの継続的自動UpdateについてLTした
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Apr 28 2018 10:32:32 JST'>Apr 28, 2018</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p><a href="https://gyazo.com/510241fc62c4497af3a35142fe5ca5ed"><img src="https://i.gyazo.com/510241fc62c4497af3a35142fe5ca5ed.png" alt="https://gyazo.com/510241fc62c4497af3a35142fe5ca5ed" width="600"/></a></p>
+
+<p>5分間のLTしてこんなクールなタンブラーが貰えるなんて、RedHat社は素晴らしい会社だと思います。ちょっとびっくりした。</p>
+
+<p><a href="https://ansible-users.connpass.com/event/84907/">Ansible Night in Tokyo 2018.04</a>でLTをしてきた。なんだか最近inputもoutputもパッとしてない感じがしたので、「そうだ！　LTしよう！！！」とほぼ思いつきで。自身3回目なんだけど、RedHatでAnsibleの話をするってのはちょっと日和った。TL見る限りだと好評っぽかったのでありがたい限りでした。</p>
+
+<script async class="speakerdeck-embed" data-id="911e623710df4b10bd00ef7509d53574" data-ratio="1.37081659973226" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p>テーマはAnsible Roleの継続的自動更新。Ansibleにはプログラムのパッケージ（RubyGemsとかpipとか）みたいな感じで、Ansible Roleという単位にコードをまとめて再利用する仕組みがある。自分もよく使うのだけど、このRoleに更新をかけたとき、それをimportしている各Playbook上で、バージョンの追随をするのが結構面倒で、みんなどうしてんだろうという思いもあり話してみた。</p>
+
+<p>この手の話はRuby界隈でも「定期的なbundle updateをいかに実行するか」という話がよく聞かれたり、ソフトウェア開発分野でもポピュラーな課題っぽかったので、そちらをいろいろ参考にした。結果としてCIで回しましょうという、まぁそうだよねという結論に至っている。</p>
+
+<p>難題は実装部分で、RubyGemsであれば <code>bundle outdated</code> という最新ではないgemを出力するコマンドがあったりするんだけど、Ansible Roleを管理する <code>ansible-galaxy</code> コマンドには「更新を確認する」ための機能はない。なので少し変則的なのだが、</p>
+
+<pre><code class="language-yaml:requirements.lock.yml">- src: hoge.fuga
+  version: 1.0.0
+</code></pre>
+
+<p>という、入れたいバージョンをロックしたrequirements.lock.ymlと、</p>
+
+<pre><code class="language-yaml:requirements.yml">- src: hoge.fuga
+</code></pre>
+
+<p>というバージョンを記述していないrequirements.ymlを用意することにした。 <code>ansible-galaxy install</code> はバージョン指定無しで実行すると最新を引っ張ってくるので、前者と後者で入るRoleのバージョンに差異があれば「更新あり」と判断できるようになる、という話。明らかにワークアラウンド、という感じなので、他にもっとスマートなやり方をしている人がいれば教えてほしいところ。これに限らずなのだが、Infrastructure as Codeにソフトウェア開発のプラクティスを適用できる、というのはその通りなのだけど、それが実際どう実装するべきなのだという情報をもっと知りたい。</p>
+
+<p>ちなみにLTは1年以上ぶりだったし経験ほとんどないので、上のスライド見て分かる通り明らかに詰め込みすぎで、思いっきり時間オーバーするしアレでした。しかしフィードバックも貰いやすいし、他の人のLTも参考になるし、もっとやっていきたいですね。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

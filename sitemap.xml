@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/04/28/lt_continuous_update_ansible_role/</loc>
+    <lastmod>2018-04-28T10:32:32+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/03/31/libraries_in_tokyo_which_have_computer_books/</loc>
     <lastmod>2018-03-31T14:41:26+09:00</lastmod>
   </url>
@@ -604,7 +609,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-03-31T14:41:26+09:00</lastmod>
+    <lastmod>2018-04-28T10:32:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -640,7 +645,7 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-03-31T14:41:26+09:00</lastmod>
+    <lastmod>2018-04-28T10:32:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -790,7 +795,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-03-31T14:41:26+09:00</lastmod>
+    <lastmod>2018-04-28T10:32:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -832,7 +837,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-03-31T14:41:26+09:00</lastmod>
+    <lastmod>2018-04-28T10:32:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
