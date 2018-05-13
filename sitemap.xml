@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/05/13/engineering_organization_theory_and_effective_devops/</loc>
+    <lastmod>2018-05-13T19:35:05+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/05/05/release_tfdoc/</loc>
     <lastmod>2018-05-05T13:33:36+09:00</lastmod>
   </url>
@@ -614,7 +619,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-05-05T13:33:36+09:00</lastmod>
+    <lastmod>2018-05-13T19:35:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -650,7 +655,7 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-05-05T13:33:36+09:00</lastmod>
+    <lastmod>2018-05-13T19:35:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -800,7 +805,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-05-05T13:33:36+09:00</lastmod>
+    <lastmod>2018-05-13T19:35:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -842,7 +847,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-05-05T13:33:36+09:00</lastmod>
+    <lastmod>2018-05-13T19:35:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
