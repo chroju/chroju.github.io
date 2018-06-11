@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 04 Jun 2018 21:19:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 11 Jun 2018 22:08:35 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Nature Remo API で遊んだ</title>
+      <link>https://chroju.github.io/blog/2018/06/11/play_with_nature_remo/</link>
+      <pubDate>Mon, 11 Jun 2018 22:08:35 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/06/11/play_with_nature_remo/</guid>
+      <description>Amazon Echo dotに続いてGoogle Home miniも安売りに釣られて買ったので、せっかくだしVUI (Voice User Interface) の醍醐味であるはずの家電操作もやってみたくなっ</description>
+    </item>
     
     <item>
       <title>AWS Summit 2018と大規模企業Confの回り方について</title>
