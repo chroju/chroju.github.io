@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 11 Jun 2018 22:08:35 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jul 2018 16:06:10 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>開発環境を見直し、dotfilesを更新して、VimからVSCodeへ移行した</title>
+      <link>https://chroju.github.io/blog/2018/07/01/update_dotfiles_with_ansible/</link>
+      <pubDate>Sun, 01 Jul 2018 16:06:10 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/07/01/update_dotfiles_with_ansible/</guid>
+      <description>開発環境を最近ちょっといろいろ替えたので、軽くまとめてみる。 dotfiles dotfiles を久しぶりにガラッとアップデートした。従来は本当に dotfile を置くことにほぼ特化させ</description>
+    </item>
     
     <item>
       <title>Nature Remo API で遊んだ</title>
