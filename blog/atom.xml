@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 01 Jul 2018 16:06:10 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jul 2018 21:02:20 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>buildersconを契機にOSS活動始めてterraform-provider-awsにcontributeできた</title>
+      <link>https://chroju.github.io/blog/2018/07/10/contributed_to_terraform_provider_aws/</link>
+      <pubDate>Tue, 10 Jul 2018 21:02:20 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/07/10/contributed_to_terraform_provider_aws/</guid>
+      <description>やったぜ。 Fix the difference between aws_waf_byte_match_set and aws_wafregional_byte_match_set by chroju · Pull Request #5043 · terraform-providers/terraform-provider-aws Terraform は最近、その本体と各APIを叩く Provider でレポジトリが分離されているんだけど、そのうちの AWS のやつに Contribute した</description>
+    </item>
     
     <item>
       <title>開発環境を見直し、dotfilesを更新して、VimからVSCodeへ移行した</title>
