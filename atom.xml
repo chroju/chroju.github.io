@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 10 Jul 2018 21:02:20 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jul 2018 21:58:46 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>July Tech Festa 2018 に行って打ちのめされた</title>
+      <link>https://chroju.github.io/blog/2018/07/30/july_tech_festa_2018/</link>
+      <pubDate>Mon, 30 Jul 2018 21:58:46 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/07/30/july_tech_festa_2018/</guid>
+      <description>初めて July Tech Festa に行ってきた。「インフラエンジニアの夏の祭典」ということで、この手の終日、複数日カンファレンスだと、だいたいどこかしらでいつも「</description>
+    </item>
     
     <item>
       <title>buildersconを契機にOSS活動始めてterraform-provider-awsにcontributeできた</title>
