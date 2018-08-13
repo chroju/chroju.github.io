@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>fluent 1.0 でログの欠損を防ぐ</title>
+      <title>fluentd 1.0 でログの欠損を防ぐ</title>
       <link>https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/</link>
       <pubDate>Mon, 13 Aug 2018 22:29:26 +0900</pubDate>
       
