@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/</loc>
+    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/07/30/july_tech_festa_2018/</loc>
     <lastmod>2018-07-30T21:58:46+09:00</lastmod>
   </url>
@@ -644,7 +649,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-07-30T21:58:46+09:00</lastmod>
+    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -680,19 +685,19 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-07-30T21:58:46+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/blog/</loc>
-    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
+    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/blog/</loc>
     <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/blog/</loc>
+    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -830,7 +835,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-07-30T21:58:46+09:00</lastmod>
+    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -872,7 +877,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-07-30T21:58:46+09:00</lastmod>
+    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   

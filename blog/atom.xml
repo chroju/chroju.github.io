@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 30 Jul 2018 21:58:46 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Aug 2018 22:29:26 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>fluent 1.0 でログの欠損を防ぐ</title>
+      <link>https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/</link>
+      <pubDate>Mon, 13 Aug 2018 22:29:26 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/</guid>
+      <description>ようやく fluentd v1.0 を最近触り始めている。極力ログを欠損させない形の設定がしたくて、 v0.12 の頃だと fluentdでログが欠損する可能性を考える - sonots:blog を参考</description>
+    </item>
     
     <item>
       <title>July Tech Festa 2018 に行って打ちのめされた</title>
