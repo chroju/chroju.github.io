@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/08/19/entry_kubernetes/</loc>
+    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/</loc>
     <lastmod>2018-08-13T22:29:26+09:00</lastmod>
   </url>
@@ -649,7 +654,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
+    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -685,7 +690,7 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
+    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -835,7 +840,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
+    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -877,7 +882,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-08-13T22:29:26+09:00</lastmod>
+    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 13 Aug 2018 22:29:26 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 19 Aug 2018 14:46:59 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kubernetes に入門してからやってきたことのメモ</title>
+      <link>https://chroju.github.io/blog/2018/08/19/entry_kubernetes/</link>
+      <pubDate>Sun, 19 Aug 2018 14:46:59 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/08/19/entry_kubernetes/</guid>
+      <description>数か月前からちょこちょこと Kubernetes を触っているのだけど、まだエントリーには何も起こしていなかったので、これまでやってみたことをツラツラと書き留めて</description>
+    </item>
     
     <item>
       <title>fluentd 1.0 でログの欠損を防ぐ</title>
