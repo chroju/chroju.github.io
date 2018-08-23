@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/08/23/engineers_intellectual_productivity/</loc>
+    <lastmod>2018-08-23T20:54:12+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/08/19/entry_kubernetes/</loc>
     <lastmod>2018-08-19T14:46:59+09:00</lastmod>
   </url>
@@ -654,7 +659,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
+    <lastmod>2018-08-23T20:54:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -690,7 +695,7 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
+    <lastmod>2018-08-23T20:54:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -840,7 +845,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
+    <lastmod>2018-08-23T20:54:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -882,7 +887,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-08-19T14:46:59+09:00</lastmod>
+    <lastmod>2018-08-23T20:54:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
