@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 09 Sep 2018 11:33:56 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Oct 2018 22:04:35 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>競技プログラミングを始めてみた</title>
+      <link>https://chroju.github.io/blog/2018/10/03/competitive_programming/</link>
+      <pubDate>Wed, 03 Oct 2018 22:04:35 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/10/03/competitive_programming/</guid>
+      <description>「Write Code Every Day」という有名なプラクティスに関して、なるほどそれは良さそうだなと思う一方、自分のメインとなる職掌がプログラミングという</description>
+    </item>
     
     <item>
       <title>builderscon 2018 に行ってきた</title>
