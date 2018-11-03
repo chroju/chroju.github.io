@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="Nature Remo を導入してから半年ぐらい経って、非常に便利に使っているのだけど、「リモコンを探さなくてもスマホか Google Home に話しかけるかすればいい」というのも">
+
+<meta property="og:title" content="Nature Remo の CLI ツールをつくった" />
+<meta property="og:description" content="Nature Remo を導入してから半年ぐらい経って、非常に便利に使っているのだけど、「リモコンを探さなくてもスマホか Google Home に話しかけるかすればいい」というのも" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2018/11/03/nature_remo_cli/" /><meta property="article:published_time" content="2018-11-03T21:32:37&#43;09:00"/>
+<meta property="article:modified_time" content="2018-11-03T21:32:37&#43;09:00"/>
+
+
+<title>
+
+
+     Nature Remo の CLI ツールをつくった &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2018/11/03/nature_remo_cli/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2018-11-03%2022%3a05%3a43.118485075%20%2b0900%20JST">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2018-11-03%2022%3a05%3a43.118485075%20%2b0900%20JST">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2018-11-03%2022%3a05%3a43.118485075%20%2b0900%20JST">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2018-11-03%2022%3a05%3a43.118485075%20%2b0900%20JST">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Nature Remo の CLI ツールをつくった
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Nov 3 2018 21:32:37 JST'>Nov 3, 2018</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><a href="https://nature.global/">Nature Remo</a> を導入してから半年ぐらい経って、非常に便利に使っているのだけど、「リモコンを探さなくてもスマホか Google Home に話しかけるかすればいい」というのも作業中などはちょっと面倒に思えてきて、ITエンジニアなのだし、ターミナルから操作できたら一番いいよねという結論に至り、作ってみた。以前、 <a href="https://chroju.github.io/blog/2018/06/11/play_with_nature_remo/">Nature Remo API で遊んだ</a> というエントリーを書いたが、当時は Get 系の API を叩くのみで、実際にシグナルを送ることはしておらず、今回初めて挑戦した。</p>
+
+<ul>
+<li><a href="https://github.com/chroju/nature-remo-cli">chroju/nature-remo-cli: Unofficial command line Interface for Nature Remo</a></li>
+</ul>
+
+<h2 id="使い方">使い方</h2>
+
+<p><a href="https://home.nature.global/">https://home.nature.global/</a> から自分の Nature Remo のアクセストークンを発行すれば、それを使って誰でも扱えるようなものにしている。インストールは <code>go get</code> か、先の GitHub レポジトリの「Releases」からバイナリを落とすかの2パターンを用意している。コマンドを使えるようになったら、まず <code>remo init</code> コマンドを叩いて、アクセストークンを読み込ませる。</p>
+
+<pre><code class="language-sh">$ remo init
+Nature Remo OAuth Token:
+&lt;Input your token&gt;
+Initializing ...
+Successfully initialized.
+</code></pre>
+
+<p>正しいトークンを与えれば、このように初期化処理が成功して、あとは自由に使えるようになる。シグナルを遅らせるときは家電 (appliance) とシグナルの名前を指定する必要があるのだけど、使用できる家電名とシグナル名は <code>remo list</code> コマンドで一覧できる。うちの場合はこんな感じ。</p>
+
+<pre><code class="language-sh">$ remo list
+ライト オフ
+ライト オン
+ライト 暗い
+ライト 明るい
+ライト 白い
+ライト 暖かい
+ライト 全灯
+tv オン
+tv 入力切替
+tv 1
+tv 2
+tv 3
+tv 4
+tv 5
+tv 6
+tv 7
+tv 8
+tv 9
+tv 10
+tv 11
+tv 12
+tv 音量上
+tv 音量下
+</code></pre>
+
+<p>ここから任意のものを選んで、 <code>remo send</code> で実行する。</p>
+
+<pre><code class="language-sh">$ remo send tv オン
+Success.
+</code></pre>
+
+<h2 id="動作仕様">動作仕様</h2>
+
+<p>Nature Remo のシグナル送信用 API は、当該の signal ID を与えて実行するようになっているのだけど、 signal ID は Nature Remo の内部的な値であって、例えばスマホ用のアプリでは表に出るものではない。取得するには API を叩く必要があるのだが、シグナルを飛ばすたびに signal ID を API で持ってくるのも非効率なので、 <code>remo init</code> を実行した時に、　<code>$HOME/.config/remo</code> に YAML 形式で書き出すようにしている。</p>
+
+<pre><code class="language-yaml">credential:
+  token: &lt;YOUR TOKEN&gt;
+appliances:
+- name: ライト
+  id: abcdefgh-1234-ijkl-5678-mnopqrstuvwx
+  signals:
+  - id: abcdefgh-1234-ijkl-5678-mnopqrstuvwx
+    name: オン
+    image: ico_foo
+  - id: abcdefgh-1234-ijkl-5678-mnopqrstuvwx
+    name: オフ
+    image: ico_bar
+</code></pre>
+
+<p><code>remo list</code> はここから全家電とシグナルの <code>name</code> を読み込んで表示している仕組み。また <code>remo send</code> も同様に、このファイルから指定した家電名、シグナル名に該当する signal ID を探してきて、その ID で API を実行している。</p>
+
+<p>つまりは <code>remo send</code> は実際 Nature Remo に設定している家電名、シグナル名を必要としているわけではなく、この YAML ファイル上に書かれた名前を必要としているので、 YAML の中身を自由に書き換えることで、 <code>remo send</code> に与える引数も変えることができる。家電名やシグナル名はスマホのアプリで設定するものなので、多くの人は日本語で名付けると思うのだけど、これをコマンドラインで実行するとなると、日本語というのは扱いづらい。なので YAML を書き換えて、例えば先の「ライト」「オン」を「light」「on」に書き換えて使うことができる。</p>
+
+<p>元に戻したい場合や、新しい家電を Nature Remo に追加した場合は、 <code>remo sync</code> コマンドで Nature Remo の最新状態と YAML を同期できる。その際は日本語から英語に手動で書き換えた箇所も復元されてしまうわけだけど、将来的に解消できたらしたいと思っている。</p>
+
+<h2 id="今後">今後</h2>
+
+<p>まだ実装していない機能としてエアコンの操作がある。</p>
+
+<p>Nature Remo は「赤外線信号の送信を代替する IoT 機器」なわけだけど、エアコンとそれ以外の家電では内部での扱い方が異なる。多くの家電では、もともとのリモコンから学習した赤外線信号をシンプルに送るだけなのだが、エアコンの場合は温度、風量、風向といった設定セットを Nature Remo 側で作って、それを赤外線で送るような形になっている。なのでエアコン用シグナルの送信は API も個別に用意されていて、そちらはまだ実装ができていない。寒くなる前にはなんとかしたい。あとはセンサー情報を取得して、現在の気温や湿度を表示する機能も実装したい。</p>
+
+<p>具体的な技術的背景とかは、また別のエントリーに書こうと思う。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+
