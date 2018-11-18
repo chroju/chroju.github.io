@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/11/18/write_code_every_day_with_competitive_programming/</loc>
+    <lastmod>2018-11-18T15:22:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/11/03/nature_remo_cli/</loc>
     <lastmod>2018-11-03T21:32:37+09:00</lastmod>
   </url>
@@ -679,7 +684,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-11-03T21:32:37+09:00</lastmod>
+    <lastmod>2018-11-18T15:22:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -715,7 +720,7 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-11-03T21:32:37+09:00</lastmod>
+    <lastmod>2018-11-18T15:22:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -865,7 +870,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-11-03T21:32:37+09:00</lastmod>
+    <lastmod>2018-11-18T15:22:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -907,7 +912,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-11-03T21:32:37+09:00</lastmod>
+    <lastmod>2018-11-18T15:22:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

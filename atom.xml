@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 03 Nov 2018 21:32:37 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 Nov 2018 15:22:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>競技プログラミングで Write Code Every Day を2か月続けてみて</title>
+      <link>https://chroju.github.io/blog/2018/11/18/write_code_every_day_with_competitive_programming/</link>
+      <pubDate>Sun, 18 Nov 2018 15:22:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/11/18/write_code_every_day_with_competitive_programming/</guid>
+      <description>「競技プログラミングを始めてみた」というエントリーを10月頭に書いて、だいたい2か月ぐらい毎日草を生やしてきたので、ここらで少し振り返ってみ</description>
+    </item>
     
     <item>
       <title>Nature Remo の CLI ツールをつくった</title>
