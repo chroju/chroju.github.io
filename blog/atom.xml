@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 18 Nov 2018 15:22:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 05 Dec 2018 00:10:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CNCF の活動から Serverless の今を追う</title>
+      <link>https://chroju.github.io/blog/2018/12/05/cncf_serverless_wg/</link>
+      <pubDate>Wed, 05 Dec 2018 00:10:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/12/05/cncf_serverless_wg/</guid>
+      <description>この記事は Serverless Advent Calendar 2018 - Qiita の5日目です。最初に断りですが、すみません具体的実装などの話は用意できませんでした。 AWS Lambda あたりを発火点として広がってき</description>
+    </item>
     
     <item>
       <title>競技プログラミングで Write Code Every Day を2か月続けてみて</title>
