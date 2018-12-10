@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="AWS では assume role と呼ばれる機能を使うことにより、 IAM ユーザーで AWS アカウントへログイン後、他の AWS アカウントの IAM Role へ権限の切り替えを行うことができる。こ">
+
+<meta property="og:title" content="Terraform で AWS assume role が使用できない場合がある" />
+<meta property="og:description" content="AWS では assume role と呼ばれる機能を使うことにより、 IAM ユーザーで AWS アカウントへログイン後、他の AWS アカウントの IAM Role へ権限の切り替えを行うことができる。こ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/" /><meta property="article:published_time" content="2018-12-10T21:08:16&#43;09:00"/>
+<meta property="article:modified_time" content="2018-12-10T21:08:16&#43;09:00"/>
+
+
+<title>
+
+
+     Terraform で AWS assume role が使用できない場合がある &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2018-12-10%2021%3a27%3a02.823194515%20%2b0900%20JST%20m%3d%2b0.083676430">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2018-12-10%2021%3a27%3a02.823194515%20%2b0900%20JST%20m%3d%2b0.083676430">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2018-12-10%2021%3a27%3a02.823194515%20%2b0900%20JST%20m%3d%2b0.083676430">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2018-12-10%2021%3a27%3a02.823194515%20%2b0900%20JST%20m%3d%2b0.083676430">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Terraform で AWS assume role が使用できない場合がある
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Dec 10 2018 21:08:16 JST'>Dec 10, 2018</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><a href="https://gyazo.com/3e9d184df4735785cec8ee0f04355c6c"><img src="https://i.gyazo.com/3e9d184df4735785cec8ee0f04355c6c.png" alt="Terraform" /></a></p>
+
+<p>AWS では <a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_use_switch-role-console.html">assume role</a> と呼ばれる機能を使うことにより、 IAM ユーザーで AWS アカウントへログイン後、他の AWS アカウントの IAM Role へ権限の切り替えを行うことができる。これを使うと、複数の AWS アカウントを保有している会社でも、管理者としては各アカウントにいちいち IAM ユーザーを作らず、中央集権的な管理が可能になるし、利用者としてもユーザー/パスワードを1組だけ覚えればいいとか良いことがたくさんあるので、2018年末の今日においては多くの人が使っていると思う。しかし、これを Terraform で利用する場合に躓きがあった。</p>
+
+<h2 id="aws-config-の活用">~/.aws/config の活用</h2>
+
+<p>Terraform を使う際に AWS 認証を通すにはいくつか方式がある。というか、 AWS CLI と同じ認証方式が基本的に使える。最も簡単なのは <code>~/.aws/config</code> を活用する方式。</p>
+
+<pre><code>[profile switch]
+region = ap-northeast-1
+source_profile = source
+role_arn = arn:aws:iam::SQITCH_ACCOUNT_ID:role/switch
+mfa_serial = arn:aws:iam::SOURCE_ACCOUNT_ID:mfa/source
+</code></pre>
+
+<p><code>source_profile</code> に switch 元になるプロファイルの名前を、 <code>role_arn</code> に switch 先になる IAM Role 名を書き、あとは MFA のシリアルも書いておけば、上記の場合 <code>--profile switch</code> という引数を付けて AWS CLI を実行することにより、 MFA の token を入力して switch ができる。</p>
+
+<p>これを Terraform の provider - profile に指定すれば使えそうなものなのだが、</p>
+
+<pre><code>provider &quot;aws&quot; {
+  region  = &quot;eu-west-1&quot;
+  profile = &quot;test&quot;
+}
+</code></pre>
+
+<p>残念ながら動作せず、 <code>assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.</code> というエラーになってしまう。</p>
+
+<p>また別の認証方式として、 <code>~/.aws</code> を活用せず、 Terraform の tffile 内に <code>provider</code> 設定として直接 assume role の情報を書き入れるという手段もあるが、この場合も同様に動作しない。</p>
+
+<pre><code>provider &quot;aws&quot; {
+  region = &quot;ap-northeast-1&quot;
+  assume_role {
+    role_arn = &quot;arn:aws:iam::SQITCH_ACCOUNT_ID:role/switch&quot;
+    session_name = &quot;switch&quot;
+  }
+}
+</code></pre>
+
+<p>エラーメッセージから察するに MFA token 周りで問題があると見られる。 AWS CLI でこの認証方式を使った場合、コマンドを実行したときに対話式に token を尋ねられるのだが、この部分の実装が terraform-provider-aws には現状無く、 MFA token が入力できないので認証も通らなくなっている。</p>
+
+<p>本件については、すでに以下のように issue が上がっている。 Contributor からも MFA token に関する実装がない点について回答がついていて、「Terraform は対話式のコマンド実行を排除し、中央集権的な環境で自動実行することを目指しているから」「重大な変更が生じるので技術的に困難だから」と理由も述べられている（が、down vote がめっちゃ入ってる）。</p>
+
+<p><a href="https://github.com/terraform-providers/terraform-provider-aws/issues/2420">Doesn&rsquo;t ask MFA token code when using assume_role with MFA required · Issue #2420 · terraform-providers/terraform-provider-aws</a></p>
+
+<p>従って現状は、MFAが有効な assume role で Terraform の認証を通すことは不可能であり、また今後の対応予定も今のところ無いと判断して良さそうである。この問題、どうも結構根深い上に、長らく GitHub 上では議論が続いているようで、すでに close されたもの（ほとんどは Terraform への機能追加ではなく、ワークアラウンドを提示して close という形）と open のもの含めて複数の issue が立っていたりする。</p>
+
+<ul>
+<li><a href="https://github.com/terraform-providers/terraform-provider-aws/issues/472#issuecomment-380931474">AWS assume role not working · Issue #472 · terraform-providers/terraform-provider-aws</a></li>
+<li><a href="https://github.com/terraform-providers/terraform-provider-aws/issues/5078">AWS Assume Role Doesn&rsquo;t work with MFA Enforced Roles · Issue #5078 · terraform-providers/terraform-provider-aws</a></li>
+<li><a href="https://github.com/hashicorp/terraform/issues/11270">AWS assume role not working · Issue #11270 · hashicorp/terraform</a></li>
+</ul>
+
+<h2 id="回避策">回避策</h2>
+
+<h3 id="mfa-無効化">MFA 無効化</h3>
+
+<p>試してはいないが、おそらく MFA token 無しで switch 可能な IAM Role であれば、この方式でも上手くいくのだろうという気はしなくもない（※ <a href="https://github.com/hashicorp/terraform/issues/11270#issuecomment-298224055">MFA 無効化してもダメだったという報告もある。手元で試してないのでわからない</a>）。</p>
+
+<p>が、少なくとも人間に対して払い出す IAM ユーザーにおいて、 MFA を無効化した運用は考えられないので、 MFA を無効化するというのは回避策としては妥当ではない。先に引いたコメントにあるように、中央集権的な環境で Terraform の実行をすべて自動化しているのであれば話は違うとは思うが。</p>
+
+<h3 id="aws-sts-assume-role-コマンドと環境変数の利用">aws sts assume-role コマンドと環境変数の利用</h3>
+
+<p>AWS CLI で assume role を使う別の方式として、 <code>aws sts assume-role</code> コマンドを使う方式がある。このコマンドを実行すると、当該の Role へ Switch するのに必要な一時的な API キーが以下のように吐き出される（<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html#tutorial_cross-account-with-roles-3">チュートリアル: AWS アカウント間の IAM ロールを使用したアクセスの委任 - AWS Identity and Access Management</a>から抜粋）。</p>
+
+<pre><code>{
+    &quot;Credentials&quot;: {
+        &quot;SecretAccessKey&quot;: &quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;,
+        &quot;SessionToken&quot;: &quot;AQoDYXdzEGcaEXAMPLE2gsYULo+Im5ZEXAMPLEeYjs1M2FUIgIJx9tQqNMBEXAMPLE
+CvSRyh0FW7jEXAMPLEW+vE/7s1HRpXviG7b+qYf4nD00EXAMPLEmj4wxS04L/uZEXAMPLECihzFB5lTYLto9dyBgSDy
+EXAMPLE9/g7QRUhZp4bqbEXAMPLENwGPyOj59pFA4lNKCIkVgkREXAMPLEjlzxQ7y52gekeVEXAMPLEDiB9ST3Uuysg
+sKdEXAMPLE1TVastU1A0SKFEXAMPLEiywCC/Cs8EXAMPLEpZgOs+6hz4AP4KEXAMPLERbASP+4eZScEXAMPLEsnf87e
+NhyDHq6ikBQ==&quot;,
+        &quot;Expiration&quot;: &quot;2014-12-11T23:08:07Z&quot;,
+        &quot;AccessKeyId&quot;: &quot;AKIAIOSFODNN7EXAMPLE&quot;
+    }
+}
+</code></pre>
+
+<p>この API キーを環境変数に set すれば、 Terraform は環境変数での認証を最優先に実行するので、 assume role の利用が可能になる。 MFA token の入力も <code>aws sts assume-role</code> コマンドの実行時点で終わるので問題ない。</p>
+
+<p>ただ注意点としては、環境変数に AWS API キーを設定しまうと、 Terraform はそれ以外の認証情報を一切無視してしまうということ。例えば複数の AWS アカウントをまたいでセットアップを行うような Terraform のレポジトリを使おうとするとき、通常は tffile に複数の <code>profile</code> を書いて切り替えようとすると思うが、これらは環境変数の認証情報で上書きされて使えなくなる。あとは率直に、 Terraform を実行するたびにキーを発行して環境変数にセットするのは面倒という話もある。</p>
+
+<h3 id="aws-sts-assume-role-コマンドと-aws-の利用">aws sts assume-role コマンドと ~/.aws の利用</h3>
+
+<p>一時的な API キーを環境変数に set してしまうと問題なのであれば、 <code>~/.aws/credentials</code> に書き込んで一時的に profile を作ってしまえばいいんではという案。スクリプトを書けば <code>aws sts assume-role</code> コマンドを実行して credentials に書き込むところまで自動化も出来る。これが比較的マシと言えばマシな手段。</p>
+
+<p>この手のツールはすでに作成されていて、見たところ aws-mfa というのが使いやすそうだった。</p>
+
+<p><a href="https://github.com/broamski/aws-mfa">broamski/aws-mfa: Manage AWS MFA Security Credentials</a></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>いろいろ検討はしてみたものの、結局のところ「Terraform は MFA を必要とするような手動運用で実行するべきではない」という話になってくるのかなとは思う。先の HashiConf &lsquo;18 で、 <code>terraform plan</code> や <code>apply</code> を実行するための基盤となるクラウド環境を <a href="https://www.hashicorp.com/blog/terraform-collaboration-for-everyone">HashiCorpが提供する</a> という話が出たことと、先述の issue 内でのやり取りを鑑みても、 HashiCorp としては手動での対応が必須になってしまう、対話的な terraform の実行はバッドプラクティスという方向に進めつつあるように見える。</p>
+
+<p>なのでここに挙げたようなワークアラウンドで一旦は回避しつつも、手動 terraform 実行を一掃することを目指さなくてはならないのかな、というのが今回の結論。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

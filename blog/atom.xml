@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 05 Dec 2018 00:10:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 10 Dec 2018 21:08:16 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Terraform で AWS assume role が使用できない場合がある</title>
+      <link>https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/</link>
+      <pubDate>Mon, 10 Dec 2018 21:08:16 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/</guid>
+      <description>AWS では assume role と呼ばれる機能を使うことにより、 IAM ユーザーで AWS アカウントへログイン後、他の AWS アカウントの IAM Role へ権限の切り替えを行うことができる。こ</description>
+    </item>
     
     <item>
       <title>CNCF の活動から Serverless の今を追う</title>
