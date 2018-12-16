@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 10 Dec 2018 21:08:16 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 15 Dec 2018 12:26:04 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GitHub Actions - Dockerfile を突っ込んで自動化するという考え方</title>
+      <link>https://chroju.github.io/blog/2018/12/15/github_actions_first_impression/</link>
+      <pubDate>Sat, 15 Dec 2018 12:26:04 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/12/15/github_actions_first_impression/</guid>
+      <description>GitHub Actions が Limited Public Beta で使えるようになっていたので触ってみた。マニュアルはすでにパブリックに公開されている ので、使い方的なことは書かずに、触ってみた印</description>
+    </item>
     
     <item>
       <title>Terraform で AWS assume role が使用できない場合がある</title>
