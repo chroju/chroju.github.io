@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 15 Dec 2018 12:26:04 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Dec 2018 20:31:56 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Subscriptions 2018</title>
+      <link>https://chroju.github.io/blog/2018/12/17/subscriptions_2018/</link>
+      <pubDate>Mon, 17 Dec 2018 20:31:56 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/12/17/subscriptions_2018/</guid>
+      <description>2018年末現在契約しているサブスクリプションの一覧。昨年やっている方を見かけて、自分も知らないうちに積み重なっている気がしたのでやってみる</description>
+    </item>
     
     <item>
       <title>GitHub Actions - Dockerfile を突っ込んで自動化するという考え方</title>
