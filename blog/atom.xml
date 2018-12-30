@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 17 Dec 2018 20:31:56 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 31 Dec 2018 08:57:32 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018年総括</title>
+      <link>https://chroju.github.io/blog/2018/12/31/looking_back_2018/</link>
+      <pubDate>Mon, 31 Dec 2018 08:57:32 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2018/12/31/looking_back_2018/</guid>
+      <description>総括エントリーは2015年から書いていて、毎年「なんもしてないんじゃね」という悲観的な感情に支配されてしまう。が、実際1年間かけて何もやって</description>
+    </item>
     
     <item>
       <title>Subscriptions 2018</title>

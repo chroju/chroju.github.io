@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2018/12/31/looking_back_2018/</loc>
+    <lastmod>2018-12-31T08:57:32+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2018/12/17/subscriptions_2018/</loc>
     <lastmod>2018-12-17T20:31:56+09:00</lastmod>
   </url>
@@ -704,7 +709,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-12-17T20:31:56+09:00</lastmod>
+    <lastmod>2018-12-31T08:57:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -740,19 +745,19 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2018-12-17T20:31:56+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/blog/</loc>
-    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
+    <lastmod>2018-12-31T08:57:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/blog/</loc>
     <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/blog/</loc>
+    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -890,7 +895,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2018-12-17T20:31:56+09:00</lastmod>
+    <lastmod>2018-12-31T08:57:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -932,7 +937,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2018-12-17T20:31:56+09:00</lastmod>
+    <lastmod>2018-12-31T08:57:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
