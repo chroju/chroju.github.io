@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが -h オプションを使ったときに表示される「Us">
+
+<meta property="og:title" content="Usage の書き方について標準仕様を探る" />
+<meta property="og:description" content="仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが -h オプションを使ったときに表示される「Us" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/02/19/how_to_write_usage/" />
+<meta property="article:published_time" content="2019-02-19T21:52:03&#43;09:00"/>
+<meta property="article:modified_time" content="2019-02-19T21:52:03&#43;09:00"/>
+
+
+<title>
+
+
+     Usage の書き方について標準仕様を探る &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/02/19/how_to_write_usage/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-02-19%2022%3a11%3a29.348546285%20%2b0900%20JST%20m%3d%2b0.089681487">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-02-19%2022%3a11%3a29.348546285%20%2b0900%20JST%20m%3d%2b0.089681487">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-02-19%2022%3a11%3a29.348546285%20%2b0900%20JST%20m%3d%2b0.089681487">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-02-19%2022%3a11%3a29.348546285%20%2b0900%20JST%20m%3d%2b0.089681487">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Usage の書き方について標準仕様を探る
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Feb 19 2019 21:52:03 JST'>Feb 19, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが <code>-h</code> オプションを使ったときに表示される「Usage」の書き方だったりします。こういうやつ。</p>
+
+<pre><code class="language-sh">usage: git [--version] [--help] [-c name=value]
+           [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]
+           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]
+           &lt;command&gt; [&lt;args&gt;]
+</code></pre>
+
+<p>この括弧の種類と使い方がよくわかっていなくて、どこかで定められた標準があるんであればそれを使いたいなと思い色々調べてみたメモです。</p>
+
+<h2 id="en-wikipedia">en.wikipedia</h2>
+
+<p>いきなり Wikipedia かよというところではありますが、英語版 Wikipedia に <a href="https://en.wikipedia.org/wiki/Usage_message">Usage message</a> という項目があって、複数の問題点があるとか指摘が入っていますが参考にはなる内容で、ここに書き方が載っています。以下引用。</p>
+
+<pre><code class="language-sh">Usage: program [-aDde] [-f | -g] [-n number] [-b b_arg | -c c_arg] req1 req2 [opt1 [opt2]]
+</code></pre>
+
+<p><code>-aDde</code> が引数を取らないオプションで <code>-n</code> は取るオプション、 <code>-f</code> と <code>-g</code> は排他、 <code>-b</code>と <code>-c</code> は引数を取ってかつ排他、括弧が付いていない <code>req1</code> と <code>req2</code> は必須オプションで、 <code>opt2</code> は <code>opt1</code> と一緒に使う必要がある、ということのようです。わかりやすい。ちなみに NetBSD のコーディングスタイルを元にしているとのこと。個人的にはよく見かける書式な気がしますし、これでFAではとも思います。いきなり結論に至りました。</p>
+
+<p>このページ他にも面白いことはいろいろ書いてあって、個人的に気になったのが、この Wikipedia のページで面白かったのが一番下にある「Anti-patterns」というものです。「要出典」扱いになっているので、いずれ消えるかもしれないですが引用してみます。</p>
+
+<blockquote>
+<p>A properly written command line program will print a succinct error message that describes the exact error made by the caller rather than printing the usage statement and requiring the user to figure out what the mistake was.</p>
+</blockquote>
+
+<p>要はエラーメッセージ代わりに「Usage」を出すべきではないという話で、 Usage は <code>-h</code> などで明示的に呼ばれたときに限り、 stdout に流せと言っています。これ結構悩むところで、最近のコマンドツールで間違った使い方をしたときに Usage を出してくれるものって実際よくありますし（git もそうですね）、それはそれで親切な気もするんですよね。で、その場合の Usage はあくまでエラーメッセージの一環として表示していて、ユーザーが意図した結果ではないわけで、パイプやリダイレクトに流れてしまっても困るので、自分としては stderr に出すべきかなという思いがあります。 en.wikipedia に書かれた主張もよくわかるんですが、実際どうするべきなんでしょうね。ここもどこかに推奨が書かれてるなら読んでみたい。</p>
+
+<h2 id="posix">POSIX</h2>
+
+<p>他にも探してみますと、 Open Group のページに POSIX.1-2017 での定義が書かれています。</p>
+
+<p><a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_01">Utility Conventions</a></p>
+
+<p>ほぼ先程の NetBSD のコーディングスタイルと同一です。なのでやっぱりこれでよさそう。</p>
+
+<h2 id="docopt">docopt</h2>
+
+<p>一方で少し毛色の違う定義を書いているのが docopt です。</p>
+
+<p><a href="http://docopt.org/">docopt—language for description of command-line interfaces</a></p>
+
+<p>引数処理を1つずつ実装しなくとも、一定の定義に則った Usage の文章を書くと、それに基づいて引数処理を勝手にやってくれるという便利なライブラリです。いくつかの言語で実装がありますが、 Python で比較的よく見かける気が。</p>
+
+<p>では docopt の Usage 書式を見てみましょうとなるわけですが、これが &ldquo;docopt is based on conventions that have been used for decades in help messages and man pages for describing a program&rsquo;s interface.&rdquo; と書かれてはいるものの、若干見慣れない定義のように感じます。</p>
+
+<pre><code class="language-sh">Usage:
+  naval_fate ship new &lt;name&gt;...
+  naval_fate ship &lt;name&gt; move &lt;x&gt; &lt;y&gt; [--speed=&lt;kn&gt;]
+  naval_fate ship shoot &lt;x&gt; &lt;y&gt;
+  naval_fate mine (set|remove) &lt;x&gt; &lt;y&gt; [--moored|--drifting]
+  naval_fate -h | --help
+  naval_fate --version
+</code></pre>
+
+<p>先の NetBSD や POSIX の定義と異なるのは <code>&lt;&gt;</code> や <code>()</code> が使われているあたりで、前者は使う位置が決まっている引数、後者は必須引数を表すそうです。必須の引数は1行目の <code>new</code> のような括弧の使わないものがそうではないかという気もしますが、上記の4つ目の例のように排他かつ必須の場合など、少しパターンの異なる場合に、必須であることを明示したい意図で使うとかですが若干飲み込みづらくよくわかりませんでした。</p>
+
+<p>位置引数を表す <code>&lt;&gt;</code> については見覚えがあります。上記の例だと1番最初のもの、 <code>ship &lt;name&gt; new</code> じゃなくて <code>ship new &lt;name&gt;</code> で位置が固定なのだと、要は <code>ship new</code> サブコマンドの引数として <code>name</code> を渡すってわけですよね。昨今このようにサブコマンドを繋げて使うタイプのコマンドが増えてきたので、それへの対応として生み出された書式と捉えられます。Terraform なんかがそうですけど、例えば以下の Usage で <code>&lt;&gt;</code> が使われていて、この場合はサブコマンドを先に置いて、オプションなどがある場合はサブコマンドの後に使えという意味になるわけです。</p>
+
+<pre><code class="language-sh">Usage: terraform state &lt;subcommand&gt; [options] [args]
+</code></pre>
+
+<p>サブコマンドは「1つのことを上手くやる」という、『UNIXという考え方』に記載のあるUNIX哲学と反していないかと言う意見もありますし、従来 UNIX/Linux にビルトインで実装されてきたコマンドでは想定されていなかった範囲に思います。そこを補完する、現代的な多機能コマンドツールを実装する際に、 docopt の定義は有用かもしれません。</p>
+
+<p>参考: <a href="http://www.songmu.jp/riji/entry/2017-08-27-subcommand.html">サブコマンドはUNIX哲学と相反していないのか | おそらくはそれさえも平凡な日々</a></p>
+
+<p>基本的には NetBSD や POSIX の定義に則り、サブコマンドが存在するようなリッチなコマンドを実装する場合には docopt を参考にしてみるとバランスが取れそうです。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+
+</body>
+</html>
+

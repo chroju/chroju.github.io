@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 31 Jan 2019 22:31:19 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 19 Feb 2019 21:52:03 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Usage の書き方について標準仕様を探る</title>
+      <link>https://chroju.github.io/blog/2019/02/19/how_to_write_usage/</link>
+      <pubDate>Tue, 19 Feb 2019 21:52:03 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/02/19/how_to_write_usage/</guid>
+      <description>仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが -h オプションを使ったときに表示される「Us</description>
+    </item>
     
     <item>
       <title>『入門 監視』を『ウェブオペレーション』『SRE』と一緒に読もう</title>
