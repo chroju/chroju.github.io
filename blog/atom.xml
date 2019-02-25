@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 19 Feb 2019 21:52:03 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 25 Feb 2019 22:32:12 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Terraform で疲れないために</title>
+      <link>https://chroju.github.io/blog/2019/02/25/make_terraform_less_tiring/</link>
+      <pubDate>Mon, 25 Feb 2019 22:32:12 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/02/25/make_terraform_less_tiring/</guid>
+      <description>Infrastructure-as-Code-is-very-tired - Speaker Deck こちらの記事を読みました。スライド内で触れられている Terraform Best Practices in 2017 - Qiita については私も読んだことがあり、以下の記事で言及させてもらっていた</description>
+    </item>
     
     <item>
       <title>Usage の書き方について標準仕様を探る</title>

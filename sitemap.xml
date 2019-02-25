@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/blog/2019/02/25/make_terraform_less_tiring/</loc>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2019/02/19/how_to_write_usage/</loc>
     <lastmod>2019-02-19T21:52:03+09:00</lastmod>
   </url>
@@ -729,7 +734,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-02-19T21:52:03+09:00</lastmod>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -765,19 +770,19 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2019-02-19T21:52:03+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/tags/blog/</loc>
-    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/categories/blog/</loc>
     <lastmod>2015-07-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/tags/blog/</loc>
+    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -915,7 +920,7 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-02-19T21:52:03+09:00</lastmod>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -957,7 +962,7 @@
   
   <url>
     <loc>https://chroju.github.io/</loc>
-    <lastmod>2019-02-19T21:52:03+09:00</lastmod>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
     <priority>0</priority>
   </url>
   
