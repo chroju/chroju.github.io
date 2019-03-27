@@ -3,8 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chroju.github.io/tags/</loc>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/</loc>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/tags/</loc>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2019/02/25/make_terraform_less_tiring/</loc>
     <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/</loc>
+    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -283,8 +307,20 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/tags/blog/</loc>
+    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2016/02/18/convert-to-hugo/</loc>
     <lastmod>2016-02-18T20:51:20+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/</loc>
+    <lastmod>2016-01-30T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -293,8 +329,26 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/event-aws/</loc>
+    <lastmod>2016-01-30T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/</loc>
     <lastmod>2016-01-24T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/lifehack/</loc>
+    <lastmod>2016-01-24T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/event-nodejs/</loc>
+    <lastmod>2016-01-20T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -308,6 +362,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/poem/</loc>
+    <lastmod>2016-01-03T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/12/31/looking-back-2015/</loc>
     <lastmod>2015-12-31T00:00:00+09:00</lastmod>
   </url>
@@ -315,6 +375,18 @@
   <url>
     <loc>https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/</loc>
     <lastmod>2015-12-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/serverspec/</loc>
+    <lastmod>2015-12-31T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/book/</loc>
+    <lastmod>2015-12-14T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -328,8 +400,26 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/docker/</loc>
+    <lastmod>2015-12-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/</loc>
     <lastmod>2015-11-18T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/ansible-serverspec-docker-circle-ci/</loc>
+    <lastmod>2015-11-18T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/event/</loc>
+    <lastmod>2015-10-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -343,8 +433,20 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</loc>
+    <lastmod>2015-10-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/10/04/individual-github-flow/</loc>
     <lastmod>2015-10-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/ansible/</loc>
+    <lastmod>2015-09-24T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -358,6 +460,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/%E6%9B%B8%E8%A9%95/</loc>
+    <lastmod>2015-08-16T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/</loc>
     <lastmod>2015-08-09T00:00:00+09:00</lastmod>
   </url>
@@ -368,8 +476,26 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/ruby-on-rails/</loc>
+    <lastmod>2015-08-08T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/exhibi/</loc>
+    <lastmod>2015-08-08T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/07/25/start-qiita/</loc>
     <lastmod>2015-07-25T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/blog/</loc>
+    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -378,13 +504,37 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/ansible-vps-linux/</loc>
+    <lastmod>2015-07-20T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/security-summary/</loc>
+    <lastmod>2015-07-20T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/</loc>
     <lastmod>2015-07-20T00:00:00+09:00</lastmod>
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2015-07-04T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/</loc>
     <lastmod>2015-07-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/event-ops/</loc>
+    <lastmod>2015-07-03T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -395,6 +545,18 @@
   <url>
     <loc>https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/</loc>
     <lastmod>2015-06-28T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</loc>
+    <lastmod>2015-06-28T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/ansible-event/</loc>
+    <lastmod>2015-06-25T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -413,13 +575,37 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/aws/</loc>
+    <lastmod>2015-05-15T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/google-api/</loc>
+    <lastmod>2015-05-03T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/</loc>
     <lastmod>2015-05-03T00:00:00+09:00</lastmod>
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/ruby/</loc>
+    <lastmod>2015-05-03T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/</loc>
     <lastmod>2015-04-29T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2015-04-29T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -488,6 +674,18 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/octopress/</loc>
+    <lastmod>2015-03-01T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/vim/</loc>
+    <lastmod>2015-03-01T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/</loc>
     <lastmod>2015-03-01T00:00:00+09:00</lastmod>
   </url>
@@ -500,6 +698,12 @@
   <url>
     <loc>https://chroju.github.io/blog/2014/12/29/2014-12-29-post/</loc>
     <lastmod>2014-12-29T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/network/</loc>
+    <lastmod>2014-12-01T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -520,6 +724,12 @@
   <url>
     <loc>https://chroju.github.io/blog/2014/10/02/2014-10-02-post/</loc>
     <lastmod>2014-10-02T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/linux/</loc>
+    <lastmod>2014-09-28T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -553,6 +763,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/terminal/</loc>
+    <lastmod>2014-07-20T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2014/07/20/2014-07-20-post/</loc>
     <lastmod>2014-07-20T00:00:00+09:00</lastmod>
   </url>
@@ -560,6 +776,18 @@
   <url>
     <loc>https://chroju.github.io/blog/2014/06/05/2014-06-05-post/</loc>
     <lastmod>2014-06-05T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/misc/</loc>
+    <lastmod>2014-06-05T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/chef-solo/</loc>
+    <lastmod>2014-05-30T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -583,6 +811,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/capistrano/</loc>
+    <lastmod>2014-04-12T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2014/04/12/2014-04-12-post/</loc>
     <lastmod>2014-04-12T00:00:00+09:00</lastmod>
   </url>
@@ -598,6 +832,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/vimperator/</loc>
+    <lastmod>2014-02-09T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2014/02/09/2014-02-09-post/</loc>
     <lastmod>2014-02-09T00:00:00+09:00</lastmod>
   </url>
@@ -610,6 +850,18 @@
   <url>
     <loc>https://chroju.github.io/blog/2014/02/02/2014-02-02-post/</loc>
     <lastmod>2014-02-02T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/vagrant/</loc>
+    <lastmod>2014-02-02T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</loc>
+    <lastmod>2014-02-02T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -653,6 +905,12 @@
   </url>
   
   <url>
+    <loc>https://chroju.github.io/categories/windows/</loc>
+    <lastmod>2013-12-22T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://chroju.github.io/blog/2013/12/22/2013-12-22-post/</loc>
     <lastmod>2013-12-22T00:00:00+09:00</lastmod>
   </url>
@@ -675,6 +933,12 @@
   <url>
     <loc>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</loc>
     <lastmod>2013-11-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</loc>
+    <lastmod>2013-10-20T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -730,270 +994,6 @@
   <url>
     <loc>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</loc>
     <lastmod>2013-07-20T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ansible/</loc>
-    <lastmod>2015-09-24T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ansible-event/</loc>
-    <lastmod>2015-06-25T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ansible-serverspec-docker-circle-ci/</loc>
-    <lastmod>2015-11-18T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ansible-vps-linux/</loc>
-    <lastmod>2015-07-20T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/aws/</loc>
-    <lastmod>2015-05-15T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/tags/blog/</loc>
-    <lastmod>2016-02-18T20:51:20+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/blog/</loc>
-    <lastmod>2015-07-25T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/book/</loc>
-    <lastmod>2015-12-14T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/capistrano/</loc>
-    <lastmod>2014-04-12T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/</loc>
-    <lastmod>2015-09-24T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/chef-solo/</loc>
-    <lastmod>2014-05-30T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/docker/</loc>
-    <lastmod>2015-12-04T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/event/</loc>
-    <lastmod>2015-10-25T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/event-aws/</loc>
-    <lastmod>2016-01-30T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/event-nodejs/</loc>
-    <lastmod>2016-01-20T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/event-ops/</loc>
-    <lastmod>2015-07-03T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/exhibi/</loc>
-    <lastmod>2015-08-08T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/git-github-%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83/</loc>
-    <lastmod>2015-10-04T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/google-api/</loc>
-    <lastmod>2015-05-03T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/lifehack/</loc>
-    <lastmod>2016-01-24T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/linux/</loc>
-    <lastmod>2014-09-28T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/misc/</loc>
-    <lastmod>2014-06-05T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/network/</loc>
-    <lastmod>2014-12-01T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/octopress/</loc>
-    <lastmod>2015-03-01T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/poem/</loc>
-    <lastmod>2016-01-03T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ruby/</loc>
-    <lastmod>2015-05-03T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/ruby-on-rails/</loc>
-    <lastmod>2015-08-08T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/security-summary/</loc>
-    <lastmod>2015-07-20T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/serverspec/</loc>
-    <lastmod>2015-12-31T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/terminal/</loc>
-    <lastmod>2014-07-20T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/vagrant/</loc>
-    <lastmod>2014-02-02T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/vim/</loc>
-    <lastmod>2015-03-01T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/vimperator/</loc>
-    <lastmod>2014-02-09T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/windows/</loc>
-    <lastmod>2013-12-22T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/windows-%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2015-07-04T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/</loc>
-    <lastmod>2019-02-25T22:32:12+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%97%E3%83%A9%E3%83%B3/</loc>
-    <lastmod>2015-06-28T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/%E6%83%85%E5%A0%B1%E3%82%BF%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2015-04-29T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/%E6%8A%80%E8%A1%93%E5%8B%89%E5%BC%B7%E5%85%A8%E8%88%AC/</loc>
-    <lastmod>2013-10-20T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/%E6%9B%B8%E8%A9%95/</loc>
-    <lastmod>2015-08-16T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/categories/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/</loc>
-    <lastmod>2014-02-02T00:00:00+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

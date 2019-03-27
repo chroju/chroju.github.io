@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Octopress on the world as code</title>
+    <title>octopress on the world as code</title>
     <link>https://chroju.github.io/categories/octopress/</link>
-    <description>Recent content in Octopress on the world as code</description>
+    <description>Recent content in octopress on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 01 Mar 2015 00:00:00 +0900</lastBuildDate>
