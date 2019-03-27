@@ -6,10 +6,19 @@
     <description>Recent content in Blog on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 25 Feb 2019 22:32:12 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 27 Mar 2019 23:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HashiCorp ファン必須科目である mitchellh/cli を履修する</title>
+      <link>https://chroju.github.io/blog/2019/03/27/mitchellh_cli/</link>
+      <pubDate>Wed, 27 Mar 2019 23:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/03/27/mitchellh_cli/</guid>
+      <description>mitchellh/cli について Go にはコマンドラインツールを書くのに役立つフレームワークが数多くありますが、今回はググってもあんまり日本語情報が出ず、また godoc に example も</description>
+    </item>
     
     <item>
       <title>Terraform で疲れないために</title>
