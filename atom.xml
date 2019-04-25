@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 27 Mar 2019 23:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Apr 2019 18:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lily58 Pro または私は如何にして市販品を探すのをやめて分割キーボードを自作するようになったか</title>
+      <link>https://chroju.github.io/blog/2019/04/25/how_i_learned_to_stop_worrying_and_love_the_original_keyboards/</link>
+      <pubDate>Thu, 25 Apr 2019 18:00:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/04/25/how_i_learned_to_stop_worrying_and_love_the_original_keyboards/</guid>
+      <description>tl;dr 分割キーボードは市販品の選択肢がない 従って自作キーボードに手を出す気はなかったが手を出すことになった Lily58 Pro がかわいい Introduction 昨今、キーボードの自作</description>
+    </item>
     
     <item>
       <title>HashiCorp ファン必須科目である mitchellh/cli を履修する</title>
