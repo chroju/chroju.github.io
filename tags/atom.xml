@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 25 Apr 2019 18:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 12:41:43 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>電子工作初心者が Lily58 Pro を買ってから作って持ち運ぶまで</title>
+      <link>https://chroju.github.io/blog/2019/04/27/making_lily58_pro_with_a_beginner/</link>
+      <pubDate>Sat, 27 Apr 2019 12:41:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/04/27/making_lily58_pro_with_a_beginner/</guid>
+      <description>前回の記事 を Twitter に載せたところ予想外に RT と fav をちょいちょいいただきまして、もしその流れで「製作編」を楽しみにしていた方がいたらとても申し訳ない</description>
+    </item>
     
     <item>
       <title>Lily58 Pro または私は如何にして市販品を探すのをやめて分割キーボードを自作するようになったか</title>
