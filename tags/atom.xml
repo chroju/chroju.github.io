@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 27 Apr 2019 12:41:43 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 14 May 2019 20:30:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話</title>
+      <link>https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/</link>
+      <pubDate>Tue, 14 May 2019 20:30:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/</guid>
+      <description>tl;dr 今回あんまりまとまった話でもなくて、いろいろ調べていたら手元のメモがだいぶ長くなったのでせっかくだし公開してみよう、程度のものです。正直文</description>
+    </item>
     
     <item>
       <title>電子工作初心者が Lily58 Pro を買ってから作って持ち運ぶまで</title>
