@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.922556806%20%2b0900%20JST%20m%3d%2b0.071499537">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.922556806%20%2b0900%20JST%20m%3d%2b0.071499537">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.922556806%20%2b0900%20JST%20m%3d%2b0.071499537">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.552286946%20%2b0900%20JST%20m%3d%2b0.158637301">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.552286946%20%2b0900%20JST%20m%3d%2b0.158637301">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.552286946%20%2b0900%20JST%20m%3d%2b0.158637301">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.922556806%20%2b0900%20JST%20m%3d%2b0.071499537">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.552286946%20%2b0900%20JST%20m%3d%2b0.158637301">
     
 
 
@@ -206,108 +204,102 @@
 <p>他にもマウス操作をキーにアサインできるとか、 Unicode のアサインも可能なので 🤔 を1キーで出せるとかいろいろできる。つまり <strong>単純なキーの配置だけではなく、どの機能を使うと自分の理想的な運指になるか</strong> ということを考える必要があり、沼と呼ぶに非常にふさわしい。</p>
 
 <p>なお Lily58 は対応していないが、キーボードにありがちな LED を光らせる設定も QMK Firmware でまかなうことができる。一部機能に関しては <code>rules.mk</code> というファイルに有効化の設定を書かなくてはならないため、ドキュメントを読みながら対応する必要がある。機能を有効化すると、その機能に関するコードがファームウェアに内包されるようになる仕組みと思われる。私の <code>rules.mk</code> はこんな感じ。</p>
-
-<pre><code class="language-c"># Build Options
-#   change to &quot;no&quot; to disable the options, or define them in the Makefile in
-#   the appropriate keymap folder that will get included automatically
-#
-BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration(+1000)
-MOUSEKEY_ENABLE = no        # Mouse keys(+4700)
-EXTRAKEY_ENABLE = yes       # Audio control and System control(+450)
-CONSOLE_ENABLE = no         # Console for debug(+400)
-COMMAND_ENABLE = no         # Commands for debug and configuration
-NKRO_ENABLE = no            # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
-MIDI_ENABLE = no            # MIDI controls
-AUDIO_ENABLE = no           # Audio output on port C6
-UNICODE_ENABLE = no         # Unicode
-BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
-RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight.
-SWAP_HANDS_ENABLE = no      # Enable one-hand typing
-TAP_DANCE_ENABLE = yes
-
-# Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
-SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
-
-# If you want to change the display of OLED, you need to change here
-SRC +=  ./lib/glcdfont.c \
-        ./lib/rgb_state_reader.c \
-        ./lib/layer_state_reader.c \
-        ./lib/logo_reader.c \
-        ./lib/key_count.c \
-        ./lib/uptime.c \
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07"># Build Options
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#719e07">#   change to &#34;no&#34; to disable the options, or define them in the Makefile in
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">#   the appropriate keymap folder that will get included automatically
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#719e07">#
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#719e07"></span>BOOTMAGIC_ENABLE <span style="color:#719e07">=</span> no       <span style="color:#719e07"># Virtual DIP switch configuration(+1000)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#719e07"></span>MOUSEKEY_ENABLE <span style="color:#719e07">=</span> no        <span style="color:#719e07"># Mouse keys(+4700)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07"></span>EXTRAKEY_ENABLE <span style="color:#719e07">=</span> yes       <span style="color:#719e07"># Audio control and System control(+450)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#719e07"></span>CONSOLE_ENABLE <span style="color:#719e07">=</span> no         <span style="color:#719e07"># Console for debug(+400)
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#719e07"></span>COMMAND_ENABLE <span style="color:#719e07">=</span> no         <span style="color:#719e07"># Commands for debug and configuration
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#719e07"></span>NKRO_ENABLE <span style="color:#719e07">=</span> no            <span style="color:#719e07"># Nkey Rollover - if this doesn&#39;t work, see here: https:</span><span style="color:#586e75">//github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"></span>BACKLIGHT_ENABLE <span style="color:#719e07">=</span> no       <span style="color:#719e07"># Enable keyboard backlight functionality
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#719e07"></span>MIDI_ENABLE <span style="color:#719e07">=</span> no            <span style="color:#719e07"># MIDI controls
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#719e07"></span>AUDIO_ENABLE <span style="color:#719e07">=</span> no           <span style="color:#719e07"># Audio output on port C6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#719e07"></span>UNICODE_ENABLE <span style="color:#719e07">=</span> no         <span style="color:#719e07"># Unicode
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span style="color:#719e07"></span>BLUETOOTH_ENABLE <span style="color:#719e07">=</span> no       <span style="color:#719e07"># Enable Bluetooth with the Adafruit EZ-Key HID
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span><span style="color:#719e07"></span>RGBLIGHT_ENABLE <span style="color:#719e07">=</span> no        <span style="color:#719e07"># Enable WS2812 RGB underlight.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#719e07"></span>SWAP_HANDS_ENABLE <span style="color:#719e07">=</span> no      <span style="color:#719e07"># Enable one-hand typing
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#719e07"></span>TAP_DANCE_ENABLE <span style="color:#719e07">=</span> yes
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span><span style="color:#719e07"># Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span style="color:#719e07"></span>SLEEP_LED_ENABLE <span style="color:#719e07">=</span> no    <span style="color:#719e07"># Breathing sleep LED during USB suspend
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span style="color:#719e07"></span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span><span style="color:#719e07"># If you want to change the display of OLED, you need to change here
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span><span style="color:#719e07"></span>SRC <span style="color:#719e07">+=</span>  .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>glcdfont.c \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>        .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>rgb_state_reader.c \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>        .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>layer_state_reader.c \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>        .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>logo_reader.c \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>        .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>key_count.c \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>        .<span style="color:#719e07">/</span>lib<span style="color:#719e07">/</span>uptime.c \</code></pre></div>
 <h2 id="lily58-デフォルトキーマップ">Lily58 デフォルトキーマップ</h2>
 
 <p>すべて自分で考えて配置するのは大変なので、デフォルトキーマップを元に編集することにした。本記事執筆時点で、デフォルトキーマップは以下の通りになっている。</p>
-
-<pre><code class="language-c">/* QWERTY
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-
- [_QWERTY] = LAYOUT( \
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV, \
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
-                             KC_LALT, KC_LGUI,LOWER, KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI \
-),
-/* LOWER
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &amp;  |   *  |   (  |   )  |   -  |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |   |  |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-[_LOWER] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,\
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
-  KC_GRV, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TILD, \
-  _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
-                             _______, _______, _______, _______, _______,  _______, _______, _______\
-),
-/* RAISE
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------.    ,-------|      | Left | Down |  Up  |Right |      |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |  F7  |  F8  |  F9  | F10  | F11  | F12  |-------|    |-------|   +  |   -  |   =  |   [  |   ]  |   \  |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-
-[_RAISE] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
-  KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,                       XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, \
-  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,   _______, _______,  KC_PLUS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-                             _______, _______, _______,  _______, _______,  _______, _______, _______ \
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">/* QWERTY
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"> * ,-----------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#586e75"> * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#586e75"> * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#586e75"> * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  &#39;   |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"> * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#586e75"> * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#586e75"> * `-----------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"> *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#586e75"> *                   |      |      |      |/       /         \      \ |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#586e75"> *                   `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span> [_QWERTY] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>                             KC_LALT, KC_LGUI,LOWER, KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span><span style="color:#586e75">/* LOWER
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span><span style="color:#586e75"> * ,-----------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span><span style="color:#586e75"> * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span><span style="color:#586e75"> * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span><span style="color:#586e75"> * |   `  |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &amp;  |   *  |   (  |   )  |   -  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span><span style="color:#586e75"> * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span><span style="color:#586e75"> * |      |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |   |  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span><span style="color:#586e75"> * `-----------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span><span style="color:#586e75"> *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">34</span><span style="color:#586e75"> *                   |      |      |      |/       /         \      \ |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">35</span><span style="color:#586e75"> *                   `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">36</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span>[_LOWER] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">38</span>  _______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,\
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">39</span>  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">40</span>  KC_GRV, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TILD, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">41</span>  _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">42</span>                             _______, _______, _______, _______, _______,  _______, _______, _______\
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">43</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">44</span><span style="color:#586e75">/* RAISE
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">45</span><span style="color:#586e75"> * ,-----------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">46</span><span style="color:#586e75"> * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">47</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">48</span><span style="color:#586e75"> * |   `  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">49</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">50</span><span style="color:#586e75"> * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------.    ,-------|      | Left | Down |  Up  |Right |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">51</span><span style="color:#586e75"> * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">52</span><span style="color:#586e75"> * |  F7  |  F8  |  F9  | F10  | F11  | F12  |-------|    |-------|   +  |   -  |   =  |   [  |   ]  |   \  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">53</span><span style="color:#586e75"> * `-----------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">54</span><span style="color:#586e75"> *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">55</span><span style="color:#586e75"> *                   |      |      |      |/       /         \      \ |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">56</span><span style="color:#586e75"> *                   `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">57</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">58</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">59</span>[_RAISE] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">60</span>  _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">61</span>  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">62</span>  KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,                       XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">63</span>  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,   _______, _______,  KC_PLUS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">64</span>                             _______, _______, _______,  _______, _______,  _______, _______, _______ \</code></pre></div>
 <p>これに対する自分の意見は以下。</p>
 
 <ul>
@@ -323,44 +315,38 @@ SRC +=  ./lib/glcdfont.c \
 <h2 id="現時点で最強のキーマップ">現時点で最強のキーマップ</h2>
 
 <p>自作キーボードは親指を駆使させ、小指を使わなくさせる傾向にあることが多い。　Ergodox の親指用キーの多さなどは顕著である。多くの人は小指より親指のほうが動かしやすいと思うので理に適った話ではあるが、しかし使い慣れたキー配置からの移行コストもあるわけで、一旦折衷的なキーマップとした。 まずはデフォルトのレイヤー。</p>
-
-<pre><code class="language-c">/* QWERTY
- * ,------------------------------------------.                    ,-----------------------------------------.
- * | ESC   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |BackSP|
- * |-------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab   |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
- * |-------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |CTL/GUI|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |-------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |LShift |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |CTL+Sp|
- * `------------------------------------------/       /     \      \-----------------------------------------'
- *                    | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| ESC  |
- *                    |      |      |IMEon |/       /         \      \ |IMEoff|      |      |
- *                    `----------------------------'           '------''--------------------'
- */
-
- [_QWERTY] = LAYOUT( \
-  KC_ESC,           KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                                KC_6,           KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,      \
-  KC_TAB,           KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                                KC_Y,           KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,      \
-  TD(TD_CTL_GUI),   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                                KC_H,           KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,      \
-  KC_LSFT,          KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_LBRC,   KC_RBRC, KC_N,           KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LCTL(KC_SPC), \
-                                     KC_LALT, KC_LGUI, LT(1, KC_LANG1), KC_SPC,    KC_ENT,  LT(2,KC_LANG2), KC_BSPC, KC_ESC  \
-),
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">/* QWERTY
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"> * ,------------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#586e75"> * | ESC   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |BackSP|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"> * |-------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#586e75"> * | Tab   |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"> * |-------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#586e75"> * |CTL/GUI|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  &#39;   |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"> * |-------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#586e75"> * |LShift |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |CTL+Sp|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#586e75"> * `------------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"> *                    | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| ESC  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#586e75"> *                    |      |      |IMEon |/       /         \      \ |IMEoff|      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#586e75"> *                    `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span> [_QWERTY] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  KC_ESC,           KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                                KC_6,           KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,      \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  KC_TAB,           KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                                KC_Y,           KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,      \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  TD(TD_CTL_GUI),   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                                KC_H,           KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,      \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  KC_LSFT,          KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_LBRC,   KC_RBRC, KC_N,           KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LCTL(KC_SPC), \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>                                     KC_LALT, KC_LGUI, LT(<span style="color:#2aa198">1</span>, KC_LANG1), KC_SPC,    KC_ENT,  LT(<span style="color:#2aa198">2</span>,KC_LANG2), KC_BSPC, KC_ESC  \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>),</code></pre></div>
 <p>Backspace と ESC は右親指で押すことを目指すが、現時点では一般的な位置にも配置している。最左列、下から2番目のキーは Tap-Dance により、1回押すと ctrl、2回押すと GUI とした。これは macOS でキーボードショートカットが GUI（⌘）に割り当たっている一方、 GNU Readline の各種ショートカットが ctrl と位置がバラけるのが嫌だったため。これも移行措置として、通常の位置にも GUI を置いている。</p>
 
 <p>なお、 Tap-Dance はどのキーを何回押したときにどう動作させるか、という定義を書く必要があり、キーマップ以外に以下のようなコードを追加している。</p>
-
-<pre><code class="language-c">enum {
-  TD_CTL_GUI = 0
-};
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_CTL_GUI] = ACTION_TAP_DANCE_DOUBLE(KC_LCTRL, KC_LGUI)
-};
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">enum</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  TD_CTL_GUI <span style="color:#719e07">=</span> <span style="color:#2aa198">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>};
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>qk_tap_dance_action_t tap_dance_actions[] <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  [TD_CTL_GUI] <span style="color:#719e07">=</span> ACTION_TAP_DANCE_DOUBLE(KC_LCTRL, KC_LGUI)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>};</code></pre></div>
 <p>LOWER、RAISEの各キーは Mod-Tap により、単独で押した場合に <code>KC_LANG1</code> と <code>KC_LANG2</code> というキーをそれぞれ割り当てている。ドキュメントに記載はないのだが、これらは macOS のかな/英数に相当するらしく、 IME の切り替えが Toggle ではなく一発で出来るようになる。 US キーボードを使っていると IME 切り替えは ctrl + space などで Toggle させるしかなかったため、このアサインが出来るのは嬉しかった。</p>
 
 <p>参考 : <a href="https://qiita.com/miyaoka/items/e3f7242b4767cd599364#_reference-af7104110d01879c97d3">変わり種ErgoDox紹介 + IME話 - Qiita</a></p>
@@ -368,60 +354,54 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 <p>最右最下は正直余ってしまったので、 ctrl + space を割り当てた。 Windows での IME 切り替えに現在使っているが、 Windows でも OS 側の設定で <code>KC_LANG</code> 各キーを IME 切り替えに割り当てられるらしいので、後日対応の予定。</p>
 
 <h3 id="lower">LOWER</h3>
-
-<pre><code class="language-c">/* LOWER
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |   ~  |      |                    |      |      |      |  _   |  +   |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |   `  |      |-------.    ,-------|      |      |      |  -   |  =   |      |
- * |------+------+------+------+------+------|   (   |    |    )  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-
-[_LOWER] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, KC_TILD, _______,                     _______, KC_UNDS, KC_PLUS, _______, _______, _______, \
-  _______, _______, _______, _______, KC_GRV,  _______,                     _______, KC_MINS, KC_EQL,  _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______,  KC_LPRN, KC_RPRN,  _______, _______, _______, _______, _______, _______, \
-                             _______, _______, _______,  _______, _______,  _______, _______, _______ \
-),
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">/* LOWER
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"> * ,-----------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#586e75"> * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#586e75"> * |      |      |      |      |   ~  |      |                    |      |      |      |  _   |  +   |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#586e75"> * |      |      |      |      |   `  |      |-------.    ,-------|      |      |      |  -   |  =   |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"> * |------+------+------+------+------+------|   (   |    |    )  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#586e75"> * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#586e75"> * `-----------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"> *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#586e75"> *                   |      |      |      |/       /         \      \ |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#586e75"> *                   `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>[_LOWER] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  _______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  _______, _______, _______, _______, KC_TILD, _______,                     _______, KC_UNDS, KC_PLUS, _______, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  _______, _______, _______, _______, KC_GRV,  _______,                     _______, KC_MINS, KC_EQL,  _______, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  _______, _______, _______, _______, _______, _______,  KC_LPRN, KC_RPRN,  _______, _______, _______, _______, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>                             _______, _______, _______,  _______, _______,  _______, _______, _______ \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>),</code></pre></div>
 <p>LOWER は記号キー用とした。通常配置で盛り込みきれていない記号キーだけに絞っている。</p>
 
 <p>当初はハイフンを9に割り当てるなど、一般的配列と近い位置に配置していたが、わざわざ遠くへ押しに行く必要もないと考え直し、左右とも人差し指近くに集中させた。</p>
 
 <h3 id="raise">RAISE</h3>
-
-<pre><code class="language-c">/* RAISE
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      | DEL  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | F11  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F12  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------| LEFT | DOWN |  UP  |RIGHT |      |      |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------| BRID | BRIU | VOLD | VOLU | MUTE |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| CAD  |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-[_RAISE] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______,  _______, KC_DEL,  \
-  KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F12,  \
-  _______, _______, _______, _______, _______, _______,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU,  KC_MUTE, _______, \
-                             _______, _______, _______, _______, _______, _______, _______, LCTL(LALT(KC_DEL)) \
-),
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">/* RAISE
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"> * ,-----------------------------------------.                    ,-----------------------------------------.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#586e75"> * |      |      |      |      |      |      |                    |      |      |      |      |      | DEL  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#586e75"> * | F11  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F12  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"> * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#586e75"> * |      |      |      |      |      |      |-------.    ,-------| LEFT | DOWN |  UP  |RIGHT |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"> * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#586e75"> * |      |      |      |      |      |      |-------|    |-------| BRID | BRIU | VOLD | VOLU | MUTE |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#586e75"> * `-----------------------------------------/       /     \      \-----------------------------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"> *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| CAD  |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#586e75"> *                   |      |      |      |/       /         \      \ |      |      |      |
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#586e75"> *                   `----------------------------&#39;           &#39;------&#39;&#39;--------------------&#39;
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"> */</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>[_RAISE] <span style="color:#719e07">=</span> LAYOUT( \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______,  _______, KC_DEL,  \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F12,  \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  _______, _______, _______, _______, _______, _______,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  _______, _______, _______, _______, _______, _______, _______, _______, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU,  KC_MUTE, _______, \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>                             _______, _______, _______, _______, _______, _______, _______, LCTL(LALT(KC_DEL)) \
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>),</code></pre></div>
 <p>RAISE は機能的なキー担当。先述の方針通りにファンクションキーと矢印キーを並べている。</p>
 
 <p>また Macbook に搭載されている輝度や音量調節のキーをよく使っていたので、それらも割り当てた。 Windows でも動いてくれるとうれしいのだが、いまのところ動かないので要調整。</p>
@@ -455,13 +435,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

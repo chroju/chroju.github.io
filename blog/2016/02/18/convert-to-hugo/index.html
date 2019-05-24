@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.96895628%20%2b0900%20JST%20m%3d%2b0.117898997">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.96895628%20%2b0900%20JST%20m%3d%2b0.117898997">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.96895628%20%2b0900%20JST%20m%3d%2b0.117898997">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.525128693%20%2b0900%20JST%20m%3d%2b0.131479011">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.525128693%20%2b0900%20JST%20m%3d%2b0.131479011">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.525128693%20%2b0900%20JST%20m%3d%2b0.131479011">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.96895628%20%2b0900%20JST%20m%3d%2b0.117898997">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.525128693%20%2b0900%20JST%20m%3d%2b0.131479011">
     
 
 
@@ -173,27 +171,21 @@
 <p><a href="http://deeeet.com/writing/2014/12/25/hugo/">OctopressからHugoへ移行した | SOTA</a></p>
 
 <p>ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名が<code>YYYY-MM-DD-foobar.markdown</code>の形だったのに対し、今回は記事のパーマリンクを<code>config.toml</code>で以下のように設定してしまっている。</p>
-
-<pre><code class="language-toml">[permalinks]
-    post = &quot;/blog/:year/:month/:day/:filename/&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>[permalinks]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    post = <span style="color:#2aa198">&#34;/blog/:year/:month/:day/:filename/&#34;</span></code></pre></div>
 <p>従って<code>/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/</code>という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事は<code>foobar.markdown</code>に直したのだが、はてなブログ時代から移植した記事は<code>YYYY-MM-DD-post.markdown</code>という適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。</p>
 
 <p>記事を公開する流れは以下のようになる。</p>
-
-<pre><code class="language-bash"># 記事作成
-$ hugo new post/title.md
-$ vi content/post/title.md
-# ビルド
-$ hugo
-# commit
-$ cd public
-$ git add .
-$ git commit -m &quot;new post&quot;
-$ git push origin master
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75"># 記事作成</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>$ hugo new post/title.md
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>$ vi content/post/title.md
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"># ビルド</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>$ hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"># commit</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>$ <span style="color:#b58900">cd</span> public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>$ git add .
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>$ git commit -m <span style="color:#2aa198">&#34;new post&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>$ git push origin master</code></pre></div>
 <p><code>hugo</code>コマンドでビルドすると<code>public</code>フォルダにサイト構成全体が吐かれるので、それをそのまま<code>git push</code>して終わり。ただ実際にバージョン管理したいのは<code>public</code>というより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体で<code>git push</code>してCIでビルドさせる形に変えたいと思う。</p>
 
 <p><a href="http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/">HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog</a></p>
@@ -203,10 +195,7 @@ $ git push origin master
 <h2 id="追記-2016-02-22-23-50">（追記 2016-02-22 23:50）</h2>
 
 <p>フィードのファイルパスがデフォルトだと<code>index.xml</code>になってしまうので、Octopressから変更がないよう<code>atom.xml</code>に直した。<code>config.toml</code>で指定ができる。</p>
-
-<pre><code class="language-toml">rssuri = &quot;atom.xml&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>rssuri = <span style="color:#2aa198">&#34;atom.xml&#34;</span></code></pre></div>
 <p>参考：<a href="https://discuss.gohugo.io/t/what-is-rsslink-exactly/1195/2">What is {{ .RSSlink }}, exactly? - support - Hugo Discussion</a></p>
 
 <h2 id="その他参考記事">その他参考記事</h2>
@@ -231,13 +220,6 @@ $ git push origin master
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

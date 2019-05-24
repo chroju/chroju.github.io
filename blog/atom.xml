@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on the world as code</title>
+    <title>Blogs on the world as code</title>
     <link>https://chroju.github.io/blog/</link>
-    <description>Recent content in Blog on the world as code</description>
+    <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 24 May 2019 21:49:37 +0900</lastBuildDate>
@@ -836,7 +836,7 @@
       <pubDate>Mon, 06 Apr 2015 00:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/04/06/study-ruby-time/</guid>
-      <description>『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&amp;gt; 2015-03-16 23:25:32 +0900 new = Time.new # =&amp;gt; 2015-03-16 23:25:32 +0900 now.zone # =&amp;gt; &amp;quot;JST&amp;quot; now.getutc #</description>
+      <description>『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 1now = Time.now # =&amp;gt; 2015-03-16 23:25:32 +0900 2new = Time.new # =&amp;gt; 2015-03-16 23:25:32 +0900 3 4now.zone # =&amp;gt; &amp;#34;JST&amp;#34; 5now.getutc</description>
     </item>
     
     <item>
@@ -845,7 +845,7 @@
       <pubDate>Sun, 05 Apr 2015 00:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/04/05/study-ruby-hash/</guid>
-      <description>『パーフェクトRuby』p.179より。 まず基本的なとこで。 hash = {hoge: 1, fuga: 2} hash.each do |key, val| p &amp;quot;#{key}: #{val}&amp;quot; end # =&amp;gt; &amp;quot;hoge: 1&amp;quot;, &amp;quot;fuga: 2&amp;quot; hash.each_key do |key| p key end # =&amp;gt; &amp;quot;hoge&amp;quot;, &amp;quot;fuga&amp;quot; hash.each_value do |val| p val end # =&amp;gt; &amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;</description>
+      <description>『パーフェクトRuby』p.179より。 まず基本的なとこで。 1hash = {hoge: 1, fuga: 2} 2 3hash.each do |key, val| 4 p &amp;#34;#{key}: #{val}&amp;#34; 5end # =&amp;gt; &amp;#34;hoge: 1&amp;#34;, &amp;#34;fuga: 2&amp;#34; 6 7hash.each_key do |key| 8 p key 9end # =&amp;gt; &amp;#34;hoge&amp;#34;, &amp;#34;fuga&amp;#34; 10 11hash.each_value do |val| 12 p</description>
     </item>
     
     <item>
@@ -899,7 +899,7 @@
       <pubDate>Sun, 15 Mar 2015 00:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2015/03/15/study-ruby-string/</guid>
-      <description>パーフェクトRuby p.148から学習。文字列ことStringクラス。 まずは基本操作系。 s = &amp;quot;hoge&amp;quot; s.empty? # =&amp;gt; false s.length # =&amp;gt; 4 s.size # =&amp;gt; 4 s.bitesize # =&amp;gt; 8 s.include?(&amp;quot;og&amp;quot;) =&amp;gt; true 演算子で</description>
+      <description>パーフェクトRuby p.148から学習。文字列ことStringクラス。 まずは基本操作系。 1s = &amp;#34;hoge&amp;#34; 2s.empty? # =&amp;gt; false 3s.length # =&amp;gt; 4 4s.size # =&amp;gt; 4 5s.bitesize # =&amp;gt; 8 6s.include?(&amp;#34;og&amp;#34;) =&amp;gt; true 演算子で</description>
     </item>
     
     <item>

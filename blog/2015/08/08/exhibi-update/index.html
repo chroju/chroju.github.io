@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.988852397%20%2b0900%20JST%20m%3d%2b0.137795146">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.988852397%20%2b0900%20JST%20m%3d%2b0.137795146">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.988852397%20%2b0900%20JST%20m%3d%2b0.137795146">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.532655783%20%2b0900%20JST%20m%3d%2b0.139006133">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.532655783%20%2b0900%20JST%20m%3d%2b0.139006133">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.532655783%20%2b0900%20JST%20m%3d%2b0.139006133">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.988852397%20%2b0900%20JST%20m%3d%2b0.137795146">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.532655783%20%2b0900%20JST%20m%3d%2b0.139006133">
     
 
 
@@ -175,18 +173,12 @@
 <iframe class="bookmarklet hatena-embed" src="http://hatenablog.com/embed?url=http%3A%2F%2Fgithub.com%2Famatsuda%2Fkaminari" title="amatsuda/kaminari" style="border:none;display:block;margin:0 0 1.7rem;overflow:hidden;height:155px;width:100%;max-width:100%;"><a href="https://github.com/amatsuda/kaminari" target="_blank">amatsuda/kaminari</a></iframe>
 
 <p>bundlerでインストールすればほぼ設定とかなくても使えます。最初のローンチのときに入れなかったので、viewを結構いじらなくちゃいけなくて大変かなーと思っていたのだけど、そんなことはなかった。主に変更は2点で、まずは<code>controller</code>で<code>#index</code>のようなリソースを拾ってくるアクションに<code>.page</code>をかましてやるようにします。</p>
-
-<pre><code class="language-ruby"># もともとはExhibition.all.order...
-def index
-  @exhibitions = Exhibition.page(params[:page]).order(&quot;start_date DESC&quot;)
-end
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#586e75"># もともとはExhibition.all.order...</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">def</span> <span style="color:#268bd2">index</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>  @exhibitions <span style="color:#719e07">=</span> <span style="color:#cb4b16">Exhibition</span><span style="color:#719e07">.</span>page(params<span style="color:#719e07">[</span><span style="color:#2aa198">:page</span><span style="color:#719e07">]</span>)<span style="color:#719e07">.</span>order(<span style="color:#2aa198">&#34;start_date DESC&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#719e07">end</span></code></pre></div>
 <p>あとは<code>view</code>でページネーションを表示するためのヘルパーを1行追加すれば終わり。以下はslimの場合。</p>
-
-<pre><code class="language-slim">= paginate @exhibitions
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-slim" data-lang="slim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>= paginate @exhibitions</code></pre></div>
 <p>なお、実装当初は<code>undefined method 'deep_symbolize_keys'</code>などというちょっと関係ねーだろこれって感じのエラーが出たりして焦ったのは秘密です。原因は<code>config/locales/ja.yml</code>が一切インデントされてなかったことなんですけど、そんなのがここに波及するんですね。。。てかyamlの書き方よくわかってねーわ。</p>
 
 <p>もちろん、1ページあたりの表示数とかページャーの表示の仕方だとか、いろいろ細かく設定はできますが、とりあえずこれだけでページャーは実装されます。あーこりゃデファクトスタンダードになるわなという簡単さ。早く入れればよかった。なお、本当にまだ入れただけなのでCSSとかぜんぜん調整してないです。</p>
@@ -220,13 +212,6 @@ end
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

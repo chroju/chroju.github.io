@@ -13,3 +13,12 @@ section.main .content .page-heading {
 .container {
     margin: 0
 }
+
+section.main .content .markdown pre code {
+    background-color: transparent;
+}
+
+section.main .content .markdown pre {
+  white-space: pre;
+  overflow: scroll;
+}

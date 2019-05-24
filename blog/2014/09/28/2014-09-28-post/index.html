@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a42.052441687%20%2b0900%20JST%20m%3d%2b0.201384424">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a42.052441687%20%2b0900%20JST%20m%3d%2b0.201384424">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a42.052441687%20%2b0900%20JST%20m%3d%2b0.201384424">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.546945365%20%2b0900%20JST%20m%3d%2b0.153295675">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.546945365%20%2b0900%20JST%20m%3d%2b0.153295675">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.546945365%20%2b0900%20JST%20m%3d%2b0.153295675">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a42.052441687%20%2b0900%20JST%20m%3d%2b0.201384424">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.546945365%20%2b0900%20JST%20m%3d%2b0.153295675">
     
 
 
@@ -181,23 +179,15 @@
 <h1 id="タグリストの書き換え">タグリストの書き換え</h1>
 
 <p>awesomeでは仮想デスクトップを&rdquo;tag&rdquo;と呼んで扱っていて、デフォルトの状態だと左上に1から8まで（だったかな？）の数字がタグの番号として並んでいる。あまりわかりやすいものではないし、そんなに多くタグも使わないので書き換える。</p>
-
-<pre><code class="language-lua">tags = &lt;span class=&quot;synType&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;synStatement&quot;&gt;for&lt;/span&gt; s = &lt;span class=&quot;synConstant&quot;&gt;1&lt;/span&gt;, screen.count() &lt;span class=&quot;synStatement&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;synComment&quot;&gt;-- Each screen has its own tag table.&lt;/span&gt;
-    tags[s] = awful.tag(&lt;span class=&quot;synType&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;synConstant&quot;&gt;&quot;Firefox&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Terminal&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Vim&quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;other&quot;&lt;/span&gt; &lt;span class=&quot;synType&quot;&gt;}&lt;/span&gt;, s, layouts[&lt;span class=&quot;synConstant&quot;&gt;1&lt;/span&gt;])
-&lt;span class=&quot;synStatement&quot;&gt;end&lt;/span&gt;
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>tags <span style="color:#719e07">=</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synType&#34;</span><span style="color:#719e07">&gt;</span>{}<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synStatement&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#268bd2">for</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span> s <span style="color:#719e07">=</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">1</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, screen.count() <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synStatement&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#268bd2">do</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--</span> Each screen has its own tag table.<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>    tags[s] <span style="color:#719e07">=</span> awful.tag(<span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synType&#34;</span><span style="color:#719e07">&gt;</span>{<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;Firefox&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;Terminal&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;Vim&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;other&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synType&#34;</span><span style="color:#719e07">&gt;</span>}<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, s, layouts[<span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">1</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>])
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synStatement&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#268bd2">end</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span></code></pre></div>
 <p>あとウィンドウを開いているタグは小さな正方形が表示されたりしていて鬱陶しかったのと、あまり見栄えも良くなかったので、正方形を表示されないようにした上で、フォーカスしているタグは文字色を変えることにした。これはbeautifulの方で設定する。</p>
-
-<pre><code class="language-lua">theme.taglist_fg_focus = &lt;span class=&quot;synConstant&quot;&gt;&quot;#f15c22&quot;&lt;/span&gt;
-&lt;span class=&quot;synComment&quot;&gt;-- theme.taglist_squares_sel   = &quot;/usr/share/awesome/themes/default/taglist/squarefw.png&quot;&lt;/span&gt;
-&lt;span class=&quot;synComment&quot;&gt;-- theme.taglist_squares_unsel = &quot;/usr/share/awesome/themes/default/taglist/squarew.png&quot;&lt;/span&gt;
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>theme.taglist_fg_focus <span style="color:#719e07">=</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;#f15c22&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--</span> theme.taglist_squares_sel   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;/usr/share/awesome/themes/default/taglist/squarefw.png&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--</span> theme.taglist_squares_unsel <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;/usr/share/awesome/themes/default/taglist/squarew.png&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span></code></pre></div>
 <p>1行目がフォーカスされているときのfg、フォアグラウンドカラーの設定。2、3行目はデフォルトで入ってる設定だったのでコメントアウトしておいた。</p>
 
 <h1 id="ウィジェットの表示">ウィジェットの表示</h1>
@@ -208,38 +198,26 @@
 </code></pre>
 
 <p>インストールした上で、</p>
-
-<pre><code class="language-lua">&lt;span class=&quot;synStatement&quot;&gt;local&lt;/span&gt; vicious = &lt;span class=&quot;synIdentifier&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;synConstant&quot;&gt;&quot;vicious&quot;&lt;/span&gt;)
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synStatement&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#268bd2">local</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span> vicious <span style="color:#719e07">=</span> <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synIdentifier&#34;</span><span style="color:#719e07">&gt;</span>require<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>(<span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;vicious&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>)</code></pre></div>
 <p>設定の順序としては、awesomeがもともと備えているウィジェット生成用のAPIである<code>wibox</code>を使ってウィジェットのの原型をセットし、これに<code>vicious</code>を使って表示させたい情報をセットする。ここではバッテリー状態と音量、Wi-Fiの状態を表示させる。どんな情報を表示させられるのか、詳細は<a href="http://git.sysphere.org/vicious/tree/README">ここ</a>。</p>
-
-<pre><code class="language-lua">&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
-battxtwidget = wibox.widget.textbox()
-vicious.register(battxtwidget, vicious.widgets.bat, &lt;span class=&quot;synConstant&quot;&gt;&quot; Battery: &lt;span color='#ffffff'&gt;$2%&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;60&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;BAT0&quot;&lt;/span&gt;)
-&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
-soundwidget = wibox.widget.textbox()
-vicious.register(soundwidget, vicious.widgets.volume, &lt;span class=&quot;synConstant&quot;&gt;&quot; Vol: &lt;span color='#ffffff'&gt;$1&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;Master&quot;&lt;/span&gt;)
-&lt;span class=&quot;synComment&quot;&gt;--&lt;/span&gt;
-wifiwidget = wibox.widget.textbox()
-vicious.register(wifiwidget, vicious.widgets.wifi, &lt;span class=&quot;synConstant&quot;&gt;&quot; Wi-Fi: &lt;span color='#ffffff'&gt;${ssid}&lt;/span&gt; &quot;&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;60&lt;/span&gt;, &lt;span class=&quot;synConstant&quot;&gt;&quot;wlp1s0&quot;&lt;/span&gt;)
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>battxtwidget <span style="color:#719e07">=</span> wibox.widget.textbox()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>vicious.register(battxtwidget, vicious.widgets.bat, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34; Battery: &lt;span color=&#39;#ffffff&#39;&gt;$2%&lt;/span&gt; &#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">60</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;BAT0&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>soundwidget <span style="color:#719e07">=</span> wibox.widget.textbox()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>vicious.register(soundwidget, vicious.widgets.volume, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34; Vol: &lt;span color=&#39;#ffffff&#39;&gt;$1&lt;/span&gt; &#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">2</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;Master&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>wifiwidget <span style="color:#719e07">=</span> wibox.widget.textbox()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span>vicious.register(wifiwidget, vicious.widgets.wifi, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34; Wi-Fi: &lt;span color=&#39;#ffffff&#39;&gt;${ssid}&lt;/span&gt; &#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">60</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>, <span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synConstant&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#2aa198">&#34;wlp1s0&#34;</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>)</code></pre></div>
 <p>ウィジェットを作ったら、画面上のレイアウトにウィジェットをセットする。</p>
-
-<pre><code class="language-lua">&lt;span class=&quot;synComment&quot;&gt;-- Widgets that are aligned to the right&lt;/span&gt;
-&lt;span class=&quot;synStatement&quot;&gt;local&lt;/span&gt; right_layout = wibox.layout.fixed.horizontal()
-&lt;span class=&quot;synComment&quot;&gt;-- if s == 1 then right_layout:add(wibox.widget.systray()) end&lt;/span&gt;
-right_layout:add(soundwidget)
-right_layout:add(battxtwidget)
-right_layout:add(wifiwidget)
-right_layout:add(mytextclock)
-right_layout:add(mylayoutbox[s])
-
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--</span> Widgets that are aligned to the right<span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synStatement&#34;</span><span style="color:#719e07">&gt;</span><span style="color:#268bd2">local</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span> right_layout <span style="color:#719e07">=</span> wibox.layout.fixed.horizontal()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">&lt;</span>span class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;synComment&#34;</span><span style="color:#719e07">&gt;--</span> <span style="color:#268bd2">if</span> s <span style="color:#719e07">==</span> <span style="color:#2aa198">1</span> <span style="color:#268bd2">then</span> right_layout:add(wibox.widget.systray()) <span style="color:#268bd2">end</span><span style="color:#719e07">&lt;/</span>span<span style="color:#719e07">&gt;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>right_layout:add(soundwidget)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>right_layout:add(battxtwidget)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>right_layout:add(wifiwidget)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>right_layout:add(mytextclock)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>right_layout:add(mylayoutbox[s])</code></pre></div>
 <p>自分がした設定はこの程度。あとはbeautifulで<code>theme.font = &quot;sans 10&quot;</code>の設定でフォントサイズを少し大きくしたぐらいだが、beautifulの設定ファイルを見ればわかる通り、かなり細かく色やら何やら設定ができる。このへんに凝り始めるとキリがないので自分はやめることにしたが、好きな人はやってみたらいいんじゃないですかね。1つ、GitHubですげーカッコイイテーマ配ってるの見つけたんで貼っときます。Samuraizuとか思い出すなー。</p>
 
 <ul>
@@ -261,13 +239,6 @@ right_layout:add(mylayoutbox[s])
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

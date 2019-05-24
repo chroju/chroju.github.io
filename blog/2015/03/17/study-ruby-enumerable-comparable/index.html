@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a42.017848482%20%2b0900%20JST%20m%3d%2b0.166791221">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a42.017848482%20%2b0900%20JST%20m%3d%2b0.166791221">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a42.017848482%20%2b0900%20JST%20m%3d%2b0.166791221">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.588065364%20%2b0900%20JST%20m%3d%2b0.194415697">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.588065364%20%2b0900%20JST%20m%3d%2b0.194415697">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.588065364%20%2b0900%20JST%20m%3d%2b0.194415697">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a42.017848482%20%2b0900%20JST%20m%3d%2b0.166791221">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.588065364%20%2b0900%20JST%20m%3d%2b0.194415697">
     
 
 
@@ -175,133 +173,103 @@
 <h2 id="enumerable">Enumerable</h2>
 
 <p>まず繰り返し系。これだけでもかなり。。<code>#each_cons</code>のconsって何の意味ですかね。他はだいたい字義からイメージできる動作をしてくれる。あと<code>#each_with_object</code>がいまいち飲み込めてない。</p>
-
-<pre><code class="language-ruby">(1..4).each_cons 2 do |a,b|
-  p [a,b]
-end # =&gt; [1,2] [2,3] [3,4]
-
-(1..4).each_slice 2 do |a,b|
-  p [a,b]
-end # =&gt; [1,2] [3,4]
-
-%(hoge fuga piyo).each_with_index do |value, index|
-  p &quot;#{index}: #{value}&quot;
-end # =&gt; 0: hoge 1: fuga 2: piyo
-
-(1..4).each_with_object([]) {|i, result| result &lt;&lt; i*2} # =&gt; [2,4,6,8]
-
-(1..4).reverse_each do |i|
-  p i
-end # =&gt; 4,3,2,1
-
-(1..4).cycle {|i| p i} # =&gt; 1,2,3,4,1,2... 以下、無限ループ
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>each_cons <span style="color:#2aa198">2</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>a,b<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  <span style="color:#b58900">p</span> <span style="color:#719e07">[</span>a,b<span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; [1,2] [2,3] [3,4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>each_slice <span style="color:#2aa198">2</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>a,b<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  <span style="color:#b58900">p</span> <span style="color:#719e07">[</span>a,b<span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; [1,2] [3,4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#2aa198">%(hoge fuga piyo)</span><span style="color:#719e07">.</span>each_with_index <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>value, index<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  <span style="color:#b58900">p</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">#{</span>index<span style="color:#2aa198">}</span><span style="color:#2aa198">: </span><span style="color:#2aa198">#{</span>value<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; 0: hoge 1: fuga 2: piyo</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>each_with_object(<span style="color:#719e07">[]</span>) {<span style="color:#719e07">|</span>i, result<span style="color:#719e07">|</span> result <span style="color:#719e07">&lt;&lt;</span> i<span style="color:#719e07">*</span><span style="color:#2aa198">2</span>} <span style="color:#586e75"># =&gt; [2,4,6,8]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>reverse_each <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>i<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>  <span style="color:#b58900">p</span> i
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; 4,3,2,1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>cycle {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> <span style="color:#b58900">p</span> i} <span style="color:#586e75"># =&gt; 1,2,3,4,1,2... 以下、無限ループ</span></code></pre></div>
 <p>各要素の評価には<code>#map</code>と<code>#collect</code>。いずれも同じ動作。</p>
-
-<pre><code class="language-ruby">(1..4).map {|i| i * 3} # =&gt; [3, 6, 9, 12]
-(1..4).collect {|i| i * 3} # =&gt; [3, 6, 9, 12]
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>map {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">*</span> <span style="color:#2aa198">3</span>} <span style="color:#586e75"># =&gt; [3, 6, 9, 12]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>)<span style="color:#719e07">.</span>collect {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">*</span> <span style="color:#2aa198">3</span>} <span style="color:#586e75"># =&gt; [3, 6, 9, 12]</span></code></pre></div>
 <p>判定系。<code>#member?</code>と<code>include?</code>は同義。</p>
-
-<pre><code class="language-ruby">[1,2,3].all? {|i| i &gt; 1} # =&gt; false
-[1,2,3].any? {|i| i &gt; 1} # =&gt; true
-[1,2,3].none? {|i| i &gt; 3} # =&gt; true
-[1,2,3].one? {|i| i &gt; 1} # =&gt; false
-
-%w(hoge fuga piyo).member? &quot;fuga&quot; # =&gt; true
-%w(hoge fuga piyo).include? &quot;fuga&quot; # =&gt; true
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span><span style="color:#719e07">].</span>all? {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>} <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span><span style="color:#719e07">].</span>any? {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>} <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span><span style="color:#719e07">].</span>none? {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">3</span>} <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span><span style="color:#719e07">].</span>one? {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>} <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span style="color:#2aa198">%w(hoge fuga piyo)</span><span style="color:#719e07">.</span>member? <span style="color:#2aa198">&#34;fuga&#34;</span> <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#2aa198">%w(hoge fuga piyo)</span><span style="color:#719e07">.</span>include? <span style="color:#2aa198">&#34;fuga&#34;</span> <span style="color:#586e75"># =&gt; true</span></code></pre></div>
 <p>抽出系。覚えやすいことにgrepがある。<code>#detect</code>は条件に当てはまる最初の要素だけ、<code>#select</code>はすべてを抽出する。<code>#find_all</code>は<code>#select</code>と同義。<code>#reject</code>は<code>#select</code>といわば「逆」の動きをする。<code>#take</code>と<code>#drop</code>は要素数を指定して先頭から要素抽出orスキップする。あとは語義通りのメソッドがいくつか。</p>
-
-<pre><code class="language-ruby">%w(hoge fuga piyo).grep(/o/i) # =&gt; &quot;hoge&quot;, &quot;piyo&quot;
-[1,2,&quot;hoge&quot;].grep(String) # =&gt; &quot;hoge&quot;
-
-[1,2,3,4].detect {|i| i.even?} # =&gt; 2
-[1,2,3,4].select {|i| i.even?} # =&gt; 2, 4
-[1,2,3,4].find_all {|i| i.even?} # =&gt; 2, 4
-[1,2,3,4].reject {|i| i.even?} # =&gt; 1, 3
-[1,2,3,4].find_index {|i| i.even?} # =&gt; 1
-
-(1..10).take 3 # =&gt; [1,2,3]
-(1..10).drop 3 # =&gt; [4,5,6,7,8,9,10]
-
-(1..10).take_while {|i| i &lt; 3} # =&gt; [1,2]
-(1..10).drop_while {|i| i &lt; 3} # =&gt; [3,4,5,6,7,8,9,10]
-
-(1..10).max # =&gt; 10
-%(aaa bbbb ccccc).max_by {|s| s.length} # =&gt; &quot;ccccc&quot;
-(1..10).min # =&gt; 1
-%(aaa bbbb ccccc).min_by {|s| s.length} # =&gt; &quot;aaa&quot;
-(1..10).minmax # =&gt; [1,10]
-%(aaa bbbb ccccc).minmax_by {|s| s.length} # =&gt; [&quot;aaa&quot;, &quot;ccccc&quot;]
-
-(1..10).first # =&gt; 1
-(1..10).count # =&gt; 10
-(1..10).count(2) # =&gt; 1
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#2aa198">%w(hoge fuga piyo)</span><span style="color:#719e07">.</span>grep(<span style="color:#dc322f">/o/i</span>) <span style="color:#586e75"># =&gt; &#34;hoge&#34;, &#34;piyo&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">&#34;hoge&#34;</span><span style="color:#719e07">].</span>grep(<span style="color:#b58900">String</span>) <span style="color:#586e75"># =&gt; &#34;hoge&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span><span style="color:#719e07">].</span>detect {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span><span style="color:#719e07">].</span>select {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; 2, 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span><span style="color:#719e07">].</span>find_all {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; 2, 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span><span style="color:#719e07">].</span>reject {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; 1, 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span><span style="color:#719e07">].</span>find_index {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; 1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>take <span style="color:#2aa198">3</span> <span style="color:#586e75"># =&gt; [1,2,3]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>drop <span style="color:#2aa198">3</span> <span style="color:#586e75"># =&gt; [4,5,6,7,8,9,10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>take_while {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">3</span>} <span style="color:#586e75"># =&gt; [1,2]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>drop_while {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">3</span>} <span style="color:#586e75"># =&gt; [3,4,5,6,7,8,9,10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>max <span style="color:#586e75"># =&gt; 10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#2aa198">%(aaa bbbb ccccc)</span><span style="color:#719e07">.</span>max_by {<span style="color:#719e07">|</span>s<span style="color:#719e07">|</span> s<span style="color:#719e07">.</span>length} <span style="color:#586e75"># =&gt; &#34;ccccc&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>min <span style="color:#586e75"># =&gt; 1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span style="color:#2aa198">%(aaa bbbb ccccc)</span><span style="color:#719e07">.</span>min_by {<span style="color:#719e07">|</span>s<span style="color:#719e07">|</span> s<span style="color:#719e07">.</span>length} <span style="color:#586e75"># =&gt; &#34;aaa&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>minmax <span style="color:#586e75"># =&gt; [1,10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span style="color:#2aa198">%(aaa bbbb ccccc)</span><span style="color:#719e07">.</span>minmax_by {<span style="color:#719e07">|</span>s<span style="color:#719e07">|</span> s<span style="color:#719e07">.</span>length} <span style="color:#586e75"># =&gt; [&#34;aaa&#34;, &#34;ccccc&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>first <span style="color:#586e75"># =&gt; 1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>count <span style="color:#586e75"># =&gt; 10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">10</span>)<span style="color:#719e07">.</span>count(<span style="color:#2aa198">2</span>) <span style="color:#586e75"># =&gt; 1</span></code></pre></div>
 <p><code>#inject</code>を使うと全要素を総計するような処理ができる。これを「畳み込み演算」と呼ぶらしい。引数2つを必要とするブロックを受け取り、第一引数が直前のループでの演算結果を持ち、第二引数がその回のループでの要素を取る。あるいはブロックを取らず、<code>#inject</code>の引数にシンボルでメソッド名を渡すことで、全要素に対してそのメソッドを適用した結果を得られる。</p>
-
-<pre><code class="language-ruby">(1..5).inject {|result, i| result + i} # =&gt; 15
-(1..5).inject(10) {|result, i| result + i} # =&gt; 25
-(1..5).inject(:+) # =&gt; 15
-(1..5).inject(:*) # =&gt; 120
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span>)<span style="color:#719e07">.</span>inject {<span style="color:#719e07">|</span>result, i<span style="color:#719e07">|</span> result <span style="color:#719e07">+</span> i} <span style="color:#586e75"># =&gt; 15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span>)<span style="color:#719e07">.</span>inject(<span style="color:#2aa198">10</span>) {<span style="color:#719e07">|</span>result, i<span style="color:#719e07">|</span> result <span style="color:#719e07">+</span> i} <span style="color:#586e75"># =&gt; 25</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span>)<span style="color:#719e07">.</span>inject(<span style="color:#2aa198">:+</span>) <span style="color:#586e75"># =&gt; 15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span>)<span style="color:#719e07">.</span>inject(<span style="color:#2aa198">:*</span>) <span style="color:#586e75"># =&gt; 120</span></code></pre></div>
 <p>グルーピング。<code>#group_by</code>はブロックで評価した戻り値をキーとしたハッシュに要素をグルーピングしてくれる。<code>#partition</code>はブロックで評価した真偽値を元に配列でグルーピング。後者の方が使い勝手は良さそうではある。</p>
-
-<pre><code class="language-ruby">(1..6).group_by {|i| i % 3 } # =&gt; {0=&gt;[3,6], 1=&gt;[1,4], 2=&gt;[2,5]}
-(1..6).partition {|i| i.even?} # =&gt; [[1,3,5], [2,4,6]]
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">6</span>)<span style="color:#719e07">.</span>group_by {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#2aa198">% 3 </span> } <span style="color:#586e75"># =&gt; {0=&gt;[3,6], 1=&gt;[1,4], 2=&gt;[2,5]}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">6</span>)<span style="color:#719e07">.</span>partition {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even?} <span style="color:#586e75"># =&gt; [[1,3,5], [2,4,6]]</span></code></pre></div>
 <p>一番意味がわからない<code>#zip</code>。selfと引数の配列で、同じ添字にあたる要素を使って新しい配列を生成する。どう使うんだろうこれ。。</p>
-
-<pre><code class="language-ruby">(1..3).zip([4,5,6], [7,8,9]) # =&gt; [1,4,7], [2,5,8], [3,6,9]
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>(<span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">3</span>)<span style="color:#719e07">.</span>zip(<span style="color:#719e07">[</span><span style="color:#2aa198">4</span>,<span style="color:#2aa198">5</span>,<span style="color:#2aa198">6</span><span style="color:#719e07">]</span>, <span style="color:#719e07">[</span><span style="color:#2aa198">7</span>,<span style="color:#2aa198">8</span>,<span style="color:#2aa198">9</span><span style="color:#719e07">]</span>) <span style="color:#586e75"># =&gt; [1,4,7], [2,5,8], [3,6,9]</span></code></pre></div>
 <h2 id="comparableとソート">Comparableとソート</h2>
 
 <p>個人的に苦手なのがこの宇宙船演算子とソート周り。まず大前提として、宇宙船演算子はレシーバと引数を比較し、レシーバが大きければ1、小さければ-1、同値であれば0を返す。</p>
-
-<pre><code class="language-ruby">1 &lt;=&gt; 2 # =&gt; -1
-1 &lt;=&gt; 0 # =&gt; 1
-1 &lt;=&gt; 1 # =&gt; 0
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#2aa198">1</span> <span style="color:#719e07">&lt;=&gt;</span> <span style="color:#2aa198">2</span> <span style="color:#586e75"># =&gt; -1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#2aa198">1</span> <span style="color:#719e07">&lt;=&gt;</span> <span style="color:#2aa198">0</span> <span style="color:#586e75"># =&gt; 1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#2aa198">1</span> <span style="color:#719e07">&lt;=&gt;</span> <span style="color:#2aa198">1</span> <span style="color:#586e75"># =&gt; 0</span></code></pre></div>
 <p>Comparableモジュールをincludeしたクラスで<code>#&lt;=&gt;</code>を定義すると、各種演算子による比較のルールを定めることができる。</p>
-
-<pre><code class="language-ruby">class Person
-  include Comparable
-  attr_accessor :age
-
-  def initialize(age)
-    self.age = age
-  end
-
-  def &lt;=&gt;(other)
-    age &lt;=&gt; other.age
-  end
-end
-
-taro = Person.new(21)
-hanako = Person.new(32)
-
-taro &gt; hanako # =&gt; true
-taro == hanako # =&gt; false
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">class</span> <span style="color:#268bd2">Person</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  <span style="color:#719e07">include</span> <span style="color:#cb4b16">Comparable</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  <span style="color:#719e07">attr_accessor</span> <span style="color:#2aa198">:age</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  <span style="color:#719e07">def</span> <span style="color:#268bd2">initialize</span>(age)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>    <span style="color:#b58900">self</span><span style="color:#719e07">.</span>age <span style="color:#719e07">=</span> age
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  <span style="color:#719e07">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  <span style="color:#719e07">def</span> <span style="color:#268bd2">&lt;=&gt;</span>(other)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    age <span style="color:#719e07">&lt;=&gt;</span> other<span style="color:#719e07">.</span>age
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  <span style="color:#719e07">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#719e07">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>taro <span style="color:#719e07">=</span> <span style="color:#cb4b16">Person</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">21</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>hanako <span style="color:#719e07">=</span> <span style="color:#cb4b16">Person</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">32</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>taro <span style="color:#719e07">&gt;</span> hanako <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>taro <span style="color:#719e07">==</span> hanako <span style="color:#586e75"># =&gt; false</span></code></pre></div>
 <p>で、Enumerableの<code>#sort</code>は要素を宇宙船演算子で比較して結果が正になるよう並び替えていく。要は昇順がデフォルト。ブロックに引き渡すこともでき、ここで任意の比較方法を定義してソートすることもできる。<code>#sort_by</code>を使えば宇宙船演算子を使わず、指定のメソッドを使って昇順に並び替えてくれる。メソッド呼び出し回数が<code>#sort_by</code>だと1回で済むので、実行速度の面で差が出る可能性がある。</p>
-
-<pre><code class="language-ruby">takeshi = Person.new(25)
-people = [hanako, taro, takeshi]
-people.sort # =&gt; [taro, takeshi, hanako]
-people.sort {|a,b| b &lt;=&gt; a} # =&gt; [hanako, takeshi, taro]
-people.sort_by {|person| person.age} # =&gt; [taro, takeshi, hanako]
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>takeshi <span style="color:#719e07">=</span> <span style="color:#cb4b16">Person</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">25</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>people <span style="color:#719e07">=</span> <span style="color:#719e07">[</span>hanako, taro, takeshi<span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>people<span style="color:#719e07">.</span>sort <span style="color:#586e75"># =&gt; [taro, takeshi, hanako]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>people<span style="color:#719e07">.</span>sort {<span style="color:#719e07">|</span>a,b<span style="color:#719e07">|</span> b <span style="color:#719e07">&lt;=&gt;</span> a} <span style="color:#586e75"># =&gt; [hanako, takeshi, taro]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>people<span style="color:#719e07">.</span>sort_by {<span style="color:#719e07">|</span>person<span style="color:#719e07">|</span> person<span style="color:#719e07">.</span>age} <span style="color:#586e75"># =&gt; [taro, takeshi, hanako]</span></code></pre></div>
 <hr />
 
 <p>なお、意図的に飛ばしてしまったのだが、あと触れてないEnumerableのメソッドとして<code>#chunk</code>周りがある。ちょっと飲み込みきれてないのでまた次回。</p>
@@ -325,13 +293,6 @@ people.sort_by {|person| person.age} # =&gt; [taro, takeshi, hanako]
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
 <meta name="author" content="the world as code">
-<meta name="description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 now.zone # =&gt; &quot;JST&quot; now.getutc #">
+<meta name="description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 1now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 2new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 3 4now.zone # =&gt; &#34;JST&#34; 5now.getutc">
 
 <meta property="og:title" content="Ruby基礎復習(7) Timeクラス" />
-<meta property="og:description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 now.zone # =&gt; &quot;JST&quot; now.getutc #" />
+<meta property="og:description" content="『パーフェクトRuby』p.190より。 Time#nowかTime#newで現在時刻が取得可能。 1now = Time.now # =&gt; 2015-03-16 23:25:32 &#43;0900 2new = Time.new # =&gt; 2015-03-16 23:25:32 &#43;0900 3 4now.zone # =&gt; &#34;JST&#34; 5now.getutc" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chroju.github.io/blog/2015/04/06/study-ruby-time/" />
 <meta property="article:published_time" content="2015-04-06T00:00:00+09:00" />
@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a42.011211952%20%2b0900%20JST%20m%3d%2b0.160154702">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a42.011211952%20%2b0900%20JST%20m%3d%2b0.160154702">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a42.011211952%20%2b0900%20JST%20m%3d%2b0.160154702">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.565574947%20%2b0900%20JST%20m%3d%2b0.171925253">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.565574947%20%2b0900%20JST%20m%3d%2b0.171925253">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.565574947%20%2b0900%20JST%20m%3d%2b0.171925253">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a42.011211952%20%2b0900%20JST%20m%3d%2b0.160154702">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.565574947%20%2b0900%20JST%20m%3d%2b0.171925253">
     
 
 
@@ -169,37 +167,25 @@
 <p>『パーフェクトRuby』p.190より。</p>
 
 <p><code>Time#now</code>か<code>Time#new</code>で現在時刻が取得可能。</p>
-
-<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
-new = Time.new # =&gt; 2015-03-16 23:25:32 +0900
-
-now.zone # =&gt; &quot;JST&quot;
-now.getutc # =&gt; 2015-03-16 14:25:32 UTC
-now.utc
-now.zone # =&gt; &quot;UTC&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now <span style="color:#719e07">=</span> <span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>now <span style="color:#586e75"># =&gt; 2015-03-16 23:25:32 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">new</span> <span style="color:#719e07">=</span> <span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>new <span style="color:#586e75"># =&gt; 2015-03-16 23:25:32 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>now<span style="color:#719e07">.</span>zone <span style="color:#586e75"># =&gt; &#34;JST&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>now<span style="color:#719e07">.</span>getutc <span style="color:#586e75"># =&gt; 2015-03-16 14:25:32 UTC</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>now<span style="color:#719e07">.</span>utc
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>now<span style="color:#719e07">.</span>zone <span style="color:#586e75"># =&gt; &#34;UTC&#34;</span></code></pre></div>
 <p>現在時刻以外のTimeオブジェクトを生成するには<code>Time#at</code>でUNIX秒を引数に指定するか、<code>Time#utc</code>か<code>Time#local</code>で直接時刻を指定する。</p>
-
-<pre><code class="language-ruby">Time.at(0) # =&gt; 1970-01-01 09:00:00 +0900
-Time.utc(2015, 1, 1, 2, 30, 40, 100) # =&gt; 2015-01-01 02:30:40 UTC (最後の100はマイクロ秒)
-Time.local(2015, 1, 1, 2, 30, 40, 100) # =&gt; 2015-01-01 02:30:40 +0900
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>at(<span style="color:#2aa198">0</span>) <span style="color:#586e75"># =&gt; 1970-01-01 09:00:00 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>utc(<span style="color:#2aa198">2015</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">30</span>, <span style="color:#2aa198">40</span>, <span style="color:#2aa198">100</span>) <span style="color:#586e75"># =&gt; 2015-01-01 02:30:40 UTC (最後の100はマイクロ秒)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>local(<span style="color:#2aa198">2015</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">30</span>, <span style="color:#2aa198">40</span>, <span style="color:#2aa198">100</span>) <span style="color:#586e75"># =&gt; 2015-01-01 02:30:40 +0900</span></code></pre></div>
 <p><code>#to_i</code>、<code>#to_f</code>、<code>#to_r</code>の戻り値はUNIX秒。<code>#to_s</code>で文字列表現が返る。<code>#to_a</code>は秒、分、時、日、月、年、曜日、その年の通算日数、夏時間の真偽判定、タイムゾーンの配列を返す。なお、この配列フォーマットを展開して<code>Time#utc</code>や<code>Time#local</code>の引数として与えることもできる。</p>
-
-<pre><code class="language-ruby">now.to_i # =&gt; 1426515932
-now.to_f # =&gt; 1426515932.978824
-now.to_r # =&gt; (178314491622353/125000)
-now.to_s # =&gt; &quot;2015-03-16 23:25:32 +0900&quot;
-now.to_a # =&gt; [32, 25, 23, 16, 3, 2015, 1, 75, false, &quot;JST&quot;]
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now<span style="color:#719e07">.</span>to_i <span style="color:#586e75"># =&gt; 1426515932</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>now<span style="color:#719e07">.</span>to_f <span style="color:#586e75"># =&gt; 1426515932.978824</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>now<span style="color:#719e07">.</span>to_r <span style="color:#586e75"># =&gt; (178314491622353/125000)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>now<span style="color:#719e07">.</span>to_s <span style="color:#586e75"># =&gt; &#34;2015-03-16 23:25:32 +0900&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>now<span style="color:#719e07">.</span>to_a <span style="color:#586e75"># =&gt; [32, 25, 23, 16, 3, 2015, 1, 75, false, &#34;JST&#34;]</span></code></pre></div>
 <p><code>#to_s</code>の戻り値は上記フォーマットの固定だが、任意のフォーマットで文字列表現を得たい場合は<code>#strftime</code>を使う。使えるフォーマット文字列は<a href="http://docs.ruby-lang.org/ja/1.9.3/class/Time.html">公式ドキュメント</a>参照で。</p>
-
-<pre><code class="language-ruby">now.strftime(&quot;今日は%Y年%m月%d日、今は%H時%M分を%S秒過ぎたところです。&quot;) # =&gt; &quot;今日は2015年3月16日、今は23時25分を32秒過ぎたところです。&quot;
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now<span style="color:#719e07">.</span>strftime(<span style="color:#2aa198">&#34;今日は%Y年%m月%d日、今は%H時%M分を%S秒過ぎたところです。&#34;</span>) <span style="color:#586e75"># =&gt; &#34;今日は2015年3月16日、今は23時25分を32秒過ぎたところです。&#34;</span></code></pre></div>
 <p>逆に文字列表現からTimeオブジェクトを得たい場合は<code>#strptime</code>が使える。</p>
 
 <h2 id="参照">参照</h2>
@@ -209,41 +195,29 @@ now.to_a # =&gt; [32, 25, 23, 16, 3, 2015, 1, 75, false, &quot;JST&quot;]
 </ul>
 
 <p>その他もろもろの出力。</p>
-
-<pre><code class="language-ruby">now.year # =&gt; 2015
-now.month # =&gt; 3
-now.day # =&gt; 16
-now.hour # =&gt; 23
-now.min # =&gt; 25
-now.sec # =&gt; 32
-now.nsec # =&gt; 978824000 (ナノ秒)
-now.wday # =&gt; 1 (曜日は日曜を0としてカウント)
-now.yday # =&gt; 75 (年初からの日数)
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now<span style="color:#719e07">.</span>year <span style="color:#586e75"># =&gt; 2015</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>now<span style="color:#719e07">.</span>month <span style="color:#586e75"># =&gt; 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>now<span style="color:#719e07">.</span>day <span style="color:#586e75"># =&gt; 16</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>now<span style="color:#719e07">.</span>hour <span style="color:#586e75"># =&gt; 23</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>now<span style="color:#719e07">.</span>min <span style="color:#586e75"># =&gt; 25</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>now<span style="color:#719e07">.</span>sec <span style="color:#586e75"># =&gt; 32</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>now<span style="color:#719e07">.</span>nsec <span style="color:#586e75"># =&gt; 978824000 (ナノ秒)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>now<span style="color:#719e07">.</span>wday <span style="color:#586e75"># =&gt; 1 (曜日は日曜を0としてカウント)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span>now<span style="color:#719e07">.</span>yday <span style="color:#586e75"># =&gt; 75 (年初からの日数)</span></code></pre></div>
 <p>曜日やサマータイム(DST)については疑問符のメソッドで真偽判定できる。</p>
-
-<pre><code class="language-ruby">now.dst? # =&gt; false
-now.sunday? # =&gt; false
-now.monday? # =&gt; true
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now<span style="color:#719e07">.</span>dst? <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>now<span style="color:#719e07">.</span>sunday? <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>now<span style="color:#719e07">.</span>monday? <span style="color:#586e75"># =&gt; true</span></code></pre></div>
 <p>Timeオブジェクト同士の比較についてはナノ秒まで判定されるので、そのあたりに注意とのこと。以下のようなことがあり得る。</p>
-
-<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
-new = Time.new # =&gt; 2015-03-16 23:25:32 +0900
-
-now == new # =&gt; false
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now <span style="color:#719e07">=</span> <span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>now <span style="color:#586e75"># =&gt; 2015-03-16 23:25:32 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">new</span> <span style="color:#719e07">=</span> <span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>new <span style="color:#586e75"># =&gt; 2015-03-16 23:25:32 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>now <span style="color:#719e07">==</span> <span style="color:#719e07">new</span> <span style="color:#586e75"># =&gt; false</span></code></pre></div>
 <p>整数を与えることによる加算減算は秒として取り扱われる。Timeオブジェクト同士の減算も可能。その場合は差分の秒数が浮動小数点数で返る。</p>
-
-<pre><code class="language-ruby">now = Time.now # =&gt; 2015-03-16 23:25:32 +0900
-
-now + 1 # =&gt; 2015-03-16 23:25:33 +0900
-now - 1 # =&gt; 2015-03-16 23:25:31 +0900
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>now <span style="color:#719e07">=</span> <span style="color:#cb4b16">Time</span><span style="color:#719e07">.</span>now <span style="color:#586e75"># =&gt; 2015-03-16 23:25:32 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>now <span style="color:#719e07">+</span> <span style="color:#2aa198">1</span> <span style="color:#586e75"># =&gt; 2015-03-16 23:25:33 +0900</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>now <span style="color:#719e07">-</span> <span style="color:#2aa198">1</span> <span style="color:#586e75"># =&gt; 2015-03-16 23:25:31 +0900</span></code></pre></div>
 <p>なお時間や日時を扱うクラスには他に<code>Date</code>や<code>DateTime</code>もあるが、組み込みのライブラリはこの<code>Time</code>だけ。どれを使えばええんや？ってのは、探してみたら大変詳しいQiitaを見つけたんでそっちに譲ります。</p>
 
 <h2 id="参考">参考</h2>
@@ -267,13 +241,6 @@ now - 1 # =&gt; 2015-03-16 23:25:31 +0900
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

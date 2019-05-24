@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.97993687%20%2b0900%20JST%20m%3d%2b0.128879617">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.97993687%20%2b0900%20JST%20m%3d%2b0.128879617">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.97993687%20%2b0900%20JST%20m%3d%2b0.128879617">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.526511762%20%2b0900%20JST%20m%3d%2b0.132862076">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.526511762%20%2b0900%20JST%20m%3d%2b0.132862076">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.526511762%20%2b0900%20JST%20m%3d%2b0.132862076">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.97993687%20%2b0900%20JST%20m%3d%2b0.128879617">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.526511762%20%2b0900%20JST%20m%3d%2b0.132862076">
     
 
 
@@ -208,25 +206,22 @@
 <p>実際のcircle.ymlはこうなった（といってもほぼ丸のまま冒頭記事のものを使っているが）。Dockerイメージのキャッシュには以下の記事も参考にした。</p>
 
 <p><a href="http://stormcat.hatenablog.com/entry/2015/02/04/004227">CircleCIでDockerイメージをキャッシュするのに、実はちょっとした工夫が必要な件 - tehepero note(・ω&lt;)</a></p>
-
-<pre><code class="language-yaml">machine:
-  timezone:
-    Asia/Tokyo
-  services:
-    - docker
-
-dependencies:
-  pre:
-    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
-
-  cache_directories:
-    - &quot;~/docker&quot;
-
-test:
-  override:
-    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c 'ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;&amp; cd /ansible/spec &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec'
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>machine:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  timezone:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    Asia/Tokyo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  services:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>    - docker
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>dependencies:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>  pre:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    - if [[ -e ~/docker/docker_ansible_image.tar ]]; then docker load --input ~/docker/docker_ansible_image.tar ; else docker build -t centos_ansible ~/ansible-ruby-devs/ ; mkdir -p ~/docker ; docker save -o ~/docker/docker_ansible_image.tar centos_ansible ; fi
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  cache_directories:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    - <span style="color:#2aa198">&#34;~/docker&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>test:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>  override:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>    - docker run -v `pwd`/ansible:/ansible centos_ansible /bin/sh -c <span style="color:#2aa198">&#39;ansible-playbook /ansible/ci_site.yml -i /ansible/ci_hosts -c local &amp;&amp; cd /ansible/spec &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle install &amp;&amp; /home/develop/.rbenv/bin/rbenv exec bundle exec rake spec&#39;</span></code></pre></div>
 <p>この方法の肝はAnsibleとServerspecのフォルダを<code>docker run</code>の<code>-v</code>オプションでコンテナにマウントさせてしまって、ローカルでいずれも実行させている点だと思う。Dockerコンテナに対してSSHで外から処理を行うことももちろん可能ではあるが、ちょこちょこと小細工は必要だし、CI上の処理であればミニマムに済ませたいところ。</p>
 
 <p>テストにおいてはインベントリファイルも<code>site.yml</code>もテスト用の設定値となるので、CI用のファイルを置いている。ただ、これらはレポジトリにとっては余分なファイルでしかないので、本来であれば取り除きたいような気もする。妙案は浮かばない。Dockerコンテナは2回目以降の実行だと<code>load</code>するだけで済むし、AnsibleとServerspecはローカル実行なので、処理時間はだいぶ速い。</p>
@@ -257,13 +252,6 @@ test:
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

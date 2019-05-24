@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.936286456%20%2b0900%20JST%20m%3d%2b0.085229183">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.936286456%20%2b0900%20JST%20m%3d%2b0.085229183">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.936286456%20%2b0900%20JST%20m%3d%2b0.085229183">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.503022424%20%2b0900%20JST%20m%3d%2b0.109372760">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.503022424%20%2b0900%20JST%20m%3d%2b0.109372760">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.503022424%20%2b0900%20JST%20m%3d%2b0.109372760">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.936286456%20%2b0900%20JST%20m%3d%2b0.085229183">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.503022424%20%2b0900%20JST%20m%3d%2b0.109372760">
     
 
 
@@ -220,13 +218,10 @@
 <p>はじめはTerraformで環境作るかとか思ってたんですが、<del>tfファイルをゼロから書くのがだるくなったので</del>他にも手段があるんじゃないかと調べていたところ、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI.html">ECS CLI</a>というAWS提供のコマンドツールがありました。</p>
 
 <p>で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。</p>
-
-<pre><code class="language-bash"># clusterを起動
-$ ecs-cli up --keypair hoge --size 1 --instance-type t2.micro --capability-iam --port 8080 3000 8086
-# docker-compose.ymlからserviceを起動
-$ ecs-cli compose --file docker-compose.yml service up
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#586e75"># clusterを起動</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ ecs-cli up --keypair hoge --size <span style="color:#2aa198">1</span> --instance-type t2.micro --capability-iam --port <span style="color:#2aa198">8080</span> <span style="color:#2aa198">3000</span> <span style="color:#2aa198">8086</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#586e75"># docker-compose.ymlからserviceを起動</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>$ ecs-cli compose --file docker-compose.yml service up</code></pre></div>
 <p>これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。</p>
 
 <p>ただ、<code>ecs-cli up</code>で賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。</p>
@@ -300,13 +295,6 @@ $ ecs-cli compose --file docker-compose.yml service up
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

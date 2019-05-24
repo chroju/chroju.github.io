@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.921849453%20%2b0900%20JST%20m%3d%2b0.070792183">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.921849453%20%2b0900%20JST%20m%3d%2b0.070792183">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.921849453%20%2b0900%20JST%20m%3d%2b0.070792183">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.503231%20%2b0900%20JST%20m%3d%2b0.109581322">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.503231%20%2b0900%20JST%20m%3d%2b0.109581322">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.503231%20%2b0900%20JST%20m%3d%2b0.109581322">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.921849453%20%2b0900%20JST%20m%3d%2b0.070792183">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.503231%20%2b0900%20JST%20m%3d%2b0.109581322">
     
 
 
@@ -255,11 +253,8 @@ Amazon で以下のものを購入しました。はんだごては温度調節�
 <h2 id="ファームウェアの書き込み">ファームウェアの書き込み</h2>
 
 <p>組み上がったらファームウェアを自分で書き込む必要があります。多くの自作キーボードでは <a href="https://github.com/qmk/qmk_firmware">qmk/qmk_firmware: keyboard controller firmware for Atmel AVR and ARM USB families</a> というものを使っているようで、 Lily58 Pro の場合もこれを使います。コマンドとしてはレポジトリを <code>git clone</code> してきて <code>cd</code> し、以下を打つだけです（前提として必要になるライブラリを <code>brew install</code> しておかなくてはならないので、それについては qmk_firmware のマニュアルを参照してください）。</p>
-
-<pre><code class="language-bash">$ make lily58/rev1:default
-$ make lily58/rev1:default:avrdude
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ make lily58/rev1:default
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ make lily58/rev1:default:avrdude</code></pre></div>
 <p>最初のコマンドでファームウェアをビルドし、2つ目のコマンドで書き込みます。従って2つ目のコマンドを打つ際にはキーボードを接続してある必要があります。2つ目のコマンドを打つと、以下のように reset 待ちになるので、キーボードのリセットボタンを押せばファームウェアが書き込まれます。左右それぞれで書き込み作業を行う必要があります。</p>
 
 <p><a href="https://gyazo.com/471b930c2bf43614c6f84f609d021b92"><img src="https://i.gyazo.com/471b930c2bf43614c6f84f609d021b92.png" alt="Image from Gyazo" width="600"/></a></p>
@@ -267,51 +262,42 @@ $ make lily58/rev1:default:avrdude
 <h3 id="キーマップ">キーマップ</h3>
 
 <p>qmk_firmware の中にキーマップを定義しているファイルがあるので、これを書き換えることでキーマップを変更できます。ファイルは <code>keyboards/lily58/keymaps/default</code> の中にあるので、これをコピーします。</p>
-
-<pre><code class="language-bash">$ cp -R keyboards/lily58/keymaps/{default,chroju}
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ cp -R keyboards/lily58/keymaps/<span style="color:#719e07">{</span>default,chroju<span style="color:#719e07">}</span></code></pre></div>
 <p>中に <code>keymaps.c</code> があるので、これを書き換えれば OK です。ソフトウェアエンジニアであれば、中を覗けば察しはつくと思います。指定できるキーコードは <a href="https://docs.qmk.fm/#/keycodes">Keycodes - QMK Firmware</a> を参考にします。私が大きく変更した点としては、 <code>Delete</code> をフルキーボードのように右上に配置したのと、 Lower のときに 1 を F1 、 2 を F2 という形でわかりやすいように割り当てたあたりでしょうか。記号キーについてはまだ模索しています。</p>
 
 <p>ビルドと書き込みについては、先のコマンドの <code>default</code> をコピー後のディレクトリ名に替えるだけです。</p>
-
-<pre><code class="language-bash">$ make lily58/rev1:chroju
-$ make lily58/rev1:chroju:avrdude
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ make lily58/rev1:chroju
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ make lily58/rev1:chroju:avrdude</code></pre></div>
 <h3 id="oled">OLED</h3>
 
 <p><a href="https://gyazo.com/d5ae8514c92841e9bf6c119cae575162"><img src="https://i.gyazo.com/d5ae8514c92841e9bf6c119cae575162.png" alt="Image from Gyazo" width="450"/></a></p>
 
 <p>OLED ですが、デフォルトだと入力したキーがそのまま表示されるようになっており、パスワード入力中など困りそうだったので、少し表示する内容を変更しました。 <a href="http://ubansi.hatenablog.com/entry/2019/03/21/223613">Lily58 Proのディスプレイ表示(OLED)を改造してみる - エンジニアの醤油漬け</a> を大いに参考にさせていただき、1分あたりのタイプ数をタイプスピードとして表示するようにしています。C言語は初めて書いたんですが、 Pro Micro というか Pro Micro が互換性を持つ <a href="https://stackoverflow.com/questions/27651012/arduino-sprintf-float-not-formatting">Arduino が sprintf で float の表示に対応していないこと</a> を知らず、1時間ぐらいハマったりしました。</p>
-
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &quot;lily58.h&quot;
-
-char typespeed_msg[64];
-uint32_t type_count = 0;
-
-void set_typespeed(void){
-    type_count++;
-
-    uint32_t uptime_millsec = timer_read32();
-    uint32_t minutes = uptime_millsec / 60000;
-    if (minutes == 0) {
-      minutes = 1;
-    }
-    float type_speed = (float)type_count / minutes;
-
-    char str_type_speed[12];
-    dtostrf(type_speed, 6, 2, str_type_speed);
-
-    snprintf(typespeed_msg, sizeof(typespeed_msg), &quot;Speed: %s keys/m&quot;, str_type_speed);
-}
-
-const char *read_typespeed(void) {
-  return typespeed_msg;
-}
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">#include</span> <span style="color:#719e07">&lt;stdio.h&gt;</span><span style="color:#719e07">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#719e07">#include</span> <span style="color:#719e07">&#34;lily58.h&#34;</span><span style="color:#719e07">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07"></span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#dc322f">char</span> typespeed_msg[<span style="color:#2aa198">64</span>];
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>uint32_t type_count <span style="color:#719e07">=</span> <span style="color:#2aa198">0</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#dc322f">void</span> <span style="color:#268bd2">set_typespeed</span>(<span style="color:#dc322f">void</span>){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    type_count<span style="color:#719e07">++</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    uint32_t uptime_millsec <span style="color:#719e07">=</span> timer_read32();
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    uint32_t minutes <span style="color:#719e07">=</span> uptime_millsec <span style="color:#719e07">/</span> <span style="color:#2aa198">60000</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    <span style="color:#719e07">if</span> (minutes <span style="color:#719e07">==</span> <span style="color:#2aa198">0</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>      minutes <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>    <span style="color:#dc322f">float</span> type_speed <span style="color:#719e07">=</span> (<span style="color:#dc322f">float</span>)type_count <span style="color:#719e07">/</span> minutes;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>    <span style="color:#dc322f">char</span> str_type_speed[<span style="color:#2aa198">12</span>];
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>    dtostrf(type_speed, <span style="color:#2aa198">6</span>, <span style="color:#2aa198">2</span>, str_type_speed);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>    snprintf(typespeed_msg, <span style="color:#719e07">sizeof</span>(typespeed_msg), <span style="color:#2aa198">&#34;Speed: %s keys/m&#34;</span>, str_type_speed);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span><span style="color:#719e07">const</span> <span style="color:#dc322f">char</span> <span style="color:#719e07">*</span><span style="color:#268bd2">read_typespeed</span>(<span style="color:#dc322f">void</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>  <span style="color:#719e07">return</span> typespeed_msg;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>}</code></pre></div>
 <p>また右側の OLED は <a href="https://qiita.com/guri3/items/844675b637c88515a989">HelixのOLED表示を簡単にカスタマイズするサービスを作った - Qiita</a> を使ってカスタマイズし、黒地に白で表示してカッコよさそうなもの、というところでパッと思い浮かんだロゴを表示してます。 UNDERTALE は2周しただけでそこまで思い入れがあるわけでもないので、いいアイデアが浮かべばまた変更します。こういうカスタムができるので OLED 付きのキーボードにしたのは正解でした。本当は日付とかも表示したいんですけど、 Arduino がクロック持っていないので仕方ないとこですね。。</p>
 
 <p><a href="https://gyazo.com/33cdc50c077aa3a2797c6221ce7a7b51"><img src="https://i.gyazo.com/33cdc50c077aa3a2797c6221ce7a7b51.png" alt="Image from Gyazo" width="450"/></a></p>
@@ -349,13 +335,6 @@ const char *read_typespeed(void) {
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

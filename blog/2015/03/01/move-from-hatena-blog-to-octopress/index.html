@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a42.049762619%20%2b0900%20JST%20m%3d%2b0.198705367">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a42.049762619%20%2b0900%20JST%20m%3d%2b0.198705367">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a42.049762619%20%2b0900%20JST%20m%3d%2b0.198705367">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.5323863%20%2b0900%20JST%20m%3d%2b0.138736651">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.5323863%20%2b0900%20JST%20m%3d%2b0.138736651">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.5323863%20%2b0900%20JST%20m%3d%2b0.138736651">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a42.049762619%20%2b0900%20JST%20m%3d%2b0.198705367">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.5323863%20%2b0900%20JST%20m%3d%2b0.138736651">
     
 
 
@@ -187,20 +185,11 @@
 <p>vimではバッファリストがあるのは知っていたけど、一方で引数リストっていうのもあって、<code>:args hoge.txt fuga.txt</code>とかでファイルリストを作れます。元々は名前の通り、vimを起動するときに与えた引数が入ってるリストらしいのだけど、任意に書き換えができるのであまり「引数」リストという感じはしない。バッファ内の全ファイルへのコマンド実行は<code>:bufdo</code>で出来るし、引数リストについても似た感じで<code>:argdo</code>が使える。このあたりを上手く活用すれば、今回のような複数ファイルを一挙に処理するのはたやすい。</p>
 
 <p>例えば先の<code>&amp;lt;</code>を<code>&lt;</code>に全置換したり。他にも置換コマンドはh1タグを<code>#</code>に変換するだとか、いろいろな形で使いました。</p>
-
-<pre><code class="language-vim">:argdo %s/&amp;lt;/&lt;/g
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>:argdo %s<span style="color:#dc322f">/&amp;lt;/</span>&lt;/g</code></pre></div>
 <p>CONVERT BREAKSと書かれた行を全部消したり。</p>
-
-<pre><code class="language-vim">:argdo g/CONVERT BREAKS/d
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>:argdo g<span style="color:#dc322f">/CONVERT BREAKS/</span>d</code></pre></div>
 <p>自分が今回初めて身に付けた知識でもっとも有効だったのは、検索でマッチした文字列を置換後の文字列内で指定する方法ですかね。検索パターンの括弧でくくった部分（vimなのでエスケープして<code>\(</code>と<code>\)</code>で囲った部分、ということになりますが）を、置換パターンから<code>\1</code>で指定できる。これははてなキーワードのリンクを一掃するのに役立ちました。</p>
-
-<pre><code class="language-vim">:argdo %s/&lt;a class=&quot;keyword&quot;\(.\{-}\)&lt;\/a&gt;/\1/g
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>:argdo %s<span style="color:#dc322f">/&lt;a class=&#34;keyword&#34;\(.\{-}\)&lt;\/a&gt;/</span>\<span style="color:#2aa198">1</span>/g</code></pre></div>
 <p>あー、あとこのコマンドで重要なのは<code>{-}</code>の部分ですかね。これで最短マッチになるらしい。他、細かなとこだと改行コードを入力するには<code>&lt;C-v&gt;&lt;C-m&gt;</code>と打つとか、<code>&lt;C-r&gt;/</code>で直前の検索パターンをコマンドラインに入力できるとか、いろいろこの機会に調べられてタメになりました。</p>
 
 <h3 id="参考">参考</h3>
@@ -245,13 +234,6 @@
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

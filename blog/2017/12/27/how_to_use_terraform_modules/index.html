@@ -33,8 +33,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
-
 
 
 
@@ -43,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a22%3a41.932165784%20%2b0900%20JST%20m%3d%2b0.081108501">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a22%3a41.932165784%20%2b0900%20JST%20m%3d%2b0.081108501">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a22%3a41.932165784%20%2b0900%20JST%20m%3d%2b0.081108501">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-05-24%2022%3a26%3a10.506371777%20%2b0900%20JST%20m%3d%2b0.112722116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-05-24%2022%3a26%3a10.506371777%20%2b0900%20JST%20m%3d%2b0.112722116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-05-24%2022%3a26%3a10.506371777%20%2b0900%20JST%20m%3d%2b0.112722116">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a22%3a41.932165784%20%2b0900%20JST%20m%3d%2b0.081108501">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-05-24%2022%3a26%3a10.506371777%20%2b0900%20JST%20m%3d%2b0.112722116">
     
 
 
@@ -175,37 +173,31 @@
 <p>moduleはクラウドリソースの枠を作り、各種設定値は変数として空けておいて、呼び出されるときに変数を埋めてもらう、という形を取るので、変数宣言をそこここに書くことになる。これがあまりDRYではないというか、何度も同じものを書く必要があったりする。</p>
 
 <p>簡単に書いてしまうとmoduleはこうなる。</p>
-
-<pre><code class="language-hcl:main.tf">variable &quot;name&quot; {}
-variable &quot;instnace_type&quot; { default = &quot;t2.micro&quot; }
-
-resource &quot;aws_ec2_instance&quot; &quot;hoge&quot; {
-  name          = &quot;${var.name}&quot;
-  instance_type = &quot;${var.type}&quot;
-}
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl:main.tf" data-lang="hcl:main.tf"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">variable</span> <span style="color:#2aa198">&#34;name&#34;</span> {}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>variable &#34;instnace_type&#34; { default <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;t2.micro&#34;</span> }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#268bd2">resource</span> <span style="color:#2aa198">&#34;aws_ec2_instance&#34; &#34;hoge&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  name          <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.name}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  instance_type <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.type}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}</code></pre></div>
 <p>resourceの中に変数のプレースホルダを置き、さらにその変数名を
  <code>variable</code> 句で宣言する。ここでは簡略化してresourceと同じファイル内に変数宣言も置いたが、推奨のプラクティスとしては <code>variable.tf</code> という別ファイルに変数宣言だけ切り出すことが多い。</p>
 
 <p>このmoduleを呼び出すときは、以下のように変数に値を埋めてやる。</p>
-
-<pre><code class="language-hcl:main.tf">variable &quot;name&quot; {
-  value = &quot;hoge&quot;
-}
-
-variable &quot;type&quot; {
-  value = &quot;c4.xlarge&quot;
-}
-
-module {
-  source = &quot;./hoge&quot;
-
-  name   = &quot;${var.name}&quot;
-  type   = &quot;${var.type}&quot;
-}
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl:main.tf" data-lang="hcl:main.tf"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">variable</span> <span style="color:#2aa198">&#34;name&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  value <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;hoge&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#268bd2">variable</span> <span style="color:#2aa198">&#34;type&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  value <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;c4.xlarge&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#268bd2">module</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  source <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;./hoge&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  name   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.name}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>  type   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.type}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>}</code></pre></div>
 <p>若干大げさに書いた。ここで <code>module</code> 内にもプレースホルダを置いて、さらに <code>variable</code> を宣言する必要はなくて、プレースホルダの箇所に直接値を書けばそれで済む。ただ、可変値とそれ以外は分けて記述した方がわかりやすいという人もいるので、そこは好みかなと。</p>
 
 <p>というわけで結構何回も同じ変数名を書くことになる。少なくともmodule内のプレースホルダで1回、その変数宣言で1回、呼び出すときに1回の計3回必要。</p>
@@ -263,13 +255,6 @@ module {
 
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 
