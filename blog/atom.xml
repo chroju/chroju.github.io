@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 24 May 2019 21:49:37 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 09 Jun 2019 17:30:59 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Corne Chocolate を組み立てる、40%キーボードに目覚める</title>
+      <link>https://chroju.github.io/blog/2019/06/09/corne_chocolate_build_log/</link>
+      <pubDate>Sun, 09 Jun 2019 17:30:59 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/06/09/corne_chocolate_build_log/</guid>
+      <description>前回の記事で書いたとおり Corne Chocolate を買って、無事に組み立てが完了した。 Corne Chocolate Corne Chocolate は foostan 氏が設計、販売している自作キーボード。 分割型 42キーのいわゆる4</description>
+    </item>
     
     <item>
       <title>Lily58 Pro 最強のキーマップを目指して</title>
