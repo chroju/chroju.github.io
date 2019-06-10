@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 09 Jun 2019 17:30:59 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 10 Jun 2019 17:43:55 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Netlify Functions と Go で動的なウェブページを作る</title>
+      <link>https://chroju.github.io/blog/2019/06/10/go_dynamic_web_page_netlify_functions/</link>
+      <pubDate>Mon, 10 Jun 2019 17:43:55 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/06/10/go_dynamic_web_page_netlify_functions/</guid>
+      <description>5年間ぐらい chroju.net というドメインを取って自分のプロフィールを掲載していて、裏側では AWS の Serverless な仕組みがいろいろ動いていたりしたのだけど、先日 chroju.dev という</description>
+    </item>
     
     <item>
       <title>Corne Chocolate を組み立てる、40%キーボードに目覚める</title>

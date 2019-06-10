@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="5年間ぐらい chroju.net というドメインを取って自分のプロフィールを掲載していて、裏側では AWS の Serverless な仕組みがいろいろ動いていたりしたのだけど、先日 chroju.dev という">
+
+<meta property="og:title" content="Netlify Functions と Go で動的なウェブページを作る" />
+<meta property="og:description" content="5年間ぐらい chroju.net というドメインを取って自分のプロフィールを掲載していて、裏側では AWS の Serverless な仕組みがいろいろ動いていたりしたのだけど、先日 chroju.dev という" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/06/10/go_dynamic_web_page_netlify_functions/" />
+<meta property="article:published_time" content="2019-06-10T17:43:55+09:00" />
+<meta property="article:modified_time" content="2019-06-10T17:43:55+09:00" />
+
+
+<title>
+
+
+     Netlify Functions と Go で動的なウェブページを作る &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/06/10/go_dynamic_web_page_netlify_functions/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-06-10%2018%3a06%3a37.665300441%20%2b0900%20JST%20m%3d%2b0.128374619">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-06-10%2018%3a06%3a37.665300441%20%2b0900%20JST%20m%3d%2b0.128374619">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-06-10%2018%3a06%3a37.665300441%20%2b0900%20JST%20m%3d%2b0.128374619">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-06-10%2018%3a06%3a37.665300441%20%2b0900%20JST%20m%3d%2b0.128374619">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Netlify Functions と Go で動的なウェブページを作る
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Jun 10 2019 17:43:55 JST'>Jun 10, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>5年間ぐらい chroju.net というドメインを取って自分のプロフィールを掲載していて、裏側では AWS の Serverless な仕組みがいろいろ動いていたりしたのだけど、先日 chroju.dev というドメインを取ったのでそちらにプロフィールを載せ替え、仕組みも Netlify Functions に変更した。</p>
+
+<h2 id="従来の仕組み">従来の仕組み</h2>
+
+<p>従来の仕組みは以下の Qiita のエントリーにまとめていた。</p>
+
+<p><div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://qiita.com/chroju/items/827dbb9e820f41820e14" data-iframely-url="//cdn.iframe.ly/XTWFfEE"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script></p>
+
+<p>やりたかったのは、プロフィールの中に自分のブログの最新記事リストを自動的に埋め込むこと。紆余曲折を経て、あらかじめ jinja2 でテンプレートを作っておき、ブログの更新を RSS と IFTTT 経由で hook して Lambda を叩いて、その Lambda がテンプレートから html を生成して S3 に設置、という形をこのときは取っている。つまり動的チックだが、実際にアクセスが来るのは静的な HTML ではある。ページ内に書いてある通り、各サービスの仕様がその後変わっているので、現時点でこのメカニズムを採用するのはモダンではなくなっている。</p>
+
+<p>なお、 chroju.net のドメインはもう失効したが、このページ自体はまだ生きている。気まぐれに消すと思うので、動いていなくてもあしからず。</p>
+
+<p><a href="https://chroju-profile.s3-ap-northeast-1.amazonaws.com/index.html">https://chroju-profile.s3-ap-northeast-1.amazonaws.com/index.html</a></p>
+
+<h2 id="今回の仕組み">今回の仕組み</h2>
+
+<p>シンプルに、 URL へアクセスがあったときにサーバーサイド（実際にはサーバーレスだけど）で RSS から最新記事のタイトルとリンクを読み込んで、テンプレートに埋め込んで HTML を返す、というメカニズムに変えることにした。</p>
+
+<p><a href="https://www.netlify.com/docs/functions/">Netlify Functions</a> はコードを書いた GitHub レポジトリと連携を設定すると、それを自動的に AWS Lambda にデプロイして URL から実行できるようにしてくれる仕組み。つまり Lambda と API Gateway の設定を面倒見る必要なく、コードを書くことだけに集中ができる。基本的には API を作ったりするのが主な用途だと思うけど、もちろん <code>text/html</code> を返しても良いので、今回はそれを利用している。言語は JavaScript と Go が使えるが、自分のスキルを鑑みて Go にした。</p>
+
+<h2 id="実装">実装</h2>
+
+<p>HTML のテンプレートには Go の標準ライブラリの <code>html/template</code> を使った。また RSS の読み込みとパースには <a href="https://github.com/mmcdole/gofeed">https://github.com/mmcdole/gofeed</a> を利用している。最新のコードは <a href="https://github.com/chroju/portfolio">https://github.com/chroju/portfolio</a> に置いている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">package</span> main
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">import</span> (
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>	<span style="color:#2aa198">&#34;bytes&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>	<span style="color:#2aa198">&#34;html/template&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>	<span style="color:#2aa198">&#34;io&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	<span style="color:#2aa198">&#34;log&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>	<span style="color:#2aa198">&#34;github.com/aws/aws-lambda-go/events&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>	<span style="color:#2aa198">&#34;github.com/aws/aws-lambda-go/lambda&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>	<span style="color:#2aa198">&#34;github.com/mmcdole/gofeed&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#268bd2">func</span> <span style="color:#268bd2">handler</span>(request events.APIGatewayProxyRequest) (<span style="color:#719e07">*</span>events.APIGatewayProxyResponse, <span style="color:#dc322f">error</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>	fp <span style="color:#719e07">:=</span> gofeed.<span style="color:#268bd2">NewParser</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>	feed, _ <span style="color:#719e07">:=</span> fp.<span style="color:#268bd2">ParseURL</span>(<span style="color:#2aa198">&#34;https://chroju.github.io/atom.xml&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>	ghitems <span style="color:#719e07">:=</span> feed.Items[:<span style="color:#2aa198">3</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>	feed, _ = fp.<span style="color:#268bd2">ParseURL</span>(<span style="color:#2aa198">&#34;https://chroju.hatenablog.jp/feed&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>	hbitems <span style="color:#719e07">:=</span> feed.Items[:<span style="color:#2aa198">3</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>	tmpl <span style="color:#719e07">:=</span> template.<span style="color:#268bd2">Must</span>(template.<span style="color:#268bd2">New</span>(<span style="color:#2aa198">&#34;index.html&#34;</span>).<span style="color:#268bd2">Parse</span>(htmlTemplate))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>	buf <span style="color:#719e07">:=</span> <span style="color:#b58900">new</span>(bytes.Buffer)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>	w <span style="color:#719e07">:=</span> io.<span style="color:#268bd2">Writer</span>(buf)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>	err <span style="color:#719e07">:=</span> tmpl.<span style="color:#268bd2">ExecuteTemplate</span>(w, <span style="color:#2aa198">&#34;base&#34;</span>, <span style="color:#268bd2">struct</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>		GitHubIOEntries   []<span style="color:#719e07">*</span>gofeed.Item
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>		HatenaBlogEntries []<span style="color:#719e07">*</span>gofeed.Item
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>	}{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span>		GitHubIOEntries:   ghitems,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span>		HatenaBlogEntries: hbitems,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span>	})
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span>	<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">34</span>		log.<span style="color:#268bd2">Fatal</span>(err)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">35</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">36</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span>	<span style="color:#719e07">return</span> <span style="color:#719e07">&amp;</span>events.APIGatewayProxyResponse{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">38</span>		StatusCode: <span style="color:#2aa198">200</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">39</span>		Body:       <span style="color:#b58900">string</span>(buf.<span style="color:#268bd2">Bytes</span>()),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">40</span>	}, <span style="color:#cb4b16">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">41</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">42</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">43</span><span style="color:#268bd2">func</span> <span style="color:#268bd2">main</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">44</span>	lambda.<span style="color:#268bd2">Start</span>(handler)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">45</span>}</code></pre></div>
+<p>先述の通り裏側は AWS Lambda なので、 Lambda の書き方に沿うことになる。 Lambda の実行時に呼び出す関数は handler と呼ばれる。この handler は特に API Gateway から呼ばれることになるので、 API Gateway とやり取りするために <code>*events.APIGatewayProxyRequest</code> を受け取り、 <code>*events.APIGatewayProxyResponse</code> を返すように実装する必要がある。今回はそのなかで html を Response Body に入れて返している。</p>
+
+<p>テンプレートは行数も多くなるので、本来であれば別ファイルに切り出したいところなのだが、 Netlify Functions でコード以外のファイルを一緒にデプロイする方法がわからなかった。そのため今はテンプレート全行を定数に代入する形でべた書きしている（上述のコードの中では省略した）。</p>
+
+<p>あとは build 用のコマンドを Makefile に書いておく。これで <code>functions</code> というフォルダ内にバイナリが置かれることになる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">build</span><span style="color:#719e07">:</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>	<span style="color:#b58900">export</span> <span style="color:#268bd2">GO111MODULE</span><span style="color:#719e07">=</span>on
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>	go get ./...
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>	go build -o functions/profile ./...
+</code></pre></div>
+<p>設定したコマンドと、バイナリの在り処を <code>netlify.toml</code> に書き、このレポジトリを Netlify Functions に連携することで、レポジトリの push を検知して自動的に build してデプロイしてくれるようになる。とても手軽。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>[build]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    command = <span style="color:#2aa198">&#34;make build&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    functios = <span style="color:#2aa198">&#34;./functions&#34;</span></code></pre></div>
+<h2 id="misc">misc</h2>
+
+<p>コード以外の設定をいくつか。</p>
+
+<h3 id="font-awesome">Font Awesome</h3>
+
+<p>SNS のアイコンを表示するために何年かぶりに Font Awesome を触ったところ、設定方法が替わっていたように思うのだが、以前の記憶が曖昧ではある。従来は CDN 上の CSS を <code>link</code> タグで直接読み込む形を取っていたと思うのだが、現状この形式は推奨されておらず、ユーザー登録すると個別の ID が払い出され、その ID に紐ついた js を読み込んで使う、という形になったらしい。</p>
+
+<p>管理画面上で使用するプランや、 Web Font か SVG かの選択などを行えるようになっているので、おそらくそれを反映して、 js が適した css を動的に読み込むようになっているのだと思われる。 Font Awesome がバージョンアップした場合にも自動的に latest を読み込んでくれるようなので、メンテナンスの手間は減って便利になっている。</p>
+
+<h3 id="dns">DNS</h3>
+
+<p>chroju.dev は Google Domains で取得したが、 Netlify Functions を使うにあたって Netlify の Managed DNS を使うと CDN を噛ませて速くしてくれるみたいな話だったので、名前解決は Netlify にまかせている。</p>
+
+<p><div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 53.5714%; padding-top: 120px;"><a href="https://www.netlify.com/docs/dns/" data-iframely-url="//cdn.iframe.ly/CpY94NE"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script></p>
+
+<p>残念ながら API がまだ無いようで、 chroju.net の時代は Route53 に乗せて API 経由でゴニョゴニョしていたことが出来なくなってしまったのでどうしようかな、という課題が残された。まだ Beta 扱いのようではあり、今後に期待したい。</p>
+
+<h3 id="redirect">Redirect</h3>
+
+<p>Netlify Functions はカスタムドメインは使用できるものの、個々の Function を実行するパスの自由度はなくて、デフォルトだと <code>/.netlify/functions/</code> 配下に置かれる。しかし <a href="https://chroju.dev">https://chroju.dev</a> へアクセスが来たときに Functions を実行して返したいわけなので、 <code>netlify.toml</code> でリダイレクトを設定した。 200 で返すことにより、ユーザーのアドレスバーには <a href="https://chroju.dev/">https://chroju.dev/</a> が表示されたままでリダイレクトさせることができている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>[[redirects]]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    from = <span style="color:#2aa198">&#34;/&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    to = <span style="color:#2aa198">&#34;/.netlify/functions/profile&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>    status = <span style="color:#2aa198">200</span></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>すごく簡単に AWS Lambda と API Gateway が使えて楽しかった。対応言語が Go と JS だけなど制約もあるが、単発で動かす Lambda とエンドポイントがほしいだけの場合であれば、 AWS ではなく Netlify Functions でデプロイしたほうがいろいろと不便がなさそう。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
