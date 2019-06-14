@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>the world as code</title>
+    <title>Tags on the world as code</title>
     <link>https://chroju.github.io/tags/</link>
-    <description>Recent content on the world as code</description>
+    <description>Recent content in Tags on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 10 Jun 2019 17:43:55 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2019 18:19:10 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title></title>
+      <link>https://chroju.github.io/tags/</link>
+      <pubDate>Fri, 14 Jun 2019 18:19:10 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://chroju.github.io/tags/blog/</link>
+      <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>ー兼大学生という字面だけ見るとよくわ</description>
+    </item>
     
     <item>
       <title>Netlify Functions と Go で動的なウェブページを作る</title>

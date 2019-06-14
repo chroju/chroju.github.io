@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 10 Jun 2019 17:43:55 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 14 Jun 2019 18:19:10 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>パラレルワーカー兼大学生になることになった</title>
+      <link>https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/</link>
+      <pubDate>Fri, 14 Jun 2019 18:19:10 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/</guid>
+      <description>4月に帝京大学理工学部情報科学科の通信課程に入学したのと、来月から2つの職場で働くために、パラレルワーカー兼大学生という字面だけ見るとよくわ</description>
+    </item>
     
     <item>
       <title>Netlify Functions と Go で動的なウェブページを作る</title>

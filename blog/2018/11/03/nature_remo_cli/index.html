@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-06-10%2018%3a15%3a58.978108155%20%2b0900%20JST%20m%3d%2b0.097730145">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-06-10%2018%3a15%3a58.978108155%20%2b0900%20JST%20m%3d%2b0.097730145">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-06-10%2018%3a15%3a58.978108155%20%2b0900%20JST%20m%3d%2b0.097730145">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-06-14%2018%3a22%3a03.505375951%20%2b0900%20JST%20m%3d%2b0.067611195">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-06-14%2018%3a22%3a03.505375951%20%2b0900%20JST%20m%3d%2b0.067611195">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-06-14%2018%3a22%3a03.505375951%20%2b0900%20JST%20m%3d%2b0.067611195">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-06-10%2018%3a15%3a58.978108155%20%2b0900%20JST%20m%3d%2b0.097730145">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-06-14%2018%3a22%3a03.505375951%20%2b0900%20JST%20m%3d%2b0.067611195">
     
 
 
@@ -213,12 +213,12 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  token: &lt;YOUR TOKEN&gt;
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>appliances:
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>- name: ライト
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  id: abcdefgh-<span style="color:#2aa198">1234</span>-ijkl-<span style="color:#2aa198">5678</span>-mnopqrstuvwx
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  id: abcdefgh<span style="color:#2aa198">-1234</span>-ijkl<span style="color:#2aa198">-5678</span>-mnopqrstuvwx
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  signals:
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  - id: abcdefgh-<span style="color:#2aa198">1234</span>-ijkl-<span style="color:#2aa198">5678</span>-mnopqrstuvwx
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  - id: abcdefgh<span style="color:#2aa198">-1234</span>-ijkl<span style="color:#2aa198">-5678</span>-mnopqrstuvwx
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    name: オン
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    image: ico_foo
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  - id: abcdefgh-<span style="color:#2aa198">1234</span>-ijkl-<span style="color:#2aa198">5678</span>-mnopqrstuvwx
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  - id: abcdefgh<span style="color:#2aa198">-1234</span>-ijkl<span style="color:#2aa198">-5678</span>-mnopqrstuvwx
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    name: オフ
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    image: ico_bar</code></pre></div>
 <p><code>remo list</code> はここから全家電とシグナルの <code>name</code> を読み込んで表示している仕組み。また <code>remo send</code> も同様に、このファイルから指定した家電名、シグナル名に該当する signal ID を探してきて、その ID で API を実行している。</p>
