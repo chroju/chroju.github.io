@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="gRPC に入門した。favicon のマスコット？めっちゃかわいいですね。。 きっかけは 3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code とい">
+
+<meta property="og:title" content="gRPC ちょっと理解した" />
+<meta property="og:description" content="gRPC に入門した。favicon のマスコット？めっちゃかわいいですね。。 きっかけは 3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code とい" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/06/21/grpc_entry/" />
+<meta property="article:published_time" content="2019-06-21T17:05:00+09:00" />
+<meta property="article:modified_time" content="2019-06-21T17:05:00+09:00" />
+
+
+<title>
+
+
+     gRPC ちょっと理解した &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/06/21/grpc_entry/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-06-21%2018%3a09%3a28.163059114%20%2b0900%20JST%20m%3d%2b0.162145355">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-06-21%2018%3a09%3a28.163059114%20%2b0900%20JST%20m%3d%2b0.162145355">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-06-21%2018%3a09%3a28.163059114%20%2b0900%20JST%20m%3d%2b0.162145355">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-06-21%2018%3a09%3a28.163059114%20%2b0900%20JST%20m%3d%2b0.162145355">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    gRPC ちょっと理解した
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Fri Jun 21 2019 17:05:00 JST'>Jun 21, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><a href="https://grpc.io/">gRPC</a> に入門した。favicon のマスコット？めっちゃかわいいですね。。</p>
+
+<p>きっかけは <a href="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/">3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code</a> という記事で触れたように、 Terraform 0.12 で Terraform Core と Provider が gRPC で通信するようになったため。知ってなてくは Terraform を使えないわけでも Provider を書けないわけでもないのだが、昨今よく聴く単語だし、 microservices などにも必要な要素技術なので入門してみた。</p>
+
+<h2 id="教材">教材</h2>
+
+<p>ちょうど WEB+DB PRESS の最新号で特集されていたので、主にこれを使った。</p>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/51SCTYcyT%2BL._SL160_.jpg" alt="WEB+DB PRESS Vol.110" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">WEB+DB PRESS Vol.110</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 19.06.21</div></div><div class="amazlet-detail">藤村 大介 森田 リーナ 渡邉 祐一 市原 創 板倉 広明 高橋 征義 笹田 耕一 大原 壯太 新倉 涼太 末永 恭正 久保田 祐史 牧 大輔 東 邦之 星 北斗 池田 拓司 竹馬 光太郎 はまちや2 竹原 八谷 賢 <br />技術評論社 <br />売り上げランキング: 13,606<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>あとは公式のドキュメント。英語で簡単な Tutorial が書かれているほか、 gRPC のレポジトリ内にある <a href="https://github.com/grpc/grpc/tree/master/examples">examples</a> というフォルダに言語別の実装例が書かれていて参考になった。</p>
+
+<h2 id="学んだこと">学んだこと</h2>
+
+<h3 id="写経">写経</h3>
+
+<p>gRPC とは何か、などとここで改めてまとめても仕方ない感があるので、それについては割愛する。 WEB+DB PRESS を読もう。</p>
+
+<p>当該号の特集では、 gRPC の4種類の通信方式（Unary, Server streaming, Client streaming, Bidirectional streaming）それぞれの簡単な実装サンプルと、実践例として gRPC を用いたタスク管理サービスの作り方が掲載されており、これを適宜写経しながら進めた。コードはいずれも GitHub で公開されている。</p>
+
+<p><div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/vvatanabe/go-grpc-basics" data-iframely-url="//cdn.iframe.ly/DAemZsu"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script></p>
+
+<p><div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/vvatanabe/go-grpc-microservices" data-iframely-url="//cdn.iframe.ly/3VubC7c"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script></p>
+
+<h3 id="ruby-での再実装">Ruby での再実装</h3>
+
+<p>単に写すだけというのもつまらないので、ちょっとした応用もやってみた。 gRPC には遣り取りするデータのシリアライズフォーマットを定義した Protocol Buffers (protobuf) を元として、サーバ / クライアントの実装を様々な言語で生成することができるという特徴がある。そこで、誌面のサンプルはサーバ / クライアントともに Go で書かれていたが、クライアント側を Ruby で書いてみることにした。</p>
+
+<p>対象にしたのは Server streaming gRPC のサンプルコード。主に公式の <a href="https://grpc.io/docs/quickstart/ruby/">Ruby 向け Tutorial</a> を見つつ、先の examples 内の実際のコードも見ながら進めたが、以下の記事も参考にした。</p>
+
+<p><div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://qiita.com/yururit/items/bc7c0eda63d5fa30289a" data-iframely-url="//cdn.iframe.ly/NJ6kcAY"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script></p>
+
+<p>まず、必要な gRPC 関連の gem をインストール。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ gem install grpc
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ gem install grpc-tools</code></pre></div>
+<p>続いて protobuf から Ruby 用のクライアントコードを生成しようと思ったのだが、サンプルコードでは protobuf の package が <code>file</code> という名前で定義されており、これをそのまま Ruby のコードに変換すると、 File class と衝突する形になってしまった。そのため package 名を <code>filedl</code> という名前に変更してからコード生成を実行している。ネーミングセンスは気にしないことにした。なお、このコマンドは元のサンプルコードの <code>downloader</code> というフォルダ内に <code>ruby</code> フォルダを掘り、その中で実行している。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ mkdir lib
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ grpc_tools_ruby_protoc -I ../proto --ruby_out<span style="color:#719e07">=</span>lib --grpc_out<span style="color:#719e07">=</span>lib ../proto/filedl.proto</code></pre></div>
+<p>Ruby のコードは以下のようになった。元々の Go によるサンプルコード（<a href="https://github.com/vvatanabe/go-grpc-basics/blob/master/downloader/client/main.go">go-grpc-basics/main.go at master · vvatanabe/go-grpc-basics</a>）とだいたい同じ動きをするようにしている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>this_dir <span style="color:#719e07">=</span> <span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>expand_path(<span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>dirname(<span style="color:#268bd2">__FILE__</span>))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>lib_dir <span style="color:#719e07">=</span> <span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>join(this_dir, <span style="color:#2aa198">&#39;lib&#39;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>$LOAD_PATH<span style="color:#719e07">.</span>unshift(lib_dir) <span style="color:#719e07">unless</span> $LOAD_PATH<span style="color:#719e07">.</span>include?(lib_dir)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#b58900">require</span> <span style="color:#2aa198">&#39;grpc&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#b58900">require</span> <span style="color:#2aa198">&#39;filedl_services_pb&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#719e07">def</span> <span style="color:#268bd2">main</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    stub <span style="color:#719e07">=</span> <span style="color:#cb4b16">Filedl</span><span style="color:#719e07">::</span><span style="color:#cb4b16">FileService</span><span style="color:#719e07">::</span><span style="color:#cb4b16">Stub</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">&#39;localhost:50051&#39;</span>, <span style="color:#2aa198">:this_channel_is_insecure</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    filename <span style="color:#719e07">=</span> <span style="color:#cb4b16">ARGV</span><span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    resps <span style="color:#719e07">=</span> stub<span style="color:#719e07">.</span>download(<span style="color:#cb4b16">Filedl</span><span style="color:#719e07">::</span><span style="color:#cb4b16">FileRequest</span><span style="color:#719e07">.</span>new(<span style="color:#b58900">name</span>: filename))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    blob <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>    resps<span style="color:#719e07">.</span>each <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>r<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>        blob <span style="color:#719e07">&lt;&lt;</span> r<span style="color:#719e07">.</span>data
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>    <span style="color:#719e07">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>    <span style="color:#b58900">p</span> <span style="color:#2aa198">&#34;done &#34;</span> <span style="color:#719e07">+</span> blob<span style="color:#719e07">.</span>size<span style="color:#719e07">.</span>to_s(<span style="color:#2aa198">10</span>) <span style="color:#719e07">+</span> <span style="color:#2aa198">&#34; bytes&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>    file <span style="color:#719e07">=</span> <span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open(filename,<span style="color:#2aa198">&#34;w&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>    file<span style="color:#719e07">.</span>puts blob
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>    file<span style="color:#719e07">.</span>close
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span style="color:#719e07">end</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>main</code></pre></div>
+<p>これで <code>ruby client.rb test</code> などと実行することで無事に動作が確認できた。異なる言語間でシリアライズされたデータの遣り取りがだいぶ簡単に実装できてなるほどねぇという感じはした。あと Ruby を3年ぶりぐらいに書いたのでところどころ文法にビビったりした。 <code>&lt;&lt;</code> 演算子とか。</p>
+
+<p>成果物はすべて <a href="https://github.com/chroju/learning_grpc">chroju/learning_grpc</a> に上げておいた。</p>
+
+<h2 id="terraform-と-grpc">Terraform と gRPC</h2>
+
+<p>一通りドキュメントを見てはみたが、正直そんなにガッツリ gRPC 使ってどうこうみたいなことは書いていないような気がする。 RPC 使ってますよ（これは Terraform 0.11 以前から同様）という話と、 &ldquo;Although technically possible to write a plugin in another language, almost all Terraform plugins are written in Go.&rdquo; という一文が <a href="https://www.terraform.io/docs/extend/writing-custom-providers.html">Writing Custom Providers - Guides - Terraform by HashiCorp</a> にあるぐらい。将来的に Go 以外でも書けるようにするんですかね。どうなんですかね。</p>
+
+<p>コードで言えば <a href="https://github.com/hashicorp/terraform/tree/c7058eaa52435e2c603319d194f903261ccfdc1f/docs/plugin-protocol">terraform/docs/plugin-protocol · hashicorp/terraform</a> に protobuf の定義ファイルがある。また、 Provider は <code>terraform/plugin</code> の <code>Serve</code> という関数を <code>main.go</code> に書く必要があり、この関数が Terraform Core に Provider を渡しているようなのだが、 <a href="https://github.com/hashicorp/terraform/blob/ba6e243bd97fda935f903da0d420e5ed94e35c9e/plugin/serve.go#L56-L83">この実装</a> を見ると、現時点では gRPC 向けに既存のメソッドを変換したりする処理が入っているみたい。 Provider を書く際には、 gRPC を意識する必要は基本的にはなさそう。</p>
+
+                <br>
+		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

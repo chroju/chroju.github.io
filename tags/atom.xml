@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on the world as code</title>
+    <title>the world as code</title>
     <link>https://chroju.github.io/tags/</link>
-    <description>Recent content in Tags on the world as code</description>
+    <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 14 Jun 2019 18:19:10 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 17:05:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/tags/atom.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title></title>
-      <link>https://chroju.github.io/tags/</link>
-      <pubDate>Fri, 14 Jun 2019 18:19:10 +0900</pubDate>
+      <title>gRPC ちょっと理解した</title>
+      <link>https://chroju.github.io/blog/2019/06/21/grpc_entry/</link>
+      <pubDate>Fri, 21 Jun 2019 17:05:00 +0900</pubDate>
       
-      <guid>https://chroju.github.io/tags/</guid>
-      <description></description>
+      <guid>https://chroju.github.io/blog/2019/06/21/grpc_entry/</guid>
+      <description>gRPC に入門した。favicon のマスコット？めっちゃかわいいですね。。 きっかけは 3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code とい</description>
     </item>
     
     <item>
-      <title>blog</title>
-      <link>https://chroju.github.io/tags/blog/</link>
-      <pubDate>Thu, 18 Feb 2016 20:51:20 +0900</pubDate>
+      <title>パラレルワーカー兼大学生になることになった</title>
+      <link>https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/</link>
+      <pubDate>Fri, 14 Jun 2019 18:19:10 +0900</pubDate>
       
-      <guid>https://chroju.github.io/tags/blog/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
-</rss>ー兼大学生という字面だけ見るとよくわ</description>
+      <guid>https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/</guid>
+      <description>4月に帝京大学理工学部情報科学科の通信課程に入学したのと、来月から2つの職場で働くために、パラレルワーカー兼大学生という字面だけ見るとよくわ</description>
     </item>
     
     <item>

@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 14 Jun 2019 18:19:10 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 17:05:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>gRPC ちょっと理解した</title>
+      <link>https://chroju.github.io/blog/2019/06/21/grpc_entry/</link>
+      <pubDate>Fri, 21 Jun 2019 17:05:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/06/21/grpc_entry/</guid>
+      <description>gRPC に入門した。favicon のマスコット？めっちゃかわいいですね。。 きっかけは 3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code とい</description>
+    </item>
     
     <item>
       <title>パラレルワーカー兼大学生になることになった</title>
