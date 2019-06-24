@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 21 Jun 2019 17:05:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jun 2019 16:57:55 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/tags/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VSCode と TeX で大学のレポートを書く</title>
+      <link>https://chroju.github.io/blog/2019/06/24/write_repot_with_vscode_tex/</link>
+      <pubDate>Mon, 24 Jun 2019 16:57:55 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/06/24/write_repot_with_vscode_tex/</guid>
+      <description>大学のレポートを書くにあたって、約10年前に文系大学に通っていた頃は Google Docs を使っていたので、今回もそれでいいかと考えていたのだが、情報系のレポ</description>
+    </item>
     
     <item>
       <title>gRPC ちょっと理解した</title>

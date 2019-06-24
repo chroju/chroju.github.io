@@ -4,31 +4,36 @@
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-06-21T17:05:00+09:00</lastmod>
+    <lastmod>2019-06-24T16:57:55+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2019-06-21T17:05:00+09:00</lastmod>
+    <lastmod>2019-06-24T16:57:55+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-06-21T17:05:00+09:00</lastmod>
+    <lastmod>2019-06-24T16:57:55+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2019/06/24/write_repot_with_vscode_tex/</loc>
+    <lastmod>2019-06-24T16:57:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/</loc>
+    <lastmod>2019-06-24T16:57:55+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://chroju.github.io/blog/2019/06/21/grpc_entry/</loc>
     <lastmod>2019-06-21T17:05:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/</loc>
-    <lastmod>2019-06-21T17:05:00+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -615,14 +620,14 @@
   </url>
   
   <url>
-    <loc>https://chroju.github.io/categories/aws/</loc>
+    <loc>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</loc>
     <lastmod>2015-05-15T00:00:00+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/</loc>
+    <loc>https://chroju.github.io/categories/aws/</loc>
     <lastmod>2015-05-15T00:00:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
