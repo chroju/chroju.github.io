@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on the world as code</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 11 Sep 2019 21:34:11 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 18 Sep 2019 23:22:43 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SRE になって3か月目に考える、 SRE とは何か、如何に実践すべきか</title>
+      <link>https://chroju.github.io/blog/2019/09/18/what_is_sre_for_me/</link>
+      <pubDate>Wed, 18 Sep 2019 23:22:43 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/09/18/what_is_sre_for_me/</guid>
+      <description>パラレルワーカー兼大学生になることになった · the world as code というエントリーで SRE の立場でやっていくということを書いて、実際働き始めて3か月近くが経過</description>
+    </item>
     
     <item>
       <title>AWS DHCP オプションセットを RFC から理解する</title>
