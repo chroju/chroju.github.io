@@ -3,22 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2019-09-18T23:22:43+09:00</lastmod>
+    <loc>https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/</loc>
+    <lastmod>2019-10-14T08:23:39+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chroju.github.io/blog/2019/09/18/what_is_sre_for_me/</loc>
-    <lastmod>2019-09-18T23:22:43+09:00</lastmod>
+    <loc>https://chroju.github.io/blog/</loc>
+    <lastmod>2019-10-14T08:23:39+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-09-18T23:22:43+09:00</lastmod>
+    <lastmod>2019-10-14T08:23:39+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/</loc>
+    <lastmod>2019-10-14T08:23:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2019/09/18/what_is_sre_for_me/</loc>
     <lastmod>2019-09-18T23:22:43+09:00</lastmod>
   </url>
   

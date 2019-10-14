@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 18 Sep 2019 23:22:43 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2019 08:23:39 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AWS Parameter Store をターミナルから操作する Parade を作った</title>
+      <link>https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/</link>
+      <pubDate>Mon, 14 Oct 2019 08:23:39 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/</guid>
+      <description>AWS Systems Manager のパラメータストア をよく使っている。例えば Git で管理ができない秘匿情報を SecureString の形で保存しておいたり、 Infrastructure as Code を実行する際、 Terraform で構築したリソー</description>
+    </item>
     
     <item>
       <title>SRE になって3か月目に考える、 SRE とは何か、如何に実践すべきか</title>
