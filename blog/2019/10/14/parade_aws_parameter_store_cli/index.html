@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-14%2009%3a38%3a09.926526458%20%2b0900%20JST%20m%3d%2b0.075003777">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-14%2009%3a38%3a09.926526458%20%2b0900%20JST%20m%3d%2b0.075003777">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-14%2009%3a38%3a09.926526458%20%2b0900%20JST%20m%3d%2b0.075003777">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-14%2009%3a44%3a12.986043768%20%2b0900%20JST%20m%3d%2b0.079222427">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-14%2009%3a44%3a12.986043768%20%2b0900%20JST%20m%3d%2b0.079222427">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-14%2009%3a44%3a12.986043768%20%2b0900%20JST%20m%3d%2b0.079222427">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-14%2009%3a38%3a09.926526458%20%2b0900%20JST%20m%3d%2b0.075003777">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-14%2009%3a44%3a12.986043768%20%2b0900%20JST%20m%3d%2b0.079222427">
     
 
 
@@ -157,7 +157,7 @@
                     <div class="date" title='Mon Oct 14 2019 08:23:39 JST'>Oct 14, 2019</div>
                     
                     
-		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
                     
                 </div>
             </div>
@@ -177,6 +177,10 @@
 <p>シンプルに値を読み書きすることだけ、もっと言えば読むことだけが目的だったので、機能は少ない。コマンド体系は redis-cli を参考にしていて、 <code>keys</code>, <code>get</code>, <code>set</code>, <code>del</code> の4つのサブコマンドから成る。先述の通り、キーの検索が面倒というのが発端になっているので、特に <code>get</code> を強化した。何もオプションを与えなければ <code>get hoge</code> でキー名 &ldquo;hoge&rdquo; がある場合に限り値を出力するけれど、キー名の記憶が曖昧な場合などは <code>--ambiguous</code> あるいは <code>-a</code> オプションを付ければ部分一致するキー名をすべて拾ってきてくれる。このとき、一致箇所を赤字で表示するようこだわってみた。また <code>SecureString</code> にも対応していて、自身に復号の権限さえあれば、 <code>-d</code> オプションで復号した値を出力することもできる。</p>
 
 <p>逆に <code>set</code> で値を登録するときは、任意のキーIDを指定した暗号化ができない（デフォルトのキーでの暗号化は可能）など、機能は現状最小限になっている。本当に手元でサクッとパラメーターを確認することを意図したツールにしている。</p>
+
+<h3 id="類似ツール">類似ツール</h3>
+
+<p>似たところだと <a href="https://github.com/segmentio/chamber">segmentio/chamber</a> が挙げられると思う。が、 chamber はあくまでシークレットマネージャーツールであることが主眼に置かれており、そのバックエンドとしてパラメータストアが使えるだけなので、パラメータストアの読み書き自体を目的とした parade とはちょっと軸足が違うかな、と思っている。</p>
 
 <h2 id="使用技術">使用技術</h2>
 
