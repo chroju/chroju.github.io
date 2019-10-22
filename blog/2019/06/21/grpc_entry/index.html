@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-14%2010%3a42%3a55.314159021%20%2b0900%20JST%20m%3d%2b0.208738776">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-14%2010%3a42%3a55.314159021%20%2b0900%20JST%20m%3d%2b0.208738776">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-14%2010%3a42%3a55.314159021%20%2b0900%20JST%20m%3d%2b0.208738776">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-22%2017%3a25%3a41.064931721%20%2b0900%20JST%20m%3d%2b0.110459611">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-22%2017%3a25%3a41.064931721%20%2b0900%20JST%20m%3d%2b0.110459611">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-22%2017%3a25%3a41.064931721%20%2b0900%20JST%20m%3d%2b0.110459611">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-14%2010%3a42%3a55.314159021%20%2b0900%20JST%20m%3d%2b0.208738776">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-22%2017%3a25%3a41.064931721%20%2b0900%20JST%20m%3d%2b0.110459611">
     
 
 
@@ -103,16 +103,17 @@
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
         
 
         
             <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
         
 
-        
+	
 
         
 
@@ -121,7 +122,11 @@
         
 
         
-            
+
+        
+
+        
+
         
 
         
@@ -131,8 +136,7 @@
         
 
         
-            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
-        
+
         
         </div>
     </div>
@@ -238,7 +242,8 @@
 <p>コードで言えば <a href="https://github.com/hashicorp/terraform/tree/c7058eaa52435e2c603319d194f903261ccfdc1f/docs/plugin-protocol">terraform/docs/plugin-protocol · hashicorp/terraform</a> に protobuf の定義ファイルがある。また、 Provider は <code>terraform/plugin</code> の <code>Serve</code> という関数を <code>main.go</code> に書く必要があり、この関数が Terraform Core に Provider を渡しているようなのだが、 <a href="https://github.com/hashicorp/terraform/blob/ba6e243bd97fda935f903da0d420e5ed94e35c9e/plugin/serve.go#L56-L83">この実装</a> を見ると、現時点では gRPC 向けに既存のメソッドを変換したりする処理が入っているみたい。 Provider を書く際には、 gRPC を意識する必要は基本的にはなさそう。</p>
 
                 <br>
-		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">

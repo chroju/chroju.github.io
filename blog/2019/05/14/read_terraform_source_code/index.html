@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-14%2010%3a42%3a55.327478314%20%2b0900%20JST%20m%3d%2b0.222058011">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-14%2010%3a42%3a55.327478314%20%2b0900%20JST%20m%3d%2b0.222058011">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-14%2010%3a42%3a55.327478314%20%2b0900%20JST%20m%3d%2b0.222058011">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-10-22%2017%3a25%3a41.087926383%20%2b0900%20JST%20m%3d%2b0.133454273">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-10-22%2017%3a25%3a41.087926383%20%2b0900%20JST%20m%3d%2b0.133454273">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-10-22%2017%3a25%3a41.087926383%20%2b0900%20JST%20m%3d%2b0.133454273">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-14%2010%3a42%3a55.327478314%20%2b0900%20JST%20m%3d%2b0.222058011">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-10-22%2017%3a25%3a41.087926383%20%2b0900%20JST%20m%3d%2b0.133454273">
     
 
 
@@ -103,16 +103,17 @@
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
         
 
         
             <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
         
 
-        
+	
 
         
 
@@ -121,7 +122,11 @@
         
 
         
-            
+
+        
+
+        
+
         
 
         
@@ -131,8 +136,7 @@
         
 
         
-            <a href="https://chroju.github.io/atom.xml"><img class="icon" src="https://chroju.github.io/img/rss.svg" alt="rss" /></a>
-        
+
         
         </div>
     </div>
@@ -183,18 +187,15 @@
 <p>既存のクラウドリソースの状態を読み解き、 tf ファイルと tfstate ファイルを生成してくれるツールです。同様のツールとしては <a href="https://github.com/dtan4/terraforming">dtan4/terraforming</a> が著名で、 terraformer の README.md 内でも言及があるほどですが、この2つにはそこそこ差異が見られます。</p>
 
 <p>まず機能面においては、 terraforming が指定したリソースの tf ファイル、 tfstate ファイル相当の情報を愚直に標準出力に出す、非常にシンプルな実装をしているのに対し、 terraformer は tf ファイルと tfstate ファイルを同時生成するほか、 <code>provider.tf</code> や、<code>terraform apply</code> したときに動的に生成される、インスタンス ID のような computed な値を出力するための <code>outputs.tf</code> まで生成してくれる至れり尽くせりなツールになっています。また、例えば <code>terraformer import aws --resources=route53</code> を実行すると Route53 に関するすべての情報を取得する、つまり <code>aws_route53_zone</code> と <code>aws_route53_record</code> 双方が生成される形になります。先のコマンドで生成されるファイルは以下のとおりです。</p>
-
-<pre><code>$ tree
-.
-├── outputs.tf
-├── provider.tf
-├── route53_record.tf
-├── route53_zone.tf
-└── terraform.tfstate
-
-0 directories, 5 files
-</code></pre>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ tree
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>.
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>├── outputs.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>├── provider.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>├── route53_record.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>├── route53_zone.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>└── terraform.tfstate
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#2aa198">0</span> directories, <span style="color:#2aa198">5</span> files</code></pre></div>
 <p>そして実装面でもだいぶアプローチが異なるのですが、それについては最後に触れようと思います。</p>
 
 <h2 id="発端となった-issue">発端となった issue</h2>
@@ -347,7 +348,8 @@ Need use schema.Schema from github.com/hashicorp/terraform/helper/schema</p>
 <p>また今回コードリーディングには VSCode を使って頑張って検索したり F12 で定義ジャンプしたりしていたのですが、もっと効率の良いやり方がありそうだなという気もしてます。1日作業になってしまったので、もう少しコードリーディングには慣れていきたいです。</p>
 
                 <br>
-		<p class="back-to-posts"><a href="https://chroju.github.io/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">
