@@ -1,0 +1,56 @@
+baseurl             = "https://chroju.github.io"
+builddrafts         = false
+canonifyurls        = true
+contentdir          = "content"
+languageCode        = "ja"
+hasCJKLanguage      = true
+enableEmoji         = true
+layoutdir           = "layouts"
+publishdir          = "public"
+theme               = "cocoa"
+author              = "chroju"
+title               = "the world as code"
+pygmentsCodefences  = true
+pygmentsStyle       = "solarized-dark"
+pygmentsOptions     = "linenos=inline"
+
+[outputFormats]
+[outputFormats.RSS]
+mediaType = "application/rss"
+baseName = "atom"
+
+[permalinks]
+blog = "/blog/:year/:month/:day/:filename/"
+
+[[menu.main]]
+name                   = "Archive"
+weight                 = -120
+identifier             = "blog"
+url                    = "/blog/"
+
+[[menu.main]]
+name                   = "About"
+weight                 = -110
+identifier             = "about"
+url                    = "/about/"
+
+[params]
+latestpostscount       = 5                             # how many posts to display on the home page
+i18n_flags             = false                         # whether to display small country flags for available translations
+author                 = "the world as code"
+cachebuster            = true                          # add the current unix timestamp in query string for cache busting css assets
+dateform               = "Jan 2, 2006"
+dateformfull           = "Mon Jan 2 2006 15:04:05 JST"
+description            = "write code to automate everything."
+email                  = "chor.chroju@gmail.com"
+extracssfiles          = [ "/css/override.css" ]       # In your `static` directory, add/remove files as necessary.
+faviconfile            = "img/favicon.ico"
+github                 = "//github.com/chroju"
+lang                   = "ja"
+noshowreadtime         = false                         # if true, don't show "<x> minutes read" in posts
+selfintro              = ""                            # appears in the site header when set to a non-empty string
+twitter                = "//twitter.com/chroju"
+
+avatar                 = "img/avatar.png" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
+# gravatar             = ""                # gravatar hash. see https://en.gravatar.com/site/implement/hash/. do not use in the same time as avatar
+
