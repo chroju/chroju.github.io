@@ -1,0 +1,35 @@
+name: deploy
+on:
+  push:
+    branches:
+    - source
+
+jobs:
+  deploy:
+    name: Deploy hugo
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Setup go
+      uses: actions/setup-go@v1
+      with:
+        go-version: "1.13.1"
+    - name: Deploy hugo
+      shell: bash
+      env:
+        BRANCH: master
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GOPATH: /home/runner/work/
+      run: |
+        git config --global user.name chroju
+        git config --global user.email chor.chroju@gmail.com
+        git remote set-url origin https://chroju:${GITHUB_TOKEN}@github.com/chroju/chroju.github.io.git
+        git submodule sync
+        git submodule update --init
+        git worktree add public master
+        rm -rf public/*
+        go get github.com/gohugoio/hugo
+        sudo cp /usr/share/zoneinfo/Japan /etc/localtime
+        $GOPATH/bin/hugo
+        cd public && git add --all && git commit -m "Rebuild pages" && git push origin master
