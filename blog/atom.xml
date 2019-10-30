@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 14 Oct 2019 08:23:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 22:52:38 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GitHub Actions (2019) ファーストインプレッション</title>
+      <link>https://chroju.github.io/blog/2019/10/30/github_actions_2019_first_impression/</link>
+      <pubDate>Wed, 30 Oct 2019 22:52:38 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/10/30/github_actions_2019_first_impression/</guid>
+      <description>GitHub Actions が新しくなって2か月ほど経つが、遅ればせながらいろいろと触ってみたのでインプレッションを書き留めておく。 まず最初に断っておくと、2019</description>
+    </item>
     
     <item>
       <title>AWS Parameter Store をターミナルから操作する Parade を作った</title>
