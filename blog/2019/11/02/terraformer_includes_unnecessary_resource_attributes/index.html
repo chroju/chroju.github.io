@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-11-02%2019%3a54%3a34.949123294%20%2b0900%20JST%20m%3d%2b0.074023428">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-11-02%2019%3a54%3a34.949123294%20%2b0900%20JST%20m%3d%2b0.074023428">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-11-02%2019%3a54%3a34.949123294%20%2b0900%20JST%20m%3d%2b0.074023428">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-11-02%2021%3a07%3a07.199895061%20%2b0900%20JST%20m%3d%2b0.072633116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-11-02%2021%3a07%3a07.199895061%20%2b0900%20JST%20m%3d%2b0.072633116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-11-02%2021%3a07%3a07.199895061%20%2b0900%20JST%20m%3d%2b0.072633116">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-11-02%2019%3a54%3a34.949123294%20%2b0900%20JST%20m%3d%2b0.074023428">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-11-02%2021%3a07%3a07.199895061%20%2b0900%20JST%20m%3d%2b0.072633116">
     
 
 
@@ -196,7 +196,7 @@
 
 <p>ではこれは余計な値でバグなのではないか、と思いたくなるところなのだけど、面白いのはこのまま <code>terraform</code> コマンドを打ってもエラーにはならないということ。以下、試しに ARN を <code>hogefuga</code> という値に変更して <code>terraform apply</code> して、その後再度 <code>plan</code> で結果を確認してみたサンプルを貼る。</p>
 
-<p><a href="https://asciinema.org/a/QC7264noQ7JGKeAhI54Yq4Dyk" target="_blank"><img src="https://asciinema.org/a/QC7264noQ7JGKeAhI54Yq4Dyk.svg" /></a></p>
+<script id="asciicast-2HP4t3MJhnhogQj1QgubaHydG" src="https://asciinema.org/a/2HP4t3MJhnhogQj1QgubaHydG.js" async></script>
 
 <p>ARN は AWS 側が一定の法則に則って自動採番する ID であり、当然ながらユーザーが任意で変更はできない。それなのに <code>plan</code> の結果として ARN の変更は予告され、そして <code>apply</code> も通ってしまうのが面白い。しかし <code>apply</code> 後に <code>plan</code> を実行すると、依然差分として表示はされるので、実際に <code>apply</code> が通ったわけではない。当たり前だけど、ちょっと挙動としては不安にもなる。</p>
 
