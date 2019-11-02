@@ -15,6 +15,11 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: "1.13.1"
+    - name: Cache GOPATH
+      uses: actions/cache@preview
+      with:
+        path: /home/runner/work
+        key: ${{ runner.os }}-gopath
     - name: Deploy hugo
       shell: bash
       env:

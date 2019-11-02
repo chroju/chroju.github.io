@@ -1,0 +1,11 @@
+{
+  "name": "textlint-actions",
+  "version": "1.0.0",
+  "dependencies": {
+    "textlint": "^11.2.3",
+    "textlint-rule-preset-japanese": "^2.0.1",
+    "textlint-rule-max-kanji-continuous-len": "4.0.0",
+    "textlint-rule-ja-no-weak-phrase": "1.0.4",
+    "textlint-rule-preset-jtf-style": "2.3.4"
+  }
+}
