@@ -1,0 +1,30 @@
+name: lint
+on:
+  pull_request:
+    branches:
+    - source
+
+jobs:
+  lint:
+    name: TextLint
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: "10.*"
+    - name: Cache node modules
+      uses: actions/cache@preview
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install dependencies
+      run: npm install
+    - name: Execute textlint and danger
+      uses: yuichielectric/danger-textlint-actions@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
