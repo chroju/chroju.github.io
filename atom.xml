@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 02 Nov 2019 16:58:17 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 10 Nov 2019 15:11:37 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Terraform Source Code Reading#3 に参加した</title>
+      <link>https://chroju.github.io/blog/2019/11/10/terraform_source_code_reading_3/</link>
+      <pubDate>Sun, 10 Nov 2019 15:11:37 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/11/10/terraform_source_code_reading_3/</guid>
+      <description>先週開催されたこちらのイベントに参加しました。 参加の動機 Terraform の AWS provider には何度か commit 経験はあるものの、 Terraform 本体のソースコードや、本体と provider 間のやり取りに</description>
+    </item>
     
     <item>
       <title>Terraformer が import した resource は不要な属性を含む場合がある</title>
