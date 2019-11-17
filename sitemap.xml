@@ -4,21 +4,26 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2019-11-10T15:11:37+09:00</lastmod>
+    <lastmod>2019-11-17T12:45:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2019/11/17/development_environment_2019/</loc>
+    <lastmod>2019-11-17T12:45:58+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2019-11-10T15:11:37+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/blog/2019/11/10/terraform_source_code_reading_3/</loc>
-    <lastmod>2019-11-10T15:11:37+09:00</lastmod>
+    <lastmod>2019-11-17T12:45:58+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/</loc>
+    <lastmod>2019-11-17T12:45:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2019/11/10/terraform_source_code_reading_3/</loc>
     <lastmod>2019-11-10T15:11:37+09:00</lastmod>
   </url>
   
