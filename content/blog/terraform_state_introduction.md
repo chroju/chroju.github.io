@@ -35,7 +35,7 @@ tfstate は自動生成されるファイルであり、手動で書き換える
 
 ### tfstate の保存場所
 
-特に設定していなければ、デフォルトの保存場所は `terraform apply` を実行したカレントディレクトリ上の `terraform.tfstate` という名前のファイルになります。しかし、先述の通りこのファイルは次回 `apply` 実行の際に必要となります。ローカルに置いたままでは複数人で `terraform` を実行することができなくなってしまうため、何らかの手段で共有する必要があります。
+特に設定していなければ、デフォルトの保存場所は `terraform apply` を実行したカレントディレクトリ上の `terraform.tfstate` という名前のファイルになります。しかし、先述の通りこのファイルは次回 `apply` 実行の際に必要となります。ローカルに置いたままでは複数人で `terraform` を実行できなくなってしまうため、何らかの手段で共有する必要があります。
 
 共有する上で、 VCS を用いることは非推奨とされています。これは例えば複数人が `git clone` して同時に `terraform apply` を実行してしまった場合などに、競合が発生する可能性があるからです。 tfstate は常に唯一無二のファイルがどこかに存在し、誰もがそのファイルを参照する必要があります。
 
@@ -131,7 +131,7 @@ resource "aws_instance" "foobar" {
 }
 ```
 
-また `instances` 内には、 `aws_insntace` であれば インスタンス ID などの、現実のリソースを一意に特定する情報が含まれます。これにより resoruce オブジェクトは Terraform resource と現実のリソースとの1対1対応を定義しています。なお、お気付きの通り `instances` は配列です。 `for_each` や `count` を使った場合など、1つの resource block で複数のインフラリソースを構築した場合には、複数のリソース情報が入ります。
+また `instances` 内には、 `aws_insntace` であればインスタンスIDなどの、現実のリソースを一意に特定する情報が含まれます。これにより resoruce オブジェクトは Terraform resource と現実のリソースとの1対1対応を定義しています。なお、お気付きの通り `instances` は配列です。 `for_each` や `count` を使った場合など、1つの resource block で複数のインフラリソースを構築した場合には、複数のリソース情報が入ります。
 
 ### terraform plan と tfstate
 
@@ -180,7 +180,7 @@ tfstate を保存するためだけに作られた、フルマネージドのス
 
 Terraform Cloud を使う場合の利点として、より重要なのは Remote State の利便性を活かしやすい点にあると考えています。
 
-Remote State とは、別の tfstate が output している値を読み取り、変数として活用することができる Terraform の機能です。例として、 AWS のネットワークを構築する際、以下のように `output` を設定しておくと、他の Terraform からこの値を読み取ることができます。
+Remote State とは、別の tfstate が output している値を読み取り、変数として活用できる Terraform の機能です。例として、 AWS のネットワークを構築する際、以下のように `output` を設定しておくと、他の Terraform からこの値を読み取ることができます。
 
 ```hcl
 resource "aws_vpc" "example" {
