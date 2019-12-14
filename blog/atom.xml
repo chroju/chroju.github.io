@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 04 Dec 2019 21:43:01 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 21:50:10 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Terraform state 概論</title>
+      <link>https://chroju.github.io/blog/2019/12/13/terraform_state_introduction/</link>
+      <pubDate>Fri, 13 Dec 2019 21:50:10 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/12/13/terraform_state_introduction/</guid>
+      <description>この記事は terraform Advent Calendar 2019 - Qiita の 14 日目です。 Terraform State （以下、本記事では tfstate と呼称します）をご存知でしょうか。 Terraform を使っていて tfstate をご存知ではない人はまぁまずい</description>
+    </item>
     
     <item>
       <title>Terraform meetup tokyo#3 に参加した</title>
