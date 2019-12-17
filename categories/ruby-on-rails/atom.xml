@@ -44,7 +44,7 @@
       <pubDate>Sun, 08 Dec 2013 00:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/</guid>
-      <description>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… bundle exec rails g devise:install Railsのログイン機構作るためにDevise入れてみてたんだけ</description>
+      <description>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
       <pubDate>Mon, 04 Nov 2013 00:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2013/11/04/2013-11-04-post/</guid>
-      <description>RailsによるアジャイルWebアプリケーション開発 第4版posted with amazlet at 15.03.01Sam Ruby Dave Thomas David Heinemeier Hansson オーム社 売り上げランキング: 138,293 Amazon.co.</description>
+      <description>Rails入門の定番書。このブログで何度か読んでいる途中経過を報告してきたか、ようやく読み終えることができた。読了というか、読み終わったのは</description>
     </item>
     
     <item>

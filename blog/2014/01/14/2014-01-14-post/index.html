@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.733417%20%2b0900%20JST%20m%3d%2b0.443198557">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.733417%20%2b0900%20JST%20m%3d%2b0.443198557">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.733417%20%2b0900%20JST%20m%3d%2b0.443198557">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.605350415%20%2b0900%20JST%20m%3d%2b0.367873434">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.605350415%20%2b0900%20JST%20m%3d%2b0.367873434">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.605350415%20%2b0900%20JST%20m%3d%2b0.367873434">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.733417%20%2b0900%20JST%20m%3d%2b0.443198557">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.605350415%20%2b0900%20JST%20m%3d%2b0.367873434">
     
 
 
@@ -167,21 +167,14 @@
             </div>
             <div class="markdown">
                 <p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
-
 <pre><code>% bundle install --path vendor/bundle
-</code></pre>
-
-<p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
-
+</code></pre><p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
 <p>まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な<a href="http://railstutorial.jp/">オンラインのRoRチュートリアル</a>にはこのことが書かれてなかったので、書き留めた次第。</p>
-
 <ul>
 <li><a href="http://qiita.com/emadurandal/items/a60886152a4c99ce1017">Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]</a></li>
 <li><a href="http://memo.yomukaku.net/entries/IpCSQmo">Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net</a></li>
 </ul>
-
-<p></blockquote></p>
-
+<!-- raw HTML omitted -->
 <p>で、<a href="http://chroju89.hatenablog.jp/entry/2014/01/09/235505">先日のエラー</a>についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。</p>
 
                 <br>

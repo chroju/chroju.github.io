@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.730666%20%2b0900%20JST%20m%3d%2b0.440447636">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.730666%20%2b0900%20JST%20m%3d%2b0.440447636">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.730666%20%2b0900%20JST%20m%3d%2b0.440447636">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.601252889%20%2b0900%20JST%20m%3d%2b0.363775908">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.601252889%20%2b0900%20JST%20m%3d%2b0.363775908">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.601252889%20%2b0900%20JST%20m%3d%2b0.363775908">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.730666%20%2b0900%20JST%20m%3d%2b0.440447636">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.601252889%20%2b0900%20JST%20m%3d%2b0.363775908">
     
 
 
@@ -167,41 +167,24 @@
             </div>
             <div class="markdown">
                 <p>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。</p>
-
 <pre><code>$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
-</code></pre>
-
-<p>リポジトリが正しく登録されているか確認。</p>
-
+</code></pre><p>リポジトリが正しく登録されているか確認。</p>
 <pre><code>$ yum list nginx --disablerepo=* --enablerepo=nginx
 （中略）
 Installed Packages
 nginx.x86_64                1.4.4-1.e16.ngx           @nginx
-</code></pre>
-
-<p>yum install</p>
-
+</code></pre><p>yum install</p>
 <pre><code>$ sudo yum install nginx
-</code></pre>
-
-<p>インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作っておくという作業を入れる。</p>
-
+</code></pre><p>インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作っておくという作業を入れる。</p>
 <pre><code>$ sudo mkdir /etc/nginx/sites-available
 $ sudo mkdir /etc/nginx/sites-enabled
 $ sudo rm -f conf.d/*.conf
-</code></pre>
-
-<p>nginx.confを開いて、sites-enabledを読み込ませるための設定を追加する。具体的には以下の1行。</p>
-
+</code></pre><p>nginx.confを開いて、sites-enabledを読み込ませるための設定を追加する。具体的には以下の1行。</p>
 <pre><code>include /etc/nginx/sites-enabled/*;
-</code></pre>
-
-<p>以上、終わり。最後にサービスを立ち上げて、自動起動を設定。</p>
-
+</code></pre><p>以上、終わり。最後にサービスを立ち上げて、自動起動を設定。</p>
 <pre><code>$ sudo service nginx start
 $ sudo chkconfig nginx on
 </code></pre>
-
                 <br>
                 
                 <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>

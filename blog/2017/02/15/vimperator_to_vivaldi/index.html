@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.56525%20%2b0900%20JST%20m%3d%2b0.275036348">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.56525%20%2b0900%20JST%20m%3d%2b0.275036348">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.56525%20%2b0900%20JST%20m%3d%2b0.275036348">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.424329996%20%2b0900%20JST%20m%3d%2b0.186853015">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.424329996%20%2b0900%20JST%20m%3d%2b0.186853015">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.424329996%20%2b0900%20JST%20m%3d%2b0.186853015">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.56525%20%2b0900%20JST%20m%3d%2b0.275036348">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.424329996%20%2b0900%20JST%20m%3d%2b0.186853015">
     
 
 
@@ -166,40 +166,23 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>Firefox 51から、Vimperatorの一部機能が使用できなくなる状態が発生した。これについてはGitHub上でFixが進んでいるが、2017-02-15現在だとまだ修正版の公開までには至っていない。</p>
-
+                <p>Firefox 51から、Vimperatorの一部機能が使用できなくなる状態が発生した。これについてはGitHub上でFixが進んでいるが、2017-02-15現在だとまだ修正版の公開までには至っていない。</p>
 <ul>
 <li><a href="https://github.com/vimperator/vimperator-labs/issues?utf8=%E2%9C%93&amp;q=is%3Aissue%20FF51">Issues · vimperator/vimperator-labs</a></li>
 </ul>
-
 <p>もう数年間vimpを使っている身として、一時は修正版を待とうかとも思ったのだが、<a href="http://internet.watch.impress.co.jp/docs/news/1031773.html">今年11月からWebExtentionに移行する</a>際にも同様の混乱が様々ありそうだし、代替策の模索を始めた。</p>
-
-<h2 id="why-vivaldi">Why Vivaldi ?</h2>
-
+<h2 id="why-vivaldi-">Why Vivaldi ?</h2>
 <p>とはいえ、今の時代に代替となるブラウザはほぼChrome一択になってしまう。ChromeにもVimライクなKey configを実現する<a href="http://internet.watch.impress.co.jp/docs/news/1031773.html">Vimium</a>があり、触れたこともあるのだが、自分はどうもChromeが苦手で移れずにいた。</p>
-
 <p>一番大きいのがUIをカスタマイズする余地がないこと。例えばFirefoxだと多段タブをTab Mix Plusで実現しているのだが、Chromeだとこういったことはできず、大量のタブを開くとファビコンのみの表示に縮小されてしまう。またアドレスバーが上部で固定されているのも、個人的には邪魔くさい。</p>
-
 <p>そこで<a href="https://vivaldi.com/">Vivaldi</a>を採用しようと考えた。VivaldiはChromeエクステンションが互換動作するのでVimiumも使える上、UIがかなりフレキシブルにカスタマイズできる。</p>
-
-<p><a data-flickr-embed="true"  href="https://www.flickr.com/gp/chroju/3ZEy43" title="vivaldi"><img src="https://c1.staticflickr.com/1/298/32875812446_92ae4222dc_z.jpg" width="640" height="452" alt="vivaldi"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <p>多段タブこそできないものの、タブバーを上部ではなく横に表示することで、ファビコンだけに縮小されることは免れた。アドレスバーも要らないと言えば要らないのだが、SSLの確認用途もあるので下部表示へ変更している。</p>
-
 <h2 id="vimperator-to-vimium">Vimperator to Vimium</h2>
-
 <p>まずそもそもなのだが、VimiumではVimperatorの完全な代替には成り得ない。Vimperatorの真髄はjavascriptを介してOSの挙動を骨の髄までコマンド操作に置き換えるところにあったわけだけど、Vimiumでコマンド操作可能なのは、あくまでエクステンション内部で定義されているものに限られる。Vimperatorのような好き勝手はできない。</p>
-
 <p>なのでVimperatorで自分にとってのキラーとなっていた機能だけでも移植を検討した。</p>
-
 <h3 id="key-mapping">Key mapping</h3>
-
 <p>key mappingは自由に替えられるので、自分の<code>.vimperatorrc</code>に合わせる形で変更した。</p>
-
 <p>なおctrlキーを交えたマッピングを行う場合、ブラウザデフォルトのショートカットと衝突する恐れがあるが、Vivaldiはショートカット定義を自由に替えられるため、キーバインドを解除すれば衝突しなくなる。</p>
-
 <pre><code>unmap d
 map d removeTab
 unmap T
@@ -214,43 +197,26 @@ map h previousTab
 unmap &lt;c-h&gt;
 map &lt;c-h&gt; moveTabLeft
 map &lt;c-l&gt; moveTabRight
-</code></pre>
-
-<h3 id="quick-marks">quick marks</h3>
-
+</code></pre><h3 id="quick-marks">quick marks</h3>
 <p>Vimのmarkっぽい機能として、VimperatorではURLにmarkを設定できるquickmarks (qmark) という機能があって重宝していた。例えば<code>q</code>にQiitaを設定しておくと、<code>goq</code>でカレントタブ、<code>gnq</code>で新しいタブにQiitaが開く。</p>
-
 <p>Vimiumでは再現できなかったので、現状Vomnibar（ブックマーク、履歴等からインクリメンタルサーチするランチャー）からブックマークを呼ぶ形で対応している。どうもREADMEを読む限りでは<code>map X createTab http://www.bbc.com/news</code>といったキーバインドが可能らしいのだが、なぜか上手くいっていない。</p>
-
-<h3 id="copy-js">copy.js</h3>
-
+<h3 id="copyjs">copy.js</h3>
 <p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/copy.js">vimperator-plugins/copy.js at master · vimpr/vimperator-plugins</a></p>
-
 <p>Pluginになるが、URLやページタイトルを加工して好きな形でクリップボードへ取り込むコマンドを設定できる、copy.jsというものがあった。</p>
-
 <p>こちらも再現はできなさそうなのだが、ブログ等を書くときにMarkdown形式でのURLコピーがどうしてもほしかったので、Vomnibarからbookmarkletを呼ぶ形で対応している。</p>
-
-<h3 id="commandbookmarklet-js">commandBookmarklet.js</h3>
-
+<h3 id="commandbookmarkletjs">commandBookmarklet.js</h3>
 <p><a href="https://github.com/vimpr/vimperator-plugins/blob/master/commandBookmarklet.js">vimperator-plugins/commandBookmarklet.js at master · vimpr/vimperator-plugins</a></p>
-
 <p>ブックマークレットをコマンドで呼べるPlugin。そもそもVimiumにはコマンドモードがないので土台無理なわけで、Vomnibarから呼ぶという手段に頼るしか無くなっている。</p>
-
 <p>良くも悪くも、以前コマンドモードでやっていたことは、ブックマークレットで再現してVomnibarからどうにかして呼ぶ、という形でだいたいは回避している。</p>
-
 <p>また一方でVivaldiには「クイックコマンド」という機能があって、デフォルトだとF2を押すとVomnibarにも似たランチャーが起動する。ここからブックマーク、履歴、オープンなタブ、設定項目等をインクリメントに呼び出せるので、Vimiumが無くてもある程度キーボードで操作ができたりする。まぁ、インクリメンタルサーチするより、Vimiumの割り当てコマンドの方がタイプ数は少なくて済むので、あまり使ってはいない。</p>
-
 <h2 id="frustrated">frustrated</h2>
-
 <p>以上の設定でなんとなく使えてはいるのだが、不満の話も。</p>
-
 <ul>
 <li>マスターパスワード設定がないので、あまりパスワードを記憶させたくない。</li>
 <li>Firefox Syncのようなブックマーク、エクステンションの同期機能がない。</li>
 <li>http/https以外のプロトコルで開いているタブ上では、Vimiumが効かない。</li>
 <li>Vimiumは<code>.vimperatorrc</code>のような設定の外出しが出来ない。</li>
 </ul>
-
 <p>そもそもにして、Firefoxの先を儚んでいるときに、先が不透明な更なるマイナーブラウザに移るという選択もどうかと思ったが、Vivaldiの開発が終わってしまった暁には大人しくChromeに移ろうと思う。</p>
 
                 <br>

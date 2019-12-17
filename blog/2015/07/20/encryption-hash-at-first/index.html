@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.60198%20%2b0900%20JST%20m%3d%2b0.311765132">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.60198%20%2b0900%20JST%20m%3d%2b0.311765132">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.60198%20%2b0900%20JST%20m%3d%2b0.311765132">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.47538907%20%2b0900%20JST%20m%3d%2b0.237912089">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.47538907%20%2b0900%20JST%20m%3d%2b0.237912089">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.47538907%20%2b0900%20JST%20m%3d%2b0.237912089">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.60198%20%2b0900%20JST%20m%3d%2b0.311765132">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.47538907%20%2b0900%20JST%20m%3d%2b0.237912089">
     
 
 
@@ -166,62 +166,42 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。</p>
-
+                <p>セキュリティスペシャリスト持ってるはずなのに曖昧な理解で誤魔化してたので自分用まとめ。また書き足すかも。なんか書き足し書き足ししていくようなノートの整理には、編集履歴が見られるQiitaの方が便利なのかなとか思うけど。</p>
 <ul>
 <li>暗号化とハッシュ化は違う。暗号化はデータの秘匿を目的としており、適切な鍵を用いることで復号が可能。ハッシュ化はデータの置換がそもそもの目的であり、ハッシュ関数により一定のフォーマットへ不可逆の変換を行う。</li>
 <li>ただし、衝突耐性を持つことなどにより、セキュリティ用途に適する「暗号学的ハッシュ関数」というものもあるらしい。デジタル署名やメッセージ認証符号への使用を目的とされており、逆にチェックサム等に使用するには計算が「重い」。</li>
 </ul>
-
-<h1 id="暗号">暗号</h1>
-
+<h1 id="heading">暗号</h1>
 <p>主なアルゴリズムをざっと。</p>
-
 <h2 id="rsa">RSA</h2>
-
 <ul>
 <li>公開鍵暗号。素因数分解の計算難度を根拠としたもの。サマウォで解いてたアレもたぶん素因数分解暗号だが、暗算で解かれたらたまったものではない。</li>
 <li>SSHログイン時の鍵認証やSSL認証など、広く使われる。</li>
 <li>秘密鍵生成コマンドとして<code>openssl genrsa</code>がある。SSH鍵認証では<code>ssh-keygen</code>を用いる。</li>
 </ul>
-
 <h2 id="des">DES</h2>
-
 <ul>
 <li>共通鍵暗号。鍵長54bitのブロック暗号。</li>
 <li>鍵長が短すぎるため、現在では安全ではないとされるが、暗号化復号化処理を3回実行するトリプルDESという形で主に実用されている。</li>
 <li><code>openssl genrsa</code>での秘密鍵生成時に、パスフレーズによるトリプルDESでの暗号化を施すため、<code>-des3</code>オプションが用いられる。</li>
 </ul>
-
 <h2 id="aes">AES</h2>
-
 <ul>
 <li>共通鍵暗号。DESの安全性低下に伴い開発された、鍵長128bit超のブロック暗号。</li>
 </ul>
-
-<h1 id="ハッシュ">ハッシュ</h1>
-
-<h2 id="ソルト">ソルト</h2>
-
+<h1 id="heading-1">ハッシュ</h1>
+<h2 id="heading-2">ソルト</h2>
 <p>ハッシュ化前に対象文字列に付加するランダムな文字列。同一文字列のハッシュ化時に衝突が防げる、レインボーテーブルによる探索に対する妨害になる、といった利点がある。</p>
-
-<h2 id="フィンガープリント">フィンガープリント</h2>
-
+<h2 id="heading-3">フィンガープリント</h2>
 <p>SSH初回ログインで表示されるやつ。公開鍵のハッシュ値。<code>~/.ssh/known_hosts</code>に記述され、次回以降のログインで公開鍵の変更有無の確認に使われる。変更があると、サーバーなりすましの危険性もあるため警告が表示される。<code>ssh-keygen -lf</code>でも表示可能。</p>
-
 <h2 id="md5">md5</h2>
-
 <ul>
 <li>出力128bitのハッシュアルゴリズム。ファイル配布時のチェックサムなどに用いられる。</li>
 <li>安全性は高くないことが判明しているため、日米ともにSHAの使用が推奨されている。</li>
 <li>コマンドは<code>md5sum</code>あるいは<code>openssl md5</code>を使用する。</li>
 <li>なおパスワードハッシュ化でよく用いられる<code>openssl passwd</code>はmd5による実装。</li>
 </ul>
-
 <h2 id="sha">sha</h2>
-
 <ul>
 <li>Secure Hash Algorithm。暗号学的ハッシュ関数の一つ。</li>
 <li>SSL、SSH等で用いられる暗号化アルゴリズム。</li>

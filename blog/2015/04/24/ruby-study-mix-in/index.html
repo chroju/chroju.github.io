@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.610023%20%2b0900%20JST%20m%3d%2b0.319807640">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.610023%20%2b0900%20JST%20m%3d%2b0.319807640">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.610023%20%2b0900%20JST%20m%3d%2b0.319807640">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.485609585%20%2b0900%20JST%20m%3d%2b0.248132604">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.485609585%20%2b0900%20JST%20m%3d%2b0.248132604">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.485609585%20%2b0900%20JST%20m%3d%2b0.248132604">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.610023%20%2b0900%20JST%20m%3d%2b0.319807640">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.485609585%20%2b0900%20JST%20m%3d%2b0.248132604">
     
 
 
@@ -166,19 +166,13 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。</p>
-
-<h2 id="参考">参考</h2>
-
+                <p>Mix-inの話と、それに似たもろもろ。他に詳しい記事があるので、これを読んでおけばいいような気はした。</p>
+<h2 id="heading">参考</h2>
 <ul>
 <li><a href="http://faultier.blog.jp/archives/1220074.html">requireとincludeとextendとmodule_function(1) : As Sloth As Possible</a></li>
 <li><a href="http://faultier.blog.jp/archives/1220088.html">requireとincludeとextendとmodule_function(2) : As Sloth As Possible</a></li>
 </ul>
-
 <h2 id="require">require</h2>
-
 <ul>
 <li>Kernelモジュールのモジュール関数。</li>
 <li>引数に与えたRubyライブラリを1回ロード、というか実行する。</li>
@@ -186,17 +180,13 @@
 <li>指定した引数は$LOAD_PATHに探しに行き、カレントディレクトリは含まれないため、パスの指定には少し注意が必要。</li>
 <li>同じファイルを複数回requireしようとしても、1回しか読み込まない。</li>
 </ul>
-
 <h2 id="load">load</h2>
-
 <ul>
 <li>Kernelモジュールのモジュール関数。</li>
 <li>requireと同様に外部ライブラリを実行するが、同じファイルを何度でも読み込める。</li>
 <li>requireは拡張子の自動補完を行うが、loadは行わない。</li>
 </ul>
-
 <h2 id="include">include</h2>
-
 <ul>
 <li>Moduleクラスのインスタンスメソッド。</li>
 <li>Moduleを引数に取り、メソッドや定数といった対象Moduleの性質を取り込む。</li>
@@ -205,9 +195,7 @@
 <li>同じモジュールを複数回読み込もうとしても、2回目以降は無視される。</li>
 <li>Rubyは多重継承を認めていないが、その代わりの機能を果たすという位置付けらしい。</li>
 </ul>
-
 <h2 id="extend">extend</h2>
-
 <ul>
 <li>Objectクラスのインスタンスメソッド。</li>
 <li>引数に取ったModuleのメソッドを特異メソッドとして取り込める。</li>

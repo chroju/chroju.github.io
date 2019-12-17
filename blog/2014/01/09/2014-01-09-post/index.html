@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.734924%20%2b0900%20JST%20m%3d%2b0.444705178">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.734924%20%2b0900%20JST%20m%3d%2b0.444705178">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.734924%20%2b0900%20JST%20m%3d%2b0.444705178">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.605596811%20%2b0900%20JST%20m%3d%2b0.368119830">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.605596811%20%2b0900%20JST%20m%3d%2b0.368119830">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.605596811%20%2b0900%20JST%20m%3d%2b0.368119830">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.734924%20%2b0900%20JST%20m%3d%2b0.444705178">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.605596811%20%2b0900%20JST%20m%3d%2b0.368119830">
     
 
 
@@ -167,16 +167,10 @@
             </div>
             <div class="markdown">
                 <p>完全に嵌った。さっぱりわからん。</p>
-
 <pre><code>undefined method `to_css' for nil:NilClass
-</code></pre>
-
-<p><a href="https://github.com/seyhunak/twitter-bootstrap-rails">twitter-bootstrap-rails</a>を試してみているのだが、インストールしていざブラウザからアクセスしてみると、undefined methodのエラーが出てしまう。どのページにアクセスしてもダメ。</p>
-
+</code></pre><p><a href="https://github.com/seyhunak/twitter-bootstrap-rails">twitter-bootstrap-rails</a>を試してみているのだが、インストールしていざブラウザからアクセスしてみると、undefined methodのエラーが出てしまう。どのページにアクセスしてもダメ。</p>
 <p>エラーメッセージ読んでも、そもそも#to_cssメソッドがどこにあるのかもわからんのだが、名前からしてLESSのコンパイルでトチってそうだという想像をしている。でもそれ以上はわかんない。ググっても情報はほとんどないし。</p>
-
 <p>試しにrails newから全部やり直してみたりしたのだが、それでも尚ダメだった。READMEの通りにやってるはずなんだけどなぁ……。使ったコマンドは以下のみ。</p>
-
 <pre><code>rails new TestApp
 (Gemfileを編集)
 bundle install
@@ -186,9 +180,7 @@ rails g Scaffold User name:string mail:string
 rake db:migrate
 rails g bootstrap:themed Users
 rails s
-</code></pre>
-
-<p>仕方ないので他のGem使おうかと。んー……なんなんだろ。</p>
+</code></pre><p>仕方ないので他のGem使おうかと。んー……なんなんだろ。</p>
 
                 <br>
                 

@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.538035%20%2b0900%20JST%20m%3d%2b0.247821343">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.538035%20%2b0900%20JST%20m%3d%2b0.247821343">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.538035%20%2b0900%20JST%20m%3d%2b0.247821343">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.391017399%20%2b0900%20JST%20m%3d%2b0.153540318">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.391017399%20%2b0900%20JST%20m%3d%2b0.153540318">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.391017399%20%2b0900%20JST%20m%3d%2b0.153540318">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.538035%20%2b0900%20JST%20m%3d%2b0.247821343">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.391017399%20%2b0900%20JST%20m%3d%2b0.153540318">
     
 
 
@@ -166,62 +166,43 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが <code>-h</code> オプションを使ったときに表示される「Usage」の書き方だったりします。こういうやつ。</p>
+                <p>仕事柄オペレーション作業で使う小さなコマンドラインツールを作ることはよくありますが、地味に悩むのが <code>-h</code> オプションを使ったときに表示される「Usage」の書き方だったりします。こういうやつ。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>usage: git <span style="color:#719e07">[</span>--version<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--help<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-c <span style="color:#268bd2">name</span><span style="color:#719e07">=</span>value<span style="color:#719e07">]</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>           <span style="color:#719e07">[</span>--exec-path<span style="color:#719e07">[=</span>&lt;path&gt;<span style="color:#719e07">]]</span> <span style="color:#719e07">[</span>--html-path<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--man-path<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--info-path<span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>           <span style="color:#719e07">[</span>--exec-path<span style="color:#719e07">[</span><span style="color:#719e07">=</span>&lt;path&gt;<span style="color:#719e07">]</span><span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--html-path<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--man-path<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--info-path<span style="color:#719e07">]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>           <span style="color:#719e07">[</span>-p|--paginate|--no-pager<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--no-replace-objects<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--bare<span style="color:#719e07">]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>           <span style="color:#719e07">[</span>--git-dir<span style="color:#719e07">=</span>&lt;path&gt;<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--work-tree<span style="color:#719e07">=</span>&lt;path&gt;<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--namespace<span style="color:#719e07">=</span>&lt;name&gt;<span style="color:#719e07">]</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>           &lt;command&gt; <span style="color:#719e07">[</span>&lt;args&gt;<span style="color:#719e07">]</span></code></pre></div>
-<p>この括弧の種類と使い方がよくわかっていなくて、どこかで定められた標準があるんであればそれを使いたいなと思い色々調べてみたメモです。</p>
-
-<h2 id="en-wikipedia">en.wikipedia</h2>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>           &lt;command&gt; <span style="color:#719e07">[</span>&lt;args&gt;<span style="color:#719e07">]</span>
+</code></pre></div><p>この括弧の種類と使い方がよくわかっていなくて、どこかで定められた標準があるんであればそれを使いたいなと思い色々調べてみたメモです。</p>
+<h2 id="enwikipedia">en.wikipedia</h2>
 <p>いきなり Wikipedia かよというところではありますが、英語版 Wikipedia に <a href="https://en.wikipedia.org/wiki/Usage_message">Usage message</a> という項目があって、複数の問題点があるとか指摘が入っていますが参考にはなる内容で、ここに書き方が載っています。以下引用。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>Usage: program <span style="color:#719e07">[</span>-aDde<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-f | -g<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-n number<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-b b_arg | -c c_arg<span style="color:#719e07">]</span> req1 req2 <span style="color:#719e07">[</span>opt1 <span style="color:#719e07">[</span>opt2<span style="color:#719e07">]]</span></code></pre></div>
-<p><code>-aDde</code> が引数を取らないオプションで <code>-n</code> は取るオプション、 <code>-f</code> と <code>-g</code> は排他、 <code>-b</code>と <code>-c</code> は引数を取ってかつ排他、括弧が付いていない <code>req1</code> と <code>req2</code> は必須オプションで、 <code>opt2</code> は <code>opt1</code> と一緒に使う必要がある、ということのようです。わかりやすい。ちなみに NetBSD のコーディングスタイルを元にしているとのこと。個人的にはよく見かける書式な気がしますし、これでFAではとも思います。いきなり結論に至りました。</p>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>Usage: program <span style="color:#719e07">[</span>-aDde<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-f | -g<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-n number<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>-b b_arg | -c c_arg<span style="color:#719e07">]</span> req1 req2 <span style="color:#719e07">[</span>opt1 <span style="color:#719e07">[</span>opt2<span style="color:#719e07">]</span><span style="color:#719e07">]</span>
+</code></pre></div><p><code>-aDde</code> が引数を取らないオプションで <code>-n</code> は取るオプション、 <code>-f</code> と <code>-g</code> は排他、 <code>-b</code>と <code>-c</code> は引数を取ってかつ排他、括弧が付いていない <code>req1</code> と <code>req2</code> は必須オプションで、 <code>opt2</code> は <code>opt1</code> と一緒に使う必要がある、ということのようです。わかりやすい。ちなみに NetBSD のコーディングスタイルを元にしているとのこと。個人的にはよく見かける書式な気がしますし、これでFAではとも思います。いきなり結論に至りました。</p>
 <p>このページ他にも面白いことはいろいろ書いてあって、個人的に気になったのが、この Wikipedia のページで面白かったのが一番下にある「Anti-patterns」というものです。「要出典」扱いになっているので、いずれ消えるかもしれないですが引用してみます。</p>
-
 <blockquote>
 <p>A properly written command line program will print a succinct error message that describes the exact error made by the caller rather than printing the usage statement and requiring the user to figure out what the mistake was.</p>
 </blockquote>
-
 <p>要はエラーメッセージ代わりに「Usage」を出すべきではないという話で、 Usage は <code>-h</code> などで明示的に呼ばれたときに限り、 stdout に流せと言っています。これ結構悩むところで、最近のコマンドツールで間違った使い方をしたときに Usage を出してくれるものって実際よくありますし（git もそうですね）、それはそれで親切な気もするんですよね。で、その場合の Usage はあくまでエラーメッセージの一環として表示していて、ユーザーが意図した結果ではないわけで、パイプやリダイレクトに流れてしまっても困るので、自分としては stderr に出すべきかなという思いがあります。 en.wikipedia に書かれた主張もよくわかるんですが、実際どうするべきなんでしょうね。ここもどこかに推奨が書かれてるなら読んでみたい。</p>
-
 <h2 id="posix">POSIX</h2>
-
 <p>他にも探してみますと、 Open Group のページに POSIX.1-2017 での定義が書かれています。</p>
-
 <p><a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_01">Utility Conventions</a></p>
-
 <p>ほぼ先程の NetBSD のコーディングスタイルと同一です。なのでやっぱりこれでよさそう。</p>
-
 <h2 id="docopt">docopt</h2>
-
 <p>一方で少し毛色の違う定義を書いているのが docopt です。</p>
-
 <p><a href="http://docopt.org/">docopt—language for description of command-line interfaces</a></p>
-
 <p>引数処理を1つずつ実装しなくとも、一定の定義に則った Usage の文章を書くと、それに基づいて引数処理を勝手にやってくれるという便利なライブラリです。いくつかの言語で実装がありますが、 Python で比較的よく見かける気が。</p>
-
-<p>では docopt の Usage 書式を見てみましょうとなるわけですが、これが &ldquo;docopt is based on conventions that have been used for decades in help messages and man pages for describing a program&rsquo;s interface.&rdquo; と書かれてはいるものの、若干見慣れない定義のように感じます。</p>
+<p>では docopt の Usage 書式を見てみましょうとなるわけですが、これが &ldquo;docopt is based on conventions that have been used for decades in help messages and man pages for describing a program's interface.&rdquo; と書かれてはいるものの、若干見慣れない定義のように感じます。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>Usage:
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  naval_fate ship new &lt;name&gt;...
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>  naval_fate ship &lt;name&gt; move &lt;x&gt; &lt;y&gt; <span style="color:#719e07">[</span>--speed<span style="color:#719e07">=</span>&lt;kn&gt;<span style="color:#719e07">]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  naval_fate ship shoot &lt;x&gt; &lt;y&gt;
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  naval_fate mine <span style="color:#719e07">(</span>set|remove<span style="color:#719e07">)</span> &lt;x&gt; &lt;y&gt; <span style="color:#719e07">[</span>--moored|--drifting<span style="color:#719e07">]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  naval_fate -h | --help
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>  naval_fate --version</code></pre></div>
-<p>先の NetBSD や POSIX の定義と異なるのは <code>&lt;&gt;</code> や <code>()</code> が使われているあたりで、前者は使う位置が決まっている引数、後者は必須引数を表すそうです。必須の引数は1行目の <code>new</code> のような括弧の使わないものがそうではないかという気もしますが、上記の4つ目の例のように排他かつ必須の場合など、少しパターンの異なる場合に、必須であることを明示したい意図で使うとかですが若干飲み込みづらくよくわかりませんでした。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>  naval_fate --version
+</code></pre></div><p>先の NetBSD や POSIX の定義と異なるのは <code>&lt;&gt;</code> や <code>()</code> が使われているあたりで、前者は使う位置が決まっている引数、後者は必須引数を表すそうです。必須の引数は1行目の <code>new</code> のような括弧の使わないものがそうではないかという気もしますが、上記の4つ目の例のように排他かつ必須の場合など、少しパターンの異なる場合に、必須であることを明示したい意図で使うとかですが若干飲み込みづらくよくわかりませんでした。</p>
 <p>位置引数を表す <code>&lt;&gt;</code> については見覚えがあります。上記の例だと1番最初のもの、 <code>ship &lt;name&gt; new</code> じゃなくて <code>ship new &lt;name&gt;</code> で位置が固定なのだと、要は <code>ship new</code> サブコマンドの引数として <code>name</code> を渡すってわけですよね。昨今このようにサブコマンドを繋げて使うタイプのコマンドが増えてきたので、それへの対応として生み出された書式と捉えられます。Terraform なんかがそうですけど、例えば以下の Usage で <code>&lt;&gt;</code> が使われていて、この場合はサブコマンドを先に置いて、オプションなどがある場合はサブコマンドの後に使えという意味になるわけです。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>Usage: terraform state &lt;subcommand&gt; <span style="color:#719e07">[</span>options<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>args<span style="color:#719e07">]</span></code></pre></div>
-<p>サブコマンドは「1つのことを上手くやる」という、『UNIXという考え方』に記載のあるUNIX哲学と反していないかと言う意見もありますし、従来 UNIX/Linux にビルトインで実装されてきたコマンドでは想定されていなかった範囲に思います。そこを補完する、現代的な多機能コマンドツールを実装する際に、 docopt の定義は有用かもしれません。</p>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>Usage: terraform state &lt;subcommand&gt; <span style="color:#719e07">[</span>options<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>args<span style="color:#719e07">]</span>
+</code></pre></div><p>サブコマンドは「1つのことを上手くやる」という、『UNIXという考え方』に記載のあるUNIX哲学と反していないかと言う意見もありますし、従来 UNIX/Linux にビルトインで実装されてきたコマンドでは想定されていなかった範囲に思います。そこを補完する、現代的な多機能コマンドツールを実装する際に、 docopt の定義は有用かもしれません。</p>
 <p>参考: <a href="http://www.songmu.jp/riji/entry/2017-08-27-subcommand.html">サブコマンドはUNIX哲学と相反していないのか | おそらくはそれさえも平凡な日々</a></p>
-
 <p>基本的には NetBSD や POSIX の定義に則り、サブコマンドが存在するようなリッチなコマンドを実装する場合には docopt を参考にしてみるとバランスが取れそうです。</p>
 
                 <br>

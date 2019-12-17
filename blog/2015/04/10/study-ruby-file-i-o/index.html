@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.640035%20%2b0900%20JST%20m%3d%2b0.349818608">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.640035%20%2b0900%20JST%20m%3d%2b0.349818608">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.640035%20%2b0900%20JST%20m%3d%2b0.349818608">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.503126068%20%2b0900%20JST%20m%3d%2b0.265648987">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.503126068%20%2b0900%20JST%20m%3d%2b0.265648987">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.503126068%20%2b0900%20JST%20m%3d%2b0.265648987">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.640035%20%2b0900%20JST%20m%3d%2b0.349818608">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.503126068%20%2b0900%20JST%20m%3d%2b0.265648987">
     
 
 
@@ -167,7 +167,6 @@
             </div>
             <div class="markdown">
                 <p>『パーフェクトRuby』p.196より。わりと苦手な分野。</p>
-
 <p>まずはファイルをひらく。<code>#open</code>して変数に格納してもいいし、ブロックを引き渡して処理させることもできる。後者の場合は処理が終わると自動でクローズしてくれるので、こっちの方が楽っぽい。<code>#read</code>はファイルの内容全体を読み込む一方、<code>#gets</code>を使うと1行ずつ読み込むことができる。あるいは<code>#each_line</code>や<code>#each_char</code>といったメソッドも。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>file <span style="color:#719e07">=</span> <span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open(<span style="color:#2aa198">&#39;example.txt&#39;</span>)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#b58900">p</span> file<span style="color:#719e07">.</span>read <span style="color:#586e75"># example.txtの内容を表示</span>
@@ -189,9 +188,8 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  f<span style="color:#719e07">.</span>each_line <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>line<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>    <span style="color:#b58900">p</span> line
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  <span style="color:#719e07">end</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span style="color:#719e07">end</span></code></pre></div>
-<p>書き込むときは<code>#open</code>の第二引数にファイルを開くモードを指定する。デフォルトは<code>'r'</code>、すなわち読み込みモードで、他は以下の通り。基本は<code>r</code>が読み込み、<code>w</code>が書き込み、<code>a</code>が追記で、<code>+</code>を付けると読み書き両用モードになる。また<code>b</code>を後置するとバイナリモードで開かれる。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span style="color:#719e07">end</span>
+</code></pre></div><p>書き込むときは<code>#open</code>の第二引数にファイルを開くモードを指定する。デフォルトは<code>'r'</code>、すなわち読み込みモードで、他は以下の通り。基本は<code>r</code>が読み込み、<code>w</code>が書き込み、<code>a</code>が追記で、<code>+</code>を付けると読み書き両用モードになる。また<code>b</code>を後置するとバイナリモードで開かれる。</p>
 <p>| r  | 読み込みモード         |
 | r+ | 読み書き両用モード（読み書き位置は先頭から）       |
 | w  | 上書き書き込みモード   |
@@ -200,21 +198,21 @@
 | a+ | 追記読み書き両用モード（読み込み位置は先頭から、書き込みは追記形式）  |</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span>, <span style="color:#2aa198">&#39;w&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  f<span style="color:#719e07">.</span>write <span style="color:#2aa198">&#39;hoge&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">end</span></code></pre></div>
-<p>もっと単純に<code>#write</code>メソッドだけでも書き込み可能。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>write <span style="color:#2aa198">&#39;example.txt&#39;</span>, <span style="color:#2aa198">&#39;fuga&#39;</span></code></pre></div>
-<p>先のファイルを開くモードの話の中で「読み込み位置は先頭から」という表現があったが、IOオブジェクトではファイル内の今どこを読み／書きしているかというアクセス位置が存在する。<code>#gets</code>では1行ずつ読み込みを行ったように、読み／書きを行うことでアクセス位置は進んでいく。先頭まで戻りたい場合は<code>#rewind</code>を使う。また<code>#seek</code>メソッドは第二引数に定数で指定した基準位置より、第一引数の整数分アクセス位置を移動させることができる。<code>#pos</code>は絶対的にアクセス位置を指定して動かせる。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">end</span>
+</code></pre></div><p>もっと単純に<code>#write</code>メソッドだけでも書き込み可能。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>write <span style="color:#2aa198">&#39;example.txt&#39;</span>, <span style="color:#2aa198">&#39;fuga&#39;</span>
+</code></pre></div><p>先のファイルを開くモードの話の中で「読み込み位置は先頭から」という表現があったが、IOオブジェクトではファイル内の今どこを読み／書きしているかというアクセス位置が存在する。<code>#gets</code>では1行ずつ読み込みを行ったように、読み／書きを行うことでアクセス位置は進んでいく。先頭まで戻りたい場合は<code>#rewind</code>を使う。また<code>#seek</code>メソッドは第二引数に定数で指定した基準位置より、第一引数の整数分アクセス位置を移動させることができる。<code>#pos</code>は絶対的にアクセス位置を指定して動かせる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  f<span style="color:#719e07">.</span>puts
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  f<span style="color:#719e07">.</span>rewind <span style="color:#586e75"># 先頭位置まで戻る</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  f<span style="color:#719e07">.</span>seek <span style="color:#2aa198">10</span> <span style="color:#586e75"># 先頭から10進む</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  f<span style="color:#719e07">.</span>seek <span style="color:#719e07">-</span><span style="color:#2aa198">10</span>, <span style="color:#cb4b16">IO</span><span style="color:#719e07">::</span><span style="color:#cb4b16">SEEK_END</span> <span style="color:#586e75"># 末尾（SEEK_END）から10戻った位置に移動</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  f<span style="color:#719e07">.</span>seek <span style="color:#2aa198">10</span> <span style="color:#719e07"></span><span style="color:#586e75"># 先頭から10進む</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  f<span style="color:#719e07">.</span>seek <span style="color:#719e07">-</span><span style="color:#2aa198">10</span><span style="color:#719e07"></span>, <span style="color:#cb4b16">IO</span><span style="color:#719e07">::</span><span style="color:#cb4b16">SEEK_END</span> <span style="color:#586e75"># 末尾（SEEK_END）から10戻った位置に移動</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>  f<span style="color:#719e07">.</span>pos <span style="color:#719e07">=</span> <span style="color:#2aa198">25</span> <span style="color:#586e75"># 先頭から25バイト目に移動</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>  f<span style="color:#719e07">.</span>pos <span style="color:#719e07">=</span> <span style="color:#2aa198">25</span> <span style="color:#719e07"></span><span style="color:#586e75"># 先頭から25バイト目に移動</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  f<span style="color:#719e07">.</span>pos <span style="color:#586e75"># =&gt; 25</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#719e07">end</span></code></pre></div>
-<p>文字のエンコーディングについては、「外部」と「内部」という概念を持つ。外部はファイルのエンコーディング情報であり、内部はRuby上で処理する際のエンコーディング情報。例えばEUC-JPのファイルをutf-8で変換して取り扱い、書き込みはEUC-JPで、といったことができる。エンコーディングの設定には<code>#set_encoding</code>メソッドを使う。引数を1つだけ取る場合は外部エンコーディングを設定し、2つ取る場合は第一引数が外部、第二引数が内部を設定する。あるいは<code>File#open</code>するときに、読み書きモードと一緒にエンコーディングも指定することができる。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#719e07">end</span>
+</code></pre></div><p>文字のエンコーディングについては、「外部」と「内部」という概念を持つ。外部はファイルのエンコーディング情報であり、内部はRuby上で処理する際のエンコーディング情報。例えばEUC-JPのファイルをutf-8で変換して取り扱い、書き込みはEUC-JPで、といったことができる。エンコーディングの設定には<code>#set_encoding</code>メソッドを使う。引数を1つだけ取る場合は外部エンコーディングを設定し、2つ取る場合は第一引数が外部、第二引数が内部を設定する。あるいは<code>File#open</code>するときに、読み書きモードと一緒にエンコーディングも指定することができる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  f<span style="color:#719e07">.</span>set_encoding(<span style="color:#2aa198">&#39;utf-8&#39;</span>) <span style="color:#586e75"># 外部エンコーディングをutf-8に設定</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
@@ -225,12 +223,12 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span>, <span style="color:#2aa198">&#39;r:utf-8:EUC-JP&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  <span style="color:#b58900">p</span> f<span style="color:#719e07">.</span>external_encoding <span style="color:#586e75"># =&gt; &#34;utf-8&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  <span style="color:#b58900">p</span> f<span style="color:#719e07">.</span>internal_encoding <span style="color:#586e75"># =&gt; &#34;EUC-JP&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#719e07">end</span></code></pre></div>
-<p>ファイルのロックには<code>#flock</code>メソッドを利用する。ロックのモードは<a href="http://docs.ruby-lang.org/ja/1.9.3/method/File/i/flock.html">ここに記載の定数</a>を使って指定するのだが、主に<code>File::LOCK_EX</code>が排他ロックであることを覚えとけばいいような気も。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#719e07">end</span>
+</code></pre></div><p>ファイルのロックには<code>#flock</code>メソッドを利用する。ロックのモードは<a href="http://docs.ruby-lang.org/ja/1.9.3/method/File/i/flock.html">ここに記載の定数</a>を使って指定するのだが、主に<code>File::LOCK_EX</code>が排他ロックであることを覚えとけばいいような気も。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span>, <span style="color:#2aa198">&#39;w&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  f<span style="color:#719e07">.</span>flock <span style="color:#cb4b16">File</span><span style="color:#719e07">::</span><span style="color:#cb4b16">LOCK_EX</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">end</span></code></pre></div>
-<p>その他、ファイル情報取得系のメソッドをつらつらと。これらはファイルオブジェクトから取得するだけではなく、<code>File.atime(filename)</code>の形で<code>File</code>クラスのクラスメソッドでも呼び出すことができる。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">end</span>
+</code></pre></div><p>その他、ファイル情報取得系のメソッドをつらつらと。これらはファイルオブジェクトから取得するだけではなく、<code>File.atime(filename)</code>の形で<code>File</code>クラスのクラスメソッドでも呼び出すことができる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>open <span style="color:#2aa198">&#39;example.txt&#39;</span> <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>f<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  f<span style="color:#719e07">.</span>atime <span style="color:#586e75"># 最終アクセス日時</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  f<span style="color:#719e07">.</span>ctime <span style="color:#586e75"># 最終変更日時</span>
@@ -250,8 +248,8 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  f<span style="color:#719e07">.</span>owned? <span style="color:#586e75"># =&gt; false (自身がファイル所有者か？)</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  f<span style="color:#719e07">.</span>gid <span style="color:#586e75"># ファイル所有者のGID</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  f<span style="color:#719e07">.</span>uid <span style="color:#586e75"># ファイル所有者のUID</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span><span style="color:#719e07">end</span></code></pre></div>
-<p>ファイル操作系。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span><span style="color:#719e07">end</span>
+</code></pre></div><p>ファイル操作系。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75"># ファイル名変更、ファイル移動</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>rename <span style="color:#2aa198">&#39;hoge&#39;</span>, <span style="color:#2aa198">&#39;fuga&#39;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>rename <span style="color:#2aa198">&#39;hoge&#39;</span>, <span style="color:#2aa198">&#39;dir/hoge&#39;</span>
@@ -266,34 +264,34 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>link <span style="color:#2aa198">&#39;target&#39;</span>, <span style="color:#2aa198">&#39;link&#39;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"># ファイルモード変更</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>chmod <span style="color:#2aa198">0600</span>, <span style="color:#2aa198">&#39;filename&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>chmod <span style="color:#2aa198">0600</span><span style="color:#719e07"></span>, <span style="color:#2aa198">&#39;filename&#39;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#586e75"># 所有者、グループの変更</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>chown <span style="color:#2aa198">100</span>, <span style="color:#2aa198">100</span>, <span style="color:#2aa198">&#39;filename&#39;</span></code></pre></div>
-<p>ファイルパスに関するもろもろ。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>chown <span style="color:#2aa198">100</span><span style="color:#719e07"></span>, <span style="color:#2aa198">100</span><span style="color:#719e07"></span>, <span style="color:#2aa198">&#39;filename&#39;</span>
+</code></pre></div><p>ファイルパスに関するもろもろ。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75"># ファイルのあるディレクトリパスの取得</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>dirname(<span style="color:#2aa198">&#34;etc/sample.txt&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/etc&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>dirname(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">etc/sample.txt</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/etc&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"># 第一引数に与えたファイルパスに対する、ファイル名の取得。第二引数でsuffix指定。</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>basename(<span style="color:#2aa198">&#34;etc/sample.txt&#34;</span>) <span style="color:#586e75"># =&gt; &#34;sample.txt&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>basename(<span style="color:#2aa198">&#34;etc/sample.txt&#34;</span>, <span style="color:#2aa198">&#34;.txt&#34;</span>) <span style="color:#586e75"># =&gt; &#34;sample&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>basename(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">etc/sample.txt</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;sample.txt&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>basename(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">etc/sample.txt</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">.txt</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;sample&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"># 拡張子の取得</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>extname(<span style="color:#2aa198">&#34;etc/sample.txt&#34;</span>) <span style="color:#586e75"># =&gt; &#34;.txt&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>extname(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">etc/sample.txt</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;.txt&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#586e75"># ファイルパスの連結（引数は可変長）</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>join(<span style="color:#2aa198">&#34;/usr/local&#34;</span>, <span style="color:#2aa198">&#34;bin/ruby&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/usr/local/bin/ruby&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>join(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">/usr/local</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">bin/ruby</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/usr/local/bin/ruby&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#586e75"># ファイルパスからdirnameとbasenameを取得し配列生成</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>split(<span style="color:#2aa198">&#34;/usr/local/bin/ruby&#34;</span>) <span style="color:#586e75"># =&gt; [&#34;/usr/local/bin&#34;, &#34;ruby&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>split(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">/usr/local/bin/ruby</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; [&#34;/usr/local/bin&#34;, &#34;ruby&#34;]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#586e75"># 絶対パスの展開</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>expand_path(<span style="color:#2aa198">&#34;~&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>expand_path(<span style="color:#2aa198">&#34;filename&#34;</span>, <span style="color:#2aa198">&#34;~&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju/filename&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>expand_path(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">~</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>expand_path(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">filename</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">~</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju/filename&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span><span style="color:#586e75"># absolute_pathでは~を展開しない</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>absolute_path(<span style="color:#2aa198">&#34;~&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju/~&#34;</span></code></pre></div>
-<p>Dirクラスも触れたいのだが、長くなるので一旦ここまで。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span><span style="color:#cb4b16">File</span><span style="color:#719e07">.</span>absolute_path(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">~</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;/home/chroju/~&#34;</span>
+</code></pre></div><p>Dirクラスも触れたいのだが、長くなるので一旦ここまで。</p>
 
                 <br>
                 

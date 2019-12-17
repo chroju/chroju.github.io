@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.712737%20%2b0900%20JST%20m%3d%2b0.422518769">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.712737%20%2b0900%20JST%20m%3d%2b0.422518769">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.712737%20%2b0900%20JST%20m%3d%2b0.422518769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.568745478%20%2b0900%20JST%20m%3d%2b0.331268497">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.568745478%20%2b0900%20JST%20m%3d%2b0.331268497">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.568745478%20%2b0900%20JST%20m%3d%2b0.331268497">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.712737%20%2b0900%20JST%20m%3d%2b0.422518769">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.568745478%20%2b0900%20JST%20m%3d%2b0.331268497">
     
 
 
@@ -166,30 +166,26 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあえず受けたら見事に落ちたんですけど、その後再受験申し込み期間あるの忘れてて棒に振るとかよくわからんことやりました。そのままなんとなーくやる気なくなってたけど、さすがにSilverクラスの知識はきちんと押さえるべきだろってことで、しばらく手元の『パーフェクトRuby』使って自分用チートシートっぽくまとめてみます。超基礎なので退屈な記事が続く予定。</p>
-
+                <p>去年末から今年のはじめにかけてRuby Silver/Goldの再受験無料キャンペーンってのやってて、おーこりゃちょうどいいわーと思って取りあえず受けたら見事に落ちたんですけど、その後再受験申し込み期間あるの忘れてて棒に振るとかよくわからんことやりました。そのままなんとなーくやる気なくなってたけど、さすがにSilverクラスの知識はきちんと押さえるべきだろってことで、しばらく手元の『パーフェクトRuby』使って自分用チートシートっぽくまとめてみます。超基礎なので退屈な記事が続く予定。</p>
 <p>今回は文法面で自分がつまずいたポイントまとめる。</p>
-
-<h2 id="変数のスコープ">変数のスコープ</h2>
-
+<h2 id="heading">変数のスコープ</h2>
 <p>ローカル変数、グローバル変数、インスタンス変数、グローバル変数がまず基本にある。それぞれ文字通りではあり、ローカル変数は最も局所的なスコープ、グローバルはどこからでも参照可能（あまり使わない？）、インスタンス変数は個々のインスタンスに属する変数、クラス変数はクラス間で共有される変数。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">def</span> <span style="color:#268bd2">display_local</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">def</span> <span style="color:#268bd2"></span><span style="color:#719e07"></span><span style="color:#268bd2">display_local</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  <span style="color:#b58900">puts</span> hoge
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">end</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#719e07">def</span> <span style="color:#268bd2">display_global</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#719e07">def</span> <span style="color:#268bd2"></span><span style="color:#719e07"></span><span style="color:#268bd2">display_global</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  <span style="color:#b58900">puts</span> $hoge
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">end</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>$hoge <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;Hello, world!&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>$hoge <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">Hello, world!</span><span style="color:#2aa198">&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>display_local <span style="color:#586e75"># =&gt; NameError: undefined local variable or method `hoge&#39; for main:Object</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>display_global <span style="color:#586e75"># =&gt; &#34;Hello, world!&#34;</span></code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">class</span> <span style="color:#268bd2">Hoge</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  @@class_var <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;Hello, world from class!&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>display_global <span style="color:#586e75"># =&gt; &#34;Hello, world!&#34;</span>
+</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">class</span> <span style="color:#268bd2">Hoge</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  @@class_var <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">Hello, world from class!</span><span style="color:#2aa198">&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  <span style="color:#719e07">def</span> <span style="color:#268bd2">display_class_var</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  <span style="color:#719e07">def</span> <span style="color:#268bd2"></span><span style="color:#719e07"></span><span style="color:#268bd2">display_class_var</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>    <span style="color:#b58900">puts</span> @@class_var
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  <span style="color:#719e07">end</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
@@ -202,65 +198,60 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>i<span style="color:#719e07">.</span>display_class_var <span style="color:#586e75"># =&gt; &#34;Hello, world from class!&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>j<span style="color:#719e07">.</span>display_class_var <span style="color:#586e75"># =&gt; &#34;Hello, world from class!&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>i<span style="color:#719e07">.</span>ins_var <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>j<span style="color:#719e07">.</span>ins_var <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>i<span style="color:#719e07">.</span>ins_var <span style="color:#586e75"># =&gt; 1</span></code></pre></div>
-<p>しかし改めてattr_accessorというのは便利ですね。</p>
-
-<p>問題はローカル変数とブロック、メソッドとの関係で、わりと理解できてなかった。やりがちだけど、メソッドの中からメソッド外のローカル変数は参照できない。一方でブロックの中からブロック外のローカル変数は<strong>参照できる。</strong>一方でブロック内のみで宣言されている変数は、ブロックローカル変数扱いになり外から参照できない。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>hoge <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;hoge&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#719e07"></span>j<span style="color:#719e07">.</span>ins_var <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#719e07"></span>i<span style="color:#719e07">.</span>ins_var <span style="color:#586e75"># =&gt; 1</span>
+</code></pre></div><p>しかし改めてattr_accessorというのは便利ですね。</p>
+<p>問題はローカル変数とブロック、メソッドとの関係で、わりと理解できてなかった。やりがちだけど、メソッドの中からメソッド外のローカル変数は参照できない。一方でブロックの中からブロック外のローカル変数は**参照できる。**一方でブロック内のみで宣言されている変数は、ブロックローカル変数扱いになり外から参照できない。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>hoge <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">def</span> <span style="color:#268bd2">hello_hoge</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">def</span> <span style="color:#268bd2"></span><span style="color:#719e07"></span><span style="color:#268bd2">hello_hoge</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  <span style="color:#b58900">puts</span> hoge
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#719e07">end</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>hello_hoge <span style="color:#586e75"># =&gt; NameError: undefined local variable or method `hoge&#39; for main:Object</span></code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>i <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>hello_hoge <span style="color:#586e75"># =&gt; NameError: undefined local variable or method `hoge&#39; for main:Object</span>
+</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>i <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#2aa198">3</span><span style="color:#719e07">.</span>times <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>j<span style="color:#719e07">|</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07"></span><span style="color:#2aa198">3</span><span style="color:#719e07"></span><span style="color:#719e07">.</span>times <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>j<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  i <span style="color:#719e07">=</span> i <span style="color:#719e07">+</span> j
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  block_local <span style="color:#719e07">=</span> <span style="color:#2aa198">&#39;in block&#39;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span style="color:#719e07">end</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span><span style="color:#b58900">puts</span> i <span style="color:#586e75"># =&gt; 4</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#b58900">puts</span> block_local <span style="color:#586e75"># =&gt; NameError</span></code></pre></div>
-<h2 id="rangeクラス">Rangeクラス</h2>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#b58900">puts</span> block_local <span style="color:#586e75"># =&gt; NameError</span>
+</code></pre></div><h2 id="range">Rangeクラス</h2>
 <p>Ruby Silver受けるまで、恥ずかしながら1..10みたいのがクラスだということを知りませんでした。Rangeクラスってのがあるのね。。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>range1 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>range2 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span><span style="color:#719e07">...</span><span style="color:#2aa198">4</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>range1<span style="color:#719e07">.</span>class <span style="color:#586e75"># =&gt; Range</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>range1 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#719e07"></span>range2 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">...</span><span style="color:#2aa198">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07"></span>range1<span style="color:#719e07">.</span>class <span style="color:#586e75"># =&gt; Range</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>range1<span style="color:#719e07">.</span>each <span style="color:#719e07">do</span> <span style="color:#719e07">|</span>i<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  <span style="color:#b58900">puts</span> i
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; 1,2,3,4</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>range1<span style="color:#719e07">.</span>include?(<span style="color:#2aa198">4</span>) <span style="color:#586e75"># =&gt; true</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>range2<span style="color:#719e07">.</span>include?(<span style="color:#2aa198">4</span>) <span style="color:#586e75"># =&gt; false</span></code></pre></div>
-<h2 id="三項演算子">三項演算子</h2>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>range1<span style="color:#719e07">.</span>include?(<span style="color:#2aa198">4</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>range2<span style="color:#719e07">.</span>include?(<span style="color:#2aa198">4</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; false</span>
+</code></pre></div><h2 id="heading-1">三項演算子</h2>
 <p>苦手。ついでに後置if/unlessもよく使うので頭に置いとく。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#2aa198">0</span><span style="color:#719e07">.</span>zero? ? <span style="color:#2aa198">&#39;0です&#39;</span> : <span style="color:#2aa198">&#39;0じゃないです&#39;</span> <span style="color:#586e75"># =&gt; &#39;0です&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#b58900">puts</span> <span style="color:#2aa198">&#39;0です&#39;</span> <span style="color:#719e07">if</span> <span style="color:#2aa198">0</span><span style="color:#719e07">.</span>zero? <span style="color:#586e75"># =&gt; &#39;0です&#39;</span></code></pre></div>
-<h2 id="rescue">rescue</h2>
-
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">.</span>zero? ? <span style="color:#2aa198">&#39;0です&#39;</span> : <span style="color:#2aa198">&#39;0じゃないです&#39;</span> <span style="color:#586e75"># =&gt; &#39;0です&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#b58900">puts</span> <span style="color:#2aa198">&#39;0です&#39;</span> <span style="color:#719e07">if</span> <span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">.</span>zero? <span style="color:#586e75"># =&gt; &#39;0です&#39;</span>
+</code></pre></div><h2 id="rescue">rescue</h2>
 <p>rescue節を複数書いた場合、最初に該当したrescue節で捕捉され、その後のrescue節は捨象される。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">begin</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  <span style="color:#719e07">raise</span> <span style="color:#2aa198">&#39;StandardError&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">LoadError</span> <span style="color:#719e07">=&gt;</span> e
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">LoadError</span> <span style="color:#719e07">=</span><span style="color:#719e07">&gt;</span> e
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  <span style="color:#b58900">puts</span> <span style="color:#2aa198">&#39;これはloaderrorです&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">StandardError</span> <span style="color:#719e07">=&gt;</span> e
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">StandardError</span> <span style="color:#719e07">=</span><span style="color:#719e07">&gt;</span> e
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  <span style="color:#b58900">puts</span> <span style="color:#2aa198">&#39;これはstandarderrorです&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">Exception</span> <span style="color:#719e07">=&gt;</span> e
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#719e07">rescue</span> <span style="color:#cb4b16">Exception</span> <span style="color:#719e07">=</span><span style="color:#719e07">&gt;</span> e
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>  <span style="color:#b58900">puts</span> <span style="color:#2aa198">&#39;これはなにかエラーです&#39;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; &#39;これはstandarderrorです&#39;</span></code></pre></div>
-<h2 id="今後のtodo">今後のtodo</h2>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#719e07">end</span> <span style="color:#586e75"># =&gt; &#39;これはstandarderrorです&#39;</span>
+</code></pre></div><h2 id="todo">今後のtodo</h2>
 <ul>
 <li>Hashの扱い（というかEnumerable）</li>
 <li>Time/Date関連の扱い</li>
 <li>Fileの扱い</li>
 <li>組み込みクラスの言語仕様再確認（特に破壊的非破壊的のあたり）</li>
 </ul>
-
 <p>まーぶっっちゃけ全部だな。。。。</p>
 
                 <br>

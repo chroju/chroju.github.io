@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.718189%20%2b0900%20JST%20m%3d%2b0.427970494">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.718189%20%2b0900%20JST%20m%3d%2b0.427970494">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.718189%20%2b0900%20JST%20m%3d%2b0.427970494">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.587646436%20%2b0900%20JST%20m%3d%2b0.350169455">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.587646436%20%2b0900%20JST%20m%3d%2b0.350169455">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.587646436%20%2b0900%20JST%20m%3d%2b0.350169455">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.718189%20%2b0900%20JST%20m%3d%2b0.427970494">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.587646436%20%2b0900%20JST%20m%3d%2b0.350169455">
     
 
 
@@ -166,321 +166,197 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブートを試みることに。デュアルじゃなくてOS丸ごと入れ替えたら？という話もありそうだが、仕事で使うのでWindowsを潰せない。かと言って仮想マシンだとこのPCのスペックでは心許ない。。ってことでデュアル。</p>
-
+                <p>VAIO Proにcygwin入れたりして頑張っていたのだが、そろそろしんどくなってきたので、まともに開発に使える環境作るかーってことでデュアルブートを試みることに。デュアルじゃなくてOS丸ごと入れ替えたら？という話もありそうだが、仕事で使うのでWindowsを潰せない。かと言って仮想マシンだとこのPCのスペックでは心許ない。。ってことでデュアル。</p>
 <p>ではディストリは何を使うか？だが、以前Ubuntuを使ったデュアルブートは構築した経験があるし、GUIでポチポチインストールするんじゃあんまり勉強にはならなさそうだなーということで、思い切ってArch Linuxを選んだ。ミニマルを是とするディストリだが、ミニマルどころか最初はsudoすら入っていないという徹底っぷり。使うものだけ入れろ！というポリシーは大変に共感できるものではあるが、それは当然難易度の高さと引き換えなわけで。。</p>
-
-<p>さすがにぶっつけ本番は怖すぎるので、まずはiMac(OS X Marverics)上のVirtualboxでデスクトップ環境が立ち上がるとこまでやってみた。難易度が確かに高いOSではあるが、<a href="https://wiki.archlinux.org/">Wiki</a>が非常に充実しているので、案外迷うこともないとは思う。逆に言えば、ここのInstallation GuideとBeginner&rsquo;s Guideにきちんと目を通した上でやるべき。こんなブログ記事だけに頼らずに。</p>
-
+<p>さすがにぶっつけ本番は怖すぎるので、まずはiMac(OS X Marverics)上のVirtualboxでデスクトップ環境が立ち上がるとこまでやってみた。難易度が確かに高いOSではあるが、<a href="https://wiki.archlinux.org/">Wiki</a>が非常に充実しているので、案外迷うこともないとは思う。逆に言えば、ここのInstallation GuideとBeginner's Guideにきちんと目を通した上でやるべき。こんなブログ記事だけに頼らずに。</p>
 <p>なお、えっらい長い記事になった模様。</p>
-
-<h1 id="事前チェック">事前チェック</h1>
-
+<h1 id="heading">事前チェック</h1>
 <p>VAIO ProがUEFI環境なんで、今回の練習でもUEFIを用いることにした。Virtualboxの場合は仮想マシンの設定から「UEFI」を有効化できる。他にも初期設定ではインストールメディアをつないだり、外部メディアからの起動準備を優先させたりして、準備完了。</p>
-
 <p>起動するといきなりシェルが現れる。ここから全部自力でコマンド打って入れてけというストイックさ。ひとまずはUEFIで起動しているか確認するため、UEFI変数を表示。</p>
-
 <pre><code># mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 # efivar -l
-</code></pre>
-
-<p>続いてキーボードマッピング変更。 jp106とかusとか適宜。やらなくてもインストールぐらいはなんとかなるかもしれんが、viでコロンの位置違ったりすると不便。地味に。</p>
-
+</code></pre><p>続いてキーボードマッピング変更。 jp106とかusとか適宜。やらなくてもインストールぐらいはなんとかなるかもしれんが、viでコロンの位置違ったりすると不便。地味に。</p>
 <pre><code># loadkeys hoge
-</code></pre>
-
-<p>事前チェックはこれぐらい。</p>
-
-<h1 id="パーティション">パーティション</h1>
-
+</code></pre><p>事前チェックはこれぐらい。</p>
+<h1 id="heading-1">パーティション</h1>
 <p>続いてパーティション分割。まずは<code>fdisk -l</code>によりハードディスクのデバイス名を確認し、そのデバイス名に対して<code>cgdisk</code>コマンドを実行。今回はGPTを用いるので<code>cgdisk</code>だが、MBRなら<code>cfdisk</code>でよい。あるいは<code>gdisk</code>や<code>fdisk</code>もあるけど、やりづらいので自分はcを頭に付ける。</p>
-
 <p>なおMBRとGPTの選択に関してはwiki内に記述がある。</p>
-
-<blockquote>ブートローダに GRUB Legacy を使う場合、MBR を使うべきです。
-古い BIOS を使う Windows (32ビット、64ビット両方) とのデュアルブートをするなら、MBR を使うべきです。
-BIOS の代わりに UEFI を使う64ビットの Windows とデュアルブートをするなら、GPT を使うべきです。
-[https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E)](https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E))</blockquote>
-
+<!-- raw HTML omitted -->
 <p>分け方はわりと適当。swapはまぁ、なくてもいいかなと。</p>
-
 <ul>
-<li><p>ESP(EFI System Partition)用に512MB</p></li>
-
-<li><p>タイプコードはef00</p></li>
-
-<li><p>FAT32でフォーマットする
-(<a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware<em>Interface</em>(%E6%97%A5%E6%9C%AC%E8%AA%9E))</a>)</p></li>
-
-<li><p>デュアルブートの場合はすでにWindows側で作られているので要らないはず。</p></li>
-
-<li><p>/bootに200MBぐらい</p></li>
-
-<li><p>残り全部が/。</p></li>
+<li>
+<p>ESP(EFI System Partition)用に512MB</p>
+</li>
+<li>
+<p>タイプコードはef00</p>
+</li>
+<li>
+<p>FAT32でフォーマットする
+([<a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E))%5D(https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E))](https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)</a>))</p>
+</li>
+<li>
+<p>デュアルブートの場合はすでにWindows側で作られているので要らないはず。</p>
+</li>
+<li>
+<p>/bootに200MBぐらい</p>
+</li>
+<li>
+<p>残り全部が/。</p>
+</li>
 </ul>
-
-<h1 id="フォーマット-マウント">フォーマット、マウント</h1>
-
+<h1 id="heading-2">フォーマット、マウント</h1>
 <p>切り分けが終わったらそれぞれ<code>mkfs</code>コマンド使ってフォーマットする。基本的にはext4でフォーマットするが、ESP用の領域はさっき書いた通りFAT32でフォーマットしておく必要がある。</p>
-
 <ul>
 <li><code>mkfs.ext4 /dev/sda1</code>でフォーマット</li>
 <li>FAT32の場合は<code>mkfs.vfat -F32</code></li>
 <li>-vオプションで詳細表示、-cで不良ブロックのチェック</li>
 <li>Windowsデュアルブートの場合、WinのEPSがある領域を/bootに指定する</li>
 </ul>
-
 <p>そしてマウント。こんな感じで。</p>
-
 <pre><code># mount /dev/sda1 /mnt
-</code></pre>
-
-<p>なお、<a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)#EFI_System_Partition">EFISTUBの場合はESPと/mnt/bootを兼ねさせることも可能</a>らしいいのだが、EFISTUBってなに。。。？　とりあえずgrub使う場合にEFISTUBのことは考えなくていいらしいので一旦無視した。</p>
-
+</code></pre><p>なお、<a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface_(%E6%97%A5%E6%9C%AC%E8%AA%9E)#EFI_System_Partition">EFISTUBの場合はESPと/mnt/bootを兼ねさせることも可能</a>らしいいのだが、EFISTUBってなに。。。？　とりあえずgrub使う場合にEFISTUBのことは考えなくていいらしいので一旦無視した。</p>
 <p>マウントが終わったら<code>lsblk -f</code>でパーティションレイアウトの確認をしておく。念のため。</p>
-
-<h1 id="インストール">インストール</h1>
-
+<h1 id="heading-3">インストール</h1>
 <p>いよいよインストールである。本来ならその前にインターネット接続の設定が必要だが、Virtualboxの場合は特に何もせずつながってしまったので何もしていない。システムファイルのインストールでは、<code>/etc/pacman.d/mirrorlist</code>の上から優先的にミラーサイトが使われるので、好みのがあるなら予め編集して並び替えておく。基本的には日本（筑波大だが）を一番上にしとけば良いかと。</p>
-
 <pre><code># pacstrap /mnt base base-devel
-</code></pre>
-
-<p>vimとかgrubとか必要なものがあれば、このコマンドの後にスペース空けて続けることで一緒に落とせる。この後の作業をある程度楽にできるかなということで、自分はvimとbashを、あとsudo（このディストリsudoすら入ってない！！）を落としておいた。</p>
-
+</code></pre><p>vimとかgrubとか必要なものがあれば、このコマンドの後にスペース空けて続けることで一緒に落とせる。この後の作業をある程度楽にできるかなということで、自分はvimとbashを、あとsudo（このディストリsudoすら入ってない！！）を落としておいた。</p>
 <p>インストールがつつがなく終わったら、fstabを生成。</p>
-
 <pre><code># genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
-</code></pre>
-
-<p>そしてchroot。</p>
-
+</code></pre><p>そしてchroot。</p>
 <pre><code># arch-chroot /mnt /bin/bash
-</code></pre>
-
-<h1 id="インストール後の処理">インストール後の処理</h1>
-
+</code></pre><h1 id="heading-4">インストール後の処理</h1>
 <p>ここからインストール後の諸設定をば。</p>
-
-<h3 id="localeの変更">localeの変更</h3>
-
+<h3 id="locale">localeの変更</h3>
 <pre><code># vim /etc/locale.gen
-</code></pre>
-
-<p>使う言語をコメント解除。基本はen_USとja_JPあたりでOKのはず。で、以下を打つ。</p>
-
+</code></pre><p>使う言語をコメント解除。基本はen_USとja_JPあたりでOKのはず。で、以下を打つ。</p>
 <pre><code># locale-gen
-</code></pre>
-
-<pre><code># vim /etc/locale.conf`
-</code></pre>
-
-<p>さっきコメント解除した言語をLANG=で指定。LANG=ja_jp.UTF-8とか。ただしGUI環境入れずに日本語使おうとすると化けるので、この時点ではen_usが無難。</p>
-
+</code></pre><pre><code># vim /etc/locale.conf`
+</code></pre><p>さっきコメント解除した言語をLANG=で指定。LANG=ja_jp.UTF-8とか。ただしGUI環境入れずに日本語使おうとすると化けるので、この時点ではen_usが無難。</p>
 <h3 id="timezone">Timezone</h3>
-
 <p>/etc/localtimeを置き換える。</p>
-
 <pre><code># ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-</code></pre>
-
-<h3 id="デフォルトのコンソールフォントとキーマップ変更">デフォルトのコンソールフォントとキーマップ変更</h3>
-
+</code></pre><h3 id="heading-5">デフォルトのコンソールフォントとキーマップ変更</h3>
 <p>/etc/vconsole.confを編集して、デフォルトのキーマップとコンソールフォントを設定する。</p>
-
 <pre><code># vim /etc/vconsole.conf
-</code></pre>
-
-<pre><code>KEYMAP=jp106
+</code></pre><pre><code>KEYMAP=jp106
 FONT=Lat2-Terminus16
-</code></pre>
-
-<h3 id="ハードウェアクロック">ハードウェアクロック</h3>
-
+</code></pre><h3 id="heading-6">ハードウェアクロック</h3>
 <p>自分はよく知らんかったのだが、ハードウェアクロックとシステムクロックってのがあるらしい。で、ハードウェアクロックにUTCを設定しておく。</p>
-
 <pre><code># hwclock --systohc --utc
-</code></pre>
-
-<p>参考：<a href="http://www.atmarkit.co.jp/ait/articles/0812/26/news120.html">実践でも役立つLPICドリル（8）：Linux時刻管理の仕組みと設定 (<sup>1</sup>&frasl;<sub>4</sub>) - ＠IT</a></p>
-
+</code></pre><p>参考：<a href="http://www.atmarkit.co.jp/ait/articles/0812/26/news120.html">実践でも役立つLPICドリル（8）：Linux時刻管理の仕組みと設定 (1/4) - ＠IT</a></p>
 <h3 id="hostname">hostname</h3>
-
 <pre><code># echo hostname &gt; /etc/hostname
-</code></pre>
-
-<h3 id="rootパスワード変更">rootパスワード変更</h3>
-
+</code></pre><h3 id="root">rootパスワード変更</h3>
 <pre><code># passwd
-</code></pre>
-
-<h1 id="ブートローダー設定">ブートローダー設定</h1>
-
+</code></pre><h1 id="heading-7">ブートローダー設定</h1>
 <p>Gummibootとか使ってみようかなとも思ったけど、初めてだし一般的によく使われているであろう、GRUB2を使うことに。どうでもいいけどパッケージマネージャの名前が「pacman」って面白いでふね。オプションなしで打つとAAも出てくるけど、権利関係とかどうしてんだろ。。</p>
-
 <pre><code># pacman -S grub efibootmgr
 # mkdir -p /boot/efi/EFI
 # grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-direcotory=/boot/efi/EFI --bootloader-id=grub --recheck
-</code></pre>
-
-<p>GRUB設定ファイルの自動生成。当たり前だがここで指定のディレクトリを誤ると立ち上がらない。自分は何度かハマったんだが、<code>grub-install</code>したときに<code>--boot-direcotory</code>オプションで指定した場所で良い、はず。</p>
-
+</code></pre><p>GRUB設定ファイルの自動生成。当たり前だがここで指定のディレクトリを誤ると立ち上がらない。自分は何度かハマったんだが、<code>grub-install</code>したときに<code>--boot-direcotory</code>オプションで指定した場所で良い、はず。</p>
 <pre><code># grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
-</code></pre>
-
-<p>そして再起動！</p>
-
+</code></pre><p>そして再起動！</p>
 <pre><code># exit
 # umount -R /mnt
 # reboot
-</code></pre>
-
-<h1 id="デスクトップ環境">デスクトップ環境</h1>
-
+</code></pre><h1 id="heading-8">デスクトップ環境</h1>
 <p>ここからはデスクトップ環境を構築していく。要らないならすっ飛ばしでも。</p>
-
 <p>まずは作業用のユーザーを作成。</p>
-
 <pre><code># useradd -m hoge
 # passwd hoge
 # visudo  #sudo実行可能にしておく
-</code></pre>
-
-<p>続いてVirtualBox特有のものとして、ゲストユーティリティをpacmanを使って入れる。普通ならVirtualbox側のメニューから仮想CD-ROMをマウントさせるところだが、Arch Linuxの場合はこの方法だとインストールができない（エラーが表示される）。</p>
-
+</code></pre><p>続いてVirtualBox特有のものとして、ゲストユーティリティをpacmanを使って入れる。普通ならVirtualbox側のメニューから仮想CD-ROMをマウントさせるところだが、Arch Linuxの場合はこの方法だとインストールができない（エラーが表示される）。</p>
 <pre><code>$ sudo pacman -S virtualbox-guest-utils
 $ sudo vim /etc/modules-load.d/virtualbox.conf
-</code></pre>
-
-<p>virtualbox.confを開いたら、下記の通り書き入れておく。これでVirtualbox関連のモジュールが起動した時に自動でロードされるようになる。</p>
-
+</code></pre><p>virtualbox.confを開いたら、下記の通り書き入れておく。これでVirtualbox関連のモジュールが起動した時に自動でロードされるようになる。</p>
 <pre><code>vboxguest
 vboxsf
 vboxvideo
-</code></pre>
-
-<p>そしてデスクトップ環境に必要なもろもろのインストール。これまでGNOMEぐらいしか使ったことがなくてよくわかってなかったのだが、LinuxのGUI環境を提供するツールは大きくこんな感じで分けられる、みたい。</p>
-
+</code></pre><p>そしてデスクトップ環境に必要なもろもろのインストール。これまでGNOMEぐらいしか使ったことがなくてよくわかってなかったのだが、LinuxのGUI環境を提供するツールは大きくこんな感じで分けられる、みたい。</p>
 <ul>
-<li><p>ディスプレイマネージャー</p></li>
-
-<li><p>グラフィカルなログイン環境を提供する</p></li>
-
-<li><p>Slim、GDM、KDMなど</p></li>
-
-<li><p>ウィンドウマネージャー</p></li>
-
-<li><p>ウィンドウ周りの機能を提供する</p></li>
-
-<li><p>スタック型＝Windowsっぽいウィンドウを重ねるタイプ（Xfwmなど）</p></li>
-
-<li><p>タイル型＝ウィンドウがオーバーラップしないタイプ（Bspwmなど）</p></li>
-
-<li><p>動的＝どちらもいける（awesomeなど）</p></li>
-
-<li><p>デスクトップ環境</p></li>
-
-<li><p>様々なツールを一括提供するGUIキット</p></li>
-
-<li><p>GNOME、KDE、Xfceなど</p></li>
+<li>
+<p>ディスプレイマネージャー</p>
+</li>
+<li>
+<p>グラフィカルなログイン環境を提供する</p>
+</li>
+<li>
+<p>Slim、GDM、KDMなど</p>
+</li>
+<li>
+<p>ウィンドウマネージャー</p>
+</li>
+<li>
+<p>ウィンドウ周りの機能を提供する</p>
+</li>
+<li>
+<p>スタック型＝Windowsっぽいウィンドウを重ねるタイプ（Xfwmなど）</p>
+</li>
+<li>
+<p>タイル型＝ウィンドウがオーバーラップしないタイプ（Bspwmなど）</p>
+</li>
+<li>
+<p>動的＝どちらもいける（awesomeなど）</p>
+</li>
+<li>
+<p>デスクトップ環境</p>
+</li>
+<li>
+<p>様々なツールを一括提供するGUIキット</p>
+</li>
+<li>
+<p>GNOME、KDE、Xfceなど</p>
+</li>
 </ul>
-
 <p>したがってGNOMEあたりを入れてしまうのが一番簡単なようなのだが、ここまで来たらきちんとやっておきたいし、せっかく最小ディストリなのに重いツールを入れてしまうのももったいないので、Slimとawesomeを使うことにした。</p>
-
 <pre><code>$ sudo pacman -S xorg-server xorg-server-utils xorg-xinit xterm
 $ sudo pacman -S slim archlinux-themes-slim slim-themes
 $ sudo pacman -S awesome
-</code></pre>
-
-<p>X Window Systemの起動には<code>startx</code>コマンドを打つことになるが、このときのシーケンスとしては、まずxorg-xinitやSLiMなどでXを起動 =&gt; .xinitrcを見てウィンドウマネージャー等を起動という順序になる。.xinitrcに対して、どのウィンドウマネージャーを使うのかを教えてやらなくてはならない。またVirtuarlBox関連のドライバを同時に読みこませておかないとうまく起動しない。</p>
-
+</code></pre><p>X Window Systemの起動には<code>startx</code>コマンドを打つことになるが、このときのシーケンスとしては、まずxorg-xinitやSLiMなどでXを起動 =&gt; .xinitrcを見てウィンドウマネージャー等を起動という順序になる。.xinitrcに対して、どのウィンドウマネージャーを使うのかを教えてやらなくてはならない。またVirtuarlBox関連のドライバを同時に読みこませておかないとうまく起動しない。</p>
 <pre><code>$ cp /etc/skel/.xinitrc ~/
 $ vim ~/.xinitrc
-</code></pre>
-
-<pre><code>/usr/bin/VBoxClient-all
+</code></pre><pre><code>/usr/bin/VBoxClient-all
 exec awesome
-</code></pre>
-
-<p>そして<code>startx</code>を使えばawesomeが立ち上がるはず。OSを起動した時に自動でGUIを立ち上げるには、slim.confを編集した上で、<code>systemctl</code>コマンドを使って有効化しておく。</p>
-
+</code></pre><p>そして<code>startx</code>を使えばawesomeが立ち上がるはず。OSを起動した時に自動でGUIを立ち上げるには、slim.confを編集した上で、<code>systemctl</code>コマンドを使って有効化しておく。</p>
 <pre><code>$ sudo vim /etc/slim.conf
-</code></pre>
-
-<pre><code>daemon yes
+</code></pre><pre><code>daemon yes
 current_theme archlinux-simplyblack
-</code></pre>
-
-<pre><code>$ systemctl enable slim.service
-</code></pre>
-
-<p>ためしに<code>reboot</code>してみて、ログイン画面が表示されればOK。</p>
-
-<h1 id="日本語環境">日本語環境</h1>
-
+</code></pre><pre><code>$ systemctl enable slim.service
+</code></pre><p>ためしに<code>reboot</code>してみて、ログイン画面が表示されればOK。</p>
+<h1 id="heading-9">日本語環境</h1>
 <p>GUIを使えるようにしたら日本語環境も整えたい。で、まずまずは<code>/etc/locale.conf</code>を編集し、さっきやめておいた言語設定の変更を。。他にやることとしてはフォントの導入、IMEの導入、キーボードの設定。まずフォントからだが、pacmanではなくyaourtを使って入れることになる。</p>
-
-<h3 id="yaourt導入">yaourt導入</h3>
-
+<h3 id="yaourt">yaourt導入</h3>
 <p>pacmanにレポジトリを追加。</p>
-
 <pre><code>$ vim /etc/pacman.conf
-</code></pre>
-
-<pre><code>[archlinuxfr]
+</code></pre><pre><code>[archlinuxfr]
 SigLevel = Never
 Server = http://repo.archlinux.fr/$arch
-</code></pre>
-
-<p>そしてyaourtを導入。</p>
-
+</code></pre><p>そしてyaourtを導入。</p>
 <pre><code>$ pacman -Sy yaourt
-</code></pre>
-
-<h3 id="フォント導入">フォント導入</h3>
-
+</code></pre><h3 id="heading-10">フォント導入</h3>
 <p>フォントの導入。yaourtを使ってインストールすると、そのままデフォルトとして設定されるみたい。複数入れておいて選択したい時とかどーすんの？って思うけど調べてない。とりあえず無難にRictyを。。</p>
-
 <pre><code>$ yaourt -S ttf-ricty
-</code></pre>
-
-<h3 id="ime導入">IME導入</h3>
-
+</code></pre><h3 id="ime">IME導入</h3>
 <p>ibus-mozcを使ってる例が多かったのでそうします。さっきと同じくpacman.confにレポジトリを追加した上でインストール。</p>
-
 <pre><code>[pnsft-pur]
 SigLevel = Optional TrustAll
 Server = http://downloads.sourceforge.net/project/pnsft-aur/pur/$arch
-</code></pre>
-
-<pre><code>$ pacman -Sy mozc ibus-mozc
-</code></pre>
-
-<p>そしてibusをセットアップする。下記コマンドを実行するとグラフィカルな設定用ウィザードが表示されるので、ホットキーを使用可能とし、mozcをインプットメソッドとして指定する。</p>
-
+</code></pre><pre><code>$ pacman -Sy mozc ibus-mozc
+</code></pre><p>そしてibusをセットアップする。下記コマンドを実行するとグラフィカルな設定用ウィザードが表示されるので、ホットキーを使用可能とし、mozcをインプットメソッドとして指定する。</p>
 <pre><code>$ ibus-setup
-</code></pre>
-
-<p>ibusを起動時に自動で上げるための設定を入れる。.xinitrcを立ち上げて、<code>exec awesome</code>よりも前に以下のように書き入れる。</p>
-
+</code></pre><p>ibusを起動時に自動で上げるための設定を入れる。.xinitrcを立ち上げて、<code>exec awesome</code>よりも前に以下のように書き入れる。</p>
 <pre><code>export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 ibus-daemon -drx
-</code></pre>
-
-<p>今のところ設定したのはここまで。残ってる問題としてはキーマップの設定がおかしい。vconsole.confはコンソール上でのキーボード設定だから、たぶんawesome上では別の設定をしなくてはいけないはず。探さねば。</p>
-
-<h1 id="参考">参考</h1>
-
+</code></pre><p>今のところ設定したのはここまで。残ってる問題としてはキーマップの設定がおかしい。vconsole.confはコンソール上でのキーボード設定だから、たぶんawesome上では別の設定をしなくてはいけないはず。探さねば。</p>
+<h1 id="heading-11">参考</h1>
 <ul>
 <li><a href="http://qiita.com/co-me@github/items/12f21126c5117e07decd">Arch Linux インストールから awesome 導入まで - Qiita</a></li>
-<li><a href="http://opamp.hatenablog.jp/entry/2013/10/30/233548">UEFIでArchLinuxをインストールする - opamp_sando&rsquo;s blog</a></li>
+<li><a href="http://opamp.hatenablog.jp/entry/2013/10/30/233548">UEFIでArchLinuxをインストールする - opamp_sando's blog</a></li>
 <li><a href="http://masawada.hatenablog.jp/entry/2013/06/10/225748">Arch Linux インストールメモ 3 - あんパン</a></li>
 <li><a href="http://qiita.com/xorphitus/items/3711895eb5d9f946c782">Arch Linux快適デスクトップ環境の構築 - Qiita</a></li>
-<li><a href="http://opamp.hatenablog.jp/entry/2013/08/13/201544">ArchLinuxでibus+mozcな環境を構築 - opamp_sando&rsquo;s blog</a></li>
+<li><a href="http://opamp.hatenablog.jp/entry/2013/08/13/201544">ArchLinuxでibus+mozcな環境を構築 - opamp_sando's blog</a></li>
 </ul>
 
                 <br>

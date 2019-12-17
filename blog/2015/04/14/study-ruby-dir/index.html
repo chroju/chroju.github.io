@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.616125%20%2b0900%20JST%20m%3d%2b0.325909333">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.616125%20%2b0900%20JST%20m%3d%2b0.325909333">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.616125%20%2b0900%20JST%20m%3d%2b0.325909333">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.497083077%20%2b0900%20JST%20m%3d%2b0.259606096">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.497083077%20%2b0900%20JST%20m%3d%2b0.259606096">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.497083077%20%2b0900%20JST%20m%3d%2b0.259606096">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.616125%20%2b0900%20JST%20m%3d%2b0.325909333">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.497083077%20%2b0900%20JST%20m%3d%2b0.259606096">
     
 
 
@@ -167,34 +167,34 @@
             </div>
             <div class="markdown">
                 <p>『パーフェクトRuby』p.208より。</p>
-
 <p>Dirクラスは基本としてカレントディレクトリ情報を持っていて、それを元としてディレクトリ操作ができる。従って多くの操作を特異メソッドで行うことができる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>pwd <span style="color:#586e75"># =&gt; &#34;/Users/chroju&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>chdir(<span style="color:#2aa198">&#34;/tmp&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>chdir(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">/tmp</span><span style="color:#2aa198">&#34;</span>)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>pwd <span style="color:#586e75"># =&gt; &#34;/tmp&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>home <span style="color:#586e75"># =&gt; &#34;/Users/chroju&#34;</span></code></pre></div>
-<p>ディレクトリに含まれるファイルは<code>Dir.entries</code>で配列として返り、<code>Dir.foreach</code>でEnumerableとして返る。また<code>Dir.glob</code>により、パターンにマッチするファイルパスを配列で返すこともできる。<code>Dir.glob</code>は<code>Dir[]</code>と同義である。引数のディレクトリが存在するか確認する場合は<code>Dir.exists?</code>を用いる。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>home <span style="color:#586e75"># =&gt; &#34;/Users/chroju&#34;</span>
+</code></pre></div><p>ディレクトリに含まれるファイルは<code>Dir.entries</code>で配列として返り、<code>Dir.foreach</code>でEnumerableとして返る。また<code>Dir.glob</code>により、パターンにマッチするファイルパスを配列で返すこともできる。<code>Dir.glob</code>は<code>Dir[]</code>と同義である。引数のディレクトリが存在するか確認する場合は<code>Dir.exists?</code>を用いる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>entries(<span style="color:#2aa198">&#39;.&#39;</span>) <span style="color:#586e75"># =&gt; [&#34;.&#34;, &#34;..&#34;, &#34;bar&#34;, &#34;foo&#34;, &#34;baz&#34;]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>foreach(<span style="color:#2aa198">&#39;.&#39;</span>) {<span style="color:#719e07">|</span>d<span style="color:#719e07">|</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>  <span style="color:#b58900">p</span> d
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>} <span style="color:#586e75"># =&gt; &#34;.&#34;, &#34;..&#34;, &#34;bar&#34;, &#34;foo&#34;, &#34;baz&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>glob(<span style="color:#2aa198">&#39;ba*&#39;</span>) <span style="color:#586e75"># =&gt; [&#34;bar&#34;, &#34;baz&#34;]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">[</span><span style="color:#2aa198">&#39;ba*&#39;</span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [&#34;bar&#34;, &#34;baz&#34;]</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>exists?(<span style="color:#2aa198">&#34;hoo&#34;</span>) <span style="color:#586e75"># =&gt; false</span></code></pre></div>
-<p>ディレクトリの削除、生成等も特異メソッドにて。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>mkdir <span style="color:#2aa198">&#39;foo&#39;</span>, <span style="color:#2aa198">0755</span> <span style="color:#586e75"># パーミッション0755でfooディレクトリを生成</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>exists?(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoo</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; false</span>
+</code></pre></div><p>ディレクトリの削除、生成等も特異メソッドにて。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>mkdir <span style="color:#2aa198">&#39;foo&#39;</span>, <span style="color:#2aa198">0755</span> <span style="color:#719e07"></span><span style="color:#586e75"># パーミッション0755でfooディレクトリを生成</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>rmdir <span style="color:#2aa198">&#39;foo&#39;</span> <span style="color:#586e75"># fooディレクトリを削除するが、対象ディレクトリは空である必要がある</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>delete <span style="color:#2aa198">&#39;foo&#39;</span> <span style="color:#586e75"># Dir.rmdirと同義</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>unlink <span style="color:#2aa198">&#39;foo&#39;</span> <span style="color:#586e75"># Dir.rmdirと同義</span></code></pre></div>
-<p><code>Dir.open</code>すると、Dirオブジェクトを取得することができ、インスタンスメソッドによる操作が可能になる。Dirオブジェクトは読み込み位置を持っていて、ディレクトリ内のファイル名を1つずつ読み込ませることができる。</p>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>unlink <span style="color:#2aa198">&#39;foo&#39;</span> <span style="color:#586e75"># Dir.rmdirと同義</span>
+</code></pre></div><p><code>Dir.open</code>すると、Dirオブジェクトを取得することができ、インスタンスメソッドによる操作が可能になる。Dirオブジェクトは読み込み位置を持っていて、ディレクトリ内のファイル名を1つずつ読み込ませることができる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>dir <span style="color:#719e07">=</span> <span style="color:#cb4b16">Dir</span><span style="color:#719e07">.</span>open(<span style="color:#2aa198">&#39;.&#39;</span>)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>dir<span style="color:#719e07">.</span>path <span style="color:#586e75"># =&gt; &#34;/temp&#34; （現在のファイルパス）</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>dir<span style="color:#719e07">.</span>pos <span style="color:#586e75"># =&gt; 0 （現在の読み込み位置）</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>dir<span style="color:#719e07">.</span>pos <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span> <span style="color:#586e75"># 読み込み位置を移動</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>dir<span style="color:#719e07">.</span>pos <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span> <span style="color:#719e07"></span><span style="color:#586e75"># 読み込み位置を移動</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>dir<span style="color:#719e07">.</span>read <span style="color:#586e75"># =&gt; &#34;..&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>dir<span style="color:#719e07">.</span>rewind <span style="color:#586e75"># 読み込み位置を先頭に戻す</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>dir<span style="color:#719e07">.</span>read <span style="color:#586e75"># =&gt; &#34;.&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>dir<span style="color:#719e07">.</span>each {<span style="color:#719e07">|</span>f<span style="color:#719e07">|</span> <span style="color:#b58900">p</span> f} <span style="color:#586e75"># =&gt; &#34;.&#34;, &#34;..&#34;, &#34;bar&#34;, &#34;baz&#34;, &#34;foo&#34;</span></code></pre></div>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>dir<span style="color:#719e07">.</span>each {<span style="color:#719e07">|</span>f<span style="color:#719e07">|</span> <span style="color:#b58900">p</span> f} <span style="color:#586e75"># =&gt; &#34;.&#34;, &#34;..&#34;, &#34;bar&#34;, &#34;baz&#34;, &#34;foo&#34;</span>
+</code></pre></div>
                 <br>
                 
                 <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>

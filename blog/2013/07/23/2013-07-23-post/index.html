@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.744896%20%2b0900%20JST%20m%3d%2b0.454677146">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.744896%20%2b0900%20JST%20m%3d%2b0.454677146">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.744896%20%2b0900%20JST%20m%3d%2b0.454677146">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.618598975%20%2b0900%20JST%20m%3d%2b0.381121894">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.618598975%20%2b0900%20JST%20m%3d%2b0.381121894">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.618598975%20%2b0900%20JST%20m%3d%2b0.381121894">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.744896%20%2b0900%20JST%20m%3d%2b0.454677146">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.618598975%20%2b0900%20JST%20m%3d%2b0.381121894">
     
 
 
@@ -161,24 +161,20 @@
                     <div class="date" title='Tue Jul 23 2013 00:00:00 JST'>Jul 23, 2013</div>
                     
                     
-		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+		    <div class="reading-time"><div class="middot"></div>One minute read</div>
                     
                 </div>
             </div>
             <div class="markdown">
                 <p>2週間ぐらいハマってた。</p>
-
 <p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>
-
 <p>で、結論。Kaoriya版Vimのデフォルト設定により、textwidthが上書かれてしまうらしい。</p>
-
-<blockquote>Kaoriya版Vimではデフォルトの設定ファイルであるvimrc_example.vimを読み込んでおり、その設定ファイル内でテキストファイルを開いたときにtextwidth=78の設定が上書きされてしまうらしい。
-
-[Vimのtextwidth設定と.vimrc - 続・日々の雑感](http://d.hatena.ne.jp/WK6/20120606/1338993826)</blockquote>
-
+<!-- raw HTML omitted -->
+<p><a href="http://d.hatena.ne.jp/WK6/20120606/1338993826">Vimのtextwidth設定と.vimrc - 続・日々の雑感</a><!-- raw HTML omitted --></p>
 <p>なので引用元の記事にもある通り、.vimrcに以下を挿入すればおｋ。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>&lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;autocmd&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synType&#34;&gt;FileType&lt;/</span>span&gt; text &lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;setlocal&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synPreProc&#34;&gt;textwidth&lt;/</span>span&gt;=<span style="color:#2aa198">0</span></code></pre></div>
-<p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>&lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;autocmd&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synType&#34;&gt;FileType&lt;/</span>span&gt; text &lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;setlocal&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synPreProc&#34;&gt;textwidth&lt;/</span>span&gt;=<span style="color:#2aa198">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>
+</code></pre></div><p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
 
                 <br>
                 

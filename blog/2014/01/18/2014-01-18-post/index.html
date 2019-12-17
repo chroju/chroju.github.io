@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.733316%20%2b0900%20JST%20m%3d%2b0.443097941">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.733316%20%2b0900%20JST%20m%3d%2b0.443097941">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.733316%20%2b0900%20JST%20m%3d%2b0.443097941">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.604472131%20%2b0900%20JST%20m%3d%2b0.366995150">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.604472131%20%2b0900%20JST%20m%3d%2b0.366995150">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.604472131%20%2b0900%20JST%20m%3d%2b0.366995150">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.733316%20%2b0900%20JST%20m%3d%2b0.443097941">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.604472131%20%2b0900%20JST%20m%3d%2b0.366995150">
     
 
 
@@ -167,41 +167,50 @@
             </div>
             <div class="markdown">
                 <p>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。</p>
-
-<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51Mb377pxwL._SL160_.jpg" alt="Ruby on Rails環境構築ガイド" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Ruby on Rails環境構築ガイド</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">黒田 努 <br />インプレスジャパン <br />売り上げランキング: 44,343<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4844333755/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
-
+<!-- raw HTML omitted -->
 <p>これまで環境としてはMax OS X 10.8にVMware FusionでCentOS浮かべて、その上でコード書いてWEBlick立ち上げてってやってたんだけど、考えてみればWEBlickでやるなら手元のMacで良かったわけで。いちいちコード書くのにSSHつなぐとかまぁ無駄なわけで。ということで、環境は次のように変えていく。</p>
-
 <ul>
-<li><p>開発環境：Mac OS X 10.8（物理）</p></li>
-
-<li><p>Ruby 2.0.0</p></li>
-
-<li><p>Rails 4.0</p></li>
-
-<li><p>MySQL</p></li>
-
-<li><p>ステージング：CentOS 6.4（Virtual Box）</p></li>
-
-<li><p>Ruby 2.0.0</p></li>
-
-<li><p>Rails 4.0</p></li>
-
-<li><p>MySQL</p></li>
-
-<li><p>nginx</p></li>
-
-<li><p>unicorn</p></li>
-
-<li><p>vagrant + chef soloで構築予定</p></li>
-
-<li><p>本番環境：CentOS 6.4（VPS）</p></li>
-
-<li><p>構成はステージングと同様</p></li>
+<li>
+<p>開発環境：Mac OS X 10.8（物理）</p>
+</li>
+<li>
+<p>Ruby 2.0.0</p>
+</li>
+<li>
+<p>Rails 4.0</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>ステージング：CentOS 6.4（Virtual Box）</p>
+</li>
+<li>
+<p>Ruby 2.0.0</p>
+</li>
+<li>
+<p>Rails 4.0</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>nginx</p>
+</li>
+<li>
+<p>unicorn</p>
+</li>
+<li>
+<p>vagrant + chef soloで構築予定</p>
+</li>
+<li>
+<p>本番環境：CentOS 6.4（VPS）</p>
+</li>
+<li>
+<p>構成はステージングと同様</p>
+</li>
 </ul>
-
 <p>Apacheは仕事でも使ったことがあるんで、流行りに乗ってnginx + unicornでやってみます。んでさらに流行りに乗ってvagrantとchef solo使おうかと。vagrantはちなみにもう試してみたけど、さっくり仮想マシンが立ってしまってビビる。あとでブログにまとめる予定。ただしchefはちょっとしっかりやんないと使えなさそう。</p>
-
 <p>もともと自分はインフラをメインで飯食ってるんで、こころへんはあまり迷わずにいきたいところ。</p>
 
                 <br>

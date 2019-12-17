@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.573221%20%2b0900%20JST%20m%3d%2b0.283006941">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.573221%20%2b0900%20JST%20m%3d%2b0.283006941">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.573221%20%2b0900%20JST%20m%3d%2b0.283006941">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.435175399%20%2b0900%20JST%20m%3d%2b0.197698418">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.435175399%20%2b0900%20JST%20m%3d%2b0.197698418">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.435175399%20%2b0900%20JST%20m%3d%2b0.197698418">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.573221%20%2b0900%20JST%20m%3d%2b0.283006941">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.435175399%20%2b0900%20JST%20m%3d%2b0.197698418">
     
 
 
@@ -166,16 +166,10 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>年初に<a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base · the world as code</a>という記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。結論としては <strong><a href="https://trello.com/">Trello</a></strong> と <strong><a href="https://github.com/gollum/gollum">gollum</a></strong> を使っている。</p>
-
+                <p>年初に<a href="http://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base · the world as code</a>という記事を上げて、メモや知識の管理をする環境作りを進めていたのだけど、最近ようやく固まってきた。結論としては <strong><a href="https://trello.com/">Trello</a></strong> と <strong><a href="https://github.com/gollum/gollum">gollum</a></strong> を使っている。</p>
 <h2 id="trello">Trello</h2>
-
 <p>近年よく名前を訊く、Kanban形式でのビジュアライズされたタスク管理を可能とするツール。タスク管理向けなので当初は目を向けてなかったのだけど、よくよく冷静に考えてみるとメモ管理にかなり適してそうだったので採用。</p>
-
 <p>結果として、タスクに限らず、数多の情報を整理するツールとしてとても使いやすい。ポイントはいくつか。</p>
-
 <ul>
 <li>メモがカードの形で表示されて、パラパラと繰って一覧できる。</li>
 <li>メモにラベルを付けると色で表示されるので視認しやすい。</li>
@@ -184,40 +178,24 @@
 <li>descriptionをMarkdownで書くことができる。</li>
 <li>Android、iOSいずれもアプリあり。IFTTTも対応。</li>
 </ul>
-
 <p>単なるテキストメモを保存する用途であればEvernoteの上位互換だと感じる。何よりも画面全体にメモを並べることができる一覧性の高さがいい。</p>
-
 <p>今の自分は<a href="http://pileofindexcards.org/wiki/index.php?title=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8">PoIC</a>のような使い方をしていて、とにかくメモを書き溜めては記録、発見、参照の3つのリストに取りあえず分けて、暇なときにつらつら眺めたりしている。分類の仕方はまだ模索中なので、今後変わるかもしれない。とにかく柔軟に使えるのがいい。</p>
-
 <ul>
 <li><a href="http://d.hatena.ne.jp/choiyaki/20140920/1411170874">「Trello」というアプリがおもしろい - iPhoneと本と数学となんやかんやと</a></li>
 <li><a href="http://victorsavkin.com/post/94468744151/using-trello-for-your-personal-productivity-system">Using Trello for Your Personal Productivity System | Victor Savkin</a></li>
 </ul>
-
 <p>GTDは「高度」の管理用といわゆるToDoの管理用に2つボードを設けて使ってみている。プライベートのタスクだけなのでそれほど厳密な期限管理などは必要ないし、これで十分。</p>
-
 <h2 id="gollum">gollum</h2>
-
 <p>散発的な思いつきをTrelloに入れる一方、体系的な知識管理はgollumを使う。GitHub Wikiの機能だけが単独でオープンソース化されているもので、さくらクラウドの2万円クーポンがあったのでとりあえずサーバー1台立ててホストしている。</p>
-
 <p>技術的なメモ書き、読書メモ、あとは趣味で行く美術展の記録などはすべてここに溜めている。Wikiだと散逸的にページを作ってしまいがちなので、トップから最大2階層までの作成と定め、1階層目は各技術ジャンルのページ、2階層目に詳細記事として配置した。こうして体系立てたメモ環境を作ってみると、自分のスキルマップが出来上がっていくようで面白い。</p>
-
 <p>gollumを建てるのに、技術的に難しいことはほとんどない。中身はSinatraとgitなのでカスタマイズもしやすく、とりあえず安易な認証機能ぐらいは追加してみた。作成した記事は個別にMarkdownファイルになってgollumのディレクトリ直下に直置きされるのだが、これはディレクトリを切って<code>git submodule</code>としてGitHub上に上げ、個別管理したいかなと思っている。</p>
-
-<h2 id="ナレッジ管理の必要性">ナレッジ管理の必要性</h2>
-
+<h2 id="heading">ナレッジ管理の必要性</h2>
 <p>ナレッジ管理が必要である、という潮流は昨今高まっているような気はしていて、Qiitaやesa.ioの登場あたりから特にそういう話はよく聞く気がする。</p>
-
-<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/2R3Nk0tCAKPUnY" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/takoratta/ss-59111661" title="情報共有から始めるチーム開発とキャリア戦略" target="_blank">情報共有から始めるチーム開発とキャリア戦略</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/takoratta">Takuya Oikawa</a></strong> </div></p>
-
+<!-- raw HTML omitted -->
 <p>個人であれ組織であれ、我々の仕事は（まぁ他の職種も同じだとは思うが）ナレッジを溜めて活用していくことにあるので、こういう取り組みは何がしか進めるべきだろうと思う。上記スライドにもあるように、暗黙知を形式化していくことで自分内でも、社内やコミュニティ内でも知識を記憶、伝達してさらに深めることが可能になる。</p>
-
 <p>とはいえ昨今はツールの乱立はあって、ブログとQiitaの使い分けだったり、個人的なメモをどうするかだったり、やっぱり迷うことも多い。そこはある程度自分なりの使い方を定めておかないと、後々散逸したメモの山に途方に暮れたりはしそう。あと、単純に良いツールがあったとしても、メモする習慣をつけておかないと意味がないし、どちらかといえばそっちが大事なんではという気もする。些細なことでも漫然と調べず、記録するクセをこの2ツールで付けていこうと思う。</p>
-
 <p>以下、他に比較検討したツール群を載せておく。</p>
-
-<h3 id="faqt-https-faqt-co"><a href="https://faqt.co/">FAQT</a></h3>
-
+<h3 id="faqthttpsfaqtco"><a href="https://faqt.co/">FAQT</a></h3>
 <ul>
 <li>比較した中ではだいぶ惹かれた。一時はこれにしようかと思った。</li>
 <li>明確にKnowledge baseを唄ったサービス。Markdownで書いたメモがカード形式で表示できる。</li>
@@ -225,16 +203,12 @@
 <li>まだ立ち上がったばかりで、将来性はちょっと不安。</li>
 <li>全文検索の不在が決め手になり不採用。</li>
 </ul>
-
 <h3 id="simplenote">Simplenote</h3>
-
 <ul>
 <li>定番メモサービス。</li>
 <li>Markdown対応がほぼ皆無なので不採用。</li>
 </ul>
-
-<h3 id="quiver-http-happenapps-com-quiver"><a href="http://happenapps.com/#quiver">Quiver</a></h3>
-
+<h3 id="quiverhttphappenappscomquiver"><a href="http://happenapps.com/#quiver">Quiver</a></h3>
 <ul>
 <li>最近少し話題になったMac用ノートアプリ。</li>
 <li>タグとノートブックで分類するEvernoteっぽいMarkdownノート。</li>
@@ -242,9 +216,7 @@
 <li>外観がクールだし、結構使い勝手はよかった。</li>
 <li>とはいえMacでしか使えないので断念（持ち歩きPCがLinuxなので）</li>
 </ul>
-
-<h2 id="参考">参考</h2>
-
+<h2 id="heading-1">参考</h2>
 <ul>
 <li><a href="https://medium.com/the-personal-knowledge-management-saga/the-personal-knowledge-management-saga-part-1-ae9bdc575ded#.9xvxjvkkz">The Personal Knowledge Management Saga: #1 — The Personal Knowledge Management Saga — Medium</a></li>
 <li><a href="https://news.ycombinator.com/item?id=7697050">Ask HN: What do you use to organize your knowledge? | Hacker News</a></li>

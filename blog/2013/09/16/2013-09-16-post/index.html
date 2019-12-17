@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.741593%20%2b0900%20JST%20m%3d%2b0.451374545">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.741593%20%2b0900%20JST%20m%3d%2b0.451374545">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.741593%20%2b0900%20JST%20m%3d%2b0.451374545">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.615741227%20%2b0900%20JST%20m%3d%2b0.378264246">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.615741227%20%2b0900%20JST%20m%3d%2b0.378264246">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.615741227%20%2b0900%20JST%20m%3d%2b0.378264246">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.741593%20%2b0900%20JST%20m%3d%2b0.451374545">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.615741227%20%2b0900%20JST%20m%3d%2b0.378264246">
     
 
 
@@ -166,101 +166,66 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。</p>
-
-<h2 id="必要なもの">必要なもの</h2>
-
+                <p>資料によっていろいろ言っていることが違うので、自分なりに調べながらまとめる。こういうのchef?とかで書いとけば環境構築楽になるんだろうな。</p>
+<h2 id="heading">必要なもの</h2>
 <ul>
-<li>Ruby ……当然のごとく</li>
-
-<li><p>Rails ……当然のごとく</p></li>
-
-<li><p>rbenv ……RubyとRailsの管理システム</p></li>
-
-<li><p>ruby-build ……rbenvとセットで使うっぽいがよくわかってない</p></li>
-
-<li><p>Git ……バージョン管理。必須ではない気もするがあった方がいい。rbenvとかのインストールにも使う。</p></li>
-
-<li><p>RubyGems ……Rubyのパッケージ管理システム</p></li>
-
-<li><p>Bundler ……Gemパッケージの管理システム</p></li>
+<li>
+<p>Ruby ……当然のごとく</p>
+</li>
+<li>
+<p>Rails ……当然のごとく</p>
+</li>
+<li>
+<p>rbenv ……RubyとRailsの管理システム</p>
+</li>
+<li>
+<p>ruby-build ……rbenvとセットで使うっぽいがよくわかってない</p>
+</li>
+<li>
+<p>Git ……バージョン管理。必須ではない気もするがあった方がいい。rbenvとかのインストールにも使う。</p>
+</li>
+<li>
+<p>RubyGems ……Rubyのパッケージ管理システム</p>
+</li>
+<li>
+<p>Bundler ……Gemパッケージの管理システム</p>
+</li>
 </ul>
-
 <p>こんなところだろうか。直接的に必要なものの他に、それぞれを管理するためのツールが必要だったりしてなかなかに複雑であった。あとhomebrewとかのあたりまで遡るとキリが無くなりそうなのでさすがに割愛。というかOSによっても違ってきちゃうし。readlineとかopensslとかも依存関係があるっぽいんだけどよくわからないので割愛……。んー、意味あるのかこの記事。俺がRoRで使ってる環境はちなみにCent OSなので、その前提で書きます。</p>
-
 <h2 id="rbenv">rbenv</h2>
-
 <p>本とか読んでるとRubyのバージョン管理にはRVM使わせているものが多いんだけど、rbenvの方が軽くてBundlerとの相性も良いらしい。よってrbenvを使うことにする。</p>
-
-<p>参考：(<a href="http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm">http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm</a>)</p>
-
+<p>参考：([<a href="http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm%5D(http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm)">http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm](http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm)</a>)</p>
 <p>インストール先のパスが迷う。。。ホームフォルダに不可視で入れるのが気持ちとしてスッキリするのでそれを採用。</p>
-
-<blockquote>$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv</blockquote>
-
+<!-- raw HTML omitted -->
 <p>で、bash_profileにパスを追加。</p>
-
-<blockquote>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-source ~/.bash_profile</blockquote>
-
-<h3 id="追記">追記</h3>
-
+<!-- raw HTML omitted -->
+<h3 id="heading-1">追記</h3>
 <p>実はこの記事書く前にすでにRVM入れちゃってたんだけど（今読んでる『RailsによるアジャイルWebアプリケーション開発』にはRVMが紹介されてたので）、RVM削除してrbenvを入れなおそうと思い立って調べてみた。そこで辿り着いたRVMのアンインストールコマンドがなかなかに衝撃的だったので追記。</p>
-
-<blockquote>$ rvm seppuku</blockquote>
-
+<!-- raw HTML omitted -->
 <p>切腹！！！ｗｗｗｗ</p>
-
 <h2 id="ruby-build">ruby-build</h2>
-
 <p>よくわかってないけど入れる。わかっていることとしては、これがないとrbenv installコマンドが使えない。rbenvのプラグインとしての位置づけらしいので、.rbenvフォルダ配下に入れる。公式のREADMEにもそう書かれてます故。</p>
-
-<blockquote>$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</blockquote>
-
+<!-- raw HTML omitted -->
 <h2 id="ruby">Ruby</h2>
-
 <p>Rubyはrbenvを使ってインストール。バージョンについては都度変わるので、$ rbenv install -lコマンドで落とせるバージョンを確認しつつ、必要なものを入れる感じで。まぁ使うバージョン選択できるんだから、そんなにセンシティブになる必要はないと思うが。</p>
-
-<blockquote>$ rbenv install 1.9.3</blockquote>
-
+<!-- raw HTML omitted -->
 <p>デフォで使うRubyのバージョンを設定。</p>
-
-<blockquote>$ rbenv global 1.9.3 # これで設定
-$ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを落としたときに実行する</blockquote>
-
+<!-- raw HTML omitted -->
 <p>インストール済みのRubyのバージョンは$ rbenv versionsで確かめられる。ちょうど今年の上半期にRuby 2.0が出たばかりだし、このあたりはしばらくの間重宝しそう。</p>
-
 <h2 id="rubygems">RubyGems</h2>
-
 <p>入れる方法はいろいろあるみたいだけど、自分の使ってるCent OSを基本として考えて、yumで入れることにする。</p>
-
-<blockquote>$ yum install rubygems</blockquote>
-
+<!-- raw HTML omitted -->
 <p>めんどかったら-yオプション付ければ対話なしで全部インストールされておしまい。</p>
-
 <h2 id="rails">Rails</h2>
-
 <p>いよいよRailsのインストール。RailsはGemパッケージとして配布されているので、今入れたRubyGemsを使ってインストールする。特定のバージョンを使う場合は-vオプションを使う。オプション無しだと最新版が入る。rbenvでRubyの複数バージョン切り替えるみたいにRailsもやってみたいんだけど、やり方がわからない。。。</p>
-
-<blockquote>$ gem install rails</blockquote>
-
+<!-- raw HTML omitted -->
 <h2 id="bundler">Bundler</h2>
-
 <p>一番よくわかっていないところ。Rubyで使われるGemパッケージの管理ツールらしい。ルートディレクトリにあるGemfileに書いておいたパッケージについて、依存関係をチェックして自動でインストールしてくれるものらしい。ほお。</p>
-
-<blockquote>$ bundle install</blockquote>
-
+<!-- raw HTML omitted -->
 <p>Railsアプリケーションを$ rails newコマンドで作成した場合、ルートディレクトリに勝手にGemfileが作られる上、$ bundle installも自動で実行されるので、あまり意識はしなくていいっぽい。Rails自体もGemで配布されているのでbundlerを使って管理させたりとかもできるみたいなんだけど、そのあたりを調べた感じ、自分には何が何を管理してるのかメタにメタ重ねる感じで徐々に訳わからん感じになってきたので考えるのを、やめた。</p>
-
 <p>RailsアプリケーションのGemfileにはcoffescriptやSASS、SQLiteなどをインストールするように記述されている。下手にこれいじると多分死ぬと思うんだけど、SQLiteじゃなくてMySQL使いたいとか、他のGemパッケージが何か必要になったとか、そういうときは編集してあげてから$ bundle installでおｋっぽい。便利！</p>
-
 <h2 id="git">Git</h2>
-
 <p>長くなりそうなので割愛。また別の機会にまとめたい。GitHubのアカウントも持ってる（ほぼ使ってないけど。。。）し、一度RSA認証で繋げるように設定はしたことあるんだけど、完全に忘れたんでもう一度ちゃんとまとめる。今度。</p>
-
 <p>ツールをインストールするときは依存関係の処理とかの問題があるので、後々新バージョンが出たときに惑わないよう、なるたけ自動で管理できるような入れ方をする必要がある。その視点に立って一旦まとめてはみたけど、もっと良いやり方というのも多分あるのだろう。インストールするぐらいなら猿でも出来ると思いがちだが、これがなかなか奥が深い。</p>
 
                 <br>

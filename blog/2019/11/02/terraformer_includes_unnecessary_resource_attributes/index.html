@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.503224%20%2b0900%20JST%20m%3d%2b0.213011688">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.503224%20%2b0900%20JST%20m%3d%2b0.213011688">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.503224%20%2b0900%20JST%20m%3d%2b0.213011688">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.329003723%20%2b0900%20JST%20m%3d%2b0.091526642">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.329003723%20%2b0900%20JST%20m%3d%2b0.091526642">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.329003723%20%2b0900%20JST%20m%3d%2b0.091526642">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.503224%20%2b0900%20JST%20m%3d%2b0.213011688">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.329003723%20%2b0900%20JST%20m%3d%2b0.091526642">
     
 
 
@@ -166,10 +166,7 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>小ネタです。</p>
-
+                <p>小ネタです。</p>
 <p>以前このブログの <a href="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/">3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code</a> というエントリーでも取り上げた <a href="https://github.com/GoogleCloudPlatform/terraformer">terraformer</a> 。既存のクラウドリソースを元に terraform file を作成してくれる便利ツールなのだが、時に必要ない属性値を resource に含んだファイルを作ることがある。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;aws_s3_bucket&#34; &#34;tfer--chroju-002E-net&#34;</span> {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  acl            <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;private&#34;</span>
@@ -191,21 +188,14 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  website_domain   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;s3-website-ap-northeast-1.amazonaws&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  website_endpoint <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;chroju.net.s3-website-ap-northeast-1.amazonaws.com&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>}</code></pre></div>
-<p>例えばこれは自分の S3 バケットを import してみた実際の結果（一部マスクあり）なのだけど、いくつか不要な値を含んでいる。具体的には <code>arn</code> , <code>website_domain</code> , <code>website_endpoint</code> の3点。ドキュメント <a href="https://www.terraform.io/docs/providers/aws/r/s3_bucket.html">AWS: aws_s3_bucket - Terraform by HashiCorp</a> を見るとわかるが、これらは <code>Attributes References</code> 、つまり他の resource から参照可能な属性であって設定に必要な値ではない。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>}
+</code></pre></div><p>例えばこれは自分の S3 バケットを import してみた実際の結果（一部マスクあり）なのだけど、いくつか不要な値を含んでいる。具体的には <code>arn</code> , <code>website_domain</code> , <code>website_endpoint</code> の3点。ドキュメント <a href="https://www.terraform.io/docs/providers/aws/r/s3_bucket.html">AWS: aws_s3_bucket - Terraform by HashiCorp</a> を見るとわかるが、これらは <code>Attributes References</code> 、つまり他の resource から参照可能な属性であって設定に必要な値ではない。</p>
 <p>ではこれは余計な値でバグなのではないか、と思いたくなるところなのだけど、面白いのはこのまま <code>terraform</code> コマンドを打ってもエラーにはならないということ。以下、試しに ARN を <code>hogefuga</code> という値に変更して <code>terraform apply</code> して、その後再度 <code>plan</code> で結果を確認してみたサンプルを貼る。</p>
-
-<script id="asciicast-2HP4t3MJhnhogQj1QgubaHydG" src="https://asciinema.org/a/2HP4t3MJhnhogQj1QgubaHydG.js" async></script>
-
+<!-- raw HTML omitted -->
 <p>ARN は AWS 側が一定の法則に則って自動採番する ID であり、当然ながらユーザーが任意で変更はできない。それなのに <code>plan</code> の結果として ARN の変更は予告され、そして <code>apply</code> も通ってしまうのが面白い。しかし <code>apply</code> 後に <code>plan</code> を実行すると、依然差分として表示はされるので、実際に <code>apply</code> が通ったわけではない。当たり前だけど、ちょっと挙動としては不安にもなる。</p>
-
 <p>ちなみにこの状態から ARN を削除してみても、 <code>terraform plan</code> の結果は <code>No Changes</code> になり、 ARN が削除されるようなことはない（そりゃそうなんだが）。そのため Terraformer の import 結果に不要な値が含まれていたら、運用上の混乱を避ける意味でも、手で削除してしまうのが無難ではある。</p>
-
-<h2 id="原因">原因</h2>
-
+<h2 id="heading">原因</h2>
 <p>ではなぜこのような挙動になるのかだが、原因は Terraform の実装にある。</p>
-
 <p>Terraform の各 resource にどのような attributes を含むかは、 <code>&amp;schema.Resource.Schema</code> に <code>map</code> の形で定義されている。 AWS S3 の場合は <a href="https://github.com/terraform-providers/terraform-provider-aws/blob/master/aws/resource_aws_s3_bucket.go">terraform-provider-aws/resource_aws_s3_bucket.go at master · terraform-providers/terraform-provider-aws</a> で、冒頭だけ抜き出すとこのような形。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>		Schema: <span style="color:#268bd2">map</span>[<span style="color:#dc322f">string</span>]<span style="color:#719e07">*</span>schema.Schema{
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>			<span style="color:#2aa198">&#34;bucket&#34;</span>: {
@@ -222,15 +212,11 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>				ForceNew:      <span style="color:#cb4b16">true</span>,
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>				ConflictsWith: []<span style="color:#dc322f">string</span>{<span style="color:#2aa198">&#34;bucket&#34;</span>},
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>				ValidateFunc:  validation.<span style="color:#268bd2">StringLenBetween</span>(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">63</span><span style="color:#719e07">-</span>resource.UniqueIDSuffixLength),
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>            },</code></pre></div>
-<p>そしてここに並列で <code>Attributes References</code> に含まれる値も並んでいる。どれが <code>Arguments</code> （設定値）でどれが <code>Attributes</code> なのかを識別できるような箇所はない。そのため resource の中に <code>Attributes</code> にあたる値を書き入れても、エラーにはならない。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>            },
+</code></pre></div><p>そしてここに並列で <code>Attributes References</code> に含まれる値も並んでいる。どれが <code>Arguments</code> （設定値）でどれが <code>Attributes</code> なのかを識別できるような箇所はない。そのため resource の中に <code>Attributes</code> にあたる値を書き入れても、エラーにはならない。</p>
 <p>また Terraformer を使用した際の挙動としては、 Terraform の <code>refresh</code> コマンドに相当するメソッドを呼び出す形になる。 <code>refresh</code> といえば現在のクラウドリソースの状態を取得して、 tfstate を書き換えるというもの。 tfstate 側には <code>Attributes</code> に相当する値も含まれているため、 <code>refresh</code> を呼ぶ形だと <code>Attributes</code> も一緒に読み込んでくる形になる。だから Terraformer が作成する tf ファイルには、 <code>Attributes</code> が含まれるということになる。</p>
-
 <p>現状、先述の通り Terraform の実装として <code>Arguments</code> と <code>Attributes</code> を識別する方法がないため Terraformer がこのような挙動をするのはやむを得ないと考えている。 Terraformer は Terraform の API を効率よく活用することで、個々のクラウドリソースの API を最小限にしか知る必要がない形で実装されている。各値が <code>Attributes</code> かどうかという情報は Terraform 側が持つべきであって、 Terraformer に実装させる必要はないだろう。幸い、見てきた通り <code>Attributes</code> を含めても Terraform はエラーにならないので、割り切ることもできなくはない。</p>
-
 <h2 id="impression">Impression</h2>
-
 <p>以上、トリビアに近い小ネタを書いてみた。きっかけは実際に terraformer を使っていてこの挙動に気づいたことなのだけど、もうすぐ <a href="https://terraform-jp.connpass.com/event/150359/">Terraform Source Code Reading#3 - connpass</a> というイベントに参加することもあり、少し Terraform のコードを読む機会が欲しかった形。このイベント、それなりにレベル高いことやろうとしてるので、生きて帰れるのかむちゃくちゃ不安。</p>
 
                 <br>

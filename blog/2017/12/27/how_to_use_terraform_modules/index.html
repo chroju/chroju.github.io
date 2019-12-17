@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.562451%20%2b0900%20JST%20m%3d%2b0.272236767">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.562451%20%2b0900%20JST%20m%3d%2b0.272236767">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.562451%20%2b0900%20JST%20m%3d%2b0.272236767">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.416462138%20%2b0900%20JST%20m%3d%2b0.178985157">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.416462138%20%2b0900%20JST%20m%3d%2b0.178985157">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.416462138%20%2b0900%20JST%20m%3d%2b0.178985157">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.562451%20%2b0900%20JST%20m%3d%2b0.272236767">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.416462138%20%2b0900%20JST%20m%3d%2b0.178985157">
     
 
 
@@ -166,16 +166,10 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>Terraformの「<a href="https://www.terraform.io/intro/getting-started/modules.html">module</a>」を最近使うようになった。moduleは複数のクラウドリソースをまとめてテンプレート化して、呼び出すときに必要な引数だけ与えてあげれば発動可能になるというもので、要するにリソースの抽象化に使われる。Ansibleで言うところのRoleに近い。</p>
-
+                <p>Terraformの「<a href="https://www.terraform.io/intro/getting-started/modules.html">module</a>」を最近使うようになった。moduleは複数のクラウドリソースをまとめてテンプレート化して、呼び出すときに必要な引数だけ与えてあげれば発動可能になるというもので、要するにリソースの抽象化に使われる。Ansibleで言うところのRoleに近い。</p>
 <p>Terraform自体は1年ぐらい前から使っていたので、結構長いことmoduleには触れていなかったんだけど、理由としては結構複雑化しそうというのがあった。今回改めて触れてみて、メリットは確かに感じられるがやっぱり複雑だなという気持ちが強くて、一旦まとめてみる。</p>
-
-<h2 id="宣言地獄">宣言地獄</h2>
-
+<h2 id="heading">宣言地獄</h2>
 <p>moduleはクラウドリソースの枠を作り、各種設定値は変数として空けておいて、呼び出されるときに変数を埋めてもらう、という形を取るので、変数宣言をそこここに書くことになる。これがあまりDRYではないというか、何度も同じものを書く必要があったりする。</p>
-
 <p>簡単に書いてしまうとmoduleはこうなる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl:main.tf" data-lang="hcl:main.tf"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">variable</span> <span style="color:#2aa198">&#34;name&#34;</span> {}
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>variable &#34;instnace_type&#34; { default <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;t2.micro&#34;</span> }
@@ -183,10 +177,9 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#268bd2">resource</span> <span style="color:#2aa198">&#34;aws_ec2_instance&#34; &#34;hoge&#34;</span> {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  name          <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.name}&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  instance_type <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.type}&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}</code></pre></div>
-<p>resourceの中に変数のプレースホルダを置き、さらにその変数名を
- <code>variable</code> 句で宣言する。ここでは簡略化してresourceと同じファイル内に変数宣言も置いたが、推奨のプラクティスとしては <code>variable.tf</code> という別ファイルに変数宣言だけ切り出すことが多い。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}
+</code></pre></div><p>resourceの中に変数のプレースホルダを置き、さらにその変数名を
+<code>variable</code> 句で宣言する。ここでは簡略化してresourceと同じファイル内に変数宣言も置いたが、推奨のプラクティスとしては <code>variable.tf</code> という別ファイルに変数宣言だけ切り出すことが多い。</p>
 <p>このmoduleを呼び出すときは、以下のように変数に値を埋めてやる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl:main.tf" data-lang="hcl:main.tf"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">variable</span> <span style="color:#2aa198">&#34;name&#34;</span> {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  value <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;hoge&#34;</span>
@@ -201,47 +194,29 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  name   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.name}&#34;</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>  type   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.type}&#34;</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>}</code></pre></div>
-<p>若干大げさに書いた。ここで <code>module</code> 内にもプレースホルダを置いて、さらに <code>variable</code> を宣言する必要はなくて、プレースホルダの箇所に直接値を書けばそれで済む。ただ、可変値とそれ以外は分けて記述した方がわかりやすいという人もいるので、そこは好みかなと。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>}
+</code></pre></div><p>若干大げさに書いた。ここで <code>module</code> 内にもプレースホルダを置いて、さらに <code>variable</code> を宣言する必要はなくて、プレースホルダの箇所に直接値を書けばそれで済む。ただ、可変値とそれ以外は分けて記述した方がわかりやすいという人もいるので、そこは好みかなと。</p>
 <p>というわけで結構何回も同じ変数名を書くことになる。少なくともmodule内のプレースホルダで1回、その変数宣言で1回、呼び出すときに1回の計3回必要。</p>
-
 <p>これさすがに冗長だなぁという気がしていて、例えば特定のmoduleを使うときに、入力が必要な変数を全部tfファイルに書き出すツールとかあったらいいんではと思ってる。Terraform本体にも <code>validate</code> サブコマンドはあるけど、あれは文法的なエラーしか確認してくれないので。来月作れたら作りたい。</p>
-
-<h2 id="moduleはどの単位で切るべきか">moduleはどの単位で切るべきか</h2>
-
+<h2 id="module">moduleはどの単位で切るべきか</h2>
 <p>moduleは何のために使うのかと言えば、繰り返し使うような部分を隠蔽して、DRYに書くことを実現するためなので、再利用性のある単位でresourceをまとめるのが効率がよいということになる。</p>
-
 <p>これは各位のAWSの使い方に依存するので、唯一解はない。例えばEC2を立ち上げるときに必ずIAM Roleも個別に用意して付与するような使い方をしているなら、EC2とIAM Role双方を作れるようなmoduleでパッケージするのが効率いいはず。</p>
-
 <p>ただ、再利用性を高めたmoduleを書くのが結構難しい。例えば以下のリンクは <a href="https://registry.terraform.io/">Terraform module registry</a> にあるAWSセキュリティグループのmoduleだが、ちょっと見てみてほしい。</p>
-
 <p><a href="https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules">terraform-aws-security-group/modules at master · terraform-aws-modules/terraform-aws-security-group</a></p>
-
 <p>セキュリティグループはかなり書き方の幅が広くて、自力で書こうともしてみたけど、様々な利用ケースを想定して書くのは相当難しかった。なので先のレポジトリではある程度割り切って、元から代表的なポート番号を開けるためのmoduleを用意して使わせる形になっている。おそらくこっちの方が現実的。</p>
-
 <p>そしてここまでのものを自前で用意したところで、そんなに再利用するかな？って話になるので、moduleが複雑化しそうであれば、無理して作らずにmodule registryから持ってくるか、逐一resourceを普通に書いた方が省エネだったりもする。一方でIAM Userとか設定がシンプルなものはmoduleに任せるとかなり楽。</p>
-
 <p>module registry、少し使ってみたけど楽なのは確かで、例えばすぐにリソース立ち上げたいからTerraform書くのめんどくせーや手動起動→結局そのリソース長期で使うハメになりブラックボックス化、とかよくあるけど、module registryから引っ張ってきて取りあえず使えば雑にコード化は可能になったりする。</p>
-
 <h2 id="best-practice">Best Practice</h2>
-
 <p>今回は断片的にmoduleに触れただけなので、どこかでもう少し包括的な視点からベストプラクティスっぽいのまとめたいなと思う。</p>
-
 <p>実のところ <a href="https://github.com/hashicorp/best-practices/">hashicorp/best-practices</a> というのが公開されてはいるのだけど、残念ながら「Deprecated」になっていて、現状HashiCorp公開のベストプラクティスは存在していない（多分）（知らないだけでどこかにあるなら教えてほしい）。最近Terraformもいろいろ機能追加があってプラクティス変わってきてるので、どこかのタイミングで再度ベストプラクティスを公開してほしいとは思う。</p>
-
 <p>Qiitaにあったこちらはかなり参考にさせていただいた。文中では触れられていないが、「immutable」と「not_immutable（mutable？）」でtfファイルを分けるというのはとても同意したい。Desired Instancesを手動、自動で変化させ得るAutoScalingグループのようなmutableなオブジェクトは、Terraformだけで変更をかけ得るオブジェクトとは別で管理した方がいい。</p>
-
 <p><a href="https://qiita.com/shogomuranushi/items/e2f3ff3cfdcacdd17f99">Terraform Best Practices in 2017 - Qiita</a></p>
-
 <p>表題に対する現時点の結論としては、</p>
-
 <ul>
 <li>シンプルな設定のリソースについては、再利用性の高いmoduleを書くとDRYなtfファイルになって嬉しい。</li>
 <li>先日公開されたTerraform module registryから引っ張ってくれば、すぐリソース作りたいときにも少ない手間でコード化ができて嬉しい。</li>
 <li>変数宣言の多さと、複雑化した場合の管理コストの多さは嬉しくない。</li>
 </ul>
-
 <p>というところ。なので3点目を解消する方向へ頑張りたい。</p>
 
                 <br>

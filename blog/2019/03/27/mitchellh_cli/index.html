@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.53739%20%2b0900%20JST%20m%3d%2b0.247177023">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.53739%20%2b0900%20JST%20m%3d%2b0.247177023">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.53739%20%2b0900%20JST%20m%3d%2b0.247177023">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.385637097%20%2b0900%20JST%20m%3d%2b0.148160116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.385637097%20%2b0900%20JST%20m%3d%2b0.148160116">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.385637097%20%2b0900%20JST%20m%3d%2b0.148160116">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.53739%20%2b0900%20JST%20m%3d%2b0.247177023">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.385637097%20%2b0900%20JST%20m%3d%2b0.148160116">
     
 
 
@@ -166,16 +166,10 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<h2 id="mitchellh-cli-について">mitchellh/cli について</h2>
-
+                <h2 id="mitchellhcli-">mitchellh/cli について</h2>
 <p>Go にはコマンドラインツールを書くのに役立つフレームワークが数多くありますが、今回はググってもあんまり日本語情報が出ず、また godoc に example も少なくて掴みどころが難しい、 <a href="https://github.com/mitchellh/cli">mitchell/cli</a> に触れてみます。正直、有名どころの <a href="https://github.com/urfave/cli">urfave/cli</a> や <a href="https://github.com/alecthomas/kingpin">alecthomas/kingpin</a> に比べて使い勝手が良いとは言いづらいフレームワークだと感じていますが、 mitchellh氏のレポジトリにあることからもわかる通り、 Terraform 等の HashiCorp OSS 群で使われているフレームワークということで、あえて学んでみました。</p>
-
 <p>なお、ただ実装を読むだけではつまらないですし、せっかくなら使ってみたかったので、現在拙作の <a href="https://github.com/chroju/nature-remo-cli">nature-remo-cli</a> 内でも活用しています。実例として良ければご参照ください。</p>
-
-<h2 id="基本">基本</h2>
-
+<h2 id="heading">基本</h2>
 <p>まずはとにかく README.md にある example コードを見てみます。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">package</span> main
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
@@ -200,34 +194,26 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>	}
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>	os.<span style="color:#268bd2">Exit</span>(exitStatus)
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>}</code></pre></div>
-<p><code>mitchellh/cli</code> は基本的にサブコマンドのあるコマンドを実装するためのツールです。 <code>c.Commands</code> にセットしている <code>map[string]cli.CommandFactory</code> がサブコマンドの定義箇所で、キーになっている文字列をサブコマンドとして実行されたとき、その値の <code>CommandFactory</code> が実行される、という形を取ります。ではこの <code>cli.CommandFactory</code> は何者かと言うと、以下のように <code>cli.Command</code> と <code>error</code> を返す関数として定義されています。</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">type</span> CommandFactory <span style="color:#268bd2">func</span>() (Command, <span style="color:#dc322f">error</span>)</code></pre></div>
-<p>従って上記の example のような変数で <code>CommandFactory</code> を返す形ではなく、ここで無名関数を定義してしまう形も可能です。具体的なところだと Terraform の実装 (<a href="https://github.com/hashicorp/terraform/blob/master/commands.go#L80-L85">https://github.com/hashicorp/terraform/blob/master/commands.go#L80-L85</a>) などを見るとイメージが掴みやすいと思います。私はこちらの書き方のほうが明示的で好みです。この Terraform の実装では <code>error</code> にあたる返り値として決め打ちで <code>nil</code> を返していますが、私も同様に実装しています。あんまりここで <code>nil</code> 以外の値を返すパターンが思いつきません。</p>
-
-<h2 id="cli-command-の実装">cli.Command の実装</h2>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>}
+</code></pre></div><p><code>mitchellh/cli</code> は基本的にサブコマンドのあるコマンドを実装するためのツールです。 <code>c.Commands</code> にセットしている <code>map[string]cli.CommandFactory</code> がサブコマンドの定義箇所で、キーになっている文字列をサブコマンドとして実行されたとき、その値の <code>CommandFactory</code> が実行される、という形を取ります。ではこの <code>cli.CommandFactory</code> は何者かと言うと、以下のように <code>cli.Command</code> と <code>error</code> を返す関数として定義されています。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">type</span> CommandFactory <span style="color:#268bd2">func</span>() (Command, <span style="color:#dc322f">error</span>)
+</code></pre></div><p>従って上記の example のような変数で <code>CommandFactory</code> を返す形ではなく、ここで無名関数を定義してしまう形も可能です。具体的なところだと Terraform の実装 (<a href="https://github.com/hashicorp/terraform/blob/master/commands.go#L80-L85">https://github.com/hashicorp/terraform/blob/master/commands.go#L80-L85</a>) などを見るとイメージが掴みやすいと思います。私はこちらの書き方のほうが明示的で好みです。この Terraform の実装では <code>error</code> にあたる返り値として決め打ちで <code>nil</code> を返していますが、私も同様に実装しています。あんまりここで <code>nil</code> 以外の値を返すパターンが思いつきません。</p>
+<h2 id="clicommand-">cli.Command の実装</h2>
 <p>次に、先の <code>CommandFactory</code> が返していた <code>cli.Command</code> の実装を見てみます。 <code>cli.Command</code> は <code>help</code>, <code>Run</code>, <code>Synopsis</code> の3つのメソッドを必要とする interface です。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">type</span> Command <span style="color:#268bd2">interface</span> {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>	<span style="color:#268bd2">Help</span>() <span style="color:#dc322f">string</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>	<span style="color:#268bd2">Run</span>(args []<span style="color:#dc322f">string</span>) <span style="color:#dc322f">int</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>	<span style="color:#268bd2">Synopsis</span>() <span style="color:#dc322f">string</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>}</code></pre></div>
-<p><code>Synopsis()</code> は、サブコマンド無しでコマンド実行したときに出力される、そのサブコマンドの使い方を記した50字程度の注釈を返すよう設定します。 例として nature-remo-cli を使ってみると、こんな感じで表示されます。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>}
+</code></pre></div><p><code>Synopsis()</code> は、サブコマンド無しでコマンド実行したときに出力される、そのサブコマンドの使い方を記した50字程度の注釈を返すよう設定します。 例として nature-remo-cli を使ってみると、こんな感じで表示されます。</p>
 <pre><code>Available commands are:
     aircon    Control Air Conditionar
     init      Initialize remo with your OAuth token
     signal    Control Signals
     sync      Sync local config with your latest one
-</code></pre>
-
-<p><code>Help()</code> はそのままの意味で、 <code>-h</code> や <code>--help</code> を付けて実行した場合に返す内容を設定します。よくある Usage の自動生成のような機能はありませんので、愚直にヒアドキュメントなどで書いていく必要があります。</p>
-
+</code></pre><p><code>Help()</code> はそのままの意味で、 <code>-h</code> や <code>--help</code> を付けて実行した場合に返す内容を設定します。よくある Usage の自動生成のような機能はありませんので、愚直にヒアドキュメントなどで書いていく必要があります。</p>
 <p><code>Run()</code> で実行したい処理を書いていきます。1つ注意したいのが、返り値として渡せるのが <code>int</code> 型、つまりはリターンコードのみであり、 <code>error</code> インターフェースや、エラーメッセージを含めた <code>string</code> などは返せないという点です。従ってエラーの処理やエラーメッセージの出力は、 <code>Run()</code> の中ですべて済ませる必要があります。</p>
-
-<h3 id="cli-command-内での出力処理">cli.Command 内での出力処理</h3>
-
+<h3 id="clicommand--1">cli.Command 内での出力処理</h3>
 <p>ではエラーメッセージをどのように出力するかですが、 <code>cli.Command</code> の中に <code>cli.Ui</code> を埋め込んで活用するのが一般的です。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">type</span> HogeCommand <span style="color:#268bd2">struct</span> {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	UI cli.Ui
@@ -238,15 +224,11 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	c.UI.<span style="color:#268bd2">Error</span>(<span style="color:#2aa198">&#34;Error Message&#34;</span>)
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>	<span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>}</code></pre></div>
-<p><code>c.UI.Output()</code> は標準出力に、 <code>c.UI.Error()</code> は標準エラー出力にいい感じに吐いてくれます。他にも対話式にユーザーの入力を待ってくれる <code>Ask()</code> や、さらにはユーザー入力を隠してくれるので秘密情報を入力させるのに便利な <code>AskSecret()</code> といった便利なメソッドも <code>cli.Ui</code> に用意されています。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>}
+</code></pre></div><p><code>c.UI.Output()</code> は標準出力に、 <code>c.UI.Error()</code> は標準エラー出力にいい感じに吐いてくれます。他にも対話式にユーザーの入力を待ってくれる <code>Ask()</code> や、さらにはユーザー入力を隠してくれるので秘密情報を入力させるのに便利な <code>AskSecret()</code> といった便利なメソッドも <code>cli.Ui</code> に用意されています。</p>
 <p>さて、 <code>fmt.Println()</code> などを使わず <code>cli.Ui</code> をわざわざ使うと何が嬉しいのかと言えば、お察しのとおりかと思いますが一つにはテストが書きやすくなる面があります。 <code>cli.MockUi</code> という、標準出力先と標準エラー出力先にあたる buffer を有した構造体があるので、テストのときにはこれを使うことで出力のチェックができます。この点については Vault での実装 (<a href="https://github.com/hashicorp/vault/blob/df18871704fe869e9be45b542a6b1eb2fe46c293/command/audit_disable_test.go">https://github.com/hashicorp/vault/blob/df18871704fe869e9be45b542a6b1eb2fe46c293/command/audit_disable_test.go</a>) などが参考になるかと思います。他にも <code>cli.Ui</code> を満たす構造体がいくつか用意されていて、ほしい機能があれば追加できるようになっており、例えば <code>cli.ColoredUi</code> は出力の色指定ができるので非常に便利です。ANSI エスケープシーケンスの8色を指定するための定数も<a href="https://godoc.org/github.com/mitchellh/cli#pkg-variables">用意されています</a> ので、簡単にターミナルへ色付きの出力をすることができます。</p>
-
-<h2 id="極めてシンプルな-cli-ツール">極めてシンプルな CLI ツール</h2>
-
+<h2 id="-cli-">極めてシンプルな CLI ツール</h2>
 <p>ざっくりここまでの説明で主要な使い方は網羅しました。説明を省いたものとして AutoComplete の支援機能などがありますが、せいぜいがそんなもので、非常に薄い実装のフレームワークになっています。他のコマンドラインフレームワークによくある機能はほとんどなく、オプションの処理すら担ってくれません（<code>-h</code> や <code>--version</code> はデフォルトで対応していますが、それだけです。nature-remo-cli では spf13/pflag を合わせて使う形にしました）。さすがにちょっと不親切というか、あくまで HashiCorp で使うための最低限の機能だけを実装したものなのかな、という感触があります。</p>
-
 <p>ただ一方では、サブコマンドごとに <code>cli.Command</code> を満たす構造体を別々に実装する、つまりはコードがサブコマンド単位で強制的に分かれる形になるので、コードの可読性は高い状態を保てるように感じています。 <a href="https://github.com/hashicorp/terraform/tree/master/command">Terraform のコマンド実装</a> など、一度でも Terraform を使ったことがある人が見れば、すぐに知りたい実装がどこにあるのか見通せるようなファイル構成になっています。したがって冒頭にも書いた通り、 HashiCorp のツールをよく使う人であれば、知っておいて損はないのではないかなと思っています。</p>
 
                 <br>

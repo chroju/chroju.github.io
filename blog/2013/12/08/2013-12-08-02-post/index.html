@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
 <meta name="author" content="the world as code">
-<meta name="description" content="今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… bundle exec rails g devise:install Railsのログイン機構作るためにDevise入れてみてたんだけ">
+<meta name="description" content="今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上">
 
 <meta property="og:title" content="Bundle execサボってエライ目にあった" />
-<meta property="og:description" content="今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… bundle exec rails g devise:install Railsのログイン機構作るためにDevise入れてみてたんだけ" />
+<meta property="og:description" content="今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ…… Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/" />
 <meta property="article:published_time" content="2013-12-08T00:00:00+09:00" />
@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.736931%20%2b0900%20JST%20m%3d%2b0.446712030">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.736931%20%2b0900%20JST%20m%3d%2b0.446712030">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.736931%20%2b0900%20JST%20m%3d%2b0.446712030">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.60895475%20%2b0900%20JST%20m%3d%2b0.371477769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.60895475%20%2b0900%20JST%20m%3d%2b0.371477769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.60895475%20%2b0900%20JST%20m%3d%2b0.371477769">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.736931%20%2b0900%20JST%20m%3d%2b0.446712030">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.60895475%20%2b0900%20JST%20m%3d%2b0.371477769">
     
 
 
@@ -167,21 +167,13 @@
             </div>
             <div class="markdown">
                 <p>今までよくわからなくてほっといたけどこれ使わなきゃダメだったわ……</p>
-
-<blockquote>bundle exec rails g devise:install</blockquote>
-
+<!-- raw HTML omitted -->
 <p>Railsのログイン機構作るためにDevise入れてみてたんだけど、本来上のコマンドを入れるべきところでふつーにrails g devise:installとしてしまった。そしてrails g devise User ゴニョゴニョ。すると何が起きたか。</p>
-
-<p><a href="http://www.flickr.com/photos/chroju/11270239633/"> title=&ldquo;スクリーンショット_2013-12-08_22.57.54-3 by chroju, on Flickr&rdquo;&gt;<img src="http://farm4.staticflickr.com/3751/11270239633_8cc563c384.jpg" width="500" height="404" alt="スクリーンショット_2013-12-08_22.57.54-3"></a></p>
-
+<p><a href="http://www.flickr.com/photos/chroju/11270239633/"> title=&quot;スクリーンショット_2013-12-08_22.57.54-3 by chroju, on Flickr&quot;&gt;<!-- raw HTML omitted --></a></p>
 <p>い……いねぇ……。確かにgenerateしたはずなのにurbはあるけどコントローラーもヘルパーもねぇ……。でもね、この状態でブラウザ開くとなんかログインできるんだよ。動くんだよ。幽霊かと。お前ソースはどこにあんのかと。んで探ってみたらあった。</p>
-
-<p><a href="http://www.flickr.com/photos/chroju/11270148454/"> title=&ldquo;スクリーンショット 2013-12-08 22.57.19 by chroju, on Flickr&rdquo;&gt;<img src="http://farm4.staticflickr.com/3754/11270148454_9e29b9f724.jpg" width="500" height="291" alt="スクリーンショット 2013-12-08 22.57.19"></a></p>
-
+<p><a href="http://www.flickr.com/photos/chroju/11270148454/"> title=&quot;スクリーンショット 2013-12-08 22.57.19 by chroju, on Flickr&quot;&gt;<!-- raw HTML omitted --></a></p>
 <p>なんかすげえとこにあった！！！！</p>
-
 <p>あー、要はこれがbundle execの有無による違いね。bundle execプレフィックスを付けると今の環境のGemfileからインストールしてくれるけど、付けない場合はシステム側のRubyにdeviseをインストールしてしまう。だからこんなとこにいろいろ入ってしまったと。あー。失敗だ……。</p>
-
 <p>なんかbundle execを省略する方法もあるらしいけど、よくわかってないものをよくわかってないままに省略するのも危険なので、しばらくは自戒込めてプレフィックス付けるようにします。</p>
 
                 <br>

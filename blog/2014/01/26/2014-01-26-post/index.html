@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.732175%20%2b0900%20JST%20m%3d%2b0.441956506">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.732175%20%2b0900%20JST%20m%3d%2b0.441956506">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.732175%20%2b0900%20JST%20m%3d%2b0.441956506">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.602691463%20%2b0900%20JST%20m%3d%2b0.365214482">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.602691463%20%2b0900%20JST%20m%3d%2b0.365214482">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.602691463%20%2b0900%20JST%20m%3d%2b0.365214482">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.732175%20%2b0900%20JST%20m%3d%2b0.441956506">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.602691463%20%2b0900%20JST%20m%3d%2b0.365214482">
     
 
 
@@ -166,10 +166,7 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。</p>
-
+                <p>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。</p>
 <pre><code>$ yum list | grep postgresql
 （中略）
 postgresql.i686                           8.4.18-1.el6_4                base
@@ -179,67 +176,37 @@ postgresql-devel.i686                     8.4.18-1.el6_4                base
 postgresql-devel.x86_64                   8.4.18-1.el6_4                base
 postgresql-docs.x86_64                    8.4.18-1.el6_4                base
 postgresql-ip4r.x86_64                    1.05-1.el6                    epel
-</code></pre>
-
-<p>うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4である。最新を入れればいいというわけでもないが、さすがにちょっと古いような気が。（ところでyumに入ってるパッケージの調べ方、これであってんのかな？）</p>
-
+</code></pre><p>うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4である。最新を入れればいいというわけでもないが、さすがにちょっと古いような気が。（ところでyumに入ってるパッケージの調べ方、これであってんのかな？）</p>
 <p>てわけで新しいバージョンをWebから持ってくる。<a href="http://yum.postgresql.org/repopackages.php">PostgreSQL RPM Repository (with Yum)</a>にいろいろあるので適切なリンクURLをコピー。1コ前のバージョンでPostgresql 9.2にしときましょか。自分のOSがなんだかわかんなくなったらunameコマンドで確認。</p>
-
 <pre><code>$ uname -a
 Linux xxx 2.6.32-358.23.2.el6.x86_64 #1 SMP Wed Oct 16 18:37:12 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre>
-
-<p>CentOS 6 x86_64であることがわかったので、wgetでダウンロード。</p>
-
+</code></pre><p>CentOS 6 x86_64であることがわかったので、wgetでダウンロード。</p>
 <pre><code>$ wget -P /tmp http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm
-</code></pre>
-
-<p>続いてRPMにインストール。</p>
-
+</code></pre><p>続いてRPMにインストール。</p>
 <pre><code>$ sudo rpm -ih /tmp/pgdg-centos92-9.2-6.noarch.rpm
 warning: /temp/pgdg-centos92-9.2-6.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
 ########################################### [100%]
 ########################################### [100%]
-</code></pre>
-
-<p>rpmコマンドのオプションとして-iを付けるとパッケージのインストールが出来る。さらにhを付けると####で進捗が表示されるそうだ。必須オプションではないので、hについてはお好みで。</p>
-
+</code></pre><p>rpmコマンドのオプションとして-iを付けるとパッケージのインストールが出来る。さらにhを付けると####で進捗が表示されるそうだ。必須オプションではないので、hについてはお好みで。</p>
 <p>いよいよyumでインストール。</p>
-
 <pre><code>$ yum -y install postgresql92-server.x86_64
-</code></pre>
-
-<p>……yum installって補完はできないんですかね入れたら初期化して起動て自動起動設定します。</p>
-
+</code></pre><p>……yum installって補完はできないんですかね入れたら初期化して起動て自動起動設定します。</p>
 <pre><code>$ sudo service postgresql-9.2 initdb
 $ sudo service postgresql-9.2 start
 $ sudo chkconfig postgresql-9.2 on
-</code></pre>
-
-<p>ここまでで一旦インストールとしては終了。あとは基本的な設定をいくつか入れておく。</p>
-
+</code></pre><p>ここまでで一旦インストールとしては終了。あとは基本的な設定をいくつか入れておく。</p>
 <p>まずpg_hba.confを触る。これはDBに対するクライアントからのアクセスを制御するファイルで、さきほどinitdbしたときに作成されている。管理している内容としてはどのDBに対するどのユーザーのどこ（IP）からのアクセスを、どの認証方式で認証するか。必要に応じて書き入れてやる必要があるが、ひとまず参考書通りの設定をしておく。</p>
-
 <pre><code>$ sudo vim /var/lib/pgsql/9.2/data
-</code></pre>
-
-<pre><code># TYPE  DATABASE     USER           ADDRESS                     METHOD
+</code></pre><pre><code># TYPE  DATABASE     USER           ADDRESS                     METHOD
 
 local  all           postgres                                   peer
 local  all           all                                        md5
 host   all           all            127.0.0.1/32                md5
 host   all           all            ::1/128                     md5
-</code></pre>
-
-<p>終わったらPostgreSQLをリロード。</p>
-
+</code></pre><p>終わったらPostgreSQLをリロード。</p>
 <pre><code>$ sudo service postgresql-9.2 reload
-</code></pre>
-
-<p>今回はここまで。</p>
-
-<h2 id="参考">参考</h2>
-
+</code></pre><p>今回はここまで。</p>
+<h2 id="heading">参考</h2>
 <ul>
 <li><a href="http://www.postgresql.jp/document/8.2/html/auth-pg-hba-conf.html">pg_hba.confファイル</a></li>
 <li><a href="http://morizyun.github.io/blog/postgresql-mac-centos-rails/">Mac MountainLion/CentOS 6.4へのPostgreSQL 9.2の導入手順 - 酒と泪とRubyとRailsと</a></li>

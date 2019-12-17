@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.561591%20%2b0900%20JST%20m%3d%2b0.271376848">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.561591%20%2b0900%20JST%20m%3d%2b0.271376848">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.561591%20%2b0900%20JST%20m%3d%2b0.271376848">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.421381949%20%2b0900%20JST%20m%3d%2b0.183904968">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.421381949%20%2b0900%20JST%20m%3d%2b0.183904968">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.421381949%20%2b0900%20JST%20m%3d%2b0.183904968">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.561591%20%2b0900%20JST%20m%3d%2b0.271376848">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.421381949%20%2b0900%20JST%20m%3d%2b0.183904968">
     
 
 
@@ -166,122 +166,68 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。</p>
-
-<h2 id="従来の環境">従来の環境</h2>
-
+                <p>CoreOS（現状Container Linuxですけど、キャッチーじゃないのであえて）上でプライベートのDockerコンテナを動かしていたのですが、それをAmazon ECS上へ移行した話です。</p>
+<h2 id="heading">従来の環境</h2>
 <p>従来は以下のような環境を使っていました。</p>
-
 <ul>
 <li>さくらクラウドでCoreOSを起動（イメージがデフォルトで用意されていて嬉しい）</li>
 <li>コンテナは個人的なログ用influxDB、Grafana、個人slack用hubotの3つ。</li>
 <li>オーケストレーションツールは使っていない（docker composeで管理、systemdで自動起動）</li>
 <li>それ以外に運用っぽいことも特にしてない。</li>
 </ul>
-
 <p>プライベートかつ、とりあえずDocker触って動かしたいという理由だけで作った環境だったので、正直扱いは雑でして、たまにコンテナ落ちてて、hubotに呼びかけてから気付くみたいなこともままありました。</p>
-
 <p>それが地味にストレスだったのと、せっかくDocker使うならもうちょいオーケストレーションとかちゃんとしたいってことで移行を決断しました。</p>
-
-<h2 id="移行先の検討">移行先の検討</h2>
-
+<h2 id="heading-1">移行先の検討</h2>
 <p>CoreOSは従来であれば<a href="https://coreos.com/fleet/docs/latest/launching-containers-fleet.html">fleet</a>という独自のオーケストレーションツールを持っていましたが（今も正確には現役ですが）、このリンク先にもある通り、現状はk8s使えってことになってます。</p>
-
 <p>なのでさくらクラウド続投してk8sで頑張るというのも手ではあったのですが、仕事ではAWS使うことが多いというのと、個人的にここ最近聴いたDockerのproduction利用の話がだいたいECSだったのとで、管理も楽そうだしECSでいいかなという感じでした。</p>
-
 <p>ただ、k8sであればオンプレやら何やらといった環境を問わずに運用が可能だし、クラウドに載せたければGKEでそのノウハウ活かせるしという利点があり、長期視点で汎用性の高い技術選択、という視点だとk8sの方がいいのではと思ったりしてます。</p>
-
-<h2 id="ecsの概念">ECSの概念</h2>
-
+<h2 id="ecs">ECSの概念</h2>
 <p>簡単に触れておきます。</p>
-
 <h3 id="cluster">cluster</h3>
-
 <p>コンテナをホストするEC2インスタンス群。</p>
-
 <h3 id="task-definition">task definition</h3>
-
 <p>cluster上でコンテナをどう配置するかという定義。</p>
-
 <h3 id="task">task</h3>
-
 <p>task definitionに基いて稼働するコンテナ群。</p>
-
 <h3 id="service">service</h3>
-
 <p>taskを永続的なプロセスとして稼働させるECSの機能。</p>
-
 <p>taskは「service」として動かすことで、コンテナが落ちても勝手に上げ直してくれるようなイイ感じのやつになります。serviceの定義の中でAuto Scalingの設定したりとかもできるらしいですが、今回そこまでやってないです。要らないし。</p>
-
-<h2 id="移行作業">移行作業</h2>
-
+<h2 id="heading-2">移行作業</h2>
 <p>ぶっちゃけ、すごく簡単でそんなにやったことはないです。</p>
-
 <p>はじめはTerraformで環境作るかとか思ってたんですが、<del>tfファイルをゼロから書くのがだるくなったので</del>他にも手段があるんじゃないかと調べていたところ、<a href="http://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ECS_CLI.html">ECS CLI</a>というAWS提供のコマンドツールがありました。</p>
-
 <p>で、これがtask definitionとしてdocker-compose.ymlがだいたいそのまま使えるんですね。。なのでdocker-compose.ymlからTerraformへ定義を書き写すような面倒はかけず、移行が出来てしまうわけです。実行したコマンドはこれだけです。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#586e75"># clusterを起動</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ ecs-cli up --keypair hoge --size <span style="color:#2aa198">1</span> --instance-type t2.micro --capability-iam --port <span style="color:#2aa198">8080</span> <span style="color:#2aa198">3000</span> <span style="color:#2aa198">8086</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#586e75"># docker-compose.ymlからserviceを起動</span>
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>$ ecs-cli compose --file docker-compose.yml service up</code></pre></div>
-<p>これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。</p>
-
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>$ ecs-cli compose --file docker-compose.yml service up
+</code></pre></div><p>これだけでもう、コンテナはほぼ永続的に稼働します。便利ですね。今回は個人用なのでt2.microを1台しか上げてないですが、複数台インスタンスを上げればコンテナはイイ感じに分散してくれるみたいです。</p>
 <p>ただ、<code>ecs-cli up</code>で賄えるのはあくまでEC2の範囲なので、ALBを使いたいですとか、EFSで各インスタンス間のデータを共有したいですとか、そういう要望がある場合にはマネジメントコンソールなりTerraformを使う必要があります。あくまで「とりあえずコンテナを動かす環境が何かあればいい」ぐらいの目的で使うものかなと。</p>
-
 <p>まぁ自分の場合はプライベート用途で複雑な要件もなかったので、ECS CLIで十分です。構成管理という面でも、先のコマンドを書いたシェルスクリプトとdocker-compose.ymlさえあれば環境再現はすぐできるので、拍子抜けするほど楽でした。</p>
-
-<h2 id="運用">運用</h2>
-
+<h2 id="heading-3">運用</h2>
 <p>当初の動機が「コンテナがバンバン落ちる不健全な環境を抜け出したい」でもあったので、多少なり運用も組み立てています。</p>
-
-<h3 id="監視">監視</h3>
-
+<h3 id="heading-4">監視</h3>
 <p>自分がproduction環境でのDocker運用経験がほとんどないこともあり、正直ベストな監視の仕方がよくわかっていません。例えば最低10台以上のコンテナを動かしてガリガリ処理させたいような環境を動かしたいとして、稼働台数10台を下回ったらアラート上げたいと個人的には思うんですが、そういう運用でいいんですかね。それともオーケストレーションでコンテナ数確保されるから監視しなくてよい、のかどうなのか。</p>
-
 <p>と言うのも、意外というかなんというか、Amazon CloudWatchではコンテナの稼働状態に関するメトリクスはほとんど取れません。CPUとメモリの使用率だけです。稼働台数ぐらいありそうなものなんですけどね。ECSの監視はどうしてんだろうみなさんというのは改めて調べておきたいところ。</p>
-
 <p>結局のところ、自分は2方面で監視してます。</p>
-
 <p>1つはCloudWatch Eventsで、serviceの稼動状態に変化が起きたことをトリガーとしてLambdaなどを発火できる機能があります。これを使ってコンテナが落ちたりしたときにはslackに通知されるようにしました（鏡音リンちゃんが教えてくれます）。ただ、先述の通り「落ちてもすぐ自動で上がる」ようにはなってるので、なんか頻繁に落ちてるなとか、落ちたまま上がらないなとかを気付くためだけの用途です。</p>
-
-<p><a href="https://gyazo.com/589d57ff847e6d90239b9f2856a25620"><img src="https://i.gyazo.com/589d57ff847e6d90239b9f2856a25620.png" alt="https://gyazo.com/589d57ff847e6d90239b9f2856a25620" /></a></p>
-
+<p>[![<a href="https://gyazo.com/589d57ff847e6d90239b9f2856a25620%5D(https://i.gyazo.com/589d57ff847e6d90239b9f2856a25620.png)%5D(https://gyazo.com/589d57ff847e6d90239b9f2856a25620)">https://gyazo.com/589d57ff847e6d90239b9f2856a25620](https://i.gyazo.com/589d57ff847e6d90239b9f2856a25620.png)](https://gyazo.com/589d57ff847e6d90239b9f2856a25620)</a></p>
 <p>2つ目はMackerelのDockerプラグイン。</p>
-
 <p><a href="https://mackerel.io/ja/docs/entry/advanced/docker">Dockerをモニタリングする - Mackerel ヘルプ</a></p>
-
 <p>これも1インスタンス上で動いているコンテナごとのメトリクスをグラフ表示するだけなので、コンテナ個別の死活などは取れないです。あくまでメトリクスグラフの描画のために使ってます。</p>
-
 <p>聴くところだとDataDogはコンテナの稼働台数とか取れるみたいですね？</p>
-
-<h3 id="バックアップ">バックアップ</h3>
-
+<h3 id="heading-5">バックアップ</h3>
 <p>ECSのインスタンスを落としたらそのままデータ死ぬという状況はさすがに怖いのでバックアップ。これも悩みましたけど、ズボラにCloudWatch Eventsで日に1回EBSスナップショット取らせてます。</p>
-
-<h2 id="罠っぽいところ">罠っぽいところ</h2>
-
+<h2 id="heading-6">罠っぽいところ</h2>
 <p>最後にハマリポイントをいくつか。</p>
-
-<h3 id="docker-compose-ymlが必ずしも直接使えない">docker-compose.ymlが必ずしも直接使えない</h3>
-
+<h3 id="docker-composeyml">docker-compose.ymlが必ずしも直接使えない</h3>
 <p>docker-compose.ymlがほぼそのまま使えるのは使えるのですが、具体的にはmemlimitを各コンテナで設定しておかないと、メモリ足りないと言って落ちたりします。CoreOSだとリソースなど見ずに上げろと言えば上げてくれるんですが、ECSはそのあたりシビアに見てます。</p>
-
-<h3 id="ecs-cli-service-upが無限ループする">ecs-cli service upが無限ループする</h3>
-
+<h3 id="ecs-cli-service-up">ecs-cli service upが無限ループする</h3>
 <p>コンテナのserviceを起動する<code>ecs-cli service up</code>コマンドですが、どうも一度起動命令を送った後、全コンテナがRUNNING状態になるのをひたすら待っているようで。</p>
-
 <p>何かタスク定義に不備（先のメモリ不足とか）があるとserviceは一度落ち、そしてserviceは永続稼働前提なので再度コンテナを起動し、そしてまた落ちるという無限ループに陥るのですが、ECS CLIはそれを拾ってくれないです。なのでupしてからしばらく応答がなければ、無限ループに陥ったと判断し、コマンドキャンセルしてGUIからログとか見に行った方がいいです。</p>
-
-<h3 id="docker-hub-privateとの連携が面倒">Docker Hub Privateとの連携が面倒</h3>
-
+<h3 id="docker-hub-private">Docker Hub Privateとの連携が面倒</h3>
 <p>ECS上でDocker Hubのプライベートレジストリに置いたイメージを動かしたい場合、cluster上のインスタンスに一旦ログインして、設定ファイルにログイン情報を書き込む必要があります。ちょっと面倒だし、手段としてもあんまりイケていない感じがするので、もう少しなんとかならないかなと。まぁECR使ってくれってことなんでしょうけど。</p>
-
-<h2 id="まとめ">まとめ</h2>
-
+<h2 id="heading-7">まとめ</h2>
 <p>単純に「コンテナを動かす」だけであれば非常にシンプルに出来ており、docker-compose.ymlという既存の資産も使えるので、ECSが使われる理由はちょっとわかった気がします。特にECS CLIがあることで、Dockerイメージを更新したときなど、CIで自動的にデプロイをトリガーできたりするのはいいですね。</p>
-
 <p>機会があればk8sも使ってみて、使い勝手とか比較したいところ。</p>
 
                 <br>

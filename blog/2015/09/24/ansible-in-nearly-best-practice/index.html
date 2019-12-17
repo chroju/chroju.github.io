@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-14%2012%3a04%3a43.591955%20%2b0900%20JST%20m%3d%2b0.301739978">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-14%2012%3a04%3a43.591955%20%2b0900%20JST%20m%3d%2b0.301739978">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-14%2012%3a04%3a43.591955%20%2b0900%20JST%20m%3d%2b0.301739978">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-17%2022%3a41%3a44.466724527%20%2b0900%20JST%20m%3d%2b0.229247546">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-17%2022%3a41%3a44.466724527%20%2b0900%20JST%20m%3d%2b0.229247546">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-17%2022%3a41%3a44.466724527%20%2b0900%20JST%20m%3d%2b0.229247546">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-14%2012%3a04%3a43.591955%20%2b0900%20JST%20m%3d%2b0.301739978">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-17%2022%3a41%3a44.466724527%20%2b0900%20JST%20m%3d%2b0.229247546">
     
 
 
@@ -166,45 +166,27 @@
                 </div>
             </div>
             <div class="markdown">
-                
-
-<p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
-
-<h2 id="なぜec2">なぜEC2？</h2>
-
+                <p>自分は今まで開発に使うマシンとして家では据え置きのiMac Mid 2010（古い）を、出先ではVAIO Proに入れたArch Linuxを使っていて、レポジトリの同期にはあろうことかDropboxを使っていたのだが、インストールされているツールが微妙に違っていたり、Dropboxで<code>bundle</code>とかまで同期してしまうのはあまりよろしくなさそうだなというのもあったりして、EC2上に開発環境を置いて各端末からはSSHでつなぐことにしてみた。で、せっかくなのでと思いansbileで環境構築を行っている。</p>
+<h2 id="ec2">なぜEC2？</h2>
 <p>少し前に<a href="http://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">開発環境としてDigitalOceanを使うことを勧める記事</a>を書いたことがあったが、仮想マシンを停止しても課金が発生してしまうのが少々つらいのと、リージョンがすべて国外で、開発に使うにはさすがにレイテンシーが厳しいので断念した。EC2であれば停止中は課金されないので、常時起動が必要ない開発環境として使う分には課金額は少なくなりそうかなと考えている。今は自分のアカウントだとまだ無料期間にあたるので、t2.microを無料で使える状態にあり、実際の課金額がどうなるかは確かめていない。</p>
-
-<h2 id="ベストプラクティス構成の意識">ベストプラクティス構成の意識</h2>
-
+<h2 id="heading">ベストプラクティス構成の意識</h2>
 <p>出来上がったplaybooks（という言い方でいいのか？）はGitHubに上げてある。</p>
-
 <p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
-
 <p>あらゆるサーバーで共通の<code>common</code>というロールと、開発環境用の<code>develop</code>というロールを用意している。現状、開発言語がRubyでシェルにはzshを使っているので、完全に自分仕様のplaybookにはなっている。dotfilesも自分のレポジトリから<code>git clone</code>しているし。</p>
-
 <p>ansibleには公式ドキュメントに<a href="http://docs.ansible.com/ansible/playbooks_best_practices.html">ディレクトリ構成のベストプラクティス</a>が上がっていて、なるべくこれに沿うようには作っている。が、完全に当てはめてしまうには開発環境1サーバーだけのためのansibleには荷が重すぎるので、あくまで部分適用ではある。自分の解釈ではベストプラクティスの考え方はこんなところかと。</p>
-
 <ul>
 <li>playbooksは同時に実行すべきtaskをroleとして分割する</li>
 <li>ansibleの適用対象サーバーはWeb、DB等の役割ごとにグループで分割する</li>
 <li>グループごとに実行するroleと変数（group_vars）を紐つける</li>
 </ul>
-
 <p>taskはroleに分割され、それらroleをwebservers.ymlやdbservers.ymlがincludeし、さらにsite.ymlがすべての*servers.ymlをincludeするというのが公式の勧めです。確かにこれなら全体に適用したい場合は<code>ansible-playbook site.yml</code>でよいし、一部グループだけに適用したいなら<code>ansible-playbook *servers.yml</code>とすれば良いのだから合理的。さらにインベントリファイルもstagingとproductionに分けて、それぞれにwebserversとdbserversのグループを作っているのだから、stagingとproductonで別々に適用することも可能になると。またtagをtaskにつけておけば特定のtask群だけ実行することも容易になる。。。とまぁ、とにかくいろんな手段を使って分割実行できるようにしているわけですな。</p>
-
 <p>なのでそこまで大規模な構成管理をしないのであれば、このあたりどこまで取り入れるのは自由ではないかと。自分の場合はサーバー1台が今のところは相手ということもあり、*servers.ymlにあたるインベントリファイルは作っていないし、tagも個々のtaskに対しては設定していない。今後さらに範囲を広げるようであれば、後付で設定していけばよいかと思っている。</p>
-
 <p>ただ、少なくともroleに関しては分けておくべきと個人的には推しておきたい。普通にアプリケーション用のコード書くときにも関数やメソッドは分割しますよね？ってことで、全体の見通しを良くする意味でもroleへの分割は必須と思う。</p>
-
 <p>ansible、ファーストインプレッションはとにかく<a href="http://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">「楽そう」</a>だったんだけど、複雑なことをやろうとすればするほどドツボにはまっていきそうな気もする。ある程度早い段階でベストプラクティスに目を通したうえで、自分が使うときにはどういったディレクトリ構成が最も有効であるかを模索した方がよい。自分も理解できるまでは少し苦労したけど、一度やり方をハメてしまうと今後長く使えそうで満足感がある。</p>
-
-<h2 id="このレポジトリでやっていること">このレポジトリでやっていること</h2>
-
+<h2 id="heading-1">このレポジトリでやっていること</h2>
 <p>ソース読んでもらえればわかる話ではありますが。</p>
-
 <ul>
 <li>common
-
 <ul>
 <li>hostname設定</li>
 <li>localeとtimezone設定</li>
@@ -214,25 +196,21 @@
 <li>DenyHostsインストール</li>
 <li>logwatchインストール</li>
 <li>iptables設定</li>
-</ul></li>
+</ul>
+</li>
 <li>develop
-
 <ul>
 <li>development tools、zsh、git、vim、jqのインストール</li>
 <li>dotfilesの配置</li>
 <li>デフォルトシェルをzshに変更</li>
 <li>rbenvの設定</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>もっとも苦労したのはrbenv周りで、<code>git clone</code>直後はpathが通ってない<code>~/.rbenv/bin</code>配下のコマンドをどう実行すべきかとか、それなりに悩んだ。当初インベントリファイルで<code>sudo: yes</code>としてしまっていたので、rbenv関連のタスクも全部root権限で実行されて、軒並みフォルダやファイルがrootの所有になってしまうという事故があったのだが、<code>sudo:</code>ないし<code>become:</code>の設定はタスク単位で考えたほうが良いと思う。また本来であれば<code>~/.bash_profile</code>あたりにrbenvのpath追加等の設定を書き込むところまでタスク化すべきかと思うが、自分の場合はdotfilesにすでに設定が入っているので、そのタスクは作っていない。</p>
-
 <p>もうひとつの悩みとしては、いずれのroleもsudo権限のある開発用ユーザーでの実行を前提に考えているのだが、EC2の場合は<code>ec2_user</code>、その他VPSの場合は<code>root</code>がデフォルトのユーザーなので、デフォルトユーザーで一度入って開発用のユーザーを作るところもタスク化すべきかなと言うこと。その場合はそのroleだけ別ユーザーで実行する形になるわけで、そういった構成がそもそも可能なのか？というところからわかってないのだけど。</p>
-
-<h2 id="その他技術的な話">その他技術的な話</h2>
-
+<h2 id="heading-2">その他技術的な話</h2>
 <p>細かい技術的なtipsは後ほどQiitaに上げるつもり。現状の疑問中心に一旦取りまとめます。</p>
-
 <ul>
 <li>変数名の命名規約。代入は<code>group_vars</code>で行うことになるが、ここに一挙に集めたときにどれがどこで使われているのかわかりにくいので、roleに紐ついた名前とすべきであろうか。。</li>
 <li>ntp.confの設定。templatesでいい気はするのだが、どんなサーバーでも共通の設定で問題ないのか勉強不足でわかっていない。</li>
