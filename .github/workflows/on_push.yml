@@ -24,17 +24,16 @@ jobs:
       shell: bash
       env:
         BRANCH: master
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
         GOPATH: /home/runner/work/
       run: |
         git config --global user.name chroju
         git config --global user.email chor.chroju@gmail.com
-        git remote set-url origin https://chroju:${GITHUB_TOKEN}@github.com/chroju/chroju.github.io.git
+        git fetch
         git submodule sync
         git submodule update --init
-        git worktree add public master
-        rm -rf public/*
+        git worktree add --track -b master public origin/master
         go get github.com/gohugoio/hugo
         sudo cp /usr/share/zoneinfo/Japan /etc/localtime
         $GOPATH/bin/hugo
-        cd public && git add --all && git commit -m "Rebuild pages" && git push origin master
+        cd public && git remote set-url origin https://x-acess-token:${GITHUB_TOKEN}@github.com/chroju/chroju.github.io.git && git add --all && git commit -m "Rebuild pages" && git push origin master
