@@ -36,4 +36,4 @@ jobs:
         go get github.com/gohugoio/hugo
         sudo cp /usr/share/zoneinfo/Japan /etc/localtime
         $GOPATH/bin/hugo
-        cd public && git remote set-url origin https://x-acess-token:${GITHUB_TOKEN}@github.com/chroju/chroju.github.io.git && git add --all && git commit -m "Rebuild pages" && git push origin master
+        cd public && git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/chroju/chroju.github.io.git && git add --all && git commit -m "Rebuild pages" && git push origin master
