@@ -25,6 +25,7 @@ jobs:
       env:
         BRANCH: master
         GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
+        GOPATH: $HOME/go
       run: |
         git config --global user.name chroju
         git config --global user.email chor.chroju@gmail.com
@@ -32,6 +33,7 @@ jobs:
         git submodule sync
         git submodule update --init
         git worktree add --track -b master public origin/master
+        mkdir $HOME/go
         go get github.com/gohugoio/hugo
         sudo cp /usr/share/zoneinfo/Japan /etc/localtime
         $GOPATH/bin/hugo
