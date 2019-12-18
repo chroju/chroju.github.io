@@ -18,14 +18,14 @@ jobs:
     - name: Cache GOPATH
       uses: actions/cache@v1
       with:
-        path: ~/go
+        path: /home/runner/work/go
         key: ${{ runner.os }}-gopath
     - name: Deploy hugo
       shell: bash
       env:
         BRANCH: master
         GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
-        GOPATH: $HOME/go
+        GOPATH: /home/runner/work/go
       run: |
         git config --global user.name chroju
         git config --global user.email chor.chroju@gmail.com
@@ -33,7 +33,7 @@ jobs:
         git submodule sync
         git submodule update --init
         git worktree add --track -b master public origin/master
-        mkdir $HOME/go
+        mkdir -p /home/runner/work/go
         go get github.com/gohugoio/hugo
         sudo cp /usr/share/zoneinfo/Japan /etc/localtime
         $GOPATH/bin/hugo
