@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだ">
+
+<meta property="og:title" content="ブログをHugoに移行した" />
+<meta property="og:description" content="すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2016/02/18/convert-to-hugo/" />
+<meta property="article:published_time" content="2016-02-18T20:51:20+09:00" />
+<meta property="article:modified_time" content="2016-02-18T20:51:20+09:00" />
+
+
+<title>
+
+
+     ブログをHugoに移行した &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2016/02/18/convert-to-hugo/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.709335485%20%2b0000%20UTC%20m%3d%2b0.231212655">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.709335485%20%2b0000%20UTC%20m%3d%2b0.231212655">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.709335485%20%2b0000%20UTC%20m%3d%2b0.231212655">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.709335485%20%2b0000%20UTC%20m%3d%2b0.231212655">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    ブログをHugoに移行した
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Thu Feb 18 2016 20:51:20 JST'>Feb 18, 2016</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>すでに流行りは一巡しているような気もするが、Hugoを導入してみた。もともと自宅iMacにOctopressを置いてブログ作業はしていたのだが、外でもブログ更新ぐらいできた方がいいなぁと考え、クラウド上の開発用端末にレポジトリ移しちゃおうということになり、じゃあついでだからと移行してみた。Go自体は最近使っているオープンソースがそれであったという試しがあり、すでに導入は終えていた（ただし書けない）。</p>
+<p>随所で語られているように移行自体は大したものではなく、Markdownでいずれも互換性があるし、Front MatterもYAML形式であれば同一。Hugoレポジトリの<code>content/post</code>配下に記事ファイルを突っ込めば移行としてはおしまい。多少の差異については以下の記事が詳しい。</p>
+<p><a href="http://deeeet.com/writing/2014/12/25/hugo/">OctopressからHugoへ移行した | SOTA</a></p>
+<p>ただ自分の場合はパーマリンクを前ブログから保てていない。というのも、Octopressで使っていた記事ファイル名が<code>YYYY-MM-DD-foobar.markdown</code>の形だったのに対し、今回は記事のパーマリンクを<code>config.toml</code>で以下のように設定してしまっている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>[permalinks]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    post = <span style="color:#2aa198">&#34;/blog/:year/:month/:day/:filename/&#34;</span>
+</code></pre></div><p>従って<code>/blog/YYYY/MM/DD/YYYY-MM-DD-foobar/</code>という歪なパーマリンクになってしまっている記事がいくつかある。ほとんどの記事は<code>foobar.markdown</code>に直したのだが、はてなブログ時代から移植した記事は<code>YYYY-MM-DD-post.markdown</code>という適当なパーマリンクにしていたので、一括して直すことができなかった。時間を見てこれらも意味のあるURLに直すつもり。</p>
+<p>記事を公開する流れは以下のようになる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75"># 記事作成</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>$ hugo new post/title.md
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>$ vi content/post/title.md
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"># ビルド</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>$ hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"># commit</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>$ <span style="color:#b58900">cd</span> public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>$ git add .
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>$ git commit -m <span style="color:#2aa198">&#34;new post&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>$ git push origin master
+</code></pre></div><p><code>hugo</code>コマンドでビルドすると<code>public</code>フォルダにサイト構成全体が吐かれるので、それをそのまま<code>git push</code>して終わり。ただ実際にバージョン管理したいのは<code>public</code>というより、設定ファイルや元のMarkdownが詰まったHugoのレポジトリ全体ではないかという気もするので、後々以下の記事のようにレポジトリ全体で<code>git push</code>してCIでビルドさせる形に変えたいと思う。</p>
+<p><a href="http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/">HugoとCircleCIでGitHub PagesにBlogを公開してみた - Hori Blog</a></p>
+<p>なおテーマはとても悩みどころで、しばらくコロコロ変わるかもしれない。というか自分でカスタマイズしたいけどCSSなんて今更書けるのか。。。</p>
+<h2 id="-2016-02-22-2350">（追記 2016-02-22 23:50）</h2>
+<p>フィードのファイルパスがデフォルトだと<code>index.xml</code>になってしまうので、Octopressから変更がないよう<code>atom.xml</code>に直した。<code>config.toml</code>で指定ができる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>rssuri = <span style="color:#2aa198">&#34;atom.xml&#34;</span>
+</code></pre></div><p>参考：<a href="https://discuss.gohugo.io/t/what-is-rsslink-exactly/1195/2">What is {{ .RSSlink }}, exactly? - support - Hugo Discussion</a></p>
+<h2 id="heading">その他参考記事</h2>
+<ul>
+<li><a href="http://qiita.com/syui/items/869538099551f24acbbf">HUGOを使ってサイトを立ち上げる方法 - Qiita</a></li>
+<li><a href="https://gohugo.io/tutorials/github-pages-blog/">Hugo - Hosting on GitHub Pages</a></li>
+</ul>
+
+                <br>
+                
+                  <div class="tags">
+                    <strong>Tags:</strong>
+                  
+                    <a href="https://chroju.github.io/tags/blog">blog</a>
+                  
+                  </div>
+                  <br />
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

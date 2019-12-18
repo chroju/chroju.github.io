@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="きっかけ VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。 とはいえ完">
+
+<meta property="og:title" content="サーバーレスっぽいインフラをどう管理していくか" />
+<meta property="og:description" content="きっかけ VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。 とはいえ完" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/" />
+<meta property="article:published_time" content="2017-02-07T15:37:51+09:00" />
+<meta property="article:modified_time" content="2017-02-07T15:37:51+09:00" />
+
+
+<title>
+
+
+     サーバーレスっぽいインフラをどう管理していくか &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.693751675%20%2b0000%20UTC%20m%3d%2b0.215628745">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.693751675%20%2b0000%20UTC%20m%3d%2b0.215628745">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.693751675%20%2b0000%20UTC%20m%3d%2b0.215628745">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.693751675%20%2b0000%20UTC%20m%3d%2b0.215628745">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    サーバーレスっぽいインフラをどう管理していくか
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Feb 7 2017 15:37:51 JST'>Feb 7, 2017</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <h2 id="heading">きっかけ</h2>
+<ul>
+<li>VPSで設置していたプロフィールサイト（静的HTML）をサーバーレスで動かした方がコストダウンになるのではないかと考えた。</li>
+<li>とはいえ完全に静的なサイトだとS3だけで事が済んでしまい面白くない（）ので、自分のブログの最新エントリーを動的に書き加えるような処理を与え、動的に生成されるページをLambdaで作ることにした。</li>
+<li>サーバーレスの時代にいくつかデプロイフレームワークが出てきていたので、それを使えればと思った。</li>
+</ul>
+<p>……という感じでサーバーレスっぽい何かを作った。いや作ろうとしたってレベルか……。</p>
+<p>実は個人で使っているクラウド上のサーバーが、今年1月の時点で3台ありまして。1台はプライベート用途のContainer Linux @さくらクラウド。1台は先に書いたパブリック用途のウェブサーバー @さくらVPS。んで踏み台として、必要なときだけ起動するEC2を1台。ああ、もう1台Herokuもhubot用に使ってたか。これはDockerにしちゃって消しましたが。</p>
+<p>まぁさすがにちょっと無駄に多いから整理したいなという思いがきっかけとなった。VPS、数年前だとエンジニアは1人1台持ってnginxとMySQL運用しろみたいな気風もあったけど、なんだかそんな時代も去った感もあり。どちらかと言えばどこかのPaaSでなんか作る方が今風なのかも。</p>
+<p>詳細な設計は<a href="http://qiita.com/chroju/items/827dbb9e820f41820e14">Qiitaに上げました</a>ので、そちらをご参照ください。</p>
+<h2 id="heading-1">使用したツール</h2>
+<h3 id="heading-2">サーバーレスなデプロイツール</h3>
+<p>これらのフレームワーク群をまとめてどう呼べばよいものか。。。「サーバーレスフレームワーク」がしっくり来るんだけど、これはすでに使ってしまっているプロダクトがあるから使えない……あの名前、汎用的過ぎてちょっとどうかと思うんだけど。</p>
+<p>今回せっかくなので、フレームワークを使ってみることにしました。試したのは以下3種類。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>カバー範囲</th>
+<th>感想</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/serverless/serverless">Serverless Framework</a></td>
+<td>中でCloud  Formationを使っているのでわりとなんでも。</td>
+<td>多機能で何でもできる印象。CFn直接使うのと学習コストを比べたい感じがする。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/awslabs/chalice">chalice</a></td>
+<td>API Gateway, Lambda</td>
+<td>レスポンスがjsonに限定されるなどまだ機能は少ないが、その分簡単なAPIならサクッと作れて楽。何よりIAMポリシーを自動生成してくれるのが最高。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/apex/apex">Apex</a></td>
+<td>Lambda</td>
+<td>Lambdaを手作業でzipしてデプロイするのが面倒なときに使いたいツール。GolangでLambdaを書けたりする機能もある。</td>
+</tr>
+</tbody>
+</table>
+<p>試用の結果、今回の目的はHTMLの返却だったのでchaliceは一旦諦めて、Serverless Frameworkでもよかったんだけど、ちょっと今回払う学習コストとしては見合わなさそうな印象があったので、Apexを使うことにした。</p>
+<p>触った印象としてはApexも非常に学習コストが少なくて良いのだが、今後に期待したいのはChalice。awslabsが作っているので、というのもあるけれど、おそらくサーバーレスアーキテクチャーとして多い用途の1つであろう、API GatewayとLambdaを使ってREST APIを返す、という使い方においては必要十分な機能が満たされているように思います。</p>
+<h3 id="html5-up">HTML5 UP!</h3>
+<p>以前は自分でせこせこHTMLやCSS書いてたんですが、カッコよいデザインがいいので今回は<a href="https://html5up.net/">HTML5 UP!</a>を使いました。やりたいことに注力して、専門外の部分は外から力借りるってとても大切だし、今はあらゆる側面でそれができる時代になりました。以下の記事のおかげです。ありがとう。</p>
+<ul>
+<li><a href="http://qiita.com/mhimuro/items/405590746e67971aac47?utm_content=buffer86566&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">「プログラマでしょ？ホームページ作ってよ！」を1日で対応する - Qiita</a></li>
+</ul>
+<h2 id="heading-3">サーバーレスの管理問題</h2>
+<p>冒頭に挙げたQiitaの記事に書きましたが、だいーぶ四苦八苦しました。かれこれ2週間ぐらい？かかった？</p>
+<p>例えばRDSやEC2ならオンプレで使っていたLinuxなりMySQLなりを単に置き換えたものとして扱えるわけですけど、API Gatewayなどは抽象化されたインフラなので、どんな機能を持っているのかは全部AWSの采配次第なわけです。従って当然ながらできることとできないことがあり、それをきちんと把握した上で、低コストでアーキテクチャーを設計するというのはなかなかにサービス仕様への理解が必要になります。AWSを持ち上げすぎることは、ベンダーロックインとどう違うのかという意見もありますが、まさにそれです。</p>
+<p>使えるようになると確かにとても楽ではありますが、一方でこれに依存し切るのもどうなんだろうな、という思いがあるのも事実で。要所要所でLambda + API Gatewayを限定的に使うならまだしも、3つ4つのサービスを繋がるピタゴラスイッチになってきたら管理コストの方が高くなる可能性が強そうです。先に挙げたApexやChaliceが非常にシンプルなデプロイツールになっているのは、構成自体もシンプルに仕上げるためだと思います。Serverless Frameworkのように守備範囲の広いツールは一見便利ですが、その分カオスにもなりやすい。</p>
+<p>サーバーレスとかマイクロサービスやりたいなら、Lambda中心に組み上げるのもいいけど、Dockerやコンテナ指向になった方が幸せになれるんじゃないかなぁ、とぼんやり考えています。いや、わかんない。今後ひょっとしたらサーバーレスを管理するための画期的ツールが現れるのかもしれないが、現時点では「使いすぎる」ことは避けたいなという思いです。構築コスト、運用コスト、さらには更改コストとはきちんと天秤にかけたいところです。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

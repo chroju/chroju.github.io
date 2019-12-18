@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="1年前、インフラエンジニアは死んだ。 遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自">
+
+<meta property="og:title" content="インフラエンジニアの幸福論" />
+<meta property="og:description" content="1年前、インフラエンジニアは死んだ。 遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/" />
+<meta property="article:published_time" content="2015-10-20T00:00:00+09:00" />
+<meta property="article:modified_time" content="2015-10-20T00:00:00+09:00" />
+
+
+<title>
+
+
+     インフラエンジニアの幸福論 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.724302595%20%2b0000%20UTC%20m%3d%2b0.246179765">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.724302595%20%2b0000%20UTC%20m%3d%2b0.246179765">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.724302595%20%2b0000%20UTC%20m%3d%2b0.246179765">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.724302595%20%2b0000%20UTC%20m%3d%2b0.246179765">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    インフラエンジニアの幸福論
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Oct 20 2015 00:00:00 JST'>Oct 20, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>1年前、<a href="http://yapcasia.org/2014/talk/show/df196eac-fb65-11e3-b7e8-e4a96aeab6a4">インフラエンジニアは死んだ</a>。</p>
+<p>遅れにも遅れをとって今年からAWSに触れているけど、これは触れれば触れるほどインフラエンジニアとしての自分の価値に疑問を抱かせてくれるサービスで、インフラエンジニアとして今後自分はどのように幸せになれるのかなんて考えたくなってくる。</p>
+<p>どうもLambdaが出たあたりから<a href="http://blog.takuros.net/entry/2015/10/19/081349">サーバーレスアーキテクチャ</a>という言葉が取り沙汰されてきているようで、アプリやDBを動かすための基盤としてサーバーが必要だという前提はすでに崩れている。AWSを触れる前はVPSを触っていたので、どうもAWS＝EC2というイメージから抜け出せずにいたが、実際には<a href="http://i-think-it.net/how-to-aws">「EC2を使ったら負け」</a>なんて言葉も目にする時代にある。ここ最近Circle CIを触ってみていても、テストの実行基盤となるサーバーなんて考え方をする必要はなくて、テスト用の環境はyamlで書けてしまうし、別のインスタンスが欲しければDockerで済ませられる。まぁherokuあたりからすでにそういう風潮だったよなという気もするが、単純にアプリをデプロイしてしまって実行基盤は全部お任せという状態から、LambdaとS3とCognitoを組み合わせて云々みたいな柔軟なアーキテクチャを採用できる状態にまで変化してきている。</p>
+<p>AWSを管理する人間が旧来のインフラエンジニアである必要性を当人としてはあまり感じていないし、実際に昨今のWeb企業あたりだとアプリエンジニアがAWSエンジニアを兼ねている場合も少なくないとは思う。規模が大きくなれば構成設計にインフラエンジニアの視点が必要になったりもするのかもしれないが、そこで必要とされるスキルは必ずしも旧来のインフラスキルとは直結していない。1000万円のLBとCiscoのスイッチとDELLのサーバーを買ってきて配線して起動して設定していくスキルと、ブラウザ上でELBやEC2のセキュリティグループを設定するスキルは明らかに異なるもので、故に2015年におけるインフラ＝AWSの領域においては、旧来のインフラエンジニアと非インフラエンジニアが同じ土俵で戦えなくもなかったりする（さすがに言い過ぎ感あるか）。これまで培ってきたインフラスキルというものは、必ずしも2015年に戦える武器にはなっていない。</p>
+<p>もちろん一方でEC2もオンプレの環境もまだ健在ではあるし、これが10年後に撤廃されるかというと、現状のMFのように残り続けるとは思う。特に金融のような特殊領域ではどうしてもクラウド移行が難しいということもある。だから旧来のインフラエンジニアが死に絶えることはないのだろうが、それでもパイが小さくなることは事実だし、物理環境の障害だとか5年ごとのリプレースだとか、テンションの上がらない類の仕事に携わり続けることを余儀なくされる。</p>
+<p>テンションの上がる仕事がしたいと言うと軽薄になってしまうが、誰だって夜中にタクシーでデータセンターに駆け付ける機会は極力少なくしたいと思うわけで、これまで注力していたいわゆる「オープン系」の需要が狭まる中で、インフラエンジニアの「幸福論」のようなものは求められつつある気がする。より少なくなる、かつ結構しんどい椅子に座り続けるのは個人的に嫌なので、Docker、ServerSpec、Ansibleあたりの領域でガッツリ存在感を示せるようになるか、あるいはそれらを生み出す側、より下のレイヤーで技術的に研ぎ澄まされていくかの二択なのかなと最近は思いつつある。とはいえ後者はどう考えても狭き門であり、現実的には前者を日常的な業務としつつ、要はRubyエンジニアがgem書くような感覚でツール作ったりOSSにイッチョカミしたりもたまにやれるぐらいの力があるといいのだろうなと思う。</p>
+<p>何はともあれやはり「勉強する」以外に道がないことは今も昔も変わってないし、ある意味で過渡期にある技術として、いまインフラは面白いところにあるとは思っている。これについていけるかついていけないかっていうシンプルな問いでもあって、自分の希望としてはついていきたい。今からアプリに鞍替えする気はなく、カーネル書けるかって言えば書けないだろうし、かといって今のまま障害対応で夜に起こされるのを続けるわけにもいかない。だったら2015年におけるインフラというものを学んでいくしかないわけで、幸いなことに、学べば「物理ハードウェアからの開放」というある程度の報酬が待ち受けていることは確実になっている。どれだけ頑張ってもサーバーのファームウェアのバグで泣かされるような時代ではなく、ある意味でインフラエンジニアが「インフラを学び直す」ことは美味しい選択肢ではある。また場合によっては、インフラエンジニアとしてより良い環境へ適時シフトしていく（惰性でずっとオンプレ使う方針の会社との喧嘩は早々に諦める）こともまた必要になるのだと思っている。</p>
+<p>とかなんとか書きながら考えていたら、<a href="http://blog.hifumi.info/2015/02/23/wakateinfra/">若手インフラエンジニア現状確認会</a>とやらで似たような話が上がっていた。個人的な実感としてはITエンジニア100人の企業であれば5～9人ぐらいがインフラかなと思うので、若手インフラが少ないというよりは全体的にインフラエンジニアが少ないのだと思っているが、その分情報交換とか大切にしなきゃなと思う。エンジニア仲間増やしたい。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

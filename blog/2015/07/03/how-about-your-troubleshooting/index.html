@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar 改めて見るとすげー名前のイベント……行ってきた。 障害対応は嫌いです。ていうか好きな">
+
+<meta property="og:title" content="すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight" />
+<meta property="og:description" content="エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar 改めて見るとすげー名前のイベント……行ってきた。 障害対応は嫌いです。ていうか好きな" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/" />
+<meta property="article:published_time" content="2015-07-03T00:00:00+09:00" />
+<meta property="article:modified_time" content="2015-07-03T00:00:00+09:00" />
+
+
+<title>
+
+
+     すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.751435513%20%2b0000%20UTC%20m%3d%2b0.273312683">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.751435513%20%2b0000%20UTC%20m%3d%2b0.273312683">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.751435513%20%2b0000%20UTC%20m%3d%2b0.273312683">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.751435513%20%2b0000%20UTC%20m%3d%2b0.273312683">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Fri Jul 3 2015 00:00:00 JST'>Jul 3, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p><a href="http://www.zusaar.com/event/6147005">エンジニア交流会〜他社の障害対応きにならNight!〜 on Zusaar</a></p>
+<p>改めて見るとすげー名前のイベント……行ってきた。</p>
+<p>障害対応は嫌いです。ていうか好きな人がいるならお目にかかってみたいもんですが、しかしシステムを動かす以上障害は避けられないし、それならばなるべく負担を軽減したいというのが人の、いやエンジニアの性。つわけでよりよいソリューションを探す目的で行ってきたイベントだったんですが、結局のところ <strong>より深い闇を知るだけの結果に終わった。</strong></p>
+<p>世の中闇だらけですわ。闇しかないですわ。自分なんかぜんぜん甘いなっていうか闇とすら呼べないんじゃないかっていう。詳しくは書けませんけど世の中運用者って苦労してんなって認識新たにしました。まぁだからって闇を甘受していいわけじゃなくて、だからこそやることあるんだけどさ。</p>
+<p>得た知見をザクっとまとめちゃいますけど、</p>
+<ul>
+<li>明文化と記録は何事も大事。顧客との契約にせよ、手順や構成にせよ、障害記録にせよ。</li>
+<li>ただ記録するんじゃなくて探しやすいようにとか考えないと意味ない(Wikiに書き散らしても役には立たない)</li>
+<li>日頃からの点検などによる障害の抑止も重要。障害訓練とか。</li>
+<li>スーパーエンジニアだから治せるって状態は脱したいのでスキルの底上げは必要。</li>
+<li>電話かかってくるのウザいけど必要。確実に対応しなきゃならない障害なら絶対電話。別にTwilioとかでいいので。</li>
+</ul>
+<p>障害対応って辛くないはずはないのだが、だったらより辛くない方法を探さねばなと思う。アラートの対象は極力絞ったり、自動復旧でイケる事象はスクリプト組んでおいたり。</p>
+<p>あと自分はもともと金融系SEで、運用に用いてたのもJP1やTivoliみたいな商用製品が多かった故、会場で交聞いたnagiosやらcactiやらCloudWatchやらを学ばねばというところ。顧客とビジネスモデルが変わっただけで、見える技術領域もほんとに変わるものだと思う。</p>
+<p>こういうopsやインフラに絞ったイベント、なかなかない気がするので良いですね。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="パラレルワーカー兼大学生になることになった · the world as code で書いた新しい職場に入って、実はエンジニア人生9年目にして初めて macOS をメインで与えられる職">
+
+<meta property="og:title" content="CUI 開発環境 2019 - tmux, fzf, ghq, Starship, aws-vault, etc" />
+<meta property="og:description" content="パラレルワーカー兼大学生になることになった · the world as code で書いた新しい職場に入って、実はエンジニア人生9年目にして初めて macOS をメインで与えられる職" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/11/17/development_environment_2019/" />
+<meta property="article:published_time" content="2019-11-17T12:45:58+09:00" />
+<meta property="article:modified_time" content="2019-11-17T12:45:58+09:00" />
+
+
+<title>
+
+
+     CUI 開発環境 2019 - tmux, fzf, ghq, Starship, aws-vault, etc &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/11/17/development_environment_2019/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    CUI 開発環境 2019 - tmux, fzf, ghq, Starship, aws-vault, etc
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Nov 17 2019 12:45:58 JST'>Nov 17, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p><a href="https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/">パラレルワーカー兼大学生になることになった · the world as code</a> で書いた新しい職場に入って、実はエンジニア人生9年目にして初めて macOS をメインで与えられる職場に入りまして。今まで全部 Windows だったというなかなか自分でも信じがたい事実（まぁ Linux で VM 立ち上げてその中で作業したりコーディングしてたりもしたけど）。それで macOS だと常に zsh 開いておけるし（ Windows でもできなくはないが）、シェルで生活する時間が大幅に増えたので、これを期にと CUI の開発環境を整えたので一旦まとめておく。ざっくり以下の技術あたりを使っているので順に書く。</p>
+<ul>
+<li>tmux</li>
+<li>fzf</li>
+<li>ghq</li>
+<li>Starship</li>
+<li>aws-vault</li>
+</ul>
+<h2 id="tmux">tmux</h2>
+<!-- raw HTML omitted -->
+<p>4年ぐらい前に一度入門したものの、 iTerm2 のタブと画面分割があれば別にいいかなという感じで使わなくなっていたのを改めて使い始めた。きっかけになった理由は実はだいぶ些細で、 macOS の全画面表示ってメニューバーを隠してしまうので時間がわからないのが困って、ステータスバーに時刻を表示したくなったというところ。実際使い始めてみるとセッションを作って長くかかるコマンドを裏で実行させたままデタッチして別のことやる、みたいなのがなかなか便利で手放せなくなりつつはある。</p>
+<p>以前使っていた tmux.conf を引っ張り出してはみたが、 powerline 周りの設定は忘れているし、学習コストかけたくもなかったので外部プラグインへの依存はやめた。 tmux デフォルトのステータスバーを使って時刻などは表示している。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="fzf--ghq">fzf + ghq</h2>
+<!-- raw HTML omitted -->
+<p>fzf は以前から興味はあったけど使ってなくて、というか動作原理がよくわかっていなかったのだが、ちゃんと使ってみたらすごく便利だった。</p>
+<p>複数行のテキストを標準入力から突っ込むと、曖昧検索ができる TUI が開き、そこで検索をして1つ結果を選択すると、その文字列を吐き出すという、日本語で書くとこういう動作をする。例えば git のブランチ切り替えだとか、複数のファイルから1つ選んで開くとか、そういう「多くの選択肢から絞りたい」操作をするのに役立つ。まぁ見たほうが早いと思う。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>こういう感じ。ただ、手でこういう風に <code>fzf</code> コマンドをわざわざ打つのではなくて、基本的な使い方としてはよく使うコマンドを関数として定義して <code>.zshrc</code> などに書いておいて、必要に応じて呼び出すという形を取る。</p>
+<!-- raw HTML omitted -->
+<p>これと組み合わせて使うとすごく良いのが ghq 。ローカルに置く git レポジトリを管理してくれるツールで、 <code>.gitconfig</code> に以下のように root となる場所を書いた上で <code>ghq get chroju/chroju.github.io</code>  と打つと root 配下に <code>git clone</code> してくれる。そして <code>ghq list</code> で、 root 配下に置かれた git レポジトリの一覧をずらっと出力してくれる。つまり fzf と組み合わせるとこういう関数が書けるということ。これがだいぶ快適で1日100回ぐらい打ってる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>fghq<span style="color:#719e07">(</span><span style="color:#719e07">)</span> <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  <span style="color:#b58900">local</span> dir
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>  <span style="color:#586e75"># fzf-tmux は tmux で検索用 TUI をペイン分割して表示してくれるコマンド</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  <span style="color:#268bd2">dir</span><span style="color:#719e07">=</span><span style="color:#719e07">$(</span>ghq list &gt; /dev/null | fzf-tmux --reverse +m<span style="color:#719e07">)</span> <span style="color:#719e07">&amp;&amp;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>    <span style="color:#b58900">cd</span> <span style="color:#719e07">$(</span>ghq root<span style="color:#719e07">)</span>/<span style="color:#268bd2">$dir</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span style="color:#719e07">}</span>
+</code></pre></div><p>他にも fzf はアイディア次第でいろんなことができそう。例えば AWS CLI と組み合わせて、 <code>ec2 describe-instances</code>  結果を食わせてインスタンス停止するとか、よくやるオペレーションを関数化しておいても便利かなと。</p>
+<h3 id="ghq--gopath">ghq と GOPATH</h3>
+<p>余談的な話。自分は Go を書く機会が多い。で、 Go のレポジトリは最近状況が変わってきてはいるけれど、 <code>$GOPATH </code> で指定したディレクトリを root として、 <code>$GOPATH/src/github.com/chroju/...</code> という具合の場所に置かれるというのがスタンダードになっている。</p>
+<p>Go とそれ以外のコードでレポジトリの置き場が替わるのも嫌なので、自分は <code>$GOPATH/src</code> にあたるディレクトリを ghq の root として設定している。幸い Go も ghq も <code>github.com/chroju/chroju.github.io</code> という形でディレクトリを掘って clone してくるので、この設定によって Go でも非 Go でも気にせず同様の構成でディレクトリが管理できている。</p>
+<p>このあたりは以下のエントリにインスパイアされている。</p>
+<!-- raw HTML omitted -->
+<h2 id="starship">Starship</h2>
+<!-- raw HTML omitted -->
+<p>プロンプトをいい感じにしてくれる Rust 製のツール。スクショは tmux のときに貼ったものを参照。</p>
+<p>以前までは zsh のプロンプト設定を自分で書いていたんだけど、あんまり可読性のいい記法ではないし、しばらく経つと書き方を忘れてしまうので外部ツールに頼って楽をすることにした。 Starship が良いのはシェル依存ではないので、仮に今後 Fish に移りたくなってもそのまま持っていけるということ。 <code>brew install</code> して <code>eval &quot;$(starship init zsh)&quot;</code> したらその瞬間からプロンプトがいい感じになる。</p>
+<p>設定も豊富でよい。デフォルトの状態で git 関係の表示、ディレクトリ表示はやってくれるし、カレントディレクトリに <code>go.mod</code> があれば Go のバージョン、 <code>requirements.txt</code> があれば Python のバージョンを表示してくれる。設定の追加もできて、自分の場合は <code>AWS_PROFILE</code> を設定していたらそれを表示するようにしている。基本的には使わない環境変数だけど、たまに動作確認などでセットしたまま忘れてたりするので、事故防止になっていい感じ。</p>
+<p>powerline font を求められることだけ面倒なんだけど、たぶん設定変更して絵文字を使わないようにしてやればそれも要らなくなる気がする。</p>
+<h2 id="aws-vault">aws-vault</h2>
+<!-- raw HTML omitted -->
+<p>macOS の Keychain と連携して AWS API のアクセスキーを管理してくれるツール。別の AWS アカウントへ switch する <code>assume role</code> 操作がすごく楽になるのでそれで使っている。以下は README からの引用だけど、 <code>~/.aws/config</code> をこんな風に書いて <code>aws-vault exec prod-readonly -- aws ec2 describe-instances</code> という具合に実行すると、これで switch ができる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">[profile jonsmith]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>region <span style="color:#719e07">=</span> <span style="color:#2aa198">us-east-1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#719e07">[profile prod-readonly]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>region<span style="color:#719e07">=</span><span style="color:#2aa198">us-east-1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>role_arn <span style="color:#719e07">=</span> <span style="color:#2aa198">arn:aws:iam::111111111111:role/ReadOnly</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>source_profile <span style="color:#719e07">=</span> <span style="color:#2aa198">jonsmith</span>
+</code></pre></div><p>重宝するのは、これで Terraform も assume role での実行ができること。以前 <a href="https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/">Terraform で AWS assume role が使用できない場合がある · the world as code</a> で書いたとおり、基本的に Terraform は assume role に対応できていないので、この方法を使うのが一番ラクだと思う。</p>
+<h2 id="conclusion">Conclusion</h2>
+<!-- raw HTML omitted -->
+<p>今書いたような設定は全部 dotfiles としてレポジトリにまとめているので、コードで見てもらったほうが早いのかも知れないです。 Ansible 流して会社 macOS の設定が数分で終わったときにはやるやんけ自分ってちょっと思いました。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

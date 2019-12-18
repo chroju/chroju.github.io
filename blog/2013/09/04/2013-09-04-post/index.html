@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。 基本的に rails generate hoge コマンドで色々作れ">
+
+<meta property="og:title" content="『RailsによるアジャイルWebアプリケーション開発』第II部読了" />
+<meta property="og:description" content="「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。 基本的に rails generate hoge コマンドで色々作れ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2013/09/04/2013-09-04-post/" />
+<meta property="article:published_time" content="2013-09-04T00:00:00+09:00" />
+<meta property="article:modified_time" content="2013-09-04T00:00:00+09:00" />
+
+
+<title>
+
+
+     『RailsによるアジャイルWebアプリケーション開発』第II部読了 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2013/09/04/2013-09-04-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.91172582%20%2b0000%20UTC%20m%3d%2b0.433602990">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.91172582%20%2b0000%20UTC%20m%3d%2b0.433602990">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.91172582%20%2b0000%20UTC%20m%3d%2b0.433602990">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.91172582%20%2b0000%20UTC%20m%3d%2b0.433602990">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    『RailsによるアジャイルWebアプリケーション開発』第II部読了
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Wed Sep 4 2013 00:00:00 JST'>Sep 4, 2013</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>「仕事で忙しい」という最悪の理由により全然勉強してなかった件。Rails本、やっと第II部読み終わった……。</p>
+<ul>
+<li>
+<p>基本的に rails generate hoge コマンドで色々作れる。scaffold、model、controllerとか、コマンドで作ればRailsが必要なファイルを用意してくれる。あとは作られたファイルをガチャガチャいじってアプリを作っていくというのが基本の流れ。</p>
+</li>
+<li>
+<p>特にscaffold。これをバチコンと叩き込むとコントローラ、モデル、ビュー、マイグレーションファイルから何から全部作られる。英語で「足場」という意味らしいがまさにそんな感じ。</p>
+</li>
+<li>
+<p>scaffold作ると編集画面（edit.html.erb）とか部分テンプレート（form.html.erb）まで作られるという至れり尽くせり感ビビる。</p>
+</li>
+<li>
+<p>create()やupdate()などの基本的なアクションも作られるので、実装したい動作によっては新しいコントローラをわざわざ作るまでもなかったり。</p>
+</li>
+<li>
+<p>テスト用のファイルも自動生成される。コントローラの機能を試すファンクションテスト、モデルの動きを試すユニットテスト、そしてアプリのフローを試す統合テスト。</p>
+</li>
+<li>
+<p>テスト用ファイルの編集方法がいまいちよくわからず。このあたりは試してみないと実感わかないかも。</p>
+</li>
+<li>
+<p>複数モデル（テーブルと読み替えてOK？）間の関係を表すには、modelsファイルにhas_manyやbelongs_toを追加する。DBを直接弄ったりはしない。</p>
+</li>
+<li>
+<p>button_to()に:remote=&gt;trueを加えるだけでAjaxが追加できる。……え？</p>
+</li>
+<li>
+<p>そもそもAjax使ったことないんでこのへんはもう少し見直したいが。。。Ajaxと言っても、再読み込みなしで画面の一部が再描画される程度の話か。</p>
+</li>
+<li>
+<p>ちなみRailsのCSSは標準でSCSSが使われている。SCSSって最近まで知らなかったけどクソ便利すぎて笑う。最初からCSSがこういう文法ならいいのに……。これもまた勉強が必要なり。</p>
+</li>
+<li>
+<p>コントローラのrespond_toメソッドは出力形式を色々替えられる。format.json、format.atomとか。</p>
+</li>
+<li>
+<p>メールの送信機能もある。。。（このへんになるともう色々出来過ぎてよくわからなくなってきた）</p>
+</li>
+<li>
+<p>Railsのコードは当然ながらRubyで書くわけだが、他にヘルパーメソッドというものがある。フォーム用にボタンリンクを作るbutton_to()とか、リンクを作るlink_to()とか。Rubyをそもそもまだちゃんと理解できていないので、どれがRubyの文法でどれがヘルパーメソッドなのかの見分けもいまいちついていない状態。</p>
+</li>
+</ul>
+<p>わーすげー簡単にまとめてしまった。全体の感想としては、とにかく何かと簡単かつ便利。自分でコーディングが必要な範囲は最低限。Javaでウェブアプリを組んだ経験があり、そのときはMVCそれぞれのファイルを全部イチから手で作っていたわけだが、RORではrails generate scaffoldで一発である。なんてこったい。しかし逆に言えばアプリの構造自体は全部任せて、中心的な機能や外観のコーディングだけに集中できるんだから、効率が良いわけで。</p>
+<p>SCSSとかAjaxとか、ウェブアプリを作る上でよく使われる技術が標準で備わっているというのも利点だろう。だから覚えることも多い。SCSS、Ajax、あとはDBもか。DBはSQL文を直接発行するようなことはないように組まれているけど、has_manyとか正しく書くためにはDBの構造あたりを正しく知っていなくてはならない。うむ、これからいろいろと学ばなくては。</p>
+<p>しかしこの本、いきなり実例から入ってしまうので理解がしやすいやらしにくいやら。実際に何か作りながら説明していく本というのは少なくないが、この本は第III部でRails全体の詳説が入る。「ここで入れるなら先に解説してくれよ！」と個人的には言いたい。いきなり知らないメソッドをバシバシ盛り込まれてどんどんコーディングを進められるより、そもRailsとはどういったディレクトリ構造になっていて、どういった動作をするものなのかという中身を知ってからの方が実例を理解しやすいのではと思う。まぁこのへんは好みか。</p>
+<p>第III部を読みつつ、そろそろとりあえず何か作ってみてもいいかもしれない。SCSSやAjaxを知らない以上、見た目にこだわったりとかはできないけど、とにかくアプリっぽいもの、データを追加して編集して表示させてっていうものをまずは作る。9月はそれが目標だなー。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

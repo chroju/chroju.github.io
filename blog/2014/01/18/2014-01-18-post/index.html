@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけ">
+
+<meta property="og:title" content="Ruby on Rails環境構築はじめます" />
+<meta property="og:description" content="Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2014/01/18/2014-01-18-post/" />
+<meta property="article:published_time" content="2014-01-18T00:00:00+09:00" />
+<meta property="article:modified_time" content="2014-01-18T00:00:00+09:00" />
+
+
+<title>
+
+
+     Ruby on Rails環境構築はじめます &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2014/01/18/2014-01-18-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.899121811%20%2b0000%20UTC%20m%3d%2b0.420998981">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.899121811%20%2b0000%20UTC%20m%3d%2b0.420998981">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.899121811%20%2b0000%20UTC%20m%3d%2b0.420998981">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.899121811%20%2b0000%20UTC%20m%3d%2b0.420998981">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby on Rails環境構築はじめます
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Jan 18 2014 00:00:00 JST'>Jan 18, 2014</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Ruby on Railsのアプリ構築の勉強もそこそこに進んできたので、そろそろ環境構築始めてみようかと。（あんまりブログで書けてないけど……）。てわけで、この本買いました。</p>
+<!-- raw HTML omitted -->
+<p>これまで環境としてはMax OS X 10.8にVMware FusionでCentOS浮かべて、その上でコード書いてWEBlick立ち上げてってやってたんだけど、考えてみればWEBlickでやるなら手元のMacで良かったわけで。いちいちコード書くのにSSHつなぐとかまぁ無駄なわけで。ということで、環境は次のように変えていく。</p>
+<ul>
+<li>
+<p>開発環境：Mac OS X 10.8（物理）</p>
+</li>
+<li>
+<p>Ruby 2.0.0</p>
+</li>
+<li>
+<p>Rails 4.0</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>ステージング：CentOS 6.4（Virtual Box）</p>
+</li>
+<li>
+<p>Ruby 2.0.0</p>
+</li>
+<li>
+<p>Rails 4.0</p>
+</li>
+<li>
+<p>MySQL</p>
+</li>
+<li>
+<p>nginx</p>
+</li>
+<li>
+<p>unicorn</p>
+</li>
+<li>
+<p>vagrant + chef soloで構築予定</p>
+</li>
+<li>
+<p>本番環境：CentOS 6.4（VPS）</p>
+</li>
+<li>
+<p>構成はステージングと同様</p>
+</li>
+</ul>
+<p>Apacheは仕事でも使ったことがあるんで、流行りに乗ってnginx + unicornでやってみます。んでさらに流行りに乗ってvagrantとchef solo使おうかと。vagrantはちなみにもう試してみたけど、さっくり仮想マシンが立ってしまってビビる。あとでブログにまとめる予定。ただしchefはちょっとしっかりやんないと使えなさそう。</p>
+<p>もともと自分はインフラをメインで飯食ってるんで、こころへんはあまり迷わずにいきたいところ。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

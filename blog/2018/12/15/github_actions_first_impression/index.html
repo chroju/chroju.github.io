@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="GitHub Actions が Limited Public Beta で使えるようになっていたので触ってみた。マニュアルはすでにパブリックに公開されている ので、使い方的なことは書かずに、触ってみた印">
+
+<meta property="og:title" content="GitHub Actions - Dockerfile を突っ込んで自動化するという考え方" />
+<meta property="og:description" content="GitHub Actions が Limited Public Beta で使えるようになっていたので触ってみた。マニュアルはすでにパブリックに公開されている ので、使い方的なことは書かずに、触ってみた印" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2018/12/15/github_actions_first_impression/" />
+<meta property="article:published_time" content="2018-12-15T12:26:04+09:00" />
+<meta property="article:modified_time" content="2018-12-15T12:26:04+09:00" />
+
+
+<title>
+
+
+     GitHub Actions - Dockerfile を突っ込んで自動化するという考え方 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2018/12/15/github_actions_first_impression/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.645067642%20%2b0000%20UTC%20m%3d%2b0.166944812">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.645067642%20%2b0000%20UTC%20m%3d%2b0.166944812">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.645067642%20%2b0000%20UTC%20m%3d%2b0.166944812">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.645067642%20%2b0000%20UTC%20m%3d%2b0.166944812">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    GitHub Actions - Dockerfile を突っ込んで自動化するという考え方
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Dec 15 2018 12:26:04 JST'>Dec 15, 2018</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p><a href="https://blog.github.com/jp/2018-10-24-action-demos/">GitHub Actions</a> が Limited Public Beta で使えるようになっていたので触ってみた。<a href="https://developer.github.com/actions/">マニュアルはすでにパブリックに公開されている</a> ので、使い方的なことは書かずに、触ってみた印象感想中心で少し書きます。</p>
+<p>現状では private レポジトリだけで、このように「Actions」タブが現れるようになっている。ここを開くとビジュアルエディターで Actions を設定できるし、テキストエディタで <code>.github/main.workflow</code> ファイルを手動で作成しても使える。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="docker-run-">docker run を組み合わせてワークフローをつくる</h2>
+<p>とはいえ CI ツールは Jenkins と CircleCI しか使ったことがないので、自ずとそれらとの比較になってしまうが、あえて挙げれば  CircleCI 2.0 と近いところが多い。CircleCI 2.0 では自動で実行する一連のプロセスを <code>Job</code> という単位に分割し、各 Job では指定した Docker コンテナの中でコマンドを実行していく形を取るが、 GitHub Actions も同様に Job に相当する <code>Action</code> で分割され、個々の Action に Docker コンテナを紐付ける。</p>
+<p>ただし大きく異なる点として、CircleCI における Docker コンテナがあくまでコマンドの実行環境としての扱いであるのに対し、 GitHub Actions では <code>docker run</code> の実行 = コマンドの実行、という感覚になる。どういうことかと言うと、各 Action では実行するコマンドを <code>runs</code> と <code>args</code> という項目で設定できるのだが、これらは <code>runs</code> が Docker の <code>ENTRYPOINT</code> を、 <code>args</code> が <code>CMD</code> を override するものとして設定されているものであって、 Docker コンテナ内で実行させるというものではないから。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>つまり、各 Action は <code>docker run</code> コマンドを一発実行するだけのものと捉えてよく、コンテナ起動後にその中で何かを実行する、という形を取らない。これは単純に考えれば各 Job で1回しかコマンドの実行機会が与えられないということであり、実行したいコマンドの数だけ Job を作る必要が出てきてしまう。それはさすがにちょっと冗長ではという気もするが、 <a href="https://github.com/actions">https://github.com/actions</a> にいくつか公開済みのサンプルを見てもわりとそういう組み方をしている。以下は Dockerfile から image を build して、 AWS の EKS へデプロイするサンプルだが、 Action 数は計10個に及んでいる。</p>
+<p><a href="https://github.com/actions/example-aws/blob/master/.github/main.workflow">example-aws/main.workflow at master · actions/example-aws</a></p>
+<p>まだユースケースが少ないので、どういう Action の組み方がベストなのかはわからないが、仮に1つの Action で複数のコマンドを実行させたい場合には、スクリプトを作って <code>ENTRYPOINT</code> に渡す形になるかと思う。 Action で起動する Docker コンテナは、レポジトリ内の Dockerfile から build させることができる（ちなみに実行の度に逐一 build するので実行時間は速くない。キャッシュしたい）ので、任意のコマンドを複数実行する Dockerfile を作るのは手かもしれない。ただ、個人的にはそういうやり方は求められていなくて、あくまで Docker コンテナの、というべきか、 <code>docker run</code> の、というべきか、その組み合わせでワークフローを組むものだと考えている。先に挙げた <a href="https://github.com/actions">https://github.com/actions</a> には GitHub Actions で使うための Dockerfile がいくつか GitHub から提供されている。現状は <code>AWS CLI</code> を実行できるもの、 <code>docker</code> コマンドを扱えるものなど数が限られるが、これが今後増えていき、またユーザーが作成する Dockerfile も集まってくれば、それらを組み合わせて様々なワークフローが作れるはず。</p>
+<h2 id="trigger-">Trigger できるイベントはかなり豊富</h2>
+<p>GitHub と連携させて使う CI ツールは多くの場合 <code>git push</code> で triggered されるが、 GitHub Actions は GitHub 組み込みなだけあって、 <a href="https://developer.github.com/actions/creating-workflows/workflow-configuration-options/#events-supported-in-workflow-files">trigger として扱えるイベント</a>が非常に多い。 star を付けられたときにも trigger することができる。</p>
+<p>star を付けられたタイミングで test や build を回したいというユースケースもあんまりないと思うし、これは CI ツールよりもっと広く、 GitHub レポジトリで何かしらのイベントが発生したときに、自動実行したいこと全般を管理するための広範なツールとして捉えるべきなんだろうと思う。今までであれば IFTTT や何かしらの bot を使って、例えば star やプルリクが発生したときに slack へ通知させたりしていた人も多いと思うが、これを GitHub Actions を使う形にしてしまえば、外部のツールを使わずにレポジトリ内だけで外部連携関係の管理が完結する。</p>
+<blockquote>
+<p>継続的インテグレーションと継続的デリバリー（CI/CD）はActionsのユースケースのほんの一部だ。たしかにその面で役立つが、Actionsはそれ以上のものだ。これはDevOps全体に革命を起こすものだとと思う。なぜならActionsを用いることでこの種のものとして最高のアプリケーション、フレームワークのデプロイメントのサイクルを構築できるからだ。</p>
+</blockquote>
+<p><a href="https://jp.techcrunch.com/2018/10/17/2018-10-16-github-launches-actions-its-workflow-automation-tool/">GitHubからワークフロー自動化ツール、Actions登場――独自サービス提供の第一弾 | TechCrunch Japan</a></p>
+<p>slack などに通知するときに必要となる API キーも <code>secrets</code> として暗号化した変数で渡すことができる。ただ現状は各レポジトリ間で <code>secrets</code> を共有することができないので、レポジトリを切るたびにいちいち設定が必要になり逆に管理が面倒とも言えるかもしれない（bot で通知を制御する場合、bot 内で一括管理ができるはずなので）。他にもまだまだ不足している要素は多く感じる。例えば golang の build を実装しようと思ったとき、 Docker の <code>WORKSPACE</code> が現状だと <code>/github/workspace</code> というディレクトリに固定されてしまっているので、 <code>$GOPATH</code> 内で実行する必要のある <code>dep ensure</code> が上手く実行できなくてだいぶ苦労したりした。</p>
+<p>ただそういった細かな点さえ解消すれば、結構魅力的なツールになりそうだと感じる。GitHub レポジトリを中心として仕事をする中で自動化したいことがあれば、全部 Dockerfile を書いてレポジトリの中に放り込めばいい、ということになるわけだから。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

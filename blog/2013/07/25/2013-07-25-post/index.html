@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Ruby">
+
+<meta property="og:title" content="『RailsによるアジャイルWebアプリケーション開発』第I部 読了" />
+<meta property="og:description" content="第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Ruby" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2013/07/25/2013-07-25-post/" />
+<meta property="article:published_time" content="2013-07-25T00:00:00+09:00" />
+<meta property="article:modified_time" content="2013-07-25T00:00:00+09:00" />
+
+
+<title>
+
+
+     『RailsによるアジャイルWebアプリケーション開発』第I部 読了 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2013/07/25/2013-07-25-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.913134621%20%2b0000%20UTC%20m%3d%2b0.435011791">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.913134621%20%2b0000%20UTC%20m%3d%2b0.435011791">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.913134621%20%2b0000%20UTC%20m%3d%2b0.435011791">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.913134621%20%2b0000%20UTC%20m%3d%2b0.435011791">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    『RailsによるアジャイルWebアプリケーション開発』第I部 読了
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Thu Jul 25 2013 00:00:00 JST'>Jul 25, 2013</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>第I部はRailsのインストールから、とりあえずウェブアプリケーションを作って公開するまで。あとRoRにおけるMVCモデルの概要と、Rubyの簡単な紹介が主。</p>
+<h1 id="1-rails">第1章 Railsのインストール</h1>
+<ul>
+<li>apt-getを使って必要な依存関係をインストールしているけど、Cent OSではapt-getが使えず。yumで入れようとしたが、yumにはnodejsがないらしく入らない。。。やむを得ずwgetで落としてきて展開しました。</li>
+<li>エディタはTextMateがオススメとあるけど、変えるのめんどいし取りあえずvimでいいか。。。</li>
+</ul>
+<h1 id="2-hello-rails">第2章 Hello, Rails!</h1>
+<ul>
+<li>ポート3000を使うってことでiptablesで開けてあげたりとか、そのへんは自分でやる必要があった。こういうのスムーズに出来るようにならなきゃなんだろうなぁ。</li>
+<li>eRubyの&lt;% %&gt;でコード埋め込むのがなんか気持ち悪いと思ってしまう。同じ理由でJSPも苦手だった。……と思ったら、この後の章で似たようなことが書いてあった。元々HTMLとJavaScript書いたりしてたからなんだろうけど、こういうのはなるたけ分離したいと思ってしまう。</li>
+</ul>
+<h1 id="3-rails">第3章 Railsアプリケーションのアーキテクチャ</h1>
+<ul>
+<li>ちょっと置いてけぼり感あったので、この後の章でアプリ作りながら再読する。</li>
+</ul>
+<h1 id="4-ruby">第4章 Ruby入門</h1>
+<ul>
+<li>一応Rubyの基礎はさらったので割愛しよう……と思ったら！！！　『作りながら学ぶRuby入門』より記述範囲が広かった！</li>
+<li>そういえばあの本、例外の処理とか出てこなかったな……。もう1冊、きちんとRubyの基礎をさらえる本を読んだ方が良さそうな気がしてきた。</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>はあ！？</p>
+</li>
+<li>
+<p>Rubyの文法ってなんか慣れない。。。</p>
+</li>
+</ul>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="tl;dr 今回あんまりまとまった話でもなくて、いろいろ調べていたら手元のメモがだいぶ長くなったのでせっかくだし公開してみよう、程度のものです。正直文">
+
+<meta property="og:title" content="3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話" />
+<meta property="og:description" content="tl;dr 今回あんまりまとまった話でもなくて、いろいろ調べていたら手元のメモがだいぶ長くなったのでせっかくだし公開してみよう、程度のものです。正直文" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/" />
+<meta property="article:published_time" content="2019-05-14T20:30:00+09:00" />
+<meta property="article:modified_time" content="2019-05-14T20:30:00+09:00" />
+
+
+<title>
+
+
+     3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue May 14 2019 20:30:00 JST'>May 14, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>8 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <h2 id="tldr">tl;dr</h2>
+<p>今回あんまりまとまった話でもなくて、いろいろ調べていたら手元のメモがだいぶ長くなったのでせっかくだし公開してみよう、程度のものです。正直文章化が上手くできているとも思えなくて、読みにくいと思いますしスルー推奨です。一応3行でまとめておきます。</p>
+<ul>
+<li>terraformer に issue を上げたら Terraform の内部実装に絡めた返答をもらったが、すぐに理解できなかった。</li>
+<li>そこで terraformer と Terraform のコードリーディングをしてみて、その過程を書いてみた。</li>
+<li>Terraform 内で使われている gRPC の勉強が必要とか、コードリーディングの効率を上げたいといった課題も見つかり、良い機会になった。</li>
+</ul>
+<h2 id="terraformer">terraformer</h2>
+<p>terraformer というツールをご存知でしょうか。</p>
+<!-- raw HTML omitted -->
+<p>既存のクラウドリソースの状態を読み解き、 tf ファイルと tfstate ファイルを生成してくれるツールです。同様のツールとしては <a href="https://github.com/dtan4/terraforming">dtan4/terraforming</a> が著名で、 terraformer の README.md 内でも言及があるほどですが、この2つにはそこそこ差異が見られます。</p>
+<p>まず機能面においては、 terraforming が指定したリソースの tf ファイル、 tfstate ファイル相当の情報を愚直に標準出力に出す、非常にシンプルな実装をしているのに対し、 terraformer は tf ファイルと tfstate ファイルを同時生成するほか、 <code>provider.tf</code> や、<code>terraform apply</code> したときに動的に生成される、インスタンス ID のような computed な値を出力するための <code>outputs.tf</code> まで生成してくれる至れり尽くせりなツールになっています。また、例えば <code>terraformer import aws --resources=route53</code> を実行すると Route53 に関するすべての情報を取得する、つまり <code>aws_route53_zone</code> と <code>aws_route53_record</code> 双方が生成される形になります。先のコマンドで生成されるファイルは以下のとおりです。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ tree
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>.
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>├── outputs.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>├── provider.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>├── route53_record.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>├── route53_zone.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>└── terraform.tfstate
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#2aa198">0</span> directories, <span style="color:#2aa198">5</span> files
+</code></pre></div><p>そして実装面でもだいぶアプローチが異なるのですが、それについては最後に触れようと思います。</p>
+<h2 id="-issue">発端となった issue</h2>
+<p>本題に入りますが、 先日 Route53 Records の <code>import</code> を terraformer で行ったところ、エイリアスレコードに関してちょっとした問題が起きたため、 issue を上げました。</p>
+<!-- raw HTML omitted -->
+<p>何を言っているかというと、 Route53 の DNS Record には当然ながら TTL の設定ができるのですが、そのレコードがエイリアスレコードである場合は TTL の設定ができない（Terraform 的な言い方をすると、2つの要素が競合 = Confilict した状態）はずなのに、 terraformer は <code>ttl = &quot;0&quot;</code> として設定を入れてしまっている、という話です。この状態で <code>terraform plan</code> を実行すると、競合する要素が定義されているよ、というエラーになります。</p>
+<p>これに対して開発者の sergeylanzman 氏が返答してきたのが、以下の文です。</p>
+<blockquote>
+<p>It's know issue(#25) terraformer can't get today details about each field.</p>
+</blockquote>
+<p>これだけではいまいちわからなかったので、ここで言及されている <a href="https://github.com/GoogleCloudPlatform/terraformer/issues/25">#25</a> の issue を引用してみると、このような内容になっています。</p>
+<blockquote>
+<p>Today terraformer use terraform.ResourceProvider interface for get ProviderSchema with Attributes.
+In other interface we can get more Attributes from providers(like deprecation options)
+Need use schema.Schema from github.com/hashicorp/terraform/helper/schema</p>
+</blockquote>
+<p>どうも terraformer が使っている terraform 側の interface の都合が絡んでいるようです。現在は <code>terraform.ResourceProvider</code> を使っているが、これを <code>schema.Schema</code> に変更したほうが、より詳細な情報を取得できる、という内容に読み取れます。私は Terraform の動作、ソースコードを広く把握できているわけではないので、この返答をもらっても飲み込むことができず、ソースコードにあたってみることにしました。</p>
+<h2 id="terraformer--terraform-">terraformer と Terraform を読み解く</h2>
+<p>まず terraformer の動作原理を少し確認しました。 import コマンドの実装部分は <a href="https://github.com/GoogleCloudPlatform/terraformer/blob/master/cmd/import.go">terraformer/cmd/import.go</a> 内の <code>func Import()</code> にあります。ここではコマンドのオプション <code>--resources</code> で与えられたリソース名（Route53, S3 など）に対し、 for 文でそれぞれ以下のような処理が実行されています。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>		err = provider.<span style="color:#268bd2">InitService</span>(service)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>		<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>			<span style="color:#719e07">return</span> err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>		}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>		err = provider.<span style="color:#268bd2">GetService</span>().<span style="color:#268bd2">InitResources</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>		<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>			<span style="color:#719e07">return</span> err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>		}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>		<span style="color:#719e07">if</span> <span style="color:#b58900">len</span>(options.Filter) <span style="color:#719e07">!=</span> <span style="color:#2aa198">0</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>			provider.<span style="color:#268bd2">GetService</span>().<span style="color:#268bd2">ParseFilter</span>(options.Filter)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>			provider.<span style="color:#268bd2">GetService</span>().<span style="color:#268bd2">CleanupWithFilter</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>		}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>		refreshedResources, err <span style="color:#719e07">:=</span> terraform_utils.<span style="color:#268bd2">RefreshResources</span>(provider.<span style="color:#268bd2">GetService</span>().<span style="color:#268bd2">GetResources</span>(), provider.<span style="color:#268bd2">GetName</span>(), provider.<span style="color:#268bd2">GetConfig</span>())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>		<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>			<span style="color:#719e07">return</span> err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>		}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>		provider.<span style="color:#268bd2">GetService</span>().<span style="color:#268bd2">SetResources</span>(refreshedResources)
+</code></pre></div><p>見たところ <code>provider.InitService()</code> で各サービス（Route53など）に対する初期化処理を行い、さらに <code>provider.GetService().InitResources()</code> で、各サービス内の個別リソース（Route53 Record や Zone など）に対する初期化を行い、その上で <code>terraform_utils.RefreshResoures()</code> というメソッドを呼ぶ、と何段階かを経ているのが読み取れます。ここの <code>provider</code> とはいわゆる Terraform Provider ではなく、 terraformer 内の <code>terraform_utils.ProviderGenerator</code> という interface を指しており、AWS、GCP等の各 Provider 向けにこれを実装しています。例えば AWS に関しては <a href="https://github.com/GoogleCloudPlatform/terraformer/blob/master/providers/aws/aws_provider.go">terraformer/providers/aws/aws_provider.go</a> 内の <code>AWSProvider</code> が該当し、この中に <code>func InitService()</code> が定義されています。<code>InitService</code> で行われる処理は文字通り初期化処理で、例えば terraformer はすべての AWS サービスに対応しているわけではないので、ここで対応非対応の判定を行っていたりするようです。</p>
+<p>続いて <code>provider.GetService().InitResources()</code> ですが、 Route53 の場合は <a href="https://github.com/GoogleCloudPlatform/terraformer/blob/master/providers/aws/route53.go">terraformer/providers/aws/route53.go</a> で定義されており、まずホストゾーンの情報をすべて取得してから、各ホストゾーンに対してレコード情報の取得を行う、という実装になっています。以下に、レコード情報を取得する部分を担っているメソッドである <code>createRecordsResources()</code> のソースを引用してみます。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">func</span> (Route53Generator) <span style="color:#268bd2">createRecordsResources</span>(svc <span style="color:#719e07">*</span>route53.Route53, zoneID <span style="color:#dc322f">string</span>) []terraform_utils.Resource {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	resources <span style="color:#719e07">:=</span> []terraform_utils.Resource{}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>	listParams <span style="color:#719e07">:=</span> <span style="color:#719e07">&amp;</span>route53.ListResourceRecordSetsInput{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>		HostedZoneId: aws.<span style="color:#268bd2">String</span>(zoneID),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>	recordSet, err <span style="color:#719e07">:=</span> svc.<span style="color:#268bd2">ListResourceRecordSets</span>(listParams)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	<span style="color:#719e07">for</span> _, record <span style="color:#719e07">:=</span> <span style="color:#719e07">range</span> recordSet.ResourceRecordSets {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>		resources = <span style="color:#b58900">append</span>(resources, terraform_utils.<span style="color:#268bd2">NewResource</span>(
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>			fmt.<span style="color:#268bd2">Sprintf</span>(<span style="color:#2aa198">&#34;%s_%s_%s&#34;</span>, zoneID, aws.<span style="color:#268bd2">StringValue</span>(record.Name), aws.<span style="color:#268bd2">StringValue</span>(record.Type)),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>			fmt.<span style="color:#268bd2">Sprintf</span>(<span style="color:#2aa198">&#34;%s_%s_%s&#34;</span>, zoneID, aws.<span style="color:#268bd2">StringValue</span>(record.Name), aws.<span style="color:#268bd2">StringValue</span>(record.Type)),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>			<span style="color:#2aa198">&#34;aws_route53_record&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>			<span style="color:#2aa198">&#34;aws&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>			<span style="color:#268bd2">map</span>[<span style="color:#dc322f">string</span>]<span style="color:#dc322f">string</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>				<span style="color:#2aa198">&#34;name&#34;</span>:    aws.<span style="color:#268bd2">StringValue</span>(record.Name),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>				<span style="color:#2aa198">&#34;zone_id&#34;</span>: zoneID,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>				<span style="color:#2aa198">&#34;type&#34;</span>:    aws.<span style="color:#268bd2">StringValue</span>(record.Type),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>			},
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>			route53AllowEmptyValues,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>			route53AdditionalFields,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>		))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>	<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>		log.<span style="color:#268bd2">Println</span>(err)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>		<span style="color:#719e07">return</span> []terraform_utils.Resource{}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>	<span style="color:#719e07">return</span> resources
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>}
+</code></pre></div><p>AWS の API を呼んで、実際に情報を取得しているのがここの6行目の箇所で、取得した list を格納した <code>recordSet</code> 変数に対して <code>for</code> を回し、必要な情報を格納した <code>resources</code> 変数を返り値として戻す、という構成になっています。しかし <code>resources</code> に情報を格納するコードを読んでみると、 API から取得した情報を格納しているのは14行目からの <code>map[string]string</code> を作っている箇所だけで、 name, zone_id, type という3つの要素しか格納されていません。これでは Route53 Record の情報としては当然ながら不足しています。</p>
+<p>どうもこれを補うのが <code>terraform_utils.RefreshResources()</code> の箇所と見受けられます。「見受けられます」とぼかした書き方をしましたが、すみません、ここから先はちょっと追いきれませんでした。ここからいくつかのメソッドを呼び出す過程があり、長くなりそうなので説明は省きますが、ここで最終的に <code>terraform.ResourceProvider</code> に行き着くことができます。 goroutine を使って並行に <code>terraform.ResourceProvider.Refresh()</code> というメソッドを呼んでいるようです。</p>
+<p>追いきれなかったのは、この <code>Refresh()</code> メソッドが何をやっているのかわからなかったためです。以下に <a href="https://github.com/hashicorp/terraform/blob/master/plugin/resource_provider.go">terraform/resource_provider.go at master · hashicorp/terraform</a> から引用します。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">func</span> (p <span style="color:#719e07">*</span>ResourceProvider) <span style="color:#268bd2">Refresh</span>(
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	info <span style="color:#719e07">*</span>terraform.InstanceInfo,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>	s <span style="color:#719e07">*</span>terraform.InstanceState) (<span style="color:#719e07">*</span>terraform.InstanceState, <span style="color:#dc322f">error</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>	<span style="color:#268bd2">var</span> resp ResourceProviderRefreshResponse
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>	args <span style="color:#719e07">:=</span> <span style="color:#719e07">&amp;</span>ResourceProviderRefreshArgs{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>		Info:  info,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>		State: s,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>	err <span style="color:#719e07">:=</span> p.Client.<span style="color:#268bd2">Call</span>(<span style="color:#2aa198">&#34;Plugin.Refresh&#34;</span>, args, <span style="color:#719e07">&amp;</span>resp)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>	<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>		<span style="color:#719e07">return</span> <span style="color:#cb4b16">nil</span>, err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>	<span style="color:#719e07">if</span> resp.Error <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>		err = resp.Error
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>	<span style="color:#719e07">return</span> resp.State, err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>}
+</code></pre></div><p><code>p.Client.Call</code> という箇所がありますが、この <code>Client</code> というのは RPC Client です。 Terraform は本体とプロバイダ間の通信に RPC を用いているのですが、私自身 RPC 周りの知識が一切ないため、今回はここでストップと相成りました。ただ、ある程度の推測は可能です。この <code>Refresh()</code> メソッドの戻り値である <code>terraform.InstanceState</code> は <a href="https://github.com/hashicorp/terraform/blob/master/terraform/state.go">terraform/state.go at master · hashicorp/terraform</a> で定義されており、この構造体の中にある <code>Attributes</code> というフィールドが <code>Attributes are basic information about the resource</code> とドキュメントされています。ここから推測するに、 terraformer の import 処理は、 <code>terraform.ResourceProvider.Refresh()</code> により <code>terraform.InstanceState</code> としてクラウドリソースの情報を取得している、と考えてよさそうです。</p>
+<p>だいぶ回り道をしてようやく本題に戻りますが、</p>
+<blockquote>
+<p>Today terraformer use terraform.ResourceProvider interface for get ProviderSchema with Attributes.
+In other interface we can get more Attributes from providers(like deprecation options)
+Need use schema.Schema from github.com/hashicorp/terraform/helper/schema</p>
+</blockquote>
+<p>この1行目については、これまでの過程で確認できました。3行目で、これに代わって使うべきとされている <code>schema.Schema</code> を見てみようと思いますが、これについては Terraform の <a href="https://www.terraform.io/docs/extend/schemas/index.html">Developer 向けガイド</a> を見たほうがわかりやすそうでした。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">// Provider returns a terraform.ResourceProvider.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"></span><span style="color:#268bd2">func</span> <span style="color:#268bd2">Provider</span>() terraform.ResourceProvider {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    <span style="color:#586e75">// Example Provider requires an API Token.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#586e75"></span>    <span style="color:#586e75">// The Email is optional
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#586e75"></span>    <span style="color:#719e07">return</span> <span style="color:#719e07">&amp;</span>schema.Provider{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>        Schema: <span style="color:#268bd2">map</span>[<span style="color:#dc322f">string</span>]<span style="color:#719e07">*</span>schema.Schema{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>            <span style="color:#2aa198">&#34;api_token&#34;</span>: {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>                Type:        schema.TypeString,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>                Required:    <span style="color:#cb4b16">true</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>            },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>            <span style="color:#2aa198">&#34;email&#34;</span>: {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>                Type:        schema.TypeString,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>                Optional:    <span style="color:#cb4b16">true</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>                Default:     <span style="color:#2aa198">&#34;&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>            },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>        },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>}
+</code></pre></div><p>このように、 <code>schema.Schema</code> は Terraform の Provider や Resource などの形式を定義する際に用いる構造体で、その要素が Required なのかオプションなのか、また他の要素と競合し得るのか、といった詳細な情報を持たせることができるものです。一方、現状 terraformer が使用している <code>terraform.InstanceState.Attributes</code> は単に Terraform Resource の要素をキーバリュー形式で格納した map に過ぎず、各要素がどのような意味を持つのかまで判断する材料にはなりません。そのため <code>schema.Schema</code> を使う形に変更すれば、私が指摘した Route53 Record で競合してしまっていた要素の検出も実装することができる、という、そういう意図だったようです。</p>
+<h2 id="terraformer-">terraformer の実装を解釈する</h2>
+<p>今見てきたように、 terraformer の import は以下のような実装となっています。</p>
+<ol>
+<li>対象のクラウドサービスの API を呼び出し、 import 対象である resource の ID など、最低限の情報だけをまず読み込む。</li>
+<li>取得した ID 等を元に、 Terraform Provider から <code>terraform.ResourceProvider.Refresh()</code> を呼ぶことで、 import に必要なすべての情報を取得する。</li>
+</ol>
+<p>これは terraforming のアプローチとは大きく異なります。というのも、 terraforming はクラウドサービスの API を呼び、最初から必要なすべての情報を取得して書き出す実装となっているからです。 terraformer があえて処理を2段階に分けたのは、 Terraform resource はクラウドサービス側の仕様変更に伴って内実が頻繁に変わる可能性があるため、 Terraform resource の定義に関する処理を Terraform Provider 側へ任せる意図があったと思われます。 Terraform resource として必要な情報を取得する処理は Terraform Provider に任せてしまうことで、 terraformer は最初の初期化処理と、 tf, tfstate ファイルを書き出す処理に集中することができており、これは疎結合で良い実装だなと感じました。ただ、一方で Terraform Provider をあらかじめダウンロードしておく必要があったり、処理が増えるために少々動作が遅いと感じることがあったり、というデメリットも見られます。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>今回、サードパーティツールが直接 Terraform や Terraform Provider のコードを呼び出していたため、それをきっかけとして Terraform に対する理解を深める良い機会になりました。ただ知識不足によりすべてが読み解けたわけでもなかったため、特に RPC については勉強してみようかと思っています。ちょうど Terraform 0.12 から gRPC を用いた実装に変更されますが、 gRPC と言えば昨今の microservices を追う上でも欠かせないプロトコルのようですので、その意味でも押さえておきたいところです。</p>
+<p>また今回コードリーディングには VSCode を使って頑張って検索したり F12 で定義ジャンプしたりしていたのですが、もっと効率の良いやり方がありそうだなという気もしてます。1日作業になってしまったので、もう少しコードリーディングには慣れていきたいです。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

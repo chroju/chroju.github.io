@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。 $ yum list | grep postgresql （中略） postgresql.i686 8.4.18-1.el6_4">
+
+<meta property="og:title" content="Rails環境構築（3）PostgreSQLインストール" />
+<meta property="og:description" content="ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。 $ yum list | grep postgresql （中略） postgresql.i686 8.4.18-1.el6_4" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2014/01/26/2014-01-26-post/" />
+<meta property="article:published_time" content="2014-01-26T00:00:00+09:00" />
+<meta property="article:modified_time" content="2014-01-26T00:00:00+09:00" />
+
+
+<title>
+
+
+     Rails環境構築（3）PostgreSQLインストール &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2014/01/26/2014-01-26-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.89745391%20%2b0000%20UTC%20m%3d%2b0.419330980">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.89745391%20%2b0000%20UTC%20m%3d%2b0.419330980">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.89745391%20%2b0000%20UTC%20m%3d%2b0.419330980">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.89745391%20%2b0000%20UTC%20m%3d%2b0.419330980">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Rails環境構築（3）PostgreSQLインストール
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Jan 26 2014 00:00:00 JST'>Jan 26, 2014</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>ポスグレのインストール。yumで入るようなんだけど、聞くところによるとバージョンが古いらしい。念のため確認してみる。</p>
+<pre><code>$ yum list | grep postgresql
+（中略）
+postgresql.i686                           8.4.18-1.el6_4                base
+postgresql.x86_64                         8.4.18-1.el6_4                base
+postgresql-contrib.x86_64                 8.4.18-1.el6_4                base
+postgresql-devel.i686                     8.4.18-1.el6_4                base
+postgresql-devel.x86_64                   8.4.18-1.el6_4                base
+postgresql-docs.x86_64                    8.4.18-1.el6_4                base
+postgresql-ip4r.x86_64                    1.05-1.el6                    epel
+</code></pre><p>うん、確かに古い。この記事を書いている時点では9.3.2とか出てるけど、yumで用意されてるのは8.4である。最新を入れればいいというわけでもないが、さすがにちょっと古いような気が。（ところでyumに入ってるパッケージの調べ方、これであってんのかな？）</p>
+<p>てわけで新しいバージョンをWebから持ってくる。<a href="http://yum.postgresql.org/repopackages.php">PostgreSQL RPM Repository (with Yum)</a>にいろいろあるので適切なリンクURLをコピー。1コ前のバージョンでPostgresql 9.2にしときましょか。自分のOSがなんだかわかんなくなったらunameコマンドで確認。</p>
+<pre><code>$ uname -a
+Linux xxx 2.6.32-358.23.2.el6.x86_64 #1 SMP Wed Oct 16 18:37:12 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre><p>CentOS 6 x86_64であることがわかったので、wgetでダウンロード。</p>
+<pre><code>$ wget -P /tmp http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm
+</code></pre><p>続いてRPMにインストール。</p>
+<pre><code>$ sudo rpm -ih /tmp/pgdg-centos92-9.2-6.noarch.rpm
+warning: /temp/pgdg-centos92-9.2-6.noarch.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
+########################################### [100%]
+########################################### [100%]
+</code></pre><p>rpmコマンドのオプションとして-iを付けるとパッケージのインストールが出来る。さらにhを付けると####で進捗が表示されるそうだ。必須オプションではないので、hについてはお好みで。</p>
+<p>いよいよyumでインストール。</p>
+<pre><code>$ yum -y install postgresql92-server.x86_64
+</code></pre><p>……yum installって補完はできないんですかね入れたら初期化して起動て自動起動設定します。</p>
+<pre><code>$ sudo service postgresql-9.2 initdb
+$ sudo service postgresql-9.2 start
+$ sudo chkconfig postgresql-9.2 on
+</code></pre><p>ここまでで一旦インストールとしては終了。あとは基本的な設定をいくつか入れておく。</p>
+<p>まずpg_hba.confを触る。これはDBに対するクライアントからのアクセスを制御するファイルで、さきほどinitdbしたときに作成されている。管理している内容としてはどのDBに対するどのユーザーのどこ（IP）からのアクセスを、どの認証方式で認証するか。必要に応じて書き入れてやる必要があるが、ひとまず参考書通りの設定をしておく。</p>
+<pre><code>$ sudo vim /var/lib/pgsql/9.2/data
+</code></pre><pre><code># TYPE  DATABASE     USER           ADDRESS                     METHOD
+
+local  all           postgres                                   peer
+local  all           all                                        md5
+host   all           all            127.0.0.1/32                md5
+host   all           all            ::1/128                     md5
+</code></pre><p>終わったらPostgreSQLをリロード。</p>
+<pre><code>$ sudo service postgresql-9.2 reload
+</code></pre><p>今回はここまで。</p>
+<h2 id="heading">参考</h2>
+<ul>
+<li><a href="http://www.postgresql.jp/document/8.2/html/auth-pg-hba-conf.html">pg_hba.confファイル</a></li>
+<li><a href="http://morizyun.github.io/blog/postgresql-mac-centos-rails/">Mac MountainLion/CentOS 6.4へのPostgreSQL 9.2の導入手順 - 酒と泪とRubyとRailsと</a></li>
+</ul>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

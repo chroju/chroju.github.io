@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="この記事は terraform Advent Calendar 2019 - Qiita の 14 日目です。 Terraform State （以下、本記事では tfstate と呼称します）をご存知でしょうか。 Terraform を使っていて tfstate をご存知ではない人はまぁまずい">
+
+<meta property="og:title" content="Terraform state 概論" />
+<meta property="og:description" content="この記事は terraform Advent Calendar 2019 - Qiita の 14 日目です。 Terraform State （以下、本記事では tfstate と呼称します）をご存知でしょうか。 Terraform を使っていて tfstate をご存知ではない人はまぁまずい" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/12/13/terraform_state_introduction/" />
+<meta property="article:published_time" content="2019-12-13T21:50:10+09:00" />
+<meta property="article:modified_time" content="2019-12-13T21:50:10+09:00" />
+
+
+<title>
+
+
+     Terraform state 概論 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/12/13/terraform_state_introduction/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Terraform state 概論
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Fri Dec 13 2019 21:50:10 JST'>Dec 13, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>15 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>この記事は <a href="https://qiita.com/advent-calendar/2019/terraform">terraform Advent Calendar 2019 - Qiita</a> の 14 日目です。</p>
+<p>Terraform State （以下、本記事では <code>tfstate</code> と呼称します）をご存知でしょうか。 Terraform を使っていて tfstate をご存知ではない人はまぁまずいないはずだとは思いますが、直接の編集が非推奨となっているためデリケートな扱いが求められる一方で、 Terraform を使っていると折に触れて立ち向かわなくてはならない憎いやつです。</p>
+<p>Terraform を上手く使うことは、 tfstate を上手く取り扱うこととニアリーイコールだと個人的に思っています。そんな tfstate のことをいろいろとまとめてみました。ていうかまとめすぎてえらいことになったので、年末年始のお暇なときにでも読んでみてください。</p>
+<p>全体は以下4つに分かれています。</p>
+<ul>
+<li>tfstate 入門 : 文字通り入門的な内容です。</li>
+<li>tfstate 理論 : tfstate にまつわる Terraform の挙動に関して理論的な内容です。</li>
+<li>マクロ tfstate 論 : マクロな視点で考えた、 tfstate の運用管理プラクティスです。</li>
+<li>ミクロ tfstate 論 : ミクロな視点で考えた、 tfstate の編集などの話です。</li>
+</ul>
+<hr>
+<h2 id="tfstate-">tfstate 入門</h2>
+<p>本項では tfstate の基本的な性質、特徴について触れていきます。</p>
+<h3 id="tfstate--1">tfstate の基礎</h3>
+<p>tfstate は Terraform が管理するインフラストラクチャーの状態をプレーンテキストで保存したファイルです。データ構造は Terraform の他の設定ファイル（以下、 <code>tffile</code> と呼称します）とは異なり、 JSON が用いられています。</p>
+<p>tfstate は自動生成されるファイルであり、手動で書き換えることは非推奨とされています。具体的なタイミングとしては <code>terraform apply</code> コマンドが実行された際に新規作成、もしくは既存のものが更新され、 <code>apply</code> した結果構築、変更されたインフラストラクチャーの状態が記録されます。</p>
+<p>また <code>terraform plan</code> コマンドが実行された際には、 tfstate から前回 <code>apply</code> 実行時のインフラストラクチャーの状態を読み取り、それと設定ファイルに記載されたインフラストラクチャー設定との差分から <code>plan</code> 結果を出力します。この挙動については後ほど詳説します。</p>
+<h3 id="tfstate--2">tfstate の保存場所</h3>
+<p>特に設定していなければ、デフォルトの保存場所は <code>terraform apply</code> を実行したカレントディレクトリ上の <code>terraform.tfstate</code> という名前のファイルになります。しかし、先述の通りこのファイルは次回 <code>apply</code> 実行の際に必要となります。ローカルに置いたままでは複数人で <code>terraform</code> を実行できなくなってしまうため、何らかの手段で共有する必要があります。</p>
+<p>共有する上で、 VCS を用いることは非推奨とされています。これは例えば複数人が <code>git clone</code> して同時に <code>terraform apply</code> を実行してしまった場合などに、競合が発生する可能性があるからです。 tfstate は常に唯一無二のファイルがどこかに存在し、誰もがそのファイルを参照する必要があります。</p>
+<p>そのため tfstate の保存にはオブジェクトストレージ等を用いることになります。これを設定するのが  <code>backend</code> という設定です。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">terraform</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  <span style="color:#719e07">backend</span> <span style="color:#2aa198">&#34;s3&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    bucket <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;example&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>    key    <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;tfstate/terraform.tfstate&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>    region <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;ap-northeast-1&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}
+</code></pre></div><p>上記の設定では Amazon S3 を backend として指定しています。この設定を記載した状態で <code>terraform init</code> を実行すると、 backend へのアクセスが可能か確認され、問題なければ <code>plan</code> や <code>apply</code> の際にこのパス上のファイルを tfstate として取り扱うようになります。</p>
+<p>backend に指定可能なストレージは Terraform がサポートしているものに限られますが、 Azure BLOB Storage 、 Google Cloud Storage といった、メジャーなクラウドサービスの各オブジェクトストレージにはいずれも対応しています。また 2019 年からは、 Terraform を制作した hashicorp が backend サービス <a href="https://www.terraform.io/docs/cloud/index.html">Terraform Cloud</a> を公開しており、ユーザー5人までのチームであれば、無償で利用することも可能です。</p>
+<h3 id="tfstate--3">tfstate は何のために存在するのか</h3>
+<p>tfstate という仕組みが設けられている理由はいくつかあり、詳しくは <a href="https://www.terraform.io/docs/state/purpose.html">State - Terraform by HashiCorp</a> に解説されています。ここでは「Terraform の管理対象を明確化する」という点について考えてみます。</p>
+<p>すでに EC2 インタンスが 4 台動いている AWS アカウントに、 Terraform を実行してもう 1 台インスタンスを追加した場合を考えます。次に <code>plan</code> したとき、 tfstate があれば、前回構築したインスタンスの ID が記録されているので、そのインスタンスとの差分を確認すればよいことになります。しかし tfstate が無いとすると、 5 台のうちどれが前回構築したインスタンスかわからず、差分を取ることが困難になります。また、 Terraform は前回実行時以降に tffile から削除したリソースは、現実のリソースも削除しようとしますが、前回実行時の記録がなければ、残る 4 台のインスタンスは Terraform が構築したものなのか、そうでないのか判別ができません。</p>
+<p>このように、 tfstate は Terraform の管理対象を明確化してくれます。逆に言えば、AWS アカウント内のすべてのリソースを1つの tfstate で管理対象とするのか、例えばサービスごとだったり、システムの構成単位ごとだったり、何かしらの単位で tfstate を分割していくのかは、個々のユースケースに併せて考えていく必要があります。</p>
+<h3 id="-tfstate">もうひとつの tfstate</h3>
+<p>ところで、あまり意識することはありませんが、 tfstate はもう1つあります。 <code>terraform init</code> 実行時に作成される <code>./.terraform/terraform.tfstate</code> です。</p>
+<p>このファイルにはリソースの情報ではなく、 backend の情報が含まれます。<code>terraform init</code> では backend との疎通確認が行われますが、その結果が問題なければ、 backend 設定がこのファイルへ出力されます。この tfstate は <code>init</code> 実行時に動的に生成されるため、永続的に保存しておく必要はありません。</p>
+<hr>
+<h2 id="tfstate--4">tfstate 理論</h2>
+<p>本項では、 tfstate が Terraform によって実際どのように用いられているのか、理論的な部分（？）に触れていきます。</p>
+<h3 id="tfstate--5">tfstate のファイル構造</h3>
+<p>手動で読み書きする機会が基本的には存在しないので、案外 tfstate の内容を目にする機会はないのかもしれません。改めて紐解いてみると、以下のような構造をしています。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  <span style="color:#268bd2">&#34;version&#34;</span>: <span style="color:#2aa198">4</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  <span style="color:#268bd2">&#34;terraform_version&#34;</span>: <span style="color:#2aa198">&#34;0.12.18&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  <span style="color:#268bd2">&#34;serial&#34;</span>: <span style="color:#2aa198">3</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  <span style="color:#268bd2">&#34;lineage&#34;</span>: <span style="color:#2aa198">&#34;XXXXXXXX-XXXX-XXXX-XXXX-f4e9614b100e&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  <span style="color:#268bd2">&#34;outputs&#34;</span>: {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>    <span style="color:#268bd2">&#34;example&#34;</span>: {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;example&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;string&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  <span style="color:#268bd2">&#34;resources&#34;</span>: [
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>    {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>      <span style="color:#268bd2">&#34;module&#34;</span>: <span style="color:#2aa198">&#34;module.iam.module.core&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>      <span style="color:#268bd2">&#34;mode&#34;</span>: <span style="color:#2aa198">&#34;managed&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;aws_instance&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>      <span style="color:#268bd2">&#34;name&#34;</span>: <span style="color:#2aa198">&#34;example&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>      <span style="color:#268bd2">&#34;provider&#34;</span>: <span style="color:#2aa198">&#34;module.example.provider.aws.example&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>      <span style="color:#268bd2">&#34;instances&#34;</span>: [
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>        {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>          <span style="color:#268bd2">&#34;schema_version&#34;</span>: <span style="color:#2aa198">0</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>          <span style="color:#268bd2">&#34;attributes&#34;</span>: {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>            <span style="color:#268bd2">&#34;arn&#34;</span>: <span style="color:#2aa198">&#34;arn:aws:ec2::...&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>            ...
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>          }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>      ]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>  ]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span>}
+</code></pre></div><p>各項目の意味はドキュメントがあるわけではないのであんまりわかっていません。上部に書かれているのはいずれもメタ情報にあたるようで、キーになりそうなのは <code>serial</code> ぐらいかと思います。これは版番号を表しており、 <code>terraform apply</code> によって tfsate が書き換えられるタイミングでインクリメントされます。また <code>terraform_version</code> は、この tfstate が生成される際に用いられていた Terraform のバージョンです。これより古いバージョンの Terraform でこの tfstate を扱おうとすると警告が出て実行できません。特に手動で Terraform を実行している場合、実行者間でバージョンを合わせる必要があるので注意が必要です。</p>
+<p>肝になるのはその後の <code>outputs</code> と <code>resources</code> です。 <code>outputs</code> は文字通り Terraform で <code>outputs</code> を設定している場合に限り、その値が記述されます。 <code>resources</code> が、実際に Terraform が構築したリソースの設定情報を記述したオブジェクトの配列です。各オブジェクトの主な項目は以下のとおりです。</p>
+<ul>
+<li><code>module</code> : 該当 resource が module に内包されている場合、その module 名（内包されていない場合はこの項目自体存在しません）</li>
+<li><code>mode</code> : data, managed（生成した resource）のいずれか</li>
+<li><code>type</code> : resource type</li>
+<li><code>name</code> : resource name</li>
+<li><code>provider</code> : その resource 生成に使われた Terraform provider 名</li>
+<li><code>instances</code> : 最後に <code>terraform apply</code> を実行した時に適用された設定情報の配列</li>
+</ul>
+<p>各 resource オブジェクトには <code>type</code> と <code>name</code> が含まれますが、これによって Terraform 設定ファイルに記載している resource と紐ついています。以下の Terraform resource で言えば、 <code>aws_instance</code> が <code>type</code> で <code>foobar</code> が <code>name</code> に当たります。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;aws_instance&#34; &#34;foobar&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  ...
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>}
+</code></pre></div><p>また <code>instances</code> 内には、 <code>aws_insntace</code> であればインスタンスIDなどの、現実のリソースを一意に特定する情報が含まれます。これにより resoruce オブジェクトは Terraform resource と現実のリソースとの1対1対応を定義しています。なお、お気付きの通り <code>instances</code> は配列です。 <code>for_each</code> や <code>count</code> を使った場合など、1つの resource block で複数のインフラリソースを構築した場合には、複数のリソース情報が入ります。</p>
+<h3 id="terraform-plan--tfstate">terraform plan と tfstate</h3>
+<p><code>terraform plan</code> を実行した際には、 tfstate を元にして設定ファイルと現実のインフラとの差分が導かれます。とはいえ、 tfstate に書き出された設定を、直接 terraform 設定ファイルの内容と比較して差分を出しているわけではありません。 tfstate からは、先述のように各 Terraform resource と対応する現実のリソースが存在するのかどうかを読み取るだけです。そして存在していれば、その設定情報を API などを用いて実際に取得し、設定ファイルとの比較を行うことになります。もしも Terraform resource に対応するリソースの情報が tfstate に存在しなければ、そのリソースは新規作成するべきものと判断されます。</p>
+<p>つまり、 <code>terraform plan</code> の挙動を表にまとめると以下のようになります。</p>
+<p>あるリソースが……</p>
+<table>
+<thead>
+<tr>
+<th>tffile に</th>
+<th>tfstate に</th>
+<th>現実のリソースと tffile の差異が</th>
+<th>plan 結果は</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ある</td>
+<td>ある</td>
+<td>ない</td>
+<td>No changes</td>
+</tr>
+<tr>
+<td>ある</td>
+<td>ある</td>
+<td>ある</td>
+<td>change</td>
+</tr>
+<tr>
+<td>ある</td>
+<td>ない</td>
+<td>差異は確認しない</td>
+<td>add</td>
+</tr>
+<tr>
+<td>ない</td>
+<td>ある</td>
+<td>差異は確認しない</td>
+<td>destroy</td>
+</tr>
+</tbody>
+</table>
+<p>従って tfstate の <code>resources[].instances</code> を仮に手動で書き換えても、 <code>terraform plan</code> の結果は変動しません（インスタンス ID のような、そのリソースを一意に特定する項目は除きます）。それでは tfstate を現実のリソース状態に合わせる <code>terraform refresh</code> は不要なのではないかと思われそうですが、例えば Terraform で構築したリソースを GUI から手動で削除してしまったような場合には、 <code>refresh</code> によって tfstate からも削除の上で、設定ファイルから削除する操作が必要になってきます。</p>
+<hr>
+<h2 id="-tfstate-">マクロ tfstate 論</h2>
+<p>本項ではマクロに見たときの tfstate について、具体的には tfstate の運用方法などについて触れていきます。</p>
+<h3 id="tfstate--6">tfstate の保存場所</h3>
+<p>「入門」で記したように、 tfstate の保存場所として利用できる backend には様々な種類のものが用意されています。それでは、この中でどれを選ぶべきなのでしょうか。</p>
+<p>2019年末の時点においては、 Terraform Cloud がベストと考えています。その理由を1つずつ見ていきます。</p>
+<h3 id="heading">フルマネージドであるということ</h3>
+<p>tfstate を保存するためだけに作られた、フルマネージドのストレージであるという特徴はやはり強みとして大きいです。 Terraform Cloud は以下の機能をもっています。</p>
+<ul>
+<li>自動的にいつ誰が実行したか履歴を蓄積してくれる</li>
+<li>tfstate 保存場所をわざわざ作る必要がない</li>
+<li>Terraform Cloud が Terraform 自動実行の機能も備えている</li>
+</ul>
+<p>1点目について。履歴を自動的に追跡し、誰がいつ <code>apply</code> を実行したかがわかるほか、あまり必要となる機会はないものの、各回での tfstate の差分も見ることができます。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>2点目については、例えば S3 だとバケットをあらかじめ作成する必要があるわけですが、 Terraform Cloud の場合は一度アカウントだけ作ってしまえば、その後は保存場所を手で作ったりする必要がありません。3点目については tfstate 保存の問題とは直接関係しませんが、 Terraform Cloud は Terraform 自動実行の機能も備えるなど、 hashicorp が提供しているだけあって Terraform を運用する上で便利な機能が備えられています。それら機能をすぐには使わないとしても、いつでも使えるよう tfstate だけは保存しておく、というのはアリだと思います。</p>
+<h3 id="remote-state-">Remote State の利便性を活かしやすい</h3>
+<p>Terraform Cloud を使う場合の利点として、より重要なのは Remote State の利便性を活かしやすい点にあると考えています。</p>
+<p>Remote State とは、別の tfstate が output している値を読み取り、変数として活用できる Terraform の機能です。例として、 AWS のネットワークを構築する際、以下のように <code>output</code> を設定しておくと、他の Terraform からこの値を読み取ることができます。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;aws_vpc&#34; &#34;example&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  cidr_block           <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;192.0.2.0/24&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#719e07">output</span> <span style="color:#2aa198">&#34;example_vpc_id&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>  value <span style="color:#719e07">=</span> <span style="color:#719e07">aws_vpc</span>.<span style="color:#719e07">example</span>.<span style="color:#719e07">id</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}
+</code></pre></div><p>先に少し触れましたが、 AWS アカウント全体を1つの tfstate が管理下に置くのではなく、いくつか分割する場合がありますが、その場合でもこの機能を使えば相互に値を参照し合うことができます。あるいはマルチアカウント構成の場合でも、他のアカウントから設定値を読み込むことができるのは非常に便利です。 VPC Peering を行う場合などに重宝します。</p>
+<p>Remote State から設定値を読み出す場合、当然ながらその tfstate に対する読み取り権限が必要になります。仮に S3 に置いている場合、バケットポリシーを適切に設定して、クロスアカウントでの読み取りを許可する必要が出てきます。</p>
+<p>これを Terraform Cloud に変えると、 Terraform 実行者は誰もが Cloud 上のすべての tfstate を参照し合うことが可能になります。 tfstate をあえて管理対象クラウドの外に引っ張り出して集めておくことにより、集約的な設定データベースのように取り扱うことができます。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<hr>
+<h2 id="-tfstate--1">ミクロ tfstate 論</h2>
+<p>本項ではミクロに見た tfstate として、ファイルの編集処理に着目します。</p>
+<h3 id="heading-1">既存リソースの取り込み</h3>
+<p>Terraform を扱う上で鬼門になる要素の1つに、「既存リソースの取り込み」があります。 tffile を書かなくてはならないのと同時に、 tfstate にも記述を加えなくてはならない点が厄介です。</p>
+<p>この問題を解決するために <a href="https://github.com/dtan4/terraforming">dtan4/terraforming</a> や <a href="https://github.com/GoogleCloudPlatform/terraformer">GoogleCloudPlatform/terraformer</a> が開発されてきました。これらのツールで対処可能であれば、ツールを利用するのが手早いと思います。ツールが残念ながら対応していないリソースを取り込みたい場合には、 <code>terraform import</code> コマンドを使うことになります。</p>
+<p><code>terraform import</code> は tfstate への取り込みだけを行う機能で、 tffile は作成してくれませんが、ある程度工夫することで楽はできます。まず、 tffile に Terraform resource の枠だけ作成してから <code>terraform import</code> を実行します。枠とは以下のように attributes を何も書き込まない状態です。 <code>import</code> は、対応する resource の記述が tffile に存在していないと動作しないため、 <code>import</code> 実行前にこれだけは必要になります。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ cat main.tf
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>resource <span style="color:#2aa198">&#34;aws_lambda_function&#34;</span> <span style="color:#2aa198">&#34;example&#34;</span> <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#719e07">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>$ terraform import aws_lambda_function.example exampleFunction
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>aws_lambda_function.example: Importing from ID <span style="color:#2aa198">&#34;exampleFunction&#34;</span>...
+</code></pre></div><p>import が完了次第、 import した resource を引数にして <code>terraform state show</code> を実行します。するとこのように、 tfstate の記述を元にして、現在の設定情報が HCL の形で出力されます。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>$ terraform state show aws_lambda_function.example
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"># aws_lambda_function.example:</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>resource <span style="color:#2aa198">&#34;aws_lambda_function&#34;</span> <span style="color:#2aa198">&#34;example&#34;</span> <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>    <span style="color:#268bd2">arn</span>                            <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;arn:aws:lambda:ap-northeast-1:999999999999:function:exampleFunction&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>    <span style="color:#268bd2">function_name</span>                  <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;exampleFunction&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>    <span style="color:#268bd2">handler</span>                        <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;Handler&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>    <span style="color:#268bd2">id</span>                             <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;exampleFunction&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    <span style="color:#268bd2">invoke_arn</span>                     <span style="color:#719e07">=</span> ...
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    <span style="color:#268bd2">last_modified</span>                  <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;2019-12-13T03:35:41.026+0000&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    <span style="color:#268bd2">memory_size</span>                    <span style="color:#719e07">=</span> <span style="color:#2aa198">512</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    ...
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>    timeouts <span style="color:#719e07">{</span><span style="color:#719e07">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>    tracing_config <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>        <span style="color:#268bd2">mode</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;PassThrough&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>    <span style="color:#719e07">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span><span style="color:#719e07">}</span>
+</code></pre></div><p>あとはこれをコピペして tffile を fix すれば取り込み完了です。 <code>terraform state show</code> が v0.12 より HCL 形式で出力されるようになったことで、取り込み処理が非常に楽になりました。注意点として、この HCL には tffile には必要のない <code>attributes references</code>  に該当する値も含まれています。そのままにしていても害はありませんが、不要な値を持っておくべきでもありませんので削除しておきましょう。 <code>attributes references</code> について詳しくは、本ブログの <a href="https://chroju.github.io/blog/2019/11/02/terraformer_includes_unnecessary_resource_attributes/">Terraformer が import した resource は不要な属性を含む場合がある · the world as code</a> を参照してください。</p>
+<h3 id="tfstate--7">tfstate の保存場所を変更したい</h3>
+<p>tfstate を現在の保存場所から別の場所へ移したい場合があると思います。最近であれば Terraform Cloud がローンチされた際、 S3 などから移行した方は多かったでしょうし、 S3 内でファイルの key（パス）だけ替えたいといった需要もあるかと思います。</p>
+<p>この操作は意外と簡単で、まず一度 <code>terraform init</code> を実行してから、 tffile の <code>backend</code> の部分を移行先のパスに書き換えてもう一度 <code>terraform init</code> を実行するだけです。 Terraform が以下のように backend の変更を検知して、 tfstate ファイルを移動させるか尋ねてくれます。これを承諾すれば、 Terraform がファイル移動を賄ってくれます。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>これは「入門」の項で記載した <code>./.terraform/terraform.tfstate</code> に書かれた backend 設定と、 tffile に書かれた backend 設定に差異があったとき、 backend が変更されたとみなして実行される処理です。</p>
+<h3 id="tfstate--8">tfstate の編集</h3>
+<p>tfstate の編集が必要になるのは、 tffile、 tfstate、現実のリソースの三者間で乖離が発生してしまい、 <code>terraform plan</code> の結果が予期せぬものになってしまうような場合です。 tfstate が変更されてしまった、というケースは無いものとして考えると、 tffile を変更したか、現実のリソースを変更したか、いずれかの場合ということになります。このうち現実のリソースを変更した場合については、先にも触れましたが <code>terraform refresh</code> コマンドを実行すれば事足ります。</p>
+<h3 id="tfstate----tffile-">tfstate の編集 - tffile を変更（リファクタリング）した場合</h3>
+<p>最も手数を要するのが、リファクタリングなどにより tffile 上の resource name を変更したり、 module の構成を変更したりした場合です。 <code>aws_instance.foo</code> を <code>aws_instance.bar</code> にリネームした場合、 tfstate 上の <code>foo</code> は tffile 上に見つからないので削除対象とされ、 tffile 上の bar は tfstate 上に見つからないので新規構築対象とされてしまいます。</p>
+<p>このようなときには <code>terraform state mv</code> コマンドを使って、変更前の名前から変更後の名前へと移し替えていきます。先の例で言えば</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ terraform state mv aws_instance.foo aws_instance.bar
+</code></pre></div><p>となります。この <code>aws_instance.foo</code> のような記述形式は Terraform のドキュメント内で <code>address</code> と呼ばれています。 address の書式は resource type と resource name をドットで繋いだ形です。 module に内包された resource の場合は <code>module.(module 名).(resource type).(resource name)</code> の形になります。 module を入れ子にしていると、さらに <code>module.(module 名).module.(module 名)...</code> と数珠つなぎで繋がっていきます。</p>
+<p>mv の対象がかなりの数に上ってくると、 address を手で書いてコマンド実行するのが面倒になってきます。こういうときは一旦 <code>terraform plan</code> を実行してしまいましょう。先に書いた通り、 mv 前の tfstate に残っているリソースは削除対象に、 mv 後の tffile に新しく命名されたリソースは新規構築対象になるので、 <code>will be (destroyed|created)</code> という文字列で grep することで、 mv 前後の address をそれぞれ取得できるはずです。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>あとはいい感じに shell script にでも編集し直して実行してしまいましょう。</p>
+<h3 id="tfstate----">tfstate の編集 - リスト化した場合</h3>
+<p>注意が必要なのが、もともとバラバラに定義していたリソースを、 count などで一括処理する形へ変更した場合です。この場合、 mv 先は <code>aws_instance.web_servers[0]</code> のようにリストの1要素という形になりますが、この <code>web_servers</code> というリスト自体が tfstate にまだ存在していない状態だと、そのリストへ要素を追加するという処理は実行できません。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>対処としては、一旦 <code>count = 0</code> として、リストを空の状態で <code>terraform apply</code> を実行し、 tfstate へリストを作成した上で mv を実行することになります。</p>
+<h3 id="tfstate--9">tfstate の直接編集</h3>
+<p>さて、最後に禁断の tfstate 直接編集についても少し触れておきます。禁断の、と言っても本当に手で編集してほしくなければバイナリにするでも暗号化するでも方法はあると思うので JSON で書くということはそういうことなんでしょう、とは思っています。</p>
+<p>とは言ったものの、私は直接 tfstate 編集することはここ2年ぐらいもうやっていないような気がします。 <code>state</code> サブコマンドの実装でかなり状況が改善されつつはあるというのが1つ。それでも編集が必要なケースについては、もう諦めて Terraform を書き直したほうが早いと思っているのが1つ。 tfstate 直接編集はあまりに尖ったスキルすぎて、チーム内での共有などがしづらいというのが1つです。</p>
+<p>Terraform が多少乱れたり使い物にならなくなったところで、先述したように <code>import</code> などを上手く使えば、ゼロから作り直すこともできなくはありません。 Martin Fowler が提唱した<a href="https://www.infoq.com/jp/news/2014/11/sacrificial-architecture/">「犠牲的アーキテクチャー」</a>という考え方がありますが、一旦すべて書き直したほうが結局コストも低く、クオリティも高くなる可能性はあります。 tfstate を直接編集しなければならない状況に追い込まれたら、そのように思考を転換するのも一手かと思います。</p>
+<p>どうしても直接編集をする場合は、 <code>terraform state pull &gt; terraform.tfstate</code> で一度ダウンロードしてから編集を行い、完了後に <code>terraform state push terraform.tfstate</code> する形を取ります。編集中は <code>terraform plan -state=terraform.tfstate</code> をこまめに行い、致命的な編集ミスがないことを都度確認することを勧めます。</p>
+<hr>
+<h2 id="heading-2">最後に</h2>
+<p>自分の経験として、 Terraform を使っていて悩まされる機会が多いのが tfstate です。そこでいくつかプラクティスをまとめて記事にしようと思っていたのですが、いつの間にか分量が膨らみ、どうせならと網羅的な「概論」という形になってしまいました。</p>
+<p>tfstate の挙動や背景を知ることで、 Terraform への理解も一層深まると思いますので、ここに書いていないことについても是非深堀りしてみてください。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

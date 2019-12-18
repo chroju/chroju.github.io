@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="これ行ってきた。ざくっと感想を箇条書きで。 ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれ">
+
+<meta property="og:title" content="Ansibleの入門イベント聞いてきた話" />
+<meta property="og:description" content="これ行ってきた。ざくっと感想を箇条書きで。 ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/" />
+<meta property="article:published_time" content="2015-06-25T00:00:00+09:00" />
+<meta property="article:modified_time" content="2015-06-25T00:00:00+09:00" />
+
+
+<title>
+
+
+     Ansibleの入門イベント聞いてきた話 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.757199717%20%2b0000%20UTC%20m%3d%2b0.279076887">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.757199717%20%2b0000%20UTC%20m%3d%2b0.279076887">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.757199717%20%2b0000%20UTC%20m%3d%2b0.279076887">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.757199717%20%2b0000%20UTC%20m%3d%2b0.279076887">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ansibleの入門イベント聞いてきた話
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Thu Jun 25 2015 00:00:00 JST'>Jun 25, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p><a href="https://atnd.org/events/66419">これ</a>行ってきた。ざくっと感想を箇条書きで。</p>
+<ul>
+<li>ChefやPuppetに相当するインフラの設定管理ツールだと勝手に思い込んでいたが、対象範囲はそれらより広い。要はCapistranoがやるようなことまでまかなえる。</li>
+<li>それどころかHomebrewの管理あたりも可。一時期brewfileとか流行ってたけど、冪等性とか考えるとAnsible管理の方がいいかも。
+<ul>
+<li>最近そんな記事がちょうど上がってた。→ <a href="http://dev.classmethod.jp/tool/osxc-ansible-configuration-for-mac/">【要するに】osxcでMacの環境の構成を記述管理する【MacでAnsible】 ｜ Developers.IO</a></li>
+</ul>
+</li>
+<li>一番のポイントはエージェントレス、だと個人的にも思う。導入ハードルが低い。個人のVPSとかならChef-Zeroとかよりも気楽で良い。</li>
+<li>yamlだからインフラ担当者でも読みやすいって点はそれほど惹かれないというか、Rubyぐらいインフラ屋でも昨今は読み書きできるべきではって気がする。
+<ul>
+<li>あとRubyの方がぶっちゃけ処理ベタ書きしちゃえるって点で安心感はある。Ansibleで細かいとこに手が届かないとき、どういうワークアラウンドがあるかはわかってないが。</li>
+</ul>
+</li>
+<li>しかし、とはいえやっぱ楽そう。Vagrantと組み合わせて開発環境立てるみたいな小さなことからやってみて、イケると思ったら本番展開ってのもアリかもしれない。かも。</li>
+<li>この手のツールが出たときに「こんなこともできる！すごい！」ってなりがちなんだけど、実は再発明された車輪で成り立ってる部分もあって、それshでできるよ？ってなることは結構ある（brewfileがわりとその気配あった）ので、その点に関してはきちんと見極めがしたい。</li>
+<li>あとやっぱり構成管理ツールはインフラエンジニアから完全にdevを奪いにかかるツールではあるので、インフラ屋はスケーリングとかネットワークとか（そういえばネットワーク周りのas codeなかなか流行りませんね）障害対策とか、本気でops特化が求められるのかもなとか思った。</li>
+</ul>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

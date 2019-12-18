@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="AWS Systems Manager のパラメータストア をよく使っている。例えば Git で管理ができない秘匿情報を SecureString の形で保存しておいたり、 Infrastructure as Code を実行する際、 Terraform で構築したリソー">
+
+<meta property="og:title" content="AWS Parameter Store をターミナルから操作する Parade を作った" />
+<meta property="og:description" content="AWS Systems Manager のパラメータストア をよく使っている。例えば Git で管理ができない秘匿情報を SecureString の形で保存しておいたり、 Infrastructure as Code を実行する際、 Terraform で構築したリソー" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/" />
+<meta property="article:published_time" content="2019-10-14T08:23:39+09:00" />
+<meta property="article:modified_time" content="2019-10-14T08:23:39+09:00" />
+
+
+<title>
+
+
+     AWS Parameter Store をターミナルから操作する Parade を作った &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.579925599%20%2b0000%20UTC%20m%3d%2b0.101802769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.579925599%20%2b0000%20UTC%20m%3d%2b0.101802769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.579925599%20%2b0000%20UTC%20m%3d%2b0.101802769">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.579925599%20%2b0000%20UTC%20m%3d%2b0.101802769">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    AWS Parameter Store をターミナルから操作する Parade を作った
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Oct 14 2019 08:23:39 JST'>Oct 14, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <!-- raw HTML omitted -->
+<p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems Manager のパラメータストア</a> をよく使っている。例えば Git で管理ができない秘匿情報を SecureString の形で保存しておいたり、 Infrastructure as Code を実行する際、 Terraform で構築したリソースの設定値を Ansible に橋渡しをするために使ったり、各種ツールやアプリケーションで参照したい設定値の保管場所として便利に使うことができる。</p>
+<p>欠点として、今どんな値が格納されていたか？　どんなキー名で格納されていたか？を確認したいときの操作が若干面倒というのがあった。マネジメントコンソールではキーの一覧から、目当てのキーをクリックしてページ遷移しなければ値を見ることができない。またキーを検索する場合も、完全一致か前方一致での検索しかできず、目的のキーをなかなか探せないことが多かった。まぁ AWS CLI を <code>grep</code> などと組み合わせてうまいこと使うのが解なのだろうとは思うのだけど、手を動かす題材としても良さそうだったので、 go で CLI ツールを作って対処することにした。</p>
+<h2 id="parade">Parade</h2>
+<!-- raw HTML omitted -->
+<p>名前にあまり意味はない。パラメータストアなので &ldquo;para&rdquo; の付く英単語がいいなと適当に探して命名した。みんな OSS の名前ってどうやって決めてるのか教えてほしい。</p>
+<p>シンプルに値を読み書きすることだけ、もっと言えば読むことだけが目的だったので、機能は少ない。コマンド体系は redis-cli を参考にしていて、 <code>keys</code>, <code>get</code>, <code>set</code>, <code>del</code> の4つのサブコマンドから成る。先述の通り、キーの検索が面倒というのが発端になっているので、特に <code>get</code> を強化した。何もオプションを与えなければ <code>get hoge</code> でキー名 &ldquo;hoge&rdquo; がある場合に限り値を出力するけれど、キー名の記憶が曖昧な場合などは <code>--ambiguous</code> あるいは <code>-a</code> オプションを付ければ部分一致するキー名をすべて拾ってきてくれる。このとき、一致箇所を赤字で表示するようこだわってみた。また <code>SecureString</code> にも対応していて、自身に復号の権限さえあれば、 <code>-d</code> オプションで復号した値を出力することもできる。</p>
+<p>逆に <code>set</code> で値を登録するときは、任意のキーIDを指定した暗号化ができない（デフォルトのキーでの暗号化は可能）など、機能は現状最小限になっている。本当に手元でサクッとパラメーターを確認することを意図したツールにしている。</p>
+<h3 id="heading">類似ツール</h3>
+<p>似たところだと <a href="https://github.com/segmentio/chamber">segmentio/chamber</a> が挙げられると思う。が、 chamber はあくまでシークレットマネージャーツールであることが主眼に置かれており、そのバックエンドとしてパラメータストアが使えるだけなので、パラメータストアの読み書き自体を目的とした parade とはちょっと軸足が違うかな、と思っている。</p>
+<h2 id="heading-1">使用技術</h2>
+<p>いくつか初めて使う技術を盛り込めたのでよかった。</p>
+<h3 id="aws-sdk-go">aws-sdk-go</h3>
+<p>AWS 関連のスクリプトを書く際は Python の boto3 を使うことが多く、今回 aws-sdk-go はほぼ初めてちゃんと使う機会になった。ドキュメントは <a href="https://docs.aws.amazon.com/sdk-for-go/api/">AWS Documentation</a> として公開されてもいるが、個人的には <a href="https://godoc.org/github.com/aws/aws-sdk-go">GoDoc</a> のほうが慣れもあって読みやすかった。</p>
+<p>またユニットテスト用の mock が用意されているのが嬉しい。 Parade ではパラメータストアへのアクセス部分で以下のようなコードを書いている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">type</span> SSMManager <span style="color:#268bd2">struct</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	svc ssmiface.SSMAPI
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#268bd2">func</span> <span style="color:#268bd2">New</span>() (<span style="color:#719e07">*</span>SSMManager, <span style="color:#dc322f">error</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>	sess <span style="color:#719e07">:=</span> session.<span style="color:#268bd2">Must</span>(session.<span style="color:#268bd2">NewSession</span>())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	svc <span style="color:#719e07">:=</span> ssm.<span style="color:#268bd2">New</span>(sess)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>	<span style="color:#719e07">return</span> <span style="color:#719e07">&amp;</span>SSMManager{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>		svc: svc,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>	}, <span style="color:#cb4b16">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span><span style="color:#268bd2">func</span> (s <span style="color:#719e07">*</span>SSMManager) <span style="color:#268bd2">GetParameter</span>(query <span style="color:#dc322f">string</span>, withDecryption <span style="color:#dc322f">bool</span>) (<span style="color:#719e07">*</span>ssm.Parameter, <span style="color:#dc322f">error</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>	params <span style="color:#719e07">:=</span> <span style="color:#719e07">&amp;</span>ssm.GetParameterInput{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>		Name:           aws.<span style="color:#268bd2">String</span>(query),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>		WithDecryption: aws.<span style="color:#268bd2">Bool</span>(withDecryption),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>	resp, err <span style="color:#719e07">:=</span> s.svc.<span style="color:#268bd2">GetParameter</span>(params)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>	<span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>		<span style="color:#719e07">return</span> <span style="color:#cb4b16">nil</span>, err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>	<span style="color:#719e07">return</span> resp.Parameter, <span style="color:#cb4b16">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>}
+</code></pre></div><p>最初に定義した構造体 <code>SSMManager</code> に埋め込んでいる <a href="https://github.com/aws/aws-sdk-go/blob/master/service/ssm/ssmiface/interface.go">ssmiface.SSMAPI</a> が、各 API を呼ぶメソッドを実装した Interface になっているため、ダミー値を返すメソッドを書いた mock を用意することで、ユニットテストができるようになっている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">type</span> mockSSMClient <span style="color:#268bd2">struct</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	ssmiface.SSMAPI
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#268bd2">func</span> <span style="color:#268bd2">NewMock</span>() <span style="color:#719e07">*</span>SSMManager {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>	svc <span style="color:#719e07">:=</span> <span style="color:#719e07">&amp;</span>mockSSMClient{}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>	<span style="color:#719e07">return</span> <span style="color:#719e07">&amp;</span>SSMManager{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>		svc: svc,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>	}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#268bd2">func</span> (m <span style="color:#719e07">*</span>mockSSMClient) <span style="color:#268bd2">GetParameter</span>(i <span style="color:#719e07">*</span>ssm.GetParameterInput) (<span style="color:#719e07">*</span>ssm.GetParameterOutput, <span style="color:#dc322f">error</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>    <span style="color:#719e07">return</span> <span style="color:#719e07">&amp;</span>ssm.GetParameterOutput{Parameter: p}, <span style="color:#cb4b16">nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>}
+</code></pre></div><h3 id="spf13cobra">spf13/cobra</h3>
+<!-- raw HTML omitted -->
+<p>Go のコマンドラインツールを作るためのパッケージの1つ。競合として <a href="https://github.com/urfave/cli">urfave/cli</a> や <a href="https://github.com/mitchellh/cli">mitchellh/cli</a> もあるが、 cobra が現時点で最もスター数が多く、用例も多いのかなと勝手に思っている。作成者が Docker, Google, MongoDB あたりに関わっているゲキヤバな人であることもあってか、 <a href="https://kubernetes.io/docs/reference/kubectl/">kubectl</a> や <a href="https://istio.io/">Istio</a> などでも使われている。</p>
+<p>使ってみた感想としてはなんでも出来る、そしてサクッと書ける良いツールではあった。が、サブコマンドのテストが書きづらい。というのも、以下のように　<code>&amp;cobra.Command</code> で変数として定義する方式を取るから。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">var</span> versionCmd = <span style="color:#719e07">&amp;</span>cobra.Command{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  Use:   <span style="color:#2aa198">&#34;version&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  Short: <span style="color:#2aa198">&#34;Print the version number of Hugo&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  Long:  <span style="color:#2aa198">`</span><span style="color:#2aa198">All software has versions. This is Hugo&#39;s</span><span style="color:#2aa198">`</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  Run: <span style="color:#268bd2">func</span>(cmd <span style="color:#719e07">*</span>cobra.Command, args []<span style="color:#dc322f">string</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>    fmt.<span style="color:#268bd2">Println</span>(<span style="color:#2aa198">&#34;Hugo Static Site Generator v0.9 -- HEAD&#34;</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#268bd2">func</span> <span style="color:#268bd2">init</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  rootCmd.<span style="color:#268bd2">AddCommand</span>(versionCmd)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>}
+</code></pre></div><p>この点を気にする人は多いようで、検索するとワークアラウンドはいろいろと出てくる。</p>
+<ul>
+<li><a href="https://www.bradcypert.com/testing-a-cobra-cli-in-go/">Testing a Cobra CLI in Go - Brad Cypert</a></li>
+<li><a href="https://text.baldanders.info/golang/using-and-testing-cobra/">Cobra の使い方とテスト — プログラミング言語 Go | text.Baldanders.info</a></li>
+<li><a href="https://stackoverflow.com/questions/35827147/cobra-viper-golang-how-to-test-subcommands">go - Cobra + Viper Golang How to test subcommands? - Stack Overflow</a></li>
+</ul>
+<p>またコードを見るとわかる通り、サブコマンドが <code>error</code> を「戻さない」のも感覚的に慣れなかった。 <code>cobra.Command.Run</code> ではなく <code>cobra.Command.RunE</code> を使うと <code>error</code> を戻せるのだが、試しに戻したところ勝手に Usage をまるっと出力されてしまって、出力しないようにするにはどうしたらいいのか探すのが面倒になって諦めた。なんでも出来るツールはその分内部がブラックボックスにはなりやすいわけで、個人的には薄い実装のほうが好みなのだと思う。</p>
+<h3 id="github-actions">GitHub Actions</h3>
+<p>Pull Request を発行したときの <code>golint</code> やテストの実行と、 tag を切ったときのバイナリ生成と GitHub Release への添付を GitHub Actions で書いている。初めて書いてみたけど正直まだ感覚がつかめていない。このブログを生成する hugo の実行を今 CircleCI にまかせているので、それを GitHub Actions へ移すときにもう一度学んでみて記事にしようと思っている。</p>
+<p>GitHub Release へのバイナリ添付には <a href="https://github.com/goreleaser/goreleaser">goreleaser</a> を使った。すでに GitHub Actions で使うための Action を公開してくれているので、めちゃくちゃ便利に扱えて感動した。</p>
+<!-- raw HTML omitted -->
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm リポジトリが正しく登録されて">
+
+<meta property="og:title" content="Rails環境構築（4）nginx導入" />
+<meta property="og:description" content="nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。 $ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm リポジトリが正しく登録されて" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2014/02/02/2014-02-02-post/" />
+<meta property="article:published_time" content="2014-02-02T00:00:00+09:00" />
+<meta property="article:modified_time" content="2014-02-02T00:00:00+09:00" />
+
+
+<title>
+
+
+     Rails環境構築（4）nginx導入 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2014/02/02/2014-02-02-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.894063408%20%2b0000%20UTC%20m%3d%2b0.415940578">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.894063408%20%2b0000%20UTC%20m%3d%2b0.415940578">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.894063408%20%2b0000%20UTC%20m%3d%2b0.415940578">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.894063408%20%2b0000%20UTC%20m%3d%2b0.415940578">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Rails環境構築（4）nginx導入
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Feb 2 2014 00:00:00 JST'>Feb 2, 2014</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>One minute read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>nginxの導入はyumを使ってサクッと。まずリポジトリを登録して、その後yumを使ってインストール。</p>
+<pre><code>$ sudo rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+</code></pre><p>リポジトリが正しく登録されているか確認。</p>
+<pre><code>$ yum list nginx --disablerepo=* --enablerepo=nginx
+（中略）
+Installed Packages
+nginx.x86_64                1.4.4-1.e16.ngx           @nginx
+</code></pre><p>yum install</p>
+<pre><code>$ sudo yum install nginx
+</code></pre><p>インストールは以上。EPEL様々ですね。あとは仮想ホスト設定用にディレクトリを作っておくという作業を入れる。</p>
+<pre><code>$ sudo mkdir /etc/nginx/sites-available
+$ sudo mkdir /etc/nginx/sites-enabled
+$ sudo rm -f conf.d/*.conf
+</code></pre><p>nginx.confを開いて、sites-enabledを読み込ませるための設定を追加する。具体的には以下の1行。</p>
+<pre><code>include /etc/nginx/sites-enabled/*;
+</code></pre><p>以上、終わり。最後にサービスを立ち上げて、自動起動を設定。</p>
+<pre><code>$ sudo service nginx start
+$ sudo chkconfig nginx on
+</code></pre>
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

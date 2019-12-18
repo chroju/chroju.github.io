@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="ITエンジニア組織における組織論について書かれた本が同時期に2冊出ていたので、それぞれ読んでみた。 エンジニアと社会学 頻繁に引用されるトム・デ">
+
+<meta property="og:title" content="『Effective DevOps』と『エンジニアリング組織論への招待』を読んだ" />
+<meta property="og:description" content="ITエンジニア組織における組織論について書かれた本が同時期に2冊出ていたので、それぞれ読んでみた。 エンジニアと社会学 頻繁に引用されるトム・デ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2018/05/13/engineering_organization_theory_and_effective_devops/" />
+<meta property="article:published_time" content="2018-05-13T19:35:05+09:00" />
+<meta property="article:modified_time" content="2018-05-13T19:35:05+09:00" />
+
+
+<title>
+
+
+     『Effective DevOps』と『エンジニアリング組織論への招待』を読んだ &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2018/05/13/engineering_organization_theory_and_effective_devops/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.665698056%20%2b0000%20UTC%20m%3d%2b0.187575226">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.665698056%20%2b0000%20UTC%20m%3d%2b0.187575226">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.665698056%20%2b0000%20UTC%20m%3d%2b0.187575226">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.665698056%20%2b0000%20UTC%20m%3d%2b0.187575226">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    『Effective DevOps』と『エンジニアリング組織論への招待』を読んだ
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun May 13 2018 19:35:05 JST'>May 13, 2018</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>ITエンジニア組織における組織論について書かれた本が同時期に2冊出ていたので、それぞれ読んでみた。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="heading">エンジニアと社会学</h2>
+<p>頻繁に引用されるトム・デマルコの言葉に、以下のものがある。</p>
+<blockquote>
+<p>実際のところ、ソフトウェア開発上の問題の多くは、技術的というより社会学的なものである。（トム・デマルコ, ティモシー・リスター『ピープルウェア』）</p>
+</blockquote>
+<p>実際コンピュータの世界にそこそこの年数身を置いていると、この言葉に対して徐々に実感が伴ってくる。技術的な解というのは、この情報過多の時代、すでに誰かがどこかへ書き記してくれていることが少なくないし、単純に技術的な妥当性だけを突き詰めれば、理想的なシステムの形は自ずと定まってくる。でもその解が実際に適用できるとは限らない場合が多い。それは予算的な都合であったり、社内の開発プロセス的に困難があったり、社内に反対勢力がいたり、もっとシンプルに技術者のレベルが追いついていないということもあり得る。技術的に楽しいことをただやっていればよかった若い時代を抜けて、徐々に自分のやりたいことをやろうとして、壁にぶつかるようになり、人はマネジメントという路線を意識せざるを得なくなるのだろうな、などと最近よく思う。</p>
+<p>とても脱線した話をすると、自称理系による安直な「文系批判」というのが自分は非常に苦手だ。上記のようなことを考えたとき、自然科学的な課題を解決するにあたっても、社会科学的なアプローチが必要とされる場面は多いからだ。理系文系というのは二項対立ではないし、どちらか一方だけに特化することが、必ずしも高い生産性につながるわけではない。この2冊の書籍が出るあたりからして、昨今は社会科学の必要性というのも強く意識されるようになってきているのだとは思うが。</p>
+<h2 id="effective-devops">Effective DevOps</h2>
+<p>DevOpsとは何か？と言われると、それは特定のツールではなくて、開発と運用、引いてはそれ以外のチームも含めたスムーズな連携によるシステム運営文化を指す、というのはわかるのだが、正直バクっとしてとらえどころのない言葉だなとは長年思っている。</p>
+<p>その点この本がすごいのは、そのとらえどころのない「文化」面に着目して、具体的実践を300ページ以上もの分量で書いていること。「ツール」の章もあるにはあるが、技術的な話ではなくツールの選定方法や、ツールが文化に対して与える影響について書かれている。もちろんこの本に書かれたことが唯一無二の正解ではない、というのは文中でも断られているが、DevOpsとはどうあるべきか、という疑問への最適解に近いものが集まっているように感じた。とにかくボリューミー。</p>
+<p>本書は先の「ツール」の他に、主に「コラボレーション」「アフィニティ」「スケーリング」という計4つの章に分かれている。コラボレーションは複数人の協力の方法について、アフィニティはチーム間の関係構築について、スケーリングは組織の成長や縮小の観点について述べており、これはそのまま組織の成熟プロセスに該当しそうなので、各々の組織の状態に合わせて参照していけばよさそう。</p>
+<h2 id="heading-1">エンジニアリング組織論への招待</h2>
+<p>こちらの本はDevOpsよりもう一歩手前というか、そもそも会社組織においてエンジニアリングを行うにあたり、何が問題として存在していて、それを如何にして解決すればよいのかという、そもそも論に焦点が当たっている。 <a href="http://blog.shibayu36.org/entry/2018/03/27/193000">「エンジニアリング組織論への招待」はいろんな立場の人に読んで欲しい - $shibayu36-&gt;blog;</a> という書評記事も読ませてもらったが、IT組織内の「いろんな立場」を超えて、IT以外の現場ですら役立ちそうに思える。</p>
+<p>本書は副題通り、エンジニアリングの目的を不確実性＝定まっていないこと、わからないこと、乱雑な状態を効率よく解消していくことにあると定める。この定義がすごくしっくりきて、例えば本書の中でも触れられているアジャイル開発などは、不確実性を反復して徐々に徐々に削減していくプロセスと捉えられる。</p>
+<p>この「不確実性の解消」という言葉で全体をまとめたことで、とても見通しの良い1冊になっているし、エンジニアリングに従事するにあたり、我々は一体何をしているのか？という日々の迷いにも指針を与えられた気分になる。そして不確実性へ向き合うにあたり、自分が最も感銘を受けたのは以下の一文。</p>
+<blockquote>
+<p>難しいのは、問題を正しく認知することです。(p.33)</p>
+</blockquote>
+<p>そう、まさにそれである。問題解決のための技術導入をしたところで、その技術が解決するべき問題を解決してくれなくては意味がない。本書では「問題の正しい認知」のために、認知バイアスの解消などが解説され、そして具体的な組織における不確実性を、通信（コミュニケーション）、方法（スケジュールの見積）などいくつかの側面から紹介している。</p>
+<h2 id="heading-2">正しい問題解決のための組織をつくる</h2>
+<p>組織的な課題にぶつかったとき、2冊は補完的に使えるように思う。『エンジニアリング組織論への招待』は、組織の問題をまず正しく認知することに活用できる。『Effective DevOps』はその問題を実際解決するにあたり、DevOpsという観点から、組織をどういう方向へ変えていけばいいかを示してくれる。</p>
+<p>自分はまだ実際にマネジメントの立場にいるわけではないので、まずは自らの認知をリファクタリングし、問題発見と解決のスキルを上げることから始めていきたい。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

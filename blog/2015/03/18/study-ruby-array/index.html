@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="『パーフェクトRuby』p.171より。 まずは配列の生成をいくつか。#new(a,b)で生成したとき、各要素は同じオブジェクトとなるので注意">
+
+<meta property="og:title" content="Ruby基礎復習(5) 配列(Array)" />
+<meta property="og:description" content="『パーフェクトRuby』p.171より。 まずは配列の生成をいくつか。#new(a,b)で生成したとき、各要素は同じオブジェクトとなるので注意" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2015/03/18/study-ruby-array/" />
+<meta property="article:published_time" content="2015-03-18T00:00:00+09:00" />
+<meta property="article:modified_time" content="2015-03-18T00:00:00+09:00" />
+
+
+<title>
+
+
+     Ruby基礎復習(5) 配列(Array) &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2015/03/18/study-ruby-array/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.825766663%20%2b0000%20UTC%20m%3d%2b0.347643833">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.825766663%20%2b0000%20UTC%20m%3d%2b0.347643833">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.825766663%20%2b0000%20UTC%20m%3d%2b0.347643833">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.825766663%20%2b0000%20UTC%20m%3d%2b0.347643833">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Ruby基礎復習(5) 配列(Array)
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Wed Mar 18 2015 00:00:00 JST'>Mar 18, 2015</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>『パーフェクトRuby』p.171より。</p>
+<p>まずは配列の生成をいくつか。<code>#new(a,b)</code>で生成したとき、各要素は同じオブジェクトとなるので注意。またブロックで受け取ると、インデックスを引数としてブロック内の処理を実行した結果が値となる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>a1 <span style="color:#719e07">=</span> <span style="color:#b58900">Array</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">3</span><span style="color:#719e07"></span>,<span style="color:#2aa198">1</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [1, 1, 1]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>a2 <span style="color:#719e07">=</span> <span style="color:#b58900">Array</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; [&#34;hoge&#34;, &#34;hoge&#34;, &#34;hoge&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>a3 <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [&#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>a4 <span style="color:#719e07">=</span> <span style="color:#b58900">Array</span><span style="color:#719e07">.</span>new(<span style="color:#2aa198">3</span><span style="color:#719e07"></span>) {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">*</span> <span style="color:#2aa198">5</span><span style="color:#719e07"></span>} <span style="color:#586e75"># =&gt; [0, 5, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>a2<span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#b58900">p</span> a2 <span style="color:#586e75"># =&gt; [&#34;hogefuga&#34;, &#34;hogefuga&#34;, &#34;hogefuga&#34;]</span>
+</code></pre></div><p>基本的な操作系メソッド。演算子メソッドは直感的でほんといいなーと思う。なお、<code>#&lt;&lt;</code>は<code>#concat</code>と同義。<code>#==</code>と<code>#eql?</code>も同義。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>array <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>array<span style="color:#719e07">.</span>length <span style="color:#586e75"># =&gt; 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>array<span style="color:#719e07">.</span>size <span style="color:#586e75"># =&gt; 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>array<span style="color:#719e07">.</span>empty? <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>array<span style="color:#719e07">.</span>include?(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#b58900">p</span> array <span style="color:#719e07">*</span> <span style="color:#2aa198">3</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [&#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;, &#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;, &#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#b58900">p</span> array <span style="color:#719e07">+</span> <span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#2aa198">2</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [&#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;, 1, 2]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#b58900">p</span> array <span style="color:#719e07">-</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [&#34;fuga&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#b58900">p</span> array <span style="color:#719e07">&amp;</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [&#34;piyo&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>array <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hogehoge</span><span style="color:#2aa198">&#34;</span> <span style="color:#586e75"># =&gt; [&#34;hoge&#34;, &#34;fuga&#34;, &#34;piyo&#34;, &#34;hogehoge&#34;]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>array2 <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>array3 <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hoge</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">fuga</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">piyo</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">hogehoge</span><span style="color:#2aa198">&#34;</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>array <span style="color:#719e07">==</span> array2 <span style="color:#586e75"># =&gt; false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>array <span style="color:#719e07">==</span> array3 <span style="color:#586e75"># =&gt; true</span>
+</code></pre></div><p>要素の取り出し。<code>#[a, b]</code>が添字aから長さbの配列を取り出すのに対し、<code>#values_at(a, b)</code>が添字a, bの要素を取り出して配列を作る、という点が異なるのが注意かも。</p>
+<p>また範囲外の添字を指定したときの振る舞いだが、<code>#[]</code>がnilを返すのに対し、第一引数のみの<code>#fetch</code>はIndexErrorを返す。<code>#fetch</code>に第二引数を指定すると、範囲外を呼び出したときに第二引数を返すようになる。</p>
+<p><code>#sample</code>はランダム抽出。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>array <span style="color:#719e07">=</span> (<span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span>)<span style="color:#719e07">.</span>to_a
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>array<span style="color:#719e07">[</span><span style="color:#719e07">-</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [2, 3, 4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">2</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">4</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; [3, 4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>array<span style="color:#719e07">.</span>values_at(<span style="color:#2aa198">3</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>array<span style="color:#719e07">.</span>values_at(<span style="color:#2aa198">0</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#2aa198">4</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [1, 4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>array<span style="color:#719e07">.</span>fetch(<span style="color:#2aa198">5</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; IndexError</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#586e75"># =&gt; nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>array<span style="color:#719e07">.</span>fetch(<span style="color:#2aa198">5</span><span style="color:#719e07"></span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">error</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;error&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>array<span style="color:#719e07">.</span>first <span style="color:#586e75"># =&gt; 1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>array<span style="color:#719e07">.</span>last <span style="color:#586e75"># =&gt; 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>array<span style="color:#719e07">.</span>last(<span style="color:#2aa198">2</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>array<span style="color:#719e07">.</span>sample <span style="color:#586e75"># =&gt; 3</span>
+</code></pre></div><p>要素の追加削除。添字を使って普通に要素の入れ替えはできるのだが、面白いのはレンジにない添字を指定してもOutOfBounds扱いにはならず、足りない箇所はnilを埋めて補完してくれること。<code>#insert</code>は第一引数をインデックスとする要素の直前に、第二引数以降の要素を挿入する。あと<code>#fill</code>は全要素を同じオブジェクトで埋め込む。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>array <span style="color:#719e07">=</span> (<span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span>)<span style="color:#719e07">.</span>to_a
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">0</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [1, 0, 3, 4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>array<span style="color:#719e07">[</span><span style="color:#2aa198">8</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">10</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>array<span style="color:#719e07">.</span>push(<span style="color:#2aa198">3</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10, 3]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>array<span style="color:#719e07">.</span>pop <span style="color:#586e75"># =&gt; 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>array<span style="color:#719e07">.</span>shift <span style="color:#586e75"># =&gt; [0, 3, 4, 5, nil, nil, nil, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>array<span style="color:#719e07">.</span>unshift(<span style="color:#2aa198">1</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [1, 0, 3, 4, 5, nil, nil, nil, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>array<span style="color:#719e07">.</span>insert(<span style="color:#2aa198">2</span><span style="color:#719e07"></span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">a</span><span style="color:#2aa198">&#34;</span>, <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">b</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; [1, 0, &#34;a&#34;, &#34;b&#34;, 3, 4, 5, nil, nil, nil, 10]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>array<span style="color:#719e07">.</span>fill(<span style="color:#2aa198">0</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>array<span style="color:#719e07">.</span>clear <span style="color:#586e75"># =&gt; []</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; []</span>
+</code></pre></div><p>要素の選択周り。ブロック内の処理でtrueとなった要素について、<code>#select</code>では抽出、<code>#reject</code>では削除を行う。いずれも破壊的／非破壊的の別があり。<code>#keep_if</code>は<code>#select!</code>と同様の動作をするが、削除する要素がなかった場合に<code>#select!</code>がnilを返す一方で、<code>#keep_if</code>がレシーバをそのまま返すという違いがある。<code>#delete_if</code>についても同様。ブロック内での評価ではなく、単純に特定の値と等しい要素を削除したい場合は<code>#delete</code>が使える。これは破壊的。<code>#delete_at</code>は添字による指定で削除する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>array <span style="color:#719e07">=</span> (<span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span>)<span style="color:#719e07">.</span>to_a
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>array<span style="color:#719e07">.</span>select {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; [2, 4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; [1, 2, 3, 4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>array<span style="color:#719e07">.</span>select! {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; [2, 4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; [2, 4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>array <span style="color:#719e07">=</span> (<span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span>)<span style="color:#719e07">.</span>to_a
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>array<span style="color:#719e07">.</span>reject {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; [1, 3, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; [1, 2, 3, 4, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>array<span style="color:#719e07">.</span>reject! {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; [1, 3, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#b58900">p</span> array <span style="color:#586e75"># =&gt; [1, 3, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>array <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">2</span><span style="color:#719e07"></span>, <span style="color:#2aa198">4</span><span style="color:#719e07"></span>, <span style="color:#2aa198">6</span><span style="color:#719e07"></span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>array<span style="color:#719e07">.</span>select! {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>array<span style="color:#719e07">.</span>keep_if {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>even? } <span style="color:#586e75"># =&gt; [2, 4, 6]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>array<span style="color:#719e07">.</span>reject! {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>odd? } <span style="color:#586e75"># =&gt; nil</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>array<span style="color:#719e07">.</span>delete_if {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i<span style="color:#719e07">.</span>odd? } <span style="color:#586e75"># =&gt; [2, 4, 6]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>array<span style="color:#719e07">.</span>delete <span style="color:#2aa198">4</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [2, 6]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>array<span style="color:#719e07">.</span>delete_at <span style="color:#2aa198">1</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [2]</span>
+</code></pre></div><p>同様に要素の切り出しでは<code>#slice</code>というメソッドもあるが、引数の与え方で動作が変わってくる。Integerの引数1つを与えると、そのインデックスにある要素を返す。範囲外の場合はnilが返る。Integerの引数2つでは、第一引数のインデックスより、第二引数の個数分要素を切り出して返す。Rangeを引数とすると、その範囲のインデックスにあたる要素を返す。</p>
+<p>またいずれの場合でも<code>!</code>による破壊的メソッドがあるが、ここでは戻り値となる要素が配列より削除される。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>a <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">2</span><span style="color:#719e07"></span>, <span style="color:#2aa198">4</span><span style="color:#719e07"></span>, <span style="color:#2aa198">6</span><span style="color:#719e07"></span>, <span style="color:#2aa198">9</span><span style="color:#719e07"></span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>a<span style="color:#719e07">.</span>slice(<span style="color:#2aa198">1</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>a<span style="color:#719e07">.</span>slice(<span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#2aa198">4</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [4, 6, 9]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>a<span style="color:#719e07">.</span>slice(<span style="color:#2aa198">1</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">2</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [4, 6]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>a<span style="color:#719e07">.</span>slice(<span style="color:#2aa198">2</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span><span style="color:#b58900">p</span> a <span style="color:#586e75"># =&gt; [2, 4, 9]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>a<span style="color:#719e07">.</span>slice(<span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">..</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span>) <span style="color:#586e75"># =&gt; [2, 4]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span><span style="color:#b58900">p</span> a <span style="color:#586e75"># =&gt; [9]</span>
+</code></pre></div><p>整形。<code>#compact</code>はnilを要素から除外する。<code>#uniq</code>は重複した要素を除外。<code>#reverse</code>は要素の順序を逆にする。<code>#flatten</code>は多次元配列を1次元に変換する。いずれも<code>!</code>を付けることで破壊的になる。また<code>#sort!</code>や<code>#map!</code>といった破壊的要素を使うことで、実行結果により自身を更新できる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>a <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">5</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#719e07">nil</span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#719e07">nil</span>, <span style="color:#2aa198">9</span><span style="color:#719e07"></span>, <span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#719e07">[</span><span style="color:#2aa198">4</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span><span style="color:#719e07">]</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>a<span style="color:#719e07">.</span>compact! <span style="color:#586e75"># =&gt; [5, 3, 3, 9, 1, [4, 3]]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>a<span style="color:#719e07">.</span>uniq! <span style="color:#586e75"># =&gt; [5, 3, 9, 1, [4, 3]]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>a<span style="color:#719e07">.</span>reverse! <span style="color:#586e75"># =&gt; [[4, 3], 1, 9, 3, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>a<span style="color:#719e07">.</span>flatten! <span style="color:#586e75"># =&gt; [4, 3, 1, 9, 3, 5]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>a<span style="color:#719e07">.</span>sort! <span style="color:#586e75"># =&gt; [1, 3, 3, 4, 5, 7, 9]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>a<span style="color:#719e07">.</span>map! {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">*</span> <span style="color:#2aa198">2</span> <span style="color:#719e07"></span>} <span style="color:#586e75"># =&gt; [2, 6, 6, 8, 10, 14, 18]</span>
+</code></pre></div><p>複製。<code>#dup</code>は内容のみを複製する（浅いコピー）のに対し、<code>#clone</code>はfrozen等の情報も複製する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>a <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#2aa198">2</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span><span style="color:#719e07">]</span><span style="color:#719e07">.</span>freeze
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>a<span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">5</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; RuntimeError</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>b <span style="color:#719e07">=</span> a<span style="color:#719e07">.</span>dup
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>b<span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">5</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; [5, 2, 3]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>c <span style="color:#719e07">=</span> a<span style="color:#719e07">.</span>clone
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>c<span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span><span style="color:#719e07">]</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">5</span> <span style="color:#719e07"></span><span style="color:#586e75"># =&gt; RuntimeError</span>
+</code></pre></div><p>若干変わったものを最後にいくつか。<code>#transpose</code>は多次元配列を行列とみなして、行と列の入れ替えを行う。破壊的メソッドはない。<code>#bsearch</code>はソートされている配列に対して使用し、二分探索で最初に見つかった要素を返す。<code>#join</code>は各要素を連結した値を返す。引数にセパレータを渡すことも可。<code>#shuffle</code>は配列をランダムにシャッフルする。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>a <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#719e07">[</span><span style="color:#2aa198">1</span><span style="color:#719e07"></span>, <span style="color:#2aa198">2</span><span style="color:#719e07"></span><span style="color:#719e07">]</span>, <span style="color:#719e07">[</span><span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#2aa198">4</span><span style="color:#719e07"></span><span style="color:#719e07">]</span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>a<span style="color:#719e07">.</span>transpose <span style="color:#586e75"># =&gt; [[1, 3], [2, 4]]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>a <span style="color:#719e07">=</span> <span style="color:#719e07">[</span><span style="color:#2aa198">0</span><span style="color:#719e07"></span>, <span style="color:#2aa198">3</span><span style="color:#719e07"></span>, <span style="color:#2aa198">5</span><span style="color:#719e07"></span>, <span style="color:#2aa198">7</span><span style="color:#719e07"></span>, <span style="color:#2aa198">9</span><span style="color:#719e07"></span><span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>a<span style="color:#719e07">.</span>bsearch {<span style="color:#719e07">|</span>i<span style="color:#719e07">|</span> i <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">2</span> <span style="color:#719e07"></span>} <span style="color:#586e75"># =&gt; 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>a<span style="color:#719e07">.</span>join <span style="color:#586e75"># =&gt; &#34;03579&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>a<span style="color:#719e07">.</span>join(<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">-</span><span style="color:#2aa198">&#34;</span>) <span style="color:#586e75"># =&gt; &#34;0-3-5-7-9&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>a<span style="color:#719e07">.</span>shuffle!
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#b58900">p</span> a <span style="color:#586e75"># =&gt; [5, 9, 0, 3, 7]</span>
+</code></pre></div>
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

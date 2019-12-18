@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="Pythonを学び始める 今年の 行動規範 でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、ま">
+
+<meta property="og:title" content="Pythonに入門している" />
+<meta property="og:description" content="Pythonを学び始める 今年の 行動規範 でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、ま" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2016/03/28/entry-python/" />
+<meta property="article:published_time" content="2016-03-28T22:29:39+09:00" />
+<meta property="article:modified_time" content="2016-03-28T22:29:39+09:00" />
+
+
+<title>
+
+
+     Pythonに入門している &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2016/03/28/entry-python/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.703626581%20%2b0000%20UTC%20m%3d%2b0.225503751">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.703626581%20%2b0000%20UTC%20m%3d%2b0.225503751">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.703626581%20%2b0000%20UTC%20m%3d%2b0.225503751">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.703626581%20%2b0000%20UTC%20m%3d%2b0.225503751">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Pythonに入門している
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Mar 28 2016 22:29:39 JST'>Mar 28, 2016</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <h2 id="python">Pythonを学び始める</h2>
+<p>今年の <a href="http://chroju.github.io/blog/2016/01/03/manifesto-2016/">行動規範</a> でも書いた通り、Pythonに入門している。きっかけはAWS LambdaがPython対応しており、またAnsibleもPythonで書かれているということで、Pythonの読み書きが出来た方が今後良さそうだなと思うに至った。これまでRubyをよく書いていたけど、Linuxにデフォルトで入っているのはPythonやPerlという現実的な問題もある。</p>
+<p>今までにやったこととしては取りあえず本を2冊読んだのと、一昨日は <a href="http://python-nyumon.connpass.com/event/26257/">入門者向けのPythonハンズオン</a> に行ったりしてみた。基礎文法はだいたいさらって、requestsのようなポピュラーなライブラリは試してみた程度。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>なおPythonチュートリアルはつい先日改版が出たのでそっちをリンクしてます。自分が買ったのは先月です（白目）</p>
+<h2 id="python-1">Pythonに対する小並感</h2>
+<p>自分はアプリ屋ではないので言語に対する知見は広くないのだけど、なんとなく感じているのはこんなところ。</p>
+<ul>
+<li>PerlのTMTOWTDIに対して<a href="http://qiita.com/IshitaTakeshi/items/e4145921c8dbf7ba57ef#there-should-be-one---and-preferably-only-one---obvious-way-to-do-it">&ldquo;There should be one&rdquo;</a>という考え方が明確で好き。</li>
+<li>難読な記法というのが今のところあまりない。発想した通りに書いてだいたい動く気がする。</li>
+<li>インデントでブロック形成するのはcoding styleの戦争が起きなくていい。
+<ul>
+<li>ただし自分はインデント＝スペース2つ派だった。Pythonは4つの方が確かに見やすいけど。</li>
+</ul>
+</li>
+<li>バージョン2.x vs 3.xの話、外から聞いてはいたけどなにこれ面倒。</li>
+<li>新参としては3.x学びたいけど、AWS Lambdaが2.7対応だし両方押さえようとしている。</li>
+<li><code>pyvenv</code>の環境の隔離の仕方がシンプルで好き。<code>pyenv</code>というのもあって紛らわしいが。</li>
+<li>というか全体的にシンプルなコンセプトで作られている印象。</li>
+</ul>
+<p>2.xと3.xの両輪を回さなくてはならないことを除いては、全体的にはシンプルだし書きやすくてよいなという感じがする。インフラ自動化便利ツールもそろそろなにか書いてみたい。</p>
+<h2 id="heading">新しい言語の学習方法</h2>
+<p>あと言語学習ではいままで「とりあえず書く」というのを手法にしていたけど、複数言語を学んでみて徐々にわかってきた勘所が2点ある。</p>
+<h3 id="heading-1">文法で押さえるべきポイントは決まっている</h3>
+<p>例えば<code>elif</code>か<code>elsif</code>か<code>else if</code>かとか、false判定されるのはnullなのか<code>0</code>なのか<code>&quot;&quot;</code>なのかとか、複数言語を並行して遣うときに迷うポイントはわりと決まっているので、そこさえ押さえればとりあえず書ける、というのがある気がした。</p>
+<p>チートシートを自分用に作るのも漫然と端から文法を並べ立てるのではなく、こういうポイントに限ったものにすると効率がよさそう。</p>
+<h3 id="heading-2">読むのも勉強</h3>
+<p>書くのではなく読むのも勉強。よく言われることではあるけれど、これまであまり意識していなかった。冒頭に挙げた通り、PythonではLambdaとAnsibleという明確にきっかけとなったツールが存在しているので、これらのコードをしばらく読んでものにしてみたいと思う。</p>
+<p>あと個人的には最近インフラ界隈でもわりとgolangが話題で気になっているけど、それはまたおいおい（実はgo製OSSを修正して使いたくて、ちょっとだけかじってはいる）。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

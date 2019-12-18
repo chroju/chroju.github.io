@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="2週間ぐらいハマってた。 プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset t">
+
+<meta property="og:title" content="Kaoriya版Vimでtxtファイルの自動改行が解除できない件" />
+<meta property="og:description" content="2週間ぐらいハマってた。 プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset t" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2013/07/23/2013-07-23-post/" />
+<meta property="article:published_time" content="2013-07-23T00:00:00+09:00" />
+<meta property="article:modified_time" content="2013-07-23T00:00:00+09:00" />
+
+
+<title>
+
+
+     Kaoriya版Vimでtxtファイルの自動改行が解除できない件 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2013/07/23/2013-07-23-post/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Kaoriya版Vimでtxtファイルの自動改行が解除できない件
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Jul 23 2013 00:00:00 JST'>Jul 23, 2013</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>One minute read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>2週間ぐらいハマってた。</p>
+<p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>
+<p>で、結論。Kaoriya版Vimのデフォルト設定により、textwidthが上書かれてしまうらしい。</p>
+<!-- raw HTML omitted -->
+<p><a href="http://d.hatena.ne.jp/WK6/20120606/1338993826">Vimのtextwidth設定と.vimrc - 続・日々の雑感</a><!-- raw HTML omitted --></p>
+<p>なので引用元の記事にもある通り、.vimrcに以下を挿入すればおｋ。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>&lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;autocmd&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synType&#34;&gt;FileType&lt;/</span>span&gt; text &lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;setlocal&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synPreProc&#34;&gt;textwidth&lt;/</span>span&gt;=<span style="color:#2aa198">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>
+</code></pre></div><p>これでQFix_howm使って快適メモライフ！！！　他にもデフォルト設定いろいろ入ってそうなんで、見直した方がいいかもしれない。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

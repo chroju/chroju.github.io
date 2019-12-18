@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="このブログは hugo で生成している。生成過程を自動化したくて、CircleCIへ任せることにしようと思ったところ、そういえばCircleCI 2.0">
+
+<meta property="og:title" content="CircleCI 2.0でhugoのブログ生成を自動化する" />
+<meta property="og:description" content="このブログは hugo で生成している。生成過程を自動化したくて、CircleCIへ任せることにしようと思ったところ、そういえばCircleCI 2.0" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2017/12/18/circleci_2_0_with_hugo/" />
+<meta property="article:published_time" content="2017-12-18T10:15:06+09:00" />
+<meta property="article:modified_time" content="2017-12-18T10:15:06+09:00" />
+
+
+<title>
+
+
+     CircleCI 2.0でhugoのブログ生成を自動化する &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2017/12/18/circleci_2_0_with_hugo/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.68591697%20%2b0000%20UTC%20m%3d%2b0.207794140">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.68591697%20%2b0000%20UTC%20m%3d%2b0.207794140">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.68591697%20%2b0000%20UTC%20m%3d%2b0.207794140">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.68591697%20%2b0000%20UTC%20m%3d%2b0.207794140">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    CircleCI 2.0でhugoのブログ生成を自動化する
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Mon Dec 18 2017 10:15:06 JST'>Dec 18, 2017</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>このブログは <a href="https://gohugo.io/">hugo</a> で生成している。生成過程を自動化したくて、<a href="https://circleci.com/">CircleCI</a>へ任せることにしようと思ったところ、そういえばCircleCI 2.0をまだ触っていないことに気付いたので、2.0で自動化した。</p>
+<h2 id="heading">設定の書き方</h2>
+<p>1.0における<code>circle.yml</code>のように、設定ファイルを書いてそれに基づいた処理が行われるという点は変わらないものの、設定の書き方はガラッと変わって後方互換性は一切なくなっていた。</p>
+<p>一応マイグレーションガイドがあるので、<code>circle.yml</code>からステップ踏んで移行できるようにはなってる。</p>
+<ul>
+<li><a href="https://circleci.com/docs/2.0/migrating-from-1-2/">Migrating from 1.0 to 2.0 - CircleCI</a></li>
+</ul>
+<h3 id="heading-1">実行タスク</h3>
+<p>1.0ではCircleCIがリポジトリの言語から実行タスクを自動判定していたので、設定の書き方は基本的に「デフォルトの実行内容と異なることをやりたければ <code>override</code> する」という形だった。2.0ではデフォルトタスクがなくなり、すべて自前で書く形になった。</p>
+<p>正直、デフォルトのタスクをそのまま使うことはほとんどなかったので、すべて自前で書ける方が何も考えずに済んで楽になった。</p>
+<h3 id="heading-2">ジョブとワークフローという概念</h3>
+<p>タスクは1つの環境上で一気通貫に実行される形ではなくなり、実行したい内容を <code>Job</code> としてステップで分けて定義する形になった。 <code>Job</code> ごとに環境も分離されていて、それぞれDocker imageを定義して起動する。各言語で必要なimageは <a href="https://circleci.com/docs/2.0/circleci-images/">CircleCIが用意している</a> が、それ以外のimageでももちろんよい。</p>
+<p><code>Job</code> をどの順番で実行するかは <code>Workflow</code> として定義する。テストのジョブが成功した場合のみデプロイのジョブを実行するなど、 <code>Job</code> 間の依存関係を定義することもできる。</p>
+<h3 id="heading-3">キャッシュの使い所</h3>
+<p><code>Job</code> ごとにDockerコンテナが起動する都合上、コンテナ間で同じファイルを共有したい場合や、実行の度に同じファイルを使うようなときにはキャッシュを利用する。前者としては、 <code>git clone</code> したソースコードをどの <code>Job</code> でも使いまわすようなとき、後者としては、依存するライブラリのダウンロードなどが考えられる。</p>
+<p>キャッシュはコンテナ内のどのディレクトリを、何という名前でキャッシュするか、という形で定義する。すでに同名のキャッシュが存在する場合は、それを上書きすることはないので、このあたりが設計上肝になる。</p>
+<p>キャッシュ名には <a href="https://circleci.com/docs/2.0/caching/#using-keys-and-templates">変数 (Template)</a> が使えて、この使い方で「いつキャッシュするか」をコントロールできる。<code>{{ checksum }}</code> を使うと特定ファイルのチェックサムがキャッシュ名に入るので、Gemfileなどを指定すれば、これに変更があったときだけキャッシュを上書き＝ライブラリの再ダウンロードが促せる。 <code>{{ epoch }}</code>を使えば実行時刻に応じたキャッシュ名となり、またキャッシュリストア時は最新の <code>epoch</code> が入ったキャッシュが選ばれるので、毎回ダウンロードし直すことになるソースコードのキャッシュに使える。</p>
+<h2 id="heading-4">実装</h2>
+<p>実装を以下に置く。hugoなのでいわゆるソフトウェアのテストは回しておらず、 <a href="https://github.com/textlint/textlint">textlint</a> で文章校正だけ行い、OKであれば build と deploy が走るようになっている。</p>
+<p>textlintは当初全記事にかける形にしていたが、今までの記事ほとんどでNGが出てしまったので、「ブランチ名と一致するファイル名のmarkdown」にだけ実行する形にした。それでもデフォルトで使っていると結構厳しく感じるので、設定は改めたい。。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>version: <span style="color:#2aa198">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>jobs:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  checkout_code:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>    docker:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>      - image: circleci/golang:<span style="color:#2aa198">1.8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>    working_directory: ~/hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    steps:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>      - checkout
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>      - save_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>          key: hugo-cache-{{ epoch }}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>          paths:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>            - ~/hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>  textlint:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>    docker:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>      - image: circleci/node:<span style="color:#2aa198">9.2</span><span style="color:#2aa198">.0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>    working_directory: ~/hugo/.circleci
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>    steps:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>      - restore_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>          keys:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>            - hugo-cache
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>            - hugo-nodemodules-{{ checksum <span style="color:#2aa198">&#34;package.json&#34;</span> }}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>      - run:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>          command: <span style="color:#2aa198">|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span><span style="color:#2aa198">           </span><span style="color:#2aa198"> </span><span style="color:#2aa198">npm install</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>            npm run textlint <span style="color:#2aa198">&#34;../content/blog/${CIRCLE_BRANCH}.md&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>      - save_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>          key: hugo-nodemodules-{{ checksum <span style="color:#2aa198">&#34;package.json&#34;</span> }}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span>          paths:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span>            - ~/hugo/.circleci/node_modules
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span>  build:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">34</span>    docker:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">35</span>      - image: circleci/golang:<span style="color:#2aa198">1.8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">36</span>    working_directory: ~/hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span>    steps:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">38</span>      - restore_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">39</span>          key: hugo-cache
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">40</span>      - run:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">41</span>          command: <span style="color:#2aa198">|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">42</span><span style="color:#2aa198">           </span><span style="color:#2aa198"> </span><span style="color:#2aa198">git submodule sync</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">43</span>            git submodule update --init
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">44</span>            go get github.com/gohugoio/hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">45</span>            git clone https://github.com/chroju/chroju.github.io public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">46</span>            rm -rf public/*
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">47</span>            sudo cp /usr/share/zoneinfo/Japan /etc/localtime
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">48</span>            hugo
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">49</span>      - save_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">50</span>          key: hugo-cache-public-{{ epoch }}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">51</span>          paths:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">52</span>            - ~/hugo/public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">53</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">54</span>  deploy:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">55</span>    machine:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">56</span>      enabled: <span style="color:#cb4b16">true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">57</span>    working_directory: ~/hugo/public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">58</span>    steps:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">59</span>      - restore_cache:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">60</span>          key: hugo-cache-public
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">61</span>      - run:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">62</span>          command: <span style="color:#2aa198">|
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">63</span><span style="color:#2aa198">           </span><span style="color:#2aa198"> </span><span style="color:#2aa198">git config --global user.name chroju</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">64</span>            git config --global user.email chor.chroju@gmail.com
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">65</span>            git add --all
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">66</span>            git commit -m <span style="color:#2aa198">&#34;${CIRCLE_BRANCH} (Circle CI)&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">67</span>            git push git@github.com:chroju/chroju.github.io
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">68</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">69</span>workflows:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">70</span>  version: <span style="color:#2aa198">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">71</span>  build_and_deploy:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">72</span>    jobs:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">73</span>      - checkout_code
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">74</span>      - textlint:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">75</span>          filters:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">76</span>            branches:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">77</span>              ignore: master
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">78</span>          requires:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">79</span>            - checkout_code
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">80</span>      - build:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">81</span>          requires:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">82</span>            - checkout_code
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">83</span>      - deploy:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">84</span>          filters:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">85</span>            branches:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">86</span>              only: master
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">87</span>          requires:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">88</span>            - textlint
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">89</span>            - build
+</code></pre></div><h2 id="hugo-theme-">hugo theme の変更</h2>
+<p>余談にはなるけど、今回のCircleCI実装に合わせて、 hugo のテーマもcocoaというものに変更した。</p>
+<p><a href="https://github.com/nishanths/cocoa-hugo-theme">nishanths/cocoa-hugo-theme: Configurable, responsive blogging theme for Hugo</a></p>
+<p>hugo のテーマ変更は初めてなのだけど、configの書き方がテーマによって少し違いがあり、そのまま移植という形にはできなかったのでちょっと時間がかかった。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
