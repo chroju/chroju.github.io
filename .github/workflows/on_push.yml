@@ -16,16 +16,15 @@ jobs:
       with:
         go-version: "1.13.1"
     - name: Cache GOPATH
-      uses: actions/cache@preview
+      uses: actions/cache@v1
       with:
-        path: /home/runner/work
+        path: ~/go
         key: ${{ runner.os }}-gopath
     - name: Deploy hugo
       shell: bash
       env:
         BRANCH: master
         GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
-        GOPATH: /home/runner/work/
       run: |
         git config --global user.name chroju
         git config --global user.email chor.chroju@gmail.com
