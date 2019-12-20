@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.765535222%20%2b0000%20UTC%20m%3d%2b0.287412392">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.765535222%20%2b0000%20UTC%20m%3d%2b0.287412392">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.765535222%20%2b0000%20UTC%20m%3d%2b0.287412392">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.702029124%20%2b0000%20UTC%20m%3d%2b0.298759972">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.702029124%20%2b0000%20UTC%20m%3d%2b0.298759972">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.702029124%20%2b0000%20UTC%20m%3d%2b0.298759972">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.765535222%20%2b0000%20UTC%20m%3d%2b0.287412392">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.702029124%20%2b0000%20UTC%20m%3d%2b0.298759972">
     
 
 
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="markdown">
-                <!-- raw HTML omitted -->
+                <script src="https://gist.github.com/chroju/7b9d422732f1a0ddd45e.js"></script>
 <p>つくった。動きとしては、項目名と入力値からなるハッシュを引数で与えてやることで、該当スプレッドシートの2列目に符合するキーがある場合、その値を一番右側の列に入力してくれる。符合するキーがない場合は、メッセージを吐いた上で最下行に新しい項目として追加する。</p>
 <p>用途としては非常に個人的なもので、各種オンラインバンクの残高をスクレイピングしてハッシュで返してくれるスクリプトをいくつか作ってあったので、その戻り値を使ってオートで家計簿作れたらいいなーという思いによるものです。ハッシュのキーをそのままスプレッドシート内の項目名として使っているので、シンボルではなく文字列をキーとして使ってしまっているのがあまりよろしくないのかなぁとは思うのだが、いつか改善するってーことで、とりあえず動くものを作ることを優先させた。んで、これって結構汎用的に使えそうなスクリプトかもなと思って公開した次第。</p>
 <p>Googleスプレッドシートをいじるのには<code>google-drive-ruby</code>というGemを使ってます。Githubは<a href="https://github.com/gimite/google-drive-ruby">ここ</a>。<code>def initialize</code>内の処理は、このGemの初期設定によるものなので、Gemの方のReadme読んでもらえればよいかと。単純な話、GoogleのOAuth API使っているだけの話です。ただ、このコードだと叩くたびにブラウザからAPI使用許可を与えてやって、success codeをコピーしてコマンドラインで入力してやらなくちゃならないっていう手間があって、そこまで省く方法なにかありそうだけどまだ調べてない。あと気になっている点としては、このGemでセルの値を取ると、表示値しか取れないこと。式を入れているセルについては、式を取るか表示値を取るか選べるといいなぁと思ったんだけど、そこまではできないらしい。しかしまぁ、とにかくGoogleスプレッドシートという、APIで叩けるクラウドの表計算ソフトがあるというのは本当に便利なことですね、って感じ。</p>

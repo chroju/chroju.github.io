@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.91171592%20%2b0000%20UTC%20m%3d%2b0.433593090">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.91171592%20%2b0000%20UTC%20m%3d%2b0.433593090">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.91171592%20%2b0000%20UTC%20m%3d%2b0.433593090">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.892629769%20%2b0000%20UTC%20m%3d%2b0.489360617">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.892629769%20%2b0000%20UTC%20m%3d%2b0.489360617">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.892629769%20%2b0000%20UTC%20m%3d%2b0.489360617">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.91171592%20%2b0000%20UTC%20m%3d%2b0.433593090">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.892629769%20%2b0000%20UTC%20m%3d%2b0.489360617">
     
 
 
@@ -196,32 +196,35 @@
 <p>本とか読んでるとRubyのバージョン管理にはRVM使わせているものが多いんだけど、rbenvの方が軽くてBundlerとの相性も良いらしい。よってrbenvを使うことにする。</p>
 <p>参考：(<a href="http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm">http://passingloop.tumblr.com/post/10512902196/difference-between-rbenv-and-rvm</a>)</p>
 <p>インストール先のパスが迷う。。。ホームフォルダに不可視で入れるのが気持ちとしてスッキリするのでそれを採用。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv</blockquote>
 <p>で、bash_profileにパスを追加。</p>
-<!-- raw HTML omitted -->
+<blockquote>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile</blockquote>
 <h3 id="heading-1">追記</h3>
 <p>実はこの記事書く前にすでにRVM入れちゃってたんだけど（今読んでる『RailsによるアジャイルWebアプリケーション開発』にはRVMが紹介されてたので）、RVM削除してrbenvを入れなおそうと思い立って調べてみた。そこで辿り着いたRVMのアンインストールコマンドがなかなかに衝撃的だったので追記。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ rvm seppuku</blockquote>
 <p>切腹！！！ｗｗｗｗ</p>
 <h2 id="ruby-build">ruby-build</h2>
 <p>よくわかってないけど入れる。わかっていることとしては、これがないとrbenv installコマンドが使えない。rbenvのプラグインとしての位置づけらしいので、.rbenvフォルダ配下に入れる。公式のREADMEにもそう書かれてます故。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</blockquote>
 <h2 id="ruby">Ruby</h2>
 <p>Rubyはrbenvを使ってインストール。バージョンについては都度変わるので、$ rbenv install -lコマンドで落とせるバージョンを確認しつつ、必要なものを入れる感じで。まぁ使うバージョン選択できるんだから、そんなにセンシティブになる必要はないと思うが。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ rbenv install 1.9.3</blockquote>
 <p>デフォで使うRubyのバージョンを設定。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ rbenv global 1.9.3 # これで設定
+$ rbenv rehash # Rubyの新しいバージョンやコマンド付きのGemを落としたときに実行する</blockquote>
 <p>インストール済みのRubyのバージョンは$ rbenv versionsで確かめられる。ちょうど今年の上半期にRuby 2.0が出たばかりだし、このあたりはしばらくの間重宝しそう。</p>
 <h2 id="rubygems">RubyGems</h2>
 <p>入れる方法はいろいろあるみたいだけど、自分の使ってるCent OSを基本として考えて、yumで入れることにする。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ yum install rubygems</blockquote>
 <p>めんどかったら-yオプション付ければ対話なしで全部インストールされておしまい。</p>
 <h2 id="rails">Rails</h2>
 <p>いよいよRailsのインストール。RailsはGemパッケージとして配布されているので、今入れたRubyGemsを使ってインストールする。特定のバージョンを使う場合は-vオプションを使う。オプション無しだと最新版が入る。rbenvでRubyの複数バージョン切り替えるみたいにRailsもやってみたいんだけど、やり方がわからない。。。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ gem install rails</blockquote>
 <h2 id="bundler">Bundler</h2>
 <p>一番よくわかっていないところ。Rubyで使われるGemパッケージの管理ツールらしい。ルートディレクトリにあるGemfileに書いておいたパッケージについて、依存関係をチェックして自動でインストールしてくれるものらしい。ほお。</p>
-<!-- raw HTML omitted -->
+<blockquote>$ bundle install</blockquote>
 <p>Railsアプリケーションを$ rails newコマンドで作成した場合、ルートディレクトリに勝手にGemfileが作られる上、$ bundle installも自動で実行されるので、あまり意識はしなくていいっぽい。Rails自体もGemで配布されているのでbundlerを使って管理させたりとかもできるみたいなんだけど、そのあたりを調べた感じ、自分には何が何を管理してるのかメタにメタ重ねる感じで徐々に訳わからん感じになってきたので考えるのを、やめた。</p>
 <p>RailsアプリケーションのGemfileにはcoffescriptやSASS、SQLiteなどをインストールするように記述されている。下手にこれいじると多分死ぬと思うんだけど、SQLiteじゃなくてMySQL使いたいとか、他のGemパッケージが何か必要になったとか、そういうときは編集してあげてから$ bundle installでおｋっぽい。便利！</p>
 <h2 id="git">Git</h2>

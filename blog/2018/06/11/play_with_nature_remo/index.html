@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.662531954%20%2b0000%20UTC%20m%3d%2b0.184409124">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.662531954%20%2b0000%20UTC%20m%3d%2b0.184409124">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.662531954%20%2b0000%20UTC%20m%3d%2b0.184409124">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.590777098%20%2b0000%20UTC%20m%3d%2b0.187507946">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.590777098%20%2b0000%20UTC%20m%3d%2b0.187507946">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.590777098%20%2b0000%20UTC%20m%3d%2b0.187507946">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.662531954%20%2b0000%20UTC%20m%3d%2b0.184409124">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.590777098%20%2b0000%20UTC%20m%3d%2b0.187507946">
     
 
 
@@ -167,7 +167,7 @@
             </div>
             <div class="markdown">
                 <p>Amazon Echo dotに続いてGoogle Home miniも安売りに釣られて買ったので、せっかくだしVUI (Voice User Interface) の醍醐味であるはずの家電操作もやってみたくなって <a href="https://nature.global/">Nature Remo</a> を買った。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B06XCQFP96/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/31MkeLD6o3L._SL160_.jpg" alt="Nature Remo" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B06XCQFP96/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Nature Remo</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 18.06.11</div></div><div class="amazlet-detail">Nature, Inc. <br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B06XCQFP96/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>ちなみにこれ書いてるときに気付いたけど、廉価版の mini ってのも近々出るらしいです。</p>
 <h2 id="nature-remo">Nature Remo</h2>
 <p>赤外線信号を学習させて使えるスマートリモコン。Wi-Fiに繋げてインターネット経由でAPIを叩く形で操作する。専用のスマートフォンアプリからリモコン感覚でも使えるし、IFTTT Channel化されているので、他サービスと連携させていろいろやったりもできる。あとGoogle HomeやAlexaとも直接連携できるようになっている。</p>
@@ -176,9 +176,9 @@
 <p>なので他製品での状況はわからないが、Nature RemoはAPIが開放されているのがすごくいい。API仕様はSwaggerで公開されているのもポイントが高い。</p>
 <p><a href="http://swagger.nature.global/">http://swagger.nature.global/</a></p>
 <p>やろうと思えば実質なんでもできる。手始めにslackからスラッシュコマンドでエアコンを点けられるようにしてみた。OFFにするコマンドをまだ実装していないので、滅多矢鱈と打てないんだけどイイ感じ。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/ada116f88ba891fa63ecf9e42258143e"><img src="https://i.gyazo.com/ada116f88ba891fa63ecf9e42258143e.png" alt="https://gyazo.com/ada116f88ba891fa63ecf9e42258143e" width="601"/></a></p>
 <p>あとこれは買ってから気付いたのだが、Nature Remoにはセンサーが内蔵されていて、温度・湿度のデータもAPI経由で取得できる。機器の設置場所によっても変動する値だし、全幅の信頼を置いていいデータではないかもしれないが、自室の温度・湿度の状態をモニタリングするのは興味があったので、influxDBへ突っ込んでGrafanaでグラフにしてみている。家に帰って窓を開けて、お茶飲みながらグラフ眺めてると結構如実に気温が下がっていったりして面白い。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/cdead523411083bb6481e577cb1ebe98"><img src="https://i.gyazo.com/cdead523411083bb6481e577cb1ebe98.png" alt="https://gyazo.com/cdead523411083bb6481e577cb1ebe98" width="1088"/></a></p>
 <p>APIでセンサー情報をGETすると、返ってくるjsonはこんな感じで、Swaggerには書かれていない &ldquo;il&rdquo; という項目があるんだけど、照度センサーも内蔵しているらしいのでおそらくは &ldquo;illuminance&rdquo; かな？と思っている。ちなみに今のところ照度の取得はアプリからもIFTTTからも出来ないので、今後拡張されるのかもしれない。ついでに人感センサーもあるらしいので、そちらの情報も取得できるようになると嬉しい。</p>
 <pre><code>[
   {

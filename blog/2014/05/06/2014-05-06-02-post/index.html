@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.879064598%20%2b0000%20UTC%20m%3d%2b0.400941768">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.879064598%20%2b0000%20UTC%20m%3d%2b0.400941768">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.879064598%20%2b0000%20UTC%20m%3d%2b0.400941768">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.859829862%20%2b0000%20UTC%20m%3d%2b0.456560610">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.859829862%20%2b0000%20UTC%20m%3d%2b0.456560610">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.859829862%20%2b0000%20UTC%20m%3d%2b0.456560610">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.879064598%20%2b0000%20UTC%20m%3d%2b0.400941768">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.859829862%20%2b0000%20UTC%20m%3d%2b0.456560610">
     
 
 
@@ -161,14 +161,14 @@
                     <div class="date" title='Tue May 6 2014 00:00:00 JST'>May 6, 2014</div>
                     
                     
-		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
                     
                 </div>
             </div>
             <div class="markdown">
                 <p>Capistranoでいろいろやったので今度はChef、正確にはChef solo。サーバー立てて最初にやること（ユーザー作成、sshd_configの設定、もろもろインストールとか）はだいたい決まっていると思うので、Chefで全部コード化してしまえたらやっぱり楽だなぁという思い。なおChefとCapistranoの境界線については、システム全体をまかなうのがChefであり、Capistranoはあくまでアプリ単位のデプロイに使うイメージでいる。rbenvやRubyを入れるのはChef。/var/www/RailsApp/配下（仮）をごにょごにょするのがCapistrano。</p>
 <p>参考としたのはお馴染みのアレです。ただ、すでに出版から1年近く経っているので若干事情が変わっている箇所もあったりした。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" alt="入門Chef Solo - Infrastructure as Code" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 15.03.01</div></div><div class="amazlet-detail">伊藤直也 (2013-03-11)<br />売り上げランキング: 2,821<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <h2 id="heading">基本構成</h2>
 <p>chefの基本構成を取りあえず押さえる。</p>
 <ul>

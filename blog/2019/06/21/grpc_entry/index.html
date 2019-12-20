@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.591067506%20%2b0000%20UTC%20m%3d%2b0.112944676">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.591067506%20%2b0000%20UTC%20m%3d%2b0.112944676">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.591067506%20%2b0000%20UTC%20m%3d%2b0.112944676">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.525086682%20%2b0000%20UTC%20m%3d%2b0.121817530">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.525086682%20%2b0000%20UTC%20m%3d%2b0.121817530">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.525086682%20%2b0000%20UTC%20m%3d%2b0.121817530">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.591067506%20%2b0000%20UTC%20m%3d%2b0.112944676">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.525086682%20%2b0000%20UTC%20m%3d%2b0.121817530">
     
 
 
@@ -170,18 +170,18 @@
 <p>きっかけは <a href="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/">3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話 · the world as code</a> という記事で触れたように、 Terraform 0.12 で Terraform Core と Provider が gRPC で通信するようになったため。知ってなてくは Terraform を使えないわけでも Provider を書けないわけでもないのだが、昨今よく聴く単語だし、 microservices などにも必要な要素技術なので入門してみた。</p>
 <h2 id="heading">教材</h2>
 <p>ちょうど WEB+DB PRESS の最新号で特集されていたので、主にこれを使った。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/51SCTYcyT%2BL._SL160_.jpg" alt="WEB+DB PRESS Vol.110" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">WEB+DB PRESS Vol.110</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 19.06.21</div></div><div class="amazlet-detail">藤村 大介 森田 リーナ 渡邉 祐一 市原 創 板倉 広明 高橋 征義 笹田 耕一 大原 壯太 新倉 涼太 末永 恭正 久保田 祐史 牧 大輔 東 邦之 星 北斗 池田 拓司 竹馬 光太郎 はまちや2 竹原 八谷 賢 <br />技術評論社 <br />売り上げランキング: 13,606<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4297105330/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>あとは公式のドキュメント。英語で簡単な Tutorial が書かれているほか、 gRPC のレポジトリ内にある <a href="https://github.com/grpc/grpc/tree/master/examples">examples</a> というフォルダに言語別の実装例が書かれていて参考になった。</p>
 <h2 id="heading-1">学んだこと</h2>
 <h3 id="heading-2">写経</h3>
 <p>gRPC とは何か、などとここで改めてまとめても仕方ない感があるので、それについては割愛する。 WEB+DB PRESS を読もう。</p>
 <p>当該号の特集では、 gRPC の4種類の通信方式（Unary, Server streaming, Client streaming, Bidirectional streaming）それぞれの簡単な実装サンプルと、実践例として gRPC を用いたタスク管理サービスの作り方が掲載されており、これを適宜写経しながら進めた。コードはいずれも GitHub で公開されている。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/vvatanabe/go-grpc-basics" data-iframely-url="//cdn.iframe.ly/DAemZsu"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/vvatanabe/go-grpc-microservices" data-iframely-url="//cdn.iframe.ly/3VubC7c"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <h3 id="ruby-">Ruby での再実装</h3>
 <p>単に写すだけというのもつまらないので、ちょっとした応用もやってみた。 gRPC には遣り取りするデータのシリアライズフォーマットを定義した Protocol Buffers (protobuf) を元として、サーバ / クライアントの実装を様々な言語で生成することができるという特徴がある。そこで、誌面のサンプルはサーバ / クライアントともに Go で書かれていたが、クライアント側を Ruby で書いてみることにした。</p>
 <p>対象にしたのは Server streaming gRPC のサンプルコード。主に公式の <a href="https://grpc.io/docs/quickstart/ruby/">Ruby 向け Tutorial</a> を見つつ、先の examples 内の実際のコードも見ながら進めたが、以下の記事も参考にした。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://qiita.com/yururit/items/bc7c0eda63d5fa30289a" data-iframely-url="//cdn.iframe.ly/NJ6kcAY"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>まず、必要な gRPC 関連の gem をインストール。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ gem install grpc
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ gem install grpc-tools

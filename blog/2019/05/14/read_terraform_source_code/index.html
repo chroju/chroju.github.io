@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.55767189%20%2b0000%20UTC%20m%3d%2b0.154402738">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.55767189%20%2b0000%20UTC%20m%3d%2b0.154402738">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.55767189%20%2b0000%20UTC%20m%3d%2b0.154402738">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.629628432%20%2b0000%20UTC%20m%3d%2b0.151505702">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.55767189%20%2b0000%20UTC%20m%3d%2b0.154402738">
     
 
 
@@ -175,7 +175,7 @@
 </ul>
 <h2 id="terraformer">terraformer</h2>
 <p>terraformer というツールをご存知でしょうか。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/GoogleCloudPlatform/terraformer" data-iframely-url="//cdn.iframe.ly/xqCkI2w"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>既存のクラウドリソースの状態を読み解き、 tf ファイルと tfstate ファイルを生成してくれるツールです。同様のツールとしては <a href="https://github.com/dtan4/terraforming">dtan4/terraforming</a> が著名で、 terraformer の README.md 内でも言及があるほどですが、この2つにはそこそこ差異が見られます。</p>
 <p>まず機能面においては、 terraforming が指定したリソースの tf ファイル、 tfstate ファイル相当の情報を愚直に標準出力に出す、非常にシンプルな実装をしているのに対し、 terraformer は tf ファイルと tfstate ファイルを同時生成するほか、 <code>provider.tf</code> や、<code>terraform apply</code> したときに動的に生成される、インスタンス ID のような computed な値を出力するための <code>outputs.tf</code> まで生成してくれる至れり尽くせりなツールになっています。また、例えば <code>terraformer import aws --resources=route53</code> を実行すると Route53 に関するすべての情報を取得する、つまり <code>aws_route53_zone</code> と <code>aws_route53_record</code> 双方が生成される形になります。先のコマンドで生成されるファイルは以下のとおりです。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ tree
@@ -190,7 +190,7 @@
 </code></pre></div><p>そして実装面でもだいぶアプローチが異なるのですが、それについては最後に触れようと思います。</p>
 <h2 id="-issue">発端となった issue</h2>
 <p>本題に入りますが、 先日 Route53 Records の <code>import</code> を terraformer で行ったところ、エイリアスレコードに関してちょっとした問題が起きたため、 issue を上げました。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/GoogleCloudPlatform/terraformer/issues/65" data-iframely-url="//cdn.iframe.ly/sGSrfal"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>何を言っているかというと、 Route53 の DNS Record には当然ながら TTL の設定ができるのですが、そのレコードがエイリアスレコードである場合は TTL の設定ができない（Terraform 的な言い方をすると、2つの要素が競合 = Confilict した状態）はずなのに、 terraformer は <code>ttl = &quot;0&quot;</code> として設定を入れてしまっている、という話です。この状態で <code>terraform plan</code> を実行すると、競合する要素が定義されているよ、というエラーになります。</p>
 <p>これに対して開発者の sergeylanzman 氏が返答してきたのが、以下の文です。</p>
 <blockquote>

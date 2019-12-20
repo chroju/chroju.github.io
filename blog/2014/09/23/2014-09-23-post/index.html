@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.863296787%20%2b0000%20UTC%20m%3d%2b0.385173957">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.863296787%20%2b0000%20UTC%20m%3d%2b0.385173957">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.863296787%20%2b0000%20UTC%20m%3d%2b0.385173957">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.847304159%20%2b0000%20UTC%20m%3d%2b0.444035007">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.847304159%20%2b0000%20UTC%20m%3d%2b0.444035007">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.847304159%20%2b0000%20UTC%20m%3d%2b0.444035007">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.863296787%20%2b0000%20UTC%20m%3d%2b0.385173957">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.847304159%20%2b0000%20UTC%20m%3d%2b0.444035007">
     
 
 
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="markdown">
-                <p><a href="https://www.flickr.com/photos/chroju/15143254940"><!-- raw HTML omitted --></a></p>
+                <p><a href="https://www.flickr.com/photos/chroju/15143254940"><img src="https://farm4.staticflickr.com/3842/15143254940_70774bd603.jpg" width="500" height="281" alt="snapshot1_1"></a></p>
 <p>先日<a href="http://chroju89.hatenablog.jp/entry/2014/09/07/232727">VirtualBoxでArch Linux入れてみた</a>ところでしたが、引き続いてVAIO Proへのインストールが完了したのでまとめます。なお、Window8.1とのデュアルブートです。上のスクリーンショットが完成形。</p>
 <h1 id="heading">事前準備</h1>
 <p>まず起動前の状態でASSISキーを押してBIOS設定を呼び出し、Secure Bootを<code>disabled</code>にしておきます。Arch LinuxではSecure Bootをサポートしてないです。あとここではExternal MediaでのBootを許可したりとかしておくべきなんですけど、怠惰なんでASSISTメニューからUSBメモリでの起動を選ぶことでインストール作業を済ませてしまいました。Arch Wikiには「External MediaいじってUSBブートしろ」って書いてあるんで、そっちに従った方がいいと思います。</p>
@@ -176,9 +176,9 @@
 <li>スタートボタン右クリック &gt; ディスクの管理 &gt; パーティションを縮小</li>
 </ul>
 <p>既存パーティションを縮めることでLinuxインストール用の領域を作るのが通例ですけど、自分の場合これだ空き容量が小さすぎたので、回復パーティションを削除することにしました。そのために16GBのUSBメモリを買ってきて、回復ドライブを作ります。</p>
-<!-- raw HTML omitted -->
+<blockquote>VAIO Care > その他の機能 > リカバリーメディアの作成</blockquote>
 <p>作成が無事に終わったら、その後一度シャットダウンしてASSISTキー押して起動。以下の手順でリカバリーパーティションが消せます。</p>
-<!-- raw HTML omitted -->
+<blockquote>トラブルシューティングを開始 > Microsoft IME > トラブルシューティング > VAIOのリカバリー機能 > Windows 8.1 > ツール > リカバリーパーティションを削除</blockquote>
 <p>が、自分の場合これだとエラーが出て結局ダメだったんでdiskpartで削除しました。これもあまり褒められたやり方ではないと思うので推奨はしません。256GBモデルをケチらず買っときゃよかったなと初めて思った次第。</p>
 <h1 id="heading-1">インストール</h1>
 <p>インストール用のUSB指して再度ASSISTキーを押し、USBメディアから起動。そこからは前回のエントリーを参考に、通常通りインストール進めていきます。ポイントは以下の点かなと。</p>

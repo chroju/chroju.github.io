@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.86771069%20%2b0000%20UTC%20m%3d%2b0.389587860">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.86771069%20%2b0000%20UTC%20m%3d%2b0.389587860">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.86771069%20%2b0000%20UTC%20m%3d%2b0.389587860">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.849521859%20%2b0000%20UTC%20m%3d%2b0.446252707">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.849521859%20%2b0000%20UTC%20m%3d%2b0.446252707">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.849521859%20%2b0000%20UTC%20m%3d%2b0.446252707">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.86771069%20%2b0000%20UTC%20m%3d%2b0.389587860">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.849521859%20%2b0000%20UTC%20m%3d%2b0.446252707">
     
 
 
@@ -181,7 +181,10 @@
 <h1 id="heading-1">パーティション</h1>
 <p>続いてパーティション分割。まずは<code>fdisk -l</code>によりハードディスクのデバイス名を確認し、そのデバイス名に対して<code>cgdisk</code>コマンドを実行。今回はGPTを用いるので<code>cgdisk</code>だが、MBRなら<code>cfdisk</code>でよい。あるいは<code>gdisk</code>や<code>fdisk</code>もあるけど、やりづらいので自分はcを頭に付ける。</p>
 <p>なおMBRとGPTの選択に関してはwiki内に記述がある。</p>
-<!-- raw HTML omitted -->
+<blockquote>ブートローダに GRUB Legacy を使う場合、MBR を使うべきです。
+古い BIOS を使う Windows (32ビット、64ビット両方) とのデュアルブートをするなら、MBR を使うべきです。
+BIOS の代わりに UEFI を使う64ビットの Windows とデュアルブートをするなら、GPT を使うべきです。
+[https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E)](https://wiki.archlinux.org/index.php/Partitioning_(%E6%97%A5%E6%9C%AC%E8%AA%9E))</blockquote>
 <p>分け方はわりと適当。swapはまぁ、なくてもいいかなと。</p>
 <ul>
 <li>

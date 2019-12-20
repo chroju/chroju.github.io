@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.905375315%20%2b0000%20UTC%20m%3d%2b0.427252485">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.905375315%20%2b0000%20UTC%20m%3d%2b0.427252485">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.905375315%20%2b0000%20UTC%20m%3d%2b0.427252485">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.884097767%20%2b0000%20UTC%20m%3d%2b0.480828615">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.884097767%20%2b0000%20UTC%20m%3d%2b0.480828615">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.884097767%20%2b0000%20UTC%20m%3d%2b0.480828615">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.905375315%20%2b0000%20UTC%20m%3d%2b0.427252485">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.884097767%20%2b0000%20UTC%20m%3d%2b0.480828615">
     
 
 
@@ -175,31 +175,34 @@
 <p>まずリモートサーバーにSSHでつなぐときの手順。</p>
 <h3 id="1-">1. 認証鍵の生成</h3>
 <p>Linuxには鍵生成のコマンドがあるので、それを使う。</p>
-<!-- raw HTML omitted -->
-<p>-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。<!-- raw HTML omitted -->絶対控える。<!-- raw HTML omitted --></p>
+<blockquote>ssh-keygen -t rsa</blockquote>
+<p>-tが鍵のタイプを示すオプション。ここではrsaを使うのでそのまま。あとは促されるままに保存先ディレクトリとパスフレーズを入力してやれば鍵が生成される。パスフレーズは忘れるとどうにもならんので絶対控える。<strong>絶対控える。</strong></p>
 <p>作成された鍵はデフォルトだと~/.ssh/配下に置かれる。id_rsaが秘密鍵でid_rsa.pubが公開鍵。</p>
 <h3 id="2-">2. 公開鍵の転送</h3>
 <p>鍵が出来上がったので、早速だが公開鍵をリモートサーバーに転送してやる。転送の方法はいろいろ考えられる（一番アレな手段だと中身コピペしちゃえばいいだけだったりする。単なるテキストだし）けど、scp使うのが個人的には楽かな、と。まぁscpもSSH利用したファイル転送なので、SSH使うためにSSH使っているという矛盾っぽいところはあるんだが。細かいことは置いといて。</p>
-<!-- raw HTML omitted -->
+<blockquote>scp ~/.ssh/id_rsa.pub hoge@fuga.com:~/.ssh/</blockquote>
 <p>SCPコマンドの第一引数が送るファイル、第二引数が転送先のユーザー名@ホスト名:ファイルパス。通信するときに指定したユーザー名のパスワードを聞かれるので答えてやる。SSHの認証の方式はいくつかあって、デフォルトではパスワード認証の設定になっているので、こういうログインの仕方になる。今このエントリの作業でやっているのは、パスワード認証から公開鍵認証に変えるための手順。</p>
-<p>ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(<!-- raw HTML omitted -->ﾉω・<!-- raw HTML omitted -->)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。</p>
+<p>ちなみにホスト名は当然ながら名前解決出来なきゃアウトなので、ローカルの開発環境とかだったらhostsに入れとくとかなんとか忘れずに。あと俺みたいにSSH1回設定したんだけどいろいろ忘れちゃったんでもっかい鍵作ってまーす(<em>ﾉω・</em>)ﾃﾍ)みたいな人（あんまいないだろうが）はすでにリモート側のsshd_configが書き換わってたりするので注意。ていうか俺が少しやられた。</p>
 <p>例えばセキュリティ面の配慮でポート番号を22から変えてると当然ながら通信できない。-Pオプションでポート番号を明示的に指定する。あるいはすでにSSHをパスワード認証で使うのをNGにしてる場合もある。これについては後述。</p>
 <h3 id="3-">3. 公開鍵の登録</h3>
 <p>今度はリモートサーバー側に入って、送られた公開鍵のファイル名を替えてやる。</p>
-<!-- raw HTML omitted -->
+<blockquote>mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</blockquote>
 <p>authorized_keysが公開鍵登録用ファイルの名前。複数の公開鍵を登録することもできる。その場合は改行挟んで追記でいいのかな。アクセス元を制限してやったりとかできる記法もあるらしいが、ここでは割愛。</p>
 <p>あとアクセス権も変える。</p>
-<!-- raw HTML omitted -->
+<blockquote>chmod 600 ~/.ssh/authorized_keys</blockquote>
 <h3 id="4-sshd-config">4. sshd_configの設定</h3>
 <p>リモートホスト側の/etc/ssh/sshd_configファイルがSSHの設定ファイルになっているので、公開鍵認証が出来るよう、設定を書き換える。</p>
-<!-- raw HTML omitted -->
+<blockquote>RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys</blockquote>
 <p>読めば字の如くだが、上からRSA認証許可、公開鍵認証許可、公開鍵ファイルパスの指定。デフォルトでは全部コメントアウトされていると思うので、#を外して設定を有効化する。おそらく一番下のオプション書き換えでauthorized_keysファイル以外のファイルも公開鍵に指定できるんだと思うけど、やったことないのでわからん。</p>
 <p>逆にパスワード認証（SCPでさっき使ったヤツ）はこれで要らなくなるので無効化する。</p>
-<!-- raw HTML omitted -->
+<blockquote>PasswordAuthentication no
+ChallengeResponseAuthentication no</blockquote>
 <p>上がパスワード認証の不許可。下はチャレンジレスポンス認証の不許可。こちらもnoにしとかないとパスワード認証が完全にオフにならないとどっかで聞いた。うろ覚え。。。</p>
 <p>あと気になるようであれば、port行を変えればポート番号も変えられる。22はウェルノウンポートなので、変えておいた方が無差別な攻撃は防げるはず。</p>
 <p>書き換えたらsshサービスを再起動してフィニッシュ。</p>
-<!-- raw HTML omitted -->
+<blockquote>/etc/init.d/sshd restart</blockquote>
 <p>これでローカル側からsshコマンド打ってやればつながる。パスワードを聞かれたら、公開鍵作る時に入れたパスフレーズを答えればOK。</p>
 <h3 id="5-github">5. Githubにつなぐ場合</h3>
 <p>Githubにつなぐときは公開鍵の中身を全部コピーして、GithubのAccount Settings &gt; SSH Keysにベタッと貼り付けてやればそれでOK。はじめはリモートホストにつなぐときと別の鍵を生成してやった方がよいのかな？とか思ってしまったが、公開鍵認証の意味を考えてみると、別の鍵を作ってやる必要はなかったので特にこれで問題はない。ちなみに俺の話をすると、これまで.ssh配下にcentosとかgithubとかフォルダ作ってそれぞれの鍵ファイルを管理してた。うん、無駄だったんやね……。</p>

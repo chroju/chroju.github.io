@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.569716192%20%2b0000%20UTC%20m%3d%2b0.091593362">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.569716192%20%2b0000%20UTC%20m%3d%2b0.091593362">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.569716192%20%2b0000%20UTC%20m%3d%2b0.091593362">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.499905576%20%2b0000%20UTC%20m%3d%2b0.096636424">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.499905576%20%2b0000%20UTC%20m%3d%2b0.096636424">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.499905576%20%2b0000%20UTC%20m%3d%2b0.096636424">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.569716192%20%2b0000%20UTC%20m%3d%2b0.091593362">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.499905576%20%2b0000%20UTC%20m%3d%2b0.096636424">
     
 
 
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="markdown">
-                <!-- raw HTML omitted -->
+                <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://terraform-jp.connpass.com/event/150359/" data-iframely-url="//cdn.iframe.ly/L6QnitY"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>先週開催されたこちらのイベントに参加しました。</p>
 <h2 id="heading">参加の動機</h2>
 <p>Terraform の AWS provider には何度か commit 経験はあるものの、 Terraform 本体のソースコードや、本体と provider 間のやり取りに関してはあんまり読んだことがなくて、コードリーディングを進めてみたかったというのが1つ。また自分はソフトウェアエンジニア出身ではないので、そもそものコードリーディングのやり方があんまり効率良い感じがしていなくて、他の方々（特に Terraform なのでインフラ寄りの方が多そうだし）がどんな感じで読んでいるのか知りたかったのが1つという感じです。</p>
@@ -182,7 +182,7 @@
 <p>あとは自分の経験上ですけど、ドキュメントに小さな誤字があることは案外多いのでチャンスも転がってますよという話をしました。実際、当日ドキュメント修正で時間内にプルリクエストを上げられた方がいました。</p>
 <p>Terraform のコードはとにかく膨大なので、なかなか contribute するぞ！という目的で挑んでも難しい部分がある気がしました。自分のこれまでを振り返ってもバグを踏んでから contribute に至ったのがほとんどです。</p>
 <h3 id="validatorsgo-">validators.go に関する知見</h3>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/terraform-providers/terraform-provider-aws/issues/9445" data-iframely-url="//cdn.iframe.ly/vTwY8Q0"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>これは個人的な話ですが、以前上記 issue にハマったことがありました。 <code>aws_route</code> resource には、ルーティング先に各種ゲートウェイを指定する <code>nat_gateway_id</code> や <code>transit_gateway_id</code> といった argument があります。本来であればゲートウェイの種類ごとに異なる argument を遣うべきところ、 <code>gateway_id</code> という argument が NAT ゲートウェイとインターネットゲートウェイのどっちも受け付けちゃうんですね。なので値のバリデーションをして、 NAT ゲートウェイは受け付けないようにするべきというのがこの issue です。</p>
 <p>この issue 、私はバリデーションの実装方法に迷ったのと、すでに author が自分でやると言っていたので放っておいてました。しかし今回の勉強会でこの話をしたところ、 <a href="https://github.com/terraform-providers/terraform-provider-aws/blob/master/aws/validators.go">validators.go</a> というファイルがあり、ここにバリデーション処理が集約されていると教えてもらいました。自分で気付けていなかったことを知ることができてとても有意義な経験でした。</p>
 <p>これでプルリクも出せるようになったし、先の「俺がやる」と言ってる人も数か月放置してるから、もうこっちで出しちゃってもいいかなと思ってます。</p>
@@ -190,7 +190,7 @@
 <p>みんなで議論をするような形を想像していたところ、もくもく会に近い雰囲気だったのでちょっと想像とは違いました。が、具体的にコードを踏まえた話が出来たのは楽しかったです。 Terraform ユーザーグループはこの Code Reading と meetup を交互に繰り返す形ですが、いずれもただ前に出た人が発表するのではなく、参加者同士話す場を中心にしているのがとてもいいなと思いました。</p>
 <p>ただグループ分けに関してはレベル別とか目的別とかでもいいんじゃないかなーという気はしました。読む対象レポジトリごとのグループ分けだと、メンバー間の意識や目的をなかなか揃えにくく、どうしようかと悩む、迷う時間が少なくなかったです。あるいは個々人で目的を持って読んでいくもくもく会的な感じですよ、と言い切ってしまうか、かなと。</p>
 <p>ちなみに読んだだけで終わるのもアレだったので、後日ですが issue 1個解決を図ってみました。定期的に issue を覗いてやれそうなものにチャレンジしていくのも勉強としては良さそうです。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/terraform-providers/terraform-provider-aws/pull/10819" data-iframely-url="//cdn.iframe.ly/X4pbFvR"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
                 <br>
                 

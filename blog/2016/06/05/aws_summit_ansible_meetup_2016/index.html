@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.700380579%20%2b0000%20UTC%20m%3d%2b0.222257749">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.700380579%20%2b0000%20UTC%20m%3d%2b0.222257749">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.700380579%20%2b0000%20UTC%20m%3d%2b0.222257749">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.630424007%20%2b0000%20UTC%20m%3d%2b0.227154755">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.630424007%20%2b0000%20UTC%20m%3d%2b0.227154755">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.630424007%20%2b0000%20UTC%20m%3d%2b0.227154755">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.700380579%20%2b0000%20UTC%20m%3d%2b0.222257749">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.630424007%20%2b0000%20UTC%20m%3d%2b0.227154755">
     
 
 
@@ -170,7 +170,8 @@
 <h2 id="aws-summit">AWS Summit</h2>
 <p>AWS Summitは初参加でしたが、会場を見渡したときのスーツ率の高さからいわゆるEnterprise系のイベントに近いのかと思いきや、DevConの方を中心にテクニカルな話題も多めで楽しめました。とはいえAWSサービス紹介にとどまるセッションや、タイトル通りの内容ではなく、各企業の内部事情を抽象的に話すだけで終わるようなセッションも少なくなく、セッションの選択はそれなりにコツがいるなとも思ったのですが。。</p>
 <p>自分が受けたセッションで特に多く話されていたのは、Serverlessの話とDevOps、具体的にはCI/CDの話。いずれも要はこれまで複雑に運用していたシステムが、AWSのマネージドサービスを使うことで簡単に実現できるという話なのですが、特にServerlessに力を入れてる感じがしました。Lambdaの話がすごく多い。先日Serverless confで「サーバーを叩き割る」というパフォーマンスで話題になった、AWSのTim Wagnerも来てましたしね。</p>
-<!-- raw HTML omitted -->
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="en" dir="ltr">This is how you go <a href="https://twitter.com/hashtag/serverless?src=hash">#serverless</a> – @timalleneagner <a href="https://t.co/SpllWVz76u">pic.twitter.com/SpllWVz76u</a></p>&mdash; Lars Trieloff (@trieloff) <a href="https://twitter.com/trieloff/status/735839549729996800">2016年5月26日</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>Lambda、簡単なジョブや解析処理であればEC2立てずとも実行が可能になるわけで、いわゆるアプリケーションが担っていた仕事、これまでサーバーを立てなければならなかった部分がごっそり持っていかれることになる。Lambda自体は発表が2014年なのでそれなりに経っているけれど、Pythonに対応したあたりから実用される動きが大きくなってきたような感触があります。とはいえLambdaだけですべて済むというわけでもなく、例えばそのエンドポイントとしてAPI Gatewayが使えたり、SNSと連携してメッセージのプッシュを行ったりと、これまで連綿と作られてきたAWS各サービスがあって、それらを繋げる部分に位置することで真価を発揮している。そう考えるとLambdaが単体ですごいというより、AWS全体を見回したときに足りなかった1ピースを埋めてくれたような印象がある。</p>
 <h2 id="ansible">Ansible</h2>
 <p>そこに来てAnsible、というのはどういう位置付けになるのか。Ansibleの役割はServerlessとは対極、基本的にはサーバーの設定管理というところになります。仮にシステムをServerlessに置き換えていくのだとしたら、ひょっとしたら徐々に要らなくなってくるツールなのかもと思ったり。無論、AnsibleにもAWSモジュールがあるけれど、端々まで対応しているというわけではなく、AWSの設定を管理するのであればCloudFormationやTerraformを使う方が現実的かなという気がします（AWS Summit内で、CloudFormationにLambdaや周辺サービスの設定を書いて、サーバーレスのマイクロサービスをパッケージングする手法が紹介されてました。Lambdaのコードもそのjsonの中に含むので「つらそう」という声は多かったですが）</p>

@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.655108049%20%2b0000%20UTC%20m%3d%2b0.176985219">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.655108049%20%2b0000%20UTC%20m%3d%2b0.176985219">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.655108049%20%2b0000%20UTC%20m%3d%2b0.176985219">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.586722397%20%2b0000%20UTC%20m%3d%2b0.183453245">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.586722397%20%2b0000%20UTC%20m%3d%2b0.183453245">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.586722397%20%2b0000%20UTC%20m%3d%2b0.183453245">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.655108049%20%2b0000%20UTC%20m%3d%2b0.176985219">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.586722397%20%2b0000%20UTC%20m%3d%2b0.183453245">
     
 
 
@@ -190,7 +190,7 @@
 </ul>
 <h2 id="heading">学習リソース</h2>
 <p>基本的には <a href="https://cloud.google.com/kubernetes-engine/docs/">Kubernetes Engine ドキュメント  |  Kubernetes Engine  |  Google Cloud</a> を見ているが、とりあえず1冊まとまっててザザッと概念的なものを見渡せるものが欲しかったので、オライリーが出している『入門 Kubernetes』をさっと読んだりもした。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873118409/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/41HRQrBzfOL._SL160_.jpg" alt="入門 Kubernetes" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873118409/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">入門 Kubernetes</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 18.08.19</div></div><div class="amazlet-detail">Kelsey Hightower Brendan Burns Joe Beda <br />オライリージャパン <br />売り上げランキング: 22,683<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873118409/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>この本は Pod, ReplicaSet, DaemonSet, Deployment といった、 Kubernetes をとりまく概念を1章ずつ割いて個別に解説してくれるので、各リソース概念がどのような働きをしているのか、またリソース同士がどういった関係性を持っているのかを整理するのにとても役立った。 Kubernetes はとにかく独自の概念が多い、というかほとんどが独自概念で構成されているツールなので、まずは個々の用語をきちんと抑えること、コンテナを動かすために何をどう設定すればよくて、その設定をデプロイしたときにどのリソースが生成されて、どのように動作しているのか、というところを早いうちに把握した方がいいと思う。これは AWS を触り始めた当初の感覚に近かった。 Kubernetes はかなりアップデートも速いので、いつまでこの本が有効性を持っていられるのかはわからないが、現時点では最初の一歩として通読しておくには良い本だと思う。</p>
 <h2 id="heading-1">現状と今後</h2>
 <p>とりあえず Kubernetes 回りで触ったのはこんなところ。現状は g1-small 2台のクラスタ上で、 influxDB と Grafana のコンテナを1つずつ動かしているだけの状態。今後やってみたい、やろうと思っていることとしては以下の通り。</p>

@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.495319175%20%2b0000%20UTC%20m%3d%2b0.092050023">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.495319175%20%2b0000%20UTC%20m%3d%2b0.092050023">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.495319175%20%2b0000%20UTC%20m%3d%2b0.092050023">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.564034488%20%2b0000%20UTC%20m%3d%2b0.085911658">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.495319175%20%2b0000%20UTC%20m%3d%2b0.092050023">
     
 
 
@@ -308,7 +308,7 @@
 <li>Terraform Cloud が Terraform 自動実行の機能も備えている</li>
 </ul>
 <p>1点目について。履歴を自動的に追跡し、誰がいつ <code>apply</code> を実行したかがわかるほか、あまり必要となる機会はないものの、各回での tfstate の差分も見ることができます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/c4961c003d884fc9959dc5786782769c"><img src="https://i.gyazo.com/c4961c003d884fc9959dc5786782769c.png" alt="Image from Gyazo" width="682"/></a></p>
 <p>2点目については、例えば S3 だとバケットをあらかじめ作成する必要があるわけですが、 Terraform Cloud の場合は一度アカウントだけ作ってしまえば、その後は保存場所を手で作ったりする必要がありません。3点目については tfstate 保存の問題とは直接関係しませんが、 Terraform Cloud は Terraform 自動実行の機能も備えるなど、 hashicorp が提供しているだけあって Terraform を運用する上で便利な機能が備えられています。それら機能をすぐには使わないとしても、いつでも使えるよう tfstate だけは保存しておく、というのはアリだと思います。</p>
 <h3 id="remote-state-">Remote State の利便性を活かしやすい</h3>
 <p>Terraform Cloud を使う場合の利点として、より重要なのは Remote State の利便性を活かしやすい点にあると考えています。</p>
@@ -323,7 +323,7 @@
 </code></pre></div><p>先に少し触れましたが、 AWS アカウント全体を1つの tfstate が管理下に置くのではなく、いくつか分割する場合がありますが、その場合でもこの機能を使えば相互に値を参照し合うことができます。あるいはマルチアカウント構成の場合でも、他のアカウントから設定値を読み込むことができるのは非常に便利です。 VPC Peering を行う場合などに重宝します。</p>
 <p>Remote State から設定値を読み出す場合、当然ながらその tfstate に対する読み取り権限が必要になります。仮に S3 に置いている場合、バケットポリシーを適切に設定して、クロスアカウントでの読み取りを許可する必要が出てきます。</p>
 <p>これを Terraform Cloud に変えると、 Terraform 実行者は誰もが Cloud 上のすべての tfstate を参照し合うことが可能になります。 tfstate をあえて管理対象クラウドの外に引っ張り出して集めておくことにより、集約的な設定データベースのように取り扱うことができます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/5f6edc1d4ea6593710d8fb5a09b259cb"><img src="https://i.gyazo.com/5f6edc1d4ea6593710d8fb5a09b259cb.png" alt="Image from Gyazo" width="501"/></a></p>
 <hr>
 <h2 id="-tfstate--1">ミクロ tfstate 論</h2>
 <p>本項ではミクロに見た tfstate として、ファイルの編集処理に着目します。</p>
@@ -360,7 +360,7 @@
 <h3 id="tfstate--7">tfstate の保存場所を変更したい</h3>
 <p>tfstate を現在の保存場所から別の場所へ移したい場合があると思います。最近であれば Terraform Cloud がローンチされた際、 S3 などから移行した方は多かったでしょうし、 S3 内でファイルの key（パス）だけ替えたいといった需要もあるかと思います。</p>
 <p>この操作は意外と簡単で、まず一度 <code>terraform init</code> を実行してから、 tffile の <code>backend</code> の部分を移行先のパスに書き換えてもう一度 <code>terraform init</code> を実行するだけです。 Terraform が以下のように backend の変更を検知して、 tfstate ファイルを移動させるか尋ねてくれます。これを承諾すれば、 Terraform がファイル移動を賄ってくれます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/f2ba5d64ab5e699f631ba3922824023f"><img src="https://i.gyazo.com/f2ba5d64ab5e699f631ba3922824023f.png" alt="Image from Gyazo" width="650"/></a></p>
 <p>これは「入門」の項で記載した <code>./.terraform/terraform.tfstate</code> に書かれた backend 設定と、 tffile に書かれた backend 設定に差異があったとき、 backend が変更されたとみなして実行される処理です。</p>
 <h3 id="tfstate--8">tfstate の編集</h3>
 <p>tfstate の編集が必要になるのは、 tffile、 tfstate、現実のリソースの三者間で乖離が発生してしまい、 <code>terraform plan</code> の結果が予期せぬものになってしまうような場合です。 tfstate が変更されてしまった、というケースは無いものとして考えると、 tffile を変更したか、現実のリソースを変更したか、いずれかの場合ということになります。このうち現実のリソースを変更した場合については、先にも触れましたが <code>terraform refresh</code> コマンドを実行すれば事足ります。</p>
@@ -370,11 +370,11 @@
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ terraform state mv aws_instance.foo aws_instance.bar
 </code></pre></div><p>となります。この <code>aws_instance.foo</code> のような記述形式は Terraform のドキュメント内で <code>address</code> と呼ばれています。 address の書式は resource type と resource name をドットで繋いだ形です。 module に内包された resource の場合は <code>module.(module 名).(resource type).(resource name)</code> の形になります。 module を入れ子にしていると、さらに <code>module.(module 名).module.(module 名)...</code> と数珠つなぎで繋がっていきます。</p>
 <p>mv の対象がかなりの数に上ってくると、 address を手で書いてコマンド実行するのが面倒になってきます。こういうときは一旦 <code>terraform plan</code> を実行してしまいましょう。先に書いた通り、 mv 前の tfstate に残っているリソースは削除対象に、 mv 後の tffile に新しく命名されたリソースは新規構築対象になるので、 <code>will be (destroyed|created)</code> という文字列で grep することで、 mv 前後の address をそれぞれ取得できるはずです。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/88e0dbb61fb4b9ee1620a174999b1b71"><img src="https://i.gyazo.com/88e0dbb61fb4b9ee1620a174999b1b71.png" alt="Image from Gyazo" width="493"/></a></p>
 <p>あとはいい感じに shell script にでも編集し直して実行してしまいましょう。</p>
 <h3 id="tfstate----">tfstate の編集 - リスト化した場合</h3>
 <p>注意が必要なのが、もともとバラバラに定義していたリソースを、 count などで一括処理する形へ変更した場合です。この場合、 mv 先は <code>aws_instance.web_servers[0]</code> のようにリストの1要素という形になりますが、この <code>web_servers</code> というリスト自体が tfstate にまだ存在していない状態だと、そのリストへ要素を追加するという処理は実行できません。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/3543958dcee3f500bb135976875c8815"><img src="https://i.gyazo.com/3543958dcee3f500bb135976875c8815.png" alt="Image from Gyazo" width="689"/></a></p>
 <p>対処としては、一旦 <code>count = 0</code> として、リストを空の状態で <code>terraform apply</code> を実行し、 tfstate へリストを作成した上で mv を実行することになります。</p>
 <h3 id="tfstate--9">tfstate の直接編集</h3>
 <p>さて、最後に禁断の tfstate 直接編集についても少し触れておきます。禁断の、と言っても本当に手で編集してほしくなければバイナリにするでも暗号化するでも方法はあると思うので JSON で書くということはそういうことなんでしょう、とは思っています。</p>

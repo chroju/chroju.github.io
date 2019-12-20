@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.697265477%20%2b0000%20UTC%20m%3d%2b0.219142647">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.697265477%20%2b0000%20UTC%20m%3d%2b0.219142647">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.697265477%20%2b0000%20UTC%20m%3d%2b0.219142647">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.618415104%20%2b0000%20UTC%20m%3d%2b0.215145952">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.618415104%20%2b0000%20UTC%20m%3d%2b0.215145952">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.618415104%20%2b0000%20UTC%20m%3d%2b0.215145952">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.697265477%20%2b0000%20UTC%20m%3d%2b0.219142647">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.618415104%20%2b0000%20UTC%20m%3d%2b0.215145952">
     
 
 
@@ -169,7 +169,7 @@
                 <p>今年度、特に下半期からいわゆる技術的負債の返済、特にDevOps方面におけるプロセス改善に深く携わるようになった。これまで依頼ベースの対応や、プロジェクトベースの仕事をすることが多く、要は「何をやるか」がある程度決まっていたわけだけど、改善系の業務は問題を見つけ、解決策、しかも場当たり的なものではなくてボトルネックを閉めるような策を講じていく必要があるということで、これまでと違う視点で仕事をする必要が出てきた。そこで何冊か「問題解決」にフォーカスした本を読んだ結果をまとめてみる。</p>
 <h2 id="heading">問題とはなにか</h2>
 <p>そもそも「問題」って何なのか。<a href="https://www.amazon.co.jp/dp/4492557415">細谷功『問題解決のジレンマ』</a>によれば、問題とは「事実と解釈の乖離」だという。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4492557415/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51HZRQOWU6L._SL160_.jpg" alt="問題解決のジレンマ: イグノランスマネジメント:無知の力" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4492557415/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">問題解決のジレンマ: イグノランスマネジメント:無知の力</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 16.12.17</div></div><div class="amazlet-detail">細谷 功 <br />東洋経済新報社 <br />売り上げランキング: 112,865<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4492557415/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>客観的な「事実」があり、その関係性や論理構造を規定する「解釈」がある。事実というのは客観的なものなので変化することは少ないが、解釈は時代や文化によって在り方を変える。つまりは古くなってくるわけで、それによって事実と解釈が乖離を起こすことにより、問題が発生する。</p>
 <p>システム運用という自身の立場で考えれば、例えばベンチャー企業においては「小規模なシステム」かつ「少人数の精鋭社員」という「事実」下では、「スピードが重要でドキュメントを書かずとも運用は可能」という「解釈」が成り立ちうる。これが年数が経過して「大規模なシステム」かつ「新卒等も含めばらつきのある社員」という事実に変わってくると、先の解釈通りにドキュメントなしでは運用が難しくなったりするわけで、事実と解釈の乖離が起きた状態が発生していることになる。</p>
 <h2 id="heading-1">問題を見つけるために</h2>
@@ -180,7 +180,7 @@
 <p>あるいは『SOFT SKILLS』の「学習」の項において、学習すべき事項を見つけるために勧めていたのが、「わからないことをメモしておく」ことだった。学習すべき事項というのは要は「問題」なわけで、これも問題発見には応用できるのだと思う。まぁ地道で「そりゃそうだろ」という話ではあるのだが、日頃見つかる小さな問題をスルーせずに、都度確実に書き留めておくことは必要と思う。そして個別の問題それぞれに対応するのではなく、ある程度蓄積された複数の小さな問題を並べて「ボトルネックは何か？」と考えていくことで、対応すべき大きな問題が見つかるのではないか。</p>
 <h2 id="heading-2">問題を解決していく過程</h2>
 <p>見つけた問題を解決する過程については<a href="https://www.amazon.co.jp/dp/4862760856">安宅和人『イシューからはじめよ』</a>に詳しいが、内容としては要するにデカルトの『方法序説』に近い、一般的な科学的方法論だ。問題を見つけたら、それを解決可能な小さな単位に分解し、単純かつ具体的な観測から抽象へと認識を進め、全体の論理が沿うように再構成していく。GTDにおいても、目的と求めるべき結果を最初に定めて、その間に必要なタスクをブレインストーミングしていく「ナチュラルプランニング」という方法論があるが、どこか似通っている。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4862760856/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41Xo9o1l0sL._SL160_.jpg" alt="イシューからはじめよ―知的生産の「シンプルな本質」" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4862760856/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">イシューからはじめよ―知的生産の「シンプルな本質」</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 16.12.17</div></div><div class="amazlet-detail">安宅和人 <br />英治出版 <br />売り上げランキング: 1,168<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4862760856/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>ある問題を端緒として改善活動を始めたとして、どうもエンジニアとしての性なのか、当初の目的からズレて技術的な面白さを求めてしまったりすることはよくある。サーバーのデプロイスピードが遅いことを発端として改善を始め、じゃあクラウドを使って改善しようという話になったが、どのクラウドサービスを使えばいいのかと言った別の問題で時間をかけてしまったり、結局手作業でEC2インスタンスを作っているのでオンプレのときとスピードが変わらない、みたいな話はありがちだ。問題から解決策への筋道が論理的な整合性を保っているかは、常に確認が必要になる。</p>
 <p>この点は自分が特に出来ていないところで、プライベートで何か勉強を始めたはいいが、何を求めて始めたのかを忘れてしまって、細かいつまずきポイントでずっとハマったままになったりしていることが少なくない。</p>
 <h2 id="heading-3">具体的実践</h2>
@@ -208,7 +208,7 @@
 </ul>
 <p>特に最後の「特定の技術にこだわらない」は重要だと思っていて、自分はどうしてもクールな技術、なんだかカッコよさそうなものがあると簡単に心惹かれてしまい、技術が目的になってしまう。もちろん、使っていて気持ちのいい技術を選択するのも大事なのだが、結局はどの技術もツールに過ぎないわけで、自社の「問題解決」に適切なハンマーなのかという点は念頭におきたいし、またその目的に適うならどんな技術だってクールと思うべきなんだろうと思う。</p>
 <p>自分は謙遜せずに言えば頭の回転が速い方なので、どうしても考えすぎてしまう、頭の中でぐるぐる物事を捏ね繰り回してしまう傾向にあり、それを解消する意味でも「きちんとesa.io上で論理展開する」というのは良いだろうと思っている。『考えない練習』という本も、考え過ぎを抑制する助けになりそうなので読んでみたい。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4094087001/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51y1EO0eUOL._SL160_.jpg" alt="考えない練習 (小学館文庫)" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4094087001/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">考えない練習 (小学館文庫)</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 16.12.17</div></div><div class="amazlet-detail">小池 龍之介 <br />小学館 (2012-03-06)<br />売り上げランキング: 5,008<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4094087001/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 <p>また、ここまでは個人的な実践の話が多かったが、実際に職務上の問題解決を行うにはチームを巻き込む必要がある。人を動かす、チームの中で振る舞っていく方法論については、また別の課題としていきたい。</p>
 
                 <br>

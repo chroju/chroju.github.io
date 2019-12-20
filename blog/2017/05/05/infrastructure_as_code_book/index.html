@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.692012674%20%2b0000%20UTC%20m%3d%2b0.213889844">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.692012674%20%2b0000%20UTC%20m%3d%2b0.213889844">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.692012674%20%2b0000%20UTC%20m%3d%2b0.213889844">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.612259903%20%2b0000%20UTC%20m%3d%2b0.208990751">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.612259903%20%2b0000%20UTC%20m%3d%2b0.208990751">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.612259903%20%2b0000%20UTC%20m%3d%2b0.208990751">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.692012674%20%2b0000%20UTC%20m%3d%2b0.213889844">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.612259903%20%2b0000%20UTC%20m%3d%2b0.208990751">
     
 
 
@@ -187,7 +187,7 @@
 <h2 id="heading-1">徹底的な自動化アプローチ</h2>
 <p>例えばプロビジョニングは「インフラストラクチャ定義ツール」でサーバーを構築し、その内部を「サーバー構成ツール」で設定するわけだけど、2つのツールを個別に手動実行するのではなくて、前者から後者へどう情報を受け渡して、自動的にプロビジョニングを済ませるかが肝になる。</p>
 <p>Terraformであれば、EC2を立てた後に自動的にAnsibleを呼ぶようなことも機能でできるらしいけど、そういった連携の仕組みがツール自体に存在しなければ、構築したサーバーのIPアドレスやユーザーの情報を「サーバー構成ツール」へ渡す必要がある。1例として挙がっていたのが「構成レジストリ」と呼ばれる、サーバー情報を中央集権的に管理するツール。インフラストラクチャ定義ツールは立てたサーバーの情報をここに登録し、サーバー構成ツールが情報を引き出して、サーバー設定のデプロイを行う。具体的に「構成レジストリ」として使えるツールについてはそれほど言及がなかったけど、CygamesだとElasticsearchを使ってサーバー情報を管理しているという話を聞いたことがあって、実装としてはこれに近いのだと思う。</p>
-<!-- raw HTML omitted -->
+<script async class="speakerdeck-embed" data-slide="46" data-id="c6f07c336b90417f9a1361c9afb5eb07" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 <p>あるいはAnsibleなどを導入したときによく聞かれるのが、結局手動でサーバー構成を変更してしまって、Playbookと実情に乖離が出てしまうという問題（本書ではこれによる構成差異の発生を「構成ドリフト」と呼んでいる）。これに対してはイミュータブルなサーバー管理をするのが最も良いとされる。なぜなら構成ドリフトを起こしても、定期的にイチから生成したサーバーに置き換えられていれば、そのたびに構成ドリフトもリセットされるから。</p>
 <p>この本全体で貫かれているのは、とかく徹底的な自動化と、ワークフローのパイプライン化を行なって、各タスクからシステム管理者の手動オペレーションをなくすということ。これによりシステム管理者はインフラ構築、変更の「門番」としての役割から解放され、問題への対応といったより生産的なタスクへ移ることができるし、システムの変更によりサービスに対して発生する影響も低減できるとしている。</p>
 <blockquote>
@@ -197,7 +197,7 @@
 <p>先述した「構成ドリフト」のように、本書ではいくつかあまり聞き慣れない用語（構成ドリフトを起こしたサーバー群を「スノーフレークサーバー」と呼んだり、イミュータブルに何度も破棄されては生成されるサーバーを「フェニックスサーバー」と呼んだり）が使われているのだけど、アンチパターンやグッドプラクティスを共有認識にする上では、名前がついているほうが話が通じやすいので、この本の用語が共通言語になっていくとうれしいなと思ったり。そういえば、プラクティスに名前を付ける手法は<a href="https://www.amazon.co.jp/dp/462108786X">『Fearless Change』</a>でも使われていた。</p>
 <p>で、結論としてとても良い本だとは思うのだけど、これを全部導入するとなるとなかなかにパワーが必要になる。特に、すでに手動でのサーバー管理を絶賛実施中の環境に対して導入する場合には、インフラに対する考え方自体を、秘伝のタレのように継ぎ足して使うものから、外部で管理している設定と常に同期して使うもの、すぐに破棄と生成のサイクルを回せるものへと変えていかなくてはならないので、組織的な協力が必要になってくる。しかも必要なのは一部ワークフローの自動化ではなく、徹底的な自動化、インフラ環境の自律的な動作。</p>
 <p>まぁ、とはいえインフラパイプライン全体をいきなり用意して導入するのも難しいのは確かなので、まずは頻繁に変更が入る設定など、Infrastructure as Codeの恩恵が大きそうなところから始めてみるべきかと思う。少しずつでも確実にこれは実現していきたいなと思える本だった。</p>
-<!-- raw HTML omitted -->
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank"><img src="https://images-fe.ssl-images-amazon.com/images/I/51YYyQ6-t6L._SL160_.jpg" alt="Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Infrastructure as Code ―クラウドにおけるサーバ管理の原則とプラクティス</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 17.05.05</div></div><div class="amazlet-detail">Kief Morris <br />オライリージャパン <br />売り上げランキング: 25,983<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873117968/diary081213-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
 
                 <br>
                 

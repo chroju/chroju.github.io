@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.495771775%20%2b0000%20UTC%20m%3d%2b0.092502623">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.495771775%20%2b0000%20UTC%20m%3d%2b0.092502623">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.495771775%20%2b0000%20UTC%20m%3d%2b0.092502623">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.570782293%20%2b0000%20UTC%20m%3d%2b0.092659463">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.495771775%20%2b0000%20UTC%20m%3d%2b0.092502623">
     
 
 
@@ -175,17 +175,17 @@
 <li>aws-vault</li>
 </ul>
 <h2 id="tmux">tmux</h2>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/tmux/tmux" data-iframely-url="//cdn.iframe.ly/grp31K2"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>4年ぐらい前に一度入門したものの、 iTerm2 のタブと画面分割があれば別にいいかなという感じで使わなくなっていたのを改めて使い始めた。きっかけになった理由は実はだいぶ些細で、 macOS の全画面表示ってメニューバーを隠してしまうので時間がわからないのが困って、ステータスバーに時刻を表示したくなったというところ。実際使い始めてみるとセッションを作って長くかかるコマンドを裏で実行させたままデタッチして別のことやる、みたいなのがなかなか便利で手放せなくなりつつはある。</p>
 <p>以前使っていた tmux.conf を引っ張り出してはみたが、 powerline 周りの設定は忘れているし、学習コストかけたくもなかったので外部プラグインへの依存はやめた。 tmux デフォルトのステータスバーを使って時刻などは表示している。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/094ef9703c2af0f99d811193548d57b8"><img src="https://i.gyazo.com/094ef9703c2af0f99d811193548d57b8.png" alt="Image from Gyazo" width="795"/></a></p>
 <h2 id="fzf--ghq">fzf + ghq</h2>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/junegunn/fzf" data-iframely-url="//cdn.iframe.ly/6Emgp7l"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>fzf は以前から興味はあったけど使ってなくて、というか動作原理がよくわかっていなかったのだが、ちゃんと使ってみたらすごく便利だった。</p>
 <p>複数行のテキストを標準入力から突っ込むと、曖昧検索ができる TUI が開き、そこで検索をして1つ結果を選択すると、その文字列を吐き出すという、日本語で書くとこういう動作をする。例えば git のブランチ切り替えだとか、複数のファイルから1つ選んで開くとか、そういう「多くの選択肢から絞りたい」操作をするのに役立つ。まぁ見たほうが早いと思う。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/69ddc6d8e70ddc5ae4ea83c26bd9cd4c"><img src="https://i.gyazo.com/69ddc6d8e70ddc5ae4ea83c26bd9cd4c.gif" alt="Image from Gyazo" width="1000"/></a></p>
 <p>こういう感じ。ただ、手でこういう風に <code>fzf</code> コマンドをわざわざ打つのではなくて、基本的な使い方としてはよく使うコマンドを関数として定義して <code>.zshrc</code> などに書いておいて、必要に応じて呼び出すという形を取る。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/motemen/ghq" data-iframely-url="//cdn.iframe.ly/kzGagrT"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>これと組み合わせて使うとすごく良いのが ghq 。ローカルに置く git レポジトリを管理してくれるツールで、 <code>.gitconfig</code> に以下のように root となる場所を書いた上で <code>ghq get chroju/chroju.github.io</code>  と打つと root 配下に <code>git clone</code> してくれる。そして <code>ghq list</code> で、 root 配下に置かれた git レポジトリの一覧をずらっと出力してくれる。つまり fzf と組み合わせるとこういう関数が書けるということ。これがだいぶ快適で1日100回ぐらい打ってる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>fghq<span style="color:#719e07">(</span><span style="color:#719e07">)</span> <span style="color:#719e07">{</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  <span style="color:#b58900">local</span> dir
@@ -198,15 +198,15 @@
 <p>余談的な話。自分は Go を書く機会が多い。で、 Go のレポジトリは最近状況が変わってきてはいるけれど、 <code>$GOPATH </code> で指定したディレクトリを root として、 <code>$GOPATH/src/github.com/chroju/...</code> という具合の場所に置かれるというのがスタンダードになっている。</p>
 <p>Go とそれ以外のコードでレポジトリの置き場が替わるのも嫌なので、自分は <code>$GOPATH/src</code> にあたるディレクトリを ghq の root として設定している。幸い Go も ghq も <code>github.com/chroju/chroju.github.io</code> という形でディレクトリを掘って clone してくるので、この設定によって Go でも非 Go でも気にせず同様の構成でディレクトリが管理できている。</p>
 <p>このあたりは以下のエントリにインスパイアされている。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 75%; padding-top: 120px;"><a href="https://songmu.jp/riji/entry/2019-03-28-go-modules.html" data-iframely-url="//cdn.iframe.ly/K36hOoI"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <h2 id="starship">Starship</h2>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="http://starship.rs/" data-iframely-url="//cdn.iframe.ly/bxOEBO2"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>プロンプトをいい感じにしてくれる Rust 製のツール。スクショは tmux のときに貼ったものを参照。</p>
 <p>以前までは zsh のプロンプト設定を自分で書いていたんだけど、あんまり可読性のいい記法ではないし、しばらく経つと書き方を忘れてしまうので外部ツールに頼って楽をすることにした。 Starship が良いのはシェル依存ではないので、仮に今後 Fish に移りたくなってもそのまま持っていけるということ。 <code>brew install</code> して <code>eval &quot;$(starship init zsh)&quot;</code> したらその瞬間からプロンプトがいい感じになる。</p>
 <p>設定も豊富でよい。デフォルトの状態で git 関係の表示、ディレクトリ表示はやってくれるし、カレントディレクトリに <code>go.mod</code> があれば Go のバージョン、 <code>requirements.txt</code> があれば Python のバージョンを表示してくれる。設定の追加もできて、自分の場合は <code>AWS_PROFILE</code> を設定していたらそれを表示するようにしている。基本的には使わない環境変数だけど、たまに動作確認などでセットしたまま忘れてたりするので、事故防止になっていい感じ。</p>
 <p>powerline font を求められることだけ面倒なんだけど、たぶん設定変更して絵文字を使わないようにしてやればそれも要らなくなる気がする。</p>
 <h2 id="aws-vault">aws-vault</h2>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/99designs/aws-vault" data-iframely-url="//cdn.iframe.ly/o7Vzpd3"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>macOS の Keychain と連携して AWS API のアクセスキーを管理してくれるツール。別の AWS アカウントへ switch する <code>assume role</code> 操作がすごく楽になるのでそれで使っている。以下は README からの引用だけど、 <code>~/.aws/config</code> をこんな風に書いて <code>aws-vault exec prod-readonly -- aws ec2 describe-instances</code> という具合に実行すると、これで switch ができる。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">[profile jonsmith]</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>region <span style="color:#719e07">=</span> <span style="color:#2aa198">us-east-1</span>
@@ -217,7 +217,7 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>source_profile <span style="color:#719e07">=</span> <span style="color:#2aa198">jonsmith</span>
 </code></pre></div><p>重宝するのは、これで Terraform も assume role での実行ができること。以前 <a href="https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/">Terraform で AWS assume role が使用できない場合がある · the world as code</a> で書いたとおり、基本的に Terraform は assume role に対応できていないので、この方法を使うのが一番ラクだと思う。</p>
 <h2 id="conclusion">Conclusion</h2>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/dotfiles" data-iframely-url="//cdn.iframe.ly/NGvxAWO"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>今書いたような設定は全部 dotfiles としてレポジトリにまとめているので、コードで見てもらったほうが早いのかも知れないです。 Ansible 流して会社 macOS の設定が数分で終わったときにはやるやんけ自分ってちょっと思いました。</p>
 
                 <br>

@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.660369253%20%2b0000%20UTC%20m%3d%2b0.182246423">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.660369253%20%2b0000%20UTC%20m%3d%2b0.182246423">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.660369253%20%2b0000%20UTC%20m%3d%2b0.182246423">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.589231497%20%2b0000%20UTC%20m%3d%2b0.185962345">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.589231497%20%2b0000%20UTC%20m%3d%2b0.185962345">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.589231497%20%2b0000%20UTC%20m%3d%2b0.185962345">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.660369253%20%2b0000%20UTC%20m%3d%2b0.182246423">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.589231497%20%2b0000%20UTC%20m%3d%2b0.185962345">
     
 
 
@@ -167,13 +167,13 @@
             </div>
             <div class="markdown">
                 <p>やったぜ。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/e7f876b113acd42992052cc2c1fafa5f"><img src="https://i.gyazo.com/e7f876b113acd42992052cc2c1fafa5f.png" alt="Image from Gyazo" width="849"/></a></p>
 <p><a href="https://github.com/terraform-providers/terraform-provider-aws/pull/5043">Fix the difference between aws_waf_byte_match_set and aws_wafregional_byte_match_set by chroju · Pull Request #5043 · terraform-providers/terraform-provider-aws</a></p>
 <p>Terraform は最近、その本体と各APIを叩く Provider でレポジトリが分離されているんだけど、そのうちの AWS のやつに Contribute した。別にそこまで大した内容の commit でも無いんだけど、なんか嬉しいのでここに至るまでをエントリ起こしておく。</p>
 <h2 id="builderscon-tokyo-2017-">builderscon tokyo 2017 が契機</h2>
 <p>そもそも自分は専門領域インフラなので、プログラミングは本業というわけではなく、まぁそういう言い訳でガッツリプログラミングするような機会からは逃げてたと言えば逃げてきてたし、 OSS 活動はやってみたい思いはあったけどなんか無理だろうなって感じでやらずにいた。 GitHub はもっぱら自分のコードのバックアップ用途というか。</p>
 <p>そんな意識を替えた、小さくてもいいからなんか Contribute できないか頑張ってみよっかと思ったのは昨年の <a href="https://builderscon.io/tokyo/2017">builderscon tokyo 2017</a> で聴いたこの発表だった。</p>
-<!-- raw HTML omitted -->
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/lQIyp731TQqOoF" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/shigemk2/oss-78585757" title="Oss貢献超入門" target="_blank">Oss貢献超入門</a> </strong> from <strong><a href="https://www.slideshare.net/shigemk2" target="_blank">Michihito Shigemura</a></strong> </div>
 <p>コード読まずに GitHub に近づかずに OSS 貢献ができるかって言ったらできないわけで、わかんなくてもいいから取りあえず読むとか、ドキュメントの修正だって貢献は貢献だって話だとか、何かしらやれることからやれたらええやんけの始めの一歩をものすごい勢いで押してくれたスライド。わかんないからとか実力がないからという理由で遠ざけてたら一生かかってもできるわきゃないので、じゃあ取りあえず、もう少し GitHub と仲良くするか、とこの頃から思うようになった。昨今はインフラエンジニアだからコード書きませんってのも無いよねって流れだし、どうにかしたかった。</p>
 <h2 id="github-">GitHub と仲良くする</h2>
 <p>手始めに始めたのはこのあたりのこと。</p>

@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.584977502%20%2b0000%20UTC%20m%3d%2b0.106854672">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.584977502%20%2b0000%20UTC%20m%3d%2b0.106854672">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.584977502%20%2b0000%20UTC%20m%3d%2b0.106854672">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.518601781%20%2b0000%20UTC%20m%3d%2b0.115332629">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.518601781%20%2b0000%20UTC%20m%3d%2b0.115332629">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.518601781%20%2b0000%20UTC%20m%3d%2b0.115332629">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.584977502%20%2b0000%20UTC%20m%3d%2b0.106854672">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.518601781%20%2b0000%20UTC%20m%3d%2b0.115332629">
     
 
 
@@ -190,7 +190,7 @@
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ ptex2pdf -l example.tex
 </code></pre></div><h3 id="vscode-">VSCode の設定</h3>
 <p>拡張機能 LaTeX Workshop を使う。</p>
-<!-- raw HTML omitted -->
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/James-Yu/LaTeX-Workshop" data-iframely-url="//cdn.iframe.ly/Wze91sK"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>デフォルトの状態でもシンタックスハイライトやサジェストの機能が使えるが、 VSCode 内でコンパイルしたりするには <code>settings.json</code> にコンパイル用のコマンドを記入したりする必要がある。自分の場合は以下のように設定している。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#2aa198">&#34;latex-workshop.latex.tools&#34;</span>: [
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>    {
@@ -228,7 +228,7 @@
 <li>TeX からコンパイルした PDF を VSCode のタブで表示する</li>
 </ul>
 <p>これでこんな感じで PDF プレビューを見ながらレポートが書けるようになった。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/3b01c439a1899793741277dead1f3f5f"><img src="https://i.gyazo.com/3b01c439a1899793741277dead1f3f5f.png" alt="Image from Gyazo" width="1184"/></a></p>
 <p>左側のメニューに「TeX」アイコンも追加されるので、ここから各種コマンドを実行することもできる。コンパイルが上手くいかなかった場合はここから <code>Terminate current compilation</code> を実行すれば、コンパイルを一旦中止できる。</p>
 <h3 id="github-">GitHub での管理</h3>
 <p>TeX ファイルは GitHub のプライベートレポジトリで管理している。これはまぁ、普通に管理するだけなので難しいことはない。</p>

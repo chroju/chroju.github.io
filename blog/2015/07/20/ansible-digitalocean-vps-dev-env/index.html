@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.742085807%20%2b0000%20UTC%20m%3d%2b0.263962877">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.742085807%20%2b0000%20UTC%20m%3d%2b0.263962877">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.742085807%20%2b0000%20UTC%20m%3d%2b0.263962877">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.688414021%20%2b0000%20UTC%20m%3d%2b0.285144769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.688414021%20%2b0000%20UTC%20m%3d%2b0.285144769">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.688414021%20%2b0000%20UTC%20m%3d%2b0.285144769">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.742085807%20%2b0000%20UTC%20m%3d%2b0.263962877">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.688414021%20%2b0000%20UTC%20m%3d%2b0.285144769">
     
 
 
@@ -178,7 +178,7 @@
 </ul>
 <p>要するに使いたいときに使いたい環境をバチコンと作れちゃうというのが一番のメリットなので、今回のような永続的に使う開発環境より、一時的なテストなんかに使った方が良いのだと思う。とはいえ時間課金上限が月あたりで定められており、現状最安プランだと月5ドルが上限になっていたりもするので、永続的にマシンを上げておく分にも安いのは確か。なお、課金はイメージを作った時点で開始されるので、不要なマシンはhaltではなくdestroyしておく必要がある。まぁ無料のスナップショット機能もあるから、リカバリできると思えばdestroyしてしまうこともそこまで難しくはないかなと。</p>
 <p>REST API提供ということで、CLIから落としたり上げたり壊したりなんだりも全部できるのだが、だったらひょっとして誰かがアプリとか作ってんじゃねーかなと思ったら、やっぱりすでにあった。</p>
-<!-- raw HTML omitted -->
+<div class="bookmarklet bookmarklet-gp" itemscope itemtype="http://schema.org/MobileApplication" style="clear:both;min-height:165px;width:100%;max-width:468px;overflow:hidden;padding:12px;border:1px solid;border-color:#eaeaea #ddd #d0d0d0;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:5px;"><dl class="bookmarklet-gp-info" style="margin:0;"><dt class="bookmarklet-gp-title" style="border-bottom:1px solid;border-color:#eaeaea #ddd #d0d0d0;font-weight:bold;margin:0 0 .5em 0;padding:0 0 .5em 0;"><img alt="Google play" class="favicon" style="vertical-align:middle;border:0;" src="//ssl.gstatic.com/android/market_images/web/favicon.ico" /> <span itemprop="name">DigitalOcean Swimmer Android</span></dt><dd class="bookmarklet-gp-desc" style="font-size:.9em;margin:0;"><div class="bookmarklet-gp-thumb" style="float:left;"><img src="https://lh3.ggpht.com/HXBZyHdspPh5MFgaC-rOXAZIZc8D9uM4KrQsL-gqoB1_9ZuBhthaWYLRoYJYNUY9Ytg=w300" alt="DigitalOcean Swimmer Android" itemprop="image" style="height:120px;width:120px;max-width:100%;vertical-align:middle;border:0;margin:0 1em 0 0;"></div><div class="supplier" itemscope itemtype="http://schema.org/Organization">制作: <span itemprop="name">Hannoun Yassir</span></div><div class="review" itemtype="http://schema.org/AggregateRating" itemscope itemprop="aggregateRating">評価: <span itemprop="ratingValue">4.4</span> / 5段階中</div><div class="price" itemtype="http://schema.org/Offer" itemscope itemprop="offers">価格: <meta itemprop="price" content="0">無料<small> (2015/7/11 時点)</small><br /></div><a href="https://play.google.com/store/apps/details?id=com.yassirh.digitalocean&hl=ja" target="_blank" title="DigitalOcean Swimmer Android" itemprop="url" style="float:right;"><img src="//dl.dropboxusercontent.com/u/540358/ja_generic_rgb_wo_45.png" alt="ダウンロード" style="border:0;display:inline-block;height:auto;vertical-align: middle;"/></a><small>posted by: <a target="_blank" href="http://hayashikejinan.com/?p=818">AndroidHTML v3.1</a></small></dd></dl></div>
 <p>このアプリさえあればGUI操作はほぼ全部できる。</p>
 <p>ちなみにこんなことでハマる人はほとんどいないだろうと思うが、自分がハマったポイントとして<code>authorized_keys</code>の件がある。Digital OceanではあらかじめWeb GUIで公開鍵を上げておき、VPSをcreateするときに最初から任意の鍵を入れておくことができるのだが、当初は<code>root</code>以外のユーザーがいないため、当然ながら<code>authorized_keys</code>のパスも<code>/root/.ssh/</code>配下となる。構築用には別のユーザーを設けることになると思うが、その際には<code>authorized_keys</code>を<code>/home/user</code>配下へ持ってきて、アクセス権の適切な設定などもしなくてはssh接続できないので注意。</p>
 <h2 id="ansible">Ansibleによる初期構築</h2>
@@ -200,7 +200,7 @@
 <p><a href="https://github.com/chroju/ansible">chroju/ansible</a></p>
 <h2 id="ipadssh">iPadからのSSH接続</h2>
 <p>クライアントソフトがいろいろあるのは知っていたが、ここまでのレベルと思わんかったなーというのが<a href="https://panic.com/jp/prompt/">Prompt2</a>。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/chroju/19822940536" title="prompt_with_digitalocean"><img src="https://farm1.staticflickr.com/541/19822940536_5f6201ca53_z.jpg" width="640" height="480" alt="prompt_with_digitalocean"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
 <p>vim-lightlineもきちんと表示してくれるし日本語も可だし、外付けキーボードの煩わしささえ考慮しなければかなり快適である。当然ながら鍵認証も使えるし、ぶっちゃけWindowsのラップトップ持ち歩くぐらいならこっちの方がSSHはストレスないんじゃないかというぐらい。つないでちょこちょこっと使えればいいかなぐらいの思いだったが、嬉しい誤算だった。さすがに有料ではあるけど。</p>
 <p>おかげさまで場所を選ばず開発環境につながるようになったので、ちょっと試したいツールがTLに上がってきたりしたらおもむろにiPadを取り出して試したりとかできる。すぐ復元したいのであれば、先のAndroidアプリで予めスナップショットを取ったりもできるし、楽すぎて笑える。</p>
 

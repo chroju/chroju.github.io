@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.913229921%20%2b0000%20UTC%20m%3d%2b0.435106991">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.913229921%20%2b0000%20UTC%20m%3d%2b0.435106991">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.913229921%20%2b0000%20UTC%20m%3d%2b0.435106991">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.89561517%20%2b0000%20UTC%20m%3d%2b0.492345918">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.89561517%20%2b0000%20UTC%20m%3d%2b0.492345918">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.89561517%20%2b0000%20UTC%20m%3d%2b0.492345918">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.913229921%20%2b0000%20UTC%20m%3d%2b0.435106991">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.89561517%20%2b0000%20UTC%20m%3d%2b0.492345918">
     
 
 
@@ -169,8 +169,8 @@
                 <p>『RailsによるアジャイルWebアプリケーション開発』、大変くだらないところでつまずいているというか、なんか知らんがエラー出まくりで先に進めず。</p>
 <p>問題が起きたのはp.79。モデルクラスのrbファイルにvalidatesメソッドによる検証過程を書き入れ、test/functional/xxxに有効なテストデータ（とされるもの）を入れてrake testコマンドを発行したところ、エラーが出る。何度やってもエラーが出る。仕方ないので一旦先に進もうともしたのだが、次に編集対象になっていたtest/unitフォルダが見当たらない。念のため別プロジェクトを作ったりもしてみたが、やはりtest/unitは生成されなかった。さすがにディレクトリ構造丸ごと違うとなると、自分のミスというよりはバージョンの相違によるものではないかと思い至る。この本ではRubyの1.9.2とrails 3.1.0を使っていたが、僕の環境はRuby2.0とrails 4.0.0だった（もっと他にも「バージョンが原因ではないか？」と思い当たった根拠があったはずなのだが失念。トラブルシュートは記録しながらやるべきだったなー……）。</p>
 <p>というわけでRubyとrailsのバージョンを下げる。Rubyについてはrvmで管理しているので簡単に変更できたが、問題はrails。軽くググった感じでは、一度アンインストールしてから再度バージョン指定して入れなおせばよいという話だった。</p>
-<!-- raw HTML omitted -->
-<p>#gem install rails -v 3.1.0<!-- raw HTML omitted --></p>
+<blockquote>   #gem uninstall rails
+<p>#gem install rails -v 3.1.0</blockquote></p>
 <p>が、これだけで再びrake testを試すとまだエラー。Gemfile内のバージョン表記を変えろとのことだったので変更し、#bundle update。bundleについてはよくわかってないのでおいおい調べる予定。</p>
 <p>しかし、まだエラー。エラーというより、SECURITY WARNINGとやらが表示された。どうもrails過去バージョンの脆弱性に起因するらしい。こういった事例がいくつかあり、最終的にはRails 3.2.13まで上げざるを得なかった。</p>
 <p><a href="http://blog.popowa.com/2013/02/security-warning-no-secret-option.html">popowa: SECURITY WARNING: No secret option provided to Rack::Session::Cookie と出たら</a></p>

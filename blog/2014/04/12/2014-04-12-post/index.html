@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.887342603%20%2b0000%20UTC%20m%3d%2b0.409219773">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.887342603%20%2b0000%20UTC%20m%3d%2b0.409219773">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.887342603%20%2b0000%20UTC%20m%3d%2b0.409219773">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.863506062%20%2b0000%20UTC%20m%3d%2b0.460236910">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.863506062%20%2b0000%20UTC%20m%3d%2b0.460236910">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.863506062%20%2b0000%20UTC%20m%3d%2b0.460236910">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.887342603%20%2b0000%20UTC%20m%3d%2b0.409219773">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.863506062%20%2b0000%20UTC%20m%3d%2b0.460236910">
     
 
 
@@ -185,7 +185,7 @@
 <li>位置付けはステージング環境</li>
 </ul>
 <h2 id="capfile">Capfile</h2>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/10530780.js"></script>
 <p>ここはだいたい環境を問わず同じになってくる箇所。まず<code>capistrano/setup</code>と<code>capistrano/deploy</code>は<code>require</code>が必須。RailsをCapistranoで扱う場合は、<code>capistrano/bundler</code>から<code>capistrano/rails/assets</code>までも必須となる。rbenvを使っている場合は<code>capistrano/rbenv</code>が必要。rbenvをどこにインストールしたのかにより、<code>set :rbenv_type</code>を指定する。あとはデプロイするアプリケーションで使うRubyのバージョンも指定してやる。rvmを使う場合も似たような<code>capistrano/rvm</code>を使うみたいだが、そちらはよくわからんので割愛。</p>
 <p>で、ここまでがrequireということなので、デプロイ元サーバーにGemfile書いてインストールしておくことを忘れずに。</p>
 <pre><code>group :development do
@@ -197,7 +197,7 @@ end
 </code></pre><p>最終行は独自カスタムタスクを読み込むための行。デフォルトで入っているのでそのままにしておけばよい。先のunicorn.capのように、何か独自タスクを作った場合はこのパスに入れれば読み込むよーということでもある。</p>
 <p>なお、以前書いたエントリーでは<code>capistrano3/unicorn</code>も<code>require</code>していたのだが、これは撤回した。詳細はunicorn.capについて説明するときに後述。</p>
 <h2 id="stagingrb">staging.rb</h2>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/10530945.js"></script>
 <p>ステージング環境、というかデプロイ先環境の設定を書く。vagrantを使う場合はだいたいこれと同じように書いておけば通るんじゃないかと思う。Vagrantはデフォルトではvagrantユーザーによるsshが可能になっているので、それをそのまま使わせてもらっている。何か他のユーザーで入りたい場合などは頑張るしかない。</p>
 <p>一点だけ注意すべきは、<code>RAILS_ENV</code>がstagingに設定されるということ。Capistrano3では<code>cap install</code>を叩くとデフォルトでstaging.rbとproduction.rbが作られ、<code>RAILS_ENV</code>もこのファイル名に倣うことになるのだが、Railsの動作環境は通常test, development, productionの3種類であり、stagingは存在していない。従ってこのままデプロイを始めてもうまくはいかない。面倒であればstaging.rbは使わず、production.rbだけを使っていてもいいかもしれない。</p>
 <p>staging.rbを使う場合は、Rails側で環境の準備が必要になる。やることは大きく3つ。</p>
@@ -211,7 +211,7 @@ end
 <li>参考：<a href="http://spring-mt.tumblr.com/post/33209507135/rails-staging">railsでstaging環境を作る - CubicLouve</a></li>
 </ul>
 <h2 id="deployrb">deploy.rb</h2>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/10530987.js"></script>
 <p>いよいよデプロイ用の設定。面倒なので説明は省くが、だいたいはコメント読めば設定できるはず。</p>
 <p><code>linked_files</code>と<code>linked_dirs</code>は<a href="http://chroju89.hatenablog.jp/entry/2014/04/06/191336">前回のエントリー</a>で書いた通り、shared配下に置いているファイルやフォルダのうち、currentに必要となるものを指定することでシンボリックリンクを張ってくれるというものなのだが、ではshared配下にこれらファイルやフォルダはいつ作られるのか？というのがかねてから疑問だった。</p>
 <p>結論を言えば、<code>linked_files</code>は勝手には作成されない。というより、ここに指定したファイルがshared下に存在しない場合、Capistranoはデプロイ時にエラーを吐いてくる。正確に言えば<code>deploy:check:linked_files</code>というタスクがあり、ここで存在確認を行っている（<a href="https://github.com/capistrano/capistrano/blob/master/lib/capistrano/tasks/deploy.rake">参照</a>）。したがってこのタスクが投げられる前にファイルは別でアップロードしなくてはならない。ここではdetabase.ymlを指定しているので、アップロードタスクを独自で組み込んでいる。詳細は後述。</p>
@@ -224,7 +224,7 @@ end
 <p>3つ目はunicornを再起動するタスク。これはunicorn.capの中で作成した<code>unicorn:restart</code>というタスクを呼んでいる。</p>
 <p>最後の2行は独自タスクのルーチンへの組み込み。database.ymlのアップロードは真っ先にやらなくてはならないので、<code>deploy:starting</code>というデフォルトで言えば最初のタスクのさらに前に組み入れている。一方のunicorn再起動は<code>deploy:publishing</code>の後、ほぼすべてのタスクが終わったタイミング。</p>
 <h2 id="unicorncap">unicorn.cap</h2>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/10531064.js"></script>
 <p>ほぼほぼ以下エントリーの中身をそのまま使わせてもらいました。</p>
 <ul>
 <li>参照：<a href="http://qiita.com/satococoa/items/9b0cc416ffc042680b9b">unicorn + rails 用 Capistrano 3 の設定ファイル - Qiita</a></li>

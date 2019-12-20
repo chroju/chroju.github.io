@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.855525182%20%2b0000%20UTC%20m%3d%2b0.377402352">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.855525182%20%2b0000%20UTC%20m%3d%2b0.377402352">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.855525182%20%2b0000%20UTC%20m%3d%2b0.377402352">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.827676654%20%2b0000%20UTC%20m%3d%2b0.424407502">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.827676654%20%2b0000%20UTC%20m%3d%2b0.424407502">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.827676654%20%2b0000%20UTC%20m%3d%2b0.424407502">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.855525182%20%2b0000%20UTC%20m%3d%2b0.377402352">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.827676654%20%2b0000%20UTC%20m%3d%2b0.424407502">
     
 
 
@@ -171,7 +171,7 @@
 <h2 id="heading">エクスポートファイルの分割</h2>
 <p>はてなブログからエクスポートすると、最初は全記事が1ファイルに連なった状態で吐かれます。自分はMT使った経験ないんでわかりませんが、これは「そういうもの」と考えていいんですかね。一方のoctopressはエントリーごとに分割されているので、まずはこのエクスポートファイルを1記事ずつ分割してやらなくてはならない。あとヘッダの形式も微妙に両者で異なるので、ここの変換も必要。</p>
 <p>なんか変換ツール落ちてないかなと堕落した感じで探しまわってたら、一応ありました。</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/railsbros-dirk/2351046.js"></script>
 <p>名前がMT to Markdownなので完全にMarkdownへ変換してくれるものかと期待したのだけど、実際やってくれるのは先ほど挙げた「分割」と「ヘッダの書き換え」程度です。中身はHTMLタグのまま。一方で自分の環境だと<code>&lt;</code>が<code>&amp;lt;</code>に変わってしまうといった副作用もあり。あと元のヘッダにあったBASENAMEだとかCONVERT BREAKSといった文字列がそのまま本文内に残ってたり。。。ちょっと謎。ただ、変換が楽になるのは確か。</p>
 <h2 id="vim">vimによる置換</h2>
 <p>スクリプト力弱いので、あとはvimによる力技です。今回初めて複数ファイルを一挙にvimで扱うってやったけど、便利ですね。</p>

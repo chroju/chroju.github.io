@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.898644971%20%2b0000%20UTC%20m%3d%2b0.495375819">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.898644971%20%2b0000%20UTC%20m%3d%2b0.495375819">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.898644971%20%2b0000%20UTC%20m%3d%2b0.495375819">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.914926622%20%2b0000%20UTC%20m%3d%2b0.436803792">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.898644971%20%2b0000%20UTC%20m%3d%2b0.495375819">
     
 
 
@@ -169,8 +169,8 @@
                 <p>2週間ぐらいハマってた。</p>
 <p>プレーンテキストの管理やRuby書くときとかにKaoriya版MacVimを使っているのだが、.vimrcでset textwidth=0を設定しているにも関わらず、txtファイルのみ自動改行が解除できなくて困っていた。最近QFix_howmをよく使うようになっていて、機能としては申し分なかったんだけど、まったく関係ないこの一点のためにイライラしっぱなしだった。</p>
 <p>で、結論。Kaoriya版Vimのデフォルト設定により、textwidthが上書かれてしまうらしい。</p>
-<!-- raw HTML omitted -->
-<p><a href="http://d.hatena.ne.jp/WK6/20120606/1338993826">Vimのtextwidth設定と.vimrc - 続・日々の雑感</a><!-- raw HTML omitted --></p>
+<blockquote>Kaoriya版Vimではデフォルトの設定ファイルであるvimrc_example.vimを読み込んでおり、その設定ファイル内でテキストファイルを開いたときにtextwidth=78の設定が上書きされてしまうらしい。
+<p><a href="http://d.hatena.ne.jp/WK6/20120606/1338993826">Vimのtextwidth設定と.vimrc - 続・日々の雑感</a></blockquote></p>
 <p>なので引用元の記事にもある通り、.vimrcに以下を挿入すればおｋ。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>&lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;autocmd&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synType&#34;&gt;FileType&lt;/</span>span&gt; text &lt;span class=<span style="color:#2aa198">&#34;synStatement&#34;</span>&gt;setlocal&lt;<span style="color:#dc322f">/span&gt; &lt;span class=&#34;synPreProc&#34;&gt;textwidth&lt;/</span>span&gt;=<span style="color:#2aa198">0</span>
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>

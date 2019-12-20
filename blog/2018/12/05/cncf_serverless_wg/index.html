@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-18%2013%3a25%3a46.647524444%20%2b0000%20UTC%20m%3d%2b0.169401614">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-18%2013%3a25%3a46.647524444%20%2b0000%20UTC%20m%3d%2b0.169401614">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-18%2013%3a25%3a46.647524444%20%2b0000%20UTC%20m%3d%2b0.169401614">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-20%2023%3a43%3a42.579058995%20%2b0000%20UTC%20m%3d%2b0.175789743">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-20%2023%3a43%3a42.579058995%20%2b0000%20UTC%20m%3d%2b0.175789743">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-20%2023%3a43%3a42.579058995%20%2b0000%20UTC%20m%3d%2b0.175789743">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-18%2013%3a25%3a46.647524444%20%2b0000%20UTC%20m%3d%2b0.169401614">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-20%2023%3a43%3a42.579058995%20%2b0000%20UTC%20m%3d%2b0.175789743">
     
 
 
@@ -183,9 +183,9 @@
 <p>実際に資料を見ると、あまり国内では耳にしないサービス、プロダクトも数多くあります。例えば「Platform」には AWS Lambda, Azure Function, netlify といったお馴染みのクラウドサービスや、 &ldquo;Installable&rdquo; な OpenFaaS や Kubeless などが並んでいますが、ここに連なっている Huawei Function Stage にはなかなかピンと来なかったりします。知らないものをたまに拾っては少し触ったり調べたりしてます。</p>
 <h3 id="example-dashbird">example: Dashbird</h3>
 <p>一例として、最近ここで見つけて使ってみたサービスに <a href="https://dashbird.io/">Dashbird</a> があります。 AWS X-Ray や CloudWatch と連携して、 Lambda や API Gateway の見やすいダッシュボードを作ってくれるシンプルなサービスです。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/c20fabd4ac3f332c32b8d3732a80ec37"><img src="https://i.gyazo.com/c20fabd4ac3f332c32b8d3732a80ec37.png" alt="Image from Gyazo" width="2856"/></a></p>
 <p>Lambda Function の一覧画面にはリージョンを問わずすべての Function が掲載され、24時間以内の実行状態が確認できます。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="https://gyazo.com/a1f00d750221985c552d870baaf1adc5"><img src="https://i.gyazo.com/a1f00d750221985c552d870baaf1adc5.png" alt="Image from Gyazo" width="1513"/></a></p>
 <p>個々の Lambda Function の詳細では実行時間やメモリ使用率のグラフ、また直近実行履歴において、それが cold start だったかどうかといった点まで一覧できて、結構使い勝手が良さそうだと感じています。ほかにも特定の Function を指定して、 tail コマンドのようにリアルタイムで実行ログを追う機能があったり、 slack へのアラート機能もあったり、およそダッシュボードに求められる機能はそれなりに揃っている印象です。カスタマイズ性は高くないものの、 Lambda を駆使して作った環境をサクッと監視したいときに使うにはアリかなと思っています。</p>
 <h2 id="heading">仕様の検討</h2>
 <p>サーバーレスコンピューティングにベンダーロックインという問題は付き物のように思われていますが、 Serverless WG ではこれを解消する一助となる、共通仕様の検討も行われています。現状形になってきているものとしては、サーバーレスなりソースがやり取りする「イベント」の記述形式を共通化する CloudEvents が上げられます。</p>
