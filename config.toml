@@ -54,3 +54,6 @@ twitter                = "//twitter.com/chroju"
 avatar                 = "img/avatar.png" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
 # gravatar             = ""                # gravatar hash. see https://en.gravatar.com/site/implement/hash/. do not use in the same time as avatar
 
+[markup.goldmark.renderer]
+  unsafe = true
+
