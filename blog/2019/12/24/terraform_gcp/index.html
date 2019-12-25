@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="Terraform はずっとほぼ AWS でしか使っていなくて、最近 GCP で使い始めたところ結構使い勝手が違って驚いている。その中でも公式提供されている Terraform modules がかなり良くて">
+
+<meta property="og:title" content="GCP 公開の Terraform modules から module による効果的な抽象化を学ぶ" />
+<meta property="og:description" content="Terraform はずっとほぼ AWS でしか使っていなくて、最近 GCP で使い始めたところ結構使い勝手が違って驚いている。その中でも公式提供されている Terraform modules がかなり良くて" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2019/12/24/terraform_gcp/" />
+<meta property="article:published_time" content="2019-12-24T19:16:59+09:00" />
+<meta property="article:modified_time" content="2019-12-24T19:16:59+09:00" />
+
+
+<title>
+
+
+     GCP 公開の Terraform modules から module による効果的な抽象化を学ぶ &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2019/12/24/terraform_gcp/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2019-12-25%2005%3a39%3a30.494224798%20%2b0000%20UTC%20m%3d%2b0.066030757">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2019-12-25%2005%3a39%3a30.494224798%20%2b0000%20UTC%20m%3d%2b0.066030757">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2019-12-25%2005%3a39%3a30.494224798%20%2b0000%20UTC%20m%3d%2b0.066030757">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2019-12-25%2005%3a39%3a30.494224798%20%2b0000%20UTC%20m%3d%2b0.066030757">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    GCP 公開の Terraform modules から module による効果的な抽象化を学ぶ
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Dec 24 2019 19:16:59 JST'>Dec 24, 2019</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Terraform はずっとほぼ AWS でしか使っていなくて、最近 GCP で使い始めたところ結構使い勝手が違って驚いている。その中でも公式提供されている Terraform modules がかなり良くて、 GCP 使わない人でも参考になるので紹介してみる。</p>
+<h2 id="terraform-modules-for-google-cloud">Terraform modules for Google Cloud</h2>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/terraform-google-modules" data-iframely-url="//cdn.iframe.ly/l2qMnlK"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>上記 GitHub Organization にて、現時点で 64 の module が公開されている。 Organization のメンバーを見ると GCP に属している方が多いので、どうも Google 公認で提供されているものらしい。 AWS にも <a href="https://github.com/terraform-aws-modules">Terraform AWS modules</a> という Organization があるが、こちらは見る限り AWS 関係者ではなく有志による提供となっている。昨今のアレじゃないけど、 Google のほうが OSS コミュニティと良い関係を築こうという意思が見て取れるなぁという気がしなくもない。</p>
+<p>公開されている module はいろいろあるが、一例として IAM に関して見てみる。 GCP の IAM に関する Terraform resources は <a href="https://www.terraform.io/docs/providers/google/r/google_project_iam.html">Google: google_project_iam - Terraform by HashiCorp</a> で触れられている通り、何種類かのものが存在するのだが、ざっくり以下2種類に気を付ける必要がある。</p>
+<ul>
+<li><code>google_project_iam_member</code> : Role とメンバーを1対1で紐つける</li>
+<li><code>google_project_iam_binding</code> : ある Role と紐付くメンバーすべてを管理する</li>
+</ul>
+<p>GCP ではあらかじめ複数の権限が割り当てられた Role というものが存在し（ AWS のマネージドポリシーみたいなものと考えればいいかもしれない）、これとメンバーを紐つけて権限の割り当てを行う。前者の <code>member</code> は1対1対応しか作れないので、ある Role に複数のメンバーを結びつけたい場合（が大半だと思うが）はちょっと不便だ。しかし一方で <code>binding</code> はある Role と紐付く <strong>すべての</strong> メンバーを管理する。そのため Terraform を apply する前に、すでに Role と紐ついたメンバーがいて、 Terraform 内ではそのメンバーを宣言していなかった場合、 <code>apply</code> 時に除外されてしまうことになるので注意が必要となる。</p>
+<p>という、それぞれ一長一短ある resource をうまいこと使い分けなくてはならないのだが、 GCP が module で解決策を提示してくれている。 <a href="https://github.com/terraform-google-modules/terraform-google-iam/tree/master/modules/projects_iam">terraform-google-iam/modules/projects_iam at master · terraform-google-modules/terraform-google-iam</a> からサンプルを引用する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">module</span> <span style="color:#2aa198">&#34;project-iam-bindings&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  source   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;terraform-google-modules/iam/google//modules/projects_iam&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  projects <span style="color:#719e07">=</span> [<span style="color:#2aa198">&#34;my-project_one&#34;, &#34;my-project_two&#34;</span>]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  mode     <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;additive&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  bindings <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>    &#34;roles/compute.networkAdmin&#34; <span style="color:#719e07">=</span> [
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>      <span style="color:#2aa198">&#34;serviceAccount:my-sa@my-project.iam.gserviceaccount.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>      <span style="color:#2aa198">&#34;group:my-group@my-org.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>      <span style="color:#2aa198">&#34;user:my-user@my-org.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    ]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    &#34;roles/appengine.appAdmin&#34; <span style="color:#719e07">=</span> [
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>      <span style="color:#2aa198">&#34;serviceAccount:my-sa@my-project.iam.gserviceaccount.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>      <span style="color:#2aa198">&#34;group:my-group@my-org.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>      <span style="color:#2aa198">&#34;user:my-user@my-org.com&#34;</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>    ]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>}
+</code></pre></div><p>2つの resource の使い分けを気にする必要はなく、 <code>bindings</code> 変数に role と members の1対多のリストを渡せばいいだけ。既存の紐付きを置き換える ( <code>authoritative</code> ) のか、既存のものは触らず新たな紐付きを追加する ( <code>additive</code> ) のかは <code>mode</code> 変数で指定ができ、さらにデフォルトは安全側に倒れて <code>additive</code> となっている。だいぶ使いやすく抽象化されていると言っていい。</p>
+<p>抽象化のロジックを見てみる。呼び出している <a href="https://github.com/terraform-google-modules/terraform-google-iam/blob/master/modules/projects_iam/main.tf">module</a> 自体はわりと簡素な内容になっている。というのも、見ればわかるのだが、ロジック部分を <code>helper</code> という別の module に飛ばしているからだ。ここではほぼ resource 作成だけが行われている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">module</span> <span style="color:#2aa198">&#34;helper&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  source   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;../helper&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  bindings <span style="color:#719e07">=</span> <span style="color:#719e07">var</span>.<span style="color:#719e07">bindings</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  mode     <span style="color:#719e07">=</span> <span style="color:#719e07">var</span>.<span style="color:#719e07">mode</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  entity   <span style="color:#719e07">=</span> <span style="color:#719e07">var</span>.<span style="color:#719e07">project</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  entities <span style="color:#719e07">=</span> <span style="color:#719e07">var</span>.<span style="color:#719e07">projects</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;google_project_iam_binding&#34; &#34;project_iam_authoritative&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  for_each <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">set_authoritative</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  project  <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_authoritative</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">name</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  role     <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_authoritative</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">role</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>  members  <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_authoritative</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">members</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;google_project_iam_member&#34; &#34;project_iam_additive&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>  for_each <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">set_additive</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>  project  <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_additive</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">name</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>  role     <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_additive</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">role</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>  member   <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">helper</span>.<span style="color:#719e07">bindings_additive</span>[<span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>].<span style="color:#719e07">member</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>}
+</code></pre></div><p>使っている resource は、やはり先程見た <code>iam_binding</code> と <code>iam_member</code> の2つだ。それぞれ <code>for_each</code> が使われていることから、変数 <code>bindings</code> で指定された role と members と project あたりをいい感じに list に変換して、選択された mode に応じて <code>module.helper.set_authoritative</code> か <code>module.helper.set_additive</code> に代入しているのだろうと想像がつく。代入されていないほうの変数は空のリストになるので、 resource の作成は行われない。</p>
+<p>実際に <a href="https://github.com/terraform-google-modules/terraform-google-iam/blob/master/modules/helper/main.tf">helper</a> を覗いてみると、確かにそのようなロジックになっている。 <code>module.helper.set_authoritative</code> について追ってみる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>  set_authoritative <span style="color:#719e07">=</span> (
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    <span style="color:#719e07">local</span>.<span style="color:#719e07">authoritative</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    ? <span style="color:#719e07">toset</span>(<span style="color:#719e07">local</span>.<span style="color:#719e07">keys_authoritative</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>    : []
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  )
+</code></pre></div><p><code>local.authoritative</code> による三項演算子だ。 <code>local.authoritative</code> は先の <code>mode</code> が <code>authoritative</code> だった場合にのみ値が代入されるようになっており、 やはり <code>authoritative</code> を指定した場合に限り、 <code>set_authoritative</code> にリストが代入されているとわかる。そして代入される値は、 <code>keys_authoritative</code> を set に変換したものとなっている。では <code>keys_authoritative</code> とは何か。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>  keys_authoritative <span style="color:#719e07">=</span> <span style="color:#719e07">distinct</span>(<span style="color:#719e07">flatten</span>([
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    <span style="color:#719e07">for</span> <span style="color:#719e07">alias</span> <span style="color:#719e07">in</span> <span style="color:#719e07">local</span>.<span style="color:#719e07">aliased_entities</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    : [
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>      <span style="color:#719e07">for</span> <span style="color:#719e07">role</span> <span style="color:#719e07">in</span> <span style="color:#719e07">keys</span>(<span style="color:#719e07">var</span>.<span style="color:#719e07">bindings</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>      : <span style="color:#2aa198">&#34;${alias}--${role}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>    ]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>  ]))
+</code></pre></div><p><code>local.aliased_entities</code> は project のリストと思ってよい。二重ループになっているため少しわかりづらいが、各 project ごとに <code>bindings</code> から keys, すなわち <code>role</code> の値を取り出し、 project 名と繋げた文字列の配列を作っている。前述したサンプルのように、 projects と role をそれぞれ2つずつ指定している場合であれば、 2 × 2 で長さ4の配列が作られることになるわけだ。 <code>helper</code> の別のところでは、この4つの project - role それぞれに紐つけるべきメンバーのリストが生成されている。最終的に <code>for_each</code> のループによって、これらを組み合わせて <code>iam_binding</code> が生成されている。</p>
+<p>ここではざっくりと GCP Terraform modules の中身を見てみたが、これ以外にも非常に多くの Terraform functions を上手く使って抽象化を試みている。コメントも多く盛り込まれていて読みやすいので、各 functions はどういう場面でどのように活用できるのか、とても参考になる。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Terraform provider はその仕組み上、各クラウドサービスの API サービスをそのまま愚直に変換したものであり、 API の仕様を把握していなければ上手く扱えないこともある。しかし我々が欲しているのはクラウドリソースのコード化という点のみであり、 API の仕様を細部まで常に気にしなくてはならない、という状況は歓迎したくない。 GCP の modules はそういった低レイヤーな知識がなくとも、簡潔な記載でクラウドリソースを使えるようにしてくれているものが多い。 Terraform modules を作るとき、単に組織内でのデフォルト値を埋め込んでいるだけ、のような使い方になってしまうことも少なくないと思うが、 GCP のそれは「抽象化」という観点で module を作る上で、大きなヒントになりそう。</p>
+<h2 id="appendix-gcp-with-terraform-">Appendix: GCP with Terraform 所感</h2>
+<p>おまけで、 Terraform で GCP を扱うときに、 AWS を扱うときとこのへんが感覚違うなーと思う点をいくつか。</p>
+<ul>
+<li>認証に JSON が必要なのはちょっと面倒。</li>
+<li>個々のユーザーでは credential json 吐き出せなくてサービスアカウントが必要なのも面倒。</li>
+<li>でも複数の project に横断的にリソースを作るのは AWS マルチアカウントより遥かに楽ですごい。</li>
+<li>各 resource とも attibute references ( outputs で出力できるやつ) がちょっと少なめな印象を受ける。</li>
+<li>一部 resoruce はドキュメントから直接 Cloud Shell で実践できるボタンがあって強い。
+<ul>
+<li><a href="https://www.terraform.io/docs/providers/google/r/dns_managed_zone.html">https://www.terraform.io/docs/providers/google/r/dns_managed_zone.html</a> とか。</li>
+</ul>
+</li>
+</ul>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
