@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 24 Dec 2019 19:16:59 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 30 Dec 2019 14:36:57 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2019年総括</title>
+      <link>https://chroju.github.io/blog/2019/12/30/looking_back_2019/</link>
+      <pubDate>Mon, 30 Dec 2019 14:36:57 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2019/12/30/looking_back_2019/</guid>
+      <description>総括エントリー5年目。 2015 2016 2017 2018 昨年の総括は「定量評価してみる」という話を書いていて、でも今見ると定量評価というよりはやったことの単なる羅列み</description>
+    </item>
     
     <item>
       <title>GCP 公開の Terraform modules から module による効果的な抽象化を学ぶ</title>
