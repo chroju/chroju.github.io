@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 30 Dec 2019 14:36:57 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jan 2020 18:48:26 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>プライベートにも OKR を取り入れてフォーカスする</title>
+      <link>https://chroju.github.io/blog/2020/01/13/okr_in_private/</link>
+      <pubDate>Mon, 13 Jan 2020 18:48:26 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/01/13/okr_in_private/</guid>
+      <description>前回のエントリー 2019年総括 · the world as code で少し触れた「個人OKRの導入」について書く。年始だし目標の話を書くのはちょうど良さそうでもある。 個</description>
+    </item>
     
     <item>
       <title>2019年総括</title>
