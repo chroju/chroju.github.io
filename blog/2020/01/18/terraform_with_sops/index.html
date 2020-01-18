@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="Terraform を使う上での長年の悩みとして、秘匿情報 (secrets) をどう扱うべきかというものがある。例えば AWS Secrets Manager への secrets の登録を Terraform で行うとして、 tf file には平文で secrets を書き">
+
+<meta property="og:title" content="Terraform の秘匿情報を mozilla/sops で管理する" />
+<meta property="og:description" content="Terraform を使う上での長年の悩みとして、秘匿情報 (secrets) をどう扱うべきかというものがある。例えば AWS Secrets Manager への secrets の登録を Terraform で行うとして、 tf file には平文で secrets を書き" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2020/01/18/terraform_with_sops/" />
+<meta property="article:published_time" content="2020-01-18T13:17:06+09:00" />
+<meta property="article:modified_time" content="2020-01-18T13:17:06+09:00" />
+
+
+<title>
+
+
+     Terraform の秘匿情報を mozilla/sops で管理する &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2020/01/18/terraform_with_sops/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-01-18%2005%3a42%3a42.226095425%20%2b0000%20UTC%20m%3d%2b0.079513756">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-01-18%2005%3a42%3a42.226095425%20%2b0000%20UTC%20m%3d%2b0.079513756">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-01-18%2005%3a42%3a42.226095425%20%2b0000%20UTC%20m%3d%2b0.079513756">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-01-18%2005%3a42%3a42.226095425%20%2b0000%20UTC%20m%3d%2b0.079513756">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Terraform の秘匿情報を mozilla/sops で管理する
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Jan 18 2020 13:17:06 JST'>Jan 18, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Terraform を使う上での長年の悩みとして、秘匿情報 (secrets) をどう扱うべきかというものがある。例えば AWS Secrets Manager への secrets の登録を Terraform で行うとして、 tf file には平文で secrets を書き記すことになってしまう。これをそのまま Git repository に commit するのは当然ながらよろしくない。</p>
+<p>いろんな Terraform ユーザーに話を聞いたりしてもなかなか解決しなかったこの問題だが、ようやく決定版と言えそうな解決策として <a href="https://github.com/mozilla/sops">mozilla/sops</a> を使う方法を見つけた。</p>
+<h2 id="sops">SOPS</h2>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/mozilla/sops" data-iframely-url="//cdn.iframe.ly/Uy7gztd"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>Secrets OPerationS の略らしい。 YAML や JSON など Key/Value 形式の設定ファイルにおいて、 Value の箇所だけを暗号化できるコマンドラインツールである。 homebrew でインストールできる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ brew install sops
+</code></pre></div><p>暗号化にあたり、まず鍵を指定しておく必要がある。鍵は AWS KMS や GCP KMS などの各種クラウドサービスの暗号化サービスに対応していて、環境変数で使うキーを指定する。鍵がファイルだったり手入力のパスフレーズだったりすると扱いに困りがちだが、クラウドの KMS であればキーへのアクセス権を適切に管理するだけでいいので、これは嬉しいポイント。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ <span style="color:#b58900">export</span> <span style="color:#268bd2">SOPS_KMS_ARN</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;arn:aws:kms:ap-northeast-1:999999999999:key/XXXXXXXX-XXXX-XXXX-bd50-ac0ec6d03d63&#39;</span>
+</code></pre></div><p>新しく暗号化したファイルを作る場合は、 <code>sops</code> コマンドに secret を保存するファイル名を引数として与えて実行する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ sops secrets.yaml
+</code></pre></div><p>すると、そのファイルの編集画面が <code>$EDITOR</code> で開く。ファイル名の拡張子からファイル形式が自動的に判断されて、以下のようにサンプルが表示される。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>hello: Welcome to SOPS! Edit this file as you please!
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>example_key: example_value
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#586e75"># Example comment</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>example_array:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>- example_value1
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>- example_value2
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>example_number: <span style="color:#2aa198">1234.5679</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>example_booleans:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>- <span style="color:#cb4b16">true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>- <span style="color:#cb4b16">false</span>
+</code></pre></div><p>別にこのサンプルを踏襲する必要はまったくなくて、すべて消して好きなように内容は書いてよい。そしてファイルを保存したタイミングで、 value 部分に暗号化が施される。例えば以下のような YAML を書く。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>db_user: user
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>db_password: password
+</code></pre></div><p>これを保存後に <code>cat</code> してみると以下の通り。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>db_user: ENC[AES256_GCM,data:vioDUg==,iv:j7O4xlHMcfb6DzY0ptSa38tkeCFKy2e8qVGwTCG3M8k=,tag:qqcothINK6OKhJb/3jvuxw==,type:str]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>db_password: ENC[AES256_GCM,data:vCo7u6AggyU=,iv:3y90FXchrZfXQ7b6JGfVJABdxk5r+mIezTf9jb19VdM=,tag:3Gq5IrDeJiz46snahFn4Og==,type:str]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>sops:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>    kms:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>    <span style="color:#2aa198">-  </span><span style="color:#2aa198"> </span><span style="color:#2aa198">arn: arn:aws:kms:ap-northeast-1:999999999999:key/XXXXXXXX-XXXX-XXXX-bd50-ac0ec6d03d63</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>        created_at: <span style="color:#2aa198">&#39;2020-01-17T14:04:58Z&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>        enc: AQICAHgIueX8MsuSyX/hToTAJGoN2l3ZRsFfBaJMo5aNEN6CPAG4Y2Bo1oWyGA+enYwwsaa+AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMbbKFmXXsd1DuWI/5AgEQgDt7SbVbUUD4rsLO1mNC0MdCU5kXZt0qrL/SrCIwGWLUwFO8jYlJrgZFlOY2jKL1ODMXjfvUiM6YsQOqVw==
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>        aws_profile: <span style="color:#2aa198">&#34;&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    gcp_kms: []
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>    azure_kv: []
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>    lastmodified: <span style="color:#2aa198">&#39;2020-01-18T04:48:01Z&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>    mac: ENC[AES256_GCM,data:2Rf0IgpyGXJxWCtFDn7Fl1Gv4qPMN9IXuWt+w71Iu9ngFBp4URSDCSthyxbXtt8jhiTl4IgvLkv0lyYAGa/dM+l/2OcR3LeZldv4oR3cm6LjErwKD8O65Lh7Z9J+LR/TmS7E4I0lN+JhePn8qrIGjL4x3J16mD45I2dNtlAoRus=,iv:HEttY0FACDix5plof0mP4B2lkikPcKiLEVSt7dqpql0=,tag:ZZR7witKJgZS/jf5rprXeQ==,type:str]
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>    pgp: []
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>    unencrypted_suffix: _unencrypted
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>    version: <span style="color:#2aa198">3.5</span><span style="color:#2aa198">.0</span>
+</code></pre></div><p>最初の2行の通り、確かに暗号化が施されている。 <code>sops:</code> 以下は sops が付加するメタ情報で、見ると暗号化に使ったキーの ARN が埋め込まれている。復号には <code>sops -d filename</code> コマンドを使うが、このときは環境変数ではなくてこの YAML 内の ARN の指示先が復号キーとして扱われる。なのでチームメンバー内でこのファイルを共有するのであれば、該当のキーに対するアクセス権限をそれぞれが保持さえしていれば、容易に復号することができる。 ARN が割れたところで何かクラックできるわけではないので、この状態のファイルであればパブリックレポジトリに入れても良さそうな気もするのだが、気になるのであればプライベートレポジトリで commit しておけばいい。</p>
+<p>なおこのファイルに対して再度 <code>sops filename</code> コマンドを使うと、複合した状態で YAML を再編集できる。編集後は編集した箇所と、メタ情報の一部だけが書き換わるので、 <code>git diff</code> で差分を見るときもわかりやすい。</p>
+<h2 id="terraform-provider-sops">terraform-provider-sops</h2>
+<p>本題の sops を使った Terraform での秘匿値管理だが、残念ながら HCL を直接暗号化することには対応していない。しかし community provider として terraform-provider-sops がありがたいことに存在している。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/carlpett/terraform-provider-sops" data-iframely-url="//cdn.iframe.ly/6WxGX58"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>これは data source として、 sops で暗号化されたファイルからの値読み込みを提供してくれる provider だ。先の <code>db_user</code> と <code>db_password</code> を書き入れた <code>secrets.yaml</code> を作成した状態で、同じディレクトリに以下のような <code>sample.tf</code> を作成してみる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">provider</span> <span style="color:#2aa198">&#34;sops&#34;</span> {}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">provider</span> <span style="color:#2aa198">&#34;aws&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  version <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;~&gt; 2.0&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  region  <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;ap-northeast-1&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#719e07">data</span> <span style="color:#2aa198">&#34;sops_file&#34; &#34;secrets&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  source_file <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;secrets.yaml&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;aws_ssm_parameter&#34; &#34;sensitive&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>  for_each <span style="color:#719e07">=</span> <span style="color:#719e07">data</span>.<span style="color:#719e07">sops_file</span>.<span style="color:#719e07">secrets</span>.<span style="color:#719e07">data</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>  type     <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;String&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>  name     <span style="color:#719e07">=</span> <span style="color:#719e07">each</span>.<span style="color:#719e07">key</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>  value    <span style="color:#719e07">=</span> <span style="color:#719e07">each</span>.<span style="color:#719e07">value</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>}
+</code></pre></div><p>すると <code>terraform plan</code> の結果は以下の通りになる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>  <span style="color:#586e75"># aws_ssm_parameter.sensitive[&#34;db_password&#34;] will be created</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  + resource <span style="color:#2aa198">&#34;aws_ssm_parameter&#34;</span> <span style="color:#2aa198">&#34;sensitive&#34;</span> <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>      + <span style="color:#268bd2">arn</span>    <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>      + <span style="color:#268bd2">id</span>     <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>      + <span style="color:#268bd2">key_id</span> <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>      + <span style="color:#268bd2">name</span>   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;db_password&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>      + <span style="color:#b58900">type</span>   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;String&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>      + <span style="color:#268bd2">value</span>  <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>sensitive value<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    <span style="color:#719e07">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>  <span style="color:#586e75"># aws_ssm_parameter.sensitive[&#34;db_user&#34;] will be created</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  + resource <span style="color:#2aa198">&#34;aws_ssm_parameter&#34;</span> <span style="color:#2aa198">&#34;sensitive&#34;</span> <span style="color:#719e07">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>      + <span style="color:#268bd2">arn</span>    <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>      + <span style="color:#268bd2">id</span>     <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>      + <span style="color:#268bd2">key_id</span> <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>known after apply<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>      + <span style="color:#268bd2">name</span>   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;db_user&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>      + <span style="color:#b58900">type</span>   <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;String&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>      + <span style="color:#268bd2">value</span>  <span style="color:#719e07">=</span> <span style="color:#719e07">(</span>sensitive value<span style="color:#719e07">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>    <span style="color:#719e07">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>Plan: <span style="color:#2aa198">2</span> to add, <span style="color:#2aa198">0</span> to change, <span style="color:#2aa198">0</span> to destroy.
+</code></pre></div><p>普段の Terraform の使い勝手とほぼ変わらず、簡単に秘匿値を取り扱うことができてこれはうれしい。普通に tf file を書き、秘匿したい値だけは YAML へ切り出して sops で暗号化し、一緒に git commit してしまえば管理は簡単そうだ。</p>
+<h3 id="terraform-cloud-">Terraform Cloud での活用</h3>
+<p>sops の暗号化を AWS KMS key で行い、 aws provider を併用している場合について、Terraform Cloud 上でも正常に復号可能か試してみた。</p>
+<p>結論から言えば復号できたのだが、若干動作が腑に落ちていない。 Terraform Cloud で aws provider を使う場合、 provider を以下のように記述して、 Terraform Cloud 側で API キーを <code>AWS_ACCESS_KEY</code> と <code>AWS_SECRET_KEY</code> の2変数に設定する形が一般的かと思う。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">provider</span> <span style="color:#2aa198">&#34;aws&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  version <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;~&gt; 2.0&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>  region  <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;ap-northeast-1&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  access_key <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.AWS_ACCESS_KEY}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>  secret_key <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;${var.AWS_SECRET_KEY}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>}
+</code></pre></div><p>どういうわけだが、ここで設定した API キーはあくまで aws provider でしか読み込まれない気がするのだが、そのキーに KMS の復号権限があれば、 sops の復号も動作した。設定が楽で助かるのは助かるが、どうしてこれで動くのかがよくわかっていない。気が向いたら深堀りしておきたい。</p>
+<p>なお Terraform Cloud で community provider （GitHub の <a href="https://github.com/terraform-providers">Terraform Providers org</a> で管理されていない provider）を使うときは、あらかじめ Git repository 内の <code>terraform.d/plugins/linux_amd64</code> 配下に provider のバイナリを含めておく必要があり、少々面倒。このことについては <a href="https://www.terraform.io/docs/cloud/run/install-software.html#custom-and-community-providers">Installing Software in the Run Environment - Runs - Terraform Cloud - Terraform by HashiCorp</a> に記載されており、将来的にはより良い方法を提供したいとも書かれているので期待したいところ。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>本当にずっと悩まされてきた課題をスマートな形で解決できてものすごいテンションが上がっている。実はもともと Kubernetes の secrets 管理の方法を調べる中で見つけたツールで、「これは Terraform にも活用できるのでは？」と調べてみたところ、なんと provider を作ってくれている人がいると気付いた、という形の出会いだった。1月から今年は幸先が良さそう。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
