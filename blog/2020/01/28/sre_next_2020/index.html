@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="SRE NEXT 2020 に行ってきた。 SRE という職種が国内で広まったきっかけは インフラチーム改め Site Reliability Engineering (SRE) チームになりました - Mercari Engineering Blog のエントリーだと思っているのだ">
+
+<meta property="og:title" content="SRE NEXT 2020 に行ってきた" />
+<meta property="og:description" content="SRE NEXT 2020 に行ってきた。 SRE という職種が国内で広まったきっかけは インフラチーム改め Site Reliability Engineering (SRE) チームになりました - Mercari Engineering Blog のエントリーだと思っているのだ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2020/01/28/sre_next_2020/" />
+<meta property="article:published_time" content="2020-01-28T00:21:52+09:00" />
+<meta property="article:modified_time" content="2020-01-28T00:21:52+09:00" />
+
+
+<title>
+
+
+     SRE NEXT 2020 に行ってきた &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2020/01/28/sre_next_2020/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-01-27%2015%3a22%3a38.997380245%20%2b0000%20UTC%20m%3d%2b0.061115093">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-01-27%2015%3a22%3a38.997380245%20%2b0000%20UTC%20m%3d%2b0.061115093">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-01-27%2015%3a22%3a38.997380245%20%2b0000%20UTC%20m%3d%2b0.061115093">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-01-27%2015%3a22%3a38.997380245%20%2b0000%20UTC%20m%3d%2b0.061115093">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    SRE NEXT 2020 に行ってきた
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Tue Jan 28 2020 00:21:52 JST'>Jan 28, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://sre-next.dev" data-iframely-url="//cdn.iframe.ly/uyH2l2H"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>SRE NEXT 2020 に行ってきた。</p>
+<p>SRE という職種が国内で広まったきっかけは <a href="https://tech.mercari.com/entry/2015/11/18/153421">インフラチーム改め Site Reliability Engineering (SRE) チームになりました - Mercari Engineering Blog</a> のエントリーだと思っているのだけど、ここから4年と少し。東京とはいえ、 SRE をテーマにカンファレンスが開催される規模になってきたというのはちょっとした驚きもある。実際来場者が何人だったのかは把握していないが、使われていた4つの部屋に入り切らないのではというぐらいの人がいて、実際に SRE をやっている、あるいは社内に SRE チームがあるという人は半数ぐらいだったらしい。</p>
+<p>発表はいずれもかなり具体的なものが多く、 SRE 本はみんな読んでいるよね？という前提の上で、あの本をこう解釈して、うちではこうやって運用しているよ、という話が多かった。最後のパネルディスカッションでも「SRE を始めるにあたり、どんなスキルがあればよいか？」というような質問があったのだが、 SRE を定義づけるのはスキルではなくてミッションなのだと思う。デプロイ頻度を上げたとき、トレードオフで劣化してしまいがちな「サイト信頼性」をどう担保するか。そのミッションに共感して携わってさえいれば SRE だと言える。むしろ特定のツールやスキルに固執して、ミッションが曖昧な状態だと SRE とは言い難い。</p>
+<p>とはいえもちろんツールだとか、どのような資料を参考にしているのかも気になるところで、各社が実際の運用で使っている OSS やドキュメント類の話も非常に参考になった。具体的に気になったのは以下。各項目末尾の括弧は、その資料やツールの話が出てきたセッションナンバー。</p>
+<ul>
+<li><a href="https://www.sciencedirect.com/science/article/pii/0005109883900468">Ironies of automation - ScienceDirect</a> (A0)</li>
+<li><a href="https://www.researchgate.net/publication/231537926_The_ironies_of_automation_still_going_strong_at_30">The ironies of automation… still going strong at 30? | Request PDF</a> (A0)</li>
+<li><a href="https://ja.coursera.org/learn/site-reliability-engineering-slos">Site Reliability Engineering: Measuring and Managing Reliability | Coursera</a> (C4)</li>
+<li><a href="https://docs.datadoghq.com/ja/monitors/service_level_objectives/event/">Event based SLO</a> / <a href="https://docs.datadoghq.com/ja/monitors/service_level_objectives/monitor/">Monitor SLO</a> (C4)</li>
+<li><a href="https://github.com/argoproj/argo-rollouts">argoproj/argo-rollouts: Progressive Delivery for Kubernetes</a> (D5)</li>
+<li>Production Readiness Check by Production-ready Microservices (B7)</li>
+</ul>
+<p>ここからは特に印象に残ったセッションを掲載する。すべて載せられればよかったのだが、結構な分量になりそうなので掻い摘んでみる。</p>
+<h2 id="heading">分散アプリケーションの信頼性観測技術に関する研究</h2>
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;"><iframe src="https://speakerdeck.com/player/058b950f8955432f8263496498a0390a" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen scrolling="no" allow="encrypted-media"></iframe></div>
+<p>基調講演その1。</p>
+<p>多くの SRE は基本的には既存の技術を用いてサイト信頼性の向上に貢献するけれど、より低いレイヤーからそもそも可観測性を高めるにはどうしたらいいか、レイテンシを狭めるにはどうしたらいいかというお話。自分はこの先このレイヤーで仕事をすることはなさそうに思っているけど興味深く聴けた。レイテンシ最小化のために、フォグコンピューティングのように小規模なデータセンターが点在する形になる、という方向性は、 <a href="https://aws.amazon.com/jp/about-aws/global-infrastructure/localzones/">AWS Local Zones</a> などですでに実現しつつもあるのだろうと思う。</p>
+<h2 id="40000--sre-">40000 コンテナを動かす SRE チームに至るまでの道</h2>
+<div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 52.5%; padding-top: 120px;"><a href="https://techblog.yahoo.co.jp/entry/20191222793763/" data-iframely-url="//cdn.iframe.ly/ypciDNM"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>Yahoo! のような大規模なサービス企業になると、インフラチームは Private PaaS を動かして社内の開発者へ「サービス提供」する形になる。それが 40000 のコンテナで提供されているとのこと。</p>
+<p>顧客ロイヤルティの指標である Net Promoter Score を社内に対して調査しているというあたりが面白かった。他にも社外ではなくて社内に対して SLA を定義しているという話もあった。 DevOps 以来の考え方として、アプリチームとインフラチームはなるべく境界をなくすべきというのが是のように思い込んできたけど、逆に明確な境界を引いて、 AWS の責任共有モデルよろしく、両者の責任範囲を限定してしまう方式もありなのだな、というのが気付きだった。</p>
+<h2 id="heading-1">成長を続ける広告配信プラットフォームのモニタリングを改善してきた話</h2>
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;"><iframe src="https://speakerdeck.com/player/7b9b2ed526bd4247acf0517295cdd6d1" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen scrolling="no" allow="encrypted-media"></iframe></div>
+<p>偽陽性のアラートを減らす、そのためにアラートの整理を定期的に実施するべきであるという2点と、実際に Kubernetes 環境をどのようなツールで監視しているかの話。特に Kubernetes の監視については現在目下検討中なので参考になった。 influxDB + Telegraf + Grafana （俗に言う TIG Stack ）と New Relic とのこと。</p>
+<h2 id="dely">delyにおける安定性とアジリティ両立に向けたアプローチ</h2>
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;"><iframe src="https://speakerdeck.com/player/5d3d1b565ce54370a2b99b59fadd200f" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen scrolling="no" allow="encrypted-media"></iframe></div>
+<p>SRE のミッションを「プロダクト開発の速度を <strong>安全に</strong> 高める」ことと定義して、それを如何に成し遂げていくかという話。一般的にはエラーバジェットを用いることになるのだけど、実際のところはバジェットを使い切ったときに新規デプロイを中止するのは現実的ではなかったり、導入が難しい側面がある。では、他に解決するべき、プロダクト開発速度を落とす要因はないのだろうか？と改めて問い直して、コードやシステムから「想定外の複雑さ」を取り除いていこうという結論に至る。 SRE 本に掲載されたプラクティスをただ愚直に導入するのではなくて、その目的はそもそも何か、その目的を達する手段は他にないだろうか？という良い問い直しでした。</p>
+<h2 id="sre-practicies-in-mercari-microservices">SRE Practicies in Mercari Microservices</h2>
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.1972%;"><iframe src="https://speakerdeck.com/player/1af1bddd18484d61ae524fbaf8dafc4b" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen scrolling="no" allow="encrypted-media"></iframe></div>
+<p>国内で最初期に SRE チームを発足させていたメルカリさんの SRE プラクティス。具体的な運用方法の話が出てくるので参考にしたいことだらけ。 SLO、CI/CD、On-call、Toil とテーマを分けて話をしてくれたのでとても聞きやすかった。特に SLO の振り返りの話が興味深くて、 SLO のみならず Toil の量や顧客（SRE が信頼性向上施策を提供する相手である、マイクロサービスチームのこと）満足度と絡めて評価するとのこと。例えば SLO が達成されていても、 Toil が多いし顧客満足度も低ければ、その SLO 達成にあまり意味はないということになるので、 SLO を厳しくしてみる。 SLO 達成、 Toil も少ないが、顧客満足度が低いのであれば、顧客が求める SLI は別のところにあるのではないかと考え、 SLI を変えてみる。達成 / 未達成の2択ではなく、その SLO に意味はあるのか？というところも運用を踏まえて振り返る視点は重要だと感じた。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

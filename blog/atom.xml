@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 18 Jan 2020 13:17:06 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jan 2020 00:21:52 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SRE NEXT 2020 に行ってきた</title>
+      <link>https://chroju.github.io/blog/2020/01/28/sre_next_2020/</link>
+      <pubDate>Tue, 28 Jan 2020 00:21:52 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/01/28/sre_next_2020/</guid>
+      <description>SRE NEXT 2020 に行ってきた。 SRE という職種が国内で広まったきっかけは インフラチーム改め Site Reliability Engineering (SRE) チームになりました - Mercari Engineering Blog のエントリーだと思っているのだ</description>
+    </item>
     
     <item>
       <title>Terraform の秘匿情報を mozilla/sops で管理する</title>
