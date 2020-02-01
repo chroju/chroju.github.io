@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="久しぶりに AWS Lambda 上でスクレイピング処理を実装しようとしたところ、 PhantomJS 開発終了以来あんまりスクレイピングしていなかったこともあり、勝手がまったくわ">
+
+<meta property="og:title" content="AWS Lambda による Web Scraping プラクティス in 2020" />
+<meta property="og:description" content="久しぶりに AWS Lambda 上でスクレイピング処理を実装しようとしたところ、 PhantomJS 開発終了以来あんまりスクレイピングしていなかったこともあり、勝手がまったくわ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2020/02/01/web_scraping_with_aws_lambda_2020/" />
+<meta property="article:published_time" content="2020-02-01T14:24:52+09:00" />
+<meta property="article:modified_time" content="2020-02-01T14:24:52+09:00" />
+
+
+<title>
+
+
+     AWS Lambda による Web Scraping プラクティス in 2020 &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2020/02/01/web_scraping_with_aws_lambda_2020/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-02-01%2005%3a33%3a45.841565011%20%2b0000%20UTC%20m%3d%2b0.081436163">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-02-01%2005%3a33%3a45.841565011%20%2b0000%20UTC%20m%3d%2b0.081436163">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-02-01%2005%3a33%3a45.841565011%20%2b0000%20UTC%20m%3d%2b0.081436163">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-02-01%2005%3a33%3a45.841565011%20%2b0000%20UTC%20m%3d%2b0.081436163">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    AWS Lambda による Web Scraping プラクティス in 2020
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Feb 1 2020 14:24:52 JST'>Feb 1, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>久しぶりに AWS Lambda 上でスクレイピング処理を実装しようとしたところ、 PhantomJS 開発終了以来あんまりスクレイピングしていなかったこともあり、勝手がまったくわからなくなっており、いろいろ調べたので書いておく。</p>
+<p>なお、あくまでデータ取得のための簡単なスクレイピングであり、 E2E テストのような複雑なシナリオが想定される用途でも適用可能なプラクティスではないと思われる。また筆者が使いたい言語は第一に Go で第二が Python である。</p>
+<h2 id="2">スクレイピング用ライブラリは主に2種類</h2>
+<p>スクレイピングに活用できるライブラリは各言語様々あると思われるが、ざっくり2種類に大別できると考えている。</p>
+<ul>
+<li>直接 HTTP アクセスするライブラリ</li>
+<li>Headless ブラウザを使うライブラリ</li>
+</ul>
+<p>外部のツールに依存せず、ライブラリの機能だけで HTTP アクセスや DOM の解析を行うものが前者。そのライブラリさえ import すれば使うことができるので、基本的にはこの手のものを使うほうが楽だと思われる。ただしブラウザの機能を再現しているわけではなく、生の HTML をそのままダウンロードするだけなので、凝ったことはできない可能性がある。</p>
+<p>凝ったこととはなんぞと言えば、例えばブラウザ表示した画面のスクリーンショットを撮りたい、 JS で動的に DOM 生成されるページをうんにゃらしたい、といった場合がある。こういった用途では Headless ブラウザを使うことになる。</p>
+<h2 id="-http-">直接 HTTP アクセスするライブラリ</h2>
+<p>個人的には <a href="https://github.com/PuerkitoBio/goquery">PuerkitoBio/goquery</a> を使うことが多い。 README から例を抜粋するが、 CSS クラスタの記法で取得する要素を指定できるのが好き。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>  <span style="color:#586e75">// Find the review items
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#586e75"></span>  doc.<span style="color:#268bd2">Find</span>(<span style="color:#2aa198">&#34;.sidebar-reviews article .content-block&#34;</span>).<span style="color:#268bd2">Each</span>(<span style="color:#268bd2">func</span>(i <span style="color:#dc322f">int</span>, s <span style="color:#719e07">*</span>goquery.Selection) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>    <span style="color:#586e75">// For each item found, get the band and title
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#586e75"></span>    band <span style="color:#719e07">:=</span> s.<span style="color:#268bd2">Find</span>(<span style="color:#2aa198">&#34;a&#34;</span>).<span style="color:#268bd2">Text</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>    title <span style="color:#719e07">:=</span> s.<span style="color:#268bd2">Find</span>(<span style="color:#2aa198">&#34;i&#34;</span>).<span style="color:#268bd2">Text</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>    fmt.<span style="color:#268bd2">Printf</span>(<span style="color:#2aa198">&#34;Review %d: %s - %s\n&#34;</span>, i, band, title)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>  })
+</code></pre></div><p>ライブラリを import すればいいだけなので、ビルドなども特別なことはない。</p>
+<h2 id="headless-">Headless ブラウザを使うライブラリ</h2>
+<p>Headless ブラウザを操作するフレームワークとしては <a href="https://selenium.dev/">Selenium</a> が有名。各種メジャーな言語で実装があるのだが、残念ながら Go に対応した公式のパッケージは提供されていない。そのため Python で使うことにしている。</p>
+<p>Selenium を使うときはライブラリのインポートだけではなく、実際にウェブアクセスするための Headless ブラウザと、 Selenium がブラウザ操作するための <a href="https://www.w3.org/TR/webdriver/">WebDriver</a> も Lambda のデプロイパッケージに含める必要がある。</p>
+<h3 id="headless--webdriver">Headless ブラウザと WebDriver</h3>
+<p>Headless Chrome を使いたいところなのだが、そのまま AWS Lambda のランタイム上で使えるわけではない。各種 FaaS ランタイム向けに Headless Chromium をビルドした serverless-chrome というプロジェクトがあるので、これを使わせてもらう。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/adieuadieu/serverless-chrome" data-iframely-url="//cdn.iframe.ly/J2IgAjY"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>WebDriver には Chrome (Chromium) 向けの ChromeDriver を <a href="https://chromedriver.chromium.org/downloads">Downloads - ChromeDriver - WebDriver for Chrome</a> からダウンロードして使う。</p>
+<p>注意しなければならないのは、 Selenium, serverless-chrome, ChromeDriver の三者で compatible な version の組み合わせが決まっているということ。任意のバージョンを好きに組み合わせて動くわけではない。現状 serverless-chrome のドキュメントがこれをアップデートしきれていないようで、以下の issue に有志が稼働確認した組み合わせを書き込んでいるのが見受けられるので参考にしている。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/adieuadieu/serverless-chrome/issues/133" data-iframely-url="//cdn.iframe.ly/ycgUfPu"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>本記事執筆時点において、最新の serverless-chrome を使った Selenium for Python との compatible な組み合わせが検証済みになっていない。そのため新し目の API が使えない、ということがしばしばある。例えば自分が経験したものとしては、 <code>element.screenshot_as_png()</code> が利用できず、要素単位でのスクリーンショットが取得できなかった。代替策として、 <a href="https://github.com/SeleniumHQ/selenium/issues/2898">Can't get the screenshot of the current element · Issue #2898 · SeleniumHQ/selenium</a> に記載のある、要素の座標から PIL でページスクリーンショットを切り取る方式を使っている。</p>
+<h3 id="lambda-layer--headless-">Lambda layer を使った Headless ブラウザ等のデプロイ</h3>
+<p>Lambda にはデプロイパッケージサイズに 50 MB の制限があるので、 Headless ブラウザと chromedriver は Lambda layer を用いてデプロイし、 Function 本体のデプロイパッケージから分離する。</p>
+<p>Lambda layer にデプロイしたファイルは、 Lambda 実行時に <code>/opt</code> 配下に展開されるので、それに合わせて Selenium からパスを指定して読み込む。自分の場合は以下の Makefile で Lambda layer 向けの zip パッケージを作成しているが、この場合は <code>/opt/bin</code> 配下に <code>chromedriver</code> と <code>chromium</code> が配置されることになる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">layer_headless_chrome/bin</span><span style="color:#719e07">:</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	mkdir -p layer_headless_chrome/bin
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#268bd2">layer_headless_chrome/bin/headless-chromium</span><span style="color:#719e07">:</span> layer_headless_chrome/bin
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>	wget https://github.com/adieuadieu/serverless-chrome/releases/download/v1.0.0-37/stable-headless-chromium-amazonlinux-2017-03.zip -O chromium.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>	unzip chromium.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	mv headless-chromium layer_headless_chrome/bin/
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>	rm chromium.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#268bd2">layer_headless_chrome/bin/chromedriver</span><span style="color:#719e07">:</span> layer_headless_chrome/bin
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>	wget https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip -O chromedriver.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>	unzip chromedriver.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>	mv chromedriver layer_headless_chrome/bin/
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>	rm chromedriver.zip
+</code></pre></div><p>Selenium を使うときは、割愛した書き方をするとこういう感じ。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">from</span> selenium <span style="color:#719e07">import</span> webdriver
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07">from</span> selenium.webdriver.chrome.options <span style="color:#719e07">import</span> Options
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>options <span style="color:#719e07">=</span> Options()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>options<span style="color:#719e07">.</span>binary_location <span style="color:#719e07">=</span> <span style="color:#2aa198"></span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">/opt/bin/chromium</span><span style="color:#2aa198">&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>driver <span style="color:#719e07">=</span> webdriver<span style="color:#719e07">.</span>Chrome(chrome_options<span style="color:#719e07">=</span>options, executable_path<span style="color:#719e07">=</span><span style="color:#2aa198"></span><span style="color:#2aa198">&#34;</span><span style="color:#2aa198">/opt/bin/chromedriver</span><span style="color:#2aa198">&#34;</span>)
+</code></pre></div><h3 id="heading">日本語フォントの内包</h3>
+<p>特にスクリーンショットを撮りたい場合、 Lambda のランタイムには日本語フォントが存在しないため、デプロイパッケージに含めてやらなければ文字化けする。</p>
+<p>これはそう面倒な問題でもなく、通常 Linux では <code>$HOME/.fonts</code> にフォントファイルを置けば読んでくれるので、デプロイパッケージを zip するときに <code>.fonts</code> 配下へ使いたいフォントファイルを置いておけばよい。僕は IPA フォントを使っているので、 Makefile だとこういう感じ。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#268bd2">.fonts</span><span style="color:#719e07">:</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>	mkdir .fonts
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span><span style="color:#268bd2">.fonts/ipaexg.ttf .fonts/ipaexm.ttf</span><span style="color:#719e07">:</span> .fonts
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>	curl https://ipafont.ipa.go.jp/IPAexfont/IPAexfont00401.zip -o IPAexfont.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>	unzip IPAexfont.zip
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>	mv ./IPAexfont00401/*.ttf ./.fonts/
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">8</span>	rm -rf ./IPAexfont00401
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">9</span>	rm IPAexfont.zip
+</code></pre></div><h3 id="serverless-framework-">Serverless Framework によるデプロイ</h3>
+<p>Lambda layer と Function を個別にデプロイするのは面倒なので、 Serverless Framework を遣う。先に書いた Makefile の例に倣い、 <code>./layer_headless_chrome</code> 配下に Headless ブラウザと chromedriver が置かれているものとして、以下のようなサンプルになる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>functions:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  sample_function:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    handler: sample_function.lambda_handler
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>    layers:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>        - { Ref: HeadlessChromeLambdaLayer }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>    role: LambdaBasicExecution
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>    package:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>      include:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>        - <span style="color:#2aa198">&#39;.fonts/**&#39;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>layers:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>  headlessChrome:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>	path: layer_headless_chrome
+</code></pre></div>
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
