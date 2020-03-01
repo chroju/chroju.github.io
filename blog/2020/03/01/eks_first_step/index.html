@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="EKS を今年はじめぐらいから調べて使い始めているのだが、それにあたって参考にした資料群を一度まとめておく。 EKS 全体 Amazon EKS Workshop :: Amazon EKS Workshop Kubernetes on AWS/EKS">
+
+<meta property="og:title" content="EKS 学び始めに使った資料のまとめ" />
+<meta property="og:description" content="EKS を今年はじめぐらいから調べて使い始めているのだが、それにあたって参考にした資料群を一度まとめておく。 EKS 全体 Amazon EKS Workshop :: Amazon EKS Workshop Kubernetes on AWS/EKS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2020/03/01/eks_first_step/" />
+<meta property="article:published_time" content="2020-03-01T13:15:17+09:00" />
+<meta property="article:modified_time" content="2020-03-01T13:15:17+09:00" />
+
+
+<title>
+
+
+     EKS 学び始めに使った資料のまとめ &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2020/03/01/eks_first_step/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-03-01%2014%3a16%3a38.450083027%20%2b0000%20UTC%20m%3d%2b0.059189011">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-03-01%2014%3a16%3a38.450083027%20%2b0000%20UTC%20m%3d%2b0.059189011">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-03-01%2014%3a16%3a38.450083027%20%2b0000%20UTC%20m%3d%2b0.059189011">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-03-01%2014%3a16%3a38.450083027%20%2b0000%20UTC%20m%3d%2b0.059189011">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    EKS 学び始めに使った資料のまとめ
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sun Mar 1 2020 13:15:17 JST'>Mar 1, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>EKS を今年はじめぐらいから調べて使い始めているのだが、それにあたって参考にした資料群を一度まとめておく。</p>
+<h2 id="eks-">EKS 全体</h2>
+<ul>
+<li><a href="https://eksworkshop.com/">Amazon EKS Workshop :: Amazon EKS Workshop</a></li>
+<li><a href="https://speakerdeck.com/mumoshu/eksbesutopurakuteisu2019-dot-2-number-jawsdays">Kubernetes on AWS/EKSベストプラクティス2019.2 #jawsdays - Speaker Deck</a></li>
+</ul>
+<p>AWS がオフィシャルで提供する Workshop がハンズオンしながら学べてわかりやすい。ドキュメントを脇に携えつつ、まずはこれの「Beginner」にあるコンテンツを全部通すといい感じになれる。「Intermediate」「Advanced」の内容は人によって要不要が分かれるので、各項で何が学べるのか調べつつ、不要であれば飛ばしてもいいかもしれない。</p>
+<p>2つ目に挙げている mumoshu 氏の資料が情報量多くてすごい。EKS を使う上で考えなくてはならない点がかなり網羅されている。この資料を読んで、「何言ってるかわからない」と感じるページが無くなるように学習を進めたりしていた。ただし1年前のものなので、一部内容が古くなっている点は注意。</p>
+<h2 id="eks-on-fargate">EKS on Fargate</h2>
+<ul>
+<li><a href="https://qiita.com/mumoshu/items/c9dea2d82a402b4f9c31">入門 EKS on Fargate - Qiita</a></li>
+<li><a href="https://blog.inductor.me/entry/eks-for-fargate">EKS for Fargateが出たので社内でファーストインプレッションの情報シェア会をやりました - inductor's blog</a></li>
+<li><a href="https://amsy810.hateblo.jp/entry/2019/12/04/151642">EKS on Fargate：virtual-kubelet の違い + Network/LB 周りの調査 - @amsy810's Blog</a></li>
+</ul>
+<p>ちょうど Fargate が EKS 対応してすぐの時期にあたり、 Fargate を採用するべきか、採用するのであればどのような場面で採用するべきかを考えた。 Fargate って Fargate 以前の EKS と比べてどうなの？という点については前者2つの URL が参考になった。最後のエントリーは Fargate とは何者なのか？ということを知る上で勉強になるのだが、まだ半分ぐらい理解できていない自覚がある。</p>
+<h2 id="eks--1">EKS 特有の観点</h2>
+<p>Kubernetes ではなく、 EKS にしか存在しない特有の観点というものがいくつかある。</p>
+<h3 id="iam-roles-for-service-accounts-irsa">IAM Roles for Service Accounts (IRSA)</h3>
+<ul>
+<li><a href="https://aws.amazon.com/jp/blogs/news/introducing-fine-grained-iam-roles-service-accounts/">Kubernetes サービスアカウントに対するきめ細やかな IAM ロール割り当ての紹介 | Amazon Web Services ブログ</a></li>
+<li><a href="https://onsd.hatenablog.com/entry/2019/09/21/015522">IAM Roles for Service Accounts を　Terraformで手軽に体験してみる - onsd’s blog</a></li>
+</ul>
+<p>Kubernetes の権限管理の仕組みである Service Accounts と、 AWS の権限管理サービスである IAM を連携した仕組みが IRSA 。導入が2019年9月と比較的最近であり、資料はまだ少なめな印象がある。また IRSA 登場以前に書かれたエントリーでは、 kube2iam など別のソリューションがベストとされていることもあり、注意したい。現時点では IRSA を基本的には使えばいいと捉えている。</p>
+<h3 id="amazon-vpc-cni-plugin">Amazon VPC CNI Plugin</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/pod-networking.html">ポッドネットワーキング (CNI) - Amazon EKS</a></li>
+<li><a href="https://github.com/aws/amazon-vpc-cni-k8s">aws/amazon-vpc-cni-k8s: Networking plugin repository for pod networking in Kubernetes using Elastic Network Interfaces on AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/cni-upgrades.html">Amazon VPC CNI Plugin for Kubernetes のアップグレード - Amazon EKS</a></li>
+</ul>
+<p>EKS には CNI として VPC と連携するためのものがデフォルトインストールされている。あまりこれに特化して解説した資料が見つからなかったのでひたすら公式を読んでいる。 <a href="https://docs.projectcalico.org/introduction/">Calico</a> の導入方法にも触れられている。</p>
+<h3 id="kubectl">kubectl</h3>
+<ul>
+<li><a href="https://dev.classmethod.jp/cloud/aws/eks-update-get-token-cmd/">[アップデート]EKSを使う際にaws-iam-authenticatorが不要になりました! ｜ Developers.IO</a></li>
+</ul>
+<p>これも2019年5月と比較的最近のリリースで、 aws-iam-authenticator を勧めるのはすでに old な方法になっている。現状は <code>aws eks update-kubeconfig</code> を打つだけで <code>~/.kube/config</code> が更新されて kubectl が使えるようになる。シンプルで好き。</p>
+<h3 id="heading">監視</h3>
+<ul>
+<li><a href="https://www.datadoghq.com/ja/blog/eks-monitoring-datadog/">Monitoring your EKS cluster with Datadog | Datadog</a></li>
+<li><a href="https://www.datadoghq.com/ja/blog/eks-cluster-metrics/">Key metrics for Amazon EKS monitoring | Datadog</a></li>
+</ul>
+<p>EKS 特有の監視方法やプラクティスは Datadog blog を参考とした。 Datadog はこれに限らず、システム監視について体系的にまとまった記事を量産していていつもお世話になっている。</p>
+<p>Kubernetes 自体の監視については <a href="https://blog.manabusakai.com/2019/08/monitoring-kubernetes/">我々は Kubernetes の何を監視すればいいのか？ | はったりエンジニアの備忘録</a> を読んだりしたが、まだはっきり答えが出せていない。調べているとよく名前を見かける <a href="https://github.com/kubernetes-retired/heapster#heapster">kubernetes-retired/heapster</a> がすでに Deprecated になっていたり、変化も激しい。</p>
+<h2 id="kubernetes-">Kubernetes 全般</h2>
+<h3 id="google-cloud-blog">Google Cloud Blog</h3>
+<ul>
+<li><a href="https://cloud.google.com/blog/ja/products/gcp/5-principles-for-cloud-native-architecture-what-it-is-and-how-to-master-it">クラウドネイティブ アーキテクチャ、5 つの原則 | Google Cloud Blog</a></li>
+<li><a href="https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-mapping-external-services">Kubernetes best practices: mapping external services | Google Cloud Blog</a></li>
+<li><a href="https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-organizing-with-namespaces">Kubernetes best practices: Organizing with Namespaces | Google Cloud Blog</a></li>
+</ul>
+<p>Kubernetes 自体のプラクティスについては、やはり Google のほうが豊富に資料を用意している。特に <a href="https://cloud.google.com/blog/topics/kubernetes-best-practices">Kubernets best practices</a> の各記事は一読しておいて損はなさそう。どう使えばいいのか迷ったらここを読む感じにしていた。</p>
+<h3 id="heading-1">書籍</h3>
+<ul>
+<li><a href="https://learning.oreilly.com/library/view/cloud-native-devops/9781492040750/">Cloud Native DevOps with Kubernetes</a></li>
+<li><a href="https://learning.oreilly.com/library/view/kubernetes-best-practices/9781492056461/">Kubernetes Best Practices</a></li>
+<li><a href="https://learning.oreilly.com/library/view/kubernetes-in-action/9781617293726/">Kubernetes in Action</a></li>
+<li><a href="https://learning.oreilly.com/library/view/kubernetes-up-and/9781492046523/">Kubernetes: Up and Running, 2nd Edition</a></li>
+</ul>
+<p>いずれも <a href="https://www.oreilly.com/online-learning/">O'Reilly online learning</a> で読んでいる。全部通読したわけではなくて、何か調べたいことがあったときに逐次辞書のように引いている。特に1番目の『Cloud Native 〜』は Kubernetes の初歩から始まり、 Kubernetes cluster をどのように運用していくのか、カオスエンジニアリングやシークレット管理の話、デプロイまわりなどかなり幅広くまとまっていておすすめ。1つのベンダーにとらわれることなく、各種 OSS や SaaS に少しずつ触れているので、cluster 運用に活用するツールの比較検討を進める端緒として使いやすい。最近日本語版も出ている。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://www.oreilly.co.jp//books/9784873119014/" data-iframely-url="//cdn.iframe.ly/0P3neqA"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>あとデプロイ（CI/CD）まわりもいろいろ読んだと思うのだけど、どれを読んだかちょっと思い出せなくなってしまった。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
