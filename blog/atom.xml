@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 01 Mar 2020 13:15:17 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2020 09:25:32 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>cVim から SurfingKeys へ移行した</title>
+      <link>https://chroju.github.io/blog/2020/03/13/surfing_keys_alternative_to_vimperator/</link>
+      <pubDate>Fri, 13 Mar 2020 09:25:32 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/03/13/surfing_keys_alternative_to_vimperator/</guid>
+      <description>ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium</description>
+    </item>
     
     <item>
       <title>EKS 学び始めに使った資料のまとめ</title>

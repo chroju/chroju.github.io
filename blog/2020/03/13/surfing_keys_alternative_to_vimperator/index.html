@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="the world as code">
+<meta name="description" content="ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium">
+
+<meta property="og:title" content="cVim から SurfingKeys へ移行した" />
+<meta property="og:description" content="ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chroju.github.io/blog/2020/03/13/surfing_keys_alternative_to_vimperator/" />
+<meta property="article:published_time" content="2020-03-13T09:25:32+09:00" />
+<meta property="article:modified_time" content="2020-03-13T09:25:32+09:00" />
+
+
+<title>
+
+
+     cVim から SurfingKeys へ移行した &middot; the world as code 
+
+</title>
+<link rel="canonical" href="https://chroju.github.io/blog/2020/03/13/surfing_keys_alternative_to_vimperator/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+    
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://chroju.github.io/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="ja">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+                
+                
+                
+                
+                
+                    
+                
+                    
+                
+                
+                <a href="https://chroju.github.io/"><img class="avatar" src="https://chroju.github.io/img/avatar.png" srcset="https://chroju.github.io/img/avatar.png 1x"></a>
+            
+            <a href="https://chroju.github.io/"><div class="name">the world as code</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-blog"><a href="https://chroju.github.io/blog/"><span>Archive</span></a></li>
+                    
+                        <li class="nav-about"><a href="https://chroju.github.io/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/chroju" target="_blank" rel="noopener"><img class="icon" src="https://chroju.github.io/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="mailto:chor.chroju@gmail.com"><img class="icon" src="https://chroju.github.io/img/email.svg" alt="email" /></a>
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    cVim から SurfingKeys へ移行した
+
+</div>
+
+                    <div class="initials"><a href="https://chroju.github.io"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Fri Mar 13 2020 09:25:32 JST'>Mar 13, 2020</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium 拡張機能の「cVim」を長らく使っていた。しかし残念ながらこちらも開発が停滞しており、先日 Chromium の仕様変更に伴い、ついに看過できない動作上の不具合が起きてしまった。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/726" data-iframely-url="//cdn.iframe.ly/ZsDRvm3"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p><code>Hint-a-Hint</code> と呼ばれるコア機能がある。 <code>f</code> を押下するとページ内の各リンクにユニークなアルファベットが割り振られ、そのアルファベットを押下するとそのリンク先へ遷移できる（下図参照）。キーボードだけでのブラウジングを行う上で欠かせない機能なのだが、これが使えなくなってしまった。</p>
+<p><a href="https://gyazo.com/5a1764e7f9dbe36f6a7a7ee77898cbb5"><img src="https://i.gyazo.com/5a1764e7f9dbe36f6a7a7ee77898cbb5.png" alt="Image from Gyazo" width="600"/></a></p>
+<p>その後有志が fork で修正バージョンを公開したり、 cVim 自体の開発引き継ぎを表明する方が現れたりもしているが、先行きが不透明であるため <a href="https://github.com/brookhong/Surfingkeys">SurfingKeys</a> という別の拡張へ乗り換えることにした。</p>
+<h2 id="surfingkeys">SurfingKeys</h2>
+<p>名前に「Vim」と入っていないためかノーマークだった。 cVim の開発停滞を危惧する以下の issue の中で代替候補として挙げられており、それで初めて知った。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/723" data-iframely-url="//cdn.iframe.ly/sjGRH1V"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>知名度の高い代替としては <a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a> なども存在するが、自分の中でキラーとなっていた以下機能をいずれも搭載していなかった。逆に言えば、探した中では SurfingKeys がこれらの機能を唯一網羅していた。</p>
+<h3 id="emacs-keybind">Emacs Keybind</h3>
+<p>Vim じゃねーのかという話なのだが、 <code>&lt;input type=&quot;text&quot;&gt;</code> なフォーム上で、 bash などで使える文字列編集のショートカットの話である。例えば <code>Ctrl-w</code> で直前の単語削除、 <code>Ctrl-a</code> で先頭までカーソル移動など。これが Vimperator にも cVim にも搭載されていて便利だったのだが、よくよく考えると Vim とは何の関係もないので、他の Vim like key bind 系の拡張には搭載されていなかった。</p>
+<p>あるいはこの機能だけ他の拡張を使ってもいいのだが、それも見つからなかった。なんなら cVim からこの部分だけ抜き出して独自拡張作ろうかと思った（けど挫折した）ぐらいには依存している。</p>
+<h3 id="javascript--keymap-">JavaScript への keymap 設定</h3>
+<p>任意の JavaScript 無名関数へ keymap を設定し、詰まるところブックマークレットをキーボードで呼び出すというもの。ブックマークレットというのも死語になった印象があるが、 Pocket にページを保存するときなどによく使う。</p>
+<p>正直なところ、一番のコアはこれではないかという思いがある。 JavaScript を書いてそれに自在な keymap ができるのであれば、実質的にあらゆるブラウザ操作に自ら Keymap が可能ということになる。 Vimium はこのあたり「行儀がよい」という言い方でいいのか、すでに Vimium 内で搭載されている機能に対して、別の Keymap を割り当てるということしかできない。</p>
+<h3 id="heading">設定の外部化</h3>
+<p>キーマッピングツールは自分で独自のキーマップを設定できるようになっているものが多い。 Vimperator はローカルのファイルを、 cVim は GitHub Gist の URL を指定することで、外部ファイルから設定を読めるようになっていた。これと同等のものが欲しかった。</p>
+<h2 id="heading-1">設定</h2>
+<p>ということで当然ながらカスタマイズしつつ使っているのだが、そのうち目星そうなものについて書いていく。主に Vimperator や cVim に存在していた機能を再現したものが多い。</p>
+<p>設定は GitHub Gist に書いたものを読み込ませる機能があり、それを活用している。 URL を指定する際には Gist の <code>raw</code> の URL を指定しなくてはならない点に注意が要る。リンクは [こちら] 。</p>
+<h3 id="p-p--url-"><code>p</code>, <code>P</code> による URL ペースト</h3>
+<p>Vimp, cVim から引き継いだ機能。 <code>p</code> や <code>P</code> を押下したとき、クリップボードに URL が含まれていればその URL に遷移させる。文字列に <code>http</code> が含まれなければ検索結果を表示するようにしている（現在「含まれていれば」という条件になってしまっているが先頭一致にしたほうがよさそう）。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">// paste URL
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"></span>mapkey(<span style="color:#2aa198">&#39;p&#39;</span>, <span style="color:#2aa198">&#39;Open URL in clipboard&#39;</span>, <span style="color:#268bd2">function</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    Clipboard.read(<span style="color:#268bd2">function</span>(response) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>        <span style="color:#268bd2">var</span> markInfo <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>            scrollLeft<span style="color:#719e07">:</span> <span style="color:#2aa198">0</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>            scrollTop<span style="color:#719e07">:</span> <span style="color:#2aa198">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>        };
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>        markInfo.tab <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>            tabbed<span style="color:#719e07">:</span> <span style="color:#cb4b16">false</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>            active<span style="color:#719e07">:</span> <span style="color:#cb4b16">false</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>        };
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>        <span style="color:#719e07">if</span> (response.data.indexOf(<span style="color:#2aa198">&#34;http&#34;</span>) <span style="color:#719e07">==</span> <span style="color:#2aa198">0</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>            markInfo.url <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;https://www.qwant.com/?r=JP&amp;sr=ja&amp;l=en_gb&amp;h=0&amp;s=1&amp;a=1&amp;b=0&amp;vt=0&amp;hc=1&amp;smartNews=1&amp;smartSocial=1&amp;theme=1&amp;i=1&amp;donation=1&amp;q=&#34;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">encodeURIComponent</span>(response.data);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>        } <span style="color:#719e07">else</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>            markInfo.url <span style="color:#719e07">=</span> response.data;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>        RUNTIME(<span style="color:#2aa198">&#34;openLink&#34;</span>, markInfo)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>    });
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>});
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>mapkey(<span style="color:#2aa198">&#39;P&#39;</span>, <span style="color:#2aa198">&#39;Open clipboard URL in new tab&#39;</span>, <span style="color:#268bd2">function</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>    Clipboard.read(<span style="color:#268bd2">function</span>(response) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>        <span style="color:#268bd2">var</span> markInfo <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>            scrollLeft<span style="color:#719e07">:</span> <span style="color:#2aa198">0</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>            scrollTop<span style="color:#719e07">:</span> <span style="color:#2aa198">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>        };
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>        markInfo.tab <span style="color:#719e07">=</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>            tabbed<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>            active<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>        };
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span>        <span style="color:#719e07">if</span> (response.data.indexOf(<span style="color:#2aa198">&#34;http&#34;</span>) <span style="color:#719e07">==</span> <span style="color:#2aa198">0</span>) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span>            markInfo.url <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;https://www.qwant.com/?q=&#34;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">encodeURIComponent</span>(response.data);
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span>        } <span style="color:#719e07">else</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span>            markInfo.url <span style="color:#719e07">=</span> response.data;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">34</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">35</span>        RUNTIME(<span style="color:#2aa198">&#34;openLink&#34;</span>, markInfo)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">36</span>    });
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span>});
+</code></pre></div><h3 id="quick-mark">Quick mark</h3>
+<p>もともとは Vim の mark を意識した Vimperator の機能だったと記憶している。任意の URL にアルファベット1文字（例えば amazon.co.jp に <code>a</code> ）を割り当てておいて、 <code>goa</code> で現在のタブに、 <code>gna</code> で新しいタブにその URL を開いてくれる。つまりはブックマークを素早く呼び出すものである。</p>
+<p>これは実装されている方のブログがあったので、それをそのまま使わせていただいた。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 75%; padding-top: 120px;"><a href="https://fewlight.net/20200225/" data-iframely-url="//cdn.iframe.ly/pDLSUTj"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<h3 id="heading-2">ブックマークレット</h3>
+<p>以下の書き方で JavaScript の無名関数にキーをマッピングできる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>mapkey(<span style="color:#2aa198">&#39;&lt;Key&gt;&#39;</span>, <span style="color:#2aa198">&#39;&lt;Description&gt;&#39;</span>, <span style="color:#268bd2">function</span>(){
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>    <span style="color:#586e75">// some code
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#586e75"></span>});
+</code></pre></div><p>登録しているものは先述の Pocket 登録のほか、 Amazon の URL から様々なクエリ文字列を削ぎ落として綺麗にするためのもの、 markdown 等特定形式での URL コピーなどいろいろ。</p>
+<h3 id="theme">theme</h3>
+<p>ominibar と呼ばれるコマンド入力用のバーが実装されているのだが、その CSS を好きにカスタムできる。デフォルトが白いのだがダークな感じがいいな、と探していたところ、カラーテーマ Dracula にインスパイアされたものが見つかったので、使わせてもらっている。</p>
+<p><a href="https://gist.github.com/emraher/2c071182ce0f04f3c69f6680de335029">https://gist.github.com/emraher/2c071182ce0f04f3c69f6680de335029</a></p>
+<h2 id="heading-3">機能</h2>
+<p>ところでこの SurfingKeys 、恐ろしく多機能らしく全部は使いこなせていない。例えば Markdown をクリップボードに入れた状態で特定のキーを押すと HTML プレビューしてくれる機能、自動スクロールしながらページ全体のスクリーンショットを撮ってくれる機能などがあるらしい。が、そこまでは使えていなくて、 Vimperator や cVim でやっていたことが引き継げればいいかなという感覚で使っている。</p>
+
+                <br>
+                
+                <p class="back-to-posts"><a href="https://chroju.github.io/blog">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
