@@ -6,7 +6,7 @@ isCJKLanguage = true
 draft = false
 +++
 
-ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium 拡張機能の「cVim」を長らく使っていた。しかし残念ながらこちらも開発が停滞しており、先日 Chromium の仕様変更に伴い、ついに看過できない動作上の不具合が起きてしまった。
+ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium 拡張機能の「cVim」を Vivaldi 上で長らく使っていた。しかし残念ながらこちらも開発が停滞しており、先日 Chromium の仕様変更に伴い、ついに看過できない動作上の不具合が起きてしまった。
 
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/726" data-iframely-url="//cdn.iframe.ly/ZsDRvm3"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
@@ -18,7 +18,9 @@ draft = false
 
 ## SurfingKeys
 
-名前に「Vim」と入っていないためかノーマークだった。 cVim の開発停滞を危惧する以下の issue の中で代替候補として挙げられており、それで初めて知った。
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc" data-iframely-url="//cdn.iframe.ly/7o3UxEU"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+
+名前に「Vim」と入っていないためか今までノーマークだった。 cVim の開発停滞を危惧する以下の issue の中で代替候補として挙げられており、それで初めて知った。
 
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/723" data-iframely-url="//cdn.iframe.ly/sjGRH1V"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
@@ -44,11 +46,11 @@ Vim じゃねーのかという話なのだが、 `<input type="text">` なフ�
 
 ということで当然ながらカスタマイズしつつ使っているのだが、そのうち目星そうなものについて書いていく。主に Vimperator や cVim に存在していた機能を再現したものが多い。
 
-設定は GitHub Gist に書いたものを読み込ませる機能があり、それを活用している。 URL を指定する際には Gist の `raw` の URL を指定しなくてはならない点に注意が要る。リンクは [こちら] 。
+設定は GitHub Gist に書いたものを読み込ませる機能があり、それを活用している。 URL を指定する際には Gist の `raw` の URL を指定しなくてはならない点に注意が要る。リンクは [こちら](https://gist.github.com/chroju/2118c2193fb9892d95b9686eb95189d2) 。
 
 ### `p`, `P` による URL ペースト
 
-Vimp, cVim から引き継いだ機能。 `p` や `P` を押下したとき、クリップボードに URL が含まれていればその URL に遷移させる。文字列に `http` が含まれなければ検索結果を表示するようにしている（現在「含まれていれば」という条件になってしまっているが先頭一致にしたほうがよさそう）。
+Vimp, cVim から引き継いだ機能。 `p` や `P` を押下したとき、クリップボードに URL が含まれていればその URL に遷移させる。文字列に `http` が含まれなければ検索結果を表示するようにしている。
 
 ```javascript
 // paste URL
@@ -94,7 +96,7 @@ mapkey('P', 'Open clipboard URL in new tab', function() {
 
 もともとは Vim の mark を意識した Vimperator の機能だったと記憶している。任意の URL にアルファベット1文字（例えば amazon.co.jp に `a` ）を割り当てておいて、 `goa` で現在のタブに、 `gna` で新しいタブにその URL を開いてくれる。つまりはブックマークを素早く呼び出すものである。
 
-これは実装されている方のブログがあったので、それをそのまま使わせていただいた。
+これは実装されている方のブログがあったので、それをそのまま使わせていただいた。ただ最近はよく使うウェブサービスを全部 [Station](https://getstation.com/) に載せるようにしているため、ブックマーク的によく行くページというのが GitHub ぐらいしかない状況にはなっていると今回改めて気付いた（ GitHub は複数のページを同時に開きたい場合が多く、1サービス1タブが基本の Station 上だと不便）。
 
 <div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 75%; padding-top: 120px;"><a href="https://fewlight.net/20200225/" data-iframely-url="//cdn.iframe.ly/pDLSUTj"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
