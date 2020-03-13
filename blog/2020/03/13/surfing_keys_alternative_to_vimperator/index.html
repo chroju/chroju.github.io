@@ -41,11 +41,11 @@
 
 
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
-    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
-    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+    <link rel="stylesheet" href="https://chroju.github.io/css/reset.css?t=2020-03-13%2001%3a36%3a23.748521089%20%2b0000%20UTC%20m%3d%2b0.173066609">
+    <link rel="stylesheet" href="https://chroju.github.io/css/pygments.css?t=2020-03-13%2001%3a36%3a23.748521089%20%2b0000%20UTC%20m%3d%2b0.173066609">
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.css?t=2020-03-13%2001%3a36%3a23.748521089%20%2b0000%20UTC%20m%3d%2b0.173066609">
     
-        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-03-13%2001%3a10%3a51.671693794%20%2b0000%20UTC%20m%3d%2b0.171466770">
+        <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-03-13%2001%3a36%3a23.748521089%20%2b0000%20UTC%20m%3d%2b0.173066609">
     
 
 
@@ -166,13 +166,14 @@
                 </div>
             </div>
             <div class="markdown">
-                <p>ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium 拡張機能の「cVim」を長らく使っていた。しかし残念ながらこちらも開発が停滞しており、先日 Chromium の仕様変更に伴い、ついに看過できない動作上の不具合が起きてしまった。</p>
+                <p>ブラウザをキーボードだけで操作するツールが好きだ。かつては Vim like なキーバインドをもたらしてくれる Firefox 向けの Vimperator を愛用していたが、その開発停止後は Chromium 拡張機能の「cVim」を Vivaldi 上で長らく使っていた。しかし残念ながらこちらも開発が停滞しており、先日 Chromium の仕様変更に伴い、ついに看過できない動作上の不具合が起きてしまった。</p>
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/726" data-iframely-url="//cdn.iframe.ly/ZsDRvm3"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p><code>Hint-a-Hint</code> と呼ばれるコア機能がある。 <code>f</code> を押下するとページ内の各リンクにユニークなアルファベットが割り振られ、そのアルファベットを押下するとそのリンク先へ遷移できる（下図参照）。キーボードだけでのブラウジングを行う上で欠かせない機能なのだが、これが使えなくなってしまった。</p>
 <p><a href="https://gyazo.com/5a1764e7f9dbe36f6a7a7ee77898cbb5"><img src="https://i.gyazo.com/5a1764e7f9dbe36f6a7a7ee77898cbb5.png" alt="Image from Gyazo" width="600"/></a></p>
 <p>その後有志が fork で修正バージョンを公開したり、 cVim 自体の開発引き継ぎを表明する方が現れたりもしているが、先行きが不透明であるため <a href="https://github.com/brookhong/Surfingkeys">SurfingKeys</a> という別の拡張へ乗り換えることにした。</p>
 <h2 id="surfingkeys">SurfingKeys</h2>
-<p>名前に「Vim」と入っていないためかノーマークだった。 cVim の開発停滞を危惧する以下の issue の中で代替候補として挙げられており、それで初めて知った。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc" data-iframely-url="//cdn.iframe.ly/7o3UxEU"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>名前に「Vim」と入っていないためか今までノーマークだった。 cVim の開発停滞を危惧する以下の issue の中で代替候補として挙げられており、それで初めて知った。</p>
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/1995eaton/chromium-vim/issues/723" data-iframely-url="//cdn.iframe.ly/sjGRH1V"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>知名度の高い代替としては <a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a> なども存在するが、自分の中でキラーとなっていた以下機能をいずれも搭載していなかった。逆に言えば、探した中では SurfingKeys がこれらの機能を唯一網羅していた。</p>
 <h3 id="emacs-keybind">Emacs Keybind</h3>
@@ -185,9 +186,9 @@
 <p>キーマッピングツールは自分で独自のキーマップを設定できるようになっているものが多い。 Vimperator はローカルのファイルを、 cVim は GitHub Gist の URL を指定することで、外部ファイルから設定を読めるようになっていた。これと同等のものが欲しかった。</p>
 <h2 id="heading-1">設定</h2>
 <p>ということで当然ながらカスタマイズしつつ使っているのだが、そのうち目星そうなものについて書いていく。主に Vimperator や cVim に存在していた機能を再現したものが多い。</p>
-<p>設定は GitHub Gist に書いたものを読み込ませる機能があり、それを活用している。 URL を指定する際には Gist の <code>raw</code> の URL を指定しなくてはならない点に注意が要る。リンクは [こちら] 。</p>
+<p>設定は GitHub Gist に書いたものを読み込ませる機能があり、それを活用している。 URL を指定する際には Gist の <code>raw</code> の URL を指定しなくてはならない点に注意が要る。リンクは <a href="https://gist.github.com/chroju/2118c2193fb9892d95b9686eb95189d2">こちら</a> 。</p>
 <h3 id="p-p--url-"><code>p</code>, <code>P</code> による URL ペースト</h3>
-<p>Vimp, cVim から引き継いだ機能。 <code>p</code> や <code>P</code> を押下したとき、クリップボードに URL が含まれていればその URL に遷移させる。文字列に <code>http</code> が含まれなければ検索結果を表示するようにしている（現在「含まれていれば」という条件になってしまっているが先頭一致にしたほうがよさそう）。</p>
+<p>Vimp, cVim から引き継いだ機能。 <code>p</code> や <code>P</code> を押下したとき、クリップボードに URL が含まれていればその URL に遷移させる。文字列に <code>http</code> が含まれなければ検索結果を表示するようにしている。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#586e75">// paste URL
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#586e75"></span>mapkey(<span style="color:#2aa198">&#39;p&#39;</span>, <span style="color:#2aa198">&#39;Open URL in clipboard&#39;</span>, <span style="color:#268bd2">function</span>() {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    Clipboard.read(<span style="color:#268bd2">function</span>(response) {
@@ -227,7 +228,7 @@
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">37</span>});
 </code></pre></div><h3 id="quick-mark">Quick mark</h3>
 <p>もともとは Vim の mark を意識した Vimperator の機能だったと記憶している。任意の URL にアルファベット1文字（例えば amazon.co.jp に <code>a</code> ）を割り当てておいて、 <code>goa</code> で現在のタブに、 <code>gna</code> で新しいタブにその URL を開いてくれる。つまりはブックマークを素早く呼び出すものである。</p>
-<p>これは実装されている方のブログがあったので、それをそのまま使わせていただいた。</p>
+<p>これは実装されている方のブログがあったので、それをそのまま使わせていただいた。ただ最近はよく使うウェブサービスを全部 <a href="https://getstation.com/">Station</a> に載せるようにしているため、ブックマーク的によく行くページというのが GitHub ぐらいしかない状況にはなっていると今回改めて気付いた（ GitHub は複数のページを同時に開きたい場合が多く、1サービス1タブが基本の Station 上だと不便）。</p>
 <div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 75%; padding-top: 120px;"><a href="https://fewlight.net/20200225/" data-iframely-url="//cdn.iframe.ly/pDLSUTj"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <h3 id="heading-2">ブックマークレット</h3>
 <p>以下の書き方で JavaScript の無名関数にキーをマッピングできる。</p>
