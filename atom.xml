@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 13 Mar 2020 09:25:32 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2020 11:25:27 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>社会人大学生1年目を終えて、大学生活と勉強法とその困難</title>
+      <link>https://chroju.github.io/blog/2020/03/28/adult_university_learner_first_year/</link>
+      <pubDate>Sat, 28 Mar 2020 11:25:27 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/03/28/adult_university_learner_first_year/</guid>
+      <description>昨年 パラレルワーカー兼大学生になることになった · the world as code で書いたように社会人大学生を始めたのだが、なんとか1年目を終えたので大学生活がどんな</description>
+    </item>
     
     <item>
       <title>cVim から SurfingKeys へ移行した</title>
