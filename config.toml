@@ -13,6 +13,7 @@ title               = "the world as code"
 pygmentsCodefences  = true
 pygmentsStyle       = "solarized-dark"
 pygmentsOptions     = "linenos=inline"
+googleAnalytics     = "UA-6765151-2"
 
 [outputFormats]
 [outputFormats.RSS]
