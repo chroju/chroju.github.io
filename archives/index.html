@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
+
+    <title> | the world as code</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://chroju.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://chroju.github.io/manifest.json">
+    <link rel="mask-icon" href="https://chroju.github.io/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.min.2545a1910010e26a9905276045afab868f812580a1e7482423da6c0c8c214d18.css" />
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-04-04%2013%3a18%3a03.16198675%20%2b0000%20UTC%20m%3d%2b0.289235463">
+    
+
+    
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-6765151-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="https://chroju.github.io/">the world as code</a>
+    </div>  
+</header>
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/archives">Archive</a>
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/about">About</a>
+  
+  <a class="color-link nav-link" href="https://chroju.github.io/atom.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="chor.chroju@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="//twitter.com/chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="//github.com/chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+</nav>
+        <div id="content" class="content-container">
+        
+
+  <h1>
+    Archives
+  </h1>
+  <div>
+     
+      
+      
+          <h3>2020</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/03/28/adult_university_learner_first_year/">社会人大学生1年目を終えて、大学生活と勉強法とその困難</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/03/13/surfing_keys_alternative_to_vimperator/">cVim から SurfingKeys へ移行した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/03/01/eks_first_step/">EKS 学び始めに使った資料のまとめ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 29</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/02/29/aws_control_tower_and_organization/">AWS Organization 等、マルチアカウント管理サービスをどう使うか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 22</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/02/22/likebook_ares_e_ink_android_review/">読書用に Likebook Ares という電子ペーパー Android を買った</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/02/01/web_scraping_with_aws_lambda_2020/">AWS Lambda による Web Scraping プラクティス in 2020</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/01/28/sre_next_2020/">SRE NEXT 2020 に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/01/18/terraform_with_sops/">Terraform の秘匿情報を mozilla/sops で管理する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2020/01/13/okr_in_private/">プライベートにも OKR を取り入れてフォーカスする</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2019</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 30</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/12/30/looking_back_2019/">2019年総括</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/12/24/terraform_gcp/">GCP 公開の Terraform modules から module による効果的な抽象化を学ぶ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/12/20/subscriptions_2019/">Subscriptions 2019</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/12/13/terraform_state_introduction/">Terraform state 概論</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/12/04/terraform_meetup_tokyo_3/">Terraform meetup tokyo#3 に参加した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 17</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/11/17/development_environment_2019/">CUI 開発環境 2019 - tmux, fzf, ghq, Starship, aws-vault, etc</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/11/10/terraform_source_code_reading_3/">Terraform Source Code Reading#3 に参加した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/11/02/terraformer_includes_unnecessary_resource_attributes/">Terraformer が import した resource は不要な属性を含む場合がある</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 30</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/10/30/github_actions_2019_first_impression/">GitHub Actions (2019) ファーストインプレッション</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/10/14/parade_aws_parameter_store_cli/">AWS Parameter Store をターミナルから操作する Parade を作った</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/09/18/what_is_sre_for_me/">SRE になって3か月目に考える、 SRE とは何か、如何に実践すべきか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 11</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/09/11/dhcp_options_rfc/">AWS DHCP オプションセットを RFC から理解する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/08/18/bitwarden_introduction/">パスワード管理サービスを Bitwarden でセルフホストする</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/06/24/write_repot_with_vscode_tex/">VSCode と TeX で大学のレポートを書く</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 21</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/06/21/grpc_entry/">gRPC ちょっと理解した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/06/14/become_parallel_worker_and_university_student/">パラレルワーカー兼大学生になることになった</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/06/10/go_dynamic_web_page_netlify_functions/">Netlify Functions と Go で動的なウェブページを作る</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 9</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/06/09/corne_chocolate_build_log/">Corne Chocolate を組み立てる、40%キーボードに目覚める</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/05/24/pursue_the_best_keymaps_with_qmk_firmware/">Lily58 Pro 最強のキーマップを目指して</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/05/14/read_terraform_source_code/">3rd Party tool をきっかけに Terraform のソースコードを少し嗜んだ話</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 27</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/04/27/making_lily58_pro_with_a_beginner/">電子工作初心者が Lily58 Pro を買ってから作って持ち運ぶまで</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/04/25/how_i_learned_to_stop_worrying_and_love_the_original_keyboards/">Lily58 Pro または私は如何にして市販品を探すのをやめて分割キーボードを自作するようになったか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 27</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/03/27/mitchellh_cli/">HashiCorp ファン必須科目である mitchellh/cli を履修する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/02/25/make_terraform_less_tiring/">Terraform で疲れないために</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 19</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/02/19/how_to_write_usage/">Usage の書き方について標準仕様を探る</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 31</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/01/31/practical_monitoring/">『入門 監視』を『ウェブオペレーション』『SRE』と一緒に読もう</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/01/28/ntt_history_center_of_technologies/">NTT技術史料館に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2019/01/13/next_web_conf_2019/">次世代 Web カンファレンスに行ってきた</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2018</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 31</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/12/31/looking_back_2018/">2018年総括</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 17</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/12/17/subscriptions_2018/">Subscriptions 2018</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 15</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/12/15/github_actions_first_impression/">GitHub Actions - Dockerfile を突っ込んで自動化するという考え方</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/12/10/terraform_with_aws_assume_role/">Terraform で AWS assume role が使用できない場合がある</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/12/05/cncf_serverless_wg/">CNCF の活動から Serverless の今を追う</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/11/18/write_code_every_day_with_competitive_programming/">競技プログラミングで Write Code Every Day を2か月続けてみて</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/11/03/nature_remo_cli/">Nature Remo の CLI ツールをつくった</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 29</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/10/29/hashiconf_2018/">HashiCorp が Terraform state 用 remote storage を出すらしい</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/10/03/competitive_programming/">競技プログラミングを始めてみた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 9</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/09/09/builderscon_2018/">builderscon 2018 に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 23</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/08/23/engineers_intellectual_productivity/">『エンジニアの知的生産術』を読んだ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 19</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/08/19/entry_kubernetes/">Kubernetes に入門してからやってきたことのメモ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/08/13/fluent_1_0_no_logs_would_be_missing/">fluentd 1.0 でログの欠損を防ぐ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 30</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/07/30/july_tech_festa_2018/">July Tech Festa 2018 に行って打ちのめされた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/07/10/contributed_to_terraform_provider_aws/">buildersconを契機にOSS活動始めてterraform-provider-awsにcontributeできた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/07/01/update_dotfiles_with_ansible/">開発環境を見直し、dotfilesを更新して、VimからVSCodeへ移行した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 11</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/06/11/play_with_nature_remo/">Nature Remo API で遊んだ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/06/04/aws_summit_tokyo_2018/">AWS Summit 2018と大規模企業Confの回り方について</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/05/13/engineering_organization_theory_and_effective_devops/">『Effective DevOps』と『エンジニアリング組織論への招待』を読んだ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/05/05/release_tfdoc/">TerraformドキュメントをCLIで読むtfdoc v0.1.0をリリースした</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/04/28/lt_continuous_update_ansible_role/">Ansible Roleの継続的自動UpdateについてLTした</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 31</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/03/31/libraries_in_tokyo_which_have_computer_books/">都内の図書館でコンピュータ書を読む</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/03/25/create_terraform_helper_tool_with_go/">Terraformドキュメントをコマンドで見るツールをGoで作る</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2018/02/28/flexible_work_or_not/">裁量労働制の恩恵、個々の裁量で働くということ</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2017</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 29</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/12/29/looking_back_2017/">2017年総括 - 計算機科学と向き合う</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 27</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/12/27/how_to_use_terraform_modules/">Terraform moduleは何が嬉しいのか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/12/18/circleci_2_0_with_hugo/">CircleCI 2.0でhugoのブログ生成を自動化する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/11/18/hello_alexa/">AlexaにAWSの請求額を教えてもらう</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 8</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/10/08/i_love_scrapbox/">Scrapbox.ioで思考を気持ちよく繋げる</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 26</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/09/26/migrate_coreos_to_ecs/">CoreOSからECSへDockerを移行した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 26</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/08/26/aws_sysops_administrator/">AWS Certified Sysops Administratorを取得した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/08/06/builderson_2017/">builderson2017に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 12</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/06/12/very_exhausted_because_of_toil/">Toilの地獄から抜け出す術を知りたい</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/05/05/infrastructure_as_code_book/">O&#39;Reilly『Infrastructure as Code』読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 15</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/02/15/vimperator_to_vivaldi/">VimperatorからVivaldi &#43; Vimiumへ乗り換える</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 7</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/02/07/try_on_serverless_architecture/">サーバーレスっぽいインフラをどう管理していくか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2017/02/05/barocco_review/">Baroccoで分割キーボードデビューした</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2016</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/12/28/looking_back_2016/">2016年総括 - 技術者って何なのかやっと理解した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 27</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/12/27/esa_io_personal_use/">esa.ioを個人利用している話</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 17</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/12/17/engineering_problem_solving/">エンジニアの問題解決力とは何か</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/10/25/what_is_ops/">多義化するOpsのミッションについて</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/10/03/serverless-conf-tokyo/">ServerlessConfとエンジニアの職掌に関して</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/08/01/soft_skills_and_our_productivity/">『SOFT SKILLS』と「やっていく気持ち」</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/07/02/yapc8oji_2016/">YAPC経験ないけどパチモンの方に行った</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/06/05/aws_summit_ansible_meetup_2016/">Serverlessの時代とas code</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/05/14/pbtech_infra_engineers/">インフラエンジニアなので第5回ペパボテックカンファレンス行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/04/24/qpstudy_alert_call/">#qpstudy 響け！アラートコール！行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/03/28/entry-python/">Pythonに入門している</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 17</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/">Personal Knowledge Base 2</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 13</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/03/13/jaws_days_2016/">JAWS DAYS 2016に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/02/18/convert-to-hugo/">ブログをHugoに移行した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 30</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/01/30/ops-jaws-3/">Ops JAWS#3に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/01/24/personal-knowledge-base/">Personal Knowledge Base</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/01/20/node-js-elementary-school-1/">東京Node学園付属小学校1限目に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2016/01/03/manifesto-2016/">2016年の行動規範</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2015</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 31</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/12/31/serverspec-first-impression/">Serverspecファーストインプレッション</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 31</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/12/31/looking-back-2015/">2015年総括</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/12/14/review-team-geek/">『Team Geek』読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/12/04/docker-first-impression/">Dockerファーストインプレッション</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/11/18/ansible-serverspec-circle-ci/">Ansible &#43; Serverspec &#43; Docker &#43; circle ci によるインフラCI</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/10/25/osc-2015-tokyo-fall/">オープンソースカンファレンス2015 Tokyo/Fall行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/10/20/eudaemonics-of-infrastructure-engineer/">インフラエンジニアの幸福論</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/10/04/individual-github-flow/">個人開発環境にGithub Flowを適用する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/09/24/ansible-in-nearly-best-practice/">開発環境のためのansibleを出来るだけベストプラクティスでまとめた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 16</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/08/16/hackers-mind-and-their-essay/">ハッカーマインドと3冊のエッセイ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 9</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/08/09/qiita-commoditization-of-engineer/">Qiitaを使うということの意義</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 8</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/08/08/exhibi-update/">Kaminariの実装をしてみた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/07/25/start-qiita/">Qiitaはじめました</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/07/20/encryption-hash-at-first/">暗号化とハッシュ化に関する基本的な事柄まとめ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/07/20/ansible-digitalocean-vps-dev-env/">AnsibleとDigitalOceanでどこでも使える開発環境を作る</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/07/04/development-environment-for-windows/">Windows開発環境を整える話と、メモアプリとして最強であるwasaviの話</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/07/03/how-about-your-troubleshooting/">すべての障害対応を、生まれる前に消し去りたい！ #障害対応きにならNight</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/06/28/one-month-from-job-changing/">SIerからサービス系の会社に転職して1か月</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/06/25/hika-labo-ansible/">Ansibleの入門イベント聞いてきた話</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 16</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/05/16/i-am-neet-now/">ファッション無職になった</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 15</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/05/15/jaws-ug-for-beginners-at-first/">JAWS-UG初心者支部の立ち上げに行ってきた #jawsug_bgnr</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/05/03/google-spread-sheet-update-via-ruby/">Hash与えるとGoogleスプレッドシートに入力してくれるRubyスクリプト</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 29</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/29/gtd-2015-workflowy/">GTD環境 2015年春版（Workflowy最強説）</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/24/ruby-study-mix-in/">Ruby基礎学習(10) Mix-in</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/14/study-ruby-dir/">Ruby基礎復習(9) Dirクラス</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/10/study-ruby-file-i-o/">Ruby基礎復習(8) Fileクラス</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/06/study-ruby-time/">Ruby基礎復習(7) Timeクラス</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/05/study-ruby-hash/">Ruby基礎復習(6) Hash</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/04/04/the-world-as-code/">the world as code</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 22</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/22/jaws-days-2015/">JAWS DAYS 2015でAWS童貞捨ててきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/18/study-ruby-array/">Ruby基礎復習(5) 配列(Array)</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 17</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/17/study-ruby-enumerable-comparable/">Ruby基礎復習(4) EnumerableとComparable</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 16</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/16/study-ruby-numeric/">Ruby基礎復習(3) Numericクラス</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 15</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/15/study-ruby-string/">Ruby基礎復習(2) Stringクラス</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 8</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/08/study-ruby-grammer/">Ruby基礎復習(1) 基礎文法</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 7</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/07/book-review-time-management-for-engineer/">『エンジニアのための時間管理術』読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Mar 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/03/01/move-from-hatena-blog-to-octopress/">はてなブログからの記事移行を完了した</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 21</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2015/02/21/developer-summit-2015/">Developers Summit 2015に行ってきた</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2014</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 29</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/12/29/2014-12-29-post/">美術展検索サービスExhiBiを見切り発車しました</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/12/01/2014-12-01-post/">『インフラ/ネットワークエンジニアのためのネットワーク技術&amp;amp;amp;設計入門』読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/11/10/2014-11-10-post/">ブログ書けてない不安</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/11/02/2014-11-02-post/">Rakuten Technology Conference 2014に行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/10/02/2014-10-02-post/">『実践Vim』でVimの思想を身につける</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/09/28/2014-09-28-post/">awesomeウィンドウマネージャーの見栄えを良くする</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 23</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/09/23/2014-09-23-post/">Arch Linux &#43; awesome with Windows 8.1 in VAIO Pro</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 22</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/09/22/2014-09-22-post/">RubyHiroba 2014に（少しだけ）行ってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 7</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/09/07/2014-09-07-post/">VirtualBoxでArch Linuxのインストール練習</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 24</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/08/24/2014-08-24-post/">Webスクレイピング手法は何かしら身に付けると便利そう</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/08/10/2014-08-10-post/">何を勉強したらいいのかわからなくなってきた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/07/20/2014-07-20-post/">tmuxをなんとなく使ってたのできちんと使うようにしてみた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jun 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/06/05/2014-06-05-post/">chroju.netを開設してみた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 30</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/05/30/2014-05-30-post/">chefでさくらVPSの初期構築を全部自動化してみた</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/05/06/2014-05-06-post/">自分のことを「ペルソナ」から見返してみる</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/05/06/2014-05-06-02-post/">Chef soloはじめの一歩</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">May 1</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/05/01/2014-05-01-post/">エンジニアの転職において「技術」とは目的か手段か</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 12</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/04/12/2014-04-12-post/">Capistrano3を最後にもう一度だけ懇切丁寧にまとめてみる</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Apr 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/04/06/2014-04-06-post/">Capistrano3がわからんので今一度イチから考えなおしてみる</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/02/20/2014-02-20-post/">Rails環境構築（5）Capistranoによるデプロイ ※未完</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 9</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/02/09/2014-02-09-post/">突然だけどVimperatorrcを晒してみる</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/02/02/2014-02-02-post/">Rails環境構築（4）nginx導入</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Feb 2</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/02/02/2014-02-02-02-post/">$ vagrant sshで仮想マシンに入れなくなった場合の対処法</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 26</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/26/2014-01-26-post/">Rails環境構築（3）PostgreSQLインストール</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 23</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/23/2014-01-23-post/">Rails環境構築（2）Rubyのインストール &#43; α</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 19</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/19/2014-01-19-post/">Rails環境構築（1） Vagrantで仮想マシン構築</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 18</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/18/2014-01-18-post/">Ruby on Rails環境構築はじめます</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/14/2014-01-14-post/">bundle installはどのパスに対してすべきなのか問題</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 9</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/09/2014-01-09-post/">twitter-bootstrap-railsでundefined methodのエラーに嵌る</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jan 5</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2014/01/05/2014-01-05-post/">今年はほぼ日からEDITに浮気しました</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+          <h3>2013</h3> 
+
+          <ul class="archives-list"> 
+            
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 28</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/12/28/2013-12-28-post/">『Webを支える技術』読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 22</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/12/22/2013-12-22-post/">Windows 8(VAIO Pro)買って最初にやったことと注意点</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 8</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/12/08/2013-12-08-post/">SSHでサーバーリモートログインする際のあれこれまとめ</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Dec 8</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/12/08/2013-12-08-02-post/">Bundle execサボってエライ目にあった</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 10</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/11/10/2013-11-10-post/">GTD環境 2013年秋版</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Nov 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/11/04/2013-11-04-post/">『RailsによるアジャイルWebアプリケーション開発』読了〜「設定より規約」なら、規約をまず知りたい</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/10/20/2013-10-20-post/">短時間に限定して図書館で情報をザッピングするという勉強法</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 14</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/10/14/2013-10-14-post/">GTDの原典読んでみたら意外にいろいろ勘違いしてたという話</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Oct 6</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/10/06/2013-10-06-post/">RoRでログイン機能を実装する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 21</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/09/21/2013-09-21-post/">RoRでScaffold作成を間違えたときの対処法が知りたい</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 16</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/09/16/2013-09-16-post/">バージョン管理に注意しながら、Ruby on Railsの動作環境を構築する</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Sep 4</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/09/04/2013-09-04-post/">『RailsによるアジャイルWebアプリケーション開発』第II部読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Aug 3</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/08/03/2013-08-03-post/">技術書のサンプル試す場合はバージョンを揃えるべきなのか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 25</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/07/25/2013-07-25-post/">『RailsによるアジャイルWebアプリケーション開発』第I部 読了</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 23</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/07/23/2013-07-23-post/">Kaoriya版Vimでtxtファイルの自動改行が解除できない件</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 21</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/07/21/2013-07-21-post/">Ruby on Railsを学ぶ、とはどこまでの範囲を学ぶのか</a>
+                    </span>
+                  </li>
+              
+             
+                  <li class="archives-list-item">
+                    <span class="archives-list-item-date">Jul 20</span>
+                    <span>
+                      <a href="https://chroju.github.io/blog/2013/07/20/2013-07-20-post/">お勉強ブログ、はじめます</a>
+                    </span>
+                  </li>
+              
+          </ul>
+      
+  </div>
+
+  <div class="page-footer"></div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+    <a class="social-icon" href="chor.chroju@gmail.com" target="_blank" rel="noopener" title="Email">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M25.2794292,5.59128519 L14,16.8707144 L2.72057081,5.59128519 C3.06733103,5.30237414 3.51336915,5.12857603 4,5.12857603 L24,5.12857603 C24.4866308,5.12857603 24.932669,5.30237414 25.2794292,5.59128519 Z M25.9956978,6.99633695 C25.998551,7.04004843 26,7.08414302 26,7.12857603 L26,20.871424 C26,21.0798433 25.9681197,21.2808166 25.9089697,21.4697335 L18.7156355,14.2763993 L25.9956978,6.99633695 Z M24.9498374,22.6319215 C24.6672737,22.7846939 24.3437653,22.871424 24,22.871424 L4,22.871424 C3.5268522,22.871424 3.09207889,22.7071233 2.74962118,22.432463 L10.0950247,15.0870594 L13.9848068,18.9768415 L14.1878486,18.7737996 L14.2030419,18.7889929 L17.6549753,15.3370594 L24.9498374,22.6319215 Z M2.00810114,21.0526627 C2.00273908,20.9929669 2,20.9325153 2,20.871424 L2,7.12857603 C2,7.08414302 2.00144896,7.04004843 2.00430222,6.99633695 L9.03436454,14.0263993 L2.00810114,21.0526627 Z"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+    <a class="social-icon" href="//twitter.com/chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="//github.com/chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+    </body>
+</html>

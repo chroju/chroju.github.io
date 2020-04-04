@@ -1,24 +1,11 @@
-section.main .content .markdown p {
-    line-height: 1.8em;
+p {
+    line-height: 2.0em;
 }
 
-section.main .content .page-heading {
-    text-transform: none;
+img {
+    max-width: 90%;
 }
 
-.markdown pre {
-    background-color: rgb(40, 43, 46);
-}
-
-.container {
-    margin: 0
-}
-
-section.main .content .markdown pre code {
-    background-color: transparent;
-}
-
-section.main .content .markdown pre {
-  white-space: pre;
-  overflow: scroll;
+.color-link, .color-link:visited {
+    color: #638bbd;
 }
