@@ -158,11 +158,6 @@
   </url>
   
   <url>
-    <loc>https://chroju.github.io/about/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chroju.github.io/blog/2019/05/24/pursue_the_best_keymaps_with_qmk_firmware/</loc>
     <lastmod>2019-05-24T21:49:37+09:00</lastmod>
   </url>
@@ -455,11 +450,6 @@
   <url>
     <loc>https://chroju.github.io/blog/2016/03/17/personal-knowledge-base-2/</loc>
     <lastmod>2016-03-17T22:09:45+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/about/</loc>
-    <lastmod>2016-03-13T11:45:24+09:00</lastmod>
   </url>
   
   <url>
@@ -1115,6 +1105,10 @@
   <url>
     <loc>https://chroju.github.io/blog/2013/07/20/2013-07-20-post/</loc>
     <lastmod>2013-07-20T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/about/</loc>
   </url>
   
 </urlset>
