@@ -7,7 +7,7 @@ hasCJKLanguage      = true
 enableEmoji         = true
 layoutdir           = "layouts"
 publishdir          = "public"
-theme               = "cocoa"
+theme               = "noteworthy"
 author              = "chroju"
 title               = "the world as code"
 pygmentsCodefences  = true
@@ -26,14 +26,14 @@ blog = "/blog/:year/:month/:day/:filename/"
 [[menu.main]]
 name                   = "Archive"
 weight                 = -120
-identifier             = "blog"
-url                    = "/blog/"
+identifier             = "archives"
+url                    = "/archives"
 
 [[menu.main]]
 name                   = "About"
 weight                 = -110
 identifier             = "about"
-url                    = "/about/"
+url                    = "/about"
 
 [params]
 latestpostscount       = 5                             # how many posts to display on the home page
@@ -42,7 +42,7 @@ author                 = "the world as code"
 cachebuster            = true                          # add the current unix timestamp in query string for cache busting css assets
 dateform               = "Jan 2, 2006"
 dateformfull           = "Mon Jan 2 2006 15:04:05 JST"
-description            = "write code to automate everything."
+# description            = "write code to automate everything."
 email                  = "chor.chroju@gmail.com"
 extracssfiles          = [ "/css/override.css" ]       # In your `static` directory, add/remove files as necessary.
 faviconfile            = "img/favicon.ico"
