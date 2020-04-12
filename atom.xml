@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 28 Mar 2020 11:25:27 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 18:24:00 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HCL をパースして、構造を組み替えて再出力する</title>
+      <link>https://chroju.github.io/blog/2020/04/11/hcl_parse_and_output/</link>
+      <pubDate>Sat, 11 Apr 2020 18:24:00 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/04/11/hcl_parse_and_output/</guid>
+      <description>Terraform などで使われる、 JSON 互換の HCL (Hashicorp Configuration Language) というデータフォーマットがある。 HCL で書かれた設定をパースすることについてはいくつかエントリーを見かけるのだ</description>
+    </item>
     
     <item>
       <title>社会人大学生1年目を終えて、大学生活と勉強法とその困難</title>

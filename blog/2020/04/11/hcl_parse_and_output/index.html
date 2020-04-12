@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>HCL をパースして、構造を組み替えて再出力する | the world as code</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://chroju.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://chroju.github.io/manifest.json">
+    <link rel="mask-icon" href="https://chroju.github.io/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.min.2545a1910010e26a9905276045afab868f812580a1e7482423da6c0c8c214d18.css" />
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-04-12%2002%3a20%3a22.510935919%20%2b0000%20UTC%20m%3d%2b0.067807794">
+    
+
+    
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-6765151-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="https://chroju.github.io/">the world as code</a>
+    </div>  
+</header>
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/archives">Archive</a>
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/about">About</a>
+  
+  <a class="color-link nav-link" href="https://chroju.github.io/atom.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+</nav>
+        <div id="content" class="content-container">
+        
+<h1 class="post-title">HCL をパースして、構造を組み替えて再出力する</h1>
+    
+    <time>April 11, 2020</time>
+    
+    <div>
+        <p>
+        <p>Terraform などで使われる、 JSON 互換の HCL (Hashicorp Configuration Language) というデータフォーマットがある。 HCL で書かれた設定をパースすることについてはいくつかエントリーを見かけるのだが、 HCL を出力するほうについてはあまり見かけないので書いてみる。</p>
+<h2 id="tfmodule">tfmodule</h2>
+<p>事の発端としては tfmodule という CLI ツールを作ったことによる。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/tfmodule" data-iframely-url="//cdn.iframe.ly/j7JrQh7"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>Terraform module を使うときは、 README などを読んで必要な変数を確認し、それに応じて設定を書いていく流れが一般的である。しかし何分これが面倒だったので、一発で module の構造をパースして、テンプレートを吐き出してくれるようなものを作れないかと考えた。</p>
+<p>例えばこんな <code>variable</code> と <code>output</code> を定義している module があったとする。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">variable</span> <span style="color:#2aa198">&#34;instance_type&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  type        <span style="color:#719e07">=</span> <span style="color:#719e07">string</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>  description <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;EC2 instance type&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  default     <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;t3.micro&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">variable</span> <span style="color:#2aa198">&#34;instance_counts&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>  type        <span style="color:#719e07">=</span> <span style="color:#719e07">number</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  description <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;Number of instances to create&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  default     <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span><span style="color:#719e07">output</span> <span style="color:#2aa198">&#34;instance_arns&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>  value <span style="color:#719e07">=</span> <span style="color:#719e07">aws_instance</span>.<span style="color:#719e07">instance</span>.*.<span style="color:#719e07">arn</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>}
+</code></pre></div><p>これに対して tfmodule は以下のようなテンプレートを出力する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">module</span> <span style="color:#2aa198">&#34;instances&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  source <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;./modules/instances&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>  // <span style="color:#719e07">EC2</span> <span style="color:#719e07">instance</span> <span style="color:#719e07">type</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>  // <span style="color:#719e07">type</span>: <span style="color:#719e07">string</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>  instance_type <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;t3.micro&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  // <span style="color:#719e07">Number</span> <span style="color:#719e07">of</span> <span style="color:#719e07">instances</span> <span style="color:#719e07">to</span> <span style="color:#719e07">create</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>  // <span style="color:#719e07">type</span>: <span style="color:#719e07">number</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  instance_counts <span style="color:#719e07">=</span> <span style="color:#2aa198">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#719e07">output</span> <span style="color:#2aa198">&#34;instances_instance_arns&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>  value <span style="color:#719e07">=</span> <span style="color:#719e07">module</span>.<span style="color:#719e07">instances</span>.<span style="color:#719e07">instance_arns</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>}
+</code></pre></div><p>処理としては HCL をパースして構造を読み取り、 module の形に再構成して出力をしている。このツールを作る中で、 HCL の出力に関して知見を得ることができた。</p>
+<h2 id="hcl-">HCL のデータ構造</h2>
+<p>HCL をパースするには、まず HCL の構造を理解する必要がある。これについては、今回は Terraform における HCL を解析するので、 <a href="https://www.terraform.io/docs/configuration/syntax.html">Syntax - Configuration Language - Terraform by HashiCorp</a> を読むと早い。正確には、このページに書かれているのは「 Terraform における HCL の使い方」でしかないので、 HCL 自体の言語仕様を知る場合には  <a href="https://github.com/hashicorp/hcl/blob/hcl2/hclsyntax/spec.md">hcl/spec.md at hcl2 · hashicorp/hcl</a> を読んだほうがよい。ちなみに Read the Docs に <a href="https://buildmedia.readthedocs.org/media/pdf/hcl/guide/hcl.pdf">https://buildmedia.readthedocs.org/media/pdf/hcl/guide/hcl.pdf</a> という URL で PDF のホワイトペーパーも置かれているのだが、こちらは一部内容が古い部分がある。</p>
+<p>ざっくり、  HCL は <code>Arguments</code> と <code>Blocks</code> という2種類のデータ構造から構成される。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>image_id <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;abc123&#34;</span>
+</code></pre></div><p>これが <code>Arguments</code> 。いわゆる key value の形を取る。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">resource</span> <span style="color:#2aa198">&#34;aws_instance&#34; &#34;example&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  ami <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;abc123&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>  <span style="color:#719e07">network_interface</span> {<span style="color:#586e75">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span><span style="color:#586e75">    # ...
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span><span style="color:#586e75"></span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">7</span>}
+</code></pre></div><p>これが <code>Blocks</code> 。 <code>{}</code> によって複数の要素を囲った形を取る。冒頭、上記で <code>resource</code> と書かれた部分は <code>type</code> と呼ばれ、その block の種別を表す。それに続くダブルクォートで囲われた2つの文字列は <code>label</code> と呼ばれ、 block を一意に識別する役割を持つ。 label の数は type ごとに定義することができ、 Terraform であれば resource の label は2つ、 variable や output の label は1つと定義されている。</p>
+<p>block の <code>{}</code> で囲われた部分は body に当たる。そして body は中に attribute と block を内包することができる。また、ファイル全体も body と呼ばれる。 HCL のデータ構造は、このような入れ子構造になっている。</p>
+<pre><code>File
+└── Body
+    ├── Attribute
+    ├── Attribute
+    └── Block
+        └── Body
+            ├── Attribute
+            └── Block
+                └── ...
+</code></pre><h2 id="hclsimple--hclparse">hclsimple / hclparse</h2>
+<p>HCL を扱うには、本家 Hashicorp が公開している <a href="https://pkg.go.dev/mod/github.com/hashicorp/hcl/v2">github.com/hashicorp/hcl/v2</a> を使うのが常道である。このライブラリには、さらに用途別でいくつかのサブパッケージが含まれている。</p>
+<p>パースをする際には hclsimple や hclparse を使うことができる。最も直感的に扱いやすいのは hclsimple で、 Go の <code>json.Marshal()</code> のように、 hcl を構造体へ変換できる。以下は <a href="https://pkg.go.dev/github.com/hashicorp/hcl/v2@v2.3.0/hclsimple?tab=doc">hclsimple package · go.dev</a> からの抜粋。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">type</span> <span style="color:#719e07">Config</span> <span style="color:#719e07">struct</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	<span style="color:#719e07">Foo</span> <span style="color:#719e07">string</span> `<span style="color:#719e07">hcl</span>:<span style="color:#2aa198">&#34;foo&#34;</span>`
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>	<span style="color:#719e07">Baz</span> <span style="color:#719e07">string</span> `<span style="color:#719e07">hcl</span>:<span style="color:#2aa198">&#34;baz&#34;</span>`
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>const exampleConfig <span style="color:#719e07">=</span> `
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>	foo <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;bar&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>	baz <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;boop&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>	`
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span><span style="color:#719e07">var</span> <span style="color:#719e07">config</span> <span style="color:#719e07">Config</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>err :<span style="color:#719e07">=</span> <span style="color:#719e07">hclsimple</span>.<span style="color:#719e07">Decode</span>(
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>	<span style="color:#2aa198">&#34;example.hcl&#34;</span>, []<span style="color:#719e07">byte</span>(<span style="color:#719e07">exampleConfig</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>	<span style="color:#719e07">nil</span>, &amp;<span style="color:#719e07">config</span>,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>if err !<span style="color:#719e07">=</span> <span style="color:#719e07">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>	<span style="color:#719e07">log</span>.<span style="color:#719e07">Fatalf</span>(<span style="color:#2aa198">&#34;Failed to load configuration: %s&#34;</span>, <span style="color:#719e07">err</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span><span style="color:#719e07">fmt</span>.<span style="color:#719e07">Printf</span>(<span style="color:#2aa198">&#34;Configuration is %v\n&#34;</span>, <span style="color:#719e07">config</span>)
+</code></pre></div><p>しかし、この方法は HCL の構造が予想可能な場合にしか使えない。不特定の構造が予期される場合には、 hclparse を使うことにより、 <code>hcl.File</code> という組み込みの構造体へ変換できる。一般的にパースだけの用途であれば、この2つを使えば十分と考えている。</p>
+<h2 id="hclwrite">hclwrite</h2>
+<p>tfmodule では hclwrite というサブパッケージを用いている。名前通り、これは HCL の出力に主眼を置いたサブパッケージになっている。先の <code>hclsimple.Decode()</code> が <code>json.Marshal()</code> と似ているので、 <code>json.Unmarshal()</code> にあたるメソッドが存在すれば嬉しいのだが、残念ながらそういった便利な機能は備わっていない。</p>
+<p>hclwrite による HCL の出力はかなり愚直な方法を取る。以下のように、先程示した HCL のデータ構造を、頭から順に作っていくような形になる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>f <span style="color:#719e07">:=</span> hclwrite.<span style="color:#268bd2">NewEmptyFile</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>rootBody <span style="color:#719e07">:=</span> f.<span style="color:#268bd2">Body</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>moduleBlock <span style="color:#719e07">:=</span> rootBody.<span style="color:#268bd2">AppendNewBlock</span>(<span style="color:#2aa198">&#34;module&#34;</span>, []<span style="color:#dc322f">string</span>{m.Name})
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>moduleBody <span style="color:#719e07">:=</span> moduleBlock.<span style="color:#268bd2">Body</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>moduleBody.<span style="color:#268bd2">SetAttributeValue</span>(<span style="color:#2aa198">&#34;source&#34;</span>, cty.<span style="color:#268bd2">StringVal</span>(m.Source))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>moduleBody.<span style="color:#268bd2">AppendNewline</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span><span style="color:#719e07">for</span> _, v <span style="color:#719e07">:=</span> <span style="color:#719e07">range</span> <span style="color:#719e07">*</span>m.Variables {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>        <span style="color:#719e07">if</span> isNoDefaults <span style="color:#719e07">&amp;&amp;</span> !reflect.<span style="color:#268bd2">DeepEqual</span>(v.Default, hclwrite.<span style="color:#268bd2">TokensForValue</span>(cty.<span style="color:#268bd2">StringVal</span>(<span style="color:#2aa198">&#34;&#34;</span>))) {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>                <span style="color:#719e07">continue</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>        moduleBody.<span style="color:#268bd2">AppendUnstructuredTokens</span>(v.<span style="color:#268bd2">generateComment</span>())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>        moduleBody.<span style="color:#268bd2">SetAttributeRaw</span>(v.Name, v.Default)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>}
+</code></pre></div><p><code>hclwrite.NewEmptyFile()</code> で返る <code>hclwrite.File</code> に、順に要素を詰め込んでいく。その後 <code>hclwrite.File.Bytes()</code> を呼ぶと、いわゆる <code>terraform fmt</code> が実行された状態の、整形された HCL が出力される。</p>
+<h3 id="setattributexxx">SetAttributeXXX</h3>
+<p>上に示したように、 <code>SetAttributeXXX()</code> というメソッドで attribute をセットできるのだが、 key は単純に string を渡せばいい一方、 value についてはそうではなく、種別にいくつかのメソッドが用意されている。</p>
+<p>最もよく使うのは <code>SetAttributeValue()</code> で、これは value として <a href="https://pkg.go.dev/github.com/zclconf/go-cty">github.com/zcolconf/go-cty</a> の <code>cty.Value</code> を取る。 cty をあんまり理解できていないのだが、 HCL が内部で利用している型システムで、 <code>cty.StringVal()</code> で文字列型、 <code>cty.BoolVal()</code> で真偽値型の <code>cty.Value</code> が返るようになっている。</p>
+<p>また、Terraform では <code>var.example</code> のようなリテラルを使うことがあるが、これは <code>SetAttributeTraversal()</code> で埋め込むことができる。主にはこの2つのいずれかを使うことになる。もう1つ <code>SetAttributeRaw()</code> というものがあり、これは <code>hclwrite.Tokens</code> という、いわばバイト列をそのまま埋め込んだような構造体を引数に取ることができる。要するに「なんでもあり」なのだが、それ故に godoc には「出来れば <code>SetAttributeValue()</code> か <code>SetAttributeTraversal()</code> を使うように」と書かれている。</p>
+<h3 id="appendunstructuredtokens">AppendUnstructuredTokens</h3>
+<p>HCL に attribute でも block でもない要素を埋め込みたいときがある。つまるところコメントなのだが、これについてはコメント埋め込み用のメソッドが hclwrite に見つからなかったので、 <code>AppendUnstructuredTokens()</code> というメソッドを使っている。</p>
+<p>その名の通り構造化されていない <code>hclwrite.Tokens</code> を直接追加するメソッドで、コメントの追加は以下のように実装している。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">...</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>moduleBody.<span style="color:#268bd2">AppendUnstructuredTokens</span>(v.<span style="color:#268bd2">generateComment</span>())
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span><span style="color:#719e07">...</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span><span style="color:#268bd2">func</span> (v <span style="color:#719e07">*</span>Variable) <span style="color:#268bd2">generateComment</span>() hclwrite.Tokens {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>        tokens <span style="color:#719e07">:=</span> hclwrite.Tokens{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>                {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>                        Type:  hclsyntax.TokenSlash,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>                        Bytes: []<span style="color:#b58900">byte</span>(<span style="color:#2aa198">&#34;//&#34;</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>                },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>                {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>                        Type:  hclsyntax.TokenIdent,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>                        Bytes: []<span style="color:#b58900">byte</span>(v.Description),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>                },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>                {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>                        Type:  hclsyntax.TokenNewline,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>                        Bytes: []<span style="color:#b58900">byte</span>(<span style="color:#2aa198">&#34;\n&#34;</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>                },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>                {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>                        Type:  hclsyntax.TokenSlash,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>                        Bytes: []<span style="color:#b58900">byte</span>(<span style="color:#2aa198">&#34;//&#34;</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>                },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">22</span>                {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">23</span>                        Type:  hclsyntax.TokenIdent,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">24</span>                        Bytes: []<span style="color:#b58900">byte</span>(<span style="color:#2aa198">&#34;type:&#34;</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">25</span>                },
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">26</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">27</span>        tokens = <span style="color:#b58900">append</span>(tokens, v.Type<span style="color:#719e07">...</span>)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">28</span>        tokens = <span style="color:#b58900">append</span>(tokens, <span style="color:#719e07">&amp;</span>hclwrite.Token{
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">29</span>                Type:  hclsyntax.TokenNewline,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">30</span>                Bytes: []<span style="color:#b58900">byte</span>(<span style="color:#2aa198">&#34;\n&#34;</span>),
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">31</span>        })
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">32</span>        <span style="color:#719e07">return</span> tokens
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">33</span>}
+</code></pre></div><p><code>hclwrite.Tokens</code> はバイト列のようなものと先程書いたが、正確には <code>hclwrite.Token</code> の slice である。ではこの <code>hclwrite.Token</code> とは何なのか、 godoc から抜粋する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#268bd2">type</span> Token <span style="color:#268bd2">struct</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>	Type  hclsyntax.TokenType
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>	Bytes []<span style="color:#dc322f">byte</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>	<span style="color:#586e75">// We record the number of spaces before each token so that we can
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span><span style="color:#586e75"></span>	<span style="color:#586e75">// reproduce the exact layout of the original file when we&#39;re making
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#586e75"></span>	<span style="color:#586e75">// surgical changes in-place. When _new_ code is created it will always
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span><span style="color:#586e75"></span>	<span style="color:#586e75">// be in the canonical style, but we preserve layout of existing code.
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span><span style="color:#586e75"></span>	SpacesBefore <span style="color:#dc322f">int</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>}
+</code></pre></div><p>バイト列、と書いたように、ここに <code>Bytes</code> でリテラルが埋め込まれる。 <code>Type</code> はそのリテラルの種類を示しており、例えばリテラルがドットであれば <code>hclsyntax.TokenDot</code> 、スラッシュであれば <code>hclsyntax.TokenSlash</code> といったものが用意されている。</p>
+<h2 id="tfmodule-">tfmodule での実装</h2>
+<p>hclwrite にも HCL をパースするためのメソッドが存在しているので、 hclwrite だけを使っている。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>src, err <span style="color:#719e07">:=</span> ioutil.<span style="color:#268bd2">ReadFile</span>(path)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span><span style="color:#719e07">if</span> err <span style="color:#719e07">!=</span> <span style="color:#cb4b16">nil</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>        <span style="color:#719e07">return</span> err
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>file, diags <span style="color:#719e07">:=</span> hclwrite.<span style="color:#268bd2">ParseConfig</span>(src, path, hcl.InitialPos)
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span><span style="color:#719e07">if</span> diags.<span style="color:#268bd2">HasErrors</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>        <span style="color:#719e07">return</span> diags
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>body <span style="color:#719e07">:=</span> file.<span style="color:#268bd2">Body</span>()
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span><span style="color:#719e07">for</span> _, block <span style="color:#719e07">:=</span> <span style="color:#719e07">range</span> body.<span style="color:#268bd2">Blocks</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>        <span style="color:#719e07">switch</span> block.<span style="color:#268bd2">Type</span>() {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>        <span style="color:#719e07">case</span> <span style="color:#2aa198">&#34;variable&#34;</span>:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>                variables = <span style="color:#b58900">append</span>(variables, <span style="color:#268bd2">parseVariable</span>(block))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>        <span style="color:#719e07">case</span> <span style="color:#2aa198">&#34;output&#34;</span>:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>                outputs = <span style="color:#b58900">append</span>(outputs, <span style="color:#268bd2">parseOutput</span>(block))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>        <span style="color:#719e07">case</span> <span style="color:#2aa198">&#34;resource&#34;</span>:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>                resources = <span style="color:#b58900">append</span>(resources, <span style="color:#268bd2">parseResource</span>(block))
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>        }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">21</span>}
+</code></pre></div><h2 id="-oss">参考となる OSS</h2>
+<p>長々書いてきたが、正直まだきちんと hashicorp/hcl を理解できたとは思っておらず、もう少し楽な実装がありそうな気がしている。ただ、なかなか実装例を見かけることが少ない。 <a href="https://github.com/shuaibiyy/awesome-terraform">shuaibiyy/awesome-terraform</a> で Terraform 関連のツールをいくつか見てみたりもしたのだが、特に hclwrite を使っているものは見つけられなかった。今のところ参考になりそうなのは2つほど。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/apparentlymart/terraform-clean-syntax" data-iframely-url="//cdn.iframe.ly/DbBZSM2"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>Terraform の開発に関わっている apparentlymart 氏の個人レポジトリ。 <code>terraform fmt</code> のように、 HCL を Terraform 0.12 の書式で整形し直してくれるコマンドラインツールで、がっつり hclwrite を使っている。 tfmodule での実装は、かなりこれを参考にさせてもらった。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/hashicorp/terraform-config-inspect" data-iframely-url="//cdn.iframe.ly/6Cg0Jow"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>この記事を書く中で見つけた、 tfmodule と似た terraform module の解析ツール。 Hashicorp の org 内にあるのだが、今まで気付いていなかった。 hclwrite は使っていないが、 terraform module をどのように解析しているか、という点で学べる点がありそうだった。</p>
+
+        </p>
+    </div>
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+    </body>
+</html>
