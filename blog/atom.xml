@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 11 Apr 2020 18:24:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 23:10:50 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>COVID-19 とリモートワーク - 設備だけではなくルーチンも大事</title>
+      <link>https://chroju.github.io/blog/2020/04/15/remote_work_infrastructure_engineer_under_covid_19/</link>
+      <pubDate>Wed, 15 Apr 2020 23:10:50 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/04/15/remote_work_infrastructure_engineer_under_covid_19/</guid>
+      <description>COVID-19 の影響で僕も絶賛リモートワーク中なのだが、せっかくなのでどんな感じでやっているのか記録も兼ねて書いておく。 インフラエンジニアはリモートワー</description>
+    </item>
     
     <item>
       <title>HCL をパースして、構造を組み替えて再出力する</title>
