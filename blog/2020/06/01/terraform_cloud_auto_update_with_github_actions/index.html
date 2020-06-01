@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>Terraform Cloud の terraform バージョンアップを GitHub Actions で自動化する | the world as code</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://chroju.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://chroju.github.io/manifest.json">
+    <link rel="mask-icon" href="https://chroju.github.io/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.min.2545a1910010e26a9905276045afab868f812580a1e7482423da6c0c8c214d18.css" />
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-06-01%2000%3a13%3a40.350804961%20%2b0000%20UTC%20m%3d%2b0.081177983">
+    
+
+    
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-6765151-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="https://chroju.github.io/">the world as code</a>
+    </div>  
+</header>
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/archives">Archive</a>
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/about">About</a>
+  
+  <a class="color-link nav-link" href="https://chroju.github.io/atom.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+</nav>
+        <div id="content" class="content-container">
+        
+<h1 class="post-title">Terraform Cloud の terraform バージョンアップを GitHub Actions で自動化する</h1>
+    
+    <time>June 1, 2020</time>
+    
+    <div>
+        <p>
+        <p>Terraform Cloud がサービス開始して約1年、 state file の保存のみならず、 <code>plan</code> と <code>apply</code> の実行環境としてもバリバリ使わせてもらっている。ちょっと面倒なのが、 plan 等を実行する workspace の Terraform バージョン設定である。常に <code>latest</code> を使うというアグレッシブな設定もできるが、そうしない限りは手動でバージョンアップが必要になっている。</p>
+<p><a href="https://gyazo.com/ddda6bbe377f7c0c09a9bed473e24374"><img src="https://i.gyazo.com/ddda6bbe377f7c0c09a9bed473e24374.png" alt="Image from Gyazo" width="921"/></a></p>
+<p>まぁガンガン <code>latest</code> にしていくのも考え方によってはありかもしれないが、メジャーバージョンアップ（ Terraform の場合 0.12 → 0.13 をメジャーバージョンアップと呼びたい）までされてしまうのは抵抗がある人も多いのではないだろうか。そもそも Terraform には remote config の中にバージョン指定を出来る箇所があり、自分の場合はこんな感じで 0.12 台のみを許可している。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span><span style="color:#719e07">terraform</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  <span style="color:#719e07">backend</span> <span style="color:#2aa198">&#34;remote&#34;</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    hostname <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;app.terraform.io&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>    organization <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;sample&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>    <span style="color:#719e07">workspaces</span> {
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>      name <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;sample&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>  }
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>  required_version <span style="color:#719e07">=</span> <span style="color:#2aa198">&#34;~&gt; 0.12.0&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>}
+</code></pre></div><p>望むらくは、この <code>required version</code> をもとにしていい感じにバージョン設定してほしい。なのでそういう GitHub Actions を作った。</p>
+<h2 id="terraform-cloud-updater">terraform-cloud-updater</h2>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/marketplace/actions/terraform-cloud-workspace-auto-update" data-iframely-url="//cdn.iframe.ly/s3PFvW5"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>input として最低限、対象の Terraform ファイルが保存された <code>working_dir</code> を指定し、環境変数 <code>TFE_TOKEN</code> で Terraform Cloud の API トークンを渡してあげれば動作する。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 1</span>on:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 2</span>  push:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 3</span>    branches:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 4</span>      - master
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 5</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 6</span>jobs:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 7</span>  tf_cloud_update:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 8</span>    runs-on: ubuntu-latest
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050"> 9</span>    steps:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">10</span>      - uses: actions/checkout@v2
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">11</span>      - name: check update
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">12</span>        id: check
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">13</span>        uses: chroju/terraform-cloud-updater@v1
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">14</span>        with:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">15</span>          working_dir: ./terraform
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">16</span>        env:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">17</span>          TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">18</span>      - name: result
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">19</span>        run: echo <span style="color:#2aa198">&#34;${{ steps.check.outputs.output }}&#34;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">20</span>        if: <span style="color:#2aa198">&#34;${{ steps.check.outputs.is_available_update == &#39;true&#39; }}&#34;</span>
+</code></pre></div><p>デフォルトの設定だと workspace のバージョンアップまでは自動で行わず、新しいバージョンが見つかったら <code>outputs.is_available_update</code> の値が <code>true</code> になり、バージョン情報が <code>outputs.output</code> にセットされるだけだ。あとは <code>is_available_update</code> で条件分岐して、例えば slack などで通知する方式を想定している。 <code>comment_pr</code> という input を <code>true</code> にすれば、 Pull request をトリガーとして使った際にコメントで通知してくれる機能も作ってはあるが、バージョンチェックであれば cron 形式で定期実行するほうがいいだろう。</p>
+<p>input の <code>auto_update</code> を <code>true</code> にすることで、自動的に更新まで行ってくれる。その際、 required version との整合性を確認し、整合しない場合には更新は行わず、通知だけが行われる。以下は <code>comment_pr</code> を <code>true</code> にした場合のサンプルだが、 <code>outputs.output</code> からも同様のメッセージが取得できる。</p>
+<p><a href="https://gyazo.com/c05c61d030dd2b6f06bd9573a905152a"><img src="https://i.gyazo.com/c05c61d030dd2b6f06bd9573a905152a.png" alt="Image from Gyazo" width="741"/></a></p>
+<h2 id="heading">実装</h2>
+<h3 id="go-tfe">go-tfe</h3>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/hashicorp/go-tfe" data-iframely-url="//cdn.iframe.ly/CxCwopM"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>Terraform Cloud の API ライブラリは hashicorp が公開している。名前が <code>tfe</code> になっているが、これは Terraform Enterprise と Cloud の共通 API ライブラリだからであって、 Cloud で特に問題なく使えた。</p>
+<p>ちなみに Go で CLI ツールとして書いているので、この Action のもとになっているレポジトリを build すれば、ローカルで実行する CLI としても使うことができる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ terraform-cloud-updater -h
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>Usage: terraform-cloud-updater <span style="color:#719e07">[</span>--version<span style="color:#719e07">]</span> <span style="color:#719e07">[</span>--help<span style="color:#719e07">]</span> &lt;command&gt; <span style="color:#719e07">[</span>&lt;args&gt;<span style="color:#719e07">]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">4</span>Available commands are:
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">5</span>    check     Check <span style="color:#719e07">if</span> new Terraform version is available
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">6</span>    update    Update Terraform cloud workspace terraform version
+</code></pre></div><h3 id="required-version-">required version の処理</h3>
+<p>一番面倒くさかったのが required version だった。セマンティックバージョニングはいわゆる小数ではなく、ドットを2つ挟んだ数値形式なので、単なる数値比較を行なうことができず、逐一ロジックを組んでいった。また required version を示すオペランドの中には、 <code>~&gt; 0.12</code> （0.12.0 以上かつ 0.13.0 未満の意）といった複数の意味をはらんだものもあり、これも自前で判定ロジックを組んだ。</p>
+<p>と、いろいろ書いた末に「セマンティックバージョニングをよろしくやってくれるライブラリあるんでは？」と思って探してみたら当の hashicorp から公開されていたわけなのだが。勉強になったのでいいか、と思いつつ、こちらも比較で見てみようと思っている。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/hashicorp/go-version" data-iframely-url="//cdn.iframe.ly/xFgS2MK"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<h3 id="-github-actions">初めての GitHub Actions</h3>
+<p>GitHub Actions 自体はよく使っているものの、自分で Action を作るのはこれが初めてだった。ここでは詳細な作り方などには触れないが、 Action を実行する Dockerfile と entrypoint.sh を書き、あとはメタ情報を定義した action.yml を設置するだけでよいので、非常にお手軽に感じた。ちなみに Action は JS か Docker で作れるのだが、後者を選んだのは単に JS が書けないから。書けるのであれば実行速度などを鑑みても JS のほうがいいと思う。</p>
+<p>なお、 GitHub Actions は <a href="https://github.com/marketplace">GitHub Marketplace</a> で公開ができる。そのための操作も非常にシンプルで、レポジトリのルートに action.yml を置くと勝手に判定されて、 Marketplace で公開するためのボタンが表示されるようになっていた。</p>
+<p><a href="https://gyazo.com/229fea07a252ea16fb56de4637fe3553"><img src="https://i.gyazo.com/229fea07a252ea16fb56de4637fe3553.png" alt="Image from Gyazo" width="461"/></a></p>
+<h2 id="terraform-">Terraform のバージョン管理という根深い問題</h2>
+<p>Terraform のバージョン管理問題はなかなか根深い。というのも Terraform の仕様上、一度使用したバージョンより古いバージョンに戻ることはできないようになっているからだ。そのため複数の Terraform レポジトリを扱っている場合、バージョンは <code>required version</code> に従って一括で揃えられるようにしたいという欲求が大きい。</p>
+<p>複数の Terraform バージョンを切り替えるためのコマンドラインツール tfenv においても、 <a href="https://github.com/tfutils/tfenv/issues/124">tfenv doesn't read the required_version from conf.tf · Issue #124 · tfutils/tfenv</a> ということで、 required version に則って自動的に切り替えてほしいという issue が挙がっており、このあたりは悩んでいる人が多いのではないかと推察している。</p>
+
+        </p>
+    </div>
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+    </body>
+</html>

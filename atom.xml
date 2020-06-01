@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 15 Apr 2020 23:10:50 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 08:06:51 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Terraform Cloud の terraform バージョンアップを GitHub Actions で自動化する</title>
+      <link>https://chroju.github.io/blog/2020/06/01/terraform_cloud_auto_update_with_github_actions/</link>
+      <pubDate>Mon, 01 Jun 2020 08:06:51 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/06/01/terraform_cloud_auto_update_with_github_actions/</guid>
+      <description>Terraform Cloud がサービス開始して約1年、 state file の保存のみならず、 plan と apply の実行環境としてもバリバリ使わせてもらっている。ちょっと面倒なのが、 plan 等を実行する</description>
+    </item>
     
     <item>
       <title>COVID-19 とリモートワーク - 設備だけではなくルーチンも大事</title>
