@@ -4,21 +4,26 @@
   
   <url>
     <loc>https://chroju.github.io/blog/</loc>
-    <lastmod>2020-06-01T08:06:51+09:00</lastmod>
+    <lastmod>2020-08-12T21:57:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2020/08/12/notion_and_scrapbox/</loc>
+    <lastmod>2020-08-12T21:57:36+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/tags/</loc>
-    <lastmod>2020-06-01T08:06:51+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chroju.github.io/blog/2020/06/01/terraform_cloud_auto_update_with_github_actions/</loc>
-    <lastmod>2020-06-01T08:06:51+09:00</lastmod>
+    <lastmod>2020-08-12T21:57:36+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://chroju.github.io/</loc>
+    <lastmod>2020-08-12T21:57:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chroju.github.io/blog/2020/06/01/terraform_cloud_auto_update_with_github_actions/</loc>
     <lastmod>2020-06-01T08:06:51+09:00</lastmod>
   </url>
   

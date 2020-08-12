@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Jun 2020 08:06:51 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 21:57:36 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>notion と情報管理、あるいは階層整理欲求と非階層整理の両立</title>
+      <link>https://chroju.github.io/blog/2020/08/12/notion_and_scrapbox/</link>
+      <pubDate>Wed, 12 Aug 2020 21:57:36 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/08/12/notion_and_scrapbox/</guid>
+      <description>Scrapbox を長らくメモ環境としてはメインで使っていて、それは今も変わらないのだけど、それと並行して notion も使い始めたので、そのあたりについて書こうと思う</description>
+    </item>
     
     <item>
       <title>Terraform Cloud の terraform バージョンアップを GitHub Actions で自動化する</title>
