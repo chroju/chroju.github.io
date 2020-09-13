@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 12 Aug 2020 21:57:36 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2020 18:46:53 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>脳内 dump のための Dynalist と、永続する外部脳としての Scrapbox</title>
+      <link>https://chroju.github.io/blog/2020/09/13/dynalist_and_scrapbox_and_gyazo_notion/</link>
+      <pubDate>Sun, 13 Sep 2020 18:46:53 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/09/13/dynalist_and_scrapbox_and_gyazo_notion/</guid>
+      <description>前回のエントリー で notion と Scrapbox の個人的な比較と、階層整理に関するお気持ちを書いた。その上で、現状じゃあ notion とか Scrapbox とかどうやって使ってんの、という話を</description>
+    </item>
     
     <item>
       <title>notion と情報管理、あるいは階層整理欲求と非階層整理の両立</title>
