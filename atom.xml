@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 13 Sep 2020 18:46:53 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 19:25:32 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GitHub default branch を意識しなくて済むようにする</title>
+      <link>https://chroju.github.io/blog/2020/09/21/github_default_branch_chaging/</link>
+      <pubDate>Mon, 21 Sep 2020 19:25:32 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/09/21/github_default_branch_chaging/</guid>
+      <description>10月1日より、 GitHub で新規レポジトリの default branch が main に変更される。この設定はオプトアウト可能であり、ユーザーや organization それぞれで必要に応じてあらかじめ設定</description>
+    </item>
     
     <item>
       <title>脳内 dump のための Dynalist と、永続する外部脳としての Scrapbox</title>

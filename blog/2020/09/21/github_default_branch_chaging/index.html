@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no" />
 
-    <title>bundle installはどのパスに対してすべきなのか問題 | the world as code</title>
+    <title>GitHub default branch を意識しなくて済むようにする | the world as code</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-09-21%2010%3a56%3a11.702495237%20%2b0000%20UTC%20m%3d%2b0.522496622">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-09-21%2010%3a56%3a11.250376134%20%2b0000%20UTC%20m%3d%2b0.070377519">
     
 
     
@@ -144,22 +144,28 @@ if (!doNotTrack) {
 </nav>
         <div id="content" class="content-container">
         
-<h1 class="post-title">bundle installはどのパスに対してすべきなのか問題</h1>
+<h1 class="post-title">GitHub default branch を意識しなくて済むようにする</h1>
     
-    <time>January 14, 2014</time>
+    <time>September 21, 2020</time>
     
     <div>
         <p>
-        <p>今まであまり意識していなかったのだが、bundle installコマンドを打ったときにGemはどこにインストールされるのか？という問題がある。オプションなしにこのコマンドを実行した場合、Gemはシステム側（すなわちusr/lib/ruby/gems/云々）に入ってしまうわけだが、一つの環境で複数アプリを構築している場合はこれだと困るし、何より各アプリごとにGemfileを用意している意味が無い。というわけで、bundle installはパスを指定すべきである、ということ。</p>
-<pre><code>% bundle install --path vendor/bundle
-</code></pre><p>Railsの場合はvendor/bundleディレクトリがあるので、ここを明示的に指定してやれば良い。これでGemも含めてアプリ内で「閉じた」状態にすることができる。</p>
-<p>まぁこのへんの話は今更自分が書くまでもなく、いくつか参考になるエントリーがあった。ただ、自分が使っていた有名な<a href="http://railstutorial.jp/">オンラインのRoRチュートリアル</a>にはこのことが書かれてなかったので、書き留めた次第。</p>
-<ul>
-<li><a href="http://qiita.com/emadurandal/items/a60886152a4c99ce1017">Rails開発環境の構築（rbenvでRuby導入からBundler、Rails導入まで） - Qiita [キータ]</a></li>
-<li><a href="http://memo.yomukaku.net/entries/IpCSQmo">Bundler再履修: bundle execって何？ gemはどこに入るの？ - memo.yomukaku.net</a></li>
-</ul>
-</blockquote>
-<p>で、<a href="http://chroju89.hatenablog.jp/entry/2014/01/09/235505">先日のエラー</a>についてもこれが原因ではないかと思ったのだが。。。そんなことはありませんでした。</p>
+        <div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 52.5095%; padding-top: 120px;"><a href="https://github.blog/changelog/2020-08-26-set-the-default-branch-for-newly-created-repositories/" data-iframely-url="//cdn.iframe.ly/yt7u8pA"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>10月1日より、 GitHub で新規レポジトリの default branch が <code>main</code> に変更される。この設定はオプトアウト可能であり、ユーザーや organization それぞれで必要に応じてあらかじめ設定しておく必要があるわけだが、みなさま確認はお済みだろうか。</p>
+<p>default branch 名として <code>master</code> を使うことの是非の話はさておき、今後は default branch がレポジトリによって多種多様になる可能性が高い。これまでは何も考えず <code>git switch master</code> を打っていた操作が、レポジトリごとに「main だっけなんだっけ」みたいな思考を挟まなくてはならないのはさすがに面倒である。ということで、 default branch を少なくともローカルでは意識しない生活を送ることにした。</p>
+<h2 id="default-branch-">default branch をコマンドで取得する</h2>
+<p>端的に結論から言えば、 <code>git symbolic-ref --short refs/remotes/origin/HEAD</code> を打てばよい。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ git symbolic-ref --short refs/remotes/origin/HEAD
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>origin/master
+</code></pre></div><p>具体的にこれは何をしているかと言えば、 <code>.git/refs/remotes/origin/HEAD</code> から情報を取得している。 <code>.git/refs</code> は git レポジトリ内の各種参照情報が格納されたディレクトリであり、その中でも <code>.git/refs/remotes</code> には追跡ブランチの情報が格納されている。例えば追跡ブランチ <code>origin/hoge</code> が存在すれば <code>.git/refs/remotes/origin/hoge</code> ファイルが存在し、その内容は <code>origin/hoge</code> の最新 commit hash となっている。 <code>.git/refs/remotes/origin/HEAD</code> はリモートリポジトリの HEAD が参照するブランチの情報が格納されており、つまるところここから default branch が取得できる。</p>
+<p>ファイルを直に <code>cat</code> しても値は取得できるが、安全性を鑑みて <code>.git/refs</code> 配下を触る場合は <code>git symbolic-ref</code> コマンドを使うことが推奨されている。このあたり、詳しくは以下の記事を参照した。 Git に関してはこの git book を読めばだいたい解決すると認識している。</p>
+<p>参照 : <a href="https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-Git%E3%81%AE%E5%8F%82%E7%85%A7">Git - Gitの参照</a></p>
+<h2 id="default-branch--switch-">default branch へ switch するサブコマンドをつくる</h2>
+<p>default branch の取得方法がわかったので、あとは好きにこれを使えばいいのだが、僕の場合は <code>git switch master</code> が一番よくつかうコマンドだったので、これを改め、 <code>git default</code> コマンドで default branch へ switch できるようにした。</p>
+<p>git には、 PATH が通った場所に <code>git-hoge</code> の命名規則に沿ったコマンドがある場合、 <code>git hoge</code> のサブコマンド形式で実行できるようになるという性質がある（参考 : <a href="https://blog.ton-up.net/2013/12/12/git-subcommand/">gitのサブコマンドを自分で作る - blog.ton-up.net</a>）。これを利用して、 <code>/usr/local/bin/git-default</code> に以下のスクリプトを書いて保存した。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">#!/bin/bash
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span><span style="color:#719e07"></span>git switch <span style="color:#719e07">$(</span>git symbolic-ref --short refs/remotes/origin/HEAD | cut -f <span style="color:#2aa198">2</span> -d <span style="color:#2aa198">&#39;/&#39;</span><span style="color:#719e07">)</span>
+</code></pre></div><p><code>origin/master</code> という慣れ親しんだものが絶対ではなくなる、と知ったときにはかなり同様したが、まぁ結局のところ名前なんて飾りであるとも思うし、意識しなくて済むものは意識しない形にどんどん持って行こうと思う。</p>
 
         </p>
     </div>
