@@ -40,3 +40,21 @@ git switch $(git symbolic-ref --short refs/remotes/origin/HEAD | cut -f 2 -d '/'
 
 `origin/master` という慣れ親しんだものが絶対ではなくなる、と知ったときにはかなり同様したが、まぁ結局のところ名前なんて飾りであるとも思うし、意識しなくて済むものは意識しない形にどんどん持って行こうと思う。
 
+## 追記 2020-09-22) default branch 変更の手順
+
+そもそもの default branch 変更の手順だが、 `branch -m` コマンドで master からブランチ名を変更した上で、 `push -u origin HEAD` した後、 GitHub 側で repository settings から設定変更を行うことになる。
+
+```bash
+$ git branch -m master main
+$ git push -u origin HEAD
+```
+
+ただ、 `.git/refs/remotes/origin/HEAD` は `git clone` した際に確定してしまっており、この手順を行っても自動的に GitHub の設定に追従することはない。 `symbolic-ref` コマンドで別途編集してやる必要がある。
+
+```bash
+$ git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+```
+
+default branch 変更に関しては、 github/renaming で guidance が公開されているので、こちらも合わせて参照したい。
+
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/github/renaming" data-iframely-url="//cdn.iframe.ly/GDo9Tyb"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
