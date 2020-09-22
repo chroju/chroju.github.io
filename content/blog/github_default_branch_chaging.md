@@ -55,6 +55,14 @@ $ git push -u origin HEAD
 $ git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 ```
 
+また、 `git init` した際の default branch については、 `.gitconfig` で global に設定できる。
+
+```ini
+[init]
+  templatedir = ~/.gittemplates
+  defaultBranch = main
+```
+
 default branch 変更に関しては、 github/renaming で guidance が公開されているので、こちらも合わせて参照したい。
 
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/github/renaming" data-iframely-url="//cdn.iframe.ly/GDo9Tyb"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
