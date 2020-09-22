@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-09-22%2000%3a41%3a07.423522086%20%2b0000%20UTC%20m%3d%2b0.086102397">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-09-22%2000%3a47%3a43.714778096%20%2b0000%20UTC%20m%3d%2b0.082740308">
     
 
     
@@ -172,6 +172,10 @@ if (!doNotTrack) {
 <span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>$ git push -u origin HEAD
 </code></pre></div><p>ただ、 <code>.git/refs/remotes/origin/HEAD</code> は <code>git clone</code> した際に確定してしまっており、この手順を行っても自動的に GitHub の設定に追従することはない。 <code>symbolic-ref</code> コマンドで別途編集してやる必要がある。</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span>$ git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+</code></pre></div><p>また、 <code>git init</code> した際の default branch については、 <code>.gitconfig</code> で global に設定できる。</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">1</span><span style="color:#719e07">[init]</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">2</span>  templatedir <span style="color:#719e07">=</span> <span style="color:#2aa198">~/.gittemplates
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#495050">3</span><span style="color:#2aa198">  defaultBranch = main</span>
 </code></pre></div><p>default branch 変更に関しては、 github/renaming で guidance が公開されているので、こちらも合わせて参照したい。</p>
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/github/renaming" data-iframely-url="//cdn.iframe.ly/GDo9Tyb"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
