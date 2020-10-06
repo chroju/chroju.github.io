@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 21 Sep 2020 19:25:32 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 14:48:02 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SRE としてのキャリアパスを考える</title>
+      <link>https://chroju.github.io/blog/2020/10/06/career_path_vision_strategy/</link>
+      <pubDate>Tue, 06 Oct 2020 14:48:02 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/10/06/career_path_vision_strategy/</guid>
+      <description>長らく、明確なキャリアパスというものを描かずに10年近くやってきているのだが、ふと「きちんとキャリアパスを作るべきなのではないか？」という考</description>
+    </item>
     
     <item>
       <title>GitHub default branch を意識しなくて済むようにする</title>
