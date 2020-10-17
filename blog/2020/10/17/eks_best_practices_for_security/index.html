@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no" />
 
-    <title>GitHub Actions - Dockerfile を突っ込んで自動化するという考え方 | the world as code</title>
+    <title>EKS Best Practices Guide for Security を読んだ | the world as code</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-10-17%2009%3a01%3a55.793378365%20%2b0000%20UTC%20m%3d%2b0.385602668">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-10-17%2009%3a01%3a55.491238377%20%2b0000%20UTC%20m%3d%2b0.083462680">
     
 
     
@@ -144,31 +144,85 @@ if (!doNotTrack) {
 </nav>
         <div id="content" class="content-container">
         
-<h1 class="post-title">GitHub Actions - Dockerfile を突っ込んで自動化するという考え方</h1>
+<h1 class="post-title">EKS Best Practices Guide for Security を読んだ</h1>
     
-    <time>December 15, 2018</time>
+    <time>October 17, 2020</time>
     
     <div>
         <p>
-        <p><a href="https://blog.github.com/jp/2018-10-24-action-demos/">GitHub Actions</a> が Limited Public Beta で使えるようになっていたので触ってみた。<a href="https://developer.github.com/actions/">マニュアルはすでにパブリックに公開されている</a> ので、使い方的なことは書かずに、触ってみた印象感想中心で少し書きます。</p>
-<p>現状では private レポジトリだけで、このように「Actions」タブが現れるようになっている。ここを開くとビジュアルエディターで Actions を設定できるし、テキストエディタで <code>.github/main.workflow</code> ファイルを手動で作成しても使える。</p>
-<p><a href="https://gyazo.com/c0edc7d6f195f09b00582021835662de"><img src="https://i.gyazo.com/c0edc7d6f195f09b00582021835662de.png" alt="Image from Gyazo" width="608"/></a></p>
-<h2 id="docker-run-">docker run を組み合わせてワークフローをつくる</h2>
-<p>とはいえ CI ツールは Jenkins と CircleCI しか使ったことがないので、自ずとそれらとの比較になってしまうが、あえて挙げれば  CircleCI 2.0 と近いところが多い。CircleCI 2.0 では自動で実行する一連のプロセスを <code>Job</code> という単位に分割し、各 Job では指定した Docker コンテナの中でコマンドを実行していく形を取るが、 GitHub Actions も同様に Job に相当する <code>Action</code> で分割され、個々の Action に Docker コンテナを紐付ける。</p>
-<p>ただし大きく異なる点として、CircleCI における Docker コンテナがあくまでコマンドの実行環境としての扱いであるのに対し、 GitHub Actions では <code>docker run</code> の実行 = コマンドの実行、という感覚になる。どういうことかと言うと、各 Action では実行するコマンドを <code>runs</code> と <code>args</code> という項目で設定できるのだが、これらは <code>runs</code> が Docker の <code>ENTRYPOINT</code> を、 <code>args</code> が <code>CMD</code> を override するものとして設定されているものであって、 Docker コンテナ内で実行させるというものではないから。</p>
-<p><a href="https://gyazo.com/5acf3940d83bf721d1d025cd31833861"><img src="https://i.gyazo.com/5acf3940d83bf721d1d025cd31833861.png" alt="Image from Gyazo" width="361"/></a></p>
-<p>つまり、各 Action は <code>docker run</code> コマンドを一発実行するだけのものと捉えてよく、コンテナ起動後にその中で何かを実行する、という形を取らない。これは単純に考えれば各 Job で1回しかコマンドの実行機会が与えられないということであり、実行したいコマンドの数だけ Job を作る必要が出てきてしまう。それはさすがにちょっと冗長ではという気もするが、 <a href="https://github.com/actions">https://github.com/actions</a> にいくつか公開済みのサンプルを見てもわりとそういう組み方をしている。以下は Dockerfile から image を build して、 AWS の EKS へデプロイするサンプルだが、 Action 数は計10個に及んでいる。</p>
-<p><a href="https://github.com/actions/example-aws/blob/master/.github/main.workflow">example-aws/main.workflow at master · actions/example-aws</a></p>
-<p>まだユースケースが少ないので、どういう Action の組み方がベストなのかはわからないが、仮に1つの Action で複数のコマンドを実行させたい場合には、スクリプトを作って <code>ENTRYPOINT</code> に渡す形になるかと思う。 Action で起動する Docker コンテナは、レポジトリ内の Dockerfile から build させることができる（ちなみに実行の度に逐一 build するので実行時間は速くない。キャッシュしたい）ので、任意のコマンドを複数実行する Dockerfile を作るのは手かもしれない。ただ、個人的にはそういうやり方は求められていなくて、あくまで Docker コンテナの、というべきか、 <code>docker run</code> の、というべきか、その組み合わせでワークフローを組むものだと考えている。先に挙げた <a href="https://github.com/actions">https://github.com/actions</a> には GitHub Actions で使うための Dockerfile がいくつか GitHub から提供されている。現状は <code>AWS CLI</code> を実行できるもの、 <code>docker</code> コマンドを扱えるものなど数が限られるが、これが今後増えていき、またユーザーが作成する Dockerfile も集まってくれば、それらを組み合わせて様々なワークフローが作れるはず。</p>
-<h2 id="trigger-">Trigger できるイベントはかなり豊富</h2>
-<p>GitHub と連携させて使う CI ツールは多くの場合 <code>git push</code> で triggered されるが、 GitHub Actions は GitHub 組み込みなだけあって、 <a href="https://developer.github.com/actions/creating-workflows/workflow-configuration-options/#events-supported-in-workflow-files">trigger として扱えるイベント</a>が非常に多い。 star を付けられたときにも trigger することができる。</p>
-<p>star を付けられたタイミングで test や build を回したいというユースケースもあんまりないと思うし、これは CI ツールよりもっと広く、 GitHub レポジトリで何かしらのイベントが発生したときに、自動実行したいこと全般を管理するための広範なツールとして捉えるべきなんだろうと思う。今までであれば IFTTT や何かしらの bot を使って、例えば star やプルリクが発生したときに slack へ通知させたりしていた人も多いと思うが、これを GitHub Actions を使う形にしてしまえば、外部のツールを使わずにレポジトリ内だけで外部連携関係の管理が完結する。</p>
-<blockquote>
-<p>継続的インテグレーションと継続的デリバリー（CI/CD）はActionsのユースケースのほんの一部だ。たしかにその面で役立つが、Actionsはそれ以上のものだ。これはDevOps全体に革命を起こすものだとと思う。なぜならActionsを用いることでこの種のものとして最高のアプリケーション、フレームワークのデプロイメントのサイクルを構築できるからだ。</p>
-</blockquote>
-<p><a href="https://jp.techcrunch.com/2018/10/17/2018-10-16-github-launches-actions-its-workflow-automation-tool/">GitHubからワークフロー自動化ツール、Actions登場――独自サービス提供の第一弾 | TechCrunch Japan</a></p>
-<p>slack などに通知するときに必要となる API キーも <code>secrets</code> として暗号化した変数で渡すことができる。ただ現状は各レポジトリ間で <code>secrets</code> を共有することができないので、レポジトリを切るたびにいちいち設定が必要になり逆に管理が面倒とも言えるかもしれない（bot で通知を制御する場合、bot 内で一括管理ができるはずなので）。他にもまだまだ不足している要素は多く感じる。例えば golang の build を実装しようと思ったとき、 Docker の <code>WORKSPACE</code> が現状だと <code>/github/workspace</code> というディレクトリに固定されてしまっているので、 <code>$GOPATH</code> 内で実行する必要のある <code>dep ensure</code> が上手く実行できなくてだいぶ苦労したりした。</p>
-<p>ただそういった細かな点さえ解消すれば、結構魅力的なツールになりそうだと感じる。GitHub レポジトリを中心として仕事をする中で自動化したいことがあれば、全部 Dockerfile を書いてレポジトリの中に放り込めばいい、ということになるわけだから。</p>
+        <p><a href="https://aws.github.io/aws-eks-best-practices/">Amazon EKS Best Practices Guide for Security</a> を読んだ。今年5月に公開された比較的新しい文書で、いわゆる docs.aws.amazon.com の中に収録されておらず、単独で github.io にホストされている。ともすると、 UI からは AWS official な文書なのかわかりにくいのだが、以下の通り、 official でアナウンスされている。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://aws.amazon.com/jp/about-aws/whats-new/2020/05/introducing-amazon-eks-best-practices-guide-for-security/" data-iframely-url="//cdn.iframe.ly/2Hf1Mhp?iframe=card-small"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>EKS と銘打たれている通り、 Kubernetes ではなく EKS にフォーカスした記述は少なくない。例えば暗号化についての項では、 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2020/02/announcing-36-percent-faster-ebs-optimized-performance-on-additional-aws-nitro-system-based-amazon-ec2-instances/">Nitro</a> におけるトラフィックのデフォルト暗号化に触れていたりする。しかし大半は Kubernetes あるいは Docker そのもののプラクティスになっていて、 EKS に限らずとも、 Kubernetes 使用者にとって学べることは多い。内容は Identity and Access Management に始まり、 Pod や Network 、 Runtime といった各要素のセキュリティプラクティスを俯瞰し、 PCI DSS のようなコンプライアンス関係についても少し記述を割いている、かなり包括的な内容となっている。</p>
+<p>すべてオープンソースでの公開となっており、 <a href="https://github.com/aws/aws-eks-best-practices">https://github.com/aws/aws-eks-best-practices</a> から issue や Pull Request を出すこともできる。また、 <code>for Security</code> と銘打っている以上、他にも <code>for XXX</code> が続くのではないかと期待されるところだが、レポジトリに GitHub Project が設けられており、そこから Performance 、 Reliability 、 Cost Optimization などが計画されていることが垣間見える。つい先日は <code>for Cluster Autoscaler</code> が追加された。個人的に、 AWS のドキュメントを読んで組めるのは「とりあえず使える Kubernetes」であり、そこからプラスアルファで行うべきプラクティスは非常に多く、なかなか捉えどころも難しいように感じている。何年か前の状況に置き換えると、 EC2 で nginx と Rails を動かすだけならそれなりに簡単だけど、セキュリティグループや LB をきちんと扱えているか、 Scaling をどうするのかといった非機能的要件になると話が変わってくるようなイメージだ。それがオフィシャルな Best Practices としてまとまり、さらにオープンに編集可能というのは非常に嬉しいことだなと感じている。</p>
+<p>以下、自分が読んだ中でメモした箇所をいくつか挙げておく。</p>
+<ul>
+<li>Pod Security
+<ul>
+<li>コンテナイメージに shell を入れるべきではない
+<ul>
+<li><code>sh</code> ぐらいは入れていることがあるので、そこまで徹底出来る方が確かに好ましそう</li>
+</ul>
+</li>
+<li>Pod Security Policy
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">https://kubernetes.io/docs/concepts/policy/pod-security-policy/</a></li>
+<li>root での起動を許可しないなどいくつかルールを定め、そのルールに従った Pod 以外は起動できなくするもの</li>
+<li>まだ beta だが使ってみたいところ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Multi-tenancy
+<ul>
+<li>Namespace を使った Soft multi-tenancy や、 cluster 自体分離する Hard multi-tenancy について説明されている
+<ul>
+<li>個人的には Soft で限りなく済ませておきたい気持ちが強い</li>
+<li><a href="https://loft.sh/blog/kubernetes-multi-tenancy-best-practices-guide/">Kubernetes Multi-Tenancy – A Best Practices Guide | Loft Blog</a> あたりも参考に</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Detective Controls
+<ul>
+<li>audit log の解析や監視</li>
+<li>同様に CloudTrail log も</li>
+<li>地力で監視するのはどう考えても大変なので自動化して何か考えたいが。。</li>
+</ul>
+</li>
+<li>Infrastructure Security
+<ul>
+<li><a href="https://github.com/aquasecurity/kube-bench">aquasecurity/kube-bench: Checks whether Kubernetes is deployed according to security best practices as defined in the CIS Kubernetes Benchmark</a>
+<ul>
+<li>CIS Kubernetes Benchmark に則っているかチェックしてくれるツール</li>
+</ul>
+</li>
+<li>Amazon Inspector の活用</li>
+</ul>
+</li>
+<li>Incident response and forensics
+<ul>
+<li>実際にセキュリティインシデントが発生したら、どう対処するか
+<ul>
+<li>Network Policy を使った通信の遮断</li>
+<li>該当 node に対して cordon を実施</li>
+<li>問題のある node や pod に label を付与してわかりやすくしてから対処する</li>
+<li>などなど</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Image Security
+<ul>
+<li>大原則として、余計なソフトウェアなどは極力入っていないことが望ましい
+<ul>
+<li>可能であれば <code>FROM scratch</code> する</li>
+</ul>
+</li>
+<li><a href="https://github.com/wagoodman/dive">wagoodman/dive: A tool for exploring each layer in a docker image</a> などを使ってイメージを縮小する</li>
+<li><a href="https://github.com/projectatomic/dockerfile_lint">projectatomic/dockerfile_lint</a> を使って Dockerfile に lint をかける</li>
+</ul>
+</li>
+</ul>
 
         </p>
     </div>
