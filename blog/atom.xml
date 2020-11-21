@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 17 Oct 2020 12:57:20 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2020 15:37:04 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WFH を始めて半年が過ぎ、調えたり諦めたりしたこと</title>
+      <link>https://chroju.github.io/blog/2020/11/21/wfh_for_half_year/</link>
+      <pubDate>Sat, 21 Nov 2020 15:37:04 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/11/21/wfh_for_half_year/</guid>
+      <description>3月末からほぼずっと WFH ことリモートワークの状態になり、早半年が過ぎた。今はたまに出社するが、ほぼ毎日 WFH の状態になっている。 WFH を始めた直後に COVID-19</description>
+    </item>
     
     <item>
       <title>EKS Best Practices Guide for Security を読んだ</title>
