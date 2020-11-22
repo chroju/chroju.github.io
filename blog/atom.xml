@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 21 Nov 2020 15:37:04 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 19:20:41 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分割無線キーボード Caravelle-BLE を組んだ</title>
+      <link>https://chroju.github.io/blog/2020/11/22/caravelle_ble/</link>
+      <pubDate>Sun, 22 Nov 2020 19:20:41 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/11/22/caravelle_ble/</guid>
+      <description>Caravelle-BLE という自作キーボードキットを組んだ。 昨年12月からずっと Corne Cherry に IMK corne case を合わせたものを使っていてかなり満足していて、今年買ったキーボードキッ</description>
+    </item>
     
     <item>
       <title>WFH を始めて半年が過ぎ、調えたり諦めたりしたこと</title>
