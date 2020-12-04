@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>Terraform Cloud を Alfred や CLI から操作する | the world as code</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://chroju.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://chroju.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://chroju.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://chroju.github.io/manifest.json">
+    <link rel="mask-icon" href="https://chroju.github.io/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/main.min.2545a1910010e26a9905276045afab868f812580a1e7482423da6c0c8c214d18.css" />
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-04%2022%3a37%3a22.521392223%20%2b0000%20UTC%20m%3d%2b0.084224265">
+    
+
+    
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-6765151-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="https://chroju.github.io/">the world as code</a>
+    </div>  
+</header>
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/archives">Archive</a>
+  
+    <a class="color-link nav-link" href="https://chroju.github.io/about">About</a>
+  
+  <a class="color-link nav-link" href="https://chroju.github.io/atom.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+</nav>
+        <div id="content" class="content-container">
+        
+<h1 class="post-title">Terraform Cloud を Alfred や CLI から操作する</h1>
+    
+    <time>December 5, 2020</time>
+    
+    <div>
+        <p>
+        <p>この記事は <a href="https://qiita.com/advent-calendar/2020/terraform">Terraform Advent Calendar 2020</a> 5日目の記事です。</p>
+<p><a href="https://www.hashicorp.com/products/terraform">Terraform Cloud</a> がフルリリースされて1年あまり経過しました。僕はこの1年だいぶ便利に使わせてもらっていて、 state file の保存のみならず、チームで共有する  private module の管理のほか、 Terraform の実行も現在は Cloud 上ですべて賄っており、手で <code>terraform apply</code> を打つ機会もほとんど無くなりました。</p>
+<p>そんな便利な Terraform Cloud ですが、現状 UI はウェブのみとなっており、 hashicorp が得意とする CLI は用意されていません。そのため画面ポチポチクリック業がそれなりの頻度で発生しており、地味にストレスになっています。そこで macOS 用のランチャーアプリである <a href="https://www.alfredapp.com/">Alfred</a> を使って、一部機能を検索、操作できるようにしてみました。</p>
+<h2 id="alfred-terraform-cloud-workflow">alfred-terraform-cloud-workflow</h2>
+<p>Alfred には有料版 (Powerpack) 限定で、 workflow という拡張機能があります。これはデフォルトの検索機能に加えて、自分で任意の検索コマンドをスクリプトで組んで追加できるというものです。今回はこれを活用して Terraform Cloud の検索用 workflow を作成しました。 GitHub で OSS として公開しているので、手元の Alfred でも使っていただけます。</p>
+<p>動作イメージは GIF で見てもらうと早いかと思います。</p>
+<p><a href="https://gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e"><img src="https://i.gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e.gif" alt="Image from Gyazo" width="600"/></a></p>
+<p>こんな感じで Alfred で検索して、該当の URL をサクッと開くことができます。検索可能なのは workspace 、 private module registry 、 run の3つです。 run はあまり耳馴染みがないかもしれませんが、 Terraform Cloud 上で実行される plan, apply がこう呼ばれます。この Alfred workflow では、実行中の run 、要するに承認待ち状態のままになっているものを検索可能としています。 Terraform Cloud 上での <code>plan</code> は実行に時間がかかることも多いので、いつでもサッと開けるようになっていると非常に便利です。</p>
+<h3 id="heading">使い方</h3>
+<p>以下のレポジトリの Releases から、最新の <code>.alfredworkflow</code> ファイルをダウンロードして、 Alfred へインポートしてください。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/alfred-terraform-cloud-workflow" data-iframely-url="//cdn.iframe.ly/kjEYjpm"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>インポート後に変数の設定が必要です。 Alfred の Preferences を開き、 <code>organization</code> に検索対象とする organization を設定してください。 organization はここで決め打ちとなるため、複数の organization を動的に切り替えて検索することには現在対応していません。</p>
+<p><a href="https://gyazo.com/c7a29e90b469d8b6052cec6b834328fa"><img src="https://i.gyazo.com/c7a29e90b469d8b6052cec6b834328fa.png" alt="Image from Gyazo" width="489"/></a></p>
+<p>もう1つ、 <code>TF_CLI_CONFIG_FILE</code> という変数も用意されています。こちらは <a href="https://www.terraform.io/docs/commands/cli-config.html#development-overrides-for-provider-developers">Terraform における同名の環境変数</a>と同じものです。この workflow は <code>$HOME/.terraformrc</code> から API token を読み込んで使用しますが、別のパスのファイルを使いたい場合は、ここに設定します。パス変更が必要ない場合は空欄で大丈夫です。</p>
+<p>これでセットアップは完了です。 <code>tfcws</code> で workspace 、 <code>tfcmd</code> で private module registry 、 <code>tfcruns</code> で run がそれぞれ検索できるようになったはずです。</p>
+<p>なお、先のサンプル GIF では Terraform のロゴが設定されていましたが、配布の workflow にはライセンスの関係でロゴ画像は含めていません。お好みでご自身で設定してください。</p>
+<h2 id="--tfcloud">内部実装 : tfcloud</h2>
+<p>ここからは内部実装の話をします。</p>
+<p>とはいえ、ここで Alfred workflow の作り方を長々説明するのはアドカレの趣旨に反すると思いますので、その点は割愛します。ざっくり説明すると、 Alfred が定めるフォーマットで JSON を食わせると、あのインクリメンタル検索の候補として流れるという、それだけです。従って原始的な実装であれば、 curl で Terraform Cloud の API をたたき、結果を jq で整形するような形でも workflow は作成可能です。ただそれでは面白くないなという思いもあり、今回は go で Terraform Cloud の CLI ツール <code>tfcloud</code> を作って中で実行しています。</p>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/tfcloud" data-iframely-url="//cdn.iframe.ly/uAA4Sjs"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<p>この CLI ツールは単独でももちろん利用可能です。普通に使う分には出力も human readable な形ですが、一部コマンドについて、隠れオプションを渡すことで Alfred に適合した JSON 形式で出力するようになっており、この仕組みを workflow 内部で呼び出しています。先ほど掲載した workflow は <code>tfcloud</code> のバイナリを内包した形で配布しているので、別途インストールは不要になっています。依存関係をあまり気にせず、ワンバイナリで配布できる Go は、こういう場面で便利ですね。</p>
+<h3 id="tfcloud-">tfcloud だけの機能</h3>
+<p><code>tfcloud</code> を単独でも使ってみたい場合は、 <code>brew install chroju/tap/tfcloud</code> でインストール可能です。</p>
+<p>tfcloud には少しだけ、 CLI 版でしか実行できない機能も存在しています。個人的に推したいのは、 Terraform Cloud workspace の Terraform version をアップグレードする機能です。</p>
+<p>Terraform Cloud では各 workspace 個別で Terraaform version を設定する必要があるため、メジャーバージョンアップの際などに数十の workspace を GUI でポチポチと upgrade して回らなくてはならず、かなり骨が折れます。 <code>tfcloud workspace upgrade</code> コマンドを実行すれば、カレントディレクトリに紐付いた workspace の Terraform version を CLI からアップグレードできます。</p>
+<p><a href="https://gyazo.com/90b3f9d30a47a74025c9f29a9a14d5c8"><img src="https://i.gyazo.com/90b3f9d30a47a74025c9f29a9a14d5c8.png" alt="Image from Gyazo" width="557"/></a></p>
+<p>このように <code>-u</code> オプションでバージョン指定して upgrade もできますし、指定しなければ自動的に最新が当たります。ただし、 <code>required_version</code> と整合性がとれないバージョンには上げないようになっています。オススメの使い方は、 <code>tfcloud workspace list</code> で各 workspace の Terraform version が一覧できるので、これと併用してバージョンアップを進めることです。</p>
+<p>このほかに、 remote backend の記述内容を元にして、 workspace をイチから自動作成するようなコマンドも実装を検討しています。</p>
+<h3 id="terraform-cloud--enterprise-api">Terraform Cloud / Enterprise API</h3>
+<p>なお、 tfcloud がやっていることは、単純に Terraform Cloud の API を叩いて、結果を整形して出力しているだけです。</p>
+<p>Terraform Cloud の API は、 <a href="https://www.terraform.io/docs/cloud/api/index.html">Terraform Cloud / Enterprise API</a> という形で提供されています。Terraform Enterprise の SaaS 版にあたるのが Terraform Cloud と言えるようで、両者の API は共通しています。 Go による API ライブラリも hashicorp から提供されており、その名も <a href="https://github.com/hashicorp/go-tfe">go-tfe</a> と、 Enterprise 由来のものになっています。 <code>tfcloud</code> もまた、その名に反して Enterprise でも動作するはずですが、筆者は Enterprise の使用経験がないため、試してはいません。</p>
+<p>Terraform Cloud / Enterprise API （以下、 tfe API） は GUI におけるほとんどの機能を実装していますが、1点だけ Registry Modules API のみ、以下のようにちょっと癖があります。</p>
+<ul>
+<li>tfe API は Registry Modules API を一部しか実装しておらず、一部は <a href="https://www.terraform.io/docs/registry/api.html">Registry standard API</a> (public な Terraform Registry の方) を踏襲している。</li>
+<li>残念ながら <code>go-tfe</code> は Registry standard API 踏襲部分については実装がない。</li>
+<li>Registry standard API に対する Go のライブラリは提供されていない。</li>
+<li>tfe API と terraform registry API では、出力フォーマットの JSON 形式が異なる。</li>
+<li>tfe API と terraform registry API では、 API endpoint の URL も異なる。</li>
+</ul>
+<p>ということで、 registry 周りの API だけ一部自分で実装する羽目になりました。これについては <a href="https://github.com/hashicorp/go-tfe/issues/136">issue も上がっています</a>が、 <code>go-tfe</code> で対応しないとしても、 Registry standard API 用のライブラリを別途リリースしてほしいところです。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>以上、 Alfred や CLI から Terraform Cloud を操作できるようになるまでを簡単にご紹介しました。アドカレの〆切駆動で開発したので最後はかなりギリギリで作っており、粗もあるかと思いますが、何か気になることがあれば issue や PR をいただけるととても嬉しいです。</p>
+<p>ただ CLI を得意とする hashicorp ですので、どこかのタイミングで公式の CLI が出てくれないかな、とはちょっと期待しています。</p>
+
+        </p>
+    </div>
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="Twitter">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M8.991284,24.971612 C19.180436,24.971612 24.752372,16.530224 24.752372,9.210524 C24.752372,8.970656 24.747512,8.731868 24.736496,8.494376 C25.818008,7.712564 26.758256,6.737 27.5,5.62622 C26.507372,6.067076 25.439252,6.364292 24.318752,6.498212 C25.462472,5.812628 26.340512,4.727444 26.754584,3.434036 C25.684088,4.068536 24.499004,4.53002 23.23724,4.778528 C22.226468,3.701876 20.786828,3.028388 19.193828,3.028388 C16.134404,3.028388 13.653536,5.509256 13.653536,8.567492 C13.653536,9.0023 13.702244,9.424904 13.797176,9.830552 C9.19346,9.599108 5.11106,7.39472 2.3792,4.04294 C1.903028,4.861364 1.629032,5.812628 1.629032,6.827072 C1.629032,8.74904 2.606972,10.445612 4.094024,11.438132 C3.185528,11.41016 2.331788,11.160464 1.585184,10.745096 C1.583888,10.768208 1.583888,10.791428 1.583888,10.815728 C1.583888,13.49888 3.493652,15.738584 6.028088,16.246508 C5.562932,16.373084 5.07326,16.44134 4.56782,16.44134 C4.210988,16.44134 3.863876,16.406024 3.526484,16.34144 C4.231724,18.542264 6.276596,20.143796 8.701412,20.18894 C6.805148,21.674696 4.416836,22.56008 1.821488,22.56008 C1.374476,22.56008 0.93362,22.534592 0.5,22.4834 C2.951708,24.054476 5.862524,24.971612 8.991284,24.971612"></path>
+        </svg>
+    </a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="chroju" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://chroju.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww="></script>
+</footer>
+    </body>
+</html>
