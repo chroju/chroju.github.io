@@ -6,13 +6,17 @@ isCJKLanguage = true
 draft = false
 +++
 
+### 追記 : 2020-12-07
+
+`alfred-terraform-cloud-workflow` を `alfred-tfcloud-workflow` に名称変更しました。（追記ここまで）
+
 この記事は [Terraform Advent Calendar 2020](https://qiita.com/advent-calendar/2020/terraform) 5日目の記事です。
 
 [Terraform Cloud](https://www.hashicorp.com/products/terraform) がフルリリースされて1年あまり経過しました。僕はこの1年だいぶ便利に使わせてもらっていて、 state file の保存のみならず、チームで共有する  private module の管理のほか、 Terraform の実行も現在は Cloud 上ですべて賄っており、手で `terraform apply` を打つ機会もほとんど無くなりました。
 
 そんな便利な Terraform Cloud ですが、現状 UI はウェブのみとなっており、 hashicorp が得意とする CLI は用意されていません。そのため画面ポチポチクリック業がそれなりの頻度で発生しており、地味にストレスになっています。そこで macOS 用のランチャーアプリである [Alfred](https://www.alfredapp.com/) を使って、一部機能を検索、操作できるようにしてみました。
 
-## alfred-terraform-cloud-workflow
+## alfred-tfcloud-workflow
 
 Alfred には有料版 (Powerpack) 限定で、 workflow という拡張機能があります。これはデフォルトの検索機能に加えて、自分で任意の検索コマンドをスクリプトで組んで追加できるというものです。今回はこれを活用して Terraform Cloud の検索用 workflow を作成しました。 GitHub で OSS として公開しているので、手元の Alfred でも使っていただけます。
 
@@ -27,7 +31,7 @@ Alfred には有料版 (Powerpack) 限定で、 workflow という拡張機能�
 
 以下のレポジトリの Releases から、最新の `.alfredworkflow` ファイルをダウンロードして、 Alfred へインポートしてください。
 
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/alfred-terraform-cloud-workflow" data-iframely-url="//cdn.iframe.ly/kjEYjpm"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/alfred-tfcloud-workflow" data-iframely-url="//cdn.iframe.ly/kjEYjpm"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 
 インポート後に変数の設定が必要です。 Alfred の Preferences を開き、 `organization` に検索対象とする organization を設定してください。 organization はここで決め打ちとなるため、複数の organization を動的に切り替えて検索することには現在対応していません。
 
