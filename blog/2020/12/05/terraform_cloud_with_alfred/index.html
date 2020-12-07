@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-04%2022%3a37%3a22.521392223%20%2b0000%20UTC%20m%3d%2b0.084224265">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-07%2002%3a56%3a10.505663057%20%2b0000%20UTC%20m%3d%2b0.084331779">
     
 
     
@@ -150,17 +150,19 @@ if (!doNotTrack) {
     
     <div>
         <p>
-        <p>この記事は <a href="https://qiita.com/advent-calendar/2020/terraform">Terraform Advent Calendar 2020</a> 5日目の記事です。</p>
+        <h3 id="--2020-12-07">追記 : 2020-12-07</h3>
+<p><code>alfred-terraform-cloud-workflow</code> を <code>alfred-tfcloud-workflow</code> に名称変更しました。（追記ここまで）</p>
+<p>この記事は <a href="https://qiita.com/advent-calendar/2020/terraform">Terraform Advent Calendar 2020</a> 5日目の記事です。</p>
 <p><a href="https://www.hashicorp.com/products/terraform">Terraform Cloud</a> がフルリリースされて1年あまり経過しました。僕はこの1年だいぶ便利に使わせてもらっていて、 state file の保存のみならず、チームで共有する  private module の管理のほか、 Terraform の実行も現在は Cloud 上ですべて賄っており、手で <code>terraform apply</code> を打つ機会もほとんど無くなりました。</p>
 <p>そんな便利な Terraform Cloud ですが、現状 UI はウェブのみとなっており、 hashicorp が得意とする CLI は用意されていません。そのため画面ポチポチクリック業がそれなりの頻度で発生しており、地味にストレスになっています。そこで macOS 用のランチャーアプリである <a href="https://www.alfredapp.com/">Alfred</a> を使って、一部機能を検索、操作できるようにしてみました。</p>
-<h2 id="alfred-terraform-cloud-workflow">alfred-terraform-cloud-workflow</h2>
+<h2 id="alfred-tfcloud-workflow">alfred-tfcloud-workflow</h2>
 <p>Alfred には有料版 (Powerpack) 限定で、 workflow という拡張機能があります。これはデフォルトの検索機能に加えて、自分で任意の検索コマンドをスクリプトで組んで追加できるというものです。今回はこれを活用して Terraform Cloud の検索用 workflow を作成しました。 GitHub で OSS として公開しているので、手元の Alfred でも使っていただけます。</p>
 <p>動作イメージは GIF で見てもらうと早いかと思います。</p>
 <p><a href="https://gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e"><img src="https://i.gyazo.com/a6ddc5a3f1aee2d8a41f5fc43639138e.gif" alt="Image from Gyazo" width="600"/></a></p>
 <p>こんな感じで Alfred で検索して、該当の URL をサクッと開くことができます。検索可能なのは workspace 、 private module registry 、 run の3つです。 run はあまり耳馴染みがないかもしれませんが、 Terraform Cloud 上で実行される plan, apply がこう呼ばれます。この Alfred workflow では、実行中の run 、要するに承認待ち状態のままになっているものを検索可能としています。 Terraform Cloud 上での <code>plan</code> は実行に時間がかかることも多いので、いつでもサッと開けるようになっていると非常に便利です。</p>
 <h3 id="heading">使い方</h3>
 <p>以下のレポジトリの Releases から、最新の <code>.alfredworkflow</code> ファイルをダウンロードして、 Alfred へインポートしてください。</p>
-<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/alfred-terraform-cloud-workflow" data-iframely-url="//cdn.iframe.ly/kjEYjpm"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://github.com/chroju/alfred-tfcloud-workflow" data-iframely-url="//cdn.iframe.ly/kjEYjpm"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
 <p>インポート後に変数の設定が必要です。 Alfred の Preferences を開き、 <code>organization</code> に検索対象とする organization を設定してください。 organization はここで決め打ちとなるため、複数の organization を動的に切り替えて検索することには現在対応していません。</p>
 <p><a href="https://gyazo.com/c7a29e90b469d8b6052cec6b834328fa"><img src="https://i.gyazo.com/c7a29e90b469d8b6052cec6b834328fa.png" alt="Image from Gyazo" width="489"/></a></p>
 <p>もう1つ、 <code>TF_CLI_CONFIG_FILE</code> という変数も用意されています。こちらは <a href="https://www.terraform.io/docs/commands/cli-config.html#development-overrides-for-provider-developers">Terraform における同名の環境変数</a>と同じものです。この workflow は <code>$HOME/.terraformrc</code> から API token を読み込んで使用しますが、別のパスのファイルを使いたい場合は、ここに設定します。パス変更が必要ない場合は空欄で大丈夫です。</p>

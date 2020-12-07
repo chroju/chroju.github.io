@@ -17,7 +17,7 @@
       <pubDate>Sat, 05 Dec 2020 07:00:00 +0900</pubDate>
       
       <guid>https://chroju.github.io/blog/2020/12/05/terraform_cloud_with_alfred/</guid>
-      <description>この記事は Terraform Advent Calendar 2020 5日目の記事です。 Terraform Cloud がフルリリースされて1年あまり経過しました。僕はこの1年だいぶ便利に使わせてもらっていて、 state file の保存</description>
+      <description>追記 : 2020-12-07 alfred-terraform-cloud-workflow を alfred-tfcloud-workflow に名称変更しました。（追記ここまで） この記事は Terraform Advent Calendar 2020 5日目の記事です。 Terraform Cloud がフルリリースされて1年あまり経過しました。僕はこ</description>
     </item>
     
     <item>
