@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-16%2010%3a53%3a52.295405803%20%2b0000%20UTC%20m%3d%2b0.068147299">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-16%2011%3a03%3a28.205776105%20%2b0000%20UTC%20m%3d%2b0.098406953">
     
 
     
@@ -153,6 +153,7 @@ if (!doNotTrack) {
         <p>前回のエントリー <a href="https://chroju.github.io/blog/2020/12/05/terraform_cloud_with_alfred/">Terraform Cloud を Alfred や CLI から操作する | the world as code</a> の中で、 Alfred Workflow の話に触れたので、改めて書いてみる。</p>
 <h2 id="alfred-workflow-">Alfred Workflow とは何か</h2>
 <p>Alfred というと黒い小さな入力フィールドがスッと出てきて、そこで色んなものをインクリメンタルサーチできるもの、というイメージが強いけれど、実際のところそれだけにはとどまらない。 Alfred Workflow をざっくり言えば、あるアクションを <code>trigger</code> し、 <code>input</code> を行い、それを受けて何らかの <code>action</code> を実行し、 <code>output</code> を出す、という4段階の流れを組み合わせることで、様々なツールを実現するもの、ということになる。</p>
+<p><code>trigger</code> は読んで字のごとくトリガーで、 workflow を起動する契機になる。「黒い窓」から実行するのであれば、 trigger は設定しなくてもかまわない。 <code>input</code> は入力値で、あのよくある「黒い窓」での検索も <code>input</code> にあたる。正確に言えば、あの検索で選んだ候補が <code>input</code> になる。では <code>input</code> は何に対しての入力なのかと言えば、 <code>action</code> だ。 action が input から要は引数を取って、 URL を開いたり、ファイルを開いたりといったアクションを行う。 <code>output</code> は aciton の結果をどこかへ出力したい場合に使うもの、ということになる。そしてこれら4つは、どれも必須ではない。 <code>action</code> を <code>input</code> 無しに実行することだってできる。</p>
 <p>例えば trigger には <code>Hotkey</code> というものがある。読んで字のごとく、任意のキーバインドで workflow を起動する場合に使う。そして action には <code>Launch Apps/Files</code> というアプリやファイルを起動できるものがある。この2つを組み合わせてみる。</p>
 <p><a href="https://gyazo.com/e044827d8c15416085e2ee05254ed435"><img src="https://i.gyazo.com/e044827d8c15416085e2ee05254ed435.png" alt="Image from Gyazo" width="375"/></a></p>
 <p>これで <code>Command + Shift + g</code> を押すと Gyazo が起動する workflow が出来た。 OS 標準のスクリーンショットを撮るのと似た感覚で、3つのキーを押すだけで簡単に Gyazo が起動できる。</p>
