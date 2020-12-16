@@ -12,7 +12,7 @@ draft = false
 
 Alfred というと黒い小さな入力フィールドがスッと出てきて、そこで色んなものをインクリメンタルサーチできるもの、というイメージが強いけれど、実際のところそれだけにはとどまらない。 Alfred Workflow をざっくり言えば、あるアクションを `trigger` し、 `input` を行い、それを受けて何らかの `action` を実行し、 `output` を出す、という4段階の流れを組み合わせることで、様々なツールを実現するもの、ということになる。
 
-例えば trigger には `Hotkey` というものがある。読んで字のごとく、任意のキーバインドで workflow を起動する場合に使う。そして input には `Launch Apps/Files` というアプリやファイルを起動できるものがある。この2つを組み合わせてみる。
+例えば trigger には `Hotkey` というものがある。読んで字のごとく、任意のキーバインドで workflow を起動する場合に使う。そして action には `Launch Apps/Files` というアプリやファイルを起動できるものがある。この2つを組み合わせてみる。
 
 <a href="https://gyazo.com/e044827d8c15416085e2ee05254ed435"><img src="https://i.gyazo.com/e044827d8c15416085e2ee05254ed435.png" alt="Image from Gyazo" width="375"/></a>
 
@@ -56,7 +56,9 @@ Hotkey を trigger にしているが、その次の `Keyword` と書かれて�
 
 ここで入力を `{query}` として受けて、 webhook を飛ばしている。
 
-最後の `Post Notification` と書かれているのが output に当たり、 macOS の通知に curl の実行結果を表示させている。
+最後の `Post Notification` と書かれているのが output に当たり、 macOS の通知に curl の実行結果を表示させている。これはあっても無くてもいい、保険のようなものではある。
+
+これは「黒い窓」を使う Workflow ではあるが、しかし検索は行っていない。単なる入力用のフィールドとして、あの窓を使うこともできる。
 
 ## Conclusion
 
