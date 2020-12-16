@@ -26,7 +26,7 @@
     
     
     
-    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-16%2010%3a26%3a41.2536484%20%2b0000%20UTC%20m%3d%2b0.070088369">
+    <link rel="stylesheet" href="https://chroju.github.io/css/override.css?t=2020-12-16%2010%3a53%3a52.295405803%20%2b0000%20UTC%20m%3d%2b0.068147299">
     
 
     
@@ -153,7 +153,7 @@ if (!doNotTrack) {
         <p>前回のエントリー <a href="https://chroju.github.io/blog/2020/12/05/terraform_cloud_with_alfred/">Terraform Cloud を Alfred や CLI から操作する | the world as code</a> の中で、 Alfred Workflow の話に触れたので、改めて書いてみる。</p>
 <h2 id="alfred-workflow-">Alfred Workflow とは何か</h2>
 <p>Alfred というと黒い小さな入力フィールドがスッと出てきて、そこで色んなものをインクリメンタルサーチできるもの、というイメージが強いけれど、実際のところそれだけにはとどまらない。 Alfred Workflow をざっくり言えば、あるアクションを <code>trigger</code> し、 <code>input</code> を行い、それを受けて何らかの <code>action</code> を実行し、 <code>output</code> を出す、という4段階の流れを組み合わせることで、様々なツールを実現するもの、ということになる。</p>
-<p>例えば trigger には <code>Hotkey</code> というものがある。読んで字のごとく、任意のキーバインドで workflow を起動する場合に使う。そして input には <code>Launch Apps/Files</code> というアプリやファイルを起動できるものがある。この2つを組み合わせてみる。</p>
+<p>例えば trigger には <code>Hotkey</code> というものがある。読んで字のごとく、任意のキーバインドで workflow を起動する場合に使う。そして action には <code>Launch Apps/Files</code> というアプリやファイルを起動できるものがある。この2つを組み合わせてみる。</p>
 <p><a href="https://gyazo.com/e044827d8c15416085e2ee05254ed435"><img src="https://i.gyazo.com/e044827d8c15416085e2ee05254ed435.png" alt="Image from Gyazo" width="375"/></a></p>
 <p>これで <code>Command + Shift + g</code> を押すと Gyazo が起動する workflow が出来た。 OS 標準のスクリーンショットを撮るのと似た感覚で、3つのキーを押すだけで簡単に Gyazo が起動できる。</p>
 <p>このように、 Alfred で出来ることは「黒い窓」でやることだけに縛られないし、何かを検索してフィルタリングすることも必須ではない。組み合わせ次第で非常に多くの効率化が実現できる。</p>
@@ -175,7 +175,8 @@ if (!doNotTrack) {
 <p>「黒い窓」の入力を受けて、次の <code>Run Script</code> が action に当たる。自由に bash コマンドを実行できる。</p>
 <p><a href="https://gyazo.com/1596fadbdeec9b0e8d357e31b3f19946"><img src="https://i.gyazo.com/1596fadbdeec9b0e8d357e31b3f19946.png" alt="Image from Gyazo" width="600"/></a></p>
 <p>ここで入力を <code>{query}</code> として受けて、 webhook を飛ばしている。</p>
-<p>最後の <code>Post Notification</code> と書かれているのが output に当たり、 macOS の通知に curl の実行結果を表示させている。</p>
+<p>最後の <code>Post Notification</code> と書かれているのが output に当たり、 macOS の通知に curl の実行結果を表示させている。これはあっても無くてもいい、保険のようなものではある。</p>
+<p>これは「黒い窓」を使う Workflow ではあるが、しかし検索は行っていない。単なる入力用のフィールドとして、あの窓を使うこともできる。</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>ということで、結構いろんなことができる。ここで挙げた以外にも <code>trigger</code> , <code>input</code> , <code>action</code> , <code>output</code> には様々な種類があるし、それらを組み合わせることのできる <code>utilities</code> というものも存在する。まぁ、スクリプトが実行できる時点で何でもありではある。</p>
 <p>ちなみにいわゆるよくある「黒い窓」で検索をするやつ、あれは <code>Script Filter</code> という input に該当する。 <code>Script Filter</code> の中で bash や python などのスクリプトを書き、決まった形式の JSON を出力するようにすると、あの検索が発動する。なので前回エントリーのように、動的に検索対象を引っ張ってくることもできるし、固定的な値から検索したいのであれば、 JSON を cat するだけでも OK だ。 HTTP status code の一覧を検索できるようにしたら便利かな、とか今は考えている。</p>
