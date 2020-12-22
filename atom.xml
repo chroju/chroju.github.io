@@ -6,10 +6,19 @@
     <description>Recent content on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 16 Dec 2020 18:29:31 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 22 Dec 2020 18:47:57 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>『なぜ危機に気づけなかったのか』を読んだ</title>
+      <link>https://chroju.github.io/blog/2020/12/22/know_what_you_dont_know/</link>
+      <pubDate>Tue, 22 Dec 2020 18:47:57 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/12/22/know_what_you_dont_know/</guid>
+      <description>「問題発見」の技術、メソッドを知りたくて、 Michael A. Roberto の『なぜ危機に気づけなかったのか（原題 : Know What You Don&#39;t Know ）』を読んだ。 問題発見を学びたいと思ったき</description>
+    </item>
     
     <item>
       <title>Alfred は「黒い窓」を使わなくなってからが本番</title>
