@@ -1,14 +1,14 @@
 +++
-title = "Shopping and Subscriptions 2020"
+title = "Best buy and Subscriptions 2020"
 date = 2020-12-29T17:15:29+09:00
 tags = ""
 isCJKLanguage = true
 draft = false
 +++
 
-一昨年より、年末にサブスクリプション契約をまとめるエントリーを上げているので今年もやってみる。今年はついでに、あんまりこれまでやったことがなかった「今年買ってよかったもの」もまとめてみた。ステイホームにより、普段あんまり買わないものをそこそこ買ったので、せっかくなので紹介してみよう、という思い。
+一昨年より、年末にサブスクリプション契約をまとめるエントリーを上げているので今年もやってみる。今年はついでに、あんまりこれまでやったことがなかった「今年買ってよかったもの (Best buy) 」もまとめてみた。ステイホームにより、普段あんまり買わないものをそこそこ買ったので、せっかくなので紹介してみよう、という思い。
 
-## Shopping 2020
+## Best buy 2020
 
 WFH 関連の物品については、 [WFH を始めて半年が過ぎ、調えたり諦めたりしたこと | the world as code](https://chroju.github.io/blog/2020/11/21/wfh_for_half_year/) や [COVID-19 とリモートワーク - 設備だけではなくルーチンも大事 | the world as code](https://chroju.github.io/blog/2020/04/15/remote_work_infrastructure_engineer_under_covid_19/) に書いているので除外した。とはいえ、ほぼおうちグッズしかない。
 
