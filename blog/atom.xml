@@ -6,10 +6,19 @@
     <description>Recent content in Blogs on the world as code</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 29 Dec 2020 17:15:29 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 31 Dec 2020 11:22:28 +0900</lastBuildDate>
     
 	<atom:link href="https://chroju.github.io/blog/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Retrospective 2020</title>
+      <link>https://chroju.github.io/blog/2020/12/31/retrospective_2020/</link>
+      <pubDate>Thu, 31 Dec 2020 11:22:28 +0900</pubDate>
+      
+      <guid>https://chroju.github.io/blog/2020/12/31/retrospective_2020/</guid>
+      <description>年間振り返りエントリー6年目。 2015 2016 2017 2018 2019 昨年までは「総括」という単語を使っていたが、今年は Retrospective にしてみた。英語でかっこいいよね、という単純な理</description>
+    </item>
     
     <item>
       <title>Best buy and Subscriptions 2020</title>
